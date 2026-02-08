@@ -40,6 +40,7 @@
   "download-copy": "اگر می خواهید فایل متنی را دانلود کنید.",
   "edgham": "ادغام",
   "ekhfa": "اخفا و غنا",
+  "embed-widget": "ابزارک جاسازی",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "پیگیری روندها، ایجاد اهداف سفارشی، ثابت قدم ماندن",
     "achieve-quran-goals-responsive": "به اهداف قرآنی خود برسید",
@@ -83,11 +84,28 @@
     "sign-in-message": "برای دسترسی به امکانات بیشتر، وارد شوید یا به صورت رایگان ثبت نام کنید!",
     "title": "پیشرفت خود را ذخیره کنید"
   },
+  "hadith": {
+    "title": "حدیث"
+  },
   "hizb-beginning": "آغاز حزب",
   "include-translator": "نام مترجم درج شود؟",
   "info": "اطلاعات",
   "juz-beginning": "آغاز جزء",
   "languages": "زبان‌ها",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "بنر طرح یادگیری ۴ داستان متحول کننده زندگی: درس‌هایی از سوره کهف",
+    "banner-image-description": "طرح یادگیری سوره کهف را مشاهده کنید",
+    "button-accessibility-label": "درباره طرح یادگیری سوره کهف بیشتر بدانید",
+    "main-headline": "با ۴ داستان تاثیرگذار از سوره کهف آشنا شوید",
+    "subtitle-description": "(یک برنامه آموزشی رایگان)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "بنر طرح یادگیری سوره ملک: نجات‌دهنده: درس‌های قدرتمند",
+    "banner-image-description": "طرح یادگیری سوره ملک توسط امدادگر را مشاهده کنید",
+    "button-accessibility-label": "درباره طرح یادگیری نجات‌دهنده بیشتر بدانید",
+    "main-headline": "امروز درس‌های قدرتمندی را در سوره ملک کشف کنید",
+    "subtitle-description": "(یک برنامه آموزشی رایگان)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "بنر طرح یادگیری سوره ملک: درس‌های قدرتمند در نجات‌دهنده",
     "banner-image-description": "طرح یادگیری سوره ملک توسط امدادگر را مشاهده کنید",
@@ -171,6 +189,8 @@
   "reflection-not-available": "هیچ بازتاب بررسی شده ای برای این آیه وجود ندارد",
   "reflections": "بازتاب‌ها",
   "reflections-desc": "آیات {{ayahNumber}} سوره {{surahName}} را بخوانید و به اشتراک بگذارید.",
+  "related-verses": "آیات مرتبط",
+  "related-verses-desc": "آیات مربوط به قرآن را بخوانید و به اشتراک بگذارید {{ayahNumber}} سوره {{surahName}}",
   "remove-bookmark": "حذف نشانک",
   "remove-my-reading-bookmark": "نشانک مطالعه من را حذف کنید",
   "remove-pinned-verse": "آیه را حذف کنید {{verseKey}} از پین شده",
@@ -190,6 +210,7 @@
   "selected-count": "{{count}} انتخاب شده",
   "set-as-reading-bookmark": "به عنوان نشانک مطالعه من تنظیم شود",
   "share-your-reflection": "نظر خود را در مورد این آیه به اشتراک بگذارید",
+  "show-tajweed-rules": "نمایش قواعد تجوید هنگام خواندن:",
   "study-mode": "حالت مطالعه",
   "surah-beginning": "آغاز سوره",
   "surah-info": "اطلاعات سوره",

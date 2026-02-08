@@ -40,6 +40,7 @@
   "download-copy": "se vuoi scaricare un file di testo.",
   "edgham": "Idghaam",
   "ekhfa": "Ikhfa e Ghunna",
+  "embed-widget": "Incorpora widget",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Tieni traccia delle serie, crea obiettivi personalizzati, mantieni la coerenza",
     "achieve-quran-goals-responsive": "Raggiungi i tuoi obiettivi coranici",
@@ -83,11 +84,28 @@
     "sign-in-message": "Accedi o registrati gratuitamente per avere accesso a più funzionalità!",
     "title": "Salva i tuoi progressi"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Inizio dell'Hizb",
   "include-translator": "Includere il nome del traduttore?",
   "info": "informazioni",
   "juz-beginning": "Inizio di Juz",
   "languages": "Lingue",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 storie che cambiano la vita: lezioni dal banner del piano di apprendimento della Sura Al-Kahf",
+    "banner-image-description": "Visualizza il piano di apprendimento per la Sura Al-Kahf",
+    "button-accessibility-label": "Scopri di più sul piano di apprendimento della Sura Al-Kahf",
+    "main-headline": "Scopri 4 storie che cambiano la vita dalla Sura Al-Kahf",
+    "subtitle-description": "(Un piano di apprendimento gratuito)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Il soccorritore: potenti lezioni nel banner del piano di apprendimento della Sura Al-Mulk",
+    "banner-image-description": "Visualizza il piano di apprendimento di The Rescuer per la Sura Al-Mulk",
+    "button-accessibility-label": "Scopri di più sul piano di apprendimento The Rescuer",
+    "main-headline": "Scopri oggi stesso le potenti lezioni della Sura Al-Mulk",
+    "subtitle-description": "(Un piano di apprendimento gratuito)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "Il soccorritore: potenti lezioni nel banner del piano di apprendimento della Sura Al-Mulk",
     "banner-image-description": "Visualizza il piano di apprendimento di The Rescuer per la Sura Al-Mulk",
@@ -171,6 +189,8 @@
   "reflection-not-available": "Non ci sono riflessioni riviste per questo ayah",
   "reflections": "Riflessioni",
   "reflections-desc": "Leggi e condividi le riflessioni coraniche di Ayah {{ayahNumber}} di Sura {{surahName}}",
+  "related-verses": "Versetti correlati",
+  "related-verses-desc": "Leggi e condividi i versetti del Corano correlati all'Ayah {{ayahNumber}} della Sura {{surahName}}",
   "remove-bookmark": "Rimuovi segnalibro",
   "remove-my-reading-bookmark": "Rimuovi il mio segnalibro di lettura",
   "remove-pinned-verse": "Rimuovi il verso {{verseKey}} da appuntato",
@@ -190,6 +210,7 @@
   "selected-count": "{{count}} selezionato",
   "set-as-reading-bookmark": "Imposta come segnalibro di lettura",
   "share-your-reflection": "Condividi la tua riflessione su questo ayah",
+  "show-tajweed-rules": "Mostra le regole di Tajweed durante la lettura:",
   "study-mode": "Modalità di studio",
   "surah-beginning": "Inizio di Sura",
   "surah-info": "Informazioni sura",

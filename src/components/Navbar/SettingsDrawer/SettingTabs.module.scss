@@ -27,6 +27,7 @@
   color: var(--color-text-faded-new);
   cursor: pointer;
   position: relative;
+  text-wrap: nowrap;
 
   &[data-state='active'] {
     color: var(--color-text-link-new);

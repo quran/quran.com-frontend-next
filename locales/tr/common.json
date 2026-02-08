@@ -100,6 +100,13 @@
   "beyond-ramadan": "Ramazan'dan sonra da gelişin!",
   "bookmark": "Yer imi",
   "bookmarked": "İşaretli",
+  "bookmarks-migration": {
+    "body-1": "Yer işaretleriniz artık şu şekilde görünecek: <strong>Kaydedilen Ayetler</strong> içinde <strong>Koleksiyonlar</strong>Mevcut yer işaretlerinizi korumak için lütfen oturum açın veya bir hesap oluşturun.",
+    "body-2": "Ayrıca, kaldığınız yerden devam etmenize yardımcı olmak için yeni bir Okuma Yer İşareti de ekledik.",
+    "checkbox": "Bu mesajı bir daha gösterme (Uyarı: Mevcut tüm yer işaretlerinizi kaybedeceksiniz)",
+    "sign-in": "Giriş Yap / Kayıt Ol",
+    "title": "Uyarı: Yer işaretleri değişiyor."
+  },
   "both": "Her ikisi de",
   "cancel": "İptal",
   "change-theme": "Temayı Değiştir",
@@ -137,6 +144,7 @@
   "copied": "kopyalandı",
   "copied-to-clipboard": "Panoya kopyalandı",
   "copy": "Kopyala",
+  "copy-embed": "Kopyala Göm",
   "copylink": "Linki Kopyala",
   "counter": {
     "decrease": "Azalt",
@@ -162,6 +170,8 @@
     "resend-email-in": "Doğrulama e-postasını {{remainingTime}} saniye içinde yeniden gönderin...",
     "verify-code": "Doğrulama kodu"
   },
+  "embed-copied": "Kopyalanan Gömme",
+  "embed-widget": "Widget'ı yerleştir",
   "end-year-donate": "2024'ü sadaka ile bitirin ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Bir seferde en fazla {{limit}} ayet seçebilirsiniz. Lütfen daha küçük bir aralık seçin.",
@@ -459,6 +469,8 @@
   "subscribe": "Abone ol",
   "subscribed": "Abone olundu",
   "surah": "Sure",
+  "tab-see-less": "Daha az göster...",
+  "tab-see-more": "Daha fazlasını görün...",
   "tafsir": {
     "font-size": "tefsir yazı tipi boyutu",
     "group-message": "{{from}} ile {{to}} arasındaki ayetler grubu için bir tefsir okuyorsunuz",

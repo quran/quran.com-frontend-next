@@ -29,6 +29,7 @@ import {
 import { setReadingViewHoveredVerseKey } from '@/redux/slices/QuranReader/readingViewVerse';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import {
+  MushafLines,
   QuranFont,
   ReadingPreference,
   WordByWordType,
@@ -73,6 +74,11 @@ export type QuranWordProps = {
   tooltipType?: TooltipType;
   isWordInteractionDisabled?: boolean;
   shouldForceShowTooltip?: boolean;
+  quranTextFontScaleOverride?: number;
+  mushafLinesOverride?: MushafLines;
+  shouldShowWordByWordTranslation?: boolean;
+  shouldShowWordByWordTransliteration?: boolean;
+  isStandaloneMode?: boolean;
 };
 
 const QuranWord = ({
@@ -85,6 +91,12 @@ const QuranWord = ({
   tooltipType,
   isWordInteractionDisabled = false,
   shouldForceShowTooltip = false,
+  // Standalone mode (widget/embed) doesn't use redux, so we can override these styles via props
+  quranTextFontScaleOverride,
+  mushafLinesOverride,
+  shouldShowWordByWordTranslation,
+  shouldShowWordByWordTransliteration,
+  isStandaloneMode = false,
 }: QuranWordProps) => {
   const dispatch = useDispatch();
   const { t } = useTranslation('quran-reader');
@@ -96,10 +108,11 @@ const QuranWord = ({
 
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
 
-  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectInlineDisplayWordByWordPreferences,
-    shallowEqual,
-  );
+  const reduxWbwPrefs = useSelector(selectInlineDisplayWordByWordPreferences, shallowEqual);
+  const showWordByWordTranslation =
+    shouldShowWordByWordTranslation ?? reduxWbwPrefs.showWordByWordTranslation;
+  const showWordByWordTransliteration =
+    shouldShowWordByWordTransliteration ?? reduxWbwPrefs.showWordByWordTransliteration;
   const readingPreference = useSelector(selectReadingPreference);
   const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
 
@@ -145,6 +158,8 @@ const QuranWord = ({
         isFontLoaded={isFontLoaded}
         isHighlighted={shouldBeHighLighted}
         charType={word.charTypeName}
+        quranTextFontScaleOverride={quranTextFontScaleOverride}
+        mushafLinesOverride={mushafLinesOverride}
       />
     );
   } else if (word.charTypeName !== CharType.Pause) {
@@ -158,34 +173,18 @@ const QuranWord = ({
     2. When it's allowed to have word by word (won't be allowed for search results as of now).
     3. When the tooltip settings are set to either translation or transliteration or both.
        This applies to both reading and translation modes.
+    4. When it's not in standalone mode (e.g. widget/embed)
   */
   const showTooltip =
-    word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
+    word.charTypeName === CharType.Word &&
+    isWordByWordAllowed &&
+    !!showTooltipFor.length &&
+    !isStandaloneMode;
+
   const translationViewTooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
   );
-
-  const handleWordAction = useCallback(() => {
-    if (isRecitationEnabled) {
-      logButtonClick('quran_word_pronounce');
-      const currentState = audioService.getSnapshot();
-      const isPlaying = currentState.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
-      const currentSurah = getChapterNumberFromKey(word.verseKey);
-      const isSameSurah = currentState.context.surah === Number(currentSurah);
-      const shouldSeekTo = isPlaying && isSameSurah;
-      if (shouldSeekTo) {
-        const wordSegment = getWordTimeSegment(currentState.context.audioData.verseTimings, word);
-        if (!wordSegment) return;
-        const [startTime] = wordSegment;
-        audioService.send({ type: 'SEEK_TO', timestamp: milliSecondsToSeconds(startTime) });
-      } else {
-        playWordAudio(word);
-      }
-    } else {
-      logButtonClick('quran_word');
-    }
-  }, [audioService, isRecitationEnabled, word]);
 
   const getReadingModeSuffix = useCallback(() => {
     if (readingPreference === ReadingPreference.Translation) {
@@ -194,8 +193,42 @@ const QuranWord = ({
     return 'arabic_reading';
   }, [readingPreference]);
 
+  const seekToWordIfPlaying = useCallback(() => {
+    const currentState = audioService.getSnapshot();
+    const isPlaying = currentState.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
+    const currentSurah = getChapterNumberFromKey(word.verseKey);
+    const isSameSurah = currentState.context.surah === Number(currentSurah);
+
+    if (isPlaying && isSameSurah) {
+      const wordSegment = getWordTimeSegment(currentState.context.audioData.verseTimings, word);
+      if (wordSegment) {
+        const [startTime] = wordSegment;
+        audioService.send({ type: 'SEEK_TO', timestamp: milliSecondsToSeconds(startTime) });
+        logButtonClick('quran_word_pronounce');
+        return true;
+      }
+    }
+    return false;
+  }, [audioService, word]);
+
+  const handleWordAction = useCallback(() => {
+    if (isRecitationEnabled) {
+      const didSeek = seekToWordIfPlaying();
+      if (!didSeek) {
+        logButtonClick('quran_word_pronounce');
+        playWordAudio(word);
+      }
+    } else {
+      logButtonClick('quran_word');
+    }
+  }, [isRecitationEnabled, seekToWordIfPlaying, word]);
+
   const handleInteraction = useCallback(() => {
     const modeSuffix = getReadingModeSuffix();
+
+    if (word.charTypeName === CharType.Word && !isRecitationEnabled) {
+      seekToWordIfPlaying();
+    }
 
     if (word.charTypeName === CharType.End) {
       logButtonClick(`study_mode_open_ayah_number_${modeSuffix}`, { verseKey: word.verseKey });
@@ -225,15 +258,14 @@ const QuranWord = ({
 
     handleWordAction();
   }, [
-    word.charTypeName,
-    word.location,
-    word.verseKey,
+    word,
     isRecitationEnabled,
     isMobile,
     showTooltip,
     handleWordAction,
     dispatch,
     getReadingModeSuffix,
+    seekToWordIfPlaying,
   ]);
 
   const onClick = useCallback(
@@ -285,13 +317,13 @@ const QuranWord = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
   }, [word.charTypeName]);
 
+  const isInteractionDisabled = isStandaloneMode || isWordInteractionDisabled;
   // Allow clicking on words and ayah numbers in both reading and translation mode for study mode modal
-  const shouldHandleWordClicking = !isWordInteractionDisabled;
+  const shouldHandleWordClicking = !isInteractionDisabled;
   return (
     <div
       {...(shouldHandleWordClicking && { onClick, onKeyPress, role: 'button', tabIndex: 0 })}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      {...(!isInteractionDisabled && { onMouseEnter, onMouseLeave })}
       {...{
         [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
       }}
@@ -299,6 +331,7 @@ const QuranWord = ({
         [styles.interactionDisabled]: isWordInteractionDisabled,
         [styles.highlightOnHover]:
           !isWordInteractionDisabled && (isRecitationEnabled || !showTooltip),
+
         /**
          * If the font is Tajweed V4, color: xyz syntax does not work
          * since the COLOR glyph is a separate vector graphic made with
@@ -318,7 +351,7 @@ const QuranWord = ({
         wrapper={(children) => {
           // Show tooltip in both reading and translation modes
           const shouldShowWordTooltip =
-            showTooltip && (shouldForceShowTooltip || !isWordInteractionDisabled);
+            showTooltip && (shouldForceShowTooltip || !isInteractionDisabled);
 
           if (shouldShowWordTooltip) {
             const isTooltipOpen =

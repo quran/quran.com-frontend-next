@@ -40,6 +40,7 @@
   "download-copy": "se você deseja baixar o arquivo de texto.",
   "edgham": "Letra silenciosa",
   "ekhfa": "Ghunna/ikhfa'",
+  "embed-widget": "Widget incorporado",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Acompanhe sequências de vitórias, crie metas personalizadas e mantenha a consistência.",
     "achieve-quran-goals-responsive": "Alcance seus objetivos com o Alcorão",
@@ -83,11 +84,28 @@
     "sign-in-message": "Faça login ou cadastre-se gratuitamente para ter acesso a mais recursos!",
     "title": "Salve seu progresso"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Começo do Hizb",
   "include-translator": "Incluir nome do tradutor?",
   "info": "informações",
   "juz-beginning": "Começo de Juz",
   "languages": "Línguas",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 Histórias Transformadoras: Lições da Surata Al-Kahf (plano de estudos)",
+    "banner-image-description": "Veja o plano de estudos para a Surata Al-Kahf.",
+    "button-accessibility-label": "Saiba mais sobre o plano de estudo da Surata Al-Kahf.",
+    "main-headline": "Descubra 4 histórias transformadoras da Surata Al-Kahf",
+    "subtitle-description": "(Um plano de aprendizagem gratuito)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "O Resgatador: Lições Poderosas na Surata Al-Mulk - Plano de Aprendizagem",
+    "banner-image-description": "Veja o plano de estudo de \"O Resgatador\" para a Surata Al-Mulk.",
+    "button-accessibility-label": "Saiba mais sobre o plano de aprendizagem de The Rescuer",
+    "main-headline": "Descubra hoje mesmo as poderosas lições da Surata Al-Mulk.",
+    "subtitle-description": "(Um plano de aprendizagem gratuito)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "O Resgatador: Lições Poderosas na Surata Al-Mulk",
     "banner-image-description": "Veja o plano de aprendizagem do Resgatador para a Surata Al-Mulk",
@@ -171,6 +189,8 @@
   "reflection-not-available": "Não há reflexões revisadas para este ayah",
   "reflections": "Reflexões",
   "reflections-desc": "Leia e compartilhe reflexões corânicas de Ayah {{ayahNumber}} da Surata {{surahName}}",
+  "related-verses": "Versículos relacionados",
+  "related-verses-desc": "Leia e compartilhe versículos do Alcorão relacionados ao versículo Ayah. {{ayahNumber}} da Surata {{surahName}}",
   "remove-bookmark": "Remover favorito",
   "remove-my-reading-bookmark": "Remover meu marcador de leitura",
   "remove-pinned-verse": "Remover verso {{verseKey}} de fixado",
@@ -190,6 +210,7 @@
   "selected-count": "{{count}} selecionado",
   "set-as-reading-bookmark": "Definido como meu marcador de leitura",
   "share-your-reflection": "Compartilhe sua reflexão sobre este ayah",
+  "show-tajweed-rules": "Mostre as regras de Tajweed enquanto lê:",
   "study-mode": "Modo de estudo",
   "surah-beginning": "Começo da Surata",
   "surah-info": "Surah Info",

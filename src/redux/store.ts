@@ -16,6 +16,7 @@ import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
+import ayahWidget from './slices/ayahWidget';
 import banner from './slices/banner';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
@@ -52,7 +53,7 @@ import getPersistedTheme from './utils/getPersistedTheme';
 
 const persistConfig = {
   key: 'root',
-  version: 42,
+  version: 43,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -76,6 +77,7 @@ const persistConfig = {
     SliceName.REVELATION_ORDER,
     SliceName.ONBOARDING,
     SliceName.MEDIA_MAKER,
+    SliceName.AYAH_WIDGET,
     SliceName.PINNED_VERSES,
     SliceName.GUEST_ENROLLMENT,
     SliceName.GUEST_BOOKMARK,
@@ -108,6 +110,7 @@ export const rootReducer = combineReducers({
   revelationOrder,
   notifications,
   onboarding,
+  ayahWidget,
   mediaMaker,
   microphone,
   guestBookmark,

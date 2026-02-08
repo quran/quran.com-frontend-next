@@ -15,6 +15,7 @@ import styles from './CommandList.module.scss';
 import CommandPrefix from './CommandPrefix';
 
 import SearchResultsHeader from '@/components/Search/SearchResults/SearchResultsHeader';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
   addRecentNavigation,
@@ -22,10 +23,10 @@ import {
   setIsExpanded,
 } from '@/redux/slices/CommandBar/state';
 import { stopMicrophone } from '@/redux/slices/microphone';
+import Language from '@/types/Language';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSearchQueryNavigationUrl, resolveUrlBySearchNavigationType } from '@/utils/navigation';
-import { getResultType } from '@/utils/search';
 import { SearchNavigationResult, SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {
@@ -38,6 +39,7 @@ export interface Command extends SearchNavigationResult {
 interface Props {
   commandGroups: { groups: Record<string, Command[]>; numberOfCommands: number };
   searchQuery?: string;
+  resultItemClassName?: string;
 }
 
 export const RESULTS_GROUP = 'results';
@@ -45,8 +47,10 @@ export const RESULTS_GROUP = 'results';
 const CommandsList: React.FC<Props> = ({
   commandGroups: { groups, numberOfCommands },
   searchQuery,
+  resultItemClassName,
 }) => {
   const { t } = useTranslation('common');
+  const arabicChaptersData = useGetChaptersData(Language.AR);
   const [scrollToSelectedCommand, selectedItemRef]: [() => void, RefObject<HTMLLIElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
   const [selectedCommandIndex, setSelectedCommandIndex] = useState(numberOfCommands ? 0 : null);
@@ -91,7 +95,17 @@ const CommandsList: React.FC<Props> = ({
       dispatch(stopMicrophone());
 
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
-        dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
+        dispatch({
+          type: addRecentNavigation.type,
+          payload: {
+            name,
+            resultType,
+            key,
+            arabic: command.arabic,
+            isArabic: command.isArabic,
+            isTransliteration: command.isTransliteration,
+          },
+        });
         dispatch({ type: setIsExpanded.type, payload: false });
       });
     },
@@ -159,6 +173,7 @@ const CommandsList: React.FC<Props> = ({
   if (numberOfCommands === 0) {
     return <p className={styles.noResult}>{t('command-bar.no-nav-results')}</p>;
   }
+
   return (
     <ul role="listbox">
       <div
@@ -183,7 +198,7 @@ const CommandsList: React.FC<Props> = ({
               )}
               <ul role="group" aria-labelledby={commandGroup}>
                 {groups[commandGroup].map((command) => {
-                  const { name, key, index } = command;
+                  const { key, index } = command;
                   const isSelected = selectedCommandIndex === index;
                   return (
                     <li
@@ -191,11 +206,13 @@ const CommandsList: React.FC<Props> = ({
                       role="option"
                       aria-selected={isSelected}
                       key={index}
-                      className={classNames(styles.command, { [styles.selected]: isSelected })}
+                      className={classNames(styles.command, resultItemClassName, {
+                        [styles.selected]: isSelected,
+                      })}
                       onClick={() => navigateToLink(command)}
                       onMouseOver={() => setSelectedCommandIndex(index)}
                     >
-                      <CommandPrefix name={name} type={getResultType(command)} />
+                      <CommandPrefix result={command} arabicChaptersData={arabicChaptersData} />
                       <div className={styles.keyboardInputContainer}>
                         <CommandControl
                           isClearable={command.isClearable}

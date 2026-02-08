@@ -40,6 +40,7 @@
   "download-copy": "如果你想下载文本文件。",
   "edgham": "伊德加姆",
   "ekhfa": "伊克法和古纳",
+  "embed-widget": "嵌入式小部件",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "追踪连胜纪录，创建自定义目标，保持稳定",
     "achieve-quran-goals-responsive": "实现你的古兰经目标",
@@ -83,11 +84,28 @@
     "sign-in-message": "登录或免费注册即可解锁更多功能！",
     "title": "保存进度"
   },
+  "hadith": {
+    "title": "圣训"
+  },
   "hizb-beginning": "Hizb的开始",
   "include-translator": "包括译者姓名？",
   "info": "信息",
   "juz-beginning": "回到本卷开头",
   "languages": "语言",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "四个改变人生的故事：从《古兰经》第18章“山洞章”中汲取的教训 学习计划横幅",
+    "banner-image-description": "查看《古兰经》第18章“山洞章”（Surah Al-Kahf）的学习计划。",
+    "button-accessibility-label": "了解更多关于《古兰经》第18章“山洞章”学习计划的信息",
+    "main-headline": "从《古兰经》第18章“山洞章”中探索4个改变人生的故事",
+    "subtitle-description": "（免费学习计划）"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "拯救者：古兰经第17章《主权章》学习计划横幅中的深刻教训",
+    "banner-image-description": "查看《拯救者》古兰经第17章“主权章”的学习计划",
+    "button-accessibility-label": "了解更多关于“救援者”学习计划的信息",
+    "main-headline": "今天就来探索《古兰经》第17章《主权章》中的深刻教训吧！",
+    "subtitle-description": "（免费学习计划）"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "拯救者：《古兰经》穆尔克章中的有力教训学习计划横幅",
     "banner-image-description": "查看 Surah Al-Mulk 的救援者学习计划",
@@ -171,6 +189,8 @@
   "reflection-not-available": "没有评论过这个啊啊啊",
   "reflections": "反思",
   "reflections-desc": "阅读并分享《古兰经》对《古兰经》{{surahName}} 的 Ayah {{ayahNumber}}的{{surahName}}",
+  "related-verses": "相关经文",
+  "related-verses-desc": "阅读并分享与《古兰经》相关的经文 {{ayahNumber}} 古兰经 {{surahName}}",
   "remove-bookmark": "删除书签",
   "remove-my-reading-bookmark": "删除我的阅读书签",
   "remove-pinned-verse": "删除诗句 {{verseKey}} 已置顶",
@@ -190,6 +210,7 @@
   "selected-count": "{{count}} 选定",
   "set-as-reading-bookmark": "设为我的阅读书签",
   "share-your-reflection": "分享您对此的看法",
+  "show-tajweed-rules": "阅读时显示 Tajweed 规则：",
   "study-mode": "学习模式",
   "surah-beginning": "回到本章开头",
   "surah-info": "古兰经信息",

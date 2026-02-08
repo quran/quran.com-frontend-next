@@ -40,6 +40,7 @@
   "download-copy": "jika anda ingin memuat turun fail teks.",
   "edgham": "Idghaam",
   "ekhfa": "Ikhfa dan Ghunna",
+  "embed-widget": "Widget Benamkan",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Jejaki Rentetan, Cipta Matlamat Tersuai, Kekal Konsisten",
     "achieve-quran-goals-responsive": "Capai Matlamat Al-Quran Anda",
@@ -83,11 +84,28 @@
     "sign-in-message": "Daftar masuk atau Daftar secara percuma untuk mendapatkan akses kepada lebih banyak ciri!",
     "title": "Simpan Kemajuan Anda"
   },
+  "hadith": {
+    "title": "Hadis"
+  },
   "hizb-beginning": "Permulaan Hizb",
   "include-translator": "Sertakan nama penterjemah?",
   "info": "maklumat",
   "juz-beginning": "Permulaan Juz",
   "languages": "Bahasa-bahasa",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 Kisah Mengubah Hidup: Pengajaran Daripada Sepanduk Pelan Pembelajaran Surah Al-Kahfi",
+    "banner-image-description": "Lihat rancangan pembelajaran untuk Surah Al-Kahfi",
+    "button-accessibility-label": "Ketahui lebih lanjut tentang pelan pembelajaran Surah Al-Kahfi",
+    "main-headline": "Temui 4 kisah yang mengubah hidup daripada Surah Al-Kahfi",
+    "subtitle-description": "(Rancangan Pembelajaran percuma)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Sepanduk pelan pembelajaran Sang Penyelamat: Pengajaran Berkesan dalam Surah Al-Mulk",
+    "banner-image-description": "Lihat pelan pembelajaran The Rescuer untuk Surah Al-Mulk",
+    "button-accessibility-label": "Ketahui lebih lanjut tentang pelan pembelajaran The Rescuer",
+    "main-headline": "Temui pengajaran hebat dalam Surah Al-Mulk hari ini",
+    "subtitle-description": "(Rancangan Pembelajaran percuma)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "The Rescuer: Powerful Lessons in Surah Al-Mulk sepanduk rancangan pembelajaran",
     "banner-image-description": "Lihat rancangan pembelajaran The Rescuer untuk Surah Al-Mulk",
@@ -171,6 +189,8 @@
   "reflection-not-available": "Tiada refleksi yang disemak untuk ayat ini",
   "reflections": "Refleksi",
   "reflections-desc": "Baca dan kongsi renungan Al-Quran Ayah {{ayahNumber}} Surah {{surahName}}",
+  "related-verses": "Ayat-ayat berkaitan",
+  "related-verses-desc": "Baca dan kongsikan ayat-ayat berkaitan Al-Quran {{ayahNumber}} Surah {{surahName}}",
   "remove-bookmark": "Alih keluar penanda halaman",
   "remove-my-reading-bookmark": "Alih Keluar Penanda Buku Bacaan Saya",
   "remove-pinned-verse": "Alih keluar ayat {{verseKey}} daripada disematkan",
@@ -190,6 +210,7 @@
   "selected-count": "{{count}} dipilih",
   "set-as-reading-bookmark": "Tetapkan sebagai Penanda Buku Bacaan Saya",
   "share-your-reflection": "Kongsikan renungan anda tentang ayat ini",
+  "show-tajweed-rules": "Tunjukkan hukum Tajwid semasa membaca:",
   "study-mode": "Mod belajar",
   "surah-beginning": "Permulaan Surah",
   "surah-info": "Info Surah",

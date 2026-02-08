@@ -40,6 +40,7 @@
   "download-copy": "หากคุณต้องการดาวน์โหลดไฟล์ข้อความ",
   "edgham": "อิดกัม",
   "ekhfa": "อิคฟาและกุนน่า",
+  "embed-widget": "วิดเจ็ตฝังตัว",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "ติดตามสถิติต่อเนื่อง สร้างเป้าหมายที่กำหนดเอง และรักษาความสม่ำเสมอ",
     "achieve-quran-goals-responsive": "บรรลุเป้าหมายตามหลักอัลกุรอานของคุณ",
@@ -83,11 +84,28 @@
     "sign-in-message": "เข้าสู่ระบบหรือสมัครสมาชิกฟรีเพื่อเข้าถึงฟีเจอร์เพิ่มเติม!",
     "title": "บันทึกความคืบหน้าของคุณ"
   },
+  "hadith": {
+    "title": "หะดีษ"
+  },
   "hizb-beginning": "จุดเริ่มต้นของฮิซบ์",
   "include-translator": "แสดงชื่อผู้แปล?",
   "info": "ข้อมูล",
   "juz-beginning": "ส่วนต้นของญุซ",
   "languages": "ภาษา",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 เรื่องราวเปลี่ยนชีวิต: บทเรียนจากซูเราะห์อัลกาห์ฟ (แบนเนอร์แผนการเรียนรู้)",
+    "banner-image-description": "ดูแผนการเรียนสำหรับซูเราะห์อัล-กาห์ฟ",
+    "button-accessibility-label": "เรียนรู้เพิ่มเติมเกี่ยวกับแผนการเรียนรู้ซูเราะห์อัล-กาห์ฟ",
+    "main-headline": "ค้นพบ 4 เรื่องราวที่จะเปลี่ยนชีวิตคุณจากซูเราะห์อัล-กาห์ฟ",
+    "subtitle-description": "(แผนการเรียนรู้ฟรี)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "ผู้กอบกู้: บทเรียนอันทรงพลังในซูเราะห์อัลมุลก์ (แบนเนอร์แผนการเรียนรู้)",
+    "banner-image-description": "ดูแผนการเรียนรู้เรื่องผู้ช่วยให้รอดสำหรับซูเราะห์อัลมุลก์",
+    "button-accessibility-label": "เรียนรู้เพิ่มเติมเกี่ยวกับแผนการเรียนรู้เรื่อง The Rescuer",
+    "main-headline": "ค้นพบบทเรียนอันทรงพลังในซูเราะห์อัลมุลก์ในวันนี้",
+    "subtitle-description": "(แผนการเรียนรู้ฟรี)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "ผู้ช่วยชีวิต: บทเรียนอันทรงพลังในแผนการเรียนรู้ซูเราะห์ อัล-มุลก์",
     "banner-image-description": "ดูแผนการเรียนรู้ของผู้ช่วยชีวิตสำหรับซูเราะห์อัลมุลก์",
@@ -171,6 +189,8 @@
   "reflection-not-available": "ยังไม่มีการทบทวนบทเรียนสำหรับอายะห์นี้",
   "reflections": "การสะท้อน",
   "reflections-desc": "อ่านและแบ่งปันการสะท้อนบทเรียนอัลกุรอาน อายะห์ที่  {{ayahNumber}} ของซูเราะห์ {{surahName}}",
+  "related-verses": "ข้อพระคัมภ์ที่เกี่ยวข้อง",
+  "related-verses-desc": "อ่านและแบ่งปันโองการต่างๆ จากอัลกุรอานที่เกี่ยวข้องกับอายะห์ {{ayahNumber}} ของซูเราะห์ {{surahName}}",
   "remove-bookmark": "ลบบุ๊คมาร์ก",
   "remove-my-reading-bookmark": "ลบที่คั่นหนังสือของฉันออก",
   "remove-pinned-verse": "ลบข้อความ {{verseKey}} จากที่ปักหมุดไว้",
@@ -190,6 +210,7 @@
   "selected-count": "{{count}} เลือก",
   "set-as-reading-bookmark": "ตั้งเป็นที่คั่นหนังสือของฉัน",
   "share-your-reflection": "แชร์การสะท้อนบทเรียนของคุณเกี่ยวกับอายะฮ์นี้",
+  "show-tajweed-rules": "แสดงกฎตัจวีดขณะอ่าน:",
   "study-mode": "โหมดการเรียนรู้",
   "surah-beginning": "ส่วนต้นของซูเราะห์",
   "surah-info": "ข้อมูลเกี่ยวกับซูเราะห์",

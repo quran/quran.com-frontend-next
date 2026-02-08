@@ -121,7 +121,7 @@ test.describe('Homepage Search Bar - General Search Features', () => {
       ]);
 
       // 2. In the "search-results" div, we should see one result
-      await expect(searchResults.getByText("Surah Al-Ma'idah")).toBeVisible();
+      await expect(searchResults.getByText("5. Al-Ma'idah (The Table Spread)")).toBeVisible();
       await expect(searchResults.getByText('Page 5')).toBeVisible();
       await expect(searchResults.getByText('Juz 5')).toBeVisible();
     },

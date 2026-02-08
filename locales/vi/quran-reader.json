@@ -40,6 +40,7 @@
   "download-copy": "Nếu bạn muốn tải xuống tệp văn bản.",
   "edgham": "Âm câm",
   "ekhfa": "Ghunna/ikhfa'",
+  "embed-widget": "Nhúng tiện ích",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Giữ chuỗi liên tục, Đặt mục tiêu riêng, Luyện tính kiên trì",
     "achieve-quran-goals-responsive": "Đạt mục tiêu với Kinh Qur'an",
@@ -83,11 +84,28 @@
     "sign-in-message": "Đăng nhập hoặc đăng ký miễn phí để truy cập nhiều tính năng hơn!",
     "title": "Lưu lại tiến trình của bạn"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Mở đầu Hizb",
   "include-translator": "Có cần ghi tên người dịch không?",
   "info": "thông tin",
   "juz-beginning": "Mở đầu Juz",
   "languages": "Ngôn ngữ",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 Câu chuyện thay đổi cuộc đời: Những bài học từ Surah Al-Kahf - biểu ngữ kế hoạch học tập",
+    "banner-image-description": "Xem kế hoạch học tập cho Surah Al-Kahf",
+    "button-accessibility-label": "Tìm hiểu thêm về kế hoạch học tập Surah Al-Kahf.",
+    "main-headline": "Khám phá 4 câu chuyện thay đổi cuộc đời từ Surah Al-Kahf.",
+    "subtitle-description": "(Một kế hoạch học tập miễn phí)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Người Cứu Thế: Những Bài Học Mạnh Mẽ trong Surah Al-Mulk (kế hoạch học tập)",
+    "banner-image-description": "Xem kế hoạch học tập về Surah Al-Mulk trong cuốn \"Người Cứu Rỗi\"",
+    "button-accessibility-label": "Tìm hiểu thêm về kế hoạch học tập The Rescuer.",
+    "main-headline": "Khám phá những bài học sâu sắc trong Surah Al-Mulk ngày hôm nay.",
+    "subtitle-description": "(Một kế hoạch học tập miễn phí)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "Đấng Cứu Rỗi: Những Bài Học Sâu Sắc từ Surah Al-Mulk (kế hoạch học tập)",
     "banner-image-description": "Xem kế hoạch học tập về Surah Al-Mulk trong bài học \"Đấng Cứu Rỗi\"",
@@ -171,6 +189,8 @@
   "reflection-not-available": "Hiện chưa có bài bình luận nào cho ayah này",
   "reflections": "Suy ngẫm",
   "reflections-desc": "Hãy đọc và chia sẻ những suy ngẫm về Ayah {{ayahNumber}} của Surah {{surahName}}",
+  "related-verses": "Các câu thơ liên quan",
+  "related-verses-desc": "Hãy đọc và chia sẻ những câu kinh liên quan đến Kinh Qur'an. {{ayahNumber}} của Surah {{surahName}}",
   "remove-bookmark": "Xóa đánh dấu trang",
   "remove-my-reading-bookmark": "Xóa dấu trang đọc của tôi",
   "remove-pinned-verse": "Xóa câu thơ {{verseKey}} từ ghim",
@@ -190,6 +210,7 @@
   "selected-count": "{{count}} đã chọn",
   "set-as-reading-bookmark": "Đã đặt làm dấu trang đọc sách của tôi",
   "share-your-reflection": "Chia sẻ suy ngẫm của bạn về ayah này",
+  "show-tajweed-rules": "Hiển thị các quy tắc Tajweed khi đọc:",
   "study-mode": "Chế độ học tập",
   "surah-beginning": "Mở đầu Surah",
   "surah-info": "Thông tin Surah",

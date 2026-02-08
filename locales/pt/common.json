@@ -100,6 +100,13 @@
   "beyond-ramadan": "Cresça além do Ramadan!",
   "bookmark": "marca páginas",
   "bookmarked": "Favorito",
+  "bookmarks-migration": {
+    "body-1": "Seus favoritos agora se tornarão <strong>Versículos Salvos</strong> em <strong>Coleções</strong>Para manter seus favoritos atuais, faça login ou crie uma conta.",
+    "body-2": "Adicionamos também um novo marcador de leitura para que você possa continuar exatamente de onde parou.",
+    "checkbox": "Não mostrar esta mensagem novamente (Aviso: você perderá todos os seus favoritos atuais)",
+    "sign-in": "Entrar / Cadastrar-se",
+    "title": "Aviso: Os favoritos estão mudando"
+  },
   "both": "Ambos",
   "cancel": "Cancelar",
   "change-theme": "Alterar tema",
@@ -137,6 +144,7 @@
   "copied": "Copiado",
   "copied-to-clipboard": "Copiado para a área de transferência",
   "copy": "cópia de",
+  "copy-embed": "Copiar e incorporar",
   "copylink": "Copiar link",
   "counter": {
     "decrease": "Diminuir",
@@ -162,6 +170,8 @@
     "resend-email-in": "Reenvie o e-mail de verificação em {{remainingTime}} segundos...",
     "verify-code": "Código de verificação"
   },
+  "embed-copied": "Incorporar cópia",
+  "embed-widget": "Widget incorporado",
   "end-year-donate": "Termine 2024 com Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Você pode selecionar até {{limit}} versos por vez. Selecione um intervalo menor.",
@@ -459,6 +469,8 @@
   "subscribe": "Se inscrever",
   "subscribed": "Subscrito",
   "surah": "Surah",
+  "tab-see-less": "Ver menos...",
+  "tab-see-more": "Veja mais...",
   "tafsir": {
     "font-size": "Tamanho da fonte Tafsir",
     "group-message": "Você está lendo um tafsir para o grupo de versos {{from}} a {{to}}",

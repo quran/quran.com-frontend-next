@@ -40,6 +40,7 @@
   "download-copy": "als u een tekstbestand wilt downloaden.",
   "edgham": "Idghaam (samenvoegen van een letter)",
   "ekhfa": "Ikhfa en Ghunna",
+  "embed-widget": "Insluiten widget",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Houd reeksen bij, stel aangepaste doelen in en blijf consistent.",
     "achieve-quran-goals-responsive": "Bereik je Koran-doelen",
@@ -83,11 +84,28 @@
     "sign-in-message": "Meld u aan of registreer u gratis om toegang te krijgen tot meer functies!",
     "title": "Sla je voortgang op"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Begin van Hizb",
   "include-translator": "Naam van de vertaler toevoegen?",
   "info": "informatie",
   "juz-beginning": "begin van Juzz",
   "languages": "Talen",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 levensveranderende verhalen: lessen uit Surah Al-Kahf (lesplanbanner)",
+    "banner-image-description": "Bekijk het leerplan voor Surah Al-Kahf.",
+    "button-accessibility-label": "Leer meer over het leerplan voor Surah Al-Kahf",
+    "main-headline": "Ontdek 4 levensveranderende verhalen uit Surah Al-Kahf.",
+    "subtitle-description": "(Een gratis leerplan)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "De Redder: Krachtige lessen in Soera Al-Mulk (lesplanbanner)",
+    "banner-image-description": "Bekijk het leerplan 'De Redder' voor Soera Al-Mulk.",
+    "button-accessibility-label": "Lees meer over het leerplan van The Rescuer.",
+    "main-headline": "Ontdek vandaag nog de waardevolle lessen in Surah Al-Mulk.",
+    "subtitle-description": "(Een gratis leerplan)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "The Rescuer: Krachtige lessen in Surah Al-Mulk leerplan banner.",
     "banner-image-description": "Bekijk het leerplan van The Rescuer voor Surah Al-Mulk",
@@ -171,6 +189,8 @@
   "reflection-not-available": "Er zijn geen beoordeelde reflecties voor deze ayah",
   "reflections": "Reflecties",
   "reflections-desc": "Lees en deel Koran reflecties van Ayah {{ayahNumber}} van Surah {{surahName}}",
+  "related-verses": "Verwante verzen",
+  "related-verses-desc": "Lees en deel koranverzen van Ayah {{ayahNumber}} van Soera {{surahName}}",
   "remove-bookmark": "Bladwijzer verwijderen",
   "remove-my-reading-bookmark": "Mijn leesbladwijzer verwijderen",
   "remove-pinned-verse": "Verwijder vers {{verseKey}} van vastgepind",
@@ -190,6 +210,7 @@
   "selected-count": "{{count}} gekozen",
   "set-as-reading-bookmark": "Instellen als mijn leesbladwijzer",
   "share-your-reflection": "Deel je reflectie op deze ayah",
+  "show-tajweed-rules": "Toon de Tajweed-regels tijdens het lezen:",
   "study-mode": "Studiemodus",
   "surah-beginning": "Begin van Surah",
   "surah-info": "Surah Info",

@@ -1,0 +1,85 @@
+{
+  "actions": {
+    "copied": "Imenakiliwa!",
+    "copy": "Nakili",
+    "copyEmbedSnippet": "Nakili Kijisehemu Kilichopachikwa"
+  },
+  "checkboxes": {
+    "answers": "Kitufe cha Onyesha Majibu (ikiwa kinapatikana)",
+    "audio": "Washa uchezaji wa sauti",
+    "customSize": "Tumia upana/urefu maalum",
+    "lessons": "Kitufe cha Onyesha Masomo",
+    "mergeVerses": "Unganisha mistari (onyesho la ndani)",
+    "reflections": "Kitufe cha Onyesha Tafakari",
+    "showArabic": "Onyesha mstari wa Kiarabu",
+    "tafsirs": "Onyesha kitufe cha Tafsirs",
+    "translator": "Onyesha jina la mtafsiri",
+    "verseRange": "Washa safu ya mistari",
+    "wordByWord": "Wezesha tafsiri ya neno kwa neno",
+    "wordByWordTransliteration": "Washa unukuzi wa neno kwa neno"
+  },
+  "errors": {
+    "clipboardFallback": "Uandishi wa ubao wa kunakili umeshindwa, kwa kutumia njia mbadala",
+    "clipboardUnavailable": "API ya Ubao wa Kunakili haipatikani",
+    "loadChapters": "Haiwezi kupakia sura",
+    "loadReciters": "Haiwezi kupakia visomaji",
+    "loadTranslations": "Haiwezi kupakia tafsiri"
+  },
+  "fields": {
+    "ayah": "Ayah",
+    "clientId": "Kitambulisho cha Mteja",
+    "height": "Urefu",
+    "language": "Lugha",
+    "mushaf": "Mushaf",
+    "reciter": "Msomaji",
+    "surah": "Surah",
+    "theme": "Mandhari",
+    "translations": "Tafsiri",
+    "width": "Upana"
+  },
+  "header": {
+    "subtitle": "<bold>Njia ya ubora wa juu na inayoweza kubadilishwa ili kujumuisha aya za Quran katika maudhui yako.</bold><br />Unda kipachiko ambacho unaweza kukibadilisha kwa urahisi, nacho <bold>Uandishi sahihi wa Kiarabu, usomaji uliojengewa ndani</bold> na zaidi, ili wasomaji waweze kusikiliza wanapojishughulisha na mstari huo.",
+    "title": "Mjenzi wa Kiambatisho cha Ayah"
+  },
+  "meta": {
+    "description": "Sanidi na hakiki wijeti za kupachika kwa ajili ya kushiriki Quran, kisha nakili kipande cha hati kilicho tayari kutumika.",
+    "title": "Mjenzi wa Kiambatisho cha Ayah | Quran.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "King Fahad Complex v1",
+    "kfgqpc_v2": "King Fahad Complex v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tajweed"
+  },
+  "placeholders": {
+    "searchTranslations": "Tafuta tafsiri..."
+  },
+  "reciters": {
+    "select": "Chagua msomaji"
+  },
+  "sections": {
+    "configuration": "Usanidi",
+    "preview": "Hakikisho la moja kwa moja",
+    "snippet": "Kijisehemu cha kupachika"
+  },
+  "states": {
+    "loadingChapters": "Inapakia sura...",
+    "loadingPreview": "Inapakia onyesho la kuchungulia...",
+    "loadingReciters": "Inapakia wasomaji...",
+    "loadingVerses": "Inapakia mistari...",
+    "noTranslations": "Hakuna tafsiri zilizopatikana"
+  },
+  "theme": {
+    "dark": "Nyeusi",
+    "light": "Mwanga",
+    "sepia": "Sepia"
+  },
+  "translations": {
+    "chipRemoveLabel": "Ondoa tafsiri",
+    "otherLanguage": "Nyingine"
+  },
+  "widget": {
+    "readOnQuran": "Soma kwenye Quran.com"
+  }
+}

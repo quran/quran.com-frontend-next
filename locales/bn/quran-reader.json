@@ -40,6 +40,7 @@
   "download-copy": "আপনি যদি টেক্সট ফাইল ডাউনলোড করতে চান।",
   "edgham": "ইদগাম",
   "ekhfa": "ইখফা ও ঘুন্না",
+  "embed-widget": "উইজেট এম্বেড করুন",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "স্ট্রিক ট্র্যাক করুন, কাস্টম লক্ষ্য তৈরি করুন, ধারাবাহিক থাকুন",
     "achieve-quran-goals-responsive": "তোমার কুরআনের লক্ষ্য অর্জন করো",
@@ -83,11 +84,28 @@
     "sign-in-message": "আরও বৈশিষ্ট্যগুলিতে অ্যাক্সেস পেতে সাইন ইন করুন অথবা বিনামূল্যে সাইন আপ করুন!",
     "title": "আপনার অগ্রগতি সংরক্ষণ করুন"
   },
+  "hadith": {
+    "title": "হাদিস"
+  },
   "hizb-beginning": "হিযবের সূচনা",
   "include-translator": "অনুবাদকের নাম অন্তর্ভুক্ত করবেন?",
   "info": "তথ্য",
   "juz-beginning": "জুজের শুরু",
   "languages": "ভাষাসমূহ",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "৪টি জীবন পরিবর্তনকারী গল্প: সূরা আল-কাহফ থেকে শিক্ষা, শেখার পরিকল্পনা ব্যানার",
+    "banner-image-description": "সূরা আল-কাহফের শেখার পরিকল্পনা দেখুন",
+    "button-accessibility-label": "সূরা আল-কাহফ শেখার পরিকল্পনা সম্পর্কে আরও জানুন",
+    "main-headline": "সূরা আল-কাহফ থেকে ৪টি জীবন বদলে দেওয়া গল্প আবিষ্কার করুন",
+    "subtitle-description": "(একটি বিনামূল্যের শিক্ষণ পরিকল্পনা)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "উদ্ধারকারী: সূরা আল-মুলকের শক্তিশালী শিক্ষামূলক ব্যানার",
+    "banner-image-description": "সূরা আল-মুলকের জন্য উদ্ধারকারী শেখার পরিকল্পনা দেখুন",
+    "button-accessibility-label": "উদ্ধারকারী শিক্ষণ পরিকল্পনা সম্পর্কে আরও জানুন",
+    "main-headline": "আজই সূরা আল-মুলকের শক্তিশালী শিক্ষাগুলি আবিষ্কার করুন",
+    "subtitle-description": "(একটি বিনামূল্যের শিক্ষণ পরিকল্পনা)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "“দ্য রেস্কিউয়ার: সূরা আল-মুলক থেকে শক্তিশালী শিক্ষা — শিক্ষা পরিকল্পনার ব্যানার\\n",
     "banner-image-description": "সূরা আল-মুলকের জন্য “দ্য রেসকিউয়ার” শিক্ষার পরিকল্পনাটি দেখুন।",
@@ -171,6 +189,8 @@
   "reflection-not-available": "এই আয়াতের জন্য কোনো পর্যালোচনা করা প্রতিফলন নেই",
   "reflections": "প্রতিফলন",
   "reflections-desc": "সূরা {{surahName}} {{ayahNumber}} এর কুরআনের প্রতিফলন পড়ুন এবং শেয়ার করুন",
+  "related-verses": "সম্পর্কিত আয়াত",
+  "related-verses-desc": "কুরআন সম্পর্কিত আয়াত পড়ুন এবং শেয়ার করুন {{ayahNumber}} সূরার {{surahName}}",
   "remove-bookmark": "বুকমার্ক সরান",
   "remove-my-reading-bookmark": "আমার পঠন বুকমার্কটি সরান",
   "remove-pinned-verse": "পদ্যটি সরান {{verseKey}} পিন করা থেকে",
@@ -190,6 +210,7 @@
   "selected-count": "{{count}} নির্বাচিত",
   "set-as-reading-bookmark": "আমার পঠন বুকমার্ক হিসেবে সেট করুন",
   "share-your-reflection": "এই আয়াতে আপনার প্রতিফলন শেয়ার করুন",
+  "show-tajweed-rules": "পড়ার সময় তাজউইদের নিয়মগুলি দেখান:",
   "study-mode": "অধ্যয়নের ধরণ",
   "surah-beginning": "সূরার শুরু",
   "surah-info": "সূরা তথ্য",

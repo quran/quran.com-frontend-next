@@ -40,6 +40,7 @@
   "download-copy": "si vous voulez télécharger un fichier texte.",
   "edgham": "Lettre muette",
   "ekhfa": "Ghunna/ikhfa’",
+  "embed-widget": "Intégrer le widget",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Suivez vos séries, créez des objectifs personnalisés, restez régulier.",
     "achieve-quran-goals-responsive": "Atteignez vos objectifs liés au Coran",
@@ -83,11 +84,28 @@
     "sign-in-message": "Connectez-vous ou inscrivez-vous gratuitement pour accéder à plus de fonctionnalités !",
     "title": "Sauvegardez votre progression"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Début du Hizb",
   "include-translator": "Inclure le nom du traducteur ?",
   "info": "info",
   "juz-beginning": "Début du Juz",
   "languages": "Langues",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 histoires qui changent la vie : Leçons tirées de la sourate Al-Kahf (bannière du plan d’apprentissage)",
+    "banner-image-description": "Consultez le plan d'apprentissage de la sourate Al-Kahf.",
+    "button-accessibility-label": "Apprenez-en davantage sur le plan d'étude de la sourate Al-Kahf",
+    "main-headline": "Découvrez 4 histoires qui ont changé votre vie, tirées de la sourate Al-Kahf.",
+    "subtitle-description": "(Un plan d'apprentissage gratuit)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Le Sauveur : Leçons puissantes tirées de la sourate Al-Mulk (bannière du plan d’apprentissage)",
+    "banner-image-description": "Consultez le plan d'apprentissage du Sauveur pour la sourate Al-Mulk.",
+    "button-accessibility-label": "Apprenez-en davantage sur le programme d'apprentissage du Sauveur",
+    "main-headline": "Découvrez dès aujourd'hui les enseignements puissants de la sourate Al-Mulk.",
+    "subtitle-description": "(Un plan d'apprentissage gratuit)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "Le Sauveur : Leçons puissantes de la sourate Al-Mulk",
     "banner-image-description": "Voir le plan d'apprentissage du Sauveur pour la sourate Al-Mulk",
@@ -171,6 +189,8 @@
   "reflection-not-available": "Il n'y a pas de réflexions révisées pour cette Ayah",
   "reflections": "Réflexions",
   "reflections-desc": "Lire et partager les réflexions Coraniques de l'Ayah {{ayahNumber}} de la Sourate {{surahName}}",
+  "related-verses": "Versets apparentés",
+  "related-verses-desc": "Lisez et partagez les versets coraniques relatifs à Ayah {{ayahNumber}} de la sourate {{surahName}}",
   "remove-bookmark": "Supprimer le favori",
   "remove-my-reading-bookmark": "Supprimer mon signet de lecture",
   "remove-pinned-verse": "Supprimer le verset {{verseKey}} à partir de l'épingle",
@@ -190,6 +210,7 @@
   "selected-count": "{{count}} choisi(s)",
   "set-as-reading-bookmark": "Défini comme mon marque-page de lecture",
   "share-your-reflection": "Partagez votre réflexion sur cette Ayah",
+  "show-tajweed-rules": "Afficher les règles de Tajwid pendant la lecture :",
   "study-mode": "Mode d'étude",
   "surah-beginning": "Début de la Sourate",
   "surah-info": "Informations sur la Sourate",

@@ -81,3 +81,7 @@ $height: calc(16 * var(--spacing-mega));
 .height {
   block-size: $height;
 }
+
+.resultItem {
+  margin-block: var(--spacing-xxsmall-px);
+}
