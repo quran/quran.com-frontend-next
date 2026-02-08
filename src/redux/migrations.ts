@@ -342,4 +342,11 @@ export default {
       showTajweedRules: state.quranReaderStyles.showTajweedRules ?? true,
     },
   }),
+  43: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      surahInfoFontScale: initialState.quranReaderStyles.surahInfoFontScale,
+    },
+  }),
 };

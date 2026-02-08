@@ -1,3 +1,12 @@
+/* eslint-disable max-lines */
+/**
+ * NOTE:
+ * This file intentionally disables the `max-lines` ESLint rule to keep all
+ * QuranReader styles logic (state, reducers, configuration, and side-effects)
+ * colocated in one place. This improves maintainability, discoverability, and
+ * navigation for a domain that is cohesive and low in functional complexity.
+ */
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import resetSettings from '@/redux/actions/reset-settings';
@@ -71,6 +80,14 @@ export const quranReaderStylesSlice = createSlice({
     }),
     increaseQnaFontScale: (state) => ({ ...state, qnaFontScale: state.qnaFontScale + 1 }),
     decreaseQnaFontScale: (state) => ({ ...state, qnaFontScale: state.qnaFontScale - 1 }),
+    increaseSurahInfoFontScale: (state) => ({
+      ...state,
+      surahInfoFontScale: state.surahInfoFontScale + 1,
+    }),
+    decreaseSurahInfoFontScale: (state) => ({
+      ...state,
+      surahInfoFontScale: state.surahInfoFontScale - 1,
+    }),
     setMushafLines: (
       state,
       action: PayloadAction<{ mushafLines: MushafLines; locale: string }>,
@@ -143,6 +160,8 @@ export const {
   decreaseWordByWordFontScale,
   increaseQnaFontScale,
   decreaseQnaFontScale,
+  increaseSurahInfoFontScale,
+  decreaseSurahInfoFontScale,
   setMushafLines,
   setShowTajweedRules,
 } = quranReaderStylesSlice.actions;
