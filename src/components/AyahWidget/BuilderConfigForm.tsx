@@ -60,7 +60,7 @@ const BuilderConfigForm = ({
   toggleTranslation,
   reciters,
 }: Props): JSX.Element => {
-  const { t } = useTranslation('embed');
+  const { t, lang } = useTranslation('embed');
 
   /**
    * Locale options are static for the session (read from i18n config).
@@ -93,6 +93,7 @@ const BuilderConfigForm = ({
   const formContext: WidgetFormContext = useMemo(
     () => ({
       t,
+      uiLocale: lang,
       preferences,
       setUserPreferences,
       surahs,
@@ -108,6 +109,7 @@ const BuilderConfigForm = ({
     }),
     [
       t,
+      lang,
       preferences,
       setUserPreferences,
       surahs,
