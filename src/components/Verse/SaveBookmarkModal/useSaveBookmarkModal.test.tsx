@@ -68,10 +68,6 @@ vi.mock('./Collections/hooks/useCollectionToggle', () => ({
     handleToggleFavorites: vi.fn(),
   }),
 }));
-vi.mock('@/dls/Toast/Toast', () => ({
-  useToast: () => vi.fn(),
-  ToastStatus: { Error: 'error', Success: 'success' },
-}));
 vi.mock('@/utils/auth/login', () => ({ isLoggedIn: () => false }));
 
 beforeEach(() => {
