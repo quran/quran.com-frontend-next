@@ -57,9 +57,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal }) => {
                     [styles.textBold]: isToday,
                   })}
                 >
-                  {dayState === DayState.Future || isToday
-                    ? day.info.localizedNumber
-                    : day.info.shortName}
+                  {dayState === DayState.Future ? day.info.localizedNumber : day.info.shortName}
                 </span>
               </HoverablePopover>
             </div>
