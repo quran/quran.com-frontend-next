@@ -137,11 +137,23 @@ const useReadingBookmark = ({
     ): boolean => {
       if (!first && !second) return true;
       if (!first || !second) return false;
-      return (
-        first.type === second.type &&
-        first.key === second.key &&
-        (first.verseNumber ?? null) === (second.verseNumber ?? null)
-      );
+      if (
+        first.type !== second.type ||
+        first.key !== second.key ||
+        (first.verseNumber ?? null) !== (second.verseNumber ?? null)
+      ) {
+        return false;
+      }
+
+      if (first.type === BookmarkType.Page) {
+        const firstMushafId = 'mushafId' in first ? first.mushafId : null;
+        const secondMushafId = 'mushafId' in second ? second.mushafId : null;
+        if (firstMushafId !== null && secondMushafId !== null) {
+          return firstMushafId === secondMushafId;
+        }
+      }
+
+      return true;
     },
     [],
   );
