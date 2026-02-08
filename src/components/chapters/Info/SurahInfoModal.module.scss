@@ -1,4 +1,6 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/constants';
+@use 'sass:map';
 
 $calligraphy-offset: -0.875rem;
 $container-min-height: 200px;
@@ -8,15 +10,14 @@ $line-height-relaxed: 1.6;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xsmall);
-  padding-block-start: var(--spacing-large-px);
-  padding-block-end: var(--spacing-mega);
-  margin-block-end: var(--spacing-mega);
-  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  padding-block: var(--spacing-large-px);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+}
 
-  @include breakpoints.smallerThanTablet {
-    margin-block-end: calc(2 * var(--spacing-small));
-    padding-block-start: calc(2 * var(--spacing-small));
-  }
+.options {
+  display: flex;
+  gap: var(--spacing-medium2-px);
+  margin-block: var(--spacing-medium2-px);
 }
 
 .calligraphyContainer {
@@ -108,17 +109,17 @@ $line-height-relaxed: 1.6;
   }
 }
 
-.loadingContainer,
-.errorContainer {
+.statusContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   min-block-size: $container-min-height;
   padding-block: var(--spacing-large);
-}
 
-.errorContainer {
-  color: var(--color-text-error);
+  &[data-status='empty'] {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-medium);
+  }
 }
 
 div {
@@ -158,15 +159,6 @@ div {
   }
 }
 
-.bottomSheetOnDesktopHeaderSeparator {
-  display: none;
-  @include breakpoints.tablet {
-    display: block;
-    padding-block-start: var(--spacing-medium3-px);
-    border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
-  }
-}
-
 .bottomSheetOnDesktopInnerContent {
   @include breakpoints.tablet {
     /**
@@ -176,5 +168,86 @@ div {
     min-block-size: 0;
     display: flex;
     flex-direction: column;
+  }
+}
+
+.resourceTabs {
+  display: flex;
+  gap: var(--spacing-small2-px);
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    block-size: var(--spacing-xxsmall-px);
+  }
+
+  & > :last-child {
+    margin-inline-end: var(--spacing-micro-px);
+  }
+}
+
+.resourceTab {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+  block-size: calc(var(--spacing-small-plus-px) * 4);
+  padding-inline: var(--spacing-medium-px);
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-background-alternative-faint);
+  color: var(--color-text-default-new);
+  line-height: 1;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+
+  &:where(:hover, :focus-visible, [aria-selected='true'], &.resourceTabActive):not(:disabled) {
+    background-color: var(--color-success-medium);
+    color: var(--color-text-white);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(constants.$button-active-scale);
+  }
+}
+
+$surah-info-scales: (
+  tablet: (
+    1: 0.8rem,
+    2: 0.9rem,
+    3: 1rem,
+    4: 1.3rem,
+    5: 1.7rem,
+    6: 2.1rem,
+    7: 2.5rem,
+    8: 2.9rem,
+    9: 3.3rem,
+    10: 3.7rem,
+  ),
+  mobile: (
+    1: 0.8rem,
+    2: 0.9rem,
+    3: 1rem,
+    4: 1.2rem,
+    5: 1.5rem,
+    6: 1.8rem,
+    7: 2.1rem,
+    8: 2.4rem,
+    9: 2.7rem,
+    10: 3rem,
+  ),
+);
+
+@for $i from 1 through 10 {
+  .surahInfo-font-size-#{$i} {
+    --surah-info-font-size: #{map-get(map-get($surah-info-scales, mobile), $i)};
+    font-size: var(--surah-info-font-size);
+
+    @include breakpoints.tablet {
+      --surah-info-font-size: #{map-get(map-get($surah-info-scales, tablet), $i)};
+      font-size: var(--surah-info-font-size);
+    }
   }
 }

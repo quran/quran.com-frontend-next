@@ -401,10 +401,11 @@ export const getSearchQueryNavigationUrl = (query?: string): string => {
  * Get the href link to the info page of a Surah.
  *
  * @param {string} chapterIdOrSlug
+ * @param {string} resourceId
  * @returns {string} chapterUrl
  */
-export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string): string =>
-  `/surah/${chapterIdOrSlug}/info`;
+export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string, resourceId?: string): string =>
+  `/surah/${chapterIdOrSlug}/info${resourceId ? `/${resourceId}` : ''}`;
 
 /**
  * Get href link to the reciter page

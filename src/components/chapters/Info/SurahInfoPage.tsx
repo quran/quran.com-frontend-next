@@ -10,15 +10,15 @@ import styles from '@/components/chapters/ChapterHeader/ChapterHeader.module.scs
 import SurahInfoContent from '@/components/chapters/Info/SurahInfoContent';
 import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import Chapter from '@/types/Chapter';
-import ChapterInfo from '@/types/ChapterInfo';
 import { fakeNavigate, getSurahNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoPageProps {
-  chapterInfo: ChapterInfo;
   chapter: Chapter;
+  initialResourceId?: string | null;
+  chapterId: string | number;
 }
 
-const SurahInfoPage: React.FC<SurahInfoPageProps> = ({ chapterInfo, chapter }) => {
+const SurahInfoPage: React.FC<SurahInfoPageProps> = ({ chapter, initialResourceId, chapterId }) => {
   const { t } = useTranslation('quran-reader');
   const router = useRouter();
 
@@ -40,11 +40,12 @@ const SurahInfoPage: React.FC<SurahInfoPageProps> = ({ chapterInfo, chapter }) =
       size={ContentModalSize.MEDIUM}
       overlayClassName={surahInfoStyles.bottomSheetOnDesktopOverlay}
       innerContentClassName={surahInfoStyles.bottomSheetOnDesktopInnerContent}
+      closeIconClassName={styles.closeIconContainer}
     >
       <SurahInfoContent
-        chapterId={String(chapter.id)}
-        chapterInfo={chapterInfo}
+        chapterId={String(chapterId)}
         chapter={chapter}
+        initialResourceId={initialResourceId}
       />
     </ContentModal>
   );
