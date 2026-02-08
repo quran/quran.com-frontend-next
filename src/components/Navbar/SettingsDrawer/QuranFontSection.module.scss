@@ -8,7 +8,7 @@
 
 .fontSizeSection {
   padding-block-start: var(--spacing-small-px);
-  padding-block-end: var(--spacing-medium2-px);
+  padding-block-end: var(--spacing-medium3-px);
 }
 
 .counter {
@@ -40,16 +40,25 @@
   justify-content: space-between;
   margin: 0;
   padding-inline-start: var(--spacing-small-plus-px);
-  margin-inline-end: var(--spacing-small-plus-px);
+  margin-inline-end: var(--spacing-small2-px);
+
+  label {
+    padding-inline-start: 0;
+    color: var(--color-text-default-new);
+    font-weight: var(--font-weight-medium);
+  }
 
   .tajweedCheckbox {
     padding: 0;
     margin: 0;
-    outline: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
+    outline: none;
     border: none;
-    block-size: var(--spacing-medium2-px);
-    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium3-px);
+    inline-size: var(--spacing-medium3-px);
     border-radius: var(--border-radius-xsmall2-px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &[data-state='checked'] {
       outline-offset: var(--spacing-hairline-px);
@@ -63,8 +72,22 @@
     .tajweedIndicator {
       background-color: transparent;
       border-radius: var(--border-radius-xsmall2-px);
-      block-size: var(--spacing-medium2-px);
-      inline-size: var(--spacing-medium2-px);
+      block-size: var(--spacing-medium3-px);
+      inline-size: var(--spacing-medium3-px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      svg {
+        block-size: var(--spacing-medium2-px);
+        inline-size: var(--spacing-medium2-px);
+      }
     }
   }
 }
