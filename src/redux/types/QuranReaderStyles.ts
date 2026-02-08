@@ -11,6 +11,7 @@ type QuranReaderStyles = {
   quranFont: QuranFont;
   mushafLines: MushafLines;
   isUsingDefaultFont: boolean;
+  showTajweedRules: boolean;
 };
 
 export default QuranReaderStyles;
