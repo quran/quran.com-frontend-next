@@ -96,6 +96,11 @@ const useReadingBookmark = ({
   const currentMushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines)
     .mushaf as Mushaf;
   const isRtlLocale = isRTLLocale(lang);
+  const localizeVerseKey = useCallback(
+    (key: string): string =>
+      isRtlLocale ? toLocalizedVerseKeyRTL(key, lang) : toLocalizedVerseKey(key, lang),
+    [isRtlLocale, lang],
+  );
 
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
 
@@ -129,16 +134,14 @@ const useReadingBookmark = ({
     if (isVerse && verseKey) {
       const [chapterId] = verseKey.split(':');
       const chapter = getChapterData(chaptersData, chapterId);
-      const localizedVerseKey = isRtlLocale
-        ? toLocalizedVerseKeyRTL(verseKey, lang)
-        : toLocalizedVerseKey(verseKey, lang);
+      const localizedVerseKey = localizeVerseKey(verseKey);
       return `${chapter?.transliteratedName || ''} ${localizedVerseKey}`;
     }
     if (!isVerse && pageNumber) {
       return `${t('page')} ${toLocalizedNumber(pageNumber, lang)}`;
     }
     return '';
-  }, [isVerse, verseKey, pageNumber, chaptersData, lang, t, isRtlLocale]);
+  }, [isVerse, verseKey, pageNumber, chaptersData, localizeVerseKey, lang, t]);
 
   // Format bookmark for display
   const formatBookmarkForDisplay = useCallback(
@@ -148,9 +151,7 @@ const useReadingBookmark = ({
         const chapter = getChapterData(chaptersData, String(bookmark.key));
         const verseNum = bookmark.verseNumber || 1;
         const bookmarkVerseKey = `${bookmark.key}:${verseNum}`;
-        const localizedVerseKey = isRtlLocale
-          ? toLocalizedVerseKeyRTL(bookmarkVerseKey, lang)
-          : toLocalizedVerseKey(bookmarkVerseKey, lang);
+        const localizedVerseKey = localizeVerseKey(bookmarkVerseKey);
         return `${chapter?.transliteratedName || ''} ${localizedVerseKey}`;
       }
       if (bookmark.type === BookmarkType.Page) {
@@ -158,7 +159,7 @@ const useReadingBookmark = ({
       }
       return null;
     },
-    [chaptersData, lang, t, isRtlLocale],
+    [chaptersData, localizeVerseKey, lang, t],
   );
 
   // Use the reusable mapping hook for cross-mushaf bookmark handling
@@ -265,9 +266,7 @@ const useReadingBookmark = ({
         effectiveAyahVerseKey?.verseNumber ?? effectiveCurrentBookmarkData.verseNumber ?? 1;
       const chapter = getChapterData(chaptersData, String(surahNumber));
       const mappedVerseKey = `${surahNumber}:${verseNumber}`;
-      const localizedVerseKey = isRtlLocale
-        ? toLocalizedVerseKeyRTL(mappedVerseKey, lang)
-        : toLocalizedVerseKey(mappedVerseKey, lang);
+      const localizedVerseKey = localizeVerseKey(mappedVerseKey);
       return `${chapter?.transliteratedName || ''} ${localizedVerseKey}`;
     }
     if (effectiveCurrentBookmarkData.type === BookmarkType.Page) {
@@ -283,9 +282,9 @@ const useReadingBookmark = ({
     effectiveAyahVerseKey,
     needsMapping,
     chaptersData,
+    localizeVerseKey,
     lang,
     t,
-    isRtlLocale,
   ]);
 
   const effectiveCurrentBookmark = formatBookmarkForDisplay(effectiveCurrentBookmarkData);
