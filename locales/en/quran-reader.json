@@ -240,5 +240,8 @@
   "verses-pinned": "{{count}} verses pinned",
   "verses-range": "Range of verses",
   "view-on-quran-reflect": "View on QuranReflect",
-  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word."
+  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
+  "save-bookmark-modal": {
+    "collections-hint": "Saving More than one bookmark? Use collections:"
+  }
 }

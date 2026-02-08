@@ -1,3 +1,5 @@
+import useTranslation from 'next-translate/useTranslation';
+
 import CollectionsList from './Collections/CollectionsList';
 import { CollectionItem } from './Collections/CollectionsListItem';
 import GuestSignInSection from './GuestSignInSection';
@@ -21,7 +23,6 @@ interface SaveBookmarkModalContentProps {
   pageNumber?: number;
   userIsLoggedIn: boolean;
   mushafId: number;
-  lang: string;
   readingBookmarkData?: Bookmark | null;
   mutateReadingBookmark?: (
     data?: Bookmark | null | Promise<Bookmark | null>,
@@ -59,7 +60,6 @@ const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
   pageNumber,
   userIsLoggedIn,
   mushafId,
-  lang,
   readingBookmarkData,
   mutateReadingBookmark,
   onReadingBookmarkChanged,
@@ -71,6 +71,9 @@ const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
   onGuestSignIn,
   onTakeNote,
 }) => {
+  const { t, lang } = useTranslation('quran-reader');
+  const collectionsHintLabel = t('save-bookmark-modal.collections-hint');
+
   return (
     <div className={styles.container}>
       <SaveBookmarkModalHeader title={modalTitle} onClose={onClose} onBack={onBack} />
@@ -86,6 +89,8 @@ const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
         onBookmarkChanged={onReadingBookmarkChanged}
         lang={lang}
       />
+
+      {isVerse && <p className={styles.collectionsHint}>{collectionsHintLabel}</p>}
 
       {userIsLoggedIn && isVerse && (
         <CollectionsList
