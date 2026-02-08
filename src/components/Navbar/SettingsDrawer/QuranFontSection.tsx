@@ -2,7 +2,6 @@
 import React, { useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -11,10 +10,10 @@ import ReciterSection from './ReciterSection';
 import Section from './Section';
 
 import Counter from '@/dls/Counter/Counter';
+import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select from '@/dls/Forms/Select';
 import Switch from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
-import CheckIcon from '@/icons/check.svg';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { resetLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import {
@@ -258,26 +257,16 @@ const QuranFontSection = () => {
       )}
       {selectedType === QuranFont.Tajweed && (
         <Section.Row className={styles.tajweedRulesSection}>
-          <Section.Label className={styles.tajweedRulesLabel}>
-            {t('quran-reader:show-tajweed-rules')}
-          </Section.Label>
-          <label htmlFor="show-tajweed-rules" className={styles.tajweedCheckboxWrapper}>
-            <input
-              type="checkbox"
-              id="show-tajweed-rules"
-              aria-label={t('quran-reader:show-tajweed-rules')}
-              checked={showTajweedRules}
-              onChange={(e) => onShowTajweedRulesChange(e.target.checked)}
-              className={styles.tajweedHiddenCheckbox}
-            />
-            <span
-              className={classNames(styles.tajweedCheckbox, {
-                [styles.tajweedCheckboxChecked]: showTajweedRules,
-              })}
-            >
-              {showTajweedRules && <CheckIcon className={styles.tajweedCheckIcon} />}
-            </span>
-          </label>
+          <Checkbox
+            keepIndicatorOnUnchecked
+            containerClassName={styles.tajweedCheckboxContainer}
+            checkboxClassName={styles.tajweedCheckbox}
+            indicatorClassName={styles.tajweedIndicator}
+            id="show-tajweed-rules"
+            label={t('quran-reader:show-tajweed-rules')}
+            checked={showTajweedRules}
+            onChange={onShowTajweedRulesChange}
+          />
         </Section.Row>
       )}
       <Section.Row id="font-size-section" className={styles.fontSizeSection}>

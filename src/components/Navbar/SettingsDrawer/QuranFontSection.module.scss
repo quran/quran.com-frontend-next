@@ -35,56 +35,38 @@
   justify-content: space-between;
 }
 
-.tajweedRulesLabel {
-  color: var(--color-text-default-new);
-  font-weight: var(--font-weight-medium);
-  opacity: unset;
+.tajweedCheckboxContainer {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 0;
   padding-inline-start: var(--spacing-small-plus-px);
-}
+  margin-inline-end: var(--spacing-small-plus-px);
 
-.tajweedCheckboxWrapper {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding-inline-end: var(--spacing-small-plus-px);
-}
+  .tajweedCheckbox {
+    padding: 0;
+    margin: 0;
+    outline: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
+    border: none;
+    block-size: var(--spacing-medium2-px);
+    inline-size: var(--spacing-medium2-px);
+    border-radius: var(--border-radius-xsmall2-px);
 
-.tajweedHiddenCheckbox {
-  position: absolute;
-  inline-size: var(--spacing-hairline-px);
-  block-size: var(--spacing-hairline-px);
-  margin: calc(-1 * var(--spacing-hairline-px));
-  padding: 0;
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(var(--opacity-50));
-  white-space: nowrap;
-  overflow: hidden;
-}
+    &[data-state='checked'] {
+      outline-offset: var(--spacing-hairline-px);
+      outline: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
 
-.tajweedHiddenCheckbox:focus-visible + .tajweedCheckbox {
-  outline: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
-  outline-offset: var(--spacing-micro-px);
-}
+      .tajweedIndicator {
+        background-color: var(--color-blue-buttons-and-icons);
+      }
+    }
 
-.tajweedCheckbox {
-  inline-size: var(--spacing-medium2-px);
-  block-size: var(--spacing-medium2-px);
-  border-radius: var(--border-radius-xsmall2-px);
-  border: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-hairline-px);
-}
-
-.tajweedCheckboxChecked {
-  background-color: var(--color-blue-buttons-and-icons);
-  box-shadow: inset 0 0 0 var(--spacing-hairline-px) var(--color-background-elevated-new);
-}
-
-.tajweedCheckIcon {
-  color: var(--color-text-white);
+    .tajweedIndicator {
+      background-color: transparent;
+      border-radius: var(--border-radius-xsmall2-px);
+      block-size: var(--spacing-medium2-px);
+      inline-size: var(--spacing-medium2-px);
+    }
+  }
 }
 
 div.fontSwitch.fontSwitch {
