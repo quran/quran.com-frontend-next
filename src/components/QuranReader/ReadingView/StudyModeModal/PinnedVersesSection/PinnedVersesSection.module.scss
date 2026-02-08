@@ -1,9 +1,20 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .pinnedSection {
-  border-block-end: var(--spacing-hairline-px) solid var(--color-background-alternative-faint-new);
+  position: relative;
+
   @include breakpoints.smallerThanTablet {
     padding-block: var(--spacing-medium-px);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: var(--spacing-edge-horizontal-px);
+    inset-block-end: 0;
+    block-size: var(--spacing-hairline-px);
+    background-color: var(--color-background-alternative-faint-new);
   }
 }
 

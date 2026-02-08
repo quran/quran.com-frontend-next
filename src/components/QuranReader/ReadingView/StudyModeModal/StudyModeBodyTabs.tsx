@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
+import answerStyle from './tabs/StudyModeAnswersTab.module.scss';
 
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
@@ -30,11 +31,19 @@ export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessons
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
-  loading: TafsirSkeleton,
+  loading: () => (
+    <div className={answerStyle.edgeToEdge}>
+      <TafsirSkeleton />
+    </div>
+  ),
 });
 
 const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
-  loading: TafsirSkeleton,
+  loading: () => (
+    <div className={answerStyle.edgeToEdge}>
+      <TafsirSkeleton />
+    </div>
+  ),
 });
 
 export const StudyModeRelatedVersesTab = dynamic(

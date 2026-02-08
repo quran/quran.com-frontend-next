@@ -61,11 +61,17 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({
   };
 
   const renderBody = () => {
-    if (isLoading) return <TafsirSkeleton />;
+    if (isLoading) {
+      return (
+        <div className={styles.edgeToEdge}>
+          <TafsirSkeleton />
+        </div>
+      );
+    }
 
     if (error) {
       return (
-        <div className={styles.errorContainer}>
+        <div className={classNames(styles.edgeToEdge, styles.errorContainer)}>
           <Error error={error} onRetryClicked={handleRetry} />
         </div>
       );

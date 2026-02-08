@@ -5,7 +5,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding-block-start: var(--spacing-xsmall-px);
+  padding-block-start: var(--spacing-medium-plus-px);
 
   @include breakpoints.tablet {
     padding-block-start: var(--spacing-medium2-px);

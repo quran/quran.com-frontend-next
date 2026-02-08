@@ -1,4 +1,9 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
+
+.edgeToEdge {
+  @include utility.edgeHorizontalPadding;
+}
 
 .container {
   padding-block-start: var(--spacing-medium);
@@ -23,13 +28,22 @@
 }
 
 .content {
+  @include utility.edgeHorizontalPadding;
   display: flex;
   column-gap: var(--spacing-large);
   row-gap: var(--spacing-micro);
   flex-direction: column;
-
+  position: relative;
   padding-block-start: var(--spacing-medium3-px);
-  border-block-start: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline: var(--spacing-edge-horizontal-px);
+    inset-block-start: 0;
+    block-size: var(--spacing-hairline-px);
+    background-color: var(--color-separators-ayah-level);
+  }
 
   @include breakpoints.desktop {
     flex-direction: row;

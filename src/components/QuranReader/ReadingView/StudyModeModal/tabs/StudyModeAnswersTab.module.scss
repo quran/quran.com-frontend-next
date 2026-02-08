@@ -1,5 +1,10 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/mixins/qna-font-scales';
+@use 'src/styles/utility';
+
+.edgeToEdge {
+  @include utility.edgeHorizontalPadding;
+}
 
 .container {
   block-size: 100%;
@@ -8,6 +13,7 @@
 .answersContainer {
   padding-block-end: var(--spacing-medium2-px);
   padding-block-start: var(--spacing-xxsmall-px);
+  @include utility.edgeHorizontalPadding;
 }
 
 .notAvailableMessage {

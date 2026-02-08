@@ -1,5 +1,6 @@
 @use '@/styles/breakpoints';
 @use '@/styles/constants';
+@use '@/styles/utility';
 
 .container {
   padding-block-end: calc(var(--spacing-xsmall) * 3);
@@ -10,6 +11,7 @@
   gap: var(--spacing-small2-px);
   padding-block-end: var(--spacing-xxsmall-px);
   margin-block-end: var(--spacing-medium-px);
+  @include utility.edgeHorizontalPadding;
   overflow-x: auto;
 
   &::-webkit-scrollbar {
@@ -19,6 +21,13 @@
   & > :last-child {
     margin-inline-end: var(--spacing-micro-px);
   }
+}
+
+.content {
+  @include utility.edgeHorizontalPadding;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall-px);
 }
 
 .tab {
