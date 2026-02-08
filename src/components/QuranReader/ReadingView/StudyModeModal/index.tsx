@@ -1,7 +1,9 @@
 /* eslint-disable max-lines */
 import React, { useState, useCallback, useContext, useEffect, useMemo } from 'react';
 
+import { useSelector as useXStateSelector } from '@xstate/react';
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -52,6 +54,11 @@ import {
   getVerseQiraatNavigationUrl,
 } from '@/utils/navigation';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+
+const AudioPlayerBody = dynamic(() => import('@/components/AudioPlayer/AudioPlayerBody'), {
+  ssr: false,
+});
 
 interface Props {
   isOpen: boolean;
@@ -80,6 +87,8 @@ const StudyModeModal: React.FC<Props> = ({
   const router = useRouter();
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isAudioVisible = useXStateSelector(audioService, (state) => state.matches('VISIBLE'));
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
   const tafsirs = useSelector(selectSelectedTafsirs, shallowEqual);
@@ -490,6 +499,13 @@ const StudyModeModal: React.FC<Props> = ({
       innerContentClassName={classNames(styles.innerContent, {
         [styles.bottomSheetInnerContent]: isContentTabActive,
       })}
+      footer={
+        isAudioVisible ? (
+          <div className={styles.audioPlayerFooter}>
+            <AudioPlayerBody hideOverflowMenu isEmbedded />
+          </div>
+        ) : undefined
+      }
     >
       <PinnedVersesSection onGoToVerse={handleGoToVerse} />
       {renderContent()}

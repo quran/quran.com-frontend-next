@@ -14,7 +14,12 @@ import useGetChaptersData from '@/hooks/useGetChaptersData';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const PlaybackControls = () => {
+interface PlaybackControlsProps {
+  hideOverflowMenu?: boolean;
+  isEmbedded?: boolean;
+}
+
+const PlaybackControls = ({ hideOverflowMenu, isEmbedded }: PlaybackControlsProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isLoading = useSelector(audioService, selectIsLoading);
   const { lang } = useTranslation('common');
@@ -22,11 +27,13 @@ const PlaybackControls = () => {
 
   return (
     <div className={styles.container}>
+      {!hideOverflowMenu && (
+        <div className={styles.actionItem}>
+          <OverflowAudioPlayerActionsMenu />
+        </div>
+      )}
       <div className={styles.actionItem}>
-        <OverflowAudioPlayerActionsMenu />
-      </div>
-      <div className={styles.actionItem}>
-        <VolumeControl />
+        <VolumeControl shouldUseModalZIndex={isEmbedded} />
       </div>
       <div className={styles.actionItem}>
         <SeekButton

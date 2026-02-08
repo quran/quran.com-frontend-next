@@ -306,6 +306,15 @@ div.bottomSheetInnerContent {
   border-radius: var(--border-radius-default);
 }
 
+// Audio player footer inside study modal
+.audioPlayerFooter {
+  position: relative;
+  background: var(--color-background-elevated-new);
+  border-block-start: 1px solid var(--color-borders-hairline);
+  flex-shrink: 0;
+  z-index: 2;
+}
+
 // SSR modal hidden state - when verse action modal is open
 .ssrHidden {
   opacity: 0;

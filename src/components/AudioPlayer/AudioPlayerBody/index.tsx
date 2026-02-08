@@ -13,7 +13,12 @@ import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import OnboardingGroup from '@/types/OnboardingGroup';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const AudioPlayerBody = () => {
+interface AudioPlayerBodyProps {
+  hideOverflowMenu?: boolean;
+  isEmbedded?: boolean;
+}
+
+const AudioPlayerBody = ({ hideOverflowMenu, isEmbedded }: AudioPlayerBodyProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isRadioMode = useSelector(audioService, (state) => !!state.context.radioActor);
   const { isActive, activeStepGroup, activeStepIndex, nextStep } = useOnboarding();
@@ -38,14 +43,14 @@ const AudioPlayerBody = () => {
         />
         {!isRadioMode && (
           <div className={styles.sliderContainer}>
-            <AudioPlayerSlider />
+            <AudioPlayerSlider isEmbedded={isEmbedded} />
           </div>
         )}
       </div>
       {isRadioMode ? (
         <RadioPlaybackControl radioActor={audioService.getSnapshot().context.radioActor} />
       ) : (
-        <PlaybackControls />
+        <PlaybackControls hideOverflowMenu={hideOverflowMenu} isEmbedded={isEmbedded} />
       )}
     </>
   );

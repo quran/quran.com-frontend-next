@@ -28,7 +28,11 @@ const getVolumeIconType = (volume: number): keyof typeof VOLUME_ICONS => {
   return 'VOLUME_UP';
 };
 
-const VolumeControl = () => {
+interface VolumeControlProps {
+  shouldUseModalZIndex?: boolean;
+}
+
+const VolumeControl = ({ shouldUseModalZIndex }: VolumeControlProps) => {
   const direction = useDirection();
   const { t } = useTranslation('common');
 
@@ -64,6 +68,7 @@ const VolumeControl = () => {
         isOpen={isOpen}
         contentClassName={styles.content}
         onOpenChange={setIsOpen}
+        shouldUseModalZIndex={shouldUseModalZIndex}
         trigger={
           <Button
             tooltip={t('audio.player.volume-control')}

@@ -48,6 +48,8 @@ const ContentModal = ({
   isBottomSheetOnMobile = true,
   isFakeSEOFriendlyMode: isFake = false,
   dataTestId,
+  footer,
+  footerClassName,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const contentRef = useRef<HTMLDivElement>(null);
@@ -133,6 +135,7 @@ const ContentModal = ({
             >
               {children}
             </div>
+            {footer && <div className={classNames(styles.footer, footerClassName)}>{footer}</div>}
           </Content>
         </Overlay>
       </Portal>
