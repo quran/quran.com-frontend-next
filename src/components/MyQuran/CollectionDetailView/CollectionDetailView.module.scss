@@ -1,3 +1,5 @@
+@use 'src/styles/breakpoints';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,11 +7,115 @@
   animation: fadeIn var(--transition-regular) ease-out;
 }
 
+.searchAndActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-medium-px);
+  margin-block-end: var(--spacing-medium2-px);
+
+  @include breakpoints.smallerThanTablet {
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+}
+
+.searchContainer {
+  flex: 1;
+  min-inline-size: min(30rem, 100%);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall-px);
+  padding: var(--spacing-xsmall-px) var(--spacing-small2-px);
+  border-radius: var(--border-radius-pill);
+  background: var(--color-background-alternative);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  // note: TODO: revert this when search is ready to use
+  opacity: 0;
+
+  @include breakpoints.smallerThanTablet {
+    min-inline-size: 100%;
+  }
+}
+
+.searchIcon {
+  inline-size: var(--spacing-medium);
+  block-size: var(--spacing-medium);
+  color: var(--color-text-faded);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  all: unset;
+  flex: 1;
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
+  min-inline-size: 0;
+
+  &::placeholder {
+    color: var(--color-text-faded);
+  }
+}
+
 .topActions {
   display: flex;
   justify-content: flex-end;
-  gap: var(--spacing-xsmall-px);
-  margin-block-end: var(--spacing-medium2-px);
+  align-items: center;
+  gap: var(--spacing-medium-px);
+}
+
+.filterButton {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: var(--spacing-xsmall);
+  border-radius: var(--border-radius-default);
+  position: relative;
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  transition: opacity var(--transition-fast);
+
+  &:hover {
+    opacity: var(--opacity-85);
+  }
+
+  &:focus-visible {
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
+  }
+}
+
+.filterIcon {
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+  inline-size: 100%;
+  block-size: 100%;
+  color: var(--color-text-default-new);
+}
+
+.filterText {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.activeDot {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 100%;
+  // these transform numbers used number to align the dot to the inline end and block start of the icon
+  transform: translateX(-30%) translateY(-25%);
+  inline-size: var(--spacing-xxsmall-px);
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-circle);
+  background-color: var(--color-blue-buttons-and-icons);
 }
 
 .header {

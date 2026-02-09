@@ -125,7 +125,18 @@ vi.mock('@/components/Collection/CollectionActionsPopover/CollectionHeaderAction
 }));
 
 vi.mock('@/components/Collection/CollectionDetail/CollectionDetail', () => ({
-  default: () => <div data-testid="collection-detail" />,
+  default: ({ bookmarks, emptyMessage, onEndReached }: any) => (
+    <div data-testid="collection-detail">
+      <div data-testid="bookmarks-count">{bookmarks?.length ?? 0}</div>
+      <div data-testid="first-bookmark-id">{bookmarks?.[0]?.id ?? ''}</div>
+      <div data-testid="empty-message">{emptyMessage ?? ''}</div>
+      {onEndReached && (
+        <button type="button" onClick={onEndReached}>
+          end-reached
+        </button>
+      )}
+    </div>
+  ),
 }));
 
 vi.mock('@/components/Collection/EditCollectionModal', () => ({
@@ -169,7 +180,11 @@ vi.mock('@/components/QuranReader/VerseActionModalContainer', () => ({
 }));
 
 vi.mock('@/icons/chevron-left.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/chevron-right.svg', () => ({ default: () => <div /> }));
 vi.mock('@/icons/menu_more_horiz.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/filter.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/filter-bar.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/search.svg', () => ({ default: () => <div /> }));
 
 const buildSWRData = (collectionId: string, name: string, isOwner = true) => ({
   data: {
@@ -193,6 +208,8 @@ const renderCollectionDetailView = (
     collectionId: 'my-collection-123',
     collectionName: 'My Collection',
     onBack: vi.fn(),
+    searchQuery: '',
+    onSearchChange: vi.fn(),
     isDefault: false,
     onCollectionUpdateRequest: vi.fn(async () => true),
     onCollectionDeleteRequest: vi.fn(async () => true),
@@ -220,6 +237,48 @@ describe('CollectionDetailView', () => {
 
     expect(onCollectionUpdateRequest).toHaveBeenCalledWith('123', 'Updated Name');
     expect(screen.queryByTestId('edit-modal')).toBeNull();
+  });
+
+  it('shows collection empty message when the collection has no bookmarks', async () => {
+    swrData = buildSWRData('123', 'My Collection');
+
+    renderCollectionDetailView();
+
+    expect(screen.getByTestId('empty-message').textContent).toBe('collections.detail-empty');
+    expect(screen.getByTestId('bookmarks-count').textContent).toBe('0');
+  });
+
+  it('sorts by date descending by default and paginates 10 items initially', async () => {
+    const bookmarks = Array.from({ length: 15 }, (unused, index) => ({
+      id: `b-${index}`,
+      key: 2,
+      verseNumber: index + 1,
+      createdAt: new Date(2025, 0, index + 1).toISOString(),
+      type: 'ayah',
+    }));
+
+    swrData = buildSWRData('123', 'My Collection');
+    // @ts-ignore - partial shape is fine for tests
+    swrData.data.bookmarks = bookmarks;
+
+    renderCollectionDetailView();
+
+    // first render shows 10 only.
+    expect(screen.getByTestId('bookmarks-count').textContent).toBe('10');
+    // default sort: newest first
+    expect(screen.getByTestId('first-bookmark-id').textContent).toBe('b-14');
+
+    // enable infinite scroll callback
+    fireEvent.scroll(window);
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'end-reached' })).toBeDefined();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'end-reached' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('bookmarks-count').textContent).toBe('15');
+    });
   });
 
   it('opens delete modal and confirms deletion', async () => {

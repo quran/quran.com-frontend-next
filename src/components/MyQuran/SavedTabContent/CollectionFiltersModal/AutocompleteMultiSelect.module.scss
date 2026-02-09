@@ -1,0 +1,126 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small-px);
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  margin: 0;
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default-new);
+}
+
+.searchBox {
+  display: flex;
+}
+
+.searchInput {
+  inline-size: 100%;
+  padding: var(--spacing-small-px) var(--spacing-medium-px);
+  border-radius: var(--border-radius-default);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  background: var(--color-background-default);
+  color: var(--color-text-default-new);
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary-medium);
+    box-shadow: 0 0 0 calc(var(--spacing-micro-px) * 3) var(--color-primary-faded);
+  }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall-px);
+  padding-block-start: var(--spacing-xsmall-px);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+  padding: var(--spacing-micro2-px) var(--spacing-small2-px);
+  border-radius: var(--border-radius-pill);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  background: var(--color-background-alternative-faint-new);
+  cursor: pointer;
+  max-inline-size: 100%;
+
+  &:hover {
+    background: var(--color-background-alternative);
+  }
+
+  &:focus-visible {
+    outline-offset: var(--spacing-hairline-px);
+    outline: var(--spacing-hairline-px) solid var(--color-primary-medium);
+  }
+}
+
+.chipLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-inline-size: 18rem;
+}
+
+.chipIcon {
+  inline-size: var(--spacing-small-px);
+  block-size: var(--spacing-small-px);
+}
+
+.list {
+  border-radius: var(--border-radius-default);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  background: var(--color-background-default);
+  overflow: auto;
+  max-block-size: calc(7 * var(--spacing-mega));
+}
+
+.row {
+  all: unset;
+  box-sizing: border-box;
+  inline-size: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  padding: var(--spacing-xsmall-px) var(--spacing-small-px);
+  cursor: pointer;
+  color: var(--color-text-default-new);
+
+  &:hover {
+    background: var(--color-background-alternative);
+  }
+
+  &:focus-visible {
+    outline-offset: var(--spacing-hairline-px);
+    outline: var(--spacing-hairline-px) solid var(--color-primary-medium);
+  }
+}
+
+.rowSelected {
+  background: var(--color-background-alternative-medium);
+  font-weight: var(--font-weight-semibold);
+}
+
+.checkboxContainer {
+  margin: 0;
+}
+
+.rowLabel {
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.emptyRow {
+  cursor: default;
+  color: var(--color-text-faded);
+}

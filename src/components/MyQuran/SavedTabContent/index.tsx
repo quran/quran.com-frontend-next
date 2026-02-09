@@ -3,8 +3,6 @@ import React, { useMemo, useState, useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import SearchAndFilters from '../SearchAndFilters';
-
 import styles from './SavedTabContent.module.scss';
 
 import CollectionDetailView from '@/components/MyQuran/CollectionDetailView';
@@ -42,7 +40,10 @@ const SavedTabContent: React.FC = () => {
   const [selectedCollection, setSelectedCollection] = useState<CollectionItem | null>(null);
 
   const onNewCollectionClick = useCallback(() => setIsNewCollectionModalOpen(true), []);
-  const onCollectionClick = useCallback((c: CollectionItem) => setSelectedCollection(c), []);
+  const onCollectionClick = useCallback((c: CollectionItem) => {
+    setSearchQuery('');
+    setSelectedCollection(c);
+  }, []);
   const onBackToCollections = useCallback(() => setSelectedCollection(null), []);
 
   const onNewCollectionCreated = useCallback(async () => {
@@ -113,17 +114,6 @@ const SavedTabContent: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {/* Temporary disabled (searchQuery) should be removed */}
-      {isLoggedIn && !selectedCollection && searchQuery && (
-        <SearchAndFilters
-          searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
-          showAddNewButton={false}
-          showFilterButton={false}
-          showSortButton={false}
-        />
-      )}
-
       {!selectedCollection && (
         <MyReadingBookmark bookmark={bookmark} isLoading={isBookmarkLoading} />
       )}
@@ -134,6 +124,7 @@ const SavedTabContent: React.FC = () => {
           collectionName={selectedCollection.name}
           onBack={onBackToCollections}
           searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
           isDefault={selectedCollection.isDefault}
           onCollectionUpdateRequest={onCollectionUpdateRequest}
           onCollectionDeleteRequest={onCollectionDeleteRequest}
