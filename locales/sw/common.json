@@ -471,6 +471,8 @@
   "subscribe": "Jisajili",
   "subscribed": "Umejisajili",
   "surah": "Sura",
+  "tab-see-less": "Tazama kidogo...",
+  "tab-see-more": "Tazama zaidi...",
   "tafsir": {
     "font-size": "Ukubwa wa fonti ya Tafsir",
     "group-message": "Unasoma tafsir kwa kundi la aya {{from}} hadi {{to}}",

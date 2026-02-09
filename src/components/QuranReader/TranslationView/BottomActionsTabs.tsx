@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './TranslationViewCell.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
+import useIsMobile from '@/hooks/useIsMobile';
 import { isRTLLocale } from '@/utils/locale';
 
 export enum TabId {
@@ -16,6 +17,11 @@ export enum TabId {
   QIRAAT = 'qiraat',
   HADITH = 'hadith',
   RELATED_VERSES = 'related-verses',
+}
+
+enum ExpandableTabId {
+  EXPAND = 'expand-tabs',
+  COLLAPSE = 'collapse-tabs',
 }
 
 export interface TabConfig {
@@ -32,13 +38,17 @@ interface BottomActionsTabsProps {
   className?: string;
 }
 
+const MAX_SHOWN_TABS = 4;
+
 const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
   tabs,
   isTranslationView,
   className,
 }) => {
-  const { lang } = useTranslation();
+  const { t, lang } = useTranslation('common');
   const isRTL = isRTLLocale(lang);
+  const [isExpanded, setIsExpanded] = React.useState(false);
+  const isMobile = useIsMobile();
 
   const handleTabClick = (
     e: React.MouseEvent,
@@ -54,7 +64,37 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
     onClick(e);
   };
 
-  const filteredTabs = tabs.filter((tab) => tab.condition !== false); // Only show tabs that meet their condition
+  const filteredTabs = React.useMemo(() => tabs.filter((tab) => tab.condition !== false), [tabs]);
+
+  const tabsToRender = React.useMemo(() => {
+    if (filteredTabs.length <= MAX_SHOWN_TABS || isMobile) {
+      return filteredTabs;
+    }
+
+    if (isExpanded) {
+      return [
+        ...filteredTabs,
+        {
+          id: ExpandableTabId.COLLAPSE,
+          label: t('tab-see-less'),
+          icon: null,
+          onClick: () => setIsExpanded(false),
+          condition: true,
+        },
+      ];
+    }
+
+    return [
+      ...filteredTabs.slice(0, MAX_SHOWN_TABS),
+      {
+        id: ExpandableTabId.EXPAND,
+        label: t('tab-see-more'),
+        icon: null,
+        onClick: () => setIsExpanded(true),
+        condition: true,
+      },
+    ];
+  }, [filteredTabs, isExpanded, t, isMobile]);
 
   return (
     <div className={styles.bottomActionsContainer}>
@@ -64,7 +104,7 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
           [styles.tabsContainerRTL]: isRTL && isTranslationView,
         })}
       >
-        {filteredTabs.map((tab, index) => (
+        {tabsToRender.map((tab, index) => (
           <React.Fragment key={tab.id}>
             <div
               className={classNames(styles.tabItem, { [styles.tabItemRTL]: isRTL })}
@@ -78,7 +118,7 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
               <span className={styles.tabIcon}>{tab.icon}</span>
               <span className={styles.tabLabel}>{tab.label}</span>
             </div>
-            {index < filteredTabs.length - 1 && (
+            {index < tabsToRender.length - 1 && (
               <div className={styles.separatorContainer}>
                 <Separator isVertical weight={SeparatorWeight.SemiBold} />
               </div>

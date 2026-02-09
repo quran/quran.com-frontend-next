@@ -100,6 +100,13 @@
   "beyond-ramadan": "¡Crece más allá del Ramadán!",
   "bookmark": "Marcar",
   "bookmarked": "Marcado como favorito",
+  "bookmarks-migration": {
+    "body-1": "Tus marcadores ahora se convertirán en <strong>Versos guardados</strong> en <strong>Colecciones</strong>Para mantener sus marcadores actuales, inicie sesión o cree una cuenta.",
+    "body-2": "También hemos agregado un nuevo marcador de lectura para ayudarte a continuar justo donde lo dejaste.",
+    "checkbox": "No volver a mostrar este mensaje (Advertencia: perderá todos sus marcadores actuales)",
+    "sign-in": "Iniciar sesión / Registrarse",
+    "title": "Aviso: Los marcadores están cambiando"
+  },
   "both": "Ambas",
   "cancel": "Cancelar",
   "change-theme": "Cambiar tema",
@@ -464,6 +471,8 @@
   "subscribe": "Suscribirse.",
   "subscribed": "Suscrito.",
   "surah": "Sura",
+  "tab-see-less": "Ver menos...",
+  "tab-see-more": "Ver más...",
   "tafsir": {
     "font-size": "Tamaño de fueste del tafsir",
     "group-message": "Estás leyendo un tafsir para el grupo de versículos {{from}} hasta {{to}}",
