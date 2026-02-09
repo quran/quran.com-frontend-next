@@ -16,6 +16,8 @@ const OBSERVED_ACTIONS = [
   `${SliceName.READING_PREFERENCES}/setWordClickFunctionality`,
   `${SliceName.READING_PREFERENCES}/setWordByWordTooltipContentType`,
   `${SliceName.READING_PREFERENCES}/setWordByWordInlineContentType`,
+  `${SliceName.READING_PREFERENCES}/setReflectionLanguages`,
+  `${SliceName.READING_PREFERENCES}/setLessonLanguages`,
   `${SliceName.QURAN_READER_STYLES}/setQuranFont`,
   `${SliceName.QURAN_READER_STYLES}/setMushafLines`,
   `${SliceName.QURAN_READER_STYLES}/increaseQuranTextFontScale`,
@@ -49,8 +51,9 @@ const DefaultSettingsMiddleware: Middleware<
   (next: Dispatch<AnyAction>) =>
   (action: AnyAction) => {
     const { type } = action;
+    const shouldSkipDefaultSettings = action?.meta?.skipDefaultSettings === true;
     // the moment any of the actions that change the settings has changed, it means we are no longer using the default settings
-    if (OBSERVED_ACTIONS.includes(type)) {
+    if (OBSERVED_ACTIONS.includes(type) && !shouldSkipDefaultSettings) {
       storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: false });
     } else if (type === RESET_SETTINGS_EVENT) {
       storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: true });
