@@ -20,6 +20,9 @@ type Params = {
   nextLocale: string;
 };
 
+const arraysEqual = (a?: string[], b?: string[]) =>
+  Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((v, i) => v === b[i]);
+
 /**
  * Keep locale-dependent content preferences (e.g. default tafsir/translation and
  * reflections/lessons languages) aligned with the site locale when the user
@@ -53,24 +56,40 @@ const syncLocaleDependentSettings =
     }
 
     // Reflections/Lessons language selector semantics:
-    // - Single language matching the previous locale => treat as "follow locale" and replace.
-    // - Multiple languages => treat as customized and preserve (do not auto-append the new locale).
-    const { selectedReflectionLanguages, selectedLessonLanguages } = state.readingPreferences;
-    const defaultReadingPrefs = getReadingPreferencesInitialState(nextLocale);
+    // - Treat as customized if the user ever manually changed it (sticky flags).
+    // - For safe migration, also treat as customized if the stored value differs from
+    //   the previous locale defaults.
+    const {
+      selectedReflectionLanguages,
+      selectedLessonLanguages,
+      hasCustomizedReflectionLanguages,
+      hasCustomizedLessonLanguages,
+    } = state.readingPreferences;
+    const defaultReadingPrefsPrev = getReadingPreferencesInitialState(prevLocale);
+    const defaultReadingPrefsNext = getReadingPreferencesInitialState(nextLocale);
 
-    if (Array.isArray(selectedReflectionLanguages)) {
-      if (
-        selectedReflectionLanguages.length === 1 &&
-        selectedReflectionLanguages[0] === prevLocale
-      ) {
-        dispatch(setReflectionLanguages(defaultReadingPrefs.selectedReflectionLanguages));
-      }
+    const isReflectionCustomized =
+      hasCustomizedReflectionLanguages === true ||
+      !arraysEqual(
+        selectedReflectionLanguages,
+        defaultReadingPrefsPrev.selectedReflectionLanguages,
+      );
+    const isLessonCustomized =
+      hasCustomizedLessonLanguages === true ||
+      !arraysEqual(selectedLessonLanguages, defaultReadingPrefsPrev.selectedLessonLanguages);
+
+    if (!isReflectionCustomized) {
+      dispatch({
+        ...setReflectionLanguages(defaultReadingPrefsNext.selectedReflectionLanguages),
+        meta: { skipCustomization: true, skipDefaultSettings: true },
+      });
     }
 
-    if (Array.isArray(selectedLessonLanguages)) {
-      if (selectedLessonLanguages.length === 1 && selectedLessonLanguages[0] === prevLocale) {
-        dispatch(setLessonLanguages(defaultReadingPrefs.selectedLessonLanguages));
-      }
+    if (!isLessonCustomized) {
+      dispatch({
+        ...setLessonLanguages(defaultReadingPrefsNext.selectedLessonLanguages),
+        meta: { skipCustomization: true, skipDefaultSettings: true },
+      });
     }
   };
 

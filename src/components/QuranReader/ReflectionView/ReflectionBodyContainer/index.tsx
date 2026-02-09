@@ -21,6 +21,8 @@ import {
   setReflectionLanguages,
   selectLessonLanguages,
   setLessonLanguages,
+  selectHasCustomizedReflectionLanguages,
+  selectHasCustomizedLessonLanguages,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
@@ -88,7 +90,12 @@ const ReflectionBodyContainer = ({
   const dispatch = useDispatch();
   const storedReflectionLanguages = useSelector(selectReflectionLanguages);
   const storedLessonLanguages = useSelector(selectLessonLanguages);
+  const hasCustomizedReflectionLanguages = useSelector(selectHasCustomizedReflectionLanguages);
+  const hasCustomizedLessonLanguages = useSelector(selectHasCustomizedLessonLanguages);
   const prevLangRef = useRef(lang);
+
+  const arraysEqual = (a?: string[], b?: string[]) =>
+    Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((v, i) => v === b[i]);
 
   // Get the appropriate languages based on content type
   const selectedLanguages =
@@ -107,17 +114,39 @@ const ReflectionBodyContainer = ({
     if (isLoggedIn()) return;
 
     // Semantics (matches `syncLocaleDependentSettings`):
-    // - Single language matching the previous locale => treat as "follow locale" and replace with defaults.
-    // - Otherwise (single non-matching or multiple languages) => treat as customized and preserve.
-    const defaultReadingPrefs = getReadingPreferencesInitialState(lang);
+    // - Treat as customized if the user ever manually changed it (sticky flags).
+    // - For safe migration, also treat as customized if the stored value differs from
+    //   the previous locale defaults.
+    const defaultReadingPrefsPrev = getReadingPreferencesInitialState(prevLang);
+    const defaultReadingPrefsNext = getReadingPreferencesInitialState(lang);
 
-    if (storedReflectionLanguages.length === 1 && storedReflectionLanguages[0] === prevLang) {
-      dispatch(setReflectionLanguages(defaultReadingPrefs.selectedReflectionLanguages));
+    const isReflectionCustomized =
+      hasCustomizedReflectionLanguages ||
+      !arraysEqual(storedReflectionLanguages, defaultReadingPrefsPrev.selectedReflectionLanguages);
+    const isLessonCustomized =
+      hasCustomizedLessonLanguages ||
+      !arraysEqual(storedLessonLanguages, defaultReadingPrefsPrev.selectedLessonLanguages);
+
+    if (!isReflectionCustomized) {
+      dispatch({
+        ...setReflectionLanguages(defaultReadingPrefsNext.selectedReflectionLanguages),
+        meta: { skipCustomization: true, skipDefaultSettings: true },
+      });
     }
-    if (storedLessonLanguages.length === 1 && storedLessonLanguages[0] === prevLang) {
-      dispatch(setLessonLanguages(defaultReadingPrefs.selectedLessonLanguages));
+    if (!isLessonCustomized) {
+      dispatch({
+        ...setLessonLanguages(defaultReadingPrefsNext.selectedLessonLanguages),
+        meta: { skipCustomization: true, skipDefaultSettings: true },
+      });
     }
-  }, [lang, dispatch, storedReflectionLanguages, storedLessonLanguages]);
+  }, [
+    lang,
+    dispatch,
+    storedReflectionLanguages,
+    storedLessonLanguages,
+    hasCustomizedReflectionLanguages,
+    hasCustomizedLessonLanguages,
+  ]);
 
   const {
     actions: { onSettingsChange },

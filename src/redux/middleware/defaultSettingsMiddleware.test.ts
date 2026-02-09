@@ -38,6 +38,14 @@ describe('DefaultSettingsMiddleware', () => {
     expect(next).toHaveBeenCalledTimes(1);
   });
 
+  it('marks isUsingDefaultSettings=false for reflection/lesson language changes', () => {
+    const { dispatched } = runMiddleware({
+      type: `${SliceName.READING_PREFERENCES}/setReflectionLanguages`,
+      payload: ['en'],
+    });
+    expect(dispatched).toEqual([{ type: setIsUsingDefaultSettings.type, payload: false }]);
+  });
+
   it('does not mark isUsingDefaultSettings=false when action has meta.skipDefaultSettings', () => {
     const { dispatched } = runMiddleware({
       type: `${SliceName.TRANSLATIONS}/setSelectedTranslations`,

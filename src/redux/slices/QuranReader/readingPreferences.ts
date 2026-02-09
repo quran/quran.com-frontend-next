@@ -85,14 +85,33 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       selectedReadingTranslation: action.payload,
     }),
-    setReflectionLanguages: (state, action: PayloadAction<string[]>) => ({
-      ...state,
-      selectedReflectionLanguages: action.payload,
-    }),
-    setLessonLanguages: (state, action: PayloadAction<string[]>) => ({
-      ...state,
-      selectedLessonLanguages: action.payload,
-    }),
+    setReflectionLanguages: (
+      state,
+      action: PayloadAction<string[], string, { skipCustomization?: boolean } | undefined>,
+    ) => {
+      const skipCustomization = action?.meta?.skipCustomization === true;
+      return {
+        ...state,
+        selectedReflectionLanguages: action.payload,
+        // Once customized, stay customized until resetSettings restores defaults.
+        hasCustomizedReflectionLanguages: skipCustomization
+          ? state.hasCustomizedReflectionLanguages ?? false
+          : true,
+      };
+    },
+    setLessonLanguages: (
+      state,
+      action: PayloadAction<string[], string, { skipCustomization?: boolean } | undefined>,
+    ) => {
+      const skipCustomization = action?.meta?.skipCustomization === true;
+      return {
+        ...state,
+        selectedLessonLanguages: action.payload,
+        hasCustomizedLessonLanguages: skipCustomization
+          ? state.hasCustomizedLessonLanguages ?? false
+          : true,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (unusedState, action) =>
@@ -203,5 +222,9 @@ export const selectReflectionLanguages = (state: RootState) =>
   state.readingPreferences.selectedReflectionLanguages;
 export const selectLessonLanguages = (state: RootState) =>
   state.readingPreferences.selectedLessonLanguages;
+export const selectHasCustomizedReflectionLanguages = (state: RootState) =>
+  state.readingPreferences.hasCustomizedReflectionLanguages ?? false;
+export const selectHasCustomizedLessonLanguages = (state: RootState) =>
+  state.readingPreferences.hasCustomizedLessonLanguages ?? false;
 
 export default readingPreferencesSlice.reducer;

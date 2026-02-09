@@ -18,6 +18,13 @@ type ReadingPreferences = {
   lastUsedReadingMode: ReadingPreference.Reading | ReadingPreference.ReadingTranslation;
   selectedReflectionLanguages: string[];
   selectedLessonLanguages: string[];
+  /**
+   * Sticky flags to track whether the user ever manually changed the tab languages.
+   * If true, we should not auto-sync these fields on locale change (even if the
+   * current value matches defaults).
+   */
+  hasCustomizedReflectionLanguages: boolean;
+  hasCustomizedLessonLanguages: boolean;
 };
 
 export default ReadingPreferences;

@@ -64,8 +64,14 @@ describe('syncLocaleDependentSettings', () => {
         ...setSelectedTafsirs({ tafsirs: ['en-tafsir'], locale: 'en' }),
         meta: { skipDefaultSettings: true },
       },
-      setReflectionLanguages(['en']),
-      setLessonLanguages(['en']),
+      {
+        ...setReflectionLanguages(['en']),
+        meta: { skipCustomization: true, skipDefaultSettings: true },
+      },
+      {
+        ...setLessonLanguages(['en']),
+        meta: { skipCustomization: true, skipDefaultSettings: true },
+      },
     ]);
   });
 
@@ -101,6 +107,23 @@ describe('syncLocaleDependentSettings', () => {
     expect(actions).toEqual([]);
   });
 
+  it('treats as customized when user previously changed it (even if back to defaults)', () => {
+    const state = {
+      translations: { isUsingDefaultTranslations: false },
+      tafsirs: { isUsingDefaultTafsirs: false },
+      readingPreferences: {
+        // matches prev-locale defaults per the mock implementation
+        selectedReflectionLanguages: ['ar'],
+        selectedLessonLanguages: ['ar'],
+        hasCustomizedReflectionLanguages: true,
+        hasCustomizedLessonLanguages: true,
+      },
+    };
+
+    const actions = runThunk(state, 'ar', 'en');
+    expect(actions).toEqual([]);
+  });
+
   it('does not dispatch changes when multi-language selections already include the new locale', () => {
     const state = {
       translations: { isUsingDefaultTranslations: false },
@@ -126,6 +149,15 @@ describe('syncLocaleDependentSettings', () => {
     };
 
     const actions = runThunk(state, 'ar', 'en');
-    expect(actions).toEqual([setReflectionLanguages(['en']), setLessonLanguages(['en'])]);
+    expect(actions).toEqual([
+      {
+        ...setReflectionLanguages(['en']),
+        meta: { skipCustomization: true, skipDefaultSettings: true },
+      },
+      {
+        ...setLessonLanguages(['en']),
+        meta: { skipCustomization: true, skipDefaultSettings: true },
+      },
+    ]);
   });
 });
