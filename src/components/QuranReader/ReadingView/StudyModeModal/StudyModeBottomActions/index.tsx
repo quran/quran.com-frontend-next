@@ -15,6 +15,7 @@ export enum StudyModeTabId {
   ANSWERS = 'answers',
   QIRAAT = 'qiraat',
   RELATED_VERSES = 'related_verses',
+  HADITH = 'hadith',
 }
 
 enum ExpandableTabId {

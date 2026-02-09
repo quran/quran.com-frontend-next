@@ -144,6 +144,7 @@
   "copied": "Đã sao chép",
   "copied-to-clipboard": "Đã sao chép vào clipboard",
   "copy": "Sao chép",
+  "copy-embed": "Sao chép mã nhúng",
   "copylink": "Sao chép link",
   "counter": {
     "decrease": "Giảm",
@@ -169,6 +170,8 @@
     "resend-email-in": "Gửi lại email xác nhận trong {{remainingTime}} giây...",
     "verify-code": "Xác minh mã"
   },
+  "embed-copied": "Đã sao chép mã nhúng",
+  "embed-widget": "Nhúng tiện ích",
   "end-year-donate": "Kết thúc năm 2024 với Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Bạn chỉ có thể chọn tối đa {{limit}} từng câu một. Vui lòng chọn phạm vi nhỏ hơn.",
@@ -284,6 +287,7 @@
   "go-to-verse": "Đi đến câu thơ",
   "hear-it-pronounced": "Nhấp vào từ Qur'an để nghe phát âm",
   "help": "Trợ giúp",
+  "hide-arabic": "Ẩn tiếng Ả Rập",
   "hizb": "Hizb",
   "home": "Trang chủ",
   "hours": "Giờ",
@@ -443,6 +447,7 @@
   "share-quran-description-line-3": "(Bukhari 3461)",
   "share-quran-title": "Chia sẻ Thiên Kinh Qur'an!",
   "shared": "Liên kết đã được sao chép vào clipboard!",
+  "show-arabic": "Hiển thị tiếng Ả Rập",
   "show-more": "Hiển thị thêm",
   "sidebar": {
     "search-hizb": "Tìm kiếm Hizb",

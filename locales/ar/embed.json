@@ -1,0 +1,85 @@
+{
+  "actions": {
+    "copied": "تم النسخ!",
+    "copy": "ينسخ",
+    "copyEmbedSnippet": "نسخ مقتطف التضمين"
+  },
+  "checkboxes": {
+    "answers": "زر \"إظهار الإجابات\" (إن وجد)",
+    "audio": "تفعيل تشغيل الصوت",
+    "customSize": "استخدم عرض/ارتفاع مخصصين",
+    "lessons": "زر عرض الدروس",
+    "mergeVerses": "دمج الآيات (عرض مضمن)",
+    "reflections": "زر إظهار الانعكاسات",
+    "showArabic": "عرض الآية العربية",
+    "tafsirs": "زر إظهار التفسير",
+    "translator": "إظهار اسم المترجم",
+    "verseRange": "تفعيل نطاق الآيات",
+    "wordByWord": "تفعيل الترجمة كلمة بكلمة",
+    "wordByWordTransliteration": "تفعيل الترجمة الصوتية كلمة بكلمة"
+  },
+  "errors": {
+    "clipboardFallback": "فشلت عملية الكتابة في الحافظة، جارٍ استخدام الحل البديل.",
+    "clipboardUnavailable": "واجهة برمجة تطبيقات الحافظة غير متاحة",
+    "loadChapters": "تعذر تحميل الفصول",
+    "loadReciters": "تعذر تحميل أجهزة التلاوة",
+    "loadTranslations": "تعذر تحميل الترجمات"
+  },
+  "fields": {
+    "ayah": "آية",
+    "clientId": "معرف العميل",
+    "height": "ارتفاع",
+    "language": "لغة",
+    "mushaf": "المصحف",
+    "reciter": "قارئ",
+    "surah": "سورة",
+    "theme": "سمة",
+    "translations": "الترجمات",
+    "width": "عرض"
+  },
+  "header": {
+    "subtitle": "<bold>طريقة عالية الجودة وقابلة للتخصيص لإدراج آيات من القرآن الكريم في محتواك.</bold><br />أنشئ عنصرًا مضمنًا يمكنك تخصيصه بسهولة، مع <bold>ترجمة عربية دقيقة، وتلاوة مدمجة</bold> وغير ذلك، حتى يتمكن القراء من الاستماع أثناء تفاعلهم مع الآية.",
+    "title": "أداة إنشاء المحتوى المضمن من أياه"
+  },
+  "meta": {
+    "description": "قم بتكوين ومعاينة الأدوات المضمنة لمشاركة القرآن، ثم انسخ مقتطف البرنامج النصي الجاهز للاستخدام.",
+    "title": "أداة تضمين الآيات | Quran.com"
+  },
+  "mushaf": {
+    "indopak": "إندوباك",
+    "kfgqpc_v1": "مجمع الملك فهد الإصدار الأول",
+    "kfgqpc_v2": "مجمع الملك فهد الإصدار الثاني",
+    "qpc": "مركز قطر للحفظ عثماني حفص",
+    "tajweed": "التجويد"
+  },
+  "placeholders": {
+    "searchTranslations": "ابحث عن الترجمات..."
+  },
+  "reciters": {
+    "select": "قارئ مختار"
+  },
+  "sections": {
+    "configuration": "إعدادات",
+    "preview": "معاينة مباشرة",
+    "snippet": "تضمين مقتطف"
+  },
+  "states": {
+    "loadingChapters": "جارٍ تحميل الفصول...",
+    "loadingPreview": "جارٍ تحميل المعاينة...",
+    "loadingReciters": "جارٍ تحميل القراء...",
+    "loadingVerses": "جارٍ تحميل الآيات...",
+    "noTranslations": "لم يتم العثور على أي ترجمات"
+  },
+  "theme": {
+    "dark": "مظلم",
+    "light": "ضوء",
+    "sepia": "بني داكن"
+  },
+  "translations": {
+    "chipRemoveLabel": "إزالة الترجمة",
+    "otherLanguage": "آخر"
+  },
+  "widget": {
+    "readOnQuran": "اقرأ المزيد على موقع Quran.com"
+  }
+}

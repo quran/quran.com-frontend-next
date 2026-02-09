@@ -144,6 +144,7 @@
   "copied": "کپی شده است",
   "copied-to-clipboard": "در کلیپ بورد کپی شد",
   "copy": "کپی",
+  "copy-embed": "کپی کردن جاسازی",
   "copylink": "لینک را کپی کنید",
   "counter": {
     "decrease": "نزول کردن",
@@ -169,6 +170,8 @@
     "resend-email-in": "ارسال مجدد ایمیل تأیید در {{remainingTime}} ثانیه...",
     "verify-code": "کد را تأیید کنید"
   },
+  "embed-copied": "جاسازی کپی شده",
+  "embed-widget": "ابزارک را جاسازی کنید",
   "end-year-donate": "پایان سال 2024 با صدقه ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "هر بار فقط می‌توانید حداکثر {{limit}} آیه را انتخاب کنید. لطفا محدوده کوچکتری را انتخاب کنید.",
@@ -284,6 +287,7 @@
   "go-to-verse": "به آیه بروید",
   "hear-it-pronounced": "کلمات قرآنی را کلیک کنید، تلفظ را بشنوید",
   "help": "کمک",
+  "hide-arabic": "مخفی کردن عربی",
   "hizb": "حزب",
   "home": "صفحه اصلی",
   "hours": "ساعت ها",
@@ -443,6 +447,7 @@
   "share-quran-description-line-3": "(بخاری ۳۴۶۱)",
   "share-quran-title": "قرآن را به اشتراک بگذارید",
   "shared": "پیوند در کلیپ بورد کپی شده است!",
+  "show-arabic": "نمایش عربی",
   "show-more": "بیشتر نشان بده، اطلاعات بیشتر",
   "sidebar": {
     "search-hizb": "جستجو در حزب",

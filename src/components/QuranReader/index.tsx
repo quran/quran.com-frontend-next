@@ -19,7 +19,7 @@ import { selectNotes } from '@/redux/slices/QuranReader/notes';
 import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectQuranReaderStyles, selectShowTajweedRules } from '@/redux/slices/QuranReader/styles';
 import { Mushaf, QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import isInReadingMode from '@/utils/readingPreference';
 import { VersesResponse } from 'types/ApiResponses';
@@ -46,13 +46,14 @@ const QuranReader = ({
   const mushaf = useGetMushaf();
   const pinnedVerseKeys = useSelector(selectPinnedVerseKeys, shallowEqual);
   const hasPinnedVerses = pinnedVerseKeys.length > 0;
+  const showTajweedRules = useSelector(selectShowTajweedRules);
 
   // Mobile collapsed state: when scrolled past threshold on mobile
   const isMobileCollapsed = isMobile && !isExpanded;
   const isTajweedMushaf = mushaf === Mushaf.QCFTajweedV4;
   // Tajweed bar is hidden only in ReadingTranslation mode
   const isReadingTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;
-  const showTajweedPadding = isTajweedMushaf && !isReadingTranslationMode;
+  const showTajweedPadding = isTajweedMushaf && !isReadingTranslationMode && showTajweedRules;
 
   const isSingleVerse = quranReaderDataType === QuranReaderDataType.Verse;
 

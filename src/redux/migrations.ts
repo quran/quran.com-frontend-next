@@ -339,7 +339,7 @@ export default {
     ...state,
     quranReaderStyles: {
       ...state.quranReaderStyles,
-      surahInfoFontScale: initialState.quranReaderStyles.surahInfoFontScale,
+      showTajweedRules: state.quranReaderStyles.showTajweedRules ?? true,
     },
   }),
   43: (state) => {
@@ -365,4 +365,18 @@ export default {
       },
     };
   },
+  44: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      surahInfoFontScale: initialState.quranReaderStyles.surahInfoFontScale,
+    },
+  }),
+  45: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      hadithFontScale: initialState.quranReaderStyles.hadithFontScale,
+    },
+  }),
 };

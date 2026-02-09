@@ -40,6 +40,7 @@
   "download-copy": "if you want to download text file.",
   "edgham": "Silent letter",
   "ekhfa": "Ghunna/ikhfa’",
+  "embed-widget": "Embed Widget",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Track Streaks, Create Custom Goals, Stay Consistent",
     "achieve-quran-goals-responsive": "Achieve Your Quran Goals",
@@ -82,6 +83,10 @@
     "sign-in": "Sign in to continue",
     "sign-in-message": "Sign in or Sign up for free to gain access to the more features!",
     "title": "Save Your Progress"
+  },
+  "hadith": {
+    "notice": "This list is not exhaustive. <0>Al-Bukhari</0> and <1>Muslim</1> are included, with more to come soon, inshAllah.",
+    "title": "Hadith"
   },
   "hizb-beginning": "Beginning of Hizb",
   "include-translator": "Include translator name?",
@@ -171,12 +176,17 @@
   "reflection-not-available": "There are no reviewed reflections for this ayah",
   "reflections": "Reflections",
   "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
+  "related-verses": "Related verses",
+  "related-verses-desc": "Read and share Quranic related verses of Ayah {{ayahNumber}} of Surah {{surahName}}",
   "remove-bookmark": "Remove bookmark",
   "remove-my-reading-bookmark": "Remove my Reading Bookmark",
   "remove-pinned-verse": "Remove verse {{verseKey}} from pinned",
   "removed-from": "Removed from {{collectionName}}",
   "revelation-order-notice": "Note: you're navigating the Quran by the order of revelation. <link>Click here</link> to revert to the default ordering.",
   "rub-beginning": "Beginning of Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Saving More than one bookmark? Use collections:"
+  },
   "save-page": "Save Page {{pageNumber}}",
   "save-pinned-to-collection": "Save to Collection",
   "save-to": "Save to...",
@@ -190,6 +200,7 @@
   "selected-count": "{{count}} selected",
   "set-as-reading-bookmark": "Set as my Reading Bookmark",
   "share-your-reflection": "Share your reflection on this ayah",
+  "show-tajweed-rules": "Show Tajweed rules while reading:",
   "study-mode": "Study mode",
   "surah-beginning": "Beginning of Surah",
   "surah-info": "Surah Info",

@@ -144,6 +144,7 @@
   "copied": "Copiado",
   "copied-to-clipboard": "Copiado para a área de transferência",
   "copy": "cópia de",
+  "copy-embed": "Copiar e incorporar",
   "copylink": "Copiar link",
   "counter": {
     "decrease": "Diminuir",
@@ -169,6 +170,8 @@
     "resend-email-in": "Reenvie o e-mail de verificação em {{remainingTime}} segundos...",
     "verify-code": "Código de verificação"
   },
+  "embed-copied": "Incorporar cópia",
+  "embed-widget": "Widget incorporado",
   "end-year-donate": "Termine 2024 com Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Você pode selecionar até {{limit}} versos por vez. Selecione um intervalo menor.",
@@ -284,6 +287,7 @@
   "go-to-verse": "Ir para o versículo",
   "hear-it-pronounced": "Clique em palavras do Quran, ouça a pronúncia",
   "help": "Ajuda",
+  "hide-arabic": "Ocultar árabe",
   "hizb": "Hizb",
   "home": "Casa",
   "hours": "Horas",
@@ -443,6 +447,7 @@
   "share-quran-description-line-3": "(Bukhari 3461)",
   "share-quran-title": "Compartilhe o Alcorão!",
   "shared": "O link foi copiado para a área de transferência!",
+  "show-arabic": "Mostrar em árabe",
   "show-more": "Mostre mais",
   "sidebar": {
     "search-hizb": "Pesquisar hizb",

@@ -40,6 +40,7 @@
   "download-copy": "如果你想下载文本文件。",
   "edgham": "伊德加姆",
   "ekhfa": "伊克法和古纳",
+  "embed-widget": "嵌入式小部件",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "追踪连胜纪录，创建自定义目标，保持稳定",
     "achieve-quran-goals-responsive": "实现你的古兰经目标",
@@ -82,6 +83,10 @@
     "sign-in": "登录以继续",
     "sign-in-message": "登录或免费注册即可解锁更多功能！",
     "title": "保存进度"
+  },
+  "hadith": {
+    "notice": "此列表并不完整。《布哈里圣训集》和《穆斯林圣训集》已包含在内，愿真主保佑，未来还将收录更多圣训。",
+    "title": "圣训"
   },
   "hizb-beginning": "Hizb的开始",
   "include-translator": "包括译者姓名？",
@@ -171,12 +176,17 @@
   "reflection-not-available": "没有评论过这个啊啊啊",
   "reflections": "反思",
   "reflections-desc": "阅读并分享《古兰经》对《古兰经》{{surahName}} 的 Ayah {{ayahNumber}}的{{surahName}}",
+  "related-verses": "相关经文",
+  "related-verses-desc": "阅读并分享与《古兰经》相关的经文 {{ayahNumber}} 古兰经 {{surahName}}",
   "remove-bookmark": "删除书签",
   "remove-my-reading-bookmark": "删除我的阅读书签",
   "remove-pinned-verse": "删除诗句 {{verseKey}} 已置顶",
   "removed-from": "从{{collectionName}}中移除",
   "revelation-order-notice": "注意：您正在按照启示的顺序浏览《古兰经》。 <link>单击此处</link>恢复默认排序。",
   "rub-beginning": "Rub el Hizb 的开始",
+  "save-bookmark-modal": {
+    "collections-hint": "想保存多个书签？使用收藏夹："
+  },
   "save-page": "保存页面 {{pageNumber}}",
   "save-pinned-to-collection": "保存到收藏夹",
   "save-to": "存到...",
@@ -190,6 +200,7 @@
   "selected-count": "{{count}} 选定",
   "set-as-reading-bookmark": "设为我的阅读书签",
   "share-your-reflection": "分享您对此的看法",
+  "show-tajweed-rules": "阅读时显示 Tajweed 规则：",
   "study-mode": "学习模式",
   "surah-beginning": "回到本章开头",
   "surah-info": "古兰经信息",

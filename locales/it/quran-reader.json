@@ -40,6 +40,7 @@
   "download-copy": "se vuoi scaricare un file di testo.",
   "edgham": "Idghaam",
   "ekhfa": "Ikhfa e Ghunna",
+  "embed-widget": "Incorpora widget",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Tieni traccia delle serie, crea obiettivi personalizzati, mantieni la coerenza",
     "achieve-quran-goals-responsive": "Raggiungi i tuoi obiettivi coranici",
@@ -82,6 +83,10 @@
     "sign-in": "Accedi per continuare",
     "sign-in-message": "Accedi o registrati gratuitamente per avere accesso a più funzionalità!",
     "title": "Salva i tuoi progressi"
+  },
+  "hadith": {
+    "notice": "Questo elenco non è esaustivo. Sono inclusi <0>Al-Bukhari</0> e <1>Muslim</1>, e presto ne arriveranno altri, inshAllah.",
+    "title": "Hadith"
   },
   "hizb-beginning": "Inizio dell'Hizb",
   "include-translator": "Includere il nome del traduttore?",
@@ -171,12 +176,17 @@
   "reflection-not-available": "Non ci sono riflessioni riviste per questo ayah",
   "reflections": "Riflessioni",
   "reflections-desc": "Leggi e condividi le riflessioni coraniche di Ayah {{ayahNumber}} di Sura {{surahName}}",
+  "related-verses": "Versetti correlati",
+  "related-verses-desc": "Leggi e condividi i versetti del Corano correlati all'Ayah {{ayahNumber}} della Sura {{surahName}}",
   "remove-bookmark": "Rimuovi segnalibro",
   "remove-my-reading-bookmark": "Rimuovi il mio segnalibro di lettura",
   "remove-pinned-verse": "Rimuovi il verso {{verseKey}} da appuntato",
   "removed-from": "Rimosso da {{collectionName}}",
   "revelation-order-notice": "Nota: stai navigando nel Corano secondo l'ordine della rivelazione. <link> Fai clic qui </link> per ripristinare l'ordine predefinito.",
   "rub-beginning": "Inizio del Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Vuoi salvare più di un segnalibro? Usa le raccolte:"
+  },
   "save-page": "Salva pagina {{pageNumber}}",
   "save-pinned-to-collection": "Salva nella raccolta",
   "save-to": "Salvare...",
@@ -190,6 +200,7 @@
   "selected-count": "{{count}} selezionato",
   "set-as-reading-bookmark": "Imposta come segnalibro di lettura",
   "share-your-reflection": "Condividi la tua riflessione su questo ayah",
+  "show-tajweed-rules": "Mostra le regole di Tajweed durante la lettura:",
   "study-mode": "Modalità di studio",
   "surah-beginning": "Inizio di Sura",
   "surah-info": "Informazioni sura",

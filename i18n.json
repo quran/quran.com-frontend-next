@@ -34,6 +34,7 @@
     "/[chapterId]/reflections": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/qiraat": ["quran-reader", "reading-goal", "notes", "qiraat", "surah-info"],
     "/[chapterId]/lessons": ["quran-reader", "reading-goal", "notes", "surah-info"],
+    "/[chapterId]/related-verses": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/tafsirs/[tafsirId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/[verseId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader", "reading-goal", "notes", "surah-info"],
@@ -95,6 +96,9 @@
       "notes",
       "surah-info"
     ],
-    "/my-quran": ["my-quran", "notes", "collection", "quran-reader"]
+    "/[chapterId]/hadith": ["quran-reader", "reading-goal", "notes", "surah-info", "hadith"],
+    "/my-quran": ["my-quran", "notes", "collection", "quran-reader"],
+    "/embed": ["embed"],
+    "/embed/v1": ["embed"]
   }
 }

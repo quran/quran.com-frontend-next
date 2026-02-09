@@ -144,6 +144,7 @@
   "copied": "Copied",
   "copied-to-clipboard": "Copied to clipboard",
   "copy": "Copy",
+  "copy-embed": "Copy Embed",
   "copylink": "Copy link",
   "counter": {
     "decrease": "Decrease",
@@ -169,6 +170,8 @@
     "resend-email-in": "Resend verification email in {{remainingTime}} sec...",
     "verify-code": "Verify Code"
   },
+  "embed-copied": "Embed Copied",
+  "embed-widget": "Embed widget",
   "end-year-donate": "End 2024 with Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "You can only select up to {{limit}} verses at a time. Please select a smaller range.",
@@ -284,6 +287,7 @@
   "go-to-verse": "Go To Verse",
   "hear-it-pronounced": "Click Quranic words, hear pronunciation",
   "help": "Help",
+  "hide-arabic": "Hide Arabic",
   "hizb": "Hizb",
   "home": "Home",
   "hours": "Hours",
@@ -443,6 +447,7 @@
   "share-quran-description-line-3": "(Bukhari 3461)",
   "share-quran-title": "Share the Quran!",
   "shared": "Link has been copied to the clipboard!",
+  "show-arabic": "Show Arabic",
   "show-more": "Show more",
   "sidebar": {
     "search-hizb": "Search Hizb",
