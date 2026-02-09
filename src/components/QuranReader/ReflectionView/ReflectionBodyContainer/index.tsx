@@ -15,16 +15,13 @@ import CompactSelector from '@/dls/CompactSelector';
 import Tabs from '@/dls/Tabs/Tabs';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
-import { getReadingPreferencesInitialState } from '@/redux/defaultSettings/util';
+import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import {
   selectReflectionLanguages,
   setReflectionLanguages,
   selectLessonLanguages,
   setLessonLanguages,
-  selectHasCustomizedReflectionLanguages,
-  selectHasCustomizedLessonLanguages,
 } from '@/redux/slices/QuranReader/readingPreferences';
-import { areArraysEqual } from '@/utils/array';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import {
@@ -91,8 +88,6 @@ const ReflectionBodyContainer = ({
   const dispatch = useDispatch();
   const storedReflectionLanguages = useSelector(selectReflectionLanguages);
   const storedLessonLanguages = useSelector(selectLessonLanguages);
-  const hasCustomizedReflectionLanguages = useSelector(selectHasCustomizedReflectionLanguages);
-  const hasCustomizedLessonLanguages = useSelector(selectHasCustomizedLessonLanguages);
   const prevLangRef = useRef(lang);
 
   // Get the appropriate languages based on content type
@@ -111,43 +106,9 @@ const ReflectionBodyContainer = ({
     // Logged-in users have persisted preferences; don't mutate them implicitly on locale change.
     if (isLoggedIn()) return;
 
-    // Semantics (matches `syncLocaleDependentSettings`):
-    // - Treat as customized if the user ever manually changed it (sticky flags).
-    // - For safe migration, also treat as customized if the stored value differs from
-    //   the previous locale defaults.
-    const defaultReadingPrefsPrev = getReadingPreferencesInitialState(prevLang);
-    const defaultReadingPrefsNext = getReadingPreferencesInitialState(lang);
-
-    const isReflectionCustomized =
-      hasCustomizedReflectionLanguages ||
-      !areArraysEqual(
-        storedReflectionLanguages,
-        defaultReadingPrefsPrev.selectedReflectionLanguages,
-      );
-    const isLessonCustomized =
-      hasCustomizedLessonLanguages ||
-      !areArraysEqual(storedLessonLanguages, defaultReadingPrefsPrev.selectedLessonLanguages);
-
-    if (!isReflectionCustomized) {
-      dispatch({
-        ...setReflectionLanguages(defaultReadingPrefsNext.selectedReflectionLanguages),
-        meta: { skipCustomization: true, skipDefaultSettings: true },
-      });
-    }
-    if (!isLessonCustomized) {
-      dispatch({
-        ...setLessonLanguages(defaultReadingPrefsNext.selectedLessonLanguages),
-        meta: { skipCustomization: true, skipDefaultSettings: true },
-      });
-    }
-  }, [
-    lang,
-    dispatch,
-    storedReflectionLanguages,
-    storedLessonLanguages,
-    hasCustomizedReflectionLanguages,
-    hasCustomizedLessonLanguages,
-  ]);
+    // Single source of truth for "follow locale unless customized" semantics.
+    dispatch(syncLocaleDependentSettings({ prevLocale: prevLang, nextLocale: lang }));
+  }, [lang, dispatch]);
 
   const {
     actions: { onSettingsChange },
