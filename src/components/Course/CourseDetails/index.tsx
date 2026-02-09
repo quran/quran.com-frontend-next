@@ -83,11 +83,11 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
         variant={ButtonVariant.Ghost}
       >
         <ArrowLeft />
-        <p className={styles.backText}>{t('back-to-learning-plans')}</p>
+        <span className={styles.backText}>{t('back-to-learning-plans')}</span>
       </Button>
       <div className={styles.headerContainer}>
         <div>
-          <p className={styles.title}>{title}</p>
+          <h1 className={styles.title}>{title}</h1>
         </div>
         <StatusHeader course={course} />
       </div>
@@ -106,7 +106,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
             </>
           )}
           <DetailSection
-            title={t('about-author')}
+            title={t('about-author', { count: course.authors.length })}
             description={<AuthorsDetails authors={course.authors} />}
           />
           {course?.editors?.length > 0 && (

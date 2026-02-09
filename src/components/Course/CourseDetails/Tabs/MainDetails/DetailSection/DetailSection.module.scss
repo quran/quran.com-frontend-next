@@ -1,9 +1,37 @@
 .title {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
-  padding-block-end: var(--spacing-micro);
+  line-height: 1.25;
+  padding-block-end: var(--spacing-xxsmall);
+  text-wrap: balance;
 }
 
 .container {
-  padding-block: var(--spacing-xsmall);
+  padding-block: var(--spacing-small);
+}
+
+.description {
+  font-size: var(--font-size-large);
+  line-height: 160%;
+}
+
+.description :global(p + p),
+.description :global(p + ul),
+.description :global(p + ol),
+.description :global(ul + p),
+.description :global(ol + p) {
+  margin-block-start: var(--spacing-large);
+}
+
+.description :global(p),
+.description :global(li) {
+  line-height: inherit;
+  text-wrap: pretty;
+}
+
+.description :global(a),
+.description :global(em),
+.description :global(span),
+.description :global(strong) {
+  line-height: inherit;
 }
