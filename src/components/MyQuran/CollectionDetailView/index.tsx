@@ -455,7 +455,11 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   );
 
   const clearDeletedBookmarksState = useCallback((deletedIds: string[]) => {
-    setSelectedBookmarks(new Set());
+    setSelectedBookmarks((prev) => {
+      const next = new Set(prev);
+      deletedIds.forEach((id) => next.delete(id));
+      return next;
+    });
     setExpandedCardIds((prev) => {
       const next = new Set(prev);
       deletedIds.forEach((id) => next.delete(id));
@@ -472,13 +476,35 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
 
     setIsDeletingBookmarks(true);
     try {
-      await runWithConcurrency(idsToDelete, BULK_ACTIONS_CONCURRENCY_LIMIT, async (bookmarkId) => {
-        await deleteCollectionBookmarkById(numericCollectionId, bookmarkId);
-      });
+      const results = await runWithConcurrency(
+        idsToDelete,
+        BULK_ACTIONS_CONCURRENCY_LIMIT,
+        async (bookmarkId) => {
+          try {
+            await deleteCollectionBookmarkById(numericCollectionId, bookmarkId);
+            return { bookmarkId, ok: true as const };
+          } catch {
+            return { bookmarkId, ok: false as const };
+          }
+        },
+      );
 
-      clearDeletedBookmarksState(idsToDelete);
-      onUpdated();
-      showDeleteBookmarksSuccessToast(idsToDelete.length);
+      const deletedIds = results.filter((r) => r.ok).map((r) => r.bookmarkId);
+      const failedIds = results.filter((r) => !r.ok).map((r) => r.bookmarkId);
+
+      if (deletedIds.length) {
+        clearDeletedBookmarksState(deletedIds);
+        onUpdated();
+        showDeleteBookmarksSuccessToast(deletedIds.length);
+      }
+
+      if (failedIds.length) {
+        // Keep the modal open to allow retrying failed deletions.
+        setPendingDeleteBookmarkIds(failedIds);
+        toast(t('common:error.general'), { status: ToastStatus.Error });
+        return;
+      }
+
       closeDeleteBookmarksModal();
     } catch {
       toast(t('common:error.general'), { status: ToastStatus.Error });
