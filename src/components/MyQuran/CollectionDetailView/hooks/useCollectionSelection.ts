@@ -22,14 +22,15 @@ const useCollectionSelection = ({
 
   const toggleSelectMode = useCallback(() => {
     setIsSelectMode((prev) => {
+      const next = !prev;
       if (prev) setSelectedBookmarks(new Set());
-      return !prev;
+      logButtonClick('collection_detail_toggle_select_mode', {
+        collectionId: numericCollectionId,
+        isEntering: next,
+      });
+      return next;
     });
-    logButtonClick('collection_detail_toggle_select_mode', {
-      collectionId: numericCollectionId,
-      isEntering: !isSelectMode,
-    });
-  }, [numericCollectionId, isSelectMode]);
+  }, [numericCollectionId]);
 
   const handleToggleExpandCollapseAll = useCallback(() => {
     const allIds = new Set(filteredBookmarks.map((b) => b.id));
