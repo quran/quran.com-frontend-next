@@ -25,10 +25,10 @@
   "change-translation": "تغيير الترجمة",
   "clear-pinned": "مسح الكل",
   "collections": "المجموعات",
-  "compare-verses": "يقارن",
+  "compare-verses": "مقارنة",
   "copy-arabic": "النص القرآني (بالرسم العثماني)",
   "copy-footnote-q": "هل تريد أيضًا نسخ الهوامش؟",
-  "copy-pinned": "ينسخ",
+  "copy-pinned": "نسخ",
   "copy-success": "تم نسخ النص بنجاح.",
   "copy-text": "نسخ النص",
   "copy-verse": "انسخ النص",
@@ -85,6 +85,7 @@
     "title": "احفظ تقدمك"
   },
   "hadith": {
+    "notice": "هذه القائمة ليست شاملة. يشمل هذا العدد صحيح <0>البخاری</0> و <1>مسلم</1>، وسيتم إضافة المزيد قريباً إن شاء الله.",
     "title": "الحديث"
   },
   "hizb-beginning": "بداية الحزب",
@@ -133,9 +134,9 @@
   "next-rub": "ربع الحزب التالي",
   "next-surah": "السورة التالية",
   "no-bookmark-set": "لم يتم تعيين أي إشارة مرجعية",
-  "no-collections": "لا توجد مجموعات حتى الآن",
+  "no-collections": "لا توجد مجموعات بعد",
   "no-pinned-verses": "لا توجد آيات مثبتة",
-  "none": "لا أحد",
+  "none": "لا شيء",
   "on-click": "عند النقر:",
   "on-hover": "عند تمرير المؤشر:",
   "page-bookmark-removed": "تمّت إزالة الإشارة المرجعية من الصفحة",
@@ -171,11 +172,11 @@
     "learn-more": "انقر هنا لمعرفة المزيد",
     "no-junctures": "لا توجد قراءات بديلة متاحة لهذه الآية",
     "reader-bio": "سيرة القارئ",
-    "readers": "القراء",
+    "readers": "المستخدمين",
     "readings": "قراءات",
     "title": "قراءات",
     "translation": "ترجمة",
-    "transliteration": "الترجمة الصوتية",
+    "transliteration": "التهجئة الصوتية",
     "what-are": "ما هي القراءات؟"
   },
   "query-param-message": "أنت تستخدم إعدادات قراءة محددة مسبقًا. <0> تجاهل </0> للعرض بإعداداتك الحالية أو <1> احفظ </1> لتحديث إعداداتك",
@@ -197,6 +198,9 @@
   "removed-from": "تمت إزالته من {{collectionName}}",
   "revelation-order-notice": "ملاحظة: أنت تتصفح القرآن بترتيب نزول الوحي <link> اضغط هنا </link> للعودة إلى الترتيب الافتراضي.",
   "rub-beginning": "بداية ربع الحزب",
+  "save-bookmark-modal": {
+    "collections-hint": "هل تريد حفظ أكثر من إشارة مرجعية؟ استخدم المجموعات:"
+  },
   "save-page": "حفظ الصفحة {{pageNumber}}",
   "save-pinned-to-collection": "حفظ في المجموعة",
   "save-to": "حفظ في...",
@@ -232,7 +236,7 @@
     "title": "ملاحظات على الترجمة",
     "translation": "ترجمة"
   },
-  "undo": "التراجع",
+  "undo": "تراجع",
   "unpin-verse": "إلغاء التثبيت",
   "verse-pinned": "الآية مثبتة",
   "verse-preview-title": "معاينة:",

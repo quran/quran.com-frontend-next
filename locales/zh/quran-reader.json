@@ -85,6 +85,7 @@
     "title": "保存进度"
   },
   "hadith": {
+    "notice": "此列表并不完整。《布哈里圣训集》和《穆斯林圣训集》已包含在内，愿真主保佑，未来还将收录更多圣训。",
     "title": "圣训"
   },
   "hizb-beginning": "Hizb的开始",
@@ -197,6 +198,9 @@
   "removed-from": "从{{collectionName}}中移除",
   "revelation-order-notice": "注意：您正在按照启示的顺序浏览《古兰经》。 <link>单击此处</link>恢复默认排序。",
   "rub-beginning": "Rub el Hizb 的开始",
+  "save-bookmark-modal": {
+    "collections-hint": "想保存多个书签？使用收藏夹："
+  },
   "save-page": "保存页面 {{pageNumber}}",
   "save-pinned-to-collection": "保存到收藏夹",
   "save-to": "存到...",

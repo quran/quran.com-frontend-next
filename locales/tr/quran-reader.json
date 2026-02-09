@@ -85,6 +85,7 @@
     "title": "İlerlemenizi Kaydedin"
   },
   "hadith": {
+    "notice": "Bu liste kapsamlı değildir. <0>Buhari</0> ve <1>Müslim</1> de dahil edilmiştir ve inşallah yakında daha fazlası eklenecektir.",
     "title": "Hadis"
   },
   "hizb-beginning": "Hizb'in Başlangıcı",
@@ -197,6 +198,9 @@
   "removed-from": "{{collectionName}} kaldırıldı",
   "revelation-order-notice": "Not: Kuran'da nüzul sırasına göre geziniyorsunuz. Varsayılan sıralamaya geri dönmek için <link> burayı tıklayın </link> .",
   "rub-beginning": "Rub el Hizb'in Başlangıcı",
+  "save-bookmark-modal": {
+    "collections-hint": "Birden fazla yer imi mi kaydediyorsunuz? Koleksiyonları kullanın:"
+  },
   "save-page": "Sayfayı Kaydet {{pageNumber}}",
   "save-pinned-to-collection": "Koleksiyona Kaydet",
   "save-to": "Şuraya kaydet...",

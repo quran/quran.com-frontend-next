@@ -85,6 +85,7 @@
     "title": "Hifadhi Maendeleo Yako"
   },
   "hadith": {
+    "notice": "Orodha hii si kamili. <0>Al-Bukhari</0> na <1>Muslim</1> wamejumuishwa, na wengine wanakuja hivi karibuni, InshaAllah.",
     "title": "Hadithi"
   },
   "hizb-beginning": "Mwanzo wa Hizb",
@@ -197,6 +198,9 @@
   "removed-from": "Imeondolewa kutoka kwa {{collectionName}}",
   "revelation-order-notice": "Kumbuka: unachunguza Qur'ani kwa mpangilio ulioteremshwa. <link> Bofya hapa </link> ili kurejea kwa mpangilio chaguomsingi.",
   "rub-beginning": "Mwanzo wa Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Umehifadhi zaidi ya alamisho moja? Tumia mikusanyiko:"
+  },
   "save-page": "Hifadhi Ukurasa {{pageNumber}}",
   "save-pinned-to-collection": "Hifadhi kwenye Mkusanyiko",
   "save-to": "Hifadhi kwa...",

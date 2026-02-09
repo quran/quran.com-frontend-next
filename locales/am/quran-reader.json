@@ -85,6 +85,7 @@
     "title": "እድገትዎን ያስቀምጡ"
   },
   "hadith": {
+    "notice": "ይህ ዝርዝር ሁሉን አቀፍ አይደለም። <0>አልቡካሪ</0> እና <1>ሙስሊም</1> ተካተዋል፣ በቅርቡ ሌሎችም ይመጣሉ፣ ኢንሻ አላህ።",
     "title": "ሐዲት"
   },
   "hizb-beginning": "የሂዝብ መጀመሪያ",
@@ -197,6 +198,9 @@
   "removed-from": "ከ {{collectionName}} ተወገደ",
   "revelation-order-notice": "ማሳሰቢያ፡- ቁርዓንን የምትቃኘው በወረደበት ቅደም ተከተል ነው። <link>እዚህ ጠቅ ያድርጉ</link> ወደ ነባሪው ቅደም ተከተል ለመመለስ።",
   "rub-beginning": "የሩብ ሂዝብ መጀመሪያ",
+  "save-bookmark-modal": {
+    "collections-hint": "ከአንድ በላይ ዕልባት እያስቀመጡ ነው? ስብስቦችን ይጠቀሙ፦"
+  },
   "save-page": "ገጽ አስቀምጥ {{pageNumber}}",
   "save-pinned-to-collection": "ወደ ስብስብ ያስቀምጡ",
   "save-to": "አስቀምጥ ወደ...",
