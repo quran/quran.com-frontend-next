@@ -1,5 +1,4 @@
-/* eslint-disable max-lines */
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
@@ -8,26 +7,20 @@ import { useSelector } from 'react-redux';
 import styles from './CollectionVerseCell.module.scss';
 import CollectionVerseCellMenu from './CollectionVerseCellMenu';
 import CollectionVerseCellProps from './CollectionVerseCellTypes';
-import buildVerseCopyText from './utils/buildVerseCopyText';
-import fetchVerseForCopy from './utils/fetchVerseForCopy';
+import useCollectionVerseCellActions from './hooks/useCollectionVerseCellActions';
 import VerseDisplay from './VerseDisplay';
 
 import DeleteBookmarkModal from '@/components/Collection/DeleteBookmarkModal/DeleteBookmarkModal';
 import Checkbox from '@/components/dls/Forms/Checkbox/Checkbox';
 import Separator from '@/dls/Separator/Separator';
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import ArrowIcon from '@/icons/arrow.svg';
-import { RootState } from '@/redux/RootState';
 import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
-import { areArraysEqual } from '@/utils/array';
-import { textToBlob } from '@/utils/blob';
 import { getChapterData } from '@/utils/chapter';
-import copyText from '@/utils/copyText';
 import { dateToMonthDayYearFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
-import { QURAN_URL, getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
+import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
 import { makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
 
@@ -49,16 +42,10 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   onToggleSelection,
   onToggleExpansion,
 }) => {
-  const { t, lang } = useTranslation();
+  const { lang } = useTranslation();
   const chaptersData = useContext(DataContext);
-  const toast = useToast();
   const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
   const pinnedVerseKeysSet = useSelector(selectPinnedVerseKeysSet);
-  const selectedTranslations = useSelector(
-    (state: RootState) => state.translations?.selectedTranslations ?? [],
-    areArraysEqual,
-  );
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const verseKey = makeVerseKey(chapterId, verseNumber);
   const isPinned = pinnedVerseKeysSet.has(verseKey);
@@ -66,10 +53,7 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   const localizedVerseKey = toLocalizedVerseKey(verseKey, lang);
   const bookmarkName = `${chapterData?.transliteratedName} ${localizedVerseKey}`;
 
-  const formattedDate = React.useMemo(() => {
-    if (!createdAt) return null;
-    return dateToMonthDayYearFormat(createdAt, lang);
-  }, [createdAt, lang]);
+  const formattedDate = createdAt ? dateToMonthDayYearFormat(createdAt, lang) : null;
 
   const handlePinToggle = useCallback(() => {
     if (isPinned) {
@@ -81,45 +65,26 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
     }
   }, [isPinned, verseKey, pinVerseWithSync, unpinVerseWithSync]);
 
-  const handleDelete = () => {
-    logButtonClick('collection_detail_delete_menu');
-    setIsDeleteModalOpen(true);
-  };
+  const {
+    isDeleteModalOpen,
+    handleCopy,
+    handleShare,
+    handleDelete,
+    handleDeleteCancel,
+    handleDeleteConfirm,
+  } = useCollectionVerseCellActions({
+    bookmarkId,
+    verseKey,
+    collectionId,
+    chapterData,
+    onShare,
+    onDelete,
+  });
 
-  const handleDeleteConfirm = () => {
-    logButtonClick('bookmark_delete_confirm', { verseKey, collectionId });
-    setIsDeleteModalOpen(false);
-    onDelete?.(bookmarkId);
-  };
-
-  const handleDeleteCancel = () => {
-    logButtonClick('bookmark_delete_confirm_cancel', { verseKey, collectionId });
-    setIsDeleteModalOpen(false);
-  };
-
-  const handleCopy = async () => {
-    // Build the blob promise and invoke clipboard copy immediately to preserve user activation.
-    const textBlobPromise = (async () => {
-      const verse = await fetchVerseForCopy(verseKey, (selectedTranslations as number[]) || []);
-      const qdcUrl = `${QURAN_URL}${getVerseNavigationUrlByVerseKey(verseKey)}`;
-      const text = buildVerseCopyText({ verse, chapter: chapterData, lang, qdcUrl });
-      return textToBlob(text);
-    })();
-
-    const copyPromise = copyText(textBlobPromise);
-
-    try {
-      await copyPromise;
-      toast(`${t('common:copied')}!`, { status: ToastStatus.Success });
-    } catch {
-      toast(t('common:error.general'), { status: ToastStatus.Error });
-    }
-  };
-
-  const handleShare = () => {
-    logButtonClick('collection_detail_share_menu', { verseKey, collectionId });
-    onShare?.(verseKey);
-  };
+  const handleToggleExpansion = useCallback(
+    () => onToggleExpansion?.(bookmarkId),
+    [bookmarkId, onToggleExpansion],
+  );
 
   return (
     <>
@@ -127,12 +92,10 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
         <div className={styles.container}>
           <div
             className={styles.headerContainer}
-            onClick={() => onToggleExpansion?.(bookmarkId)}
+            onClick={handleToggleExpansion}
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') onToggleExpansion?.(bookmarkId);
-            }}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleToggleExpansion()}
           >
             <div className={styles.headerLeft}>
               <Link
