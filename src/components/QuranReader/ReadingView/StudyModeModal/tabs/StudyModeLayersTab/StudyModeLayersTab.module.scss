@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use '@/styles/constants';
 
 .container {
   display: flex;
@@ -79,7 +80,6 @@
   inline-size: 0.75em;
   block-size: 0.75em;
   flex-shrink: 0;
-  transition: transform var(--transition-fast) ease-in-out;
 }
 
 .groupTokenActive {
@@ -120,6 +120,27 @@ $max-popover-width: 23.125rem;
   padding-block-end: var(--spacing-small-px);
   margin-inline: var(--spacing-inline);
   border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+
+  .closeGroupPanelButton {
+    all: unset;
+
+    cursor: pointer;
+    border: none;
+    border-radius: var(--border-radius-smallxx-px);
+    transition: transform var(--transition-fast) ease-in-out;
+
+    &:hover {
+      color: var(--color-text-default-new);
+    }
+
+    &:active {
+      transform: scale(constants.$button-active-scale);
+    }
+
+    &:focus-visible {
+      outline: var(--spacing-hairline-px) solid var(--color-text-default-new);
+    }
+  }
 
   .closeIcon {
     svg {
@@ -223,8 +244,14 @@ $max-popover-width: 23.125rem;
 
 .translationText :global(sup[foot_note]),
 .popoverContent :global(sup[foot_note]) {
+  vertical-align: super;
   color: var(--color-text-link);
   font-weight: var(--font-weight-medium);
-  vertical-align: super;
-  font-size: var(--font-size-xsmall-px);
+  font-size: 0.8em;
+  padding-inline: var(--spacing-micro2-px);
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(var(--opacity-85));
+  }
 }
