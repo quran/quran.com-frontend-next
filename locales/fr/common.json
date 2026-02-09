@@ -137,6 +137,7 @@
   "copied": "Copié",
   "copied-to-clipboard": "Copié dans le presse-papier",
   "copy": "Copier",
+  "copy-embed": "Copier Intégrer",
   "copylink": "Copier le lien",
   "counter": {
     "decrease": "Diminuer",
@@ -162,6 +163,8 @@
     "resend-email-in": "Renvoyer l'e-mail de vérification dans {{remainingTime}}s...",
     "verify-code": "Vérifier le code"
   },
+  "embed-copied": "Intégrer copié",
+  "embed-widget": "widget intégré",
   "end-year-donate": "Terminez 2024 avec une Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Vous ne pouvez uniquement sélectionner {{limit}} Ayahs à la fois. Veuillez sélectionner une plage plus petite.",
@@ -277,6 +280,7 @@
   "go-to-verse": "Aller à l'Ayah",
   "hear-it-pronounced": "Cliquez sur les mots du Coran, écoutez la prononciation",
   "help": "Aider",
+  "hide-arabic": "Masquer l'arabe",
   "hizb": "Hizb",
   "home": "Accueil",
   "hours": "Heures",
@@ -436,6 +440,7 @@
   "share-quran-description-line-3": "(Boukhari 3461)",
   "share-quran-title": "Partagez le Coran !",
   "shared": "Le lien a été copié dans le presse-papiers !",
+  "show-arabic": "Afficher l'arabe",
   "show-more": "Afficher plus",
   "sidebar": {
     "search-hizb": "Rechercher Hizb",

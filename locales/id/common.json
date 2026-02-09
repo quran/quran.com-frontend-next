@@ -137,6 +137,7 @@
   "copied": "disalin",
   "copied-to-clipboard": "Disalin ke papan klip",
   "copy": "Salinan",
+  "copy-embed": "Salin Sematkan",
   "copylink": "Salin tautan",
   "counter": {
     "decrease": "Mengurangi",
@@ -162,6 +163,8 @@
     "resend-email-in": "Kirim ulang email verifikasi dalam {{remainingTime}} detik...",
     "verify-code": "Kode verifikasi"
   },
+  "embed-copied": "Disematkan Disalin",
+  "embed-widget": "Sematkan widget",
   "end-year-donate": "Akhiri tahun 2024 dengan Sedekah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Anda hanya dapat memilih hingga {{limit}} ayat dalam satu waktu. Harap pilih rentang yang lebih kecil.",
@@ -277,6 +280,7 @@
   "go-to-verse": "Buka Ayat",
   "hear-it-pronounced": "Klik kata-kata Qurani, dengarkan pengucapannya",
   "help": "Bantuan",
+  "hide-arabic": "Sembunyikan Bahasa Arab",
   "hizb": "Hizb",
   "home": "Halaman Utama",
   "hours": "Jam",
@@ -436,6 +440,7 @@
   "share-quran-description-line-3": "(HR. Al-Bukhari 3461)",
   "share-quran-title": "Bagikan Al-Quran!",
   "shared": "Tautan telah disalin ke papan klip!",
+  "show-arabic": "Tampilkan bahasa Arab",
   "show-more": "Menampilkan lebih banyak",
   "sidebar": {
     "search-hizb": "Cari Hizb",

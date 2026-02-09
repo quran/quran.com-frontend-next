@@ -137,6 +137,7 @@
   "copied": "已复制",
   "copied-to-clipboard": "复制到剪贴板",
   "copy": "复制",
+  "copy-embed": "复制嵌入",
   "copylink": "复制链接",
   "counter": {
     "decrease": "减少",
@@ -162,6 +163,8 @@
     "resend-email-in": "在{{remainingTime}}秒内重新发送验证电子邮件...",
     "verify-code": "验证码"
   },
+  "embed-copied": "嵌入复制",
+  "embed-widget": "嵌入小部件",
   "end-year-donate": "用 Sadaqah ❤️ 结束 2024 年",
   "error": {
     "MediaVersesRangeLimitExceeded": "您一次最多只能选择{{limit}}节经文。请选择较小的范围。",
@@ -277,6 +280,7 @@
   "go-to-verse": "前往诗节",
   "hear-it-pronounced": "点击《古兰经》单词，听发音",
   "help": "帮助",
+  "hide-arabic": "隐藏阿拉伯语",
   "hizb": "希兹布",
   "home": "首页",
   "hours": "小时",
@@ -436,6 +440,7 @@
   "share-quran-description-line-3": "（布哈里 3461）",
   "share-quran-title": "分享古兰经！",
   "shared": "链接已复制到剪贴板！",
+  "show-arabic": "显示阿拉伯语",
   "show-more": "展示更多",
   "sidebar": {
     "search-hizb": "搜索 Hizb",

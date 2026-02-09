@@ -40,6 +40,7 @@
   "download-copy": "اگر می خواهید فایل متنی را دانلود کنید.",
   "edgham": "ادغام",
   "ekhfa": "اخفا و غنا",
+  "embed-widget": "ابزارک جاسازی",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "پیگیری روندها، ایجاد اهداف سفارشی، ثابت قدم ماندن",
     "achieve-quran-goals-responsive": "به اهداف قرآنی خود برسید",
@@ -82,6 +83,10 @@
     "sign-in": "برای ادامه وارد شوید",
     "sign-in-message": "برای دسترسی به امکانات بیشتر، وارد شوید یا به صورت رایگان ثبت نام کنید!",
     "title": "پیشرفت خود را ذخیره کنید"
+  },
+  "hadith": {
+    "notice": "این فهرست کامل نیست. <0>البخاری</0> و <1>مسلم</1> نیز در آن گنجانده شده‌اند و ان‌شاءالله به زودی منابع بیشتری نیز اضافه خواهد شد.",
+    "title": "حدیث"
   },
   "hizb-beginning": "آغاز حزب",
   "include-translator": "نام مترجم درج شود؟",
@@ -171,12 +176,17 @@
   "reflection-not-available": "هیچ بازتاب بررسی شده ای برای این آیه وجود ندارد",
   "reflections": "بازتاب‌ها",
   "reflections-desc": "آیات {{ayahNumber}} سوره {{surahName}} را بخوانید و به اشتراک بگذارید.",
+  "related-verses": "آیات مرتبط",
+  "related-verses-desc": "آیات مربوط به قرآن را بخوانید و به اشتراک بگذارید {{ayahNumber}} سوره {{surahName}}",
   "remove-bookmark": "حذف نشانک",
   "remove-my-reading-bookmark": "نشانک مطالعه من را حذف کنید",
   "remove-pinned-verse": "آیه را حذف کنید {{verseKey}} از پین شده",
   "removed-from": "از {{collectionName}} حذف شد",
   "revelation-order-notice": "توجه: شما در حال حرکت در قرآن به ترتیب وحی هستید. <link> اینجا را کلیک کنید </link> برای بازگشت به ترتیب پیش فرض.",
   "rub-beginning": "آغاز روب الحزب",
+  "save-bookmark-modal": {
+    "collections-hint": "ذخیره بیش از یک نشانک؟ از مجموعه‌ها استفاده کنید:"
+  },
   "save-page": "ذخیره صفحه {{pageNumber}}",
   "save-pinned-to-collection": "ذخیره در مجموعه",
   "save-to": "ذخیره در...",
@@ -190,6 +200,7 @@
   "selected-count": "{{count}} انتخاب شده",
   "set-as-reading-bookmark": "به عنوان نشانک مطالعه من تنظیم شود",
   "share-your-reflection": "نظر خود را در مورد این آیه به اشتراک بگذارید",
+  "show-tajweed-rules": "نمایش قواعد تجوید هنگام خواندن:",
   "study-mode": "حالت مطالعه",
   "surah-beginning": "آغاز سوره",
   "surah-info": "اطلاعات سوره",

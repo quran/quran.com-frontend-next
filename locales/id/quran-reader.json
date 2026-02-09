@@ -40,6 +40,7 @@
   "download-copy": "jika Anda ingin mengunduh file teks.",
   "edgham": "Idgham",
   "ekhfa": "Ikhfa/Ghunnah",
+  "embed-widget": "Sematkan Widget",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Lacak Rentetan Prestasi, Buat Sasaran Khusus, Pertahankan Konsistensi",
     "achieve-quran-goals-responsive": "Raih Tujuan Anda dalam Al-Quran",
@@ -82,6 +83,10 @@
     "sign-in": "Masuk untuk melanjutkan",
     "sign-in-message": "Masuk atau Daftar gratis untuk mendapatkan akses ke lebih banyak fitur!",
     "title": "Simpan Kemajuan Anda"
+  },
+  "hadith": {
+    "notice": "Daftar ini tidak lengkap. <0>Al-Bukhari</0> dan <1>Muslim</1> termasuk di dalamnya, dan akan ada lebih banyak lagi yang menyusul segera, insya Allah.",
+    "title": "Hadits"
   },
   "hizb-beginning": "Awal Hizb",
   "include-translator": "Sertakan nama penterjemah?",
@@ -171,12 +176,17 @@
   "reflection-not-available": "Tidak ada refleksi yang ditinjau untuk ayat ini",
   "reflections": "Refleksi",
   "reflections-desc": "Baca dan bagikan renungan dari Ayat {{ayahNumber}} Surah {{SurahName}}",
+  "related-verses": "Ayat-ayat terkait",
+  "related-verses-desc": "Bacalah dan bagikan ayat-ayat Al-Quran yang berkaitan dengan Ayat. {{ayahNumber}} dari Surah {{surahName}}",
   "remove-bookmark": "Hapus Penanda",
   "remove-my-reading-bookmark": "Hapus Bookmark Bacaan Saya",
   "remove-pinned-verse": "Hapus ayat {{verseKey}} dari yang disematkan",
   "removed-from": "Dihapus dari {{collectionName}}",
   "revelation-order-notice": "Catatan: Anda menavigasi Al-Qur'an berdasarkan urutan wahyu. <link> Klik di sini </link> untuk kembali ke urutan default.",
   "rub-beginning": "Awal Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Ingin menyimpan lebih dari satu bookmark? Gunakan koleksi:"
+  },
   "save-page": "Simpan Halaman {{pageNumber}}",
   "save-pinned-to-collection": "Simpan ke Koleksi",
   "save-to": "Menyimpan ke...",
@@ -190,6 +200,7 @@
   "selected-count": "{{count}} terpilih",
   "set-as-reading-bookmark": "Tetapkan sebagai Bookmark Bacaan saya",
   "share-your-reflection": "Bagikan refleksi Anda tentang ayat ini",
+  "show-tajweed-rules": "Tunjukkan aturan Tajwid saat membaca:",
   "study-mode": "Mode belajar",
   "surah-beginning": "Awal dari Surah",
   "surah-info": "Tentang Surah ini",

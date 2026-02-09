@@ -137,6 +137,7 @@
   "copied": "E kopjuar",
   "copied-to-clipboard": "Kopjuar në kujtesën tuaj",
   "copy": "Kopjo",
+  "copy-embed": "Kopjo Vendos",
   "copylink": "Kopjo lidhjen",
   "counter": {
     "decrease": "Ulje",
@@ -162,6 +163,8 @@
     "resend-email-in": "Ridërgo email-in e verifikimit për {{remainingTime}} sek...",
     "verify-code": "Verifiko kodin"
   },
+  "embed-copied": "Embed Copyed",
+  "embed-widget": "Minuta e integrimit",
   "end-year-donate": "Përfundoni 2024 me Sadaka ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Mund të zgjidhni vetëm deri në {{limit}} vargje në të njëjtën kohë. Ju lutemi zgjidhni një gamë më të vogël.",
@@ -277,6 +280,7 @@
   "go-to-verse": "Shko te Vargu",
   "hear-it-pronounced": "Klikoni fjalët kuranore, dëgjoni shqiptimin",
   "help": "Ndihmë",
+  "hide-arabic": "Fshih arabishten",
   "hizb": "Hizb",
   "home": "Shtëpi",
   "hours": "orët",
@@ -436,6 +440,7 @@
   "share-quran-description-line-3": "(Buhariu 3461)",
   "share-quran-title": "Shpërndaje Kuranin!",
   "shared": "Lidhja është kopjuar në kujtesë!",
+  "show-arabic": "Shfaq arabishten",
   "show-more": "Trego më shumë",
   "sidebar": {
     "search-hizb": "Kërko Hizb",

@@ -14,7 +14,7 @@ import useIsMobile from '@/hooks/useIsMobile';
 import ChevronDownIcon from '@/public/icons/chevron-down.svg';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { selectValidatedReadingTranslation } from '@/redux/slices/QuranReader/readingPreferences';
-import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 import AvailableTranslation from 'types/AvailableTranslation';
 import { ReadingPreference } from 'types/QuranReader';
 
@@ -57,7 +57,16 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
     switchReadingPreference(ReadingPreference.ReadingTranslation);
   }, [readingPreference, switchReadingPreference]);
 
-  const closeDropdown = useCallback(() => setIsDropdownOpen(false), []);
+  const handleDropdownOpenChange = useCallback((isOpen: boolean) => {
+    logEvent(isOpen ? 'translation_dropdown_opened' : 'translation_dropdown_closed');
+    setIsDropdownOpen(isOpen);
+  }, []);
+
+  const closeDropdown = useCallback(
+    () => handleDropdownOpenChange(false),
+    [handleDropdownOpenChange],
+  );
+
   useCloseOnScroll(isDropdownOpen, closeDropdown);
 
   const activeTranslation = translations?.find((tr) => tr.id === selectedReadingTranslation);
@@ -129,7 +138,7 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
       }
       isOpen={isDropdownOpen}
       isModal={false}
-      onOpenChange={setIsDropdownOpen}
+      onOpenChange={handleDropdownOpenChange}
       contentClassName={styles.dropdownContent}
       align={isMobile ? PopoverMenuAlign.END : PopoverMenuAlign.START}
       sideOffset={8}

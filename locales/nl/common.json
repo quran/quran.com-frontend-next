@@ -137,6 +137,7 @@
   "copied": "gekopieerd",
   "copied-to-clipboard": "Gekopieerd naar het klembord",
   "copy": "Kopiëren",
+  "copy-embed": "Insluiten kopiëren",
   "copylink": "Link kopiëren",
   "counter": {
     "decrease": "Verminderen",
@@ -162,6 +163,8 @@
     "resend-email-in": "Verzend de verificatie-e-mail opnieuw over {{remainingTime}} sec...",
     "verify-code": "Code verifiëren"
   },
+  "embed-copied": "Insluiten Gekopieerd",
+  "embed-widget": "Insluitwidget",
   "end-year-donate": "Sluit 2024 af met Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "U kunt maximaal {{limit}} verzen tegelijk selecteren. Selecteer een kleiner bereik.",
@@ -277,6 +280,7 @@
   "go-to-verse": "Ga naar vers",
   "hear-it-pronounced": "Klik op Koranische woorden, hoor uitspraak",
   "help": "Hulp",
+  "hide-arabic": "Arabisch verbergen",
   "hizb": "Hizb",
   "home": "Home",
   "hours": "Uren",
@@ -436,6 +440,7 @@
   "share-quran-description-line-3": "(Bukhari 3461)",
   "share-quran-title": "Deel de Koran!",
   "shared": "Link is gekopieerd naar het klembord!",
+  "show-arabic": "Toon Arabisch",
   "show-more": "Laat meer zien",
   "sidebar": {
     "search-hizb": "Zoek Hizb",

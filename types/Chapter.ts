@@ -9,6 +9,7 @@ interface Chapter {
   revelationPlace: string;
   pages: Array<number>;
   nameComplex: string;
+  nameSimple: string;
   transliteratedName: string;
   nameArabic: string;
   translatedName: string;

@@ -137,6 +137,7 @@
   "copied": "คัดลอกแล้ว",
   "copied-to-clipboard": "คัดลอกไปยังคลิปบอร์ดแล้ว",
   "copy": "คัดลอก",
+  "copy-embed": "คัดลอกฝัง",
   "copylink": "คัดลอกลิงค์",
   "counter": {
     "decrease": "ลด",
@@ -162,6 +163,8 @@
     "resend-email-in": "ส่งอีเมลยืนยันอีกครั้งใน {{remainingTime}} วินาที...",
     "verify-code": "รหัสยืนยัน"
   },
+  "embed-copied": "ฝังคัดลอกแล้ว",
+  "embed-widget": "ฝังวิดเจ็ต",
   "end-year-donate": "ส่งท้ายปี 2024 ด้วยศอดกะฮ์ ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "คุณสามารถเลือกได้ครั้งละไม่เกิน {{limit}} ข้อ โปรดเลือกช่วงที่สั้นกว่า",
@@ -277,6 +280,7 @@
   "go-to-verse": "ไปที่บท",
   "hear-it-pronounced": "คลิกคำในอัลกุรอาน ฟังการออกเสียง",
   "help": "ช่วยเหลือ",
+  "hide-arabic": "ซ่อนภาษาอาหรับ",
   "hizb": "ฮิซบ์",
   "home": "หน้าหลัก",
   "hours": "ชั่วโมง",
@@ -436,6 +440,7 @@
   "share-quran-description-line-3": "(บุคอรี 3461)",
   "share-quran-title": "แบ่งปันอัลกุรอาน!",
   "shared": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว!",
+  "show-arabic": "แสดงภาษาอาหรับ",
   "show-more": "แสดงมากขึ้น",
   "sidebar": {
     "search-hizb": "ค้นหาอัลฮิซบ์",

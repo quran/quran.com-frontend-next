@@ -15,6 +15,7 @@ import {
   selectVerseActionModalWasOpenedFromStudyMode,
 } from '@/redux/slices/QuranReader/verseActionModal';
 import { TestId } from '@/tests/test-ids';
+import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Verse from '@/types/Verse';
 import Word from '@/types/Word';
@@ -50,6 +51,7 @@ interface StudyModeSsrModalContentProps {
   questionsInitialData?: AyahQuestionsResponse;
   isContentTabActive: boolean;
   tafsirIdOrSlug?: string;
+  hadithsInitialData?: AyahHadithsResponse;
 }
 
 const StudyModeSsrModalContent: React.FC<StudyModeSsrModalContentProps> = ({

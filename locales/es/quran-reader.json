@@ -40,6 +40,7 @@
   "download-copy": "Si desea descargar un archivo de texto.",
   "edgham": "Letra silenciada",
   "ekhfa": "Ghuna/ikhfa´",
+  "embed-widget": "Incrustar widget",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Sigue tus rachas, crea objetivos personalizados y sé constante",
     "achieve-quran-goals-responsive": "Alcanza tus objetivos coránicos",
@@ -82,6 +83,10 @@
     "sign-in": "Inicia sesión para continuar",
     "sign-in-message": "¡Inicia sesión o regístrate gratis para obtener acceso a más funciones!",
     "title": "Guarda tu progreso"
+  },
+  "hadith": {
+    "notice": "Esta lista no es exhaustiva. Se incluyen <0>Al-Bujari</0> y <1>Muslim</1>, y pronto habrá más, inshAllah.",
+    "title": "Hadith"
   },
   "hizb-beginning": "Comienzo de Hizb",
   "include-translator": "¿Incluir el nombre del traductor?",
@@ -171,12 +176,17 @@
   "reflection-not-available": "No hay reflexiones revisadas para esta aleya",
   "reflections": "Reflexiones",
   "reflections-desc": "Lee y comparte reflexiones coránicas de la aleya {{ayahNumber}} de la sura {{surahName}}",
+  "related-verses": "Versos relacionados",
+  "related-verses-desc": "Lea y comparta versículos de Ayah relacionados con el Corán {{ayahNumber}} de la Sura {{surahName}}",
   "remove-bookmark": "Quitar favorito",
   "remove-my-reading-bookmark": "Eliminar mi marcador de lectura",
   "remove-pinned-verse": "Quitar verso {{verseKey}} desde fijado",
   "removed-from": "Eliminado de {{collectionName}}",
   "revelation-order-notice": "Nota: estás navegando por el Corán según el orden de la revelación. <link> Haz clic aquí </link> para volver al orden predeterminado.",
   "rub-beginning": "Comienzo de Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "¿Guardar más de un marcador? Usar colecciones:"
+  },
   "save-page": "Guardar página {{pageNumber}}",
   "save-pinned-to-collection": "Guardar en la colección",
   "save-to": "Guardar en...",
@@ -190,6 +200,7 @@
   "selected-count": "{{count}} seleccionado",
   "set-as-reading-bookmark": "Establecer como mi marcador de lectura",
   "share-your-reflection": "Comparte tu reflexión sobre esta aleya",
+  "show-tajweed-rules": "Mostrar las reglas de Tajweed mientras se lee:",
   "study-mode": "Modo de estudio",
   "surah-beginning": "Comienzo de la sura",
   "surah-info": "Información de la sura",
