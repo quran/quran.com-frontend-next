@@ -1,6 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from '@/components/MyQuran/DeleteCollectionModal/DeleteCollectionModal.module.scss';
+import styles from './DeleteBookmarkModal.module.scss';
+
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Modal from '@/dls/Modal/Modal';
 import CloseIcon from '@/icons/close.svg';
