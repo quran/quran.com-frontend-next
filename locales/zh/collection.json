@@ -7,7 +7,9 @@
   "collection-name": "收藏名称",
   "collections": "收藏品",
   "delete-bookmark": {
+    "confirmation-subtitle": "您将删除 {{count}} 来自 {{collectionName}}， 你确定吗？",
     "subtitle": "确定要从{{collectionName}}收藏中删除{{bookmarkName}}吗？",
+    "success": "已删除 {{count}} 项目）。",
     "title": "删除书签"
   },
   "delete-collection-action": "删除收藏集",

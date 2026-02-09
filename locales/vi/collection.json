@@ -7,7 +7,9 @@
   "collection-name": "Tên bộ sưu tập",
   "collections": "Bộ sưu tập",
   "delete-bookmark": {
+    "confirmation-subtitle": "Bạn sẽ xóa {{count}} mục(s) từ {{collectionName}}Bạn có chắc không?",
     "subtitle": "Bạn có chắc chắn muốn xóa không? {{bookmarkName}} từ bộ sưu tập {{collectionName}}?",
+    "success": "Đã xóa {{count}} mặt hàng).",
     "title": "Xóa đánh dấu trang"
   },
   "delete-collection-action": "Xóa bộ sưu tập",

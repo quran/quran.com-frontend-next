@@ -8,6 +8,7 @@
   "collections": "Collections",
   "delete-bookmark": {
     "confirmation-subtitle": "You will delete {{count}} item(s) from {{collectionName}}, Are you sure?",
+    "subtitle": "Are you sure you want to delete {{bookmarkName}} from {{collectionName}} collection?",
     "success": "Deleted {{count}} item(s).",
     "title": "Delete bookmark"
   },

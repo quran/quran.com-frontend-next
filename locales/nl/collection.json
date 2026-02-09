@@ -7,7 +7,9 @@
   "collection-name": "Collectienaam",
   "collections": "Collecties",
   "delete-bookmark": {
+    "confirmation-subtitle": "Je gaat verwijderen {{count}} artikel(en) van {{collectionName}}Weet je het zeker?",
     "subtitle": "Weet u zeker dat u {{bookmarkName}} uit {{collectionName}} wilt verwijderen?",
+    "success": "Verwijderd {{count}} artikel(en).",
     "title": "Bladwijzer verwijderen"
   },
   "delete-collection-action": "Verwijder verzameling",
