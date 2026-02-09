@@ -7,7 +7,9 @@
   "collection-name": "Koleksiyon adı",
   "collections": "Koleksiyonlar",
   "delete-bookmark": {
+    "confirmation-subtitle": "Sileceksiniz {{count}} ürün(ler)den {{collectionName}}, Emin misin?",
     "subtitle": "{{bookmarkName}} ' {{collectionName}} koleksiyonundan silmek istediğinizden emin misiniz?",
+    "success": "Silindi {{count}} öğeler).",
     "title": "Yer işaretini sil"
   },
   "delete-collection-action": "Koleksiyonu Sil",

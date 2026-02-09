@@ -7,7 +7,9 @@
   "collection-name": "সংগ্রহের নাম",
   "collections": "সংগ্রহ",
   "delete-bookmark": {
+    "confirmation-subtitle": "তুমি মুছে ফেলবে। {{count}} থেকে আইটেম(গুলি) {{collectionName}}, তুমি কি নিশ্চিত?",
     "subtitle": "আপনি কি {{bookmarkName}} {{collectionName}} সংগ্রহ থেকে মুছতে চান?",
+    "success": "মুছে ফেলা হয়েছে {{count}} আইটেম(গুলি)।",
     "title": "বুকমার্ক মুছুন"
   },
   "delete-collection-action": "সংগ্রহ মুছুন",

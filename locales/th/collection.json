@@ -7,7 +7,9 @@
   "collection-name": "ชื่อคอลเลกชัน",
   "collections": "คอลเลกชัน",
   "delete-bookmark": {
+    "confirmation-subtitle": "คุณจะลบ {{count}} รายการจาก {{collectionName}}คุณแน่ใจเหรอ?",
     "subtitle": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{bookmarkName}} จาก {{collectionName}}",
+    "success": "ลบแล้ว {{count}} รายการ(ต่างๆ)",
     "title": "ลบบุ๊คมาร์ก"
   },
   "delete-collection-action": "ลบคอลเลกชัน",

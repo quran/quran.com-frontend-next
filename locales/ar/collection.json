@@ -7,19 +7,21 @@
   "collection-name": "اسم المجموعة",
   "collections": "المجموعات",
   "delete-bookmark": {
+    "confirmation-subtitle": "ستقوم بالحذف {{count}} عنصر (عناصر) من {{collectionName}}، هل أنت متأكد؟",
     "subtitle": "هل أنت متأكد أنك تريد حذف {{bookmarkName}} من مجموعة {{collectionName}} ؟",
+    "success": "تم الحذف {{count}} أغراض).",
     "title": "حذف ما تم حفظه"
   },
   "delete-collection-action": "حذف المجموعة",
   "delete-collection-success": "تم حذف المجموعة بنجاح",
   "delete-collection": {
     "description": "ستفقد جميع الآيات المحفوظة داخل هذه المجموعة.",
-    "subtitle": "هل تريد حذف مجموعة {{collectionName}} ؟",
-    "subtitle-tagged": "هل أنت متأكد من رغبتك في الحذف <collectionName>{{collectionName}}</collectionName> ؟",
+    "subtitle": "هل تريد حذف {{collectionName}} مجموعة ؟",
+    "subtitle-tagged": "هل أنت متأكد أنك تريد حذف <collectionName>{{collectionName}}</collectionName> ؟",
     "title": "حذف المجموعة"
   },
-  "edit-collection": "مجموعة التحرير",
-  "edit-collection-name-required": "أدخل اسم المجموعة لحفظها.",
+  "edit-collection": "تعديل المجموعة",
+  "edit-collection-name-required": "أدخل اسم المجموعة للحفظ.",
   "edit-collection-success": "تم تحديث المجموعة بنجاح",
   "empty": "المجموعة فارغة",
   "expand-all": "عرض جميع الآيات",

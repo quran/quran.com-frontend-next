@@ -29,6 +29,7 @@ type CollectionDetailProps = {
   bookmarks: Bookmark[];
 
   onItemDeleted?: (bookmarkId: string) => void;
+  onShareVerse?: (verseKey: string) => void;
   onBack?: () => void;
 
   isSelectMode?: boolean;
@@ -44,6 +45,7 @@ const CollectionDetail = ({
   title,
   bookmarks,
   onItemDeleted,
+  onShareVerse,
   isOwner,
   onBack,
   isSelectMode = false,
@@ -81,6 +83,7 @@ const CollectionDetail = ({
       collectionName={title}
       isOwner={isOwner}
       onDelete={onItemDeleted}
+      onShare={onShareVerse}
       createdAt={bookmark.createdAt}
       isSelectMode={isSelectMode}
       isSelected={isBookmarkSelected?.(bookmark.id)}

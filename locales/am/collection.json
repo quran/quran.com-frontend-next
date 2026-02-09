@@ -7,7 +7,9 @@
   "collection-name": "የስብስብ ስም",
   "collections": "ስብስቦች",
   "delete-bookmark": {
+    "confirmation-subtitle": "እርስዎ ይሰርዛሉ {{count}} ንጥል(ዎች) ከ {{collectionName}}፣ ኧረ፧",
     "subtitle": "እርግጠኛ ነዎት {{bookmarkName}} ከ {{collectionName}} ስብስብ መሰረዝ ይፈልጋሉ?",
+    "success": "ተሰርዟል {{count}} እቃ(ዎች)።",
     "title": "ዕልባት(ቡክማርክ) ሰርዝ"
   },
   "delete-collection-action": "ስብስብ ሰርዝ",
