@@ -1,0 +1,1 @@
+../../../.agents/quran/skills/web-design-guidelines/SKILL.md

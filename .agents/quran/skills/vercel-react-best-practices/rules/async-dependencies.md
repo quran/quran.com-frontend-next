@@ -1,0 +1,1 @@
+../../../../skills/vercel-react-best-practices/rules/async-dependencies.md

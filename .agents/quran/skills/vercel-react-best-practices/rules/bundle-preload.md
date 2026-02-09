@@ -1,0 +1,1 @@
+../../../../skills/vercel-react-best-practices/rules/bundle-preload.md

@@ -1,0 +1,1 @@
+../../../../skills/pdf/scripts/check_bounding_boxes.py

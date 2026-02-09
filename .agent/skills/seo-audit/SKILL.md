@@ -1,0 +1,1 @@
+../../../.agents/quran/skills/seo-audit/SKILL.md

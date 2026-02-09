@@ -1,0 +1,1 @@
+../../../../.agents/quran/skills/vercel-react-best-practices/rules/server-parallel-fetching.md

@@ -1,3 +1,5 @@
+@use 'src/styles/utility';
+
 .title {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
@@ -34,4 +36,8 @@
 .description :global(span),
 .description :global(strong) {
   line-height: inherit;
+}
+
+.description {
+  @include utility.kitabFontHtmlLang;
 }

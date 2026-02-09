@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .backText {
   padding-inline-start: var(--spacing-micro);
@@ -18,6 +19,7 @@
   line-height: var(--line-height-jumbo);
   padding-inline-end: var(--spacing-small);
   text-wrap: balance;
+  @include utility.kitabFontHtmlLang;
 }
 
 .author {
