@@ -35,7 +35,7 @@ vi.mock('./useReadingBookmark', () => ({
     };
   },
 }));
-vi.mock('@/icons/bookmark_blank.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/bookmark-empty.svg', () => ({ default: () => <div /> }));
 vi.mock('@/icons/question-mark-rounded.svg', () => ({ default: () => <div /> }));
 vi.mock('@/icons/bookmark-star.svg', () => ({ default: () => <div /> }));
 vi.mock('@/icons/check.svg', () => ({ default: () => <div /> }));

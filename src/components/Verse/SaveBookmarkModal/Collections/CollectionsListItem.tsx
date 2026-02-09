@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import styles from './collections.module.scss';
 
 import Spinner from '@/dls/Spinner/Spinner';
-import BookmarkBlankIcon from '@/icons/bookmark_blank.svg';
+import BookmarkBlankIcon from '@/icons/bookmark-empty.svg';
 import BookmarkIcon from '@/icons/bookmark_new.svg';
 import CheckIcon from '@/icons/check.svg';
 
