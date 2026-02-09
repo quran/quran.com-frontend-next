@@ -13,6 +13,7 @@
     "next-verse": "Ayah suivante",
     "next-word": "Mot suivant",
     "open-study-mode": "Ouvrir le mode d'étude",
+    "previous-related-verse": "Verset précédent lié",
     "previous-verse": "Ayah précédente",
     "previous-word": "Mot précédent",
     "read-ayah-refls": "Lire les Réflexions de l'Ayah",
@@ -85,6 +86,7 @@
     "title": "Sauvegardez votre progression"
   },
   "hadith": {
+    "notice": "Cette liste n'est pas exhaustive. <0>Al-Bukhari</0> et <1>Muslim</1> y figurent, et d'autres suivront bientôt, inshAllah.",
     "title": "Hadith"
   },
   "hizb-beginning": "Début du Hizb",

@@ -13,6 +13,7 @@
     "next-verse": "下一节",
     "next-word": "下一个词",
     "open-study-mode": "开放学习模式",
+    "previous-related-verse": "前一首相关诗句",
     "previous-verse": "前一节",
     "previous-word": "上一个词",
     "read-ayah-refls": "阅读相关参悟",
@@ -85,6 +86,7 @@
     "title": "保存进度"
   },
   "hadith": {
+    "notice": "此列表并不完整。《布哈里圣训集》和《穆斯林圣训集》已包含在内，愿真主保佑，未来还将收录更多圣训。",
     "title": "圣训"
   },
   "hizb-beginning": "Hizb的开始",
