@@ -9,6 +9,7 @@ type QuranReaderStyles = {
   wordByWordFontScale: number;
   qnaFontScale: number;
   surahInfoFontScale: number;
+  layersFontScale: number;
   quranFont: QuranFont;
   mushafLines: MushafLines;
   isUsingDefaultFont: boolean;

@@ -29,12 +29,14 @@ import {
   MAXIMUM_QURAN_FONT_STEP,
   increaseSurahInfoFontScale,
   decreaseSurahInfoFontScale,
+  increaseLayersFontScale,
+  decreaseLayersFontScale,
 } from '@/redux/slices/QuranReader/styles';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-export type FontSizeType = 'tafsir' | 'reflection' | 'lesson' | 'qna' | 'surahInfo';
+export type FontSizeType = 'tafsir' | 'reflection' | 'lesson' | 'qna' | 'surahInfo' | 'layers';
 
 interface FontSizeControlProps {
   className?: string;
@@ -80,6 +82,14 @@ const FONT_TYPE_CONFIG = {
     increaseAction: increaseSurahInfoFontScale,
     decreaseAction: decreaseSurahInfoFontScale,
     logKey: 'surah_info_font_scale',
+    defaultValue: 3,
+  },
+  layers: {
+    key: 'layersFontScale' as const,
+    maxStep: MAXIMUM_QURAN_FONT_STEP,
+    increaseAction: increaseLayersFontScale,
+    decreaseAction: decreaseLayersFontScale,
+    logKey: 'layers_font_scale',
     defaultValue: 3,
   },
 };

@@ -1,5 +1,45 @@
-@use 'src/styles/breakpoints';
+@use '@/styles/breakpoints';
 @use '@/styles/constants';
+
+$layers-scales: (
+  tablet: (
+    1: 0.8rem,
+    2: 0.9rem,
+    3: 1rem,
+    4: 1.3rem,
+    5: 1.7rem,
+    6: 2.1rem,
+    7: 2.5rem,
+    8: 2.9rem,
+    9: 3.3rem,
+    10: 3.7rem,
+  ),
+  mobile: (
+    1: 0.8rem,
+    2: 0.9rem,
+    3: 1rem,
+    4: 1.2rem,
+    5: 1.5rem,
+    6: 1.8rem,
+    7: 2.1rem,
+    8: 2.4rem,
+    9: 2.7rem,
+    10: 3rem,
+  ),
+);
+
+@for $i from 1 through 10 {
+  .layers-font-size-#{$i} {
+    --layers-base-font-size: #{map-get(map-get($layers-scales, mobile), $i)};
+    font-size: var(--layers-base-font-size);
+    line-height: 1.8;
+
+    @include breakpoints.tablet {
+      --layers-base-font-size: #{map-get(map-get($layers-scales, tablet), $i)};
+      font-size: var(--layers-base-font-size);
+    }
+  }
+}
 
 .container {
   display: flex;
@@ -30,7 +70,7 @@
   border: none;
   border-radius: var(--border-radius-xsmall-px);
   padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
-  font-size: var(--font-size-small);
+  font-size: calc(var(--layers-base-font-size) * 0.875); // base 3 => 14px
   background: var(--color-background-alternative-faint);
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-medium);
@@ -45,17 +85,16 @@
 }
 
 .description {
-  padding: var(--spacing-small-px);
+  padding: var(--spacing-xsmall-px) var(--spacing-small-px);
   border-radius: var(--border-radius-xsmall-px);
   background-color: var(--color-success-faded);
   color: var(--color-text-default-new);
-  font-size: var(--font-size-xsmall-px);
+  font-size: calc(var(--layers-base-font-size) * 0.875); // base 3 => 14px
   font-weight: var(--font-weight-medium);
-  line-height: 1;
 }
 
 .translationText {
-  font-size: var(--font-size-small-px);
+  font-size: var(--layers-base-font-size);
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-light);
   line-height: 1.8;
@@ -117,7 +156,7 @@
   align-items: flex-start;
   justify-content: space-between;
 
-  font-size: var(--font-size-xxsmall-px);
+  font-size: calc(var(--layers-base-font-size) * 0.75); // base 3 => 12px
   color: var(--color-text-faded-new);
   padding-block-end: var(--spacing-small-px);
   margin-inline: var(--spacing-inline);
@@ -146,8 +185,8 @@
 
   .closeIcon {
     svg {
-      inline-size: var(--spacing-small2-px);
-      block-size: var(--spacing-small2-px);
+      inline-size: calc(var(--layers-base-font-size) * 0.75); // base 3 => 12px
+      block-size: calc(var(--layers-base-font-size) * 0.75); // base 3 => 12px
       color: var(--color-text-faded-new);
     }
   }
@@ -164,14 +203,14 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-small-px);
-  padding: var(--spacing-small-px) var(--spacing-xsmall-px);
+  padding: var(--spacing-xsmall-px) var(--spacing-xsmall-px);
   text-align: start;
   border: none;
   outline: none;
   background: transparent;
   border-radius: var(--border-radius-small-px);
   color: var(--color-text-default-new);
-  font-size: var(--font-size-small-px);
+  font-size: var(--layers-base-font-size);
   font-weight: var(--font-weight-light);
   line-height: 1;
   cursor: pointer;
@@ -190,9 +229,9 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  block-size: var(--font-size-small-px);
-  inline-size: var(--font-size-small-px);
-  font-size: calc(var(--font-size-normal-px) * 0.5);
+  block-size: var(--layers-base-font-size); // base 3 => 10px
+  inline-size: var(--layers-base-font-size); // base 3 => 10px
+  font-size: calc(var(--layers-base-font-size) * 0.625); // base 3 => 10px
   border-radius: var(--border-radius-circle);
   background: var(--color-background-alternative-faint);
   color: var(--color-text-faded-new);
@@ -224,15 +263,15 @@
   border: none;
   background: transparent;
   gap: var(--spacing-xxsmall-px);
-  font-size: var(--font-size-xxsmall-px);
+  font-size: calc(var(--layers-base-font-size) * 0.75); // base 3 => 12px
   color: var(--color-text-default-new);
   cursor: pointer;
   text-align: end;
 }
 
 .explanationChevron {
-  inline-size: var(--spacing-small-px);
-  block-size: var(--spacing-small-px);
+  inline-size: calc(var(--layers-base-font-size) * 0.625); // base 3 => 10px
+  block-size: calc(var(--layers-base-font-size) * 0.625); // base 3 => 10px
   color: var(--color-text-default-new);
   transition: transform var(--transition-fast) ease-in-out;
 }
@@ -242,7 +281,7 @@
 }
 
 .explanationText {
-  font-size: var(--font-size-small-px);
+  font-size: var(--layers-base-font-size);
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-light);
   line-height: 1.5;
@@ -253,11 +292,22 @@
   vertical-align: super;
   color: var(--color-text-link);
   font-weight: var(--font-weight-medium);
-  font-size: 0.8em;
+  font-size: 0.75em;
   padding-inline: var(--spacing-micro2-px);
   cursor: pointer;
 
   &:hover {
     filter: brightness(var(--opacity-85));
+  }
+}
+
+.footnoteContainer {
+  font-size: var(--layers-base-font-size);
+
+  // Override CSS variables that InlineFootnote component uses
+  > div {
+    --font-size-large: calc(var(--layers-base-font-size) * 1.125); // base 3 => 18px
+    --font-size-normal: var(--layers-base-font-size); // base 3 => 16px
+    --font-size-xsmall: calc(var(--layers-base-font-size) * 0.75); // base 3 => 10px
   }
 }

@@ -4,6 +4,7 @@ import React, { MouseEvent, useCallback, useEffect, useMemo, useRef, useState } 
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import useLayeredTranslationData from './hooks/useLayeredTranslationData';
 import styles from './StudyModeLayersTab.module.scss';
@@ -19,6 +20,7 @@ import ChevronDownIcon from '@/icons/chevron-down.svg';
 import CloseIcon from '@/icons/close.svg';
 import ExpandArrowIcon from '@/icons/expand-arrow.svg';
 import { logErrorToSentry } from '@/lib/sentry';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Language from '@/types/Language';
 import { LayeredTranslationGroup, LayeredTranslationToken } from '@/types/LayeredTranslation';
 import { findLanguageIdByLocale, getLanguageDataById } from '@/utils/locale';
@@ -39,8 +41,10 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   switchTab,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
+  const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const verseKey = `${chapterId}:${verseNumber}`;
   const { data, isLoading, error, hasData, refetch } = useLayeredTranslationData(verseKey);
+  const scaleClass = styles[`layers-font-size-${quranReaderStyles.layersFontScale}`];
 
   const [layerMode, setLayerMode] = useState<LayerMode>('expanded');
   const [selectedOptionByGroup, setSelectedOptionByGroup] = useState<Record<string, string>>({});
@@ -187,9 +191,9 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   const shouldShowFootnote = footnote !== null || isLoadingFootnote;
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, scaleClass)}>
       <div className={styles.controls}>
-        <FontSizeControl fontType="tafsir" />
+        <FontSizeControl fontType="layers" />
         <button
           type="button"
           className={styles.layerButton}
@@ -205,7 +209,9 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
       </div>
 
       {data.resource.description && (
-        <div className={styles.description}>{data.resource.description}</div>
+        <div>
+          <div className={styles.description}>{data.resource.description}</div>
+        </div>
       )}
 
       <div className={styles.translationText} onClick={onTextClicked} role="presentation">
@@ -337,13 +343,15 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
       </div>
 
       {shouldShowFootnote && (
-        <InlineFootnote
-          footnoteName={activeFootnoteName}
-          footnoteText={footnote?.text}
-          isLoading={isLoadingFootnote}
-          direction={langData.direction}
-          onClose={resetFootnote}
-        />
+        <div className={styles.footnoteContainer}>
+          <InlineFootnote
+            footnoteName={activeFootnoteName}
+            footnoteText={footnote?.text}
+            isLoading={isLoadingFootnote}
+            direction={langData.direction}
+            onClose={resetFootnote}
+          />
+        </div>
       )}
     </div>
   );

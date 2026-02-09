@@ -349,4 +349,11 @@ export default {
       surahInfoFontScale: initialState.quranReaderStyles.surahInfoFontScale,
     },
   }),
+  44: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      layersFontScale: initialState.quranReaderStyles.layersFontScale,
+    },
+  }),
 };
