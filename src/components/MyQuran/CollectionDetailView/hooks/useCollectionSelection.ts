@@ -17,20 +17,26 @@ const useCollectionSelection = ({
   const [expandedCardIds, setExpandedCardIds] = useState<Set<string>>(new Set());
 
   const isAllExpanded = useMemo(() => {
-    return filteredBookmarks.length > 0 && expandedCardIds.size === filteredBookmarks.length;
-  }, [expandedCardIds, filteredBookmarks.length]);
+    return (
+      filteredBookmarks.length > 0 &&
+      filteredBookmarks.every((bookmark) => expandedCardIds.has(bookmark.id))
+    );
+  }, [expandedCardIds, filteredBookmarks]);
 
   const toggleSelectMode = useCallback(() => {
-    setIsSelectMode((prev) => {
-      const next = !prev;
-      if (prev) setSelectedBookmarks(new Set());
-      logButtonClick('collection_detail_toggle_select_mode', {
-        collectionId: numericCollectionId,
-        isEntering: next,
-      });
-      return next;
+    const newSelectMode = !isSelectMode;
+    setIsSelectMode(newSelectMode);
+
+    // Clear selected bookmarks when exiting select mode
+    if (isSelectMode) {
+      setSelectedBookmarks(new Set());
+    }
+
+    logButtonClick('collection_detail_toggle_select_mode', {
+      collectionId: numericCollectionId,
+      isEntering: newSelectMode,
     });
-  }, [numericCollectionId]);
+  }, [numericCollectionId, isSelectMode]);
 
   const handleToggleExpandCollapseAll = useCallback(() => {
     const allIds = new Set(filteredBookmarks.map((b) => b.id));

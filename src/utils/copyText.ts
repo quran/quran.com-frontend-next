@@ -21,7 +21,11 @@ const copyText = async (textBlobPromise: Promise<Blob>) => {
   try {
     // Try to copy with promise value (works in Safari when invoked from a user gesture).
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    if (navigator?.clipboard?.write && typeof ClipboardItem !== 'undefined') {
+    if (
+      typeof navigator !== 'undefined' &&
+      navigator?.clipboard?.write &&
+      typeof ClipboardItem !== 'undefined'
+    ) {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       await navigator.clipboard.write([new ClipboardItem({ 'text/plain': textBlobPromise })]);
       return;

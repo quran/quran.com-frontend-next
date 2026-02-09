@@ -1,3 +1,5 @@
+import type React from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './DeleteBookmarkModal.module.scss';
