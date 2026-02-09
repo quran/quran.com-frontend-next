@@ -1,5 +1,6 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -10,12 +11,16 @@ import styles from './CollectionDetailView.module.scss';
 import CollectionBulkActionsPopover from '@/components/Collection/CollectionActionsPopover/CollectionBulkActionsPopover';
 import CollectionHeaderActionsPopover from '@/components/Collection/CollectionActionsPopover/CollectionHeaderActionsPopover';
 import CollectionDetail from '@/components/Collection/CollectionDetail/CollectionDetail';
+import buildVerseCopyText from '@/components/Collection/CollectionDetail/utils/buildVerseCopyText';
+import fetchVerseForCopy from '@/components/Collection/CollectionDetail/utils/fetchVerseForCopy';
 import CollectionSorter from '@/components/Collection/CollectionSorter/CollectionSorter';
+import DeleteBookmarkModal from '@/components/Collection/DeleteBookmarkModal/DeleteBookmarkModal';
 import EditCollectionModal from '@/components/Collection/EditCollectionModal';
 import Button, { ButtonSize, ButtonVariant } from '@/components/dls/Button/Button';
 import Error from '@/components/Error';
 import DeleteCollectionModal from '@/components/MyQuran/DeleteCollectionModal';
 import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
+import ShareQuranModal from '@/components/QuranReader/ReadingView/ShareQuranModal';
 import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
 import { ArrowDirection } from '@/dls/Sorter/Sorter';
@@ -27,19 +32,32 @@ import { broadcastPinnedVerses, PinnedVersesBroadcastType } from '@/hooks/usePin
 import ChevronLeft from '@/icons/chevron-left.svg';
 import MenuMoreHorizIcon from '@/icons/menu_more_horiz.svg';
 import { logErrorToSentry } from '@/lib/sentry';
+import { RootState } from '@/redux/RootState';
 import { pinVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import BookmarkType from '@/types/BookmarkType';
 import { getMushafId } from '@/utils/api';
+import { areArraysEqual } from '@/utils/array';
 import { deleteCollectionBookmarkById, privateFetcher, syncPinnedItems } from '@/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
 import { buildPinnedSyncPayload, isPinnedItemsCacheKey } from '@/utils/auth/pinnedItems';
+import { textToBlob } from '@/utils/blob';
+import { getChapterData } from '@/utils/chapter';
+import copyText from '@/utils/copyText';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
+import { QURAN_URL, getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import { makeVerseKey } from '@/utils/verse';
+import DataContext from 'src/contexts/DataContext';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
+
+// Limit concurrency to avoid spamming the QDC API when copying/deleting many verses.
+const BULK_ACTIONS_CONCURRENCY_LIMIT = 5;
+// We fetch all bookmarks at once in collection details view.
+const COLLECTION_BOOKMARKS_LIMIT = 10000;
+const SINGLE_ITEM_COUNT = 1;
 
 interface CollectionDetailViewProps {
   collectionId: string;
@@ -64,10 +82,15 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const dispatch = useDispatch();
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
   const toast = useToast();
+  const chaptersData = useContext(DataContext);
   const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();
   const { isLoggedIn } = useIsLoggedIn();
   const { mutate: globalMutate } = useSWRConfig();
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
+  const selectedTranslations = useSelector(
+    (state: RootState) => state.translations?.selectedTranslations ?? [],
+    areArraysEqual,
+  );
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
   const [isSelectMode, setIsSelectMode] = useState(false);
@@ -80,6 +103,10 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [shareVerseKey, setShareVerseKey] = useState<string | null>(null);
+  const [isDeleteBookmarksModalOpen, setIsDeleteBookmarksModalOpen] = useState(false);
+  const [isDeletingBookmarks, setIsDeletingBookmarks] = useState(false);
+  const [pendingDeleteBookmarkIds, setPendingDeleteBookmarkIds] = useState<string[]>([]);
 
   const onSortByChange = useCallback(
     (newSortByVal: CollectionDetailSortOption) => {
@@ -89,11 +116,13 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     [sortBy],
   );
 
+  const numericCollectionId = slugifiedCollectionIdToCollectionId(collectionId);
+
   // Fetch all bookmarks at once
-  const fetchUrl = makeGetBookmarkByCollectionId(collectionId, {
+  const fetchUrl = makeGetBookmarkByCollectionId(numericCollectionId, {
     sortBy,
     type: BookmarkType.Ayah,
-    limit: 10000,
+    limit: COLLECTION_BOOKMARKS_LIMIT,
   });
 
   const { data, mutate, error } = useSWR<GetBookmarkCollectionsIdResponse>(
@@ -115,6 +144,11 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     });
   }, [bookmarks, searchQuery]);
 
+  const onUpdated = useCallback(() => {
+    mutate();
+    invalidateAllBookmarkCaches();
+  }, [invalidateAllBookmarkCaches, mutate]);
+
   const isAllExpanded = React.useMemo(() => {
     return filteredBookmarks.length > 0 && expandedCardIds.size === filteredBookmarks.length;
   }, [filteredBookmarks, expandedCardIds]);
@@ -125,14 +159,14 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       return !prev;
     });
     logButtonClick('collection_detail_toggle_select_mode', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      collectionId: numericCollectionId,
       isEntering: !isSelectMode,
     });
-  }, [collectionId, isSelectMode]);
+  }, [numericCollectionId, isSelectMode]);
 
   const handleToggleExpandCollapseAll = useCallback(() => {
     const allIds = new Set(filteredBookmarks.map((b) => b.id));
-    const params = { collectionId: slugifiedCollectionIdToCollectionId(collectionId) };
+    const params = { collectionId: numericCollectionId };
 
     if (isAllExpanded) {
       setExpandedCardIds(new Set());
@@ -141,7 +175,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       setExpandedCardIds(allIds);
       logButtonClick('collection_detail_expand_all', params);
     }
-  }, [filteredBookmarks, isAllExpanded, collectionId]);
+  }, [filteredBookmarks, isAllExpanded, numericCollectionId]);
 
   const handleToggleBookmarkSelection = useCallback((bookmarkId: string) => {
     setSelectedBookmarks((prev) => {
@@ -186,11 +220,11 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     setIsNoteModalOpen(true);
 
     logButtonClick('collection_detail_note_click', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      collectionId: numericCollectionId,
       selectedCount: selectedBookmarks.size,
       isBulkAction: false,
     });
-  }, [collectionId, filteredBookmarks, selectedBookmarks.size]);
+  }, [numericCollectionId, filteredBookmarks, selectedBookmarks.size]);
 
   const handleBulkNoteClick = useCallback(() => {
     const selectedBookmarksList = filteredBookmarks.filter((bookmark) =>
@@ -205,10 +239,10 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     setIsNoteModalOpen(true);
 
     logButtonClick('collection_detail_bulk_note_click', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      collectionId: numericCollectionId,
       selectedCount: selectedBookmarks.size,
     });
-  }, [collectionId, filteredBookmarks, selectedBookmarks]);
+  }, [numericCollectionId, filteredBookmarks, selectedBookmarks]);
 
   const handleNoteModalClose = useCallback(() => {
     setIsNoteModalOpen(false);
@@ -218,9 +252,9 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const handleEditClick = useCallback(() => {
     setIsEditModalOpen(true);
     logButtonClick('collection_detail_edit_click', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      collectionId: numericCollectionId,
     });
-  }, [collectionId]);
+  }, [numericCollectionId]);
 
   const handleEditModalClose = useCallback(() => {
     setIsEditModalOpen(false);
@@ -228,8 +262,6 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
 
   const handleEditSubmit = useCallback(
     async (formData: { name: string }) => {
-      const numericCollectionId = slugifiedCollectionIdToCollectionId(collectionId);
-
       // Optimistic: close modal immediately
       setIsEditModalOpen(false);
 
@@ -243,31 +275,30 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         logButtonClick('collection_edit_failed', { collectionId: numericCollectionId });
       }
     },
-    [collectionId, toast, t, onCollectionUpdateRequest],
+    [numericCollectionId, toast, t, onCollectionUpdateRequest],
   );
 
   const handleDeleteClick = useCallback(() => {
     logButtonClick('collection_detail_delete_click', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      collectionId: numericCollectionId,
     });
     setIsDeleteModalOpen(true);
-  }, [collectionId]);
+  }, [numericCollectionId]);
 
   const handleDeleteModalClose = useCallback(() => {
     setIsDeleteModalOpen(false);
     logButtonClick('collection_delete_cancel', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      collectionId: numericCollectionId,
     });
-  }, [collectionId]);
+  }, [numericCollectionId]);
 
   const handleDeleteConfirm = useCallback(async () => {
-    const numericCollectionId = slugifiedCollectionIdToCollectionId(collectionId);
     logButtonClick('collection_delete_confirm', { collectionId: numericCollectionId });
-    setIsDeleting(true);
+    if (!onCollectionDeleteRequest) return;
 
-    if (onCollectionDeleteRequest) {
+    setIsDeleting(true);
+    try {
       const success = await onCollectionDeleteRequest(numericCollectionId);
-      setIsDeleting(false);
       if (success) {
         setIsDeleteModalOpen(false);
         toast(t('collection:delete-collection-success'), { status: ToastStatus.Success });
@@ -275,8 +306,12 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       } else {
         toast(t('common:error.general'), { status: ToastStatus.Error });
       }
+    } catch {
+      toast(t('common:error.general'), { status: ToastStatus.Error });
+    } finally {
+      setIsDeleting(false);
     }
-  }, [collectionId, onCollectionDeleteRequest, toast, t, invalidateAllBookmarkCaches]);
+  }, [numericCollectionId, onCollectionDeleteRequest, toast, t, invalidateAllBookmarkCaches]);
 
   const pinVersesAndSync = useCallback(
     async (verseKeys: string[]) => {
@@ -310,21 +345,166 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const handlePinAllVerses = useCallback(() => {
     const verseKeys = filteredBookmarks.map((b) => makeVerseKey(b.key, b.verseNumber));
     logButtonClick('collection_detail_pin_all_verses', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      collectionId: numericCollectionId,
       count: verseKeys.length,
     });
     pinVersesAndSync(verseKeys);
-  }, [filteredBookmarks, collectionId, pinVersesAndSync]);
+  }, [filteredBookmarks, numericCollectionId, pinVersesAndSync]);
 
   const handlePinSelectedVerses = useCallback(() => {
     const selected = filteredBookmarks.filter((b) => selectedBookmarks.has(b.id));
     const verseKeys = selected.map((b) => makeVerseKey(b.key, b.verseNumber));
     logButtonClick('collection_detail_pin_selected_verses', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      collectionId: numericCollectionId,
       count: verseKeys.length,
     });
     pinVersesAndSync(verseKeys);
-  }, [filteredBookmarks, selectedBookmarks, collectionId, pinVersesAndSync]);
+  }, [filteredBookmarks, selectedBookmarks, numericCollectionId, pinVersesAndSync]);
+
+  const runWithConcurrency = useCallback(
+    async <T, R>(items: T[], limit: number, mapper: (item: T) => Promise<R>): Promise<R[]> => {
+      const results: R[] = [];
+      let index = 0;
+
+      const workers = new Array(Math.min(limit, items.length)).fill(null).map(async () => {
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+          const currentIndex = index;
+          index += 1;
+          if (currentIndex >= items.length) return;
+          // eslint-disable-next-line no-await-in-loop
+          results[currentIndex] = await mapper(items[currentIndex]);
+        }
+      });
+
+      await Promise.all(workers);
+      return results;
+    },
+    [],
+  );
+
+  const handleBulkCopyClick = useCallback(async () => {
+    const selected = filteredBookmarks.filter((b) => selectedBookmarks.has(b.id));
+    if (!selected.length) return;
+
+    // Build the blob promise and invoke clipboard copy immediately to preserve user activation.
+    const textBlobPromise = (async () => {
+      const verseKeys = selected.map((b) => makeVerseKey(b.key, b.verseNumber));
+      const texts = await runWithConcurrency(
+        verseKeys,
+        BULK_ACTIONS_CONCURRENCY_LIMIT,
+        async (vk) => {
+          const verse = await fetchVerseForCopy(vk, (selectedTranslations as number[]) || []);
+          const surahNumber = vk.split(':')[0];
+          const chapter = getChapterData(chaptersData, surahNumber);
+          const qdcUrl = `${QURAN_URL}${getVerseNavigationUrlByVerseKey(vk)}`;
+          return buildVerseCopyText({ verse, chapter, lang, qdcUrl });
+        },
+      );
+      const fullText = texts.join('\n\n');
+      return textToBlob(fullText);
+    })();
+
+    const copyPromise = copyText(textBlobPromise);
+
+    try {
+      await copyPromise;
+      toast(`${t('common:copied')}!`, { status: ToastStatus.Success });
+    } catch {
+      toast(t('common:error.general'), { status: ToastStatus.Error });
+    }
+  }, [
+    chaptersData,
+    filteredBookmarks,
+    lang,
+    runWithConcurrency,
+    selectedBookmarks,
+    selectedTranslations,
+    t,
+    toast,
+  ]);
+
+  const handleBulkDeleteClick = useCallback(() => {
+    const ids = Array.from(selectedBookmarks);
+    if (!ids.length) return;
+
+    setPendingDeleteBookmarkIds(ids);
+    setIsDeleteBookmarksModalOpen(true);
+  }, [selectedBookmarks]);
+
+  const closeDeleteBookmarksModal = useCallback(() => {
+    setIsDeleteBookmarksModalOpen(false);
+    setPendingDeleteBookmarkIds([]);
+  }, []);
+
+  const handleBulkDeleteModalClose = useCallback(() => {
+    if (isDeletingBookmarks) return;
+    closeDeleteBookmarksModal();
+  }, [closeDeleteBookmarksModal, isDeletingBookmarks]);
+
+  const showDeleteBookmarksSuccessToast = useCallback(
+    (count: number) => {
+      toast(
+        t('collection:delete-bookmark.success', {
+          count: toLocalizedNumber(count, lang),
+        }),
+        { status: ToastStatus.Success },
+      );
+    },
+    [lang, t, toast],
+  );
+
+  const clearDeletedBookmarksState = useCallback((deletedIds: string[]) => {
+    setSelectedBookmarks(new Set());
+    setExpandedCardIds((prev) => {
+      const next = new Set(prev);
+      deletedIds.forEach((id) => next.delete(id));
+      return next;
+    });
+  }, []);
+
+  const handleBulkDeleteConfirm = useCallback(async () => {
+    const idsToDelete = pendingDeleteBookmarkIds;
+    if (!idsToDelete.length) {
+      handleBulkDeleteModalClose();
+      return;
+    }
+
+    setIsDeletingBookmarks(true);
+    try {
+      await runWithConcurrency(idsToDelete, BULK_ACTIONS_CONCURRENCY_LIMIT, async (bookmarkId) => {
+        await deleteCollectionBookmarkById(numericCollectionId, bookmarkId);
+      });
+
+      clearDeletedBookmarksState(idsToDelete);
+      onUpdated();
+      showDeleteBookmarksSuccessToast(idsToDelete.length);
+      closeDeleteBookmarksModal();
+    } catch {
+      toast(t('common:error.general'), { status: ToastStatus.Error });
+    } finally {
+      setIsDeletingBookmarks(false);
+    }
+  }, [
+    clearDeletedBookmarksState,
+    closeDeleteBookmarksModal,
+    handleBulkDeleteModalClose,
+    numericCollectionId,
+    onUpdated,
+    pendingDeleteBookmarkIds,
+    runWithConcurrency,
+    showDeleteBookmarksSuccessToast,
+    t,
+    toast,
+  ]);
+
+  const handleShareVerse = useCallback((verseKey: string) => {
+    setShareVerseKey(verseKey);
+  }, []);
+
+  const handleShareModalClose = useCallback(() => {
+    setShareVerseKey(null);
+  }, []);
 
   if (error) {
     return (
@@ -342,15 +522,16 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     );
   }
 
-  const onUpdated = () => {
-    mutate();
-    invalidateAllBookmarkCaches();
-  };
-
   const onItemDeleted = (bookmarkId: string) => {
-    deleteCollectionBookmarkById(collectionId, bookmarkId)
+    deleteCollectionBookmarkById(numericCollectionId, bookmarkId)
       .then(() => {
         onUpdated();
+        toast(
+          t('collection:delete-bookmark.success', {
+            count: toLocalizedNumber(SINGLE_ITEM_COUNT, lang),
+          }),
+          { status: ToastStatus.Success },
+        );
       })
       .catch(() => {
         toast(t('common:error.general'), {
@@ -383,7 +564,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
           onChange={onSortByChange}
           options={sortOptions}
           isSingleCollection
-          collectionId={slugifiedCollectionIdToCollectionId(collectionId)}
+          collectionId={numericCollectionId}
         />
       </div>
 
@@ -436,6 +617,8 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
               <CollectionBulkActionsPopover
                 onNoteClick={handleBulkNoteClick}
                 onPinVersesClick={handlePinSelectedVerses}
+                onCopyClick={handleBulkCopyClick}
+                onDeleteClick={isOwner ? handleBulkDeleteClick : undefined}
                 dataTestPrefix="collection-bulk-actions"
               >
                 <Button
@@ -474,10 +657,11 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       <div className={styles.separator} />
 
       <CollectionDetail
-        id={slugifiedCollectionIdToCollectionId(collectionId)}
+        id={numericCollectionId}
         title={collectionName}
         bookmarks={filteredBookmarks}
         onItemDeleted={onItemDeleted}
+        onShareVerse={handleShareVerse}
         isOwner={isOwner}
         onBack={onBack}
         isSelectMode={isSelectMode}
@@ -489,6 +673,20 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
 
       <StudyModeContainer />
       <VerseActionModalContainer />
+      <ShareQuranModal
+        isOpen={!!shareVerseKey}
+        onClose={handleShareModalClose}
+        verse={shareVerseKey ? { verseKey: shareVerseKey } : undefined}
+      />
+
+      <DeleteBookmarkModal
+        isOpen={isDeleteBookmarksModalOpen}
+        isLoading={isDeletingBookmarks}
+        count={pendingDeleteBookmarkIds.length}
+        collectionName={collectionName}
+        onCancel={handleBulkDeleteModalClose}
+        onConfirm={handleBulkDeleteConfirm}
+      />
 
       <AddNoteModal
         showRanges

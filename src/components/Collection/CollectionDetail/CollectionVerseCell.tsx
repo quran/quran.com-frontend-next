@@ -1,4 +1,5 @@
-import React, { useCallback, useContext } from 'react';
+/* eslint-disable max-lines */
+import React, { useCallback, useContext, useState } from 'react';
 
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
@@ -7,22 +8,30 @@ import { useSelector } from 'react-redux';
 import styles from './CollectionVerseCell.module.scss';
 import CollectionVerseCellMenu from './CollectionVerseCellMenu';
 import CollectionVerseCellProps from './CollectionVerseCellTypes';
+import buildVerseCopyText from './utils/buildVerseCopyText';
+import fetchVerseForCopy from './utils/fetchVerseForCopy';
 import VerseDisplay from './VerseDisplay';
 
+import DeleteBookmarkModal from '@/components/Collection/DeleteBookmarkModal/DeleteBookmarkModal';
 import Checkbox from '@/components/dls/Forms/Checkbox/Checkbox';
-import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import Separator from '@/dls/Separator/Separator';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import ArrowIcon from '@/icons/arrow.svg';
+import { RootState } from '@/redux/RootState';
 import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
+import { areArraysEqual } from '@/utils/array';
+import { textToBlob } from '@/utils/blob';
 import { getChapterData } from '@/utils/chapter';
+import copyText from '@/utils/copyText';
 import { dateToMonthDayYearFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
-import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
-import { navigateToExternalUrl } from '@/utils/url';
+import { QURAN_URL, getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
 import { makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
+
+const SINGLE_ITEM_COUNT = 1;
 
 const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   bookmarkId,
@@ -31,6 +40,7 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   collectionId,
   collectionName,
   isOwner,
+  onShare,
   createdAt,
   isSelectMode = false,
   isSelected = false,
@@ -41,9 +51,14 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
 }) => {
   const { t, lang } = useTranslation();
   const chaptersData = useContext(DataContext);
-  const confirm = useConfirm();
+  const toast = useToast();
   const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
   const pinnedVerseKeysSet = useSelector(selectPinnedVerseKeysSet);
+  const selectedTranslations = useSelector(
+    (state: RootState) => state.translations?.selectedTranslations ?? [],
+    areArraysEqual,
+  );
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const verseKey = makeVerseKey(chapterId, verseNumber);
   const isPinned = pinnedVerseKeysSet.has(verseKey);
@@ -66,86 +81,113 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
     }
   }, [isPinned, verseKey, pinVerseWithSync, unpinVerseWithSync]);
 
-  const handleGoToAyah = () => {
-    logButtonClick('collection_detail_go_to_ayah_menu', { verseKey, collectionId });
-    navigateToExternalUrl(getVerseNavigationUrlByVerseKey(verseKey));
+  const handleDelete = () => {
+    logButtonClick('collection_detail_delete_menu');
+    setIsDeleteModalOpen(true);
   };
 
-  const handleDelete = async () => {
-    logButtonClick('collection_detail_delete_menu');
+  const handleDeleteConfirm = () => {
+    logButtonClick('bookmark_delete_confirm', { verseKey, collectionId });
+    setIsDeleteModalOpen(false);
+    onDelete?.(bookmarkId);
+  };
 
-    const isConfirmed = await confirm({
-      confirmText: t('common:delete'),
-      cancelText: t('common:cancel'),
-      title: t('collection:delete-bookmark.title'),
-      subtitle: t('collection:delete-bookmark.subtitle', { bookmarkName, collectionName }),
-    });
+  const handleDeleteCancel = () => {
+    logButtonClick('bookmark_delete_confirm_cancel', { verseKey, collectionId });
+    setIsDeleteModalOpen(false);
+  };
 
-    if (isConfirmed) {
-      logButtonClick('bookmark_delete_confirm', { verseKey, collectionId });
-      if (onDelete) onDelete(bookmarkId);
-    } else {
-      logButtonClick('bookmark_delete_confirm_cancel', { verseKey, collectionId });
+  const handleCopy = async () => {
+    // Build the blob promise and invoke clipboard copy immediately to preserve user activation.
+    const textBlobPromise = (async () => {
+      const verse = await fetchVerseForCopy(verseKey, (selectedTranslations as number[]) || []);
+      const qdcUrl = `${QURAN_URL}${getVerseNavigationUrlByVerseKey(verseKey)}`;
+      const text = buildVerseCopyText({ verse, chapter: chapterData, lang, qdcUrl });
+      return textToBlob(text);
+    })();
+
+    const copyPromise = copyText(textBlobPromise);
+
+    try {
+      await copyPromise;
+      toast(`${t('common:copied')}!`, { status: ToastStatus.Success });
+    } catch {
+      toast(t('common:error.general'), { status: ToastStatus.Error });
     }
   };
 
-  return (
-    <div className={styles.outerContainer}>
-      <div className={styles.container}>
-        <div
-          className={styles.headerContainer}
-          onClick={() => onToggleExpansion?.(bookmarkId)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') onToggleExpansion?.(bookmarkId);
-          }}
-        >
-          <div className={styles.headerLeft}>
-            <Link
-              href={getVerseNavigationUrlByVerseKey(verseKey)}
-              className={styles.verseReference}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {bookmarkName}
-            </Link>
-            {formattedDate && <div className={styles.bookmarkDate}>{formattedDate}</div>}
-          </div>
-          <div className={styles.headerRight}>
-            {isSelectMode ? (
-              <Checkbox
-                id={`checkbox-${bookmarkId}`}
-                checked={isSelected}
-                onChange={() => onToggleSelection?.(bookmarkId)}
-                onClick={(e) => e.stopPropagation()}
-                checkboxClassName={styles.checkbox}
-                containerClassName={styles.checkboxContainer}
-              />
-            ) : (
-              <CollectionVerseCellMenu
-                isPinned={isPinned}
-                isOwner={isOwner}
-                onPinToggle={handlePinToggle}
-                onDelete={handleDelete}
-                onGoToAyah={handleGoToAyah}
-              />
-            )}
-            <div className={styles.iconButton}>
-              <ArrowIcon className={isExpanded ? styles.arrowUp : styles.arrowDown} />
-            </div>
-          </div>
-        </div>
+  const handleShare = () => {
+    logButtonClick('collection_detail_share_menu', { verseKey, collectionId });
+    onShare?.(verseKey);
+  };
 
-        {isExpanded && (
-          <>
-            <Separator className={styles.contentSeparator} />
-            <div className={styles.cellContainer} data-verse-key={verseKey}>
-              <VerseDisplay chapterId={chapterId} verseNumber={verseNumber} />
+  return (
+    <>
+      <div className={styles.outerContainer}>
+        <div className={styles.container}>
+          <div
+            className={styles.headerContainer}
+            onClick={() => onToggleExpansion?.(bookmarkId)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') onToggleExpansion?.(bookmarkId);
+            }}
+          >
+            <div className={styles.headerLeft}>
+              <Link
+                href={getVerseNavigationUrlByVerseKey(verseKey)}
+                className={styles.verseReference}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {bookmarkName}
+              </Link>
+              {formattedDate && <div className={styles.bookmarkDate}>{formattedDate}</div>}
             </div>
-          </>
-        )}
+            <div className={styles.headerRight}>
+              {isSelectMode ? (
+                <Checkbox
+                  id={`checkbox-${bookmarkId}`}
+                  checked={isSelected}
+                  onChange={() => onToggleSelection?.(bookmarkId)}
+                  onClick={(e) => e.stopPropagation()}
+                  checkboxClassName={styles.checkbox}
+                  containerClassName={styles.checkboxContainer}
+                />
+              ) : (
+                <CollectionVerseCellMenu
+                  isPinned={isPinned}
+                  isOwner={isOwner}
+                  onPinToggle={handlePinToggle}
+                  onDelete={handleDelete}
+                  onShare={handleShare}
+                  onCopy={handleCopy}
+                />
+              )}
+              <div className={styles.iconButton}>
+                <ArrowIcon className={isExpanded ? styles.arrowUp : styles.arrowDown} />
+              </div>
+            </div>
+          </div>
+
+          {isExpanded && (
+            <>
+              <Separator className={styles.contentSeparator} />
+              <div className={styles.cellContainer} data-verse-key={verseKey}>
+                <VerseDisplay chapterId={chapterId} verseNumber={verseNumber} />
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+      <DeleteBookmarkModal
+        isOpen={isDeleteModalOpen}
+        count={SINGLE_ITEM_COUNT}
+        collectionName={collectionName}
+        onCancel={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+      />
+    </>
   );
 };
 

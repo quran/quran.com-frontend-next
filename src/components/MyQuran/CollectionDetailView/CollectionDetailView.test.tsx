@@ -164,6 +164,10 @@ vi.mock('@/components/QuranReader/StudyModeContainer', () => ({
   default: () => null,
 }));
 
+vi.mock('@/components/QuranReader/ReadingView/ShareQuranModal', () => ({
+  default: () => null,
+}));
+
 vi.mock('@/components/QuranReader/VerseActionModalContainer', () => ({
   default: () => null,
 }));
