@@ -12,9 +12,9 @@ import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQues
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
+import LayerIcon from '@/icons/layer.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
-import LayersIcon from '@/icons/plus-cubed.svg';
 import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVersesIcon from '@/icons/related-verses.svg';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
@@ -125,7 +125,7 @@ const BottomActions = ({
     {
       id: TabId.LAYERS,
       label: t('quran-reader:layers.title'),
-      icon: <LayersIcon />,
+      icon: <LayerIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: createTabHandler(TabId.LAYERS, () => getVerseLayersNavigationUrl(verseKey)),
       condition: hasLayersData,
     },
