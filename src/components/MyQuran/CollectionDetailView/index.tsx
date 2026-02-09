@@ -32,7 +32,6 @@ import { broadcastPinnedVerses, PinnedVersesBroadcastType } from '@/hooks/usePin
 import ChevronLeft from '@/icons/chevron-left.svg';
 import FilterIcon from '@/icons/filter-bar.svg';
 import MenuMoreHorizIcon from '@/icons/menu_more_horiz.svg';
-import SearchIcon from '@/icons/search.svg';
 import { logErrorToSentry } from '@/lib/sentry';
 import { pinVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -568,16 +567,11 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const onClearAllFilters = useCallback(() => {
     setSelectedChapterIds([]);
     setSelectedJuzNumbers([]);
+    // Search is currently not exposed in the UI. Clearing all active constraints should also clear
+    // any externally-supplied query (e.g. via URL/state) to avoid trapping the user in a filtered view.
+    onSearchChange('');
     resetListState();
-  }, [resetListState]);
-
-  const onSearchQueryChange = useCallback(
-    (q: string) => {
-      onSearchChange(q);
-      resetListState();
-    },
-    [onSearchChange, resetListState],
-  );
+  }, [onSearchChange, resetListState]);
 
   const onSelectedChapterIdsChange = useCallback(
     (ids: string[]) => {
@@ -649,17 +643,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.searchAndActions}>
-        <div className={styles.searchContainer}>
-          <SearchIcon className={styles.searchIcon} />
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder={t('search.placeholder')}
-            value={searchQuery}
-            onChange={(e) => onSearchQueryChange(e.target.value)}
-            aria-label={t('search.placeholder')}
-          />
-        </div>
+        <div className={styles.searchSpacer} aria-hidden="true" />
 
         <div className={styles.topActions}>
           <CollectionFiltersDropdown

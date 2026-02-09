@@ -20,40 +20,26 @@
   }
 }
 
-.searchContainer {
+// Spacer to preserve layout until collection search is implemented.
+// Important: do not keep an invisible input in the tab order.
+.searchSpacer {
   flex: 1;
   min-inline-size: min(30rem, 100%);
   display: flex;
   align-items: center;
-  gap: var(--spacing-xsmall-px);
+  box-sizing: border-box;
   padding: var(--spacing-xsmall-px) var(--spacing-small2-px);
+  border: var(--spacing-hairline-px) solid transparent;
   border-radius: var(--border-radius-pill);
-  background: var(--color-background-alternative);
-  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
-  // note: TODO: revert this when search is ready to use
-  opacity: 0;
+  // Match the old search control's height (icon + vertical padding + border).
+  min-block-size: calc(
+    var(--spacing-medium) + (2 * var(--spacing-xsmall-px)) + (2 * var(--spacing-hairline-px))
+  );
+  visibility: hidden;
+  pointer-events: none;
 
   @include breakpoints.smallerThanTablet {
     min-inline-size: 100%;
-  }
-}
-
-.searchIcon {
-  inline-size: var(--spacing-medium);
-  block-size: var(--spacing-medium);
-  color: var(--color-text-faded);
-  flex-shrink: 0;
-}
-
-.searchInput {
-  all: unset;
-  flex: 1;
-  font-size: var(--font-size-normal);
-  color: var(--color-text-default-new);
-  min-inline-size: 0;
-
-  &::placeholder {
-    color: var(--color-text-faded);
   }
 }
 
