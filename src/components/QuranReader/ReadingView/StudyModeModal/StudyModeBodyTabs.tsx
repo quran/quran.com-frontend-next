@@ -16,6 +16,7 @@ import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVerseIcon from '@/icons/related-verses.svg';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
+import { toLocalizedNumber } from '@/utils/locale';
 
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
   loading: TafsirSkeleton,
@@ -99,7 +100,7 @@ export const useStudyModeTabs = ({
   hasRelatedVerses: boolean;
   relatedVersesCount?: number | null;
 }): TabConfig[] => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   const { data: questionData, isLoading: isLoadingQuestions } =
     useBatchedCountRangeQuestions(verseKey);
@@ -166,7 +167,7 @@ export const useStudyModeTabs = ({
     {
       id: StudyModeTabId.RELATED_VERSES,
       label: relatedVersesCount
-        ? `${t('related-verses')} (${relatedVersesCount})`
+        ? `${t('related-verses')} (${toLocalizedNumber(relatedVersesCount, lang)})`
         : t('related-verses'),
       icon: <RelatedVerseIcon />,
       onClick: () => handleTabClick(StudyModeTabId.RELATED_VERSES),
