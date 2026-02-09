@@ -190,6 +190,7 @@ Even when HTML is a HIT, the browser still downloads:
 ### Quick checks
 
 - `BASE_URL=https://ssr.quran.com LOCALE=vi bash scripts/qf-318/edge-cache-smoke.sh`
+- `BASE_URL=https://ssr.quran.com bash scripts/qf-318/onboard-verify.sh` (see `docs/qf-318-edge-cache-verification.md`)
 - `BASE_URL=https://ssr.quran.com PATHS='/ /5 /vi /vi/5' RUNS=2 bash scripts/qf-318/edge-live-debug.sh`
 - `HEADLESS=1 RUNS=1 URLS='https://ssr.quran.com/ https://ssr.quran.com/vi https://ssr.quran.com/vi/5' node scripts/qf-318/real-world-browser-report.mjs`
 

@@ -786,6 +786,9 @@ curl -X POST "https://api.cloudflare.com/client/v4/zones/{zone_id}/purge_cache" 
 # Edge cache smoke test
 BASE_URL=https://ssr.quran.com LOCALE=vi bash scripts/qf-318/edge-cache-smoke.sh
 
+# Onboarding verifier (prints PASS/FAIL + expected cache-key fields)
+BASE_URL=https://ssr.quran.com bash scripts/qf-318/onboard-verify.sh
+
 # Live debugging with multiple paths
 BASE_URL=https://ssr.quran.com PATHS='/ /5 /vi /vi/5' RUNS=2 bash scripts/qf-318/edge-live-debug.sh
 
