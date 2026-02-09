@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 /* eslint-disable max-lines */
-import React, { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -50,6 +50,8 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   const [activeFootnoteName, setActiveFootnoteName] = useState<string | null>(null);
   const [isLoadingFootnote, setIsLoadingFootnote] = useState(false);
 
+  const panelRef = useRef<HTMLDivElement>(null);
+
   const langData = getLanguageDataById(findLanguageIdByLocale(lang as Language));
 
   const resetFootnote = useCallback(() => {
@@ -87,6 +89,12 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
       return changed ? next : prev;
     });
   }, [data?.groups]);
+
+  useEffect(() => {
+    if (activeGroupKey && panelRef.current) {
+      panelRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [activeGroupKey]);
 
   const groupsByKey = useMemo(() => {
     const map: Record<string, LayeredTranslationGroup> = {};
@@ -257,7 +265,7 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
       </div>
 
       {activeGroup && (
-        <div className={styles.popoverContent}>
+        <div ref={panelRef} className={styles.popoverContent}>
           <div className={styles.groupPanelHeader}>
             <span>{t('layers.alternative-translations')}</span>
             <button
