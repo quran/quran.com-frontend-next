@@ -49,6 +49,9 @@ const LearningPlanPage: NextPage<Props> = ({ course }) => {
         canonical={getCanonicalUrl(lang, url)}
         description={course?.metaDescription || t('learning-plan-meta-desc')}
         languageAlternates={getLanguageAlternates(url)}
+        image={course.thumbnail}
+        imageWidth={1200}
+        imageHeight={630}
       />
       <div className={layoutStyles.pageContainer}>
         <div className={styles.container}>
