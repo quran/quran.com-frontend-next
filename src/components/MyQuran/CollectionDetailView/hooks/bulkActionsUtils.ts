@@ -14,12 +14,12 @@ import ChaptersData from 'types/ChaptersData';
 
 const BULK_ACTIONS_CONCURRENCY_LIMIT = 5;
 
-export const runWithConcurrency = async <T, R>(
+const runWithConcurrencySettled = async <T, R>(
   items: T[],
   limit: number,
   mapper: (item: T) => Promise<R>,
-): Promise<R[]> => {
-  const results: R[] = [];
+): Promise<PromiseSettledResult<R>[]> => {
+  const results: PromiseSettledResult<R>[] = new Array(items.length);
   let index = 0;
   const workers = new Array(Math.min(limit, items.length)).fill(null).map(async () => {
     // eslint-disable-next-line no-constant-condition
@@ -27,11 +27,17 @@ export const runWithConcurrency = async <T, R>(
       const currentIndex = index;
       index += 1;
       if (currentIndex >= items.length) return;
-      // eslint-disable-next-line no-await-in-loop
-      results[currentIndex] = await mapper(items[currentIndex]);
+
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        const value = await mapper(items[currentIndex]);
+        results[currentIndex] = { status: 'fulfilled', value };
+      } catch (reason) {
+        results[currentIndex] = { status: 'rejected', reason };
+      }
     }
   });
-  await Promise.all(workers);
+  await Promise.allSettled(workers);
   return results;
 };
 
@@ -46,13 +52,22 @@ export const buildBulkCopyBlobPromise = async (params: {
     .map((b) => (b.verseNumber ? makeVerseKey(b.key, b.verseNumber) : null))
     .filter(Boolean) as string[];
 
-  const texts = await runWithConcurrency(verseKeys, BULK_ACTIONS_CONCURRENCY_LIMIT, async (vk) => {
-    const verse = await fetchVerseForCopy(vk, selectedTranslations);
-    const surahNumber = vk.split(':')[0];
-    const chapter = getChapterData(chaptersData, surahNumber);
-    const qdcUrl = `${QURAN_URL}${getVerseNavigationUrlByVerseKey(vk)}`;
-    return buildVerseCopyText({ verse, chapter, lang, qdcUrl });
-  });
+  const settledTexts = await runWithConcurrencySettled(
+    verseKeys,
+    BULK_ACTIONS_CONCURRENCY_LIMIT,
+    async (vk) => {
+      const verse = await fetchVerseForCopy(vk, selectedTranslations);
+      const surahNumber = vk.split(':')[0];
+      const chapter = getChapterData(chaptersData, surahNumber);
+      const qdcUrl = `${QURAN_URL}${getVerseNavigationUrlByVerseKey(vk)}`;
+      return buildVerseCopyText({ verse, chapter, lang, qdcUrl });
+    },
+  );
+
+  const rejected = settledTexts.find((r) => r.status === 'rejected');
+  if (rejected) throw rejected.reason;
+
+  const texts = settledTexts.map((r) => (r as PromiseFulfilledResult<string>).value);
 
   return textToBlob(texts.join('\n\n'));
 };
@@ -62,22 +77,19 @@ export const deleteBookmarks = async (params: {
   bookmarkIds: string[];
 }) => {
   const { numericCollectionId, bookmarkIds } = params;
-  const results = await runWithConcurrency(
+  const results = await runWithConcurrencySettled(
     bookmarkIds,
     BULK_ACTIONS_CONCURRENCY_LIMIT,
-    async (bookmarkId) => {
-      try {
-        await deleteCollectionBookmarkById(numericCollectionId, bookmarkId);
-        return { bookmarkId, ok: true as const };
-      } catch {
-        return { bookmarkId, ok: false as const };
-      }
-    },
+    async (bookmarkId) => deleteCollectionBookmarkById(numericCollectionId, bookmarkId),
   );
 
   return {
-    deletedIds: results.filter((r) => r.ok).map((r) => r.bookmarkId),
-    failedIds: results.filter((r) => !r.ok).map((r) => r.bookmarkId),
+    deletedIds: results
+      .map((r, idx) => (r.status === 'fulfilled' ? bookmarkIds[idx] : null))
+      .filter((id): id is string => id !== null),
+    failedIds: results
+      .map((r, idx) => (r.status === 'rejected' ? bookmarkIds[idx] : null))
+      .filter((id): id is string => id !== null),
   };
 };
 

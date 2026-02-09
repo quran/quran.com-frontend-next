@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 
 import styles from './CollectionDetailView.module.scss';
@@ -127,7 +128,8 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
         isCardExpanded={isCardExpanded}
         isBookmarkSelected={isBookmarkSelected}
       />
-      <StudyModeContainer /> <VerseActionModalContainer />
+      <StudyModeContainer />
+      <VerseActionModalContainer />
       <CollectionDetailViewModals
         collectionName={collectionName}
         shareVerseKey={shareVerseKey}
