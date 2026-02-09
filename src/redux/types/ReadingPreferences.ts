@@ -23,8 +23,8 @@ type ReadingPreferences = {
    * If true, we should not auto-sync these fields on locale change (even if the
    * current value matches defaults).
    */
-  hasCustomizedReflectionLanguages: boolean;
-  hasCustomizedLessonLanguages: boolean;
+  hasCustomizedReflectionLanguages?: boolean;
+  hasCustomizedLessonLanguages?: boolean;
 };
 
 export default ReadingPreferences;
