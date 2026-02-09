@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import { ToastFn, TranslateFn } from '../types';
+import { DispatchFn, ToastFn, TranslateFn } from '../types';
 
 import { useToast } from '@/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
@@ -17,7 +17,7 @@ import DataContext from 'src/contexts/DataContext';
 
 const useCollectionDetailViewDeps = () => {
   const { t, lang } = useTranslation('my-quran');
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<DispatchFn>();
   const toast = useToast();
   const chaptersData = useContext(DataContext);
   const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();

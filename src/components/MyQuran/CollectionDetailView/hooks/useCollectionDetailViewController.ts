@@ -66,12 +66,8 @@ const useCollectionDetailViewController = ({
     onCollectionDeleteRequest,
   });
   const pinnedVerses = useCollectionPinnedVerses({
-    dispatch: dispatch as unknown as (action: unknown) => void,
-    globalMutate: globalMutate as unknown as (
-      key: unknown,
-      data?: unknown,
-      opts?: unknown,
-    ) => Promise<unknown>,
+    dispatch,
+    globalMutate,
     isLoggedIn,
     mushafId,
     toast,
