@@ -18,8 +18,15 @@ import { setLocaleCookie } from '@/utils/cookies';
 import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-// React expects this flag in non-Jest runners to enable `act()` semantics.
-(globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
+declare global {
+  // React checks this global flag to decide whether `act()` semantics are enabled.
+  // Jest sets it automatically; Vitest does not.
+  interface GlobalThis {
+    IS_REACT_ACT_ENVIRONMENT?: boolean;
+  }
+}
+
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 // Mocks
 vi.mock('react-redux', () => ({
@@ -42,7 +49,7 @@ vi.mock('@/redux/actions/sync-locale-dependent-settings', () => ({
 }));
 
 vi.mock('@/redux/actions/reset-settings', () => ({
-  default: vi.fn((locale: string) => ({ type: 'RESET_SETTINGS', payload: locale })),
+  default: vi.fn((locale: string) => ({ type: 'resetSettings', payload: { locale } })),
 }));
 
 vi.mock('@/utils/auth/api', () => ({
@@ -89,7 +96,7 @@ describe('useLanguageChange', () => {
       nextLocale: 'en',
     });
     expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
-    expect(dispatch).not.toHaveBeenCalledWith({ type: 'RESET_SETTINGS', payload: 'en' });
+    expect(dispatch).not.toHaveBeenCalledWith({ type: 'resetSettings', payload: { locale: 'en' } });
     expect(addOrUpdateUserPreference).not.toHaveBeenCalled();
     expect(setLocaleCookie).toHaveBeenCalledWith('en');
     expect(logValueChange).toHaveBeenCalledWith('locale', 'ar', 'en');
@@ -124,6 +131,6 @@ describe('useLanguageChange', () => {
     });
 
     expect(resetSettings).toHaveBeenCalledWith('en');
-    expect(dispatch).toHaveBeenCalledWith({ type: 'RESET_SETTINGS', payload: 'en' });
+    expect(dispatch).toHaveBeenCalledWith({ type: 'resetSettings', payload: { locale: 'en' } });
   });
 });
