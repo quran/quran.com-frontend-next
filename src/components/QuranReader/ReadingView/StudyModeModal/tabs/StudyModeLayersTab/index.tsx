@@ -90,12 +90,6 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
     });
   }, [data?.groups]);
 
-  useEffect(() => {
-    if (activeGroupKey && panelRef.current) {
-      panelRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }, [activeGroupKey]);
-
   const groupsByKey = useMemo(() => {
     const map: Record<string, LayeredTranslationGroup> = {};
     data?.groups?.forEach((group) => {
@@ -265,7 +259,7 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
       </div>
 
       {activeGroup && (
-        <div ref={panelRef} className={styles.popoverContent}>
+        <div ref={panelRef} className={styles.groupPanel}>
           <div className={styles.groupPanelHeader}>
             <span>{t('layers.alternative-translations')}</span>
             <button

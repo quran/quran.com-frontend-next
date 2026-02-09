@@ -90,13 +90,10 @@
   }
 }
 
-$max-popover-width: 23.125rem;
-
-.popoverContent {
+.groupPanel {
   border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
   border-radius: var(--border-radius-small-px);
   background: var(--color-background-elevated-new);
-  max-inline-size: $max-popover-width;
   z-index: 9999;
 
   --spacing-block: var(--spacing-medium-px) var(--spacing-medium2-px);
@@ -243,7 +240,7 @@ $max-popover-width: 23.125rem;
 }
 
 .translationText :global(sup[foot_note]),
-.popoverContent :global(sup[foot_note]) {
+.groupPanel :global(sup[foot_note]) {
   vertical-align: super;
   color: var(--color-text-link);
   font-weight: var(--font-weight-medium);
