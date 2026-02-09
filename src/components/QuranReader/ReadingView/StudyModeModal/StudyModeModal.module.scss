@@ -58,20 +58,19 @@ div.mobileBottomSheetOverlay {
   }
 
   // When left controls are hidden (no verse history), switch to 2-column layout
-  // and reset child grid positions for mobile
   &.hideHeaderLeftControls {
     grid-template-columns: 1fr auto;
 
     .headerMiddleControls {
       @include breakpoints.smallerThanTablet {
-        grid-column: 1 / -1;
-        grid-row: 1; // Move to first row since there's no left controls above
+        grid-column: 1;
+        grid-row: 1;
       }
     }
 
     .headerRightControls {
       @include breakpoints.smallerThanTablet {
-        grid-column: 2; // Column 2 instead of 3 since we only have 2 columns now
+        grid-column: 2;
         grid-row: 1;
       }
     }
