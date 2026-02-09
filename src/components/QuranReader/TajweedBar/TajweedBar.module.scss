@@ -19,6 +19,13 @@ $pixel: 1px;
   z-index: var(--z-index-min);
 }
 
+.withSidebarNavigation {
+  @include breakpoints.tablet {
+    margin-inline-start: calc(10 * var(--spacing-mega));
+    inline-size: calc(100% - calc(10 * var(--spacing-mega)));
+  }
+}
+
 .hiddenContainer {
   transform: translateY(calc(-100% + var(--tajweed-trigger-height)));
 }
