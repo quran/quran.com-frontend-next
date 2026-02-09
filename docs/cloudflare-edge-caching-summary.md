@@ -5,6 +5,14 @@
 
 ---
 
+## Source Of Truth
+
+If this doc conflicts with code or tests, treat those as authoritative:
+
+- Snippet: `cloudflare/snippets/qdc-ssr-edge-cache.js`
+- Prod edge tests: `tests/integration/qf-318-edge/*`
+- Smoke verifiers: `scripts/qf-318/onboard-verify.sh`, `scripts/qf-318/edge-cache-smoke.sh`
+
 ## 🎯 Core Objective
 
 Make **SSR (Server-Side Rendering) personalization first-class** while still leveraging **edge
@@ -42,6 +50,34 @@ flowchart LR
 ```
 
 ---
+
+## 🧭 QA Quick Start (No Code Needed)
+
+Goal: validate behavior without needing to understand implementation.
+
+### Browser (Recommended)
+
+1. Open `ssr.quran.com` in a fresh session (Incognito or a new browser profile).
+2. Open DevTools, go to **Network**.
+3. Click the **document** request (the first HTML request).
+4. In **Response Headers**, record:
+   - `X-QDC-Edge-Cache`
+   - `X-QDC-Edge-Cache-Key`
+   - `CF-Cache-Status`, `Age` (secondary)
+   - `Location` (for redirects)
+5. Refresh once. First request can be `MISS`; the second request often becomes `HIT` for the same bucket.
+
+### Curl (For Reproducible Header Checks)
+
+Do not use `curl -I` (`HEAD`). The snippet only runs on `GET`.
+
+```bash
+curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5" \
+  -H "Accept: text/html" \
+  -H "Accept-Language: vi" \
+  -H "User-Agent: Mozilla/5.0" \
+  | grep -iE "(x-qdc|cf-cache|age:|cache-control|content-type|location|HTTP/)"
+```
 
 ## ✅ What the Snippet Caches (and what it ignores)
 
@@ -167,6 +203,7 @@ sequenceDiagram
 | **Cache key includes** | URL + locale + `prefsKey` **or** guest bucket + **`userKey`** |
 | **Result**             | Each user gets **isolated cache entries** → no data leakage |
 | **Bypass rule**        | If `userKey` can't be determined → **bypass entirely**      |
+| **Freshness tradeoff** | Private pages are cached per-user for up to 1 hour. SSR can be stale until TTL (or explicit cache bust). |
 
 **Private paths include:**
 
@@ -214,6 +251,7 @@ sequenceDiagram
 | **Behavior**              | User's explicit locale choice takes precedence over device language              |
 | **Edge redirect caching** | Redirects like `/` → `/vi` are cached at the edge (24h TTL)                      |
 | **Cache key**             | Includes `manualLocale` flag to bucket manual vs. auto-detected users separately |
+| **Default locale**        | Manual selection of the default locale (`en`) does **not** force `/en/...` paths |
 
 ---
 
@@ -368,6 +406,12 @@ graph LR
 | `CF-Cache-Status`      | `HIT`, `MISS`, etc.     | Cloudflare's built-in cache status (HTML fetch path)                |
 | `Age`                  | seconds                 | Cache age (HTML fetch path; not expected for `caches.default` hits) |
 
+Important distinctions:
+
+- If `X-QDC-Edge-Cache` is **missing**, the snippet bypassed entirely (non-GET, bypass path, token query, private without `id`, etc.).
+- If `X-QDC-Edge-Cache` is **present** and equals `BYPASS`, the snippet handled the request but intentionally did not cache it (common for JSON that fails safety checks).
+- For JSON cached via `caches.default`, `CF-Cache-Status` is not a reliable signal. Use `X-QDC-Edge-Cache` as the primary indicator.
+
 ---
 
 ## 💡 Key Engineering Decisions
@@ -438,6 +482,7 @@ Uses **Cloudflare Snippets only**, which is cheaper and simpler to deploy than f
 curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5" \
   -H "Accept: text/html" \
   -H "Accept-Language: vi" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -iE "(x-qdc|cf-cache|age:|cache-control|content-type|location)"
 ```
 
@@ -458,6 +503,7 @@ curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5" \
 curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5" \
   -H "Accept: text/html" \
   -H "Accept-Language: vi" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -iE "(x-qdc|cf-cache|age:)"
 ```
 
@@ -485,6 +531,7 @@ Age: 142
 curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5" \
   -H "Accept: text/html" \
   -H "Cookie: QDC_PREFS_KEY=abc123def" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -iE "(x-qdc|cf-cache)"
 ```
 
@@ -509,6 +556,7 @@ X-QDC-Edge-Cache-Key: https://ssr.quran.com/vi/5?__qdc_v=3&__qdc_l=vi&__qdc_p=ab
 curl -sS -D - -o /dev/null "https://ssr.quran.com/" \
   -H "Accept: text/html" \
   -H "Cookie: NEXT_LOCALE=vi; QDC_MANUAL_LOCALE=1" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -iE "(x-qdc|location|status|HTTP)"
 ```
 
@@ -517,7 +565,7 @@ curl -sS -D - -o /dev/null "https://ssr.quran.com/" \
 ```
 HTTP/2 307
 Location: /vi
-X-QDC-Edge-Cache: HIT
+X-QDC-Edge-Cache: MISS   (first time) / HIT (subsequent)
 X-QDC-Edge-Cache-Key: https://ssr.quran.com/?__qdc_v=3&__qdc_t=redir&__qdc_d=vi&__qdc_c=US&__qdc_m=1&__qdc_ml=vi
 ```
 
@@ -535,12 +583,14 @@ X-QDC-Edge-Cache-Key: https://ssr.quran.com/?__qdc_v=3&__qdc_t=redir&__qdc_d=vi&
 # Test without auth (should bypass)
 curl -sS -D - -o /dev/null "https://ssr.quran.com/en/profile" \
   -H "Accept: text/html" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -iE "x-qdc"
 
 # Test with auth (should cache per-user)
 curl -sS -D - -o /dev/null "https://ssr.quran.com/en/profile" \
   -H "Accept: text/html" \
   -H "Cookie: id=user123abc; QDC_PREFS_KEY=xyz789" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -iE "x-qdc"
 ```
 
@@ -568,9 +618,9 @@ X-QDC-Edge-Cache-Key: https://ssr.quran.com/en/profile?__qdc_v=3&__qdc_l=en&__qd
 
 ```bash
 # Test auth routes - should all bypass
-curl -sS -D - -o /dev/null "https://ssr.quran.com/auth" -H "Accept: text/html" | grep -iE "(x-qdc|cf-cache)"
-curl -sS -D - -o /dev/null "https://ssr.quran.com/login" -H "Accept: text/html" | grep -iE "(x-qdc|cf-cache)"
-curl -sS -D - -o /dev/null "https://ssr.quran.com/logout" -H "Accept: text/html" | grep -iE "(x-qdc|cf-cache)"
+curl -sS -D - -o /dev/null "https://ssr.quran.com/auth" -H "Accept: text/html" -H "User-Agent: Mozilla/5.0" | grep -iE "(x-qdc|cf-cache)"
+curl -sS -D - -o /dev/null "https://ssr.quran.com/login" -H "Accept: text/html" -H "User-Agent: Mozilla/5.0" | grep -iE "(x-qdc|cf-cache)"
+curl -sS -D - -o /dev/null "https://ssr.quran.com/logout" -H "Accept: text/html" -H "User-Agent: Mozilla/5.0" | grep -iE "(x-qdc|cf-cache)"
 ```
 
 **Expected:**
@@ -592,6 +642,7 @@ curl -sS -D - -o /dev/null "https://ssr.quran.com/logout" -H "Accept: text/html"
 # Test token bypass
 curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5?token=abc123" \
   -H "Accept: text/html" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -iE "(x-qdc|cf-cache)"
 ```
 
@@ -618,6 +669,8 @@ BUILD_ID="your-build-id-here"
 
 # Test Next.js data caching
 curl -sS -D - -o /dev/null "https://ssr.quran.com/_next/data/${BUILD_ID}/vi/5.json" \
+  -H "Accept: application/json" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -iE "(x-qdc|content-type|cache-control|set-cookie)"
 ```
 
@@ -643,6 +696,8 @@ X-QDC-Edge-Cache-Key: https://ssr.quran.com/_next/data/.../vi/5.json?__qdc_v=3&_
 # Test content API caching
 curl -sS -D - -o /dev/null "https://ssr.quran.com/api/proxy/content/api/qdc/verses/by_chapter/1" \
   -H "Accept: application/json" \
+  -H "User-Agent: Mozilla/5.0" \
+  -H "Referer: https://ssr.quran.com/vi" \
   | grep -iE "(x-qdc|cache-control|content-type|set-cookie)"
 ```
 
@@ -668,6 +723,7 @@ X-QDC-Edge-Cache-Key: https://ssr.quran.com/api/proxy/content/api/qdc/verses/by_
 # Test trailing slash removal
 curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5/" \
   -H "Accept: text/html" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -iE "(HTTP/|location:)"
 ```
 
@@ -692,12 +748,14 @@ Location: /vi/5
 curl -sS -D - -o /dev/null "https://ssr.quran.com/en/5" \
   -H "Accept: text/html" \
   -H "Accept-Language: en-US" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -i "X-QDC-Edge-Cache-Key"
 
 # Vietnamese user - should see US regardless of IP
 curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5" \
   -H "Accept: text/html" \
   -H "Accept-Language: vi" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -i "X-QDC-Edge-Cache-Key"
 ```
 
@@ -714,11 +772,13 @@ curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5" \
 # Request with UTM params
 curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5?utm_source=twitter&utm_campaign=test" \
   -H "Accept: text/html" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -i "X-QDC-Edge-Cache-Key"
 
 # Request without UTM - should be same cache bucket
 curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5" \
   -H "Accept: text/html" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -i "X-QDC-Edge-Cache-Key"
 ```
 
@@ -736,6 +796,7 @@ curl -sS -D - -o /dev/null "https://ssr.quran.com/vi/5" \
 ```bash
 # Static assets use Cloudflare default caching, not our snippet
 curl -sS -D - -o /dev/null "https://ssr.quran.com/_next/static/chunks/main.js" \
+  -H "User-Agent: Mozilla/5.0" \
   | grep -iE "(cf-cache|x-qdc)"
 ```
 
@@ -763,11 +824,17 @@ CF-Cache-Status: HIT (or MISS on first request)
 ### 🧹 Cache Purge (Emergency)
 
 ```bash
-# Purge specific URL via Cloudflare API
+# Important: HTML caching uses a custom `cf.cacheKey`. Purging the human URL (e.g. https://ssr.quran.com/vi/5)
+# may not purge the actual cached variants.
+#
+# To purge a specific entry, purge the exact value from `X-QDC-Edge-Cache-Key` (includes `__qdc_*` params).
+# You may need to purge multiple keys (different prefsKey/userKey buckets).
+#
+# Purge a specific cache entry via Cloudflare API (paste the X-QDC-Edge-Cache-Key value):
 curl -X POST "https://api.cloudflare.com/client/v4/zones/{zone_id}/purge_cache" \
   -H "Authorization: Bearer {api_token}" \
   -H "Content-Type: application/json" \
-  --data '{"files":["https://ssr.quran.com/vi/5"]}'
+  --data '{"files":["<paste X-QDC-Edge-Cache-Key here>"]}'
 
 # Purge everything (nuclear option)
 curl -X POST "https://api.cloudflare.com/client/v4/zones/{zone_id}/purge_cache" \
@@ -845,4 +912,4 @@ HEADLESS=1 RUNS=1 URLS='https://ssr.quran.com/ https://ssr.quran.com/vi' node sc
 
 ---
 
-_Last updated: 2026-02-05_
+_Last updated: 2026-02-09_
