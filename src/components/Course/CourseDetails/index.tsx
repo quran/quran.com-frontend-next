@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react';
 
+import classNames from 'classnames';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CourseDetails.module.scss';
 import EditorsDetails from './Tabs/MainDetails/DetailSection/EditorsDetails';
 
+import RepeatLearningPlan from '@/components/Course/Buttons/RepeatLearningPlan';
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
-import CompletedStatus from '@/components/Course/CompletedStatus';
 import ContentContainer from '@/components/Course/ContentContainer';
 import StatusHeader from '@/components/Course/CourseDetails/StatusHeader';
 import MainDetails from '@/components/Course/CourseDetails/Tabs/MainDetails';
@@ -15,7 +16,9 @@ import DetailSection from '@/components/Course/CourseDetails/Tabs/MainDetails/De
 import AuthorsDetails from '@/components/Course/CourseDetails/Tabs/MainDetails/DetailSection/AuthorsDetails';
 import Syllabus from '@/components/Course/CourseDetails/Tabs/Syllabus';
 import TabSwitcherItem from '@/components/Course/CourseDetails/TabSwitcherItem';
+import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedback';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
+import Pill from '@/dls/Pill';
 import Switch from '@/dls/Switch/Switch';
 import DetailsIcon from '@/icons/collection.svg';
 import SyllabusIcon from '@/icons/developers.svg';
@@ -85,15 +88,29 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
         <ArrowLeft />
         <p className={styles.backText}>{t('back-to-learning-plans')}</p>
       </Button>
-      <div className={styles.headerContainer}>
-        <div>
-          <p className={styles.title}>{title}</p>
+      <div className={styles.topSection}>
+        <div
+          className={classNames(styles.headerContainer, { [styles.completedHeader]: isCompleted })}
+        >
+          <div className={styles.title}>
+            {title}
+            {isCompleted && <Pill containerClassName={styles.completedPill}>{t('completed')}</Pill>}
+          </div>
+          {isCompleted ? (
+            <div className={styles.completedActionsRow}>
+              <RepeatLearningPlan course={course} />
+              {course?.userHasFeedback === false && (
+                <CourseFeedback course={course} source={FeedbackSource.CoursePage} />
+              )}
+            </div>
+          ) : (
+            <StatusHeader course={course} />
+          )}
         </div>
-        <StatusHeader course={course} />
-      </div>
 
-      <div className={styles.imgContainer}>
-        <Image alt={title} src={image} width={1920} height={480} />
+        <div className={styles.imgContainer}>
+          <Image alt={title} src={image} width={1920} height={480} />
+        </div>
       </div>
 
       <Switch selected={selectedTab} items={tabs} onSelect={onTabChange} />
@@ -120,7 +137,6 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
               <StartOrContinueLearning course={course} isHeaderButton={false} />
             </div>
           )}
-          {isCompleted && <CompletedStatus course={course} />}
         </>
       )}
     </ContentContainer>

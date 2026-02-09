@@ -5,19 +5,69 @@
   padding-inline-start: var(--spacing-micro);
 }
 
+.topSection {
+  display: flex;
+  flex-direction: column;
+}
+
 .headerContainer {
   padding-block-end: var(--spacing-small);
   display: flex;
   justify-content: space-between;
   align-items: center;
   inline-size: 100%;
+  order: 1;
+
+  @include breakpoints.smallerThanTablet {
+    order: 2;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-small-px);
+  }
+
+  &.completedHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-block-end: 0;
+
+    @include breakpoints.smallerThanTablet {
+      gap: var(--spacing-medium2-px);
+    }
+  }
 }
 
 .title {
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-jumbo);
-  padding-inline-end: var(--spacing-small);
   @include utility.kitabFontHtmlLang;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-large-px);
+    align-self: flex-start;
+  }
+}
+
+.completedPill {
+  vertical-align: middle;
+  margin-inline-start: var(--spacing-small-px);
+  font-size: var(--font-size-small-px);
+  color: var(--color-text-white);
+}
+
+.completedActionsRow {
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  gap: var(--spacing-small-px);
+  margin-block-start: var(--spacing-small-px);
+  margin-block-end: var(--spacing-medium-px);
+
+  @include breakpoints.smallerThanTablet {
+    order: 3;
+    align-self: flex-end;
+    margin-block-start: 0;
+    margin-block-end: var(--spacing-medium2-px);
+  }
 }
 
 .author {
@@ -31,6 +81,11 @@
   }
   margin: auto;
   margin-block-end: var(--spacing-small);
+  order: 2;
+
+  @include breakpoints.smallerThanTablet {
+    order: 1;
+  }
 }
 
 .startLearningButton {
