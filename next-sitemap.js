@@ -98,6 +98,38 @@ const getVersesWithQiraat = async () => {
     .map(([key]) => key);
 };
 
+const getVersesWithRelatedVerses = async () => {
+  const versesWithRelatedVerses = [];
+
+  // Fetch verses for each chapter and filter those with has_related_verses
+  await Promise.all(
+    chapters.map(async (chapterId) => {
+      const { versesCount } = englishChaptersData[chapterId];
+      const versesURL = `${API_CONTENT_URL}${QDC_PREFIX}/verses/by_chapter/${chapterId}?per_page=${versesCount}&fields=chapter_id,has_related_verses`;
+      const { signature, timestamp } = generateSignature(versesURL);
+
+      const res = await fetch(versesURL, {
+        headers: {
+          'x-auth-signature': signature,
+          'x-timestamp': timestamp,
+          'x-internal-client': process.env.INTERNAL_CLIENT_ID,
+        },
+      });
+
+      const data = await res.json();
+      if (data.verses) {
+        data.verses.forEach((verse) => {
+          if (verse.has_related_verses) {
+            versesWithRelatedVerses.push(verse.verse_key);
+          }
+        });
+      }
+    }),
+  );
+
+  return versesWithRelatedVerses;
+};
+
 /**
  * Get the alternate ref objects for a path. We append "-remove-from-here" because
  * next-sitemap library appends the alternate ref to the beginning
@@ -269,6 +301,13 @@ module.exports = {
         const versesWithQiraat = await getVersesWithQiraat();
         versesWithQiraat.forEach((verseKey) => {
           const location = `${verseKey}/qiraat`;
+          result.push({ loc: location, alternateRefs: getAlternateRefs('', false, '', location) });
+        });
+
+        // 14. /[verseKey]/related-verses for verses that have related verses
+        const versesWithRelatedVerses = await getVersesWithRelatedVerses();
+        versesWithRelatedVerses.forEach((verseKey) => {
+          const location = `${verseKey}/related-verses`;
           result.push({ loc: location, alternateRefs: getAlternateRefs('', false, '', location) });
         });
 
