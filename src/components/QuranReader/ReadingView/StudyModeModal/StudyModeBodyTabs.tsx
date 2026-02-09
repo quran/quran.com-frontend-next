@@ -38,7 +38,7 @@ const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
 });
 
 export const StudyModeRelatedVersesTab = dynamic(
-  () => import('./tabs/RelatedVerses/StudyModeRelatedVersesTab'),
+  () => import('./tabs/StudyModeRelatedVerses/StudyModeRelatedVersesTab'),
   {
     loading: TafsirSkeleton,
   },

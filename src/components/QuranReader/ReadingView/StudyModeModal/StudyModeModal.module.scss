@@ -13,7 +13,7 @@ div.contentModal {
   max-block-size: 95dvh;
   inline-size: 100%;
   max-inline-size: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   background: var(--color-background-elevated-new);
   border-radius: var(--border-radius-large-px) var(--border-radius-large-px) 0 0;
   @include breakpoints.tablet {
@@ -45,15 +45,60 @@ div.mobileBottomSheetOverlay {
 }
 
 .header {
-  display: flex;
+  display: grid;
   align-items: center;
-  gap: var(--spacing-small-px);
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: 1fr auto;
+  column-gap: var(--spacing-small-px);
   inline-size: 100%;
-  flex-shrink: 0;
 
   @include breakpoints.tablet {
     border-block-end: 1px solid var(--color-separators);
     padding-block-end: var(--spacing-medium2-px);
+  }
+
+  // When left controls are hidden (no verse history), switch to 2-column layout
+  // and reset child grid positions for mobile
+  &.hideHeaderLeftControls {
+    grid-template-columns: 1fr auto;
+
+    .headerMiddleControls {
+      @include breakpoints.smallerThanTablet {
+        grid-column: 1 / -1;
+        grid-row: 1; // Move to first row since there's no left controls above
+      }
+    }
+
+    .headerRightControls {
+      @include breakpoints.smallerThanTablet {
+        grid-column: 2; // Column 2 instead of 3 since we only have 2 columns now
+        grid-row: 1;
+      }
+    }
+  }
+}
+
+.headerLeftControls {
+  @include breakpoints.smallerThanTablet {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+.headerMiddleControls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  @include breakpoints.smallerThanTablet {
+    grid-column: 1 / -1; /* span all columns */
+    grid-row: 2;
+  }
+}
+
+.headerRightControls {
+  @include breakpoints.smallerThanTablet {
+    grid-column: 3;
+    grid-row: 1;
   }
 }
 
@@ -95,6 +140,15 @@ button.navButton {
     svg {
       color: var(--color-daily-progress);
     }
+  }
+}
+
+button.previousRelatedVerseButton {
+  color: var(--color-text-faded-new);
+
+  svg {
+    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
   }
 }
 

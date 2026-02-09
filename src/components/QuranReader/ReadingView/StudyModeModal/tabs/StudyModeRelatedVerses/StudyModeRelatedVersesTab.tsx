@@ -5,8 +5,8 @@ import useSWRImmutable from 'swr/immutable';
 
 import { studyModeTabStyles as parentStyles, useStudyModeTabScroll } from '../StudyModeTabLayout';
 
-import RelatedVerseCollapsible from './RelatedVerseCollapsible';
-import RelatedVersesSkeleton from './RelatedVersesSkeleton';
+import StudyModeRelatedVerseContent from './StudyModeRelatedVerseContent';
+import StudyModeRelatedVersesSkeleton from './StudyModeRelatedVersesSkeleton';
 
 import { fetcher } from '@/api';
 import { makeRelatedVersesByKeyUrl } from '@/utils/apiPaths';
@@ -15,7 +15,7 @@ import { RelatedVersesResponse } from 'types/ApiResponses';
 interface StudyModeRelatedVersesTabProps {
   chapterId: string;
   verseNumber: string;
-  onGoToVerse?: (chapterId: string, verseNumber: string) => void;
+  onGoToVerse?: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
 }
 
 const StudyModeRelatedVersesTab: React.FC<StudyModeRelatedVersesTabProps> = ({
@@ -92,7 +92,7 @@ const StudyModeRelatedVersesTab: React.FC<StudyModeRelatedVersesTabProps> = ({
   }, [loadMore]);
 
   if (isLoadingInitial) {
-    return <RelatedVersesSkeleton />;
+    return <StudyModeRelatedVersesSkeleton />;
   }
 
   if (error || relatedVerses.length === 0) {
@@ -102,14 +102,15 @@ const StudyModeRelatedVersesTab: React.FC<StudyModeRelatedVersesTabProps> = ({
   return (
     <div ref={containerRef} className={parentStyles.container}>
       {relatedVerses.map((relatedVerse) => (
-        <RelatedVerseCollapsible
+        <StudyModeRelatedVerseContent
           key={relatedVerse.id}
           relatedVerse={relatedVerse}
+          currentVerseKey={verseKey}
           onGoToVerse={onGoToVerse}
         />
       ))}
       <div ref={sentinelRef} style={{ height: 1 }} />
-      {isLoadingMore && <RelatedVersesSkeleton />}
+      {isLoadingMore && <StudyModeRelatedVersesSkeleton />}
     </div>
   );
 };
