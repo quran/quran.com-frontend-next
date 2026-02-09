@@ -46,7 +46,7 @@ const CourseFeedback: React.FC<Props> = ({ source, course, shouldOpenModal = fal
     });
 
     if (!userIsLoggedIn) {
-      router.push(getLoginNavigationUrl(encodeURIComponent(router.asPath)));
+      router.push(getLoginNavigationUrl(router.asPath));
       return;
     }
 
