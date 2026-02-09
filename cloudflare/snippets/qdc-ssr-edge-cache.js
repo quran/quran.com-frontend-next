@@ -3,16 +3,17 @@
  *
  * Key properties:
  * - No Workers required (Snippets-only).
- * - Caches SSR HTML (GET document navigations) at the edge using Cache API.
+ * - Caches SSR HTML (GET document navigations) at the edge using Cloudflare's built-in cache
+ *   (`fetch(..., { cf: { cacheEverything, cacheKey } })`).
  * - Cache key includes:
  *   - normalized URL (tracking params stripped)
  *   - locale
  *   - prefsKey (QDC_PREFS_KEY) when present
  *   - otherwise: device-language + country bucket (QF-318 rules)
  *   - for private/auth-required pages: userKey (hashed user id cookie)
- * - Caches safe locale redirects (307/308) and removes trailing-slash redirects.
+ * - Canonicalizes trailing slashes (308) and caches safe locale redirects (307/308).
  * - Caches safe JSON second-wave requests (_next/data + public content API allowlist).
- * - Never caches auth/token routes, errors, or any response that sets cookies.
+ * - Never caches auth/token routes or errors. JSON caching paths refuse unsafe Set-Cookie responses.
  */
 
 const CONFIG = {

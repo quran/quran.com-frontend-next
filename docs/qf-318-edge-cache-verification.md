@@ -29,6 +29,28 @@ Do not use `curl -I` (`HEAD`). The snippet only runs on `GET`, so `HEAD` will us
 | `__qdc_m` | Manual selection flag | Only for `__qdc_t=redir` |
 | `__qdc_ml` | Manual locale | Only for `__qdc_t=redir` |
 
+## Locale And Bucketing Rules (What “Looks Weird” But Is Correct)
+
+These rules explain common “why is it US?” questions.
+
+| Item | Rule | Where to observe |
+| --- | --- | --- |
+| Locale of the response | `__qdc_l` comes from URL prefix first (`/vi/...`), otherwise `NEXT_LOCALE`, otherwise default (`en`). | `X-QDC-Edge-Cache-Key` |
+| Guest “device language” bucket | `__qdc_d` is the base language from `Accept-Language` (e.g., `vi-VN` -> `vi`). If `QDC_MANUAL_LOCALE=1`, the manual locale is used instead of `Accept-Language`. | `X-QDC-Edge-Cache-Key` |
+| Guest “country” bucket | `__qdc_c` is a cache bucketing value, not “your real country”. QF-318 bucketing forces `US` for supported non-English device languages to reduce cache fragmentation. Only English buckets use the real 2-letter country code. | `X-QDC-Edge-Cache-Key` |
+
+If you see `__qdc_d=vi&__qdc_c=US` while physically in Vietnam, that is expected.
+
+## API Defaults Sanity Checks (Country + Device Language)
+
+Defaults come from the content API `country_language_preference` contract. Fast checks:
+
+| Input | Expected fields |
+| --- | --- |
+| `user_device_language=vi&country=VN` | `default_locale=vi`, `qr_default_locale=vi` |
+| `user_device_language=vi&country=US` | Same as VN (Vietnamese defaults are stable across country input) |
+| `user_device_language=en&country=VN` | `default_locale=vi`, `qr_default_locale=en` |
+
 ## Expected Matrix (Most Common Checks)
 
 | Case | Example | `X-QDC-Edge-Cache` | `X-QDC-Edge-Cache-Key` must contain | Must NOT contain |
@@ -52,4 +74,3 @@ BASE_URL=https://ssr.quran.com ./scripts/qf-318/onboard-verify.sh
 ```
 
 It prints PASS/FAIL per case and shows the relevant headers when a check fails.
-

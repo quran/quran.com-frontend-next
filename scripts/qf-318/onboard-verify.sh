@@ -16,6 +16,9 @@ set -euo pipefail
 BASE_URL="${BASE_URL:-https://ssr.quran.com}"
 RUNS="${RUNS:-4}"
 SLEEP_MS="${SLEEP_MS:-300}"
+CURL_CONNECT_TIMEOUT_SECONDS="${CURL_CONNECT_TIMEOUT_SECONDS:-10}"
+CURL_MAX_TIME_SECONDS="${CURL_MAX_TIME_SECONDS:-20}"
+USER_AGENT="${USER_AGENT:-Mozilla/5.0}"
 
 ACCEPT_LANGUAGE_VI="${ACCEPT_LANGUAGE_VI:-vi-VN,vi;q=0.9,en;q=0.8}"
 ACCEPT_LANGUAGE_EN="${ACCEPT_LANGUAGE_EN:-en-US,en;q=0.9}"
@@ -44,7 +47,12 @@ curl_headers() {
   local referer="${5:-}"
 
   local -a args
-  args=(-sS -D - -o /dev/null -H "Accept: ${accept}")
+  args=(-sS -D - -o /dev/null
+    --connect-timeout "${CURL_CONNECT_TIMEOUT_SECONDS}"
+    --max-time "${CURL_MAX_TIME_SECONDS}"
+    -H "Accept: ${accept}"
+    -H "User-Agent: ${USER_AGENT}"
+  )
 
   if [[ -n "$accept_language" ]]; then
     args+=(-H "Accept-Language: ${accept_language}")
@@ -122,7 +130,7 @@ eventual_hit() {
 
   local last="" headers qdc
   for ((i = 1; i <= RUNS; i++)); do
-    headers="$(curl_headers "$url" "$accept" "$accept_language" "$cookie" "$referer" || true)"
+    headers="$(curl_headers "$url" "$accept" "$accept_language" "$cookie" "$referer")" || return 1
     qdc="$(header_val "$headers" "x-qdc-edge-cache")"
     last="${qdc:-<none>}"
     if [[ "$qdc" == "HIT" ]]; then
@@ -154,7 +162,7 @@ check_guest_vi_bucket() {
   local token url headers key qdc
   token="$(mk_token)"
   url="/vi/53?__onboard=${token}"
-  headers="$(curl_headers "$url" "text/html" "$ACCEPT_LANGUAGE_VI")"
+  headers="$(curl_headers "$url" "text/html" "$ACCEPT_LANGUAGE_VI")" || return 1
   qdc="$(header_val "$headers" "x-qdc-edge-cache")"
   key="$(header_val "$headers" "x-qdc-edge-cache-key")"
 
@@ -177,7 +185,7 @@ check_guest_with_prefs_bucket() {
   url="/vi/53?__onboard=${token}"
   cookie="QDC_PREFS_KEY=${PREFS_KEY}; QDC_PREFS_VER=1"
 
-  headers="$(curl_headers "$url" "text/html" "" "$cookie")"
+  headers="$(curl_headers "$url" "text/html" "" "$cookie")" || return 1
   qdc="$(header_val "$headers" "x-qdc-edge-cache")"
   key="$(header_val "$headers" "x-qdc-edge-cache-key")"
 
@@ -199,8 +207,8 @@ check_public_key_invariance_with_auth_cookie() {
   token="$(mk_token)"
   url="/vi/53?__onboard=${token}"
 
-  head_guest="$(curl_headers "$url" "text/html" "$ACCEPT_LANGUAGE_VI")"
-  head_auth="$(curl_headers "$url" "text/html" "$ACCEPT_LANGUAGE_VI" "id=111")"
+  head_guest="$(curl_headers "$url" "text/html" "$ACCEPT_LANGUAGE_VI")" || return 1
+  head_auth="$(curl_headers "$url" "text/html" "$ACCEPT_LANGUAGE_VI" "id=111")" || return 1
 
   key_guest="$(header_val "$head_guest" "x-qdc-edge-cache-key")"
   key_auth="$(header_val "$head_auth" "x-qdc-edge-cache-key")"
@@ -223,7 +231,7 @@ check_private_without_id_bypasses() {
   local token url headers qdc key
   token="$(mk_token)"
   url="/vi/profile?__onboard=${token}"
-  headers="$(curl_headers "$url" "text/html" "")"
+  headers="$(curl_headers "$url" "text/html" "")" || return 1
   qdc="$(header_val "$headers" "x-qdc-edge-cache")"
   key="$(header_val "$headers" "x-qdc-edge-cache-key")"
 
@@ -236,7 +244,7 @@ check_token_query_bypasses() {
   local token url headers qdc key
   token="$(mk_token)"
   url="/vi/1?token=fake&__onboard=${token}"
-  headers="$(curl_headers "$url" "text/html" "")"
+  headers="$(curl_headers "$url" "text/html" "")" || return 1
   qdc="$(header_val "$headers" "x-qdc-edge-cache")"
   key="$(header_val "$headers" "x-qdc-edge-cache-key")"
 
@@ -249,7 +257,7 @@ check_manual_locale_redirect_es() {
   local token url headers loc key qdc
   token="$(mk_token)"
   url="/?__onboard=${token}"
-  headers="$(curl_headers "$url" "text/html" "" "QDC_MANUAL_LOCALE=1; NEXT_LOCALE=es")"
+  headers="$(curl_headers "$url" "text/html" "" "QDC_MANUAL_LOCALE=1; NEXT_LOCALE=es")" || return 1
 
   qdc="$(header_val "$headers" "x-qdc-edge-cache")"
   key="$(header_val "$headers" "x-qdc-edge-cache-key")"
@@ -269,7 +277,7 @@ check_manual_default_locale_does_not_force_en() {
   local token url headers loc key qdc
   token="$(mk_token)"
   url="/?__onboard=${token}"
-  headers="$(curl_headers "$url" "text/html" "$ACCEPT_LANGUAGE_VI" "QDC_MANUAL_LOCALE=1; NEXT_LOCALE=en")"
+  headers="$(curl_headers "$url" "text/html" "$ACCEPT_LANGUAGE_VI" "QDC_MANUAL_LOCALE=1; NEXT_LOCALE=en")" || return 1
 
   qdc="$(header_val "$headers" "x-qdc-edge-cache")"
   key="$(header_val "$headers" "x-qdc-edge-cache-key")"
@@ -290,10 +298,12 @@ check_allowlisted_content_api_key_and_hit() {
   url="/api/proxy/content/api/qdc/resources/country_language_preference?user_device_language=vi&country=VN&__onboard=${token}"
 
   headers="$(curl -sS -D - -o /dev/null \
+    --connect-timeout "${CURL_CONNECT_TIMEOUT_SECONDS}" \
+    --max-time "${CURL_MAX_TIME_SECONDS}" \
     -H 'Accept: application/json' \
-    -H 'User-Agent: Mozilla/5.0' \
+    -H "User-Agent: ${USER_AGENT}" \
     -H 'Referer: https://ssr.quran.com/vi' \
-    "${BASE_URL%/}${url}")"
+    "${BASE_URL%/}${url}")" || return 1
 
   qdc="$(header_val "$headers" "x-qdc-edge-cache")"
   key="$(header_val "$headers" "x-qdc-edge-cache-key")"
@@ -308,10 +318,12 @@ check_allowlisted_content_api_key_and_hit() {
   local last="${qdc:-<none>}"
   for ((i = 1; i <= RUNS; i++)); do
     headers="$(curl -sS -D - -o /dev/null \
+      --connect-timeout "${CURL_CONNECT_TIMEOUT_SECONDS}" \
+      --max-time "${CURL_MAX_TIME_SECONDS}" \
       -H 'Accept: application/json' \
-      -H 'User-Agent: Mozilla/5.0' \
+      -H "User-Agent: ${USER_AGENT}" \
       -H 'Referer: https://ssr.quran.com/vi' \
-      "${BASE_URL%/}${url}" || true)"
+      "${BASE_URL%/}${url}")" || return 1
     last="$(header_val "$headers" "x-qdc-edge-cache")"
     if [[ "$last" == "HIT" ]]; then
       return 0
@@ -328,10 +340,12 @@ check_preference_api_contract_basic() {
   url="/api/proxy/content/api/qdc/resources/country_language_preference?user_device_language=en&country=VN&__onboard=${token}"
 
   json="$(curl -sS \
+    --connect-timeout "${CURL_CONNECT_TIMEOUT_SECONDS}" \
+    --max-time "${CURL_MAX_TIME_SECONDS}" \
     -H 'Accept: application/json' \
-    -H 'User-Agent: Mozilla/5.0' \
+    -H "User-Agent: ${USER_AGENT}" \
     -H 'Referer: https://ssr.quran.com/en' \
-    "${BASE_URL%/}${url}" || true)"
+    "${BASE_URL%/}${url}")" || return 1
 
   if [[ -z "$json" || "$json" == *"Forbidden"* ]]; then
     echo "Preference API request failed or returned Forbidden."
@@ -350,14 +364,18 @@ check_no_redirect_loops_for_default_locale_paths() {
   token="$(mk_token)"
 
   curl -sS -o /dev/null -L --max-redirs 10 \
+    --connect-timeout "${CURL_CONNECT_TIMEOUT_SECONDS}" \
+    --max-time "${CURL_MAX_TIME_SECONDS}" \
     -H "Accept: text/html" \
     -H "Accept-Language: ${ACCEPT_LANGUAGE_EN}" \
-    "${BASE_URL%/}/en/1?__onboard=${token}"
+    "${BASE_URL%/}/en/1?__onboard=${token}" || return 1
 
   curl -sS -o /dev/null -L --max-redirs 10 \
+    --connect-timeout "${CURL_CONNECT_TIMEOUT_SECONDS}" \
+    --max-time "${CURL_MAX_TIME_SECONDS}" \
     -H "Accept: text/html" \
     -H "Accept-Language: ${ACCEPT_LANGUAGE_EN}" \
-    "${BASE_URL%/}/1?__onboard=${token}"
+    "${BASE_URL%/}/1?__onboard=${token}" || return 1
 
   return 0
 }
@@ -365,7 +383,14 @@ check_no_redirect_loops_for_default_locale_paths() {
 main() {
   echo "Base: ${BASE_URL}"
   echo "RUNS: ${RUNS} (eventual HIT attempts)"
+  echo "Timeouts: connect=${CURL_CONNECT_TIMEOUT_SECONDS}s max=${CURL_MAX_TIME_SECONDS}s"
   echo
+
+  # Preflight: avoid false positives when curl can't reach the host.
+  if ! curl_headers "/?__onboard_preflight=1" "text/html" "$ACCEPT_LANGUAGE_EN" >/dev/null; then
+    echo "Preflight failed: unable to reach ${BASE_URL} (DNS/network)."
+    exit 2
+  fi
 
   run_check "Guest HTML (vi) bucket key + eventual HIT" check_guest_vi_bucket
   run_check "Guest HTML (prefsKey) bucket key + eventual HIT" check_guest_with_prefs_bucket
