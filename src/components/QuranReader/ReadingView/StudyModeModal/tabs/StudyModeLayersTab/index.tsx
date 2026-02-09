@@ -6,19 +6,18 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
+import GroupPanel from './GroupPanel';
+import GroupToken from './GroupToken';
 import useLayeredTranslationData from './hooks/useLayeredTranslationData';
+import LayerControls from './LayerControls';
 import styles from './StudyModeLayersTab.module.scss';
+import { LayerMode } from './types';
 
 import { getFootnote } from '@/api';
 import Error from '@/components/Error';
 import InlineFootnote from '@/components/QuranReader/ReadingView/InlineFootnote';
-import FontSizeControl from '@/components/QuranReader/ReadingView/StudyModeModal/FontSizeControl';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
-import IconContainer from '@/dls/IconContainer/IconContainer';
-import ChevronDownIcon from '@/icons/chevron-down.svg';
-import CloseIcon from '@/icons/close.svg';
-import ExpandArrowIcon from '@/icons/expand-arrow.svg';
 import { logErrorToSentry } from '@/lib/sentry';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Language from '@/types/Language';
@@ -26,7 +25,6 @@ import { LayeredTranslationGroup, LayeredTranslationToken } from '@/types/Layere
 import { findLanguageIdByLocale, getLanguageDataById } from '@/utils/locale';
 import Footnote from 'types/Footnote';
 
-type LayerMode = 'collapsed' | 'expanded';
 const EMPTY_TOKENS: LayeredTranslationToken[] = [];
 
 interface StudyModeLayersTabProps {
@@ -40,13 +38,13 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   verseNumber,
   switchTab,
 }) => {
-  const { t, lang } = useTranslation('quran-reader');
+  const { lang } = useTranslation('quran-reader');
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const verseKey = `${chapterId}:${verseNumber}`;
   const { data, isLoading, error, hasData, refetch } = useLayeredTranslationData(verseKey);
   const scaleClass = styles[`layers-font-size-${quranReaderStyles.layersFontScale}`];
 
-  const [layerMode, setLayerMode] = useState<LayerMode>('expanded');
+  const [layerMode, setLayerMode] = useState<LayerMode>(LayerMode.Expanded);
   const [selectedOptionByGroup, setSelectedOptionByGroup] = useState<Record<string, string>>({});
   const [activeGroupKey, setActiveGroupKey] = useState<string | null>(null);
   const [isExplanationOpen, setIsExplanationOpen] = useState(false);
@@ -55,7 +53,6 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   const [isLoadingFootnote, setIsLoadingFootnote] = useState(false);
 
   const panelRef = useRef<HTMLDivElement>(null);
-
   const langData = getLanguageDataById(findLanguageIdByLocale(lang as Language));
 
   const resetFootnote = useCallback(() => {
@@ -65,7 +62,7 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   }, []);
 
   useEffect(() => {
-    setLayerMode('expanded');
+    setLayerMode(LayerMode.Expanded);
     setSelectedOptionByGroup({});
     setActiveGroupKey(null);
     setIsExplanationOpen(false);
@@ -104,9 +101,11 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
 
   const tokens = useMemo(
     () =>
-      (layerMode === 'collapsed' ? data?.collapsedTokens : data?.expandedTokens) || EMPTY_TOKENS,
+      (layerMode === LayerMode.Collapsed ? data?.collapsedTokens : data?.expandedTokens) ||
+      EMPTY_TOKENS,
     [layerMode, data?.collapsedTokens, data?.expandedTokens],
   );
+
   const tokenEntries = useMemo(() => {
     const counts = new Map<string, number>();
 
@@ -116,10 +115,7 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
       const occurrence = counts.get(baseKey) || 0;
       counts.set(baseKey, occurrence + 1);
 
-      return {
-        key: `${baseKey}:${occurrence}`,
-        token,
-      };
+      return { key: `${baseKey}:${occurrence}`, token };
     });
   }, [tokens]);
 
@@ -129,7 +125,9 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
       group.options.find((option) => option.optionKey === selectedOptionKey) || group.options[0];
     if (!selectedOption) return '';
 
-    return layerMode === 'collapsed' ? selectedOption.collapsedHtml : selectedOption.expandedHtml;
+    return layerMode === LayerMode.Collapsed
+      ? selectedOption.collapsedHtml
+      : selectedOption.expandedHtml;
   };
 
   const onTextClicked = useCallback(
@@ -192,21 +190,7 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
 
   return (
     <div className={classNames(styles.container, scaleClass)}>
-      <div className={styles.controls}>
-        <FontSizeControl fontType="layers" />
-        <button
-          type="button"
-          className={styles.layerButton}
-          onClick={() => setLayerMode((prev) => (prev === 'expanded' ? 'collapsed' : 'expanded'))}
-        >
-          <IconContainer
-            icon={<ExpandArrowIcon />}
-            shouldForceSetColors={false}
-            className={styles.layerButtonIcon}
-          />
-          {layerMode === 'expanded' ? t('layers.contract') : t('layers.expand')}
-        </button>
-      </div>
+      <LayerControls layerMode={layerMode} setLayerMode={setLayerMode} />
 
       {data.resource.description && (
         <div>
@@ -225,7 +209,7 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
 
           const isActive = activeGroupKey === group.groupKey;
 
-          const handleClick = () => {
+          const handleTokenClick = () => {
             if (isActive) {
               setActiveGroupKey(null);
               setIsExplanationOpen(false);
@@ -235,107 +219,32 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
             }
           };
 
+          const handleOptionSelect = (optionKey: string) => {
+            setActiveGroupKey(null);
+            setIsExplanationOpen(false);
+            setSelectedOptionByGroup((prev) => ({ ...prev, [group.groupKey]: optionKey }));
+          };
+
           return (
             <React.Fragment key={key}>
-              <span
-                role="button"
-                tabIndex={0}
-                aria-label={t('layers.alternative-translations')}
-                className={classNames(styles.groupToken, { [styles.groupTokenActive]: isActive })}
-                onClick={handleClick}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    handleClick();
-                  }
-                }}
-              >
-                <span
-                  className={styles.groupTokenText}
-                  dangerouslySetInnerHTML={{ __html: getSelectedOptionHtml(group) }}
-                />
-
-                <ChevronDownIcon className={styles.groupTokenChevron} />
-              </span>
+              <GroupToken
+                isActive={isActive}
+                selectedOptionHtml={getSelectedOptionHtml(group)}
+                onClick={handleTokenClick}
+              />
 
               {isActive && (
-                <div ref={panelRef} className={styles.groupPanel}>
-                  <div className={styles.groupPanelHeader}>
-                    <span>{t('layers.alternative-translations')}</span>
-                    <button
-                      type="button"
-                      aria-label={t('aria.close-alternative-translations')}
-                      className={styles.closeGroupPanelButton}
-                      onClick={() => setActiveGroupKey(null)}
-                    >
-                      <IconContainer
-                        icon={<CloseIcon />}
-                        shouldForceSetColors={false}
-                        className={styles.closeIcon}
-                      />
-                    </button>
-                  </div>
-                  <div className={styles.optionsList}>
-                    {group.options.map((option) => {
-                      const optionHtml =
-                        layerMode === 'collapsed' ? option.collapsedHtml : option.expandedHtml;
-                      const isSelected = selectedOptionByGroup[group.groupKey] === option.optionKey;
-
-                      return (
-                        <button
-                          key={option.optionKey}
-                          type="button"
-                          className={classNames(styles.optionButton, {
-                            [styles.optionButtonActive]: isSelected,
-                          })}
-                          onClick={() => {
-                            setActiveGroupKey(null);
-                            setIsExplanationOpen(false);
-                            setSelectedOptionByGroup((prev) => ({
-                              ...prev,
-                              [group.groupKey]: option.optionKey,
-                            }));
-                          }}
-                        >
-                          <span className={styles.optionIndex}>{option.position}</span>
-                          <span
-                            className={styles.optionText}
-                            dangerouslySetInnerHTML={{ __html: optionHtml }}
-                          />
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {!!group.explanationHtml && (
-                    <div className={styles.explanationWrapper}>
-                      <button
-                        type="button"
-                        className={styles.explanationToggle}
-                        onClick={() => setIsExplanationOpen((prev) => !prev)}
-                      >
-                        <span>
-                          {isExplanationOpen
-                            ? t('layers.close-explanation')
-                            : t('layers.read-explanation')}
-                        </span>
-                        <ChevronDownIcon
-                          className={classNames(styles.explanationChevron, {
-                            [styles.explanationChevronOpen]: isExplanationOpen,
-                          })}
-                        />
-                      </button>
-
-                      {isExplanationOpen && (
-                        <div
-                          className={styles.explanationText}
-                          onClick={onTextClicked}
-                          role="presentation"
-                          dangerouslySetInnerHTML={{ __html: group.explanationHtml }}
-                        />
-                      )}
-                    </div>
-                  )}
-                </div>
+                <GroupPanel
+                  group={group}
+                  layerMode={layerMode}
+                  selectedOptionKey={selectedOptionByGroup[group.groupKey]}
+                  isExplanationOpen={isExplanationOpen}
+                  onOptionSelect={handleOptionSelect}
+                  onClose={() => setActiveGroupKey(null)}
+                  onExplanationToggle={() => setIsExplanationOpen((prev) => !prev)}
+                  onTextClicked={onTextClicked}
+                  panelRef={panelRef}
+                />
               )}
             </React.Fragment>
           );
