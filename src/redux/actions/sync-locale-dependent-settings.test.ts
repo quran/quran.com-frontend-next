@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { AnyAction } from '@reduxjs/toolkit';
 import type { Dispatch } from 'redux';
@@ -19,16 +20,24 @@ type DeepPartial<T> = T extends Array<infer U>
   : T;
 
 vi.mock('@/redux/defaultSettings/util', () => ({
-  getTranslationsInitialState: (locale: string) => ({
-    selectedTranslations: locale === 'en' ? [131] : [],
+  getTranslationsInitialState: (locale?: string) => ({
+    selectedTranslations: typeof locale === 'string' && locale.startsWith('en') ? [131] : [],
   }),
-  getTafsirsInitialState: (locale: string) => ({
-    selectedTafsirs: locale === 'en' ? ['en-tafsir'] : ['ar-tafsir'],
+  getTafsirsInitialState: (locale?: string) => ({
+    selectedTafsirs:
+      typeof locale === 'string' && locale.startsWith('en') ? ['en-tafsir'] : ['ar-tafsir'],
   }),
-  getReadingPreferencesInitialState: (locale: string) => ({
-    selectedReflectionLanguages: [locale],
-    selectedLessonLanguages: [locale],
-  }),
+  getReadingPreferencesInitialState: (locale?: string) => {
+    // Map locale variants to the same underlying language so we can test "no-op" locale changes.
+    let lang = 'en';
+    if (typeof locale === 'string') {
+      lang = locale.startsWith('en') ? 'en' : locale;
+    }
+    return {
+      selectedReflectionLanguages: [lang],
+      selectedLessonLanguages: [lang],
+    };
+  },
 }));
 
 const runThunk = (state: DeepPartial<RootState>, prevLocale: string, nextLocale: string) => {
@@ -54,7 +63,6 @@ describe('syncLocaleDependentSettings', () => {
     };
 
     const actions = runThunk(state, 'ar', 'en');
-
     expect(actions).toEqual([
       {
         ...setSelectedTranslations({ translations: [131], locale: 'en' }),
@@ -87,7 +95,6 @@ describe('syncLocaleDependentSettings', () => {
     };
 
     const actions = runThunk(state, 'en', 'ar');
-
     // No changes expected: the single selection doesn't equal prevLocale ('en'), so treat as customized.
     expect(actions).toEqual([]);
   });
@@ -159,5 +166,19 @@ describe('syncLocaleDependentSettings', () => {
         meta: { skipCustomization: true, skipDefaultSettings: true },
       },
     ]);
+  });
+
+  it('does not dispatch when next-locale defaults equal current values', () => {
+    const state = {
+      translations: { isUsingDefaultTranslations: true, selectedTranslations: [131] },
+      tafsirs: { isUsingDefaultTafsirs: true, selectedTafsirs: ['en-tafsir'] },
+      readingPreferences: {
+        selectedReflectionLanguages: ['en'],
+        selectedLessonLanguages: ['en'],
+      },
+    };
+
+    const actions = runThunk(state, 'en', 'en-GB');
+    expect(actions).toEqual([]);
   });
 });

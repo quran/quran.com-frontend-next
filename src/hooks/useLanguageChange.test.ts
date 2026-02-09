@@ -93,7 +93,7 @@ describe('useLanguageChange', () => {
     vi.mocked(useDispatch).mockReturnValue(dispatch);
   });
 
-  it('dispatches syncLocaleDependentSettings only for guests', async () => {
+  it('dispatches syncLocaleDependentSettings for guests when not using default settings', async () => {
     vi.mocked(isLoggedIn).mockReturnValue(false);
     vi.mocked(useSelector).mockReturnValue(false); // isUsingDefaultSettings=false
 
@@ -112,6 +112,22 @@ describe('useLanguageChange', () => {
     expect(addOrUpdateUserPreference).not.toHaveBeenCalled();
     expect(setLocaleCookie).toHaveBeenCalledWith('en');
     expect(logValueChange).toHaveBeenCalledWith('locale', 'ar', 'en');
+  });
+
+  it('does not dispatch syncLocaleDependentSettings for guests when using default settings', async () => {
+    vi.mocked(isLoggedIn).mockReturnValue(false);
+    vi.mocked(useSelector).mockReturnValue(true); // isUsingDefaultSettings=true
+
+    const { result } = renderHook(() => useLanguageChange());
+
+    await act(async () => {
+      await result.current.onLanguageChange('en');
+    });
+
+    expect(syncLocaleDependentSettings).not.toHaveBeenCalled();
+    expect(resetSettings).toHaveBeenCalledWith('en');
+    expect(dispatch).toHaveBeenCalledWith({ type: 'resetSettings', payload: { locale: 'en' } });
+    expect(addOrUpdateUserPreference).not.toHaveBeenCalled();
   });
 
   it('does not dispatch syncLocaleDependentSettings for logged-in users', async () => {

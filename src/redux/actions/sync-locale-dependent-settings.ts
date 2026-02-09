@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { AnyAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
 
@@ -21,6 +20,127 @@ type Params = {
   nextLocale: string;
 };
 
+const syncTranslationsIfUsingDefaults = (
+  state: RootState,
+  dispatch: Dispatch<AnyAction>,
+  nextLocale: string,
+) => {
+  if (!state.translations?.isUsingDefaultTranslations) return;
+
+  const defaultTranslations = getTranslationsInitialState(nextLocale).selectedTranslations;
+  const currentTranslations = state.translations?.selectedTranslations || [];
+  // Avoid redundant dispatches when next-locale defaults are already selected.
+  if (areArraysEqual(currentTranslations, defaultTranslations)) return;
+
+  dispatch({
+    ...setSelectedTranslations({ translations: defaultTranslations, locale: nextLocale }),
+    meta: { skipDefaultSettings: true },
+  });
+};
+
+const syncTafsirsIfUsingDefaults = (
+  state: RootState,
+  dispatch: Dispatch<AnyAction>,
+  nextLocale: string,
+) => {
+  if (!state.tafsirs?.isUsingDefaultTafsirs) return;
+
+  const defaultTafsirs = getTafsirsInitialState(nextLocale).selectedTafsirs;
+  const currentTafsirs = state.tafsirs?.selectedTafsirs || [];
+  // Avoid redundant dispatches when next-locale defaults are already selected.
+  if (areArraysEqual(currentTafsirs, defaultTafsirs)) return;
+
+  dispatch({
+    ...setSelectedTafsirs({ tafsirs: defaultTafsirs, locale: nextLocale }),
+    meta: { skipDefaultSettings: true },
+  });
+};
+
+const isReadingPreferenceLanguageCustomized = (
+  selectedLanguages: string[],
+  hasCustomizedLanguages: boolean | undefined,
+  defaultLanguagesForPrevLocale: string[],
+) =>
+  hasCustomizedLanguages === true ||
+  !areArraysEqual(selectedLanguages, defaultLanguagesForPrevLocale);
+
+const syncReflectionLanguagesIfNotCustomized = (
+  readingPreferences: RootState['readingPreferences'],
+  dispatch: Dispatch<AnyAction>,
+  defaultReadingPrefsPrev: ReturnType<typeof getReadingPreferencesInitialState>,
+  defaultReadingPrefsNext: ReturnType<typeof getReadingPreferencesInitialState>,
+) => {
+  const { selectedReflectionLanguages, hasCustomizedReflectionLanguages } = readingPreferences;
+  const isReflectionCustomized = isReadingPreferenceLanguageCustomized(
+    selectedReflectionLanguages,
+    hasCustomizedReflectionLanguages,
+    defaultReadingPrefsPrev.selectedReflectionLanguages,
+  );
+  if (isReflectionCustomized) return;
+  // Avoid redundant dispatches when the next-locale defaults are already selected.
+  if (
+    areArraysEqual(selectedReflectionLanguages, defaultReadingPrefsNext.selectedReflectionLanguages)
+  ) {
+    return;
+  }
+
+  dispatch({
+    ...setReflectionLanguages(defaultReadingPrefsNext.selectedReflectionLanguages),
+    meta: { skipCustomization: true, skipDefaultSettings: true },
+  });
+};
+
+const syncLessonLanguagesIfNotCustomized = (
+  readingPreferences: RootState['readingPreferences'],
+  dispatch: Dispatch<AnyAction>,
+  defaultReadingPrefsPrev: ReturnType<typeof getReadingPreferencesInitialState>,
+  defaultReadingPrefsNext: ReturnType<typeof getReadingPreferencesInitialState>,
+) => {
+  const { selectedLessonLanguages, hasCustomizedLessonLanguages } = readingPreferences;
+  const isLessonCustomized = isReadingPreferenceLanguageCustomized(
+    selectedLessonLanguages,
+    hasCustomizedLessonLanguages,
+    defaultReadingPrefsPrev.selectedLessonLanguages,
+  );
+  if (isLessonCustomized) return;
+  // Avoid redundant dispatches when the next-locale defaults are already selected.
+  if (areArraysEqual(selectedLessonLanguages, defaultReadingPrefsNext.selectedLessonLanguages)) {
+    return;
+  }
+
+  dispatch({
+    ...setLessonLanguages(defaultReadingPrefsNext.selectedLessonLanguages),
+    meta: { skipCustomization: true, skipDefaultSettings: true },
+  });
+};
+
+const syncReflectionAndLessonLanguagesIfNotCustomized = (
+  state: RootState,
+  dispatch: Dispatch<AnyAction>,
+  prevLocale: string,
+  nextLocale: string,
+) => {
+  // Reflections/Lessons language selector semantics:
+  // - Treat as customized if the user ever manually changed it (sticky flags).
+  // - For safe migration, also treat as customized if the stored value differs from
+  //   the previous locale defaults.
+  const defaultReadingPrefsPrev = getReadingPreferencesInitialState(prevLocale);
+  const defaultReadingPrefsNext = getReadingPreferencesInitialState(nextLocale);
+
+  syncReflectionLanguagesIfNotCustomized(
+    state.readingPreferences,
+    dispatch,
+    defaultReadingPrefsPrev,
+    defaultReadingPrefsNext,
+  );
+  syncLessonLanguagesIfNotCustomized(
+    state.readingPreferences,
+    dispatch,
+    defaultReadingPrefsPrev,
+    defaultReadingPrefsNext,
+  );
+};
+
 /**
  * Keep locale-dependent content preferences (e.g. default tafsir/translation and
  * reflections/lessons languages) aligned with the site locale when the user
@@ -35,60 +155,9 @@ const syncLocaleDependentSettings =
   (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
     const state = getState();
 
-    // Translations: if user is using defaults, switch to the new locale's defaults.
-    if (state.translations?.isUsingDefaultTranslations) {
-      const defaultTranslations = getTranslationsInitialState(nextLocale).selectedTranslations;
-      dispatch({
-        ...setSelectedTranslations({ translations: defaultTranslations, locale: nextLocale }),
-        meta: { skipDefaultSettings: true },
-      });
-    }
-
-    // Tafsir: if user is using defaults, switch to the new locale's defaults.
-    if (state.tafsirs?.isUsingDefaultTafsirs) {
-      const defaultTafsirs = getTafsirsInitialState(nextLocale).selectedTafsirs;
-      dispatch({
-        ...setSelectedTafsirs({ tafsirs: defaultTafsirs, locale: nextLocale }),
-        meta: { skipDefaultSettings: true },
-      });
-    }
-
-    // Reflections/Lessons language selector semantics:
-    // - Treat as customized if the user ever manually changed it (sticky flags).
-    // - For safe migration, also treat as customized if the stored value differs from
-    //   the previous locale defaults.
-    const {
-      selectedReflectionLanguages,
-      selectedLessonLanguages,
-      hasCustomizedReflectionLanguages,
-      hasCustomizedLessonLanguages,
-    } = state.readingPreferences;
-    const defaultReadingPrefsPrev = getReadingPreferencesInitialState(prevLocale);
-    const defaultReadingPrefsNext = getReadingPreferencesInitialState(nextLocale);
-
-    const isReflectionCustomized =
-      hasCustomizedReflectionLanguages === true ||
-      !areArraysEqual(
-        selectedReflectionLanguages,
-        defaultReadingPrefsPrev.selectedReflectionLanguages,
-      );
-    const isLessonCustomized =
-      hasCustomizedLessonLanguages === true ||
-      !areArraysEqual(selectedLessonLanguages, defaultReadingPrefsPrev.selectedLessonLanguages);
-
-    if (!isReflectionCustomized) {
-      dispatch({
-        ...setReflectionLanguages(defaultReadingPrefsNext.selectedReflectionLanguages),
-        meta: { skipCustomization: true, skipDefaultSettings: true },
-      });
-    }
-
-    if (!isLessonCustomized) {
-      dispatch({
-        ...setLessonLanguages(defaultReadingPrefsNext.selectedLessonLanguages),
-        meta: { skipCustomization: true, skipDefaultSettings: true },
-      });
-    }
+    syncTranslationsIfUsingDefaults(state, dispatch, nextLocale);
+    syncTafsirsIfUsingDefaults(state, dispatch, nextLocale);
+    syncReflectionAndLessonLanguagesIfNotCustomized(state, dispatch, prevLocale, nextLocale);
   };
 
 export default syncLocaleDependentSettings;
