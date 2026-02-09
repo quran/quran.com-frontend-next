@@ -49,7 +49,12 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   const isPinned = pinnedVerseKeysSet.has(verseKey);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
   const localizedVerseKey = toLocalizedVerseKey(verseKey, lang);
-  const bookmarkName = `${chapterData?.transliteratedName} ${localizedVerseKey}`;
+  const shouldShowArabicSurahName = lang === 'ar' || lang === 'ur';
+  const surahName =
+    (shouldShowArabicSurahName ? chapterData?.nameArabic : chapterData?.transliteratedName) ||
+    chapterData?.transliteratedName ||
+    chapterData?.nameArabic;
+  const bookmarkName = `${surahName || ''} ${localizedVerseKey}`.trim();
 
   const formattedDate = React.useMemo(() => {
     if (!createdAt) return null;

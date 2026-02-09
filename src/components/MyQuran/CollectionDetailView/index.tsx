@@ -119,6 +119,108 @@ const sortBookmarks = (bookmarks: BookmarkWithMeta[], sortBy: CollectionDetailSo
   return list;
 };
 
+type TranslateFn = (key: string, query?: Record<string, unknown>) => string;
+
+const isArabicOrUrduLang = (lang: string) => lang === 'ar' || lang === 'ur';
+
+const getCollectionItemsLabel = (totalCount: number, lang: string, t: TranslateFn) => {
+  const count = toLocalizedNumber(totalCount, lang);
+  return totalCount === 1
+    ? t('collections.items', { count })
+    : t('collections.items_plural', { count });
+};
+
+const getVerseKeysAll = (bookmarks: BookmarkWithMeta[]) => bookmarks.map((b) => b.verseKey);
+
+const getVerseKeysSelected = (bookmarks: BookmarkWithMeta[], selectedIds: Set<string>) =>
+  bookmarks.filter((b) => selectedIds.has(b.id)).map((b) => b.verseKey);
+
+const makeSortOptions = (t: TranslateFn) => [
+  {
+    id: CollectionDetailSortOption.DateDesc,
+    label: t('collection:date-desc'),
+    direction: ArrowDirection.Down,
+  },
+  {
+    id: CollectionDetailSortOption.DateAsc,
+    label: t('collection:date-asc'),
+    direction: ArrowDirection.Up,
+  },
+  {
+    id: CollectionDetailSortOption.QuranicOrderAsc,
+    label: t('collection:quranic-asc'),
+    direction: ArrowDirection.Up,
+  },
+  {
+    id: CollectionDetailSortOption.QuranicOrderDesc,
+    label: t('collection:quranic-desc'),
+    direction: ArrowDirection.Down,
+  },
+];
+
+const buildChapterItems = (chaptersData: unknown, lang: string) => {
+  const isArabicOrUrdu = isArabicOrUrduLang(lang);
+  // Ensure stable 1 -> 114 ordering.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return Array.from({ length: 114 }, (unusedValue, index) => index + 1)
+    .map((chapterId) => {
+      const chapter = getChapterData(
+        chaptersData as Parameters<typeof getChapterData>[0],
+        String(chapterId),
+      );
+      const surahName = isArabicOrUrdu ? chapter?.nameArabic : chapter?.transliteratedName;
+      const localized = toLocalizedNumber(chapterId, lang);
+      const numericLabel = `${chapterId}.`;
+      const localizedLabel = `${localized}.`;
+      return {
+        value: String(chapterId),
+        label: `${localizedLabel} ${surahName || ''}`.trim(),
+        searchText: `${numericLabel} ${surahName || ''} ${chapterId}`.trim().toLowerCase(),
+      };
+    })
+    .filter((item) => item.label);
+};
+
+const buildJuzItems = (lang: string, tCommon: TranslateFn) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return Array.from({ length: 30 }, (unusedValue, index) => index + 1).map((juzNumber) => {
+    const localized = toLocalizedNumber(juzNumber, lang);
+    const numericLabel = `${juzNumber}`;
+    const localizedLabel = `${localized}`;
+    return {
+      value: String(juzNumber),
+      label: `${tCommon('juz')} ${localizedLabel}`,
+      searchText: `${tCommon('juz')} ${numericLabel} ${localizedLabel}`.toLowerCase(),
+    };
+  });
+};
+
+const buildActiveChapterChips = (
+  chaptersData: unknown,
+  lang: string,
+  selectedChapterIds: string[],
+): ActiveFilterChip[] => {
+  const isArabicOrUrdu = isArabicOrUrduLang(lang);
+  return selectedChapterIds
+    .map((chapterIdStr) => {
+      const chapter = getChapterData(
+        chaptersData as Parameters<typeof getChapterData>[0],
+        chapterIdStr,
+      );
+      const surahName = isArabicOrUrdu ? chapter?.nameArabic : chapter?.transliteratedName;
+      const localized = toLocalizedNumber(Number(chapterIdStr), lang);
+      return { id: chapterIdStr, label: `${localized}. ${surahName || ''}`.trim() };
+    })
+    .filter((chip) => chip.label);
+};
+
+const buildActiveJuzChips = (lang: string, selectedJuzNumbers: string[], tCommon: TranslateFn) => {
+  return selectedJuzNumbers.map((juzNumberStr) => {
+    const localized = toLocalizedNumber(Number(juzNumberStr), lang);
+    return { id: juzNumberStr, label: `${tCommon('juz')} ${localized}` };
+  });
+};
+
 const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   collectionId,
   collectionName,
@@ -292,7 +394,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   );
 
   const handleNoteClick = useCallback(() => {
-    const verseKeys = sortedBookmarks.map((bookmark) => bookmark.verseKey);
+    const verseKeys = getVerseKeysAll(sortedBookmarks);
 
     setNoteModalVerseKeys(verseKeys);
     setIsNoteModalOpen(true);
@@ -305,9 +407,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   }, [numericCollectionId, sortedBookmarks, selectedBookmarks.size]);
 
   const handleBulkNoteClick = useCallback(() => {
-    const verseKeys = sortedBookmarks
-      .filter((bookmark) => selectedBookmarks.has(bookmark.id))
-      .map((bookmark) => bookmark.verseKey);
+    const verseKeys = getVerseKeysSelected(sortedBookmarks, selectedBookmarks);
 
     setNoteModalVerseKeys(verseKeys);
     setIsNoteModalOpen(true);
@@ -416,7 +516,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   );
 
   const handlePinAllVerses = useCallback(() => {
-    const verseKeys = sortedBookmarks.map((b) => b.verseKey);
+    const verseKeys = getVerseKeysAll(sortedBookmarks);
     logButtonClick('collection_detail_pin_all_verses', {
       collectionId: numericCollectionId,
       count: verseKeys.length,
@@ -425,9 +525,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   }, [sortedBookmarks, numericCollectionId, pinVersesAndSync]);
 
   const handlePinSelectedVerses = useCallback(() => {
-    const verseKeys = sortedBookmarks
-      .filter((b) => selectedBookmarks.has(b.id))
-      .map((b) => b.verseKey);
+    const verseKeys = getVerseKeysSelected(sortedBookmarks, selectedBookmarks);
     logButtonClick('collection_detail_pin_selected_verses', {
       collectionId: numericCollectionId,
       count: verseKeys.length,
@@ -436,56 +534,19 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   }, [sortedBookmarks, selectedBookmarks, numericCollectionId, pinVersesAndSync]);
 
   const chapterItems = useMemo(() => {
-    const isArabicOrUrdu = lang === 'ar' || lang === 'ur';
-    // Ensure stable 1 -> 114 ordering.
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    return Array.from({ length: 114 }, (unusedValue, index) => index + 1)
-      .map((chapterId) => {
-        const chapter = getChapterData(chaptersData, String(chapterId));
-        const surahName = isArabicOrUrdu ? chapter?.nameArabic : chapter?.transliteratedName;
-        const localized = toLocalizedNumber(chapterId, lang);
-        const numericLabel = `${chapterId}.`;
-        const localizedLabel = `${localized}.`;
-        return {
-          value: String(chapterId),
-          label: `${localizedLabel} ${surahName || ''}`.trim(),
-          searchText: `${numericLabel} ${surahName || ''} ${chapterId}`.trim().toLowerCase(),
-        };
-      })
-      .filter((item) => item.label);
+    return buildChapterItems(chaptersData, lang);
   }, [chaptersData, lang]);
 
   const juzItems = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    return Array.from({ length: 30 }, (unusedValue, index) => index + 1).map((juzNumber) => {
-      const localized = toLocalizedNumber(juzNumber, lang);
-      const numericLabel = `${juzNumber}`;
-      const localizedLabel = `${localized}`;
-      return {
-        value: String(juzNumber),
-        label: `${tCommon('juz')} ${localizedLabel}`,
-        searchText: `${tCommon('juz')} ${numericLabel} ${localizedLabel}`.toLowerCase(),
-      };
-    });
+    return buildJuzItems(lang, tCommon);
   }, [lang, tCommon]);
 
   const activeChapterChips: ActiveFilterChip[] = useMemo(() => {
-    const isArabicOrUrdu = lang === 'ar' || lang === 'ur';
-    return selectedChapterIds
-      .map((chapterIdStr) => {
-        const chapter = getChapterData(chaptersData, chapterIdStr);
-        const surahName = isArabicOrUrdu ? chapter?.nameArabic : chapter?.transliteratedName;
-        const localized = toLocalizedNumber(Number(chapterIdStr), lang);
-        return { id: chapterIdStr, label: `${localized}. ${surahName || ''}`.trim() };
-      })
-      .filter((chip) => chip.label);
+    return buildActiveChapterChips(chaptersData, lang, selectedChapterIds);
   }, [chaptersData, lang, selectedChapterIds]);
 
   const activeJuzChips: ActiveFilterChip[] = useMemo(() => {
-    return selectedJuzNumbers.map((juzNumberStr) => {
-      const localized = toLocalizedNumber(Number(juzNumberStr), lang);
-      return { id: juzNumberStr, label: `${tCommon('juz')} ${localized}` };
-    });
+    return buildActiveJuzChips(lang, selectedJuzNumbers, tCommon);
   }, [lang, selectedJuzNumbers, tCommon]);
 
   const onRemoveChapterFilter = useCallback(
@@ -516,6 +577,22 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       resetListState();
     },
     [onSearchChange, resetListState],
+  );
+
+  const onSelectedChapterIdsChange = useCallback(
+    (ids: string[]) => {
+      setSelectedChapterIds(ids);
+      resetListState();
+    },
+    [resetListState],
+  );
+
+  const onSelectedJuzNumbersChange = useCallback(
+    (nums: string[]) => {
+      setSelectedJuzNumbers(nums);
+      resetListState();
+    },
+    [resetListState],
   );
 
   // Prevent Virtuoso's `endReached` from triggering additional pages before the user scrolls.
@@ -567,28 +644,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const isOwner = data?.data?.isOwner ?? false;
   const totalCount = sortedBookmarks.length;
 
-  const sortOptions = [
-    {
-      id: CollectionDetailSortOption.DateDesc,
-      label: t('collection:date-desc'),
-      direction: ArrowDirection.Down,
-    },
-    {
-      id: CollectionDetailSortOption.DateAsc,
-      label: t('collection:date-asc'),
-      direction: ArrowDirection.Up,
-    },
-    {
-      id: CollectionDetailSortOption.QuranicOrderAsc,
-      label: t('collection:quranic-asc'),
-      direction: ArrowDirection.Up,
-    },
-    {
-      id: CollectionDetailSortOption.QuranicOrderDesc,
-      label: t('collection:quranic-desc'),
-      direction: ArrowDirection.Down,
-    },
-  ];
+  const sortOptions = makeSortOptions(t);
 
   return (
     <div className={styles.container}>
@@ -620,14 +676,8 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
             juzItems={juzItems}
             selectedChapterIds={selectedChapterIds}
             selectedJuzNumbers={selectedJuzNumbers}
-            onSelectedChapterIdsChange={(ids) => {
-              setSelectedChapterIds(ids);
-              resetListState();
-            }}
-            onSelectedJuzNumbersChange={(nums) => {
-              setSelectedJuzNumbers(nums);
-              resetListState();
-            }}
+            onSelectedChapterIdsChange={onSelectedChapterIdsChange}
+            onSelectedJuzNumbersChange={onSelectedJuzNumbersChange}
           />
 
           <CollectionSorter
@@ -654,11 +704,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
           <span>{collectionName}</span>
         </Button>
         <div className={styles.badgeContainer}>
-          <span className={styles.badge}>
-            {totalCount === 1
-              ? t('collections.items', { count: toLocalizedNumber(totalCount, lang) })
-              : t('collections.items_plural', { count: toLocalizedNumber(totalCount, lang) })}
-          </span>
+          <span className={styles.badge}>{getCollectionItemsLabel(totalCount, lang, t)}</span>
           <CollectionHeaderActionsPopover
             onNoteClick={handleNoteClick}
             onPinVersesClick={handlePinAllVerses}
