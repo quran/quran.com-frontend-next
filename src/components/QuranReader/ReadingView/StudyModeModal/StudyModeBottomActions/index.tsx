@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -41,6 +41,16 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
   const { t } = useTranslation('common');
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
+  const tabRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  useEffect(() => {
+    if (activeTab && tabRefs.current[activeTab]) {
+      tabRefs.current[activeTab]?.scrollIntoView({
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  }, [activeTab]);
 
   const handleTabClick = (onClick: () => void) => {
     onClick();
@@ -96,6 +106,9 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
         {tabsToRender.map((tab, index) => (
           <React.Fragment key={tab.id}>
             <div
+              ref={(el) => {
+                tabRefs.current[tab.id] = el;
+              }}
               className={classNames(styles.tabItem, {
                 [styles.tabItemActive]: activeTab === tab.id,
               })}
