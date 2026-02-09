@@ -85,6 +85,7 @@
     "title": "Salva i tuoi progressi"
   },
   "hadith": {
+    "notice": "Questo elenco non è esaustivo. Sono inclusi <0>Al-Bukhari</0> e <1>Muslim</1>, e presto ne arriveranno altri, inshAllah.",
     "title": "Hadith"
   },
   "hizb-beginning": "Inizio dell'Hizb",
@@ -183,6 +184,9 @@
   "removed-from": "Rimosso da {{collectionName}}",
   "revelation-order-notice": "Nota: stai navigando nel Corano secondo l'ordine della rivelazione. <link> Fai clic qui </link> per ripristinare l'ordine predefinito.",
   "rub-beginning": "Inizio del Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Vuoi salvare più di un segnalibro? Usa le raccolte:"
+  },
   "save-page": "Salva pagina {{pageNumber}}",
   "save-pinned-to-collection": "Salva nella raccolta",
   "save-to": "Salvare...",

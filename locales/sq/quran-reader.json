@@ -85,6 +85,7 @@
     "title": "Ruaj progresin tënd"
   },
   "hadith": {
+    "notice": "Kjo listë nuk është shteruese. Përfshihen <0>Al-Buhari</0> dhe <1>Muslimi</1>, dhe së shpejti do të shfaqen edhe të tjera, inshAllah.",
     "title": "Hadith"
   },
   "hizb-beginning": "Fillimi i Hizbit",
@@ -183,6 +184,9 @@
   "removed-from": "U hoq nga {{collectionName}}",
   "revelation-order-notice": "Shënim: ju jeni duke lundruar në Kuran sipas rendit të shpalljes. <link> Klikoni këtu </link> për t'u kthyer në renditjen e paracaktuar.",
   "rub-beginning": "Fillimi i Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Po ruani më shumë se një faqeshënues? Përdorni koleksionet:"
+  },
   "save-page": "Ruaj faqen {{pageNumber}}",
   "save-pinned-to-collection": "Ruaj në Koleksion",
   "save-to": "Ruaje në...",

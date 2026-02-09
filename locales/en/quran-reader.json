@@ -85,8 +85,8 @@
     "title": "Save Your Progress"
   },
   "hadith": {
-    "title": "Hadith",
-    "notice": "This list is not exhaustive. <0>Al-Bukhari</0> and <1>Muslim</1> are included, with more to come soon, inshAllah."
+    "notice": "This list is not exhaustive. <0>Al-Bukhari</0> and <1>Muslim</1> are included, with more to come soon, inshAllah.",
+    "title": "Hadith"
   },
   "hizb-beginning": "Beginning of Hizb",
   "include-translator": "Include translator name?",
@@ -184,6 +184,9 @@
   "removed-from": "Removed from {{collectionName}}",
   "revelation-order-notice": "Note: you're navigating the Quran by the order of revelation. <link>Click here</link> to revert to the default ordering.",
   "rub-beginning": "Beginning of Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Saving More than one bookmark? Use collections:"
+  },
   "save-page": "Save Page {{pageNumber}}",
   "save-pinned-to-collection": "Save to Collection",
   "save-to": "Save to...",
