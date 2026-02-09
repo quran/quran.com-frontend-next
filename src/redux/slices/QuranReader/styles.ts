@@ -90,14 +90,6 @@ export const quranReaderStylesSlice = createSlice({
     }),
     increaseHadithFontScale: (state) => ({ ...state, hadithFontScale: state.hadithFontScale + 1 }),
     decreaseHadithFontScale: (state) => ({ ...state, hadithFontScale: state.hadithFontScale - 1 }),
-    increaseSurahInfoFontScale: (state) => ({
-      ...state,
-      surahInfoFontScale: state.surahInfoFontScale + 1,
-    }),
-    decreaseSurahInfoFontScale: (state) => ({
-      ...state,
-      surahInfoFontScale: state.surahInfoFontScale - 1,
-    }),
     setMushafLines: (
       state,
       action: PayloadAction<{ mushafLines: MushafLines; locale: string }>,
