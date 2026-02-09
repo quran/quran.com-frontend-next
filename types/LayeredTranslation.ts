@@ -13,6 +13,7 @@ export interface LayeredTranslationVerse {
 export interface LayeredTranslationResource {
   id: number;
   name: string;
+  description?: string;
   language: string | null;
 }
 

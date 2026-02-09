@@ -43,9 +43,20 @@
   }
 }
 
+.description {
+  padding: var(--spacing-small-px);
+  border-radius: var(--border-radius-xsmall-px);
+  background-color: var(--color-success-faded);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+}
+
 .translationText {
-  font-size: var(--font-size-large);
-  line-height: 1.9;
+  line-height: 1.8;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small-px);
   color: var(--color-text-default-new);
 }
 
@@ -83,104 +94,120 @@ $max-popover-width: 23.125rem;
 
 .popoverContent {
   border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
-  border-radius: var(--spacing-medium-px);
-  background: var(--color-background-alternative-faint);
+  border-radius: var(--border-radius-small-px);
+  background: var(--color-background-elevated-new);
   max-inline-size: $max-popover-width;
   z-index: 9999;
+
+  --spacing-block: var(--spacing-medium-px) var(--spacing-medium2-px);
+  --spacing-inline: var(--spacing-medium-px);
+
+  padding-inline: 0;
+  padding-block: var(--spacing-block);
 }
 
-.groupPanel {
-  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
-  border-radius: var(--spacing-medium-px);
-  background: var(--color-background-default);
-  overflow: hidden;
-  inline-size: min(100%, 58rem);
-  box-shadow: 0 var(--spacing-xxsmall-px) var(--spacing-large-px) rgba(0, 0, 0, 0.08);
-  margin-block-start: var(--spacing-xxsmall-px);
+.groupTokenTrigger {
+  display: inline;
 }
 
 .groupPanelHeader {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: var(--spacing-medium-px) var(--spacing-medium-px) var(--spacing-small-px);
-  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-medium);
+  align-items: flex-start;
+  justify-content: space-between;
+
+  font-size: var(--font-size-xxsmall-px);
   color: var(--color-text-faded-new);
+  padding-block-end: var(--spacing-small-px);
+  margin-inline: var(--spacing-inline);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+
+  .closeIcon {
+    svg {
+      inline-size: var(--spacing-small2-px);
+      block-size: var(--spacing-small2-px);
+      color: var(--color-text-faded-new);
+    }
+  }
 }
 
 .optionsList {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xsmall-px);
-  padding: var(--spacing-small-px) var(--spacing-medium-px);
+  padding-block: var(--spacing-medium-px);
+  margin-inline: var(--spacing-inline);
 }
 
 .optionButton {
   display: flex;
   align-items: center;
   gap: var(--spacing-small-px);
+  padding: var(--spacing-small-px) var(--spacing-xsmall-px);
   text-align: start;
-  border: 0;
-  border-radius: var(--spacing-small-px);
-  background: var(--color-background-default);
+  border: none;
+  outline: none;
+  background: transparent;
+  border-radius: var(--border-radius-small-px);
   color: var(--color-text-default-new);
-  padding: var(--spacing-xxsmall-px) var(--spacing-xxsmall-px);
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
   cursor: pointer;
-  font-size: var(--font-size-xlarge);
-  line-height: 1.45;
-}
-
-.optionButtonActive {
-  background: var(--color-background-default);
-}
-
-.optionIndex {
-  min-inline-size: calc(var(--spacing-medium-px) + var(--spacing-small-px));
-  block-size: calc(var(--spacing-medium-px) + var(--spacing-small-px));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-normal);
-  background: var(--color-secondary-medium);
-  color: var(--color-text-faded-new);
-  flex-shrink: 0;
 }
 
 .optionText {
   color: inherit;
 }
 
-.optionButtonActive .optionText {
-  color: var(--color-success-medium);
+.optionIndex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  block-size: var(--font-size-small-px);
+  inline-size: var(--font-size-small-px);
+  font-size: calc(var(--font-size-normal-px) * 0.5);
+  border-radius: var(--border-radius-circle);
+  background: var(--color-background-alternative-faint);
+  color: var(--color-text-faded-new);
+}
+
+.optionButtonActive {
+  background: var(--color-background-alternative-faint);
+  color: var(--color-text-default-new);
+
+  .optionIndex {
+    background: var(--color-background-elevated-new);
+  }
 }
 
 .explanationWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+  padding-block-start: var(--spacing-medium-px);
+  margin-inline: var(--spacing-inline);
   border-block-start: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
-  padding: var(--spacing-small-px) var(--spacing-medium-px) var(--spacing-medium-px);
 }
 
 .explanationToggle {
-  border: 0;
-  background: none;
-  padding: 0;
-  font-size: var(--font-size-normal);
-  color: var(--color-text-default-new);
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
+  padding: 0;
+  border: none;
+  background: transparent;
   gap: var(--spacing-xxsmall-px);
-  inline-size: 100%;
+  font-size: var(--font-size-xxsmall-px);
+  color: var(--color-text-default-new);
+  cursor: pointer;
   text-align: end;
 }
 
 .explanationChevron {
   inline-size: var(--spacing-small-px);
   block-size: var(--spacing-small-px);
-  transition: transform 120ms ease-in-out;
+  color: var(--color-text-default-new);
+  transition: transform var(--transition-fast) ease-in-out;
 }
 
 .explanationChevronOpen {
@@ -188,20 +215,16 @@ $max-popover-width: 23.125rem;
 }
 
 .explanationText {
-  margin-block-start: var(--spacing-small-px);
-  font-size: var(--font-size-xlarge);
-  line-height: 1.8;
+  font-size: var(--font-size-small-px);
   color: var(--color-text-default-new);
+  font-weight: var(--font-weight-light);
+  line-height: 1.5;
 }
 
 .translationText :global(sup[foot_note]),
-.groupPanel :global(sup[foot_note]) {
-  font-size: 0.55em;
-  line-height: 1;
-}
-
-@include breakpoints.smallerThanTablet {
-  .translationText {
-    font-size: var(--font-size-xlarge);
-  }
+.popoverContent :global(sup[foot_note]) {
+  color: var(--color-text-link);
+  font-weight: var(--font-weight-medium);
+  vertical-align: super;
+  font-size: var(--font-size-xsmall-px);
 }
