@@ -60,10 +60,11 @@ const LanguageSelector = ({
    */
   const onChange = async (newLocale: string) => {
     if (newLocale === lang) return;
+    const loggedIn = isLoggedIn();
 
     // Guest-only: keep locale-dependent content tabs (tafsir, lessons, reflections, etc.)
     // following defaults unless the user has customized those preferences.
-    if (!isLoggedIn()) {
+    if (!loggedIn) {
       dispatch(syncLocaleDependentSettings({ prevLocale: lang, nextLocale: newLocale }));
     }
 
@@ -76,7 +77,7 @@ const LanguageSelector = ({
     await setLanguage(newLocale);
     setLocaleCookie(newLocale);
 
-    if (isLoggedIn()) {
+    if (loggedIn) {
       addOrUpdateUserPreference(
         PreferenceGroup.LANGUAGE,
         newLocale,
