@@ -10,17 +10,13 @@ type Props = {
 
 const AuthorsDetails: React.FC<Props> = ({ authors }) => {
   return (
-    <>
-      {authors.map((author) => {
-        const authorDetails = author.author;
-        return (
-          <li key={authorDetails.id}>
-            <span className={styles.author}>{authorDetails.name}</span>{' '}
-            <span>{authorDetails.biography}</span>
-          </li>
-        );
-      })}
-    </>
+    <ul className={styles.list}>
+      {authors.map(({ author }) => (
+        <li key={author.id}>
+          <span className={styles.author}>{author.name}</span> {author.biography}
+        </li>
+      ))}
+    </ul>
   );
 };
 
