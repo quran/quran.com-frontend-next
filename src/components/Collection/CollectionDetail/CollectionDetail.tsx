@@ -78,7 +78,9 @@ const CollectionDetail = ({
   };
 
   const shouldVirtualize =
-    isVirtualizeForced || !!onEndReached || bookmarks.length > MAX_NON_VIRTUALIZED_BOOKMARKS;
+    isVirtualizeForced ||
+    !!(onEndReached && hasMore) ||
+    bookmarks.length > MAX_NON_VIRTUALIZED_BOOKMARKS;
 
   const renderBookmarkCell = (bookmark: Bookmark) => (
     <CollectionVerseCell
