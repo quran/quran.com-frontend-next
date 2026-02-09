@@ -47,7 +47,7 @@ const CollectionsListItem: React.FC<CollectionsListItemProps> = ({
       );
     }
 
-    return <div className={styles.checkbox} />;
+    return <div className={styles.collectionRadio} />;
   }, [collection, isTogglingFavorites]);
 
   const handleKeyDown = useCallback(
