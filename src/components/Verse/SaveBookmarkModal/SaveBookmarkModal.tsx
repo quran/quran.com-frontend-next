@@ -1,5 +1,3 @@
-import useTranslation from 'next-translate/useTranslation';
-
 import NewCollectionForm from './Collections/NewCollectionForm';
 import styles from './SaveBookmarkModal.module.scss';
 import SaveBookmarkModalContent from './SaveBookmarkModalContent';
@@ -37,8 +35,6 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
   onBack,
   wasOpenedFromStudyMode = false,
 }) => {
-  const { lang } = useTranslation('quran-reader');
-
   const {
     isTogglingFavorites,
     isCreatingCollection,
@@ -101,7 +97,6 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
             pageNumber={pageNumber}
             userIsLoggedIn={userIsLoggedIn}
             mushafId={mushafId}
-            lang={lang}
             readingBookmarkData={readingBookmarkData}
             mutateReadingBookmark={mutateReadingBookmark}
             onReadingBookmarkChanged={handleReadingBookmarkChanged}

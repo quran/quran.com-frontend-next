@@ -6,6 +6,14 @@
   inline-size: 100%;
   background: var(--color-background-elevated);
   border: var(--spacing-micro-px) solid var(--color-separators-new);
+  transition: margin-inline-start var(--transition-regular), inline-size var(--transition-regular);
+}
+
+.withSidebarNavigation {
+  @include breakpoints.tablet {
+    margin-inline-start: calc(10 * var(--spacing-mega));
+    inline-size: calc(100% - calc(10 * var(--spacing-mega)));
+  }
 }
 
 .barContent {

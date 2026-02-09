@@ -40,6 +40,7 @@
   "download-copy": "আপনি যদি টেক্সট ফাইল ডাউনলোড করতে চান।",
   "edgham": "ইদগাম",
   "ekhfa": "ইখফা ও ঘুন্না",
+  "embed-widget": "উইজেট এম্বেড করুন",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "স্ট্রিক ট্র্যাক করুন, কাস্টম লক্ষ্য তৈরি করুন, ধারাবাহিক থাকুন",
     "achieve-quran-goals-responsive": "তোমার কুরআনের লক্ষ্য অর্জন করো",
@@ -82,6 +83,9 @@
     "sign-in": "চালিয়ে যেতে সাইন ইন করুন",
     "sign-in-message": "আরও বৈশিষ্ট্যগুলিতে অ্যাক্সেস পেতে সাইন ইন করুন অথবা বিনামূল্যে সাইন আপ করুন!",
     "title": "আপনার অগ্রগতি সংরক্ষণ করুন"
+  },
+  "hadith": {
+    "title": "হাদিস"
   },
   "hizb-beginning": "হিযবের সূচনা",
   "include-translator": "অনুবাদকের নাম অন্তর্ভুক্ত করবেন?",
@@ -185,12 +189,17 @@
   "reflection-not-available": "এই আয়াতের জন্য কোনো পর্যালোচনা করা প্রতিফলন নেই",
   "reflections": "প্রতিফলন",
   "reflections-desc": "সূরা {{surahName}} {{ayahNumber}} এর কুরআনের প্রতিফলন পড়ুন এবং শেয়ার করুন",
+  "related-verses": "সম্পর্কিত আয়াত",
+  "related-verses-desc": "কুরআন সম্পর্কিত আয়াত পড়ুন এবং শেয়ার করুন {{ayahNumber}} সূরার {{surahName}}",
   "remove-bookmark": "বুকমার্ক সরান",
   "remove-my-reading-bookmark": "আমার পঠন বুকমার্কটি সরান",
   "remove-pinned-verse": "পদ্যটি সরান {{verseKey}} পিন করা থেকে",
   "removed-from": "{{collectionName}} থেকে সরানো হয়েছে",
   "revelation-order-notice": "দ্রষ্টব্য: আপনি ওহীর ক্রম অনুসারে কুরআন নেভিগেট করছেন। ডিফল্ট অর্ডারে ফিরে যেতে <link> এখানে ক্লিক করুন </link> ।",
   "rub-beginning": "রুবেল হিজবের সূচনা",
+  "save-bookmark-modal": {
+    "collections-hint": "একাধিক বুকমার্ক সংরক্ষণ করছেন? সংগ্রহ ব্যবহার করুন:"
+  },
   "save-page": "পৃষ্ঠা সংরক্ষণ করুন {{pageNumber}}",
   "save-pinned-to-collection": "সংগ্রহে সংরক্ষণ করুন",
   "save-to": "সংরক্ষণ কর...",
@@ -204,6 +213,7 @@
   "selected-count": "{{count}} নির্বাচিত",
   "set-as-reading-bookmark": "আমার পঠন বুকমার্ক হিসেবে সেট করুন",
   "share-your-reflection": "এই আয়াতে আপনার প্রতিফলন শেয়ার করুন",
+  "show-tajweed-rules": "পড়ার সময় তাজউইদের নিয়মগুলি দেখান:",
   "study-mode": "অধ্যয়নের ধরণ",
   "surah-beginning": "সূরার শুরু",
   "surah-info": "সূরা তথ্য",

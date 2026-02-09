@@ -8,6 +8,12 @@ import { getSurahBookmarks } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 
 /**
+ * Prefix for surah bookmarks cache keys.
+ * Use this for cache invalidation filters.
+ */
+export const SURAH_BOOKMARKS_PREFIX = 'surah-bookmarks-';
+
+/**
  * Generate a stable cache key for surah bookmarks.
  * Format: "surah-bookmarks-{mushafId}-{surahNumber}"
  *
@@ -16,7 +22,7 @@ import { isLoggedIn } from '@/utils/auth/login';
  * @returns {string} The cache key
  */
 export const SURAH_BOOKMARKS_KEY = (mushafId: number, surahNumber: number) =>
-  `surah-bookmarks-${mushafId}-${surahNumber}`;
+  `${SURAH_BOOKMARKS_PREFIX}${mushafId}-${surahNumber}`;
 
 interface UseSurahBookmarksReturn {
   /** Map of all bookmarks in the surah, keyed by verseKey */

@@ -1,0 +1,1 @@
+../../../.agents/quran/skills/pdf/SKILL.md

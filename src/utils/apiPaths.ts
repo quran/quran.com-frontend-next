@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable max-lines */
 import { decamelizeKeys } from 'humps';
 
@@ -200,10 +201,21 @@ export const makePagesLookupUrl = (params: PagesLookUpRequest): string =>
  *
  * @param {string} chapterId the chapter Id.
  * @param {string} language the user's language code.
+ * @param {object} options optional parameters.
+ * @param {string | number} options.resourceId filter by resource id or slug.
+ * @param {boolean} options.includeResources include resources array in response.
  * @returns {string}
  */
-export const makeChapterInfoUrl = (chapterId: string, language: string): string =>
-  makeUrl(`/chapters/${chapterId}/info`, { language });
+export const makeChapterInfoUrl = (
+  chapterId: string,
+  language: string,
+  options?: { resourceId?: string | number; includeResources?: boolean },
+): string =>
+  makeUrl(`/chapters/${chapterId}/info`, {
+    language,
+    ...(options?.resourceId && { resource_id: options.resourceId }),
+    ...(options?.includeResources && { include_resources: true }),
+  });
 
 /**
  * Compose the url for the chapter metadata API.

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -6,14 +6,16 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../ChapterHeader.module.scss';
 
-import SurahInfoModal from '@/components/chapters/Info/SurahInfoModal';
+import SurahInfoContent from '@/components/chapters/Info/SurahInfoContent';
 import surahInfoStyles from '@/components/chapters/Info/SurahInfoModal.module.scss';
 import ContentModal, { ContentModalSize } from '@/components/dls/ContentModal/ContentModal';
+import DataContext from '@/contexts/DataContext';
+import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getSurahInfoNavigationUrl, getSurahNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoButtonProps {
-  chapterId?: string;
+  chapterId: string;
   className?: string;
 }
 
@@ -24,6 +26,10 @@ interface SurahInfoButtonProps {
  */
 const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className }) => {
   const { t } = useTranslation('quran-reader');
+
+  const chaptersData = useContext(DataContext);
+  const chapter = getChapterData(chaptersData, String(chapterId));
+
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,7 +44,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
      * This ensures the browser URL stays accurate - users on /1:1 keep /1:1 in the address bar,
      * rather than faking it to just /1 which would be incorrect.
      */
-    if (!router.pathname.includes('/surah/[chapterId]/info')) {
+    if (!router.pathname.includes('/surah/[chapterId]/[...info]')) {
       fakeNavigate(router.asPath, router.locale);
     } else {
       fakeNavigate(getSurahNavigationUrl(chapterId), router.locale);
@@ -64,7 +70,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
       >
         {t('info')}
       </button>
-      {chapterId && (
+      {chapterId && chapter && (
         <ContentModal
           isOpen={isOpen}
           onClose={handleClose}
@@ -78,9 +84,10 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
           )}
           overlayClassName={surahInfoStyles.bottomSheetOnDesktopOverlay}
           innerContentClassName={surahInfoStyles.bottomSheetOnDesktopInnerContent}
+          closeIconClassName={styles.closeIconContainer}
           size={ContentModalSize.MEDIUM}
         >
-          <SurahInfoModal chapterId={chapterId} />
+          <SurahInfoContent chapterId={chapterId} chapter={chapter} />
         </ContentModal>
       )}
     </>

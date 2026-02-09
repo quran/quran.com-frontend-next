@@ -27,7 +27,6 @@ interface Props {
   verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
-  bookmarksRangeUrl?: string;
   isInsideStudyMode?: boolean;
 }
 
@@ -134,11 +133,9 @@ const BookmarkAction: React.FC<Props> = ({
         tooltip={bookmarkLabel}
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
-        className={classNames(
-          styles.iconContainer,
-          styles.verseAction,
-          'bookmark-verse-action-button',
-        )}
+        className={classNames(styles.iconContainer, styles.verseAction, styles.bookmarkAction, {
+          [styles.bookmarkActionActive]: isBookmarked,
+        })}
         onClick={onBookmarkClicked}
         isDisabled={isVerseBookmarkedLoading}
         ariaLabel={bookmarkLabel}

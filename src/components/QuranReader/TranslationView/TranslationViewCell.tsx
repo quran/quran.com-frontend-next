@@ -35,7 +35,6 @@ type TranslationViewCellProps = {
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
   verseIndex: number;
-  bookmarksRangeUrl: string;
   isFirstCellWithHeader?: boolean;
 };
 
@@ -43,7 +42,6 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   verse,
   quranReaderStyles,
   verseIndex,
-  bookmarksRangeUrl,
   isFirstCellWithHeader = false,
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
@@ -99,7 +97,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
           [styles.firstCellWithHeader]: isFirstCellWithHeader,
         })}
       >
-        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} />
+        <TopActions verse={verse} />
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
@@ -157,6 +155,5 @@ const areVersesEqual = (
     nextProps.verse.words,
   ) &&
   !verseTranslationChanged(prevProps.verse, nextProps.verse) &&
-  !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles) &&
-  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl;
+  !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles);
 export default memo(TranslationViewCell, areVersesEqual);

@@ -40,6 +40,7 @@
   "download-copy": "si vous voulez télécharger un fichier texte.",
   "edgham": "Lettre muette",
   "ekhfa": "Ghunna/ikhfa’",
+  "embed-widget": "Intégrer le widget",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Suivez vos séries, créez des objectifs personnalisés, restez régulier.",
     "achieve-quran-goals-responsive": "Atteignez vos objectifs liés au Coran",
@@ -82,6 +83,9 @@
     "sign-in": "Connectez-vous pour continuer",
     "sign-in-message": "Connectez-vous ou inscrivez-vous gratuitement pour accéder à plus de fonctionnalités !",
     "title": "Sauvegardez votre progression"
+  },
+  "hadith": {
+    "title": "Hadith"
   },
   "hizb-beginning": "Début du Hizb",
   "include-translator": "Inclure le nom du traducteur ?",
@@ -185,12 +189,17 @@
   "reflection-not-available": "Il n'y a pas de réflexions révisées pour cette Ayah",
   "reflections": "Réflexions",
   "reflections-desc": "Lire et partager les réflexions Coraniques de l'Ayah {{ayahNumber}} de la Sourate {{surahName}}",
+  "related-verses": "Versets apparentés",
+  "related-verses-desc": "Lisez et partagez les versets coraniques relatifs à Ayah {{ayahNumber}} de la sourate {{surahName}}",
   "remove-bookmark": "Supprimer le favori",
   "remove-my-reading-bookmark": "Supprimer mon signet de lecture",
   "remove-pinned-verse": "Supprimer le verset {{verseKey}} à partir de l'épingle",
   "removed-from": "Supprimé de {{collectionName}}",
   "revelation-order-notice": "Remarque : vous naviguez dans le Coran selon l'ordre de la révélation. <link> Cliquez ici </link> pour revenir à l'ordre par défaut.",
   "rub-beginning": "Début du Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Vous enregistrez plusieurs signets ? Utilisez les collections :"
+  },
   "save-page": "Enregistrer la page {{pageNumber}}",
   "save-pinned-to-collection": "Ajouter à la collection",
   "save-to": "Enregistrer dans...",
@@ -204,6 +213,7 @@
   "selected-count": "{{count}} choisi(s)",
   "set-as-reading-bookmark": "Défini comme mon marque-page de lecture",
   "share-your-reflection": "Partagez votre réflexion sur cette Ayah",
+  "show-tajweed-rules": "Afficher les règles de Tajwid pendant la lecture :",
   "study-mode": "Mode d'étude",
   "surah-beginning": "Début de la Sourate",
   "surah-info": "Informations sur la Sourate",

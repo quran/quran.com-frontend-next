@@ -1,0 +1,1 @@
+../../../../skills/vercel-react-best-practices/rules/rerender-simple-expression-in-memo.md

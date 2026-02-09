@@ -40,6 +40,7 @@
   "download-copy": "የጽሑፍ ፋይል ማውረድ ከፈለጉ ።",
   "edgham": "ጸጥ ያለ ፊደል",
   "ekhfa": "ጉንና/ኢኽፋ",
+  "embed-widget": "መግብርን ክተት",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "ትራኮችን ይከታተሉ፣ ብጁ ግቦችን ይፍጠሩ፣ ወጥነት ይኑርዎት",
     "achieve-quran-goals-responsive": "የቁርዓን ግቦችህን ማሳካት",
@@ -82,6 +83,9 @@
     "sign-in": "ለመቀጠል ይግቡ",
     "sign-in-message": "ተጨማሪ ባህሪያትን ለማግኘት በነፃ ይግቡ ወይም ይመዝገቡ!",
     "title": "እድገትዎን ያስቀምጡ"
+  },
+  "hadith": {
+    "title": "ሐዲት"
   },
   "hizb-beginning": "የሂዝብ መጀመሪያ",
   "include-translator": "የተርጓሚ ስም ይካተት?",
@@ -185,12 +189,17 @@
   "reflection-not-available": "ለዚህ አያህ የተገመገሙ አስተያየቶች የሉም",
   "reflections": "ነጸብራቆች",
   "reflections-desc": "የሱራህ {{surahName}} የአያህን {{ayahNumber}} የቁርዓን አንቀጾች አንብብና አጋራ",
+  "related-verses": "ተዛማጅ ጥቅሶች",
+  "related-verses-desc": "ከቁርዓን ጋር የተያያዙ የአያህ አንቀጾችን ያንብቡ እና ያጋሩ {{ayahNumber}} የሱራህ {{surahName}}",
   "remove-bookmark": "ዕልባት አስወግድ",
   "remove-my-reading-bookmark": "የንባብ ዕልቤን አስወግድ",
   "remove-pinned-verse": "ጥቅስ አስወግድ {{verseKey}} ከተሰካ",
   "removed-from": "ከ {{collectionName}} ተወገደ",
   "revelation-order-notice": "ማሳሰቢያ፡- ቁርዓንን የምትቃኘው በወረደበት ቅደም ተከተል ነው። <link>እዚህ ጠቅ ያድርጉ</link> ወደ ነባሪው ቅደም ተከተል ለመመለስ።",
   "rub-beginning": "የሩብ ሂዝብ መጀመሪያ",
+  "save-bookmark-modal": {
+    "collections-hint": "ከአንድ በላይ ዕልባት እያስቀመጡ ነው? ስብስቦችን ይጠቀሙ፦"
+  },
   "save-page": "ገጽ አስቀምጥ {{pageNumber}}",
   "save-pinned-to-collection": "ወደ ስብስብ ያስቀምጡ",
   "save-to": "አስቀምጥ ወደ...",
@@ -204,6 +213,7 @@
   "selected-count": "{{count}} ተመርጧል",
   "set-as-reading-bookmark": "እንደ የንባብ ዕልባትዬ አዘጋጅ",
   "share-your-reflection": "በዚህ አንቀፅ ላይ ያላችሁን አስተያየት(ያስተነተኑትን) አካፍሉን",
+  "show-tajweed-rules": "የሚከተለውን በማንበብ የታጂዊድ ህጎችን አሳይ፦",
   "study-mode": "የጥናት ሁነታ",
   "surah-beginning": "የሱራ(ምዕራፍ) መጀመሪያ",
   "surah-info": "የሱራህ መረጃ",

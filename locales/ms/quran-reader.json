@@ -40,6 +40,7 @@
   "download-copy": "jika anda ingin memuat turun fail teks.",
   "edgham": "Idghaam",
   "ekhfa": "Ikhfa dan Ghunna",
+  "embed-widget": "Widget Benamkan",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Jejaki Rentetan, Cipta Matlamat Tersuai, Kekal Konsisten",
     "achieve-quran-goals-responsive": "Capai Matlamat Al-Quran Anda",
@@ -82,6 +83,9 @@
     "sign-in": "Log masuk untuk meneruskan",
     "sign-in-message": "Daftar masuk atau Daftar secara percuma untuk mendapatkan akses kepada lebih banyak ciri!",
     "title": "Simpan Kemajuan Anda"
+  },
+  "hadith": {
+    "title": "Hadis"
   },
   "hizb-beginning": "Permulaan Hizb",
   "include-translator": "Sertakan nama penterjemah?",
@@ -185,12 +189,17 @@
   "reflection-not-available": "Tiada refleksi yang disemak untuk ayat ini",
   "reflections": "Refleksi",
   "reflections-desc": "Baca dan kongsi renungan Al-Quran Ayah {{ayahNumber}} Surah {{surahName}}",
+  "related-verses": "Ayat-ayat berkaitan",
+  "related-verses-desc": "Baca dan kongsikan ayat-ayat berkaitan Al-Quran {{ayahNumber}} Surah {{surahName}}",
   "remove-bookmark": "Alih keluar penanda halaman",
   "remove-my-reading-bookmark": "Alih Keluar Penanda Buku Bacaan Saya",
   "remove-pinned-verse": "Alih keluar ayat {{verseKey}} daripada disematkan",
   "removed-from": "Dipadam daripada {{collectionName}}",
   "revelation-order-notice": "Nota: anda sedang menavigasi Al-Quran mengikut urutan wahyu. <link> Klik di sini </link> untuk kembali kepada pesanan lalai.",
   "rub-beginning": "Permulaan Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Menyimpan Lebih daripada satu penanda buku? Gunakan koleksi:"
+  },
   "save-page": "Simpan Halaman {{pageNumber}}",
   "save-pinned-to-collection": "Simpan ke Koleksi",
   "save-to": "Simpan ke...",
@@ -204,6 +213,7 @@
   "selected-count": "{{count}} dipilih",
   "set-as-reading-bookmark": "Tetapkan sebagai Penanda Buku Bacaan Saya",
   "share-your-reflection": "Kongsikan renungan anda tentang ayat ini",
+  "show-tajweed-rules": "Tunjukkan hukum Tajwid semasa membaca:",
   "study-mode": "Mod belajar",
   "surah-beginning": "Permulaan Surah",
   "surah-info": "Info Surah",

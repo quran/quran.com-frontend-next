@@ -177,6 +177,7 @@ const TranslationText: React.FC<Props> = ({
         chapterName={chapterName}
         reference={reference}
         lang={lang}
+        languageCode={langData.code}
       />
       <FootnoteAndSubFootnote
         shouldShowFootnote={shouldShowFootnote}

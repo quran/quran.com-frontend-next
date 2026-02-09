@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "canonicalRoots": ["AGENTS.md", ".agents/quran"],
+  "links": [
+    {
+      "path": "CLAUDE.md",
+      "target": "AGENTS.md",
+      "type": "file"
+    },
+    {
+      "path": ".claude/commands",
+      "target": ".agents/quran/commands",
+      "type": "tree"
+    },
+    {
+      "path": ".agent/skills",
+      "target": ".agents/quran/skills",
+      "type": "tree"
+    },
+    {
+      "path": ".agent/workflows",
+      "target": ".agents/quran/workflows",
+      "type": "tree"
+    },
+    {
+      "path": ".agent/rules/quran-frontend.md",
+      "target": ".agents/quran/standards/quran-frontend.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "target": ".agents/quran/standards/copilot-instructions.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/instructions/api-data.instructions.md",
+      "target": ".agents/quran/standards/instructions/api-data.instructions.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/instructions/localization.instructions.md",
+      "target": ".agents/quran/standards/instructions/localization.instructions.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/instructions/playwright-tests.instructions.md",
+      "target": ".agents/quran/standards/instructions/playwright-tests.instructions.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/instructions/react-components.instructions.md",
+      "target": ".agents/quran/standards/instructions/react-components.instructions.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/instructions/security.instructions.md",
+      "target": ".agents/quran/standards/instructions/security.instructions.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/instructions/styles.instructions.md",
+      "target": ".agents/quran/standards/instructions/styles.instructions.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/instructions/testing.instructions.md",
+      "target": ".agents/quran/standards/instructions/testing.instructions.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/instructions/typescript.instructions.md",
+      "target": ".agents/quran/standards/instructions/typescript.instructions.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/standards/quran-frontend.md",
+      "target": ".agents/quran/standards/core-standards.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/standards/copilot-instructions.md",
+      "target": ".agents/quran/standards/core-standards.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/standards/instructions/api-data.instructions.md",
+      "target": ".agents/quran/standards/core-standards.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/standards/instructions/localization.instructions.md",
+      "target": ".agents/quran/standards/core-standards.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/standards/instructions/playwright-tests.instructions.md",
+      "target": ".agents/quran/standards/core-standards.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/standards/instructions/react-components.instructions.md",
+      "target": ".agents/quran/standards/core-standards.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/standards/instructions/security.instructions.md",
+      "target": ".agents/quran/standards/core-standards.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/standards/instructions/styles.instructions.md",
+      "target": ".agents/quran/standards/core-standards.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/standards/instructions/testing.instructions.md",
+      "target": ".agents/quran/standards/core-standards.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/standards/instructions/typescript.instructions.md",
+      "target": ".agents/quran/standards/core-standards.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/prompts/pre-pr-review.md",
+      "target": ".agents/quran/prompts/pre-pr-review.md",
+      "type": "file"
+    },
+    {
+      "path": ".github/prompts/review.prompt.md",
+      "target": ".agents/quran/prompts/review.prompt.md",
+      "type": "file"
+    },
+    {
+      "path": ".windsurf/rules/prompts.md",
+      "target": ".agents/quran/standards/always-on-prompt.md",
+      "type": "file"
+    },
+    {
+      "path": ".windsurf/prompts/review.prompt.md",
+      "target": ".agents/quran/prompts/review.prompt.md",
+      "type": "file"
+    },
+    {
+      "path": ".cursor/rules/prompts.md",
+      "target": ".agents/quran/standards/always-on-prompt.md",
+      "type": "file"
+    },
+    {
+      "path": ".cursor/prompts/review.prompt.md",
+      "target": ".agents/quran/prompts/review.prompt.md",
+      "type": "file"
+    },
+    {
+      "path": ".agents/quran/skills/agent-browser",
+      "target": ".agents/skills/agent-browser",
+      "type": "tree"
+    },
+    {
+      "path": ".agents/quran/skills/frontend-design",
+      "target": ".agents/skills/frontend-design",
+      "type": "tree"
+    },
+    {
+      "path": ".agents/quran/skills/pdf",
+      "target": ".agents/skills/pdf",
+      "type": "tree"
+    },
+    {
+      "path": ".agents/quran/skills/seo-audit",
+      "target": ".agents/skills/seo-audit",
+      "type": "tree"
+    },
+    {
+      "path": ".agents/quran/skills/skill-creator",
+      "target": ".agents/skills/skill-creator",
+      "type": "tree"
+    },
+    {
+      "path": ".agents/quran/skills/vercel-react-best-practices",
+      "target": ".agents/skills/vercel-react-best-practices",
+      "type": "tree"
+    },
+    {
+      "path": ".agents/quran/skills/web-design-guidelines",
+      "target": ".agents/skills/web-design-guidelines",
+      "type": "tree"
+    },
+    {
+      "path": ".claude/skills/agent-browser",
+      "target": ".agents/skills/agent-browser",
+      "type": "tree"
+    },
+    {
+      "path": ".claude/skills/frontend-design",
+      "target": ".agents/skills/frontend-design",
+      "type": "tree"
+    },
+    {
+      "path": ".claude/skills/pdf",
+      "target": ".agents/skills/pdf",
+      "type": "tree"
+    },
+    {
+      "path": ".claude/skills/seo-audit",
+      "target": ".agents/skills/seo-audit",
+      "type": "tree"
+    },
+    {
+      "path": ".claude/skills/skill-creator",
+      "target": ".agents/skills/skill-creator",
+      "type": "tree"
+    },
+    {
+      "path": ".claude/skills/vercel-react-best-practices",
+      "target": ".agents/skills/vercel-react-best-practices",
+      "type": "tree"
+    },
+    {
+      "path": ".claude/skills/web-design-guidelines",
+      "target": ".agents/skills/web-design-guidelines",
+      "type": "tree"
+    },
+    {
+      "path": ".codex/skills/agent-browser",
+      "target": ".agents/skills/agent-browser",
+      "type": "tree"
+    },
+    {
+      "path": ".codex/skills/frontend-design",
+      "target": ".agents/skills/frontend-design",
+      "type": "tree"
+    },
+    {
+      "path": ".codex/skills/pdf",
+      "target": ".agents/skills/pdf",
+      "type": "tree"
+    },
+    {
+      "path": ".codex/skills/seo-audit",
+      "target": ".agents/skills/seo-audit",
+      "type": "tree"
+    },
+    {
+      "path": ".codex/skills/skill-creator",
+      "target": ".agents/skills/skill-creator",
+      "type": "tree"
+    },
+    {
+      "path": ".codex/skills/vercel-react-best-practices",
+      "target": ".agents/skills/vercel-react-best-practices",
+      "type": "tree"
+    },
+    {
+      "path": ".codex/skills/web-design-guidelines",
+      "target": ".agents/skills/web-design-guidelines",
+      "type": "tree"
+    }
+  ]
+}

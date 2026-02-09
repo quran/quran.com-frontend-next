@@ -28,7 +28,7 @@ import {
   getVerseLayersNavigationUrl,
   getVerseQiraatNavigationUrl,
   getVerseReflectionNavigationUrl,
-  getVerseRelatedVerseNavigationUrl,
+  getVerseRelatedVersesNavigationUrl,
   getVerseSelectedTafsirNavigationUrl,
 } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
@@ -162,7 +162,7 @@ const BottomActions = ({
       label: t('related-verses'),
       icon: <RelatedVersesIcon />,
       onClick: createTabHandler(TabId.RELATED_VERSES, () =>
-        getVerseRelatedVerseNavigationUrl(verseKey),
+        getVerseRelatedVersesNavigationUrl(verseKey),
       ),
       condition: hasRelatedVerses,
     },

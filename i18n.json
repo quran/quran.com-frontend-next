@@ -35,13 +35,21 @@
     "/[chapterId]/qiraat": ["quran-reader", "reading-goal", "notes", "qiraat", "surah-info"],
     "/[chapterId]/lessons": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/layers": ["quran-reader", "reading-goal", "notes", "surah-info"],
+    "/[chapterId]/related-verses": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/tafsirs/[tafsirId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/[verseId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/page/[pageId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/juz/[juzId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/hizb/[hizbId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
-    "/surah/[chapterId]/info": ["quran-reader", "reading-goal", "notes", "chapter", "surah-info"],
+    "/surah/[chapterId]/[...info]": [
+      "quran-reader",
+      "reading-goal",
+      "notes",
+      "collection",
+      "chapter",
+      "surah-info"
+    ],
     "/collections/all": [
       "collection",
       "quran-reader",
@@ -90,6 +98,8 @@
       "notes",
       "surah-info"
     ],
-    "/my-quran": ["my-quran", "notes", "collection", "quran-reader"]
+    "/my-quran": ["my-quran", "notes", "collection", "quran-reader"],
+    "/embed": ["embed"],
+    "/embed/v1": ["embed"]
   }
 }

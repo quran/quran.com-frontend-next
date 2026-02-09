@@ -100,7 +100,12 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
       StudyModeTabId.LESSONS,
       StudyModeTabId.ANSWERS,
       StudyModeTabId.QIRAAT,
+      StudyModeTabId.RELATED_VERSES,
     ].includes(activeContentTab);
+
+  const isInitialVerse =
+    verseNav.selectedChapterId === initialChapterId &&
+    verseNav.selectedVerseNumber === initialVerseNumber;
 
   if (!chaptersData || !initialChapterId || !initialVerseNumber) return null;
 
@@ -132,8 +137,8 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
       canNavigateWordNext={wordNav.canNavigateWordNext}
       activeContentTab={activeContentTab}
       onTabChange={events.handleTabChange}
-      questionId={questionId}
-      questionsInitialData={questionsInitialData}
+      questionId={isInitialVerse ? questionId : undefined}
+      questionsInitialData={isInitialVerse ? questionsInitialData : undefined}
       isContentTabActive={isContentTabActive}
       tafsirIdOrSlug={tafsirIdOrSlug}
     />

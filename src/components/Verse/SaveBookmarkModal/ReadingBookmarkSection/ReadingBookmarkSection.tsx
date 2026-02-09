@@ -90,12 +90,7 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
   return (
     <div className={styles.readingBookmarkContainer}>
       {showRemoveSection ? (
-        <RemoveBookmarkSection
-          resourceDisplayName={resourceDisplayName}
-          isLoading={isLoading}
-          error={error}
-          onRemove={handleRemoveCurrentBookmark}
-        />
+        <RemoveBookmarkSection isLoading={isLoading} onRemove={handleRemoveCurrentBookmark} />
       ) : (
         <SetBookmarkSection
           isSelected={isSelected}

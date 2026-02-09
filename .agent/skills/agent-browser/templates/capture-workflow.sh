@@ -1,0 +1,1 @@
+../../../../.agents/quran/skills/agent-browser/templates/capture-workflow.sh
