@@ -105,7 +105,7 @@ const getVersesWithRelatedVerses = async () => {
   await Promise.all(
     chapters.map(async (chapterId) => {
       const { versesCount } = englishChaptersData[chapterId];
-      const versesURL = `${API_CONTENT_URL}${QDC_PREFIX}/verses/by_chapter/${chapterId}?per_page=${versesCount}&fields=chapter_id,has_related_verses`;
+      const versesURL = `${API_CONTENT_URL}${QDC_PREFIX}/verses/by_chapter/${chapterId}?per_page=${versesCount}`;
       const { signature, timestamp } = generateSignature(versesURL);
 
       const res = await fetch(versesURL, {
