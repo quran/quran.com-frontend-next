@@ -24,6 +24,7 @@ import {
   selectHasCustomizedReflectionLanguages,
   selectHasCustomizedLessonLanguages,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import { areArraysEqual } from '@/utils/array';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import {
@@ -94,9 +95,6 @@ const ReflectionBodyContainer = ({
   const hasCustomizedLessonLanguages = useSelector(selectHasCustomizedLessonLanguages);
   const prevLangRef = useRef(lang);
 
-  const arraysEqual = (a?: string[], b?: string[]) =>
-    Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((v, i) => v === b[i]);
-
   // Get the appropriate languages based on content type
   const selectedLanguages =
     selectedContentType === ContentType.REFLECTIONS
@@ -122,10 +120,13 @@ const ReflectionBodyContainer = ({
 
     const isReflectionCustomized =
       hasCustomizedReflectionLanguages ||
-      !arraysEqual(storedReflectionLanguages, defaultReadingPrefsPrev.selectedReflectionLanguages);
+      !areArraysEqual(
+        storedReflectionLanguages,
+        defaultReadingPrefsPrev.selectedReflectionLanguages,
+      );
     const isLessonCustomized =
       hasCustomizedLessonLanguages ||
-      !arraysEqual(storedLessonLanguages, defaultReadingPrefsPrev.selectedLessonLanguages);
+      !areArraysEqual(storedLessonLanguages, defaultReadingPrefsPrev.selectedLessonLanguages);
 
     if (!isReflectionCustomized) {
       dispatch({

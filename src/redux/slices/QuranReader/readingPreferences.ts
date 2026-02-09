@@ -89,7 +89,7 @@ export const readingPreferencesSlice = createSlice({
       state,
       action: PayloadAction<string[], string, { skipCustomization?: boolean } | undefined>,
     ) => {
-      const skipCustomization = action?.meta?.skipCustomization === true;
+      const skipCustomization = action.meta?.skipCustomization === true;
       return {
         ...state,
         selectedReflectionLanguages: action.payload,
@@ -103,7 +103,7 @@ export const readingPreferencesSlice = createSlice({
       state,
       action: PayloadAction<string[], string, { skipCustomization?: boolean } | undefined>,
     ) => {
-      const skipCustomization = action?.meta?.skipCustomization === true;
+      const skipCustomization = action.meta?.skipCustomization === true;
       return {
         ...state,
         selectedLessonLanguages: action.payload,

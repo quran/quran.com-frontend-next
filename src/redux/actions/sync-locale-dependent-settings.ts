@@ -14,14 +14,12 @@ import {
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { setSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { areArraysEqual } from '@/utils/array';
 
 type Params = {
   prevLocale: string;
   nextLocale: string;
 };
-
-const arraysEqual = (a?: string[], b?: string[]) =>
-  Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((v, i) => v === b[i]);
 
 /**
  * Keep locale-dependent content preferences (e.g. default tafsir/translation and
@@ -70,13 +68,13 @@ const syncLocaleDependentSettings =
 
     const isReflectionCustomized =
       hasCustomizedReflectionLanguages === true ||
-      !arraysEqual(
+      !areArraysEqual(
         selectedReflectionLanguages,
         defaultReadingPrefsPrev.selectedReflectionLanguages,
       );
     const isLessonCustomized =
       hasCustomizedLessonLanguages === true ||
-      !arraysEqual(selectedLessonLanguages, defaultReadingPrefsPrev.selectedLessonLanguages);
+      !areArraysEqual(selectedLessonLanguages, defaultReadingPrefsPrev.selectedLessonLanguages);
 
     if (!isReflectionCustomized) {
       dispatch({

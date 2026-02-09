@@ -6,7 +6,7 @@ import { act } from 'react';
 import { renderHook } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { Dispatch } from 'redux';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import useLanguageChange from './useLanguageChange';
 
@@ -25,8 +25,6 @@ declare global {
     IS_REACT_ACT_ENVIRONMENT?: boolean;
   }
 }
-
-globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 // Mocks
 vi.mock('react-redux', () => ({
@@ -75,6 +73,20 @@ vi.mock('@/dls/Toast/Toast', () => ({
 
 describe('useLanguageChange', () => {
   const dispatch = vi.fn() as unknown as Dispatch;
+  let previousIsReactActEnvironment: boolean | undefined;
+
+  beforeAll(() => {
+    previousIsReactActEnvironment = globalThis.IS_REACT_ACT_ENVIRONMENT;
+    globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+  });
+
+  afterAll(() => {
+    if (previousIsReactActEnvironment === undefined) {
+      delete globalThis.IS_REACT_ACT_ENVIRONMENT;
+    } else {
+      globalThis.IS_REACT_ACT_ENVIRONMENT = previousIsReactActEnvironment;
+    }
+  });
 
   beforeEach(() => {
     vi.clearAllMocks();
