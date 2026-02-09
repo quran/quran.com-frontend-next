@@ -1,0 +1,1 @@
+../../../../.agents/skills/vercel-react-best-practices/rules/rendering-conditional-render.md

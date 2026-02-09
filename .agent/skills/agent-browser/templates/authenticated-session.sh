@@ -1,0 +1,1 @@
+../../../../.agents/quran/skills/agent-browser/templates/authenticated-session.sh

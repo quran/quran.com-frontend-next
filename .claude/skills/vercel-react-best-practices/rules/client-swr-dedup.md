@@ -1,0 +1,1 @@
+../../../../.agents/skills/vercel-react-best-practices/rules/client-swr-dedup.md
