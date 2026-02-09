@@ -55,10 +55,14 @@
 }
 
 .translationText {
-  line-height: 1.8;
-  font-weight: var(--font-weight-medium);
   font-size: var(--font-size-small-px);
   color: var(--color-text-default-new);
+  font-weight: var(--font-weight-light);
+  line-height: 1.8;
+
+  & b {
+    font-weight: var(--font-weight-medium);
+  }
 }
 
 .groupToken {
@@ -168,9 +172,13 @@
   border-radius: var(--border-radius-small-px);
   color: var(--color-text-default-new);
   font-size: var(--font-size-small-px);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-light);
   line-height: 1;
   cursor: pointer;
+
+  & b {
+    font-weight: var(--font-weight-medium);
+  }
 }
 
 .optionText {
