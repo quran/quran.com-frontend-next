@@ -11,9 +11,12 @@ import styles from './StudyModeLayersTab.module.scss';
 import { getFootnote } from '@/api';
 import Error from '@/components/Error';
 import InlineFootnote from '@/components/QuranReader/ReadingView/InlineFootnote';
+import FontSizeControl from '@/components/QuranReader/ReadingView/StudyModeModal/FontSizeControl';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
+import IconContainer from '@/dls/IconContainer/IconContainer';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
+import ExpandArrowIcon from '@/icons/expand-arrow.svg';
 import { logErrorToSentry } from '@/lib/sentry';
 import Language from '@/types/Language';
 import { LayeredTranslationGroup, LayeredTranslationToken } from '@/types/LayeredTranslation';
@@ -164,7 +167,13 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
     [footnote, resetFootnote, verseKey],
   );
 
-  if (isLoading) return <TafsirSkeleton />;
+  if (isLoading) {
+    return (
+      <div className={styles.container}>
+        <TafsirSkeleton />
+      </div>
+    );
+  }
 
   if (error) {
     return (
@@ -181,11 +190,17 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.controls}>
+        <FontSizeControl fontType="tafsir" />
         <button
           type="button"
           className={styles.layerButton}
           onClick={() => setLayerMode((prev) => (prev === 'expanded' ? 'collapsed' : 'expanded'))}
         >
+          <IconContainer
+            icon={<ExpandArrowIcon />}
+            shouldForceSetColors={false}
+            className={styles.layerButtonIcon}
+          />
           {layerMode === 'expanded' ? t('layers.contract') : t('layers.expand')}
         </button>
       </div>
@@ -206,28 +221,38 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
           const group = groupsByKey[token.groupKey];
           if (!group) return null;
 
+          const onClick = () => {
+            setActiveGroupKey((prev) => {
+              const next = prev === group.groupKey ? null : group.groupKey;
+              setIsExplanationOpen(false);
+              return next;
+            });
+          };
+
           return (
-            <button
-              type="button"
+            <span
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onClick();
+                }
+              }}
               key={key}
               className={classNames(styles.groupToken, {
                 [styles.groupTokenActive]: activeGroupKey === group.groupKey,
               })}
               aria-label={t('layers.alternative-translations')}
-              onClick={() =>
-                setActiveGroupKey((prev) => {
-                  const next = prev === group.groupKey ? null : group.groupKey;
-                  setIsExplanationOpen(false);
-                  return next;
-                })
-              }
+              onClick={onClick}
             >
               <span
                 className={styles.groupTokenText}
                 dangerouslySetInnerHTML={{ __html: getSelectedOptionHtml(group) }}
               />
               <ChevronDownIcon className={styles.groupTokenChevron} />
-            </button>
+            </span>
           );
         })}
       </div>

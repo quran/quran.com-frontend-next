@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
@@ -101,9 +100,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const verseKey = String(chapterId);
   const chaptersData = await getAllChaptersData(locale);
 
-  if (!isValidVerseKey(chaptersData, verseKey)) {
-    return { notFound: true };
-  }
+  if (!isValidVerseKey(chaptersData, verseKey)) return { notFound: true };
 
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
@@ -147,10 +144,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   } catch (error) {
     logErrorToSentry(error, {
       transactionName: 'getStaticProps-LayersPage',
-      metadata: {
-        chapterIdOrSlug: String(params.chapterId),
-        locale,
-      },
+      metadata: { chapterIdOrSlug: String(params.chapterId), locale },
     });
     return {
       notFound: true,

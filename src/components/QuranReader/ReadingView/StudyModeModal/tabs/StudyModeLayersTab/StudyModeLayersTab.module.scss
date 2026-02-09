@@ -3,7 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-medium-px);
+  gap: var(--spacing-medium2-px);
   padding-block-start: var(--spacing-medium);
   padding-block-end: var(--spacing-mega);
 }
@@ -18,18 +18,29 @@
 
 .controls {
   display: flex;
-  gap: var(--spacing-xsmall-px);
+  gap: var(--spacing-medium2-px);
   flex-wrap: wrap;
 }
 
 .layerButton {
-  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
-  border-radius: var(--spacing-small-px);
+  display: flex;
+  gap: var(--spacing-small-px);
+  align-items: center;
+  border: none;
+  border-radius: var(--border-radius-xsmall-px);
   padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
-  font-size: var(--font-size-normal);
-  background: var(--color-background-default);
+  font-size: var(--font-size-small);
+  background: var(--color-background-alternative-faint);
   color: var(--color-text-default-new);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
+
+  .layerButtonIcon {
+    svg {
+      inline-size: var(--spacing-small);
+      block-size: var(--spacing-small);
+    }
+  }
 }
 
 .translationText {
@@ -39,18 +50,10 @@
 }
 
 .groupToken {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-xxsmall-px);
-  border: 0;
   border-block-end: var(--spacing-hairline-px) dotted var(--color-text-faded-new);
-  background: none;
-  padding: 0;
-  margin-inline-start: var(--spacing-xxsmall-px);
-  margin-inline-end: var(--spacing-xxsmall-px);
+  color: var(--color-text-default-new);
   font-size: inherit;
   line-height: inherit;
-  color: var(--color-text-default-new);
   cursor: pointer;
 }
 
@@ -59,13 +62,20 @@
 }
 
 .groupTokenChevron {
+  display: inline-flex;
+  margin-inline-start: var(--spacing-xxsmall-px);
   inline-size: 0.75em;
   block-size: 0.75em;
   flex-shrink: 0;
+  transition: transform var(--transition-fast) ease-in-out;
 }
 
 .groupTokenActive {
   border-block-end-color: var(--color-success-medium);
+
+  .groupTokenChevron {
+    transform: rotate(180deg);
+  }
 }
 
 .groupPanel {
