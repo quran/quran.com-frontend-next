@@ -50,6 +50,7 @@
 }
 
 .groupToken {
+  display: inline;
   border-block-end: var(--spacing-hairline-px) dotted var(--color-text-faded-new);
   color: var(--color-text-default-new);
   font-size: inherit;
@@ -76,6 +77,16 @@
   .groupTokenChevron {
     transform: rotate(180deg);
   }
+}
+
+$max-popover-width: 23.125rem;
+
+.popoverContent {
+  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  border-radius: var(--spacing-medium-px);
+  background: var(--color-background-alternative-faint);
+  max-inline-size: $max-popover-width;
+  z-index: 9999;
 }
 
 .groupPanel {

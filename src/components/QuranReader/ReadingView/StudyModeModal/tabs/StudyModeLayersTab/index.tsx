@@ -15,6 +15,7 @@ import FontSizeControl from '@/components/QuranReader/ReadingView/StudyModeModal
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import IconContainer from '@/dls/IconContainer/IconContainer';
+import Popover, { ContentAlign, ContentSide } from '@/dls/Popover';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import ExpandArrowIcon from '@/icons/expand-arrow.svg';
 import { logErrorToSentry } from '@/lib/sentry';
@@ -95,7 +96,6 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
     return map;
   }, [data?.groups]);
 
-  const activeGroup = activeGroupKey ? groupsByKey[activeGroupKey] : null;
   const tokens = useMemo(
     () =>
       (layerMode === 'collapsed' ? data?.collapsedTokens : data?.expandedTokens) || EMPTY_TOKENS,
@@ -221,106 +221,112 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
           const group = groupsByKey[token.groupKey];
           if (!group) return null;
 
-          const onClick = () => {
-            setActiveGroupKey((prev) => {
-              const next = prev === group.groupKey ? null : group.groupKey;
-              setIsExplanationOpen(false);
-              return next;
-            });
-          };
+          const isActive = activeGroupKey === group.groupKey;
 
           return (
-            <span
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onClick();
+            <Popover
+              key={key}
+              contentSide={ContentSide.BOTTOM}
+              contentAlign={ContentAlign.CENTER}
+              avoidCollisions
+              tip={false}
+              open={isActive}
+              isContainerSpan
+              contentSideOffset={8}
+              contentStyles={styles.popoverContent}
+              trigger={
+                <span
+                  role="button"
+                  tabIndex={0}
+                  aria-label={t('layers.alternative-translations')}
+                  className={classNames(styles.groupToken, {
+                    [styles.groupTokenActive]: isActive,
+                  })}
+                >
+                  <span
+                    className={styles.groupTokenText}
+                    dangerouslySetInnerHTML={{ __html: getSelectedOptionHtml(group) }}
+                  />
+                  <ChevronDownIcon className={styles.groupTokenChevron} />
+                </span>
+              }
+              onOpenChange={(open) => {
+                if (open) {
+                  setActiveGroupKey(group.groupKey);
+                  setIsExplanationOpen(false);
+                } else {
+                  setActiveGroupKey(null);
                 }
               }}
-              key={key}
-              className={classNames(styles.groupToken, {
-                [styles.groupTokenActive]: activeGroupKey === group.groupKey,
-              })}
-              aria-label={t('layers.alternative-translations')}
-              onClick={onClick}
             >
-              <span
-                className={styles.groupTokenText}
-                dangerouslySetInnerHTML={{ __html: getSelectedOptionHtml(group) }}
-              />
-              <ChevronDownIcon className={styles.groupTokenChevron} />
-            </span>
+              <div className={styles.popoverContent}>
+                <div className={styles.groupPanelHeader}>
+                  <span>{t('layers.alternative-translations')}</span>
+                </div>
+                <div className={styles.optionsList}>
+                  {group.options.map((option) => {
+                    const optionHtml =
+                      layerMode === 'collapsed' ? option.collapsedHtml : option.expandedHtml;
+                    const isSelected = selectedOptionByGroup[group.groupKey] === option.optionKey;
+
+                    return (
+                      <button
+                        key={option.optionKey}
+                        type="button"
+                        className={classNames(styles.optionButton, {
+                          [styles.optionButtonActive]: isSelected,
+                        })}
+                        onClick={() =>
+                          setSelectedOptionByGroup((prev) => ({
+                            ...prev,
+                            [group.groupKey]: option.optionKey,
+                          }))
+                        }
+                      >
+                        <span className={styles.optionIndex}>{option.position}</span>
+                        <span
+                          className={styles.optionText}
+                          dangerouslySetInnerHTML={{ __html: optionHtml }}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {!!group.explanationHtml && (
+                  <div className={styles.explanationWrapper}>
+                    <button
+                      type="button"
+                      className={styles.explanationToggle}
+                      onClick={() => setIsExplanationOpen((prev) => !prev)}
+                    >
+                      <span>
+                        {isExplanationOpen
+                          ? t('layers.close-explanation')
+                          : t('layers.read-explanation')}
+                      </span>
+                      <ChevronDownIcon
+                        className={classNames(styles.explanationChevron, {
+                          [styles.explanationChevronOpen]: isExplanationOpen,
+                        })}
+                      />
+                    </button>
+
+                    {isExplanationOpen && (
+                      <div
+                        className={styles.explanationText}
+                        onClick={onTextClicked}
+                        role="presentation"
+                        dangerouslySetInnerHTML={{ __html: group.explanationHtml }}
+                      />
+                    )}
+                  </div>
+                )}
+              </div>
+            </Popover>
           );
         })}
       </div>
-
-      {activeGroup && (
-        <div className={styles.groupPanel}>
-          <div className={styles.groupPanelHeader}>
-            <span>{t('layers.alternative-translations')}</span>
-          </div>
-          <div className={styles.optionsList}>
-            {activeGroup.options.map((option) => {
-              const optionHtml =
-                layerMode === 'collapsed' ? option.collapsedHtml : option.expandedHtml;
-              const isSelected = selectedOptionByGroup[activeGroup.groupKey] === option.optionKey;
-
-              return (
-                <button
-                  key={option.optionKey}
-                  type="button"
-                  className={classNames(styles.optionButton, {
-                    [styles.optionButtonActive]: isSelected,
-                  })}
-                  onClick={() =>
-                    setSelectedOptionByGroup((prev) => ({
-                      ...prev,
-                      [activeGroup.groupKey]: option.optionKey,
-                    }))
-                  }
-                >
-                  <span className={styles.optionIndex}>{option.position}</span>
-                  <span
-                    className={styles.optionText}
-                    dangerouslySetInnerHTML={{ __html: optionHtml }}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          {!!activeGroup.explanationHtml && (
-            <div className={styles.explanationWrapper}>
-              <button
-                type="button"
-                className={styles.explanationToggle}
-                onClick={() => setIsExplanationOpen((prev) => !prev)}
-              >
-                <span>
-                  {isExplanationOpen ? t('layers.close-explanation') : t('layers.read-explanation')}
-                </span>
-                <ChevronDownIcon
-                  className={classNames(styles.explanationChevron, {
-                    [styles.explanationChevronOpen]: isExplanationOpen,
-                  })}
-                />
-              </button>
-
-              {isExplanationOpen && (
-                <div
-                  className={styles.explanationText}
-                  onClick={onTextClicked}
-                  role="presentation"
-                  dangerouslySetInnerHTML={{ __html: activeGroup.explanationHtml }}
-                />
-              )}
-            </div>
-          )}
-        </div>
-      )}
 
       {shouldShowFootnote && (
         <InlineFootnote
