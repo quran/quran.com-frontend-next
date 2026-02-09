@@ -54,7 +54,8 @@ export const TAB_COMPONENTS: Partial<
       questionId?: string;
       questionsInitialData?: AyahQuestionsResponse;
       tafsirIdOrSlug?: string;
-      onGoToVerse?: (chapterId: string, verseNumber: string) => void;
+      onGoToVerse?: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
+      setRelatedVersesCount?: (count: number) => void;
     }>
   >
 > = {
@@ -82,6 +83,7 @@ export type TabConfig = {
  * @param {string} props.verseKey - Current verse key
  * @param {Function} [props.onTabChange] - Callback when tab is clicked
  * @param {boolean} [props.hasRelatedVerses=false] - Whether the verse has related verses
+ * @param {number | null} [props.relatedVersesCount] - Count of related verses
  * @returns {TabConfig[]} Array of tab configurations
  */
 export const useStudyModeTabs = ({
@@ -89,11 +91,13 @@ export const useStudyModeTabs = ({
   verseKey,
   onTabChange,
   hasRelatedVerses = false,
+  relatedVersesCount,
 }: {
   activeTab: StudyModeTabId | null | undefined;
   verseKey: string;
   onTabChange?: (tabId: StudyModeTabId | null) => void;
   hasRelatedVerses: boolean;
+  relatedVersesCount?: number | null;
 }): TabConfig[] => {
   const { t } = useTranslation('common');
 
@@ -161,7 +165,9 @@ export const useStudyModeTabs = ({
     },
     {
       id: StudyModeTabId.RELATED_VERSES,
-      label: t('related-verses'),
+      label: relatedVersesCount
+        ? `${t('related-verses')} (${relatedVersesCount})`
+        : t('related-verses'),
       icon: <RelatedVerseIcon />,
       onClick: () => handleTabClick(StudyModeTabId.RELATED_VERSES),
       condition: hasRelatedVerses,

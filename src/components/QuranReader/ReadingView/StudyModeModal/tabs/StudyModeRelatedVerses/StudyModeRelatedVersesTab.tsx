@@ -16,12 +16,14 @@ interface StudyModeRelatedVersesTabProps {
   chapterId: string;
   verseNumber: string;
   onGoToVerse?: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
+  setRelatedVersesCount?: (count: number) => void;
 }
 
 const StudyModeRelatedVersesTab: React.FC<StudyModeRelatedVersesTabProps> = ({
   chapterId,
   verseNumber,
   onGoToVerse,
+  setRelatedVersesCount,
 }) => {
   const { lang } = useTranslation();
   const { containerRef } = useStudyModeTabScroll();
@@ -39,6 +41,12 @@ const StudyModeRelatedVersesTab: React.FC<StudyModeRelatedVersesTabProps> = ({
     error,
     isValidating,
   } = useSWRImmutable<RelatedVersesResponse>(firstPageUrl, fetcher);
+
+  useEffect(() => {
+    if (firstPageData?.pagination?.totalRecords) {
+      setRelatedVersesCount?.(firstPageData.pagination.totalRecords);
+    }
+  }, [firstPageData, setRelatedVersesCount]);
 
   // Combine first page with additional pages
   const allPageData = useMemo(() => {

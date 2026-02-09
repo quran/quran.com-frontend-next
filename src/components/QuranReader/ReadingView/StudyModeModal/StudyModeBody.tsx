@@ -55,12 +55,14 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
 }) => {
   const { containerRef, bottomActionsRef, tabContentRef, hasScrolledDown, showScrollGradient } =
     useStudyModeScroll({ verseKey: verse.verseKey, activeTab });
+  const [relatedVersesCount, setRelatedVersesCount] = React.useState<number | null>(null);
 
   const tabs = useStudyModeTabs({
     activeTab,
     verseKey: verse.verseKey,
     onTabChange,
     hasRelatedVerses: verse.hasRelatedVerses,
+    relatedVersesCount,
   });
 
   return (
@@ -113,6 +115,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
                 questionsInitialData={questionsInitialData}
                 tafsirIdOrSlug={tafsirIdOrSlug}
                 onGoToVerse={onGoToVerse}
+                setRelatedVersesCount={setRelatedVersesCount}
               />
             </div>
           );
