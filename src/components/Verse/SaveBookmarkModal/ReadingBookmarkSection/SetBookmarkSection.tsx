@@ -7,7 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ReadingBookmarkSection.module.scss';
 
 import Spinner from '@/dls/Spinner/Spinner';
-import BookmarkBlankIcon from '@/icons/bookmark-empty.svg';
+import BookmarkEmptyIcon from '@/icons/bookmark-empty.svg';
 import BookmarkStarIcon from '@/icons/bookmark-star.svg';
 import CheckIcon from '@/icons/check.svg';
 import QuestionIcon from '@/icons/question-mark-rounded.svg';
@@ -95,7 +95,7 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
       onKeyDown={handleKeyDown}
     >
       <div className={styles.readingBookmarkIcon}>
-        {isSelected ? <BookmarkStarIcon /> : <BookmarkBlankIcon />}
+        {isSelected ? <BookmarkStarIcon /> : <BookmarkEmptyIcon />}
       </div>
       <div className={styles.readingBookmarkContent}>
         <div className={styles.readingBookmarkTitle}>
