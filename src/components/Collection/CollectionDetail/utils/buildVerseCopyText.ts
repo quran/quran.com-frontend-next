@@ -28,7 +28,10 @@ const buildVerseCopyText = ({ verse, chapter, lang, qdcUrl }: Params): string =>
   const [surah, ayah] = getVerseAndChapterNumbersFromKey(verse.verseKey);
 
   const isArabicLocale = lang === Language.AR || lang?.startsWith(`${Language.AR}-`);
-  const surahName = isArabicLocale ? chapter?.nameArabic || '' : chapter?.transliteratedName || '';
+  // NOTE: `data/chapters/ar.json` uses `transliteratedName` for the Arabic surah name.
+  const surahName = isArabicLocale
+    ? chapter?.nameArabic || chapter?.transliteratedName || ''
+    : chapter?.transliteratedName || '';
   const header = surahName ? `${surahName} (${surah}:${ayah})` : `${surah}:${ayah}`;
 
   const arabicText = getArabicTextUthmani(verse);
