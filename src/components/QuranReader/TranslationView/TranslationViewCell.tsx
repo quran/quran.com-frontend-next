@@ -56,7 +56,6 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
 
   const { isActive } = useOnboarding();
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
-  // disable auto scrolling when the user is onboarding or study mode is open
   const enableAutoScrolling =
     useSelector(selectEnableAutoScrolling) && !isActive && !isStudyModeOpen;
 

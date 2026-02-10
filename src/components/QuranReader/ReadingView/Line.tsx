@@ -75,7 +75,6 @@ const Line = ({
   );
   const { isActive } = useOnboarding();
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
-  // disable auto scrolling when the user is onboarding or study mode is open
   const enableAutoScrolling =
     useSelector(selectEnableAutoScrolling, shallowEqual) && !isActive && !isStudyModeOpen;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(

@@ -6,7 +6,6 @@
   margin-block-end: var(--spacing-large);
 }
 
-// Constrain height when embedded inside modal — single scroll container
 .embeddedContent {
   max-block-size: 40vh;
   overflow-y: auto;
