@@ -26,6 +26,10 @@ $hadith-font-line-height: 1.6;
     &:hover {
       text-decoration: none;
     }
+
+    &::selection {
+      color: var(--color-text-default-new);
+    }
   }
 }
 
