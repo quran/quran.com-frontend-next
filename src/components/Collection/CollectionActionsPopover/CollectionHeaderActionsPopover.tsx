@@ -39,6 +39,7 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
       {onEditClick && (
         <PopoverMenu.Item
           onClick={onEditClick}
+          isDisabled={isDisabledAllActions}
           shouldCloseMenuAfterClick
           dataTestId={`${dataTestPrefix}-edit`}
           className={styles.menuItem}
@@ -56,6 +57,7 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
         <PopoverMenu.Item
           onClick={onDeleteClick}
           shouldCloseMenuAfterClick
+          isDisabled={isDisabledAllActions}
           dataTestId={`${dataTestPrefix}-delete`}
           className={styles.menuItem}
         >
