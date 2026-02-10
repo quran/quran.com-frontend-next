@@ -54,23 +54,23 @@ const AyahLayersPage: NextPage<AyahLayersProp> = ({
   verse,
   versesResponse,
 }) => {
-  const { t, lang } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation('layers');
 
   const navigationUrl = getVerseLayersNavigationUrl(`${chapterId}:${verseNumber}`);
 
   return (
     <>
       <NextSeoWrapper
-        title={`${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
-          Number(verseNumber),
-          lang,
-        )} ${t('layers.title')}`}
+        title={t('title', {
+          surahName: chapter.chapter.transliteratedName,
+          ayahNumber: toLocalizedNumber(Number(verseNumber), lang),
+        })}
         image={getChapterOgImageUrl({ chapterId, verseNumber, locale: lang })}
         imageWidth={1200}
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={t('layers.description', {
+        description={t('description', {
           ayahNumber: toLocalizedNumber(Number(verseNumber), lang),
           surahName: chapter.chapter.transliteratedName,
         })}

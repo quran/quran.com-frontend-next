@@ -182,7 +182,6 @@
   },
   "layers": {
     "title": "Layers",
-    "description": "Explore layered translation for Ayah {{ayahNumber}} of Surah {{surahName}} with expandable and contracted meanings.",
     "expand": "Expand Tafsir",
     "contract": "Contract Tafsir",
     "alternative-translations": "Alternative Translations",
