@@ -8,10 +8,6 @@ import { TAB_COMPONENTS, useStudyModeTabs } from './StudyModeBodyTabs';
 import StudyModeBottomActions, { StudyModeTabId } from './StudyModeBottomActions';
 import useStudyModeScroll from './useStudyModeScroll';
 
-import TopActions from '@/components/QuranReader/TranslationView/TopActions';
-import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { getVerseWords } from '@/utils/verse';
 import { AyahHadithsResponse } from 'types/Hadith';
 import AyahQuestionsResponse from 'types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Verse from 'types/Verse';

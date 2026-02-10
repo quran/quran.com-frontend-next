@@ -41,31 +41,26 @@ const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
   loading: TafsirSkeleton,
 });
 
-const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), {
-  loading: TafsirSkeleton,
-});
+const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), { loading: TafsirSkeleton });
 
 export const StudyModeRelatedVersesTab = dynamic(
   () => import('./tabs/StudyModeRelatedVerses/StudyModeRelatedVersesTab'),
-  { loading: TafsirSkeleton, }
+  { loading: TafsirSkeleton },
 );
 
-export const TAB_COMPONENTS: Partial<
-  Record<
-    StudyModeTabId,
-    React.ComponentType<{
-      chapterId: string;
-      verseNumber: string;
-      switchTab?: (tabId: StudyModeTabId | null) => void;
-      questionId?: string;
-      questionsInitialData?: AyahQuestionsResponse;
-      tafsirIdOrSlug?: string;
-      hadithsInitialData?: AyahHadithsResponse;
-      onGoToVerse?: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
-      setRelatedVersesCount?: (count: number) => void;
-    }>
-  >
-> = {
+interface TabProps {
+  chapterId: string;
+  verseNumber: string;
+  switchTab?: (tabId: StudyModeTabId | null) => void;
+  questionId?: string;
+  questionsInitialData?: AyahQuestionsResponse;
+  tafsirIdOrSlug?: string;
+  hadithsInitialData?: AyahHadithsResponse;
+  onGoToVerse?: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
+  setRelatedVersesCount?: (count: number) => void;
+}
+
+export const TAB_COMPONENTS: Partial<Record<StudyModeTabId, React.ComponentType<TabProps>>> = {
   [StudyModeTabId.TAFSIR]: StudyModeTafsirTab,
   [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
   [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
