@@ -34,7 +34,7 @@
     "/[chapterId]/reflections": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/qiraat": ["quran-reader", "reading-goal", "notes", "qiraat", "surah-info"],
     "/[chapterId]/lessons": ["quran-reader", "reading-goal", "notes", "surah-info"],
-    "/[chapterId]/layers": ["quran-reader", "reading-goal", "notes", "surah-info"],
+    "/[chapterId]/layers": ["quran-reader", "reading-goal", "notes", "surah-info", "layers"],
     "/[chapterId]/related-verses": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/tafsirs/[tafsirId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/[chapterId]/[verseId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
