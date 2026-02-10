@@ -27,6 +27,7 @@ type CollectionDetailProps = {
   title: string;
   isOwner: boolean;
   bookmarks: Bookmark[];
+  emptyMessage?: string;
 
   onItemDeleted?: (bookmarkId: string) => void;
   onShareVerse?: (verseKey: string) => void;
@@ -34,6 +35,9 @@ type CollectionDetailProps = {
 
   isSelectMode?: boolean;
   shouldUseBodyScroll?: boolean;
+  onEndReached?: () => void;
+  hasMore?: boolean;
+  isVirtualizeForced?: boolean;
   onToggleBookmarkSelection?: (bookmarkId: string) => void;
   onToggleCardExpansion?: (bookmarkId: string) => void;
   isCardExpanded?: (bookmarkId: string) => boolean;
@@ -48,8 +52,12 @@ const CollectionDetail = ({
   onShareVerse,
   isOwner,
   onBack,
+  emptyMessage,
   isSelectMode = false,
   shouldUseBodyScroll = false,
+  onEndReached,
+  hasMore = false,
+  isVirtualizeForced = false,
   onToggleBookmarkSelection,
   onToggleCardExpansion,
   isCardExpanded,
@@ -71,7 +79,10 @@ const CollectionDetail = ({
     }
   };
 
-  const shouldVirtualize = bookmarks.length > MAX_NON_VIRTUALIZED_BOOKMARKS;
+  const shouldVirtualize =
+    isVirtualizeForced ||
+    !!(onEndReached && hasMore) ||
+    bookmarks.length > MAX_NON_VIRTUALIZED_BOOKMARKS;
 
   const renderBookmarkCell = (bookmark: Bookmark) => (
     <CollectionVerseCell
@@ -101,6 +112,7 @@ const CollectionDetail = ({
           overscan={10}
           increaseViewportBy={100}
           useWindowScroll
+          {...(onEndReached && hasMore && { endReached: onEndReached })}
           itemContent={(index, bookmark) => renderBookmarkCell(bookmark)}
         />
       );
@@ -114,6 +126,7 @@ const CollectionDetail = ({
           data={bookmarks}
           overscan={10}
           increaseViewportBy={100}
+          {...(onEndReached && hasMore && { endReached: onEndReached })}
           itemContent={(index, bookmark) => renderBookmarkCell(bookmark)}
         />
       );
@@ -132,7 +145,7 @@ const CollectionDetail = ({
         >
           {isCollectionEmpty ? (
             <div className={styles.emptyCollectionContainer}>
-              <span>{t('collection:empty')}</span>
+              <span>{emptyMessage || t('collection:empty')}</span>
               <div className={styles.backToCollectionButtonContainer}>
                 <Button onClick={onBackToCollectionsClicked}>
                   {t('collection:back-to-collection-list')}

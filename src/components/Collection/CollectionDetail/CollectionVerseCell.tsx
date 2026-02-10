@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useCallback, useContext } from 'react';
 
 import Link from 'next/link';

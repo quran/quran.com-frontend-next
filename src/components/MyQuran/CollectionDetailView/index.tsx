@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-handler-names */
 import React from 'react';
 
 import styles from './CollectionDetailView.module.scss';
@@ -11,7 +12,8 @@ interface CollectionDetailViewProps {
   collectionId: string;
   collectionName: string;
   onBack: () => void;
-  searchQuery?: string;
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
   isDefault?: boolean;
   onCollectionUpdateRequest?: (collectionId: string, newName: string) => Promise<boolean>;
   onCollectionDeleteRequest?: (collectionId: string) => Promise<boolean>;
@@ -22,6 +24,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   collectionName,
   onBack,
   searchQuery,
+  onSearchChange,
   isDefault,
   onCollectionUpdateRequest,
   onCollectionDeleteRequest,
@@ -30,6 +33,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     collectionId,
     collectionName,
     searchQuery,
+    onSearchChange,
     isDefault,
     onCollectionUpdateRequest,
     onCollectionDeleteRequest,
@@ -51,10 +55,6 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     );
   }
 
-  const handleSortByChange = controller.onSortByChange;
-  const handleItemDeleted = controller.onItemDeleted;
-  const handleToggleSelectMode = controller.toggleSelectMode;
-
   return (
     <CollectionDetailViewLayout
       collectionName={controller.collectionName}
@@ -65,16 +65,17 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       t={controller.t}
       numericCollectionId={controller.numericCollectionId}
       sortBy={controller.sortBy}
-      onSortByChange={handleSortByChange}
+      onSortByChange={controller.onSortByChange}
       totalCount={controller.totalCount}
       isOwner={controller.isOwner}
+      emptyMessage={controller.emptyMessage}
       filteredBookmarks={controller.filteredBookmarks}
-      onItemDeleted={handleItemDeleted}
+      onItemDeleted={controller.onItemDeleted}
       onShareVerse={controller.handleShareVerse}
       isSelectMode={controller.isSelectMode}
       isAllExpanded={controller.isAllExpanded}
       selectedCount={controller.selectedBookmarks.size}
-      onToggleSelectMode={handleToggleSelectMode}
+      onToggleSelectMode={controller.toggleSelectMode}
       onToggleExpandCollapseAll={controller.handleToggleExpandCollapseAll}
       onToggleBookmarkSelection={controller.handleToggleBookmarkSelection}
       onToggleCardExpansion={controller.handleToggleCardExpansion}
@@ -105,6 +106,18 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       onDeleteCollectionConfirm={controller.handleDeleteConfirm}
       onDeleteCollectionCancel={controller.handleDeleteModalClose}
       isDeletingCollection={controller.isDeleting}
+      chapterItems={controller.chapterItems}
+      juzItems={controller.juzItems}
+      selectedChapterIds={controller.selectedChapterIds}
+      selectedJuzNumbers={controller.selectedJuzNumbers}
+      onSelectedChapterIdsChange={controller.onSelectedChapterIdsChange}
+      onSelectedJuzNumbersChange={controller.onSelectedJuzNumbersChange}
+      activeChapterChips={controller.activeChapterChips}
+      activeJuzChips={controller.activeJuzChips}
+      hasActiveFilters={controller.hasActiveFilters}
+      onRemoveChapterFilter={controller.onRemoveChapterFilter}
+      onRemoveJuzFilter={controller.onRemoveJuzFilter}
+      onClearAllFilters={controller.onClearAllFilters}
     />
   );
 };

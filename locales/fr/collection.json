@@ -6,6 +6,8 @@
   "collection-list-empty": "La liste des collections est vide. Vous n'avez pas encore créé de collection",
   "collection-name": "Nom de la collection",
   "collections": "Collections",
+  "date-asc": "Date (la plus ancienne)",
+  "date-desc": "Date (la plus récente)",
   "delete-bookmark": {
     "confirmation-subtitle": "Vous allez supprimer {{count}} article(s) de {{collectionName}}, Es-tu sûr?",
     "subtitle": "Voulez-vous vraiment supprimer {{bookmarkName}} de la collection {{collectionName}} ?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Aller à l'Ayah",
   "load-more": "Charger plus",
   "no-collections": "Vous n'avez pas encore de collections",
+  "quranic-asc": "Ordre coranique (ascendant)",
+  "quranic-desc": "Ordre coranique (descendant)",
   "recently-added": "Récemment ajouté",
   "recently-updated": "Récemment mis à jour",
   "verse-key": "Numéro de Sourate et d'Ayah"

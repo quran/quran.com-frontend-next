@@ -10,7 +10,16 @@
     "select": "Seleccionar"
   },
   "collections": {
+    "detail-empty": "¡Empieza a leer y añade a tu colección!",
     "favorites": "Favoritos",
+    "filters": {
+      "chapters": "Capítulo",
+      "clear-all": "Borrar todo",
+      "juz": "Juez",
+      "no-matches": "No hay versículos guardados que coincidan con tus filtros.",
+      "no-results": "No hay resultados",
+      "title": "Filtrar"
+    },
     "guest-promo": {
       "sign-in": "Iniciar sesión",
       "subtitle": "Comparar y contrastar versículos",

@@ -130,6 +130,40 @@ vi.mock('@/components/Collection/CollectionSorter/CollectionSorter', () => ({
   default: () => <div data-testid="collection-sorter" />,
 }));
 
+vi.mock('@/components/MyQuran/SavedTabContent/CollectionFiltersDropdown', () => ({
+  default: ({
+    trigger,
+    selectedChapterIds,
+    selectedJuzNumbers,
+    onSelectedChapterIdsChange,
+    onSelectedJuzNumbersChange,
+  }: any) => (
+    <div data-testid="collection-filters-dropdown">
+      {trigger}
+      <button type="button" onClick={() => onSelectedChapterIdsChange(['1'])}>
+        chapter-1
+      </button>
+      <button type="button" onClick={() => onSelectedChapterIdsChange(['2'])}>
+        chapter-2
+      </button>
+      <button type="button" onClick={() => onSelectedChapterIdsChange([])}>
+        clear-chapters
+      </button>
+      <button type="button" onClick={() => onSelectedJuzNumbersChange(['1'])}>
+        juz-1
+      </button>
+      <button type="button" onClick={() => onSelectedJuzNumbersChange(['2'])}>
+        juz-2
+      </button>
+      <button type="button" onClick={() => onSelectedJuzNumbersChange([])}>
+        clear-juz
+      </button>
+      <div data-testid="selected-chapters">{selectedChapterIds?.join(',') ?? ''}</div>
+      <div data-testid="selected-juz">{selectedJuzNumbers?.join(',') ?? ''}</div>
+    </div>
+  ),
+}));
+
 vi.mock('@/components/Collection/CollectionActionsPopover/CollectionBulkActionsPopover', () => ({
   default: ({ children, onCopyClick, onDeleteClick }: any) => (
     <div data-testid="bulk-actions">
@@ -173,13 +207,23 @@ vi.mock('@/components/Collection/CollectionActionsPopover/CollectionHeaderAction
 }));
 
 vi.mock('@/components/Collection/CollectionDetail/CollectionDetail', () => ({
-  default: ({ bookmarks, onToggleBookmarkSelection }: any) => (
+  default: ({ bookmarks, emptyMessage, onEndReached, onToggleBookmarkSelection }: any) => (
     <div data-testid="collection-detail">
+      <div data-testid="bookmarks-count">{bookmarks?.length ?? 0}</div>
+      <div data-testid="first-bookmark-id">{bookmarks?.[0]?.id ?? ''}</div>
+      <div data-testid="empty-message">
+        {(bookmarks?.length ?? 0) === 0 ? emptyMessage ?? '' : ''}
+      </div>
       {(bookmarks || []).map((b: any) => (
-        <button key={b.id} type="button" onClick={() => onToggleBookmarkSelection(b.id)}>
+        <button key={b.id} type="button" onClick={() => onToggleBookmarkSelection?.(b.id)}>
           {`toggle-${b.id}`}
         </button>
       ))}
+      {onEndReached && (
+        <button type="button" onClick={onEndReached}>
+          end-reached
+        </button>
+      )}
     </div>
   ),
 }));
@@ -243,7 +287,12 @@ vi.mock('@/components/QuranReader/VerseActionModalContainer', () => ({
 }));
 
 vi.mock('@/icons/chevron-left.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/chevron-right.svg', () => ({ default: () => <div /> }));
 vi.mock('@/icons/menu_more_horiz.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/filter.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/filter-bar.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/search.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/close.svg', () => ({ default: () => <div /> }));
 
 const buildSWRData = (
   collectionId: string,
@@ -272,6 +321,8 @@ const renderCollectionDetailView = (
     collectionId: 'my-collection-123',
     collectionName: 'My Collection',
     onBack: vi.fn(),
+    searchQuery: '',
+    onSearchChange: vi.fn(),
     isDefault: false,
     onCollectionUpdateRequest: vi.fn(async () => true),
     onCollectionDeleteRequest: vi.fn(async () => true),
@@ -304,6 +355,15 @@ describe('CollectionDetailView', () => {
 
     expect(onCollectionUpdateRequest).toHaveBeenCalledWith('123', 'Updated Name');
     expect(screen.queryByTestId('edit-modal')).toBeNull();
+  });
+
+  it('shows collection empty message when the collection has no bookmarks', async () => {
+    swrData = buildSWRData('123', 'My Collection');
+
+    renderCollectionDetailView();
+
+    expect(screen.getByTestId('empty-message').textContent).toBe('collections.detail-empty');
+    expect(screen.getByTestId('bookmarks-count').textContent).toBe('0');
   });
 
   it('opens delete modal and confirms deletion', async () => {
@@ -350,6 +410,136 @@ describe('CollectionDetailView', () => {
 
     expect(screen.queryByRole('button', { name: 'edit' })).toBeNull();
     expect(screen.queryByRole('button', { name: 'delete' })).toBeNull();
+  });
+
+  it('filters bookmarks by selected chapter', async () => {
+    const bookmarks = [
+      {
+        id: 'b-1-early',
+        key: 1,
+        verseNumber: 1,
+        createdAt: new Date(2025, 0, 1).toISOString(),
+        type: 'ayah',
+      },
+      {
+        id: 'b-2',
+        key: 2,
+        verseNumber: 1,
+        createdAt: new Date(2025, 0, 2).toISOString(),
+        type: 'ayah',
+      },
+      {
+        id: 'b-1-late',
+        key: 1,
+        verseNumber: 2,
+        createdAt: new Date(2025, 0, 3).toISOString(),
+        type: 'ayah',
+      },
+    ];
+
+    swrData = buildSWRData('123', 'My Collection');
+    // @ts-ignore - partial shape is fine for tests
+    swrData.data.bookmarks = bookmarks;
+
+    renderCollectionDetailView();
+
+    expect(screen.getByTestId('bookmarks-count').textContent).toBe('3');
+
+    fireEvent.click(screen.getByRole('button', { name: 'chapter-1' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('bookmarks-count').textContent).toBe('2');
+      expect(screen.getByRole('button', { name: 'toggle-b-1-early' })).toBeDefined();
+      expect(screen.getByRole('button', { name: 'toggle-b-1-late' })).toBeDefined();
+      expect(screen.queryByRole('button', { name: 'toggle-b-2' })).toBeNull();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'chapter-2' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('bookmarks-count').textContent).toBe('1');
+      expect(screen.queryByRole('button', { name: 'toggle-b-1-early' })).toBeNull();
+      expect(screen.queryByRole('button', { name: 'toggle-b-1-late' })).toBeNull();
+      expect(screen.getByRole('button', { name: 'toggle-b-2' })).toBeDefined();
+    });
+  });
+
+  it('filters bookmarks by selected juz (using juz mapping)', async () => {
+    // 2:142 is the start of Juz 2 in standard Qur'an partitioning.
+    const bookmarks = [
+      {
+        id: 'b-2-1',
+        key: 2,
+        verseNumber: 1,
+        createdAt: new Date(2025, 0, 1).toISOString(),
+        type: 'ayah',
+      },
+      {
+        id: 'b-2-142',
+        key: 2,
+        verseNumber: 142,
+        createdAt: new Date(2025, 0, 2).toISOString(),
+        type: 'ayah',
+      },
+      {
+        id: 'b-1-1',
+        key: 1,
+        verseNumber: 1,
+        createdAt: new Date(2025, 0, 3).toISOString(),
+        type: 'ayah',
+      },
+    ];
+
+    swrData = buildSWRData('123', 'My Collection');
+    // @ts-ignore - partial shape is fine for tests
+    swrData.data.bookmarks = bookmarks;
+
+    renderCollectionDetailView();
+
+    fireEvent.click(screen.getByRole('button', { name: 'juz-2' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('bookmarks-count').textContent).toBe('1');
+      expect(screen.getByRole('button', { name: 'toggle-b-2-142' })).toBeDefined();
+      expect(screen.queryByRole('button', { name: 'toggle-b-2-1' })).toBeNull();
+      expect(screen.queryByRole('button', { name: 'toggle-b-1-1' })).toBeNull();
+    });
+  });
+
+  it('shows no-matches empty state when active filters produce no results', async () => {
+    const bookmarks = [
+      {
+        id: 'b-2-1',
+        key: 2,
+        verseNumber: 1,
+        createdAt: new Date(2025, 0, 1).toISOString(),
+        type: 'ayah',
+      },
+      {
+        id: 'b-2-2',
+        key: 2,
+        verseNumber: 2,
+        createdAt: new Date(2025, 0, 2).toISOString(),
+        type: 'ayah',
+      },
+    ];
+
+    swrData = buildSWRData('123', 'My Collection');
+    // @ts-ignore - partial shape is fine for tests
+    swrData.data.bookmarks = bookmarks;
+
+    renderCollectionDetailView();
+
+    // None of the bookmarks are in Chapter 1 or Juz 2, so active filters should yield zero matches.
+    fireEvent.click(screen.getByRole('button', { name: 'chapter-1' }));
+    fireEvent.click(screen.getByRole('button', { name: 'juz-2' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('bookmarks-count').textContent).toBe('0');
+      expect(screen.getByTestId('empty-message').textContent).toBe(
+        'collections.filters.no-matches',
+      );
+    });
   });
 
   it('triggers bulk copy and calls copyText', async () => {

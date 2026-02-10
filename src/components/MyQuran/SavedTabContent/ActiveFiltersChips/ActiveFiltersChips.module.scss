@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-medium-px);
+  margin-block-end: var(--spacing-medium2-px);
+  flex-wrap: wrap;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small2-px);
+  flex-wrap: wrap;
+  min-inline-size: 0;
+}
+
+.label {
+  color: var(--color-text-faded-new);
+  font-size: var(--font-size-small-px);
+  white-space: nowrap;
+}
+
+.chips {
+  display: flex;
+  gap: var(--spacing-xsmall-px);
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+  padding: var(--spacing-micro2-px) var(--spacing-small2-px);
+  border-radius: var(--border-radius-small-px);
+  border: var(--spacing-hairline-px) solid var(--color-daily-progress);
+  background: var(--color-background-default);
+  color: var(--color-text-link-new);
+  font-size: var(--font-size-small-px);
+  cursor: pointer;
+  transition: background var(--transition-fast) ease-out,
+    border-color var(--transition-fast) ease-out;
+
+  &:hover {
+    background: var(--color-background-alternative);
+    border-color: var(--color-borders-hairline-new);
+  }
+
+  &:focus-visible {
+    outline-offset: var(--spacing-hairline-px);
+    outline: var(--spacing-hairline-px) solid var(--color-primary-medium);
+  }
+}
+
+.chipLabel {
+  white-space: nowrap;
+}
+
+.removeIcon {
+  inline-size: var(--spacing-small2-px);
+  block-size: var(--spacing-small2-px);
+  flex-shrink: 0;
+}
+
+.clearAll {
+  all: unset;
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  color: var(--color-text-link-new);
+  text-decoration: underline;
+  text-underline-offset: var(--spacing-micro-px);
+
+  &:focus-visible {
+    outline-offset: var(--spacing-hairline-px);
+    outline: var(--spacing-hairline-px) solid var(--color-primary-medium);
+  }
+}

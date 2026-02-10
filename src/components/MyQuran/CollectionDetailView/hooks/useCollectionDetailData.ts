@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useSWR, { mutate as globalMutate } from 'swr';
 
+import { getJuzNumberByVerse } from '../juzVerseMapping';
+
 import BookmarkType from '@/types/BookmarkType';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
@@ -15,6 +17,8 @@ const COLLECTION_BOOKMARKS_PER_PAGE = 20;
 interface UseCollectionDetailDataParams {
   collectionId: string;
   searchQuery?: string;
+  selectedChapterIds?: string[];
+  selectedJuzNumbers?: string[];
   invalidateAllBookmarkCaches: () => void;
   fetchAll?: boolean;
 }
@@ -27,10 +31,13 @@ type CollectionBookmarksPage = {
   cursor: string;
   bookmarks: GetBookmarkCollectionsIdResponse['data']['bookmarks'];
 };
+const EMPTY_STRING_ARRAY: string[] = [];
 
 const useCollectionDetailData = ({
   collectionId,
   searchQuery,
+  selectedChapterIds = EMPTY_STRING_ARRAY,
+  selectedJuzNumbers = EMPTY_STRING_ARRAY,
   invalidateAllBookmarkCaches,
   fetchAll = false,
 }: UseCollectionDetailDataParams) => {
@@ -107,12 +114,32 @@ const useCollectionDetailData = ({
 
   const filteredBookmarks = useMemo(() => {
     const sourcedBookmarks = fetchAll ? allBookmarks : bookmarks;
-    if (!searchQuery) return sourcedBookmarks;
     const query = searchQuery.toLowerCase();
-    return sourcedBookmarks.filter((bookmark) =>
-      `${bookmark.key}:${bookmark.verseNumber}`.includes(query),
-    );
-  }, [bookmarks, allBookmarks, searchQuery, fetchAll]);
+
+    const hasChapterFilters = selectedChapterIds.length > 0;
+    const hasJuzFilters = selectedJuzNumbers.length > 0;
+    const shouldFilter = hasChapterFilters || hasJuzFilters;
+
+    const chapterIdSet = hasChapterFilters ? new Set(selectedChapterIds) : null;
+    const juzSet = hasJuzFilters ? new Set(selectedJuzNumbers) : null;
+
+    return sourcedBookmarks.filter((bookmark) => {
+      const verseKey = `${bookmark.key}:${bookmark.verseNumber ?? 1}`;
+      if (query && !verseKey.includes(query)) return false;
+      if (!shouldFilter) return true;
+
+      // When filtering, a filter group that isn't active should not "auto-match" everything.
+      // We OR the active filter groups together so results match *any* selected chapter/juz.
+      const matchesChapter = chapterIdSet ? chapterIdSet.has(String(bookmark.key)) : false;
+      // Juz lookup is skipped when no juz filter is active (juzSet is null).
+      const matchesJuz = juzSet
+        ? juzSet.has(
+            String(getJuzNumberByVerse(Number(bookmark.key), bookmark.verseNumber ?? 1) ?? ''),
+          )
+        : false;
+      return matchesChapter || matchesJuz;
+    });
+  }, [bookmarks, searchQuery, selectedChapterIds, selectedJuzNumbers, allBookmarks, fetchAll]);
 
   const goToNextPage = useCallback(() => {
     if (pagination?.hasNextPage && pagination?.endCursor) {

@@ -6,6 +6,8 @@
   "collection-list-empty": "Orodha ya mkusanyiko ni tupu. Bado hujaunda mkusanyiko wowote",
   "collection-name": "Jina la mkusanyiko",
   "collections": "Mikusanyiko",
+  "date-asc": "Tarehe (Ya Kale Zaidi)",
+  "date-desc": "Tarehe (Mpya Zaidi)",
   "delete-bookmark": {
     "confirmation-subtitle": "Utafuta {{count}} bidhaa(vipengee) kutoka {{collectionName}}Una uhakika?",
     "subtitle": "Je, una uhakika unataka kufuta {{bookmarkName}} kutoka kwenye mkusanyiko wa {{collectionName}}?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Nenda kwa aya",
   "load-more": "Pakia Zaidi",
   "no-collections": "Huna mikusanyiko yoyote kwa sasa",
+  "quranic-asc": "Utaratibu wa Quran (Kupanda)",
+  "quranic-desc": "Utaratibu wa Quran (Kushuka)",
   "recently-added": "Iliyoongezwa hivi karibuni",
   "recently-updated": "Imesasishwa hivi karibuni",
   "verse-key": "Sura na Nambari ya Aya"

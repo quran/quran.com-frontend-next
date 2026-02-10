@@ -10,7 +10,16 @@
     "select": "Zgjidh"
   },
   "collections": {
+    "detail-empty": "Filloni të lexoni dhe shtoni në koleksionin tuaj!",
     "favorites": "Të preferuarat",
+    "filters": {
+      "chapters": "Kapitulli",
+      "clear-all": "Pastro të gjitha",
+      "juz": "Xhuz",
+      "no-matches": "Asnjë varg i ruajtur nuk përputhet me filtrat tuaj.",
+      "no-results": "Asnjë rezultat",
+      "title": "Filtër"
+    },
     "guest-promo": {
       "sign-in": "Hyr",
       "subtitle": "Krahaso dhe dallo vargje",

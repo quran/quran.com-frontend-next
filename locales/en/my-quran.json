@@ -10,7 +10,16 @@
     "select": "Select"
   },
   "collections": {
+    "detail-empty": "Start reading and add to your collection!",
     "favorites": "Favorites",
+    "filters": {
+      "chapters": "Chapter",
+      "clear-all": "Clear all",
+      "juz": "Juz",
+      "no-matches": "No saved verses match your filters.",
+      "no-results": "No results",
+      "title": "Filter"
+    },
     "guest-promo": {
       "sign-in": "Sign in",
       "subtitle": "Compare and contrast verses",

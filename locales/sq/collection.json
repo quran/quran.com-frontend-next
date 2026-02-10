@@ -6,6 +6,8 @@
   "collection-list-empty": "Lista e koleksioneve është bosh. Nuk keni krijuar ende asnjë koleksion",
   "collection-name": "Emri i koleksionit",
   "collections": "Koleksionet",
+  "date-asc": "Data (Më e vjetra)",
+  "date-desc": "Data (Më e reja)",
   "delete-bookmark": {
     "confirmation-subtitle": "Do të fshish {{count}} artikull(e) nga {{collectionName}}, Je i sigurt?",
     "subtitle": "Jeni i sigurt që dëshironi të fshini {{bookmarkName}} nga {{collectionName}} ?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Shko te ajah",
   "load-more": "Ngarko më shumë",
   "no-collections": "Nuk ke ende asnjë koleksion",
+  "quranic-asc": "Renditja Kuranore (Ngjitëse)",
+  "quranic-desc": "Renditja Kuranore (Zbritëse)",
   "recently-added": "Shtuar së fundmi",
   "recently-updated": "Përditësuar së fundmi",
   "verse-key": "Numri i kapitullit dhe vargut"

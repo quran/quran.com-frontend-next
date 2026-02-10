@@ -6,6 +6,8 @@
   "collection-list-empty": "Koleksiyon listesi boş. Henüz bir koleksiyon oluşturmadınız",
   "collection-name": "Koleksiyon adı",
   "collections": "Koleksiyonlar",
+  "date-asc": "Tarih (En Eski)",
+  "date-desc": "Tarih (En Yeni)",
   "delete-bookmark": {
     "confirmation-subtitle": "Sileceksiniz {{count}} ürün(ler)den {{collectionName}}, Emin misin?",
     "subtitle": "{{bookmarkName}} ' {{collectionName}} koleksiyonundan silmek istediğinizden emin misiniz?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Ayete git",
   "load-more": "Daha fazla yükle",
   "no-collections": "Henüz hiçbir koleksiyonunuz yok.",
+  "quranic-asc": "Kur'an'daki sıralama (Artan)",
+  "quranic-desc": "Kur'an'daki sıralama (Azalan)",
   "recently-added": "Son eklenen",
   "recently-updated": "Son güncellenen",
   "verse-key": "Sure ve Ayet Numarası"
