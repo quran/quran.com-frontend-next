@@ -16,6 +16,7 @@ interface CollectionDetailViewHeaderProps {
   t: TranslateFn;
   onBack: () => void;
   isDefault?: boolean;
+  isFetchingAll?: boolean;
   onNoteClick: () => void;
   onPinVersesClick: () => void;
   onEditClick: () => void;
@@ -29,6 +30,7 @@ const CollectionDetailViewHeader: React.FC<CollectionDetailViewHeaderProps> = ({
   t,
   onBack,
   isDefault,
+  isFetchingAll,
   onNoteClick,
   onPinVersesClick,
   onEditClick,
@@ -51,6 +53,7 @@ const CollectionDetailViewHeader: React.FC<CollectionDetailViewHeaderProps> = ({
           onPinVersesClick={onPinVersesClick}
           onEditClick={isDefault ? undefined : onEditClick}
           onDeleteClick={isDefault ? undefined : onDeleteClick}
+          isDisabledAllActions={isFetchingAll}
           dataTestPrefix="collection-header-actions"
         >
           <button type="button" className={styles.iconButton} aria-label={t('common:more')}>

@@ -11,6 +11,7 @@ interface CollectionDetailViewBulkActionsBarProps {
   isAllExpanded: boolean;
   isSelectMode: boolean;
   isOwner: boolean;
+  isFetchingAll?: boolean;
   lang: string;
   selectedCount: number;
   t: TranslateFn;
@@ -26,6 +27,7 @@ const CollectionDetailViewBulkActionsBar: React.FC<CollectionDetailViewBulkActio
   isAllExpanded,
   isSelectMode,
   isOwner,
+  isFetchingAll,
   lang,
   selectedCount,
   t,
@@ -43,6 +45,7 @@ const CollectionDetailViewBulkActionsBar: React.FC<CollectionDetailViewBulkActio
         size={ButtonSize.XSmall}
         className={styles.bulkActionButton}
         onClick={onToggleExpandCollapseAll}
+        isDisabled={isFetchingAll}
       >
         {isAllExpanded ? t('bulk-actions.collapse-all') : t('bulk-actions.expand-all')}
       </Button>
@@ -92,6 +95,7 @@ const CollectionDetailViewBulkActionsBar: React.FC<CollectionDetailViewBulkActio
           className={styles.bulkActionButton}
           size={ButtonSize.XSmall}
           onClick={onToggleSelectMode}
+          isDisabled={isFetchingAll}
         >
           {t('bulk-actions.select')}
         </Button>

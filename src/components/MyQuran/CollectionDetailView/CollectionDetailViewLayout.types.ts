@@ -7,6 +7,7 @@ export interface CollectionDetailViewLayoutProps {
   collectionName: string;
   onBack: () => void;
   isDefault?: boolean;
+  isFetchingAll?: boolean;
   lang: string;
   t: TranslateFn;
   numericCollectionId: string;

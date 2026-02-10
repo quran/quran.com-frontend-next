@@ -17,6 +17,7 @@ type CollectionHeaderActionsPopoverProps = {
   onPinVersesClick: () => void;
   onEditClick?: () => void;
   onDeleteClick?: () => void;
+  isDisabledAllActions?: boolean;
   align?: PopoverMenuAlign;
   dataTestPrefix?: string;
 };
@@ -27,6 +28,7 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
   onPinVersesClick,
   onEditClick,
   onDeleteClick,
+  isDisabledAllActions,
   align = PopoverMenuAlign.END,
   dataTestPrefix = 'collection-header-actions',
 }) => {
@@ -69,6 +71,7 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
       <PopoverMenu.Item
         onClick={onPinVersesClick}
         shouldCloseMenuAfterClick
+        isDisabled={isDisabledAllActions}
         dataTestId={`${dataTestPrefix}-pin`}
         className={styles.menuItem}
       >
@@ -83,6 +86,7 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
       <PopoverMenu.Item
         onClick={onNoteClick}
         shouldCloseMenuAfterClick
+        isDisabled={isDisabledAllActions}
         dataTestId={`${dataTestPrefix}-note`}
         className={styles.menuItem}
       >
