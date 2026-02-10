@@ -160,7 +160,7 @@ const CollectionFiltersDropdown: React.FC<CollectionFiltersDropdownProps> = ({
             opts.items.map((item) => {
               const isSelected = opts.selectedSet.has(item.value);
               return (
-                <PrimitiveDropdownMenu.Item key={item.value} asChild className={styles.optionItem}>
+                <PrimitiveDropdownMenu.Item key={item.value} asChild>
                   <button
                     type="button"
                     key={item.value}
