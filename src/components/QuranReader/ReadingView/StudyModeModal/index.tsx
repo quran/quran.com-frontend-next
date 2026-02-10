@@ -557,7 +557,7 @@ const StudyModeModal: React.FC<Props> = ({
       footer={
         isAudioVisible ? (
           <div className={styles.audioPlayerFooter}>
-            <AudioPlayerBody hideOverflowMenu isEmbedded />
+            <AudioPlayerBody isEmbedded />
           </div>
         ) : undefined
       }

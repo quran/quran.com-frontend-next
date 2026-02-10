@@ -39,7 +39,13 @@ enum AudioPlayerOverflowMenu {
   Experience = 'experience',
 }
 
-const OverflowAudioPlayActionsMenuBody = () => {
+interface OverflowAudioPlayActionsMenuBodyProps {
+  isEmbedded?: boolean;
+}
+
+const OverflowAudioPlayActionsMenuBody = ({
+  isEmbedded,
+}: OverflowAudioPlayActionsMenuBodyProps) => {
   const [selectedMenu, setSelectedMenu] = useState<AudioPlayerOverflowMenu>(
     AudioPlayerOverflowMenu.Main,
   );
@@ -77,21 +83,25 @@ const OverflowAudioPlayActionsMenuBody = () => {
     () => ({
       [AudioPlayerOverflowMenu.Main]: [
         <DownloadAudioButton key={0} />,
-        <RepeatButton key={1} />,
-        <PopoverMenu.Divider key={2} />,
-        <PopoverMenu.Item
-          key={3}
-          icon={<ExperienceIcon />}
-          onClick={() => {
-            logButtonClick(`audio_player_overflow_menu_experience`); // TODO: log this
-            setSelectedMenu(AudioPlayerOverflowMenu.Experience);
-          }}
-        >
-          <div className={styles.menuWithNestedItems}>
-            {t('audio.experience')}
-            <ChevronRightIcon />
-          </div>
-        </PopoverMenu.Item>,
+        ...(!isEmbedded
+          ? [
+              <RepeatButton key={1} />,
+              <PopoverMenu.Divider key={2} />,
+              <PopoverMenu.Item
+                key={3}
+                icon={<ExperienceIcon />}
+                onClick={() => {
+                  logButtonClick(`audio_player_overflow_menu_experience`);
+                  setSelectedMenu(AudioPlayerOverflowMenu.Experience);
+                }}
+              >
+                <div className={styles.menuWithNestedItems}>
+                  {t('audio.experience')}
+                  <ChevronRightIcon />
+                </div>
+              </PopoverMenu.Item>,
+            ]
+          : [<PopoverMenu.Divider key={2} />]),
         <PopoverMenu.Item
           dataTestId={TestId.PLAYBACK_RATE_MENU}
           key={4}
@@ -130,13 +140,16 @@ const OverflowAudioPlayActionsMenuBody = () => {
         <AudioPlaybackRateMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
       ),
       [AudioPlayerOverflowMenu.Reciter]: (
-        <SelectReciterMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
+        <SelectReciterMenu
+          onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)}
+          isEmbedded={isEmbedded}
+        />
       ),
       [AudioPlayerOverflowMenu.Experience]: (
         <AudioExperienceMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
       ),
     }),
-    [t, playbackRate],
+    [t, playbackRate, isEmbedded],
   );
 
   return <>{menus[selectedMenu]}</>;

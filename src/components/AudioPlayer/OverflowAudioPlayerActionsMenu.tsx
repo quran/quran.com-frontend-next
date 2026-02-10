@@ -1,18 +1,24 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useState } from 'react';
 
+import classNames from 'classnames';
+
 import AudioPlayerOverflowMenuTrigger from './AudioPlayerOverflowMenuTrigger';
 import OverflowAudioPlayActionsMenuBody from './OverflowAudioPlayActionsMenuBody';
 import styles from './OverflowAudioPlayerActionsMenu.module.scss';
 
 import OnboardingEvent from '@/components/Onboarding/OnboardingChecklist/hooks/OnboardingEvent';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
-import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import PopoverMenu, { PopoverMenuExpandDirection } from '@/dls/PopoverMenu/PopoverMenu';
 import useDirection from '@/hooks/useDirection';
 import OnboardingGroup from '@/types/OnboardingGroup';
 import { logEvent } from '@/utils/eventLogger';
 
-const OverflowAudioPlayerActionsMenu = () => {
+interface OverflowAudioPlayerActionsMenuProps {
+  isEmbedded?: boolean;
+}
+
+const OverflowAudioPlayerActionsMenu = ({ isEmbedded }: OverflowAudioPlayerActionsMenuProps) => {
   const direction = useDirection();
   const { isActive, activeStepGroup, activeStepIndex, nextStep, prevStep } = useOnboarding();
   const [open, setOpen] = useState(false);
@@ -89,9 +95,13 @@ const OverflowAudioPlayerActionsMenu = () => {
         isModal={!shouldStayOpen} // in the onboarding, we want the popover to not be modal
         trigger={<AudioPlayerOverflowMenuTrigger />}
         onOpenChange={onOpenChange}
-        contentClassName={styles.overriddenPopoverMenuContentPositioning}
+        contentClassName={classNames(styles.overriddenPopoverMenuContentPositioning, {
+          [styles.embeddedContent]: isEmbedded,
+        })}
+        shouldUseModalZIndex={isEmbedded}
+        {...(isEmbedded && { expandDirection: PopoverMenuExpandDirection.TOP })}
       >
-        <OverflowAudioPlayActionsMenuBody />
+        <OverflowAudioPlayActionsMenuBody isEmbedded={isEmbedded} />
       </PopoverMenu>
     </div>
   );

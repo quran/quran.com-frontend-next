@@ -14,11 +14,10 @@ import OnboardingGroup from '@/types/OnboardingGroup';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface AudioPlayerBodyProps {
-  hideOverflowMenu?: boolean;
   isEmbedded?: boolean;
 }
 
-const AudioPlayerBody = ({ hideOverflowMenu, isEmbedded }: AudioPlayerBodyProps) => {
+const AudioPlayerBody = ({ isEmbedded }: AudioPlayerBodyProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isRadioMode = useSelector(audioService, (state) => !!state.context.radioActor);
   const { isActive, activeStepGroup, activeStepIndex, nextStep } = useOnboarding();
@@ -50,7 +49,7 @@ const AudioPlayerBody = ({ hideOverflowMenu, isEmbedded }: AudioPlayerBodyProps)
       {isRadioMode ? (
         <RadioPlaybackControl radioActor={audioService.getSnapshot().context.radioActor} />
       ) : (
-        <PlaybackControls hideOverflowMenu={hideOverflowMenu} isEmbedded={isEmbedded} />
+        <PlaybackControls isEmbedded={isEmbedded} />
       )}
     </>
   );

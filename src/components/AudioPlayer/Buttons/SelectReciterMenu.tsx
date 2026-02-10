@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 
 import { useSelector } from '@xstate/react';
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SelectReciterMenu.module.scss';
@@ -22,7 +23,13 @@ import Reciter from 'types/Reciter';
 
 const DEFAULT_RECITATION_STYLE = 'Murattal';
 
-const SelectReciterMenu = ({ onBack }) => {
+const SelectReciterMenu = ({
+  onBack,
+  isEmbedded,
+}: {
+  onBack: () => void;
+  isEmbedded?: boolean;
+}) => {
   const { lang, t } = useTranslation('common');
 
   const audioService = useContext(AudioPlayerMachineContext);
@@ -101,7 +108,10 @@ const SelectReciterMenu = ({ onBack }) => {
   );
 
   const reciters = (
-    <div id="audio-player-reciter-list" className={styles.reciterList}>
+    <div
+      id="audio-player-reciter-list"
+      className={classNames(styles.reciterList, { [styles.embeddedReciterList]: isEmbedded })}
+    >
       <DataFetcher queryKey={makeAvailableRecitersUrl(lang)} render={renderReciter} />
     </div>
   );

@@ -211,6 +211,8 @@ button.pinButton {
 .modalHeader {
   padding-inline-end: 0;
   background-color: var(--color-background-elevated-new);
+  flex-shrink: 0;
+  z-index: 3;
   @include breakpoints.smallerThanTablet {
     padding: 0;
     padding-block-end: var(--spacing-medium-px);

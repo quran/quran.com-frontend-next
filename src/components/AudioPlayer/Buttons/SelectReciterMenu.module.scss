@@ -8,3 +8,9 @@
   overflow-y: auto;
   overscroll-behavior: contain;
 }
+
+// When embedded in modal, the parent popover handles scrolling
+.embeddedReciterList {
+  max-block-size: none;
+  overflow-y: visible;
+}

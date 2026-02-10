@@ -24,6 +24,7 @@ import useNavbarAutoHide from '@/hooks/useNavbarAutoHide';
 import useIntersectionObserver from '@/hooks/useObserveElement';
 import useScrollWithContextMenuOffset from '@/hooks/useScrollWithContextMenuOffset';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
+import { selectStudyModeIsOpen } from '@/redux/slices/QuranReader/studyMode';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
@@ -54,8 +55,10 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   });
 
   const { isActive } = useOnboarding();
-  // disable auto scrolling when the user is onboarding
-  const enableAutoScrolling = useSelector(selectEnableAutoScrolling) && !isActive;
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  // disable auto scrolling when the user is onboarding or study mode is open
+  const enableAutoScrolling =
+    useSelector(selectEnableAutoScrolling) && !isActive && !isStudyModeOpen;
 
   // Use our custom hook that handles scrolling with context menu offset
   const [scrollToSelectedItem, selectedItemRef] = useScrollWithContextMenuOffset<HTMLDivElement>();

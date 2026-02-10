@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './VolumeControl.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
-import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import PopoverMenu, { PopoverMenuExpandDirection } from '@/dls/PopoverMenu/PopoverMenu';
 import Slider, { SliderVariant } from '@/dls/Slider';
 import useDirection from '@/hooks/useDirection';
 import NoSoundIcon from '@/icons/no-sound.svg';
@@ -69,6 +69,7 @@ const VolumeControl = ({ shouldUseModalZIndex }: VolumeControlProps) => {
         contentClassName={styles.content}
         onOpenChange={setIsOpen}
         shouldUseModalZIndex={shouldUseModalZIndex}
+        {...(shouldUseModalZIndex && { expandDirection: PopoverMenuExpandDirection.TOP })}
         trigger={
           <Button
             tooltip={t('audio.player.volume-control')}
