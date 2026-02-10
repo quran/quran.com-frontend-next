@@ -2,4 +2,5 @@
 
 .container {
   @include flexbox.col-center;
+  gap: var(--spacing-xxsmall);
 }

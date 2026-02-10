@@ -1,0 +1,1 @@
+../../../skills/seo-audit/SKILL.md

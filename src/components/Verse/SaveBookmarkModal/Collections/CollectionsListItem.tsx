@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import styles from './collections.module.scss';
 
 import Spinner from '@/dls/Spinner/Spinner';
-import BookmarkBlankIcon from '@/icons/bookmark_blank.svg';
+import BookmarkEmptyIcon from '@/icons/bookmark-empty.svg';
 import BookmarkIcon from '@/icons/bookmark_new.svg';
 import CheckIcon from '@/icons/check.svg';
 
@@ -47,7 +47,7 @@ const CollectionsListItem: React.FC<CollectionsListItemProps> = ({
       );
     }
 
-    return <div className={styles.checkbox} />;
+    return <div className={styles.collectionRadio} />;
   }, [collection, isTogglingFavorites]);
 
   const handleKeyDown = useCallback(
@@ -69,7 +69,7 @@ const CollectionsListItem: React.FC<CollectionsListItemProps> = ({
       tabIndex={0}
     >
       <div className={styles.collectionIcon}>
-        {!collection.checked ? <BookmarkBlankIcon /> : <BookmarkIcon />}
+        {!collection.checked ? <BookmarkEmptyIcon /> : <BookmarkIcon />}
       </div>
       <span className={styles.collectionName}>{collection.name}</span>
       {renderTrailingIndicator()}

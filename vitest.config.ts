@@ -41,7 +41,7 @@ export default defineConfig({
       '@/contexts': path.resolve(__dirname, './src/contexts'),
       types: path.resolve(__dirname, './types'),
       src: path.resolve(__dirname, './src'),
-      '@/api': path.resolve(__dirname, './src/api'),
+      '@/api': path.resolve(__dirname, './src/api.ts'),
       '@/lib': path.resolve(__dirname, './src/lib'),
       '@/hooks': path.resolve(__dirname, './src/hooks'),
       '@/components': path.resolve(__dirname, './src/components'),

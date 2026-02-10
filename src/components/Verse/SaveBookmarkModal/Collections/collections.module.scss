@@ -87,8 +87,7 @@ $icon-size: var(--spacing-medium2-px);
   }
 
   &.selected {
-    background-color: var(--color-background-default);
-
+    background-color: transparent;
     .collectionIcon {
       color: var(--color-bookmark-icon) !important;
     }
@@ -113,6 +112,15 @@ $icon-size: var(--spacing-medium2-px);
   display: flex;
   align-items: center;
   gap: var(--spacing-xxsmall);
+}
+
+.collectionRadio {
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+  border: var(--spacing-micro-px) solid var(--color-borders-hairline);
+  border-radius: 50%;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .defaultLabel {

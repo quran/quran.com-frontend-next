@@ -17,7 +17,6 @@ interface StudyModeSsrContentProps {
   error: Error | undefined;
   onRetry: () => void;
   currentVerse: Verse | undefined;
-  bookmarksRangeUrl: string;
   selectedWord: Word | undefined;
   selectedWordLocation: string | undefined;
   showWordBox: boolean;
@@ -42,7 +41,6 @@ const StudyModeSsrContent: React.FC<StudyModeSsrContentProps> = ({
   error,
   onRetry,
   currentVerse,
-  bookmarksRangeUrl,
   selectedWord,
   selectedWordLocation,
   showWordBox,
@@ -82,7 +80,6 @@ const StudyModeSsrContent: React.FC<StudyModeSsrContentProps> = ({
       <div data-testid={TestId.STUDY_MODE_CONTENT}>
         <StudyModeBody
           verse={currentVerse}
-          bookmarksRangeUrl={bookmarksRangeUrl}
           selectedWord={selectedWord}
           selectedWordLocation={selectedWordLocation}
           showWordBox={showWordBox}

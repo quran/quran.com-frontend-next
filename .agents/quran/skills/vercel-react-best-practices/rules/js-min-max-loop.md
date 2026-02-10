@@ -1,0 +1,1 @@
+../../../../skills/vercel-react-best-practices/rules/js-min-max-loop.md

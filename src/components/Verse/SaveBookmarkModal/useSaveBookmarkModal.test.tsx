@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 
 import { render, screen } from '@testing-library/react';
@@ -6,13 +7,23 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import useSaveBookmarkModal from './useSaveBookmarkModal';
 
 import { ReadingBookmarkType } from '@/types/Bookmark';
+import { toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
+
+let mockLang = 'en';
 
 vi.mock('@/dls/Toast/Toast', () => ({
   useToast: () => vi.fn(),
   ToastStatus: { Error: 'error', Success: 'success' },
 }));
 vi.mock('next-translate/useTranslation', () => ({
-  default: () => ({ t: (k: string) => k, lang: 'en' }),
+  default: () => ({
+    t: (k: string, params?: { verseKey?: string; pageNumber?: string }) => {
+      if (params?.verseKey) return `${k}:${params.verseKey}`;
+      if (params?.pageNumber) return `${k}:${params.pageNumber}`;
+      return k;
+    },
+    lang: mockLang,
+  }),
 }));
 vi.mock('next/router', () => {
   const push = vi.fn();
@@ -57,11 +68,11 @@ vi.mock('./Collections/hooks/useCollectionToggle', () => ({
     handleToggleFavorites: vi.fn(),
   }),
 }));
-vi.mock('@/dls/Toast/Toast', () => ({
-  useToast: () => vi.fn(),
-  ToastStatus: { Error: 'error', Success: 'success' },
-}));
 vi.mock('@/utils/auth/login', () => ({ isLoggedIn: () => false }));
+
+beforeEach(() => {
+  mockLang = 'en';
+});
 
 const HookProbe: React.FC<{
   type: ReadingBookmarkType;
@@ -108,6 +119,45 @@ describe('useSaveBookmarkModal guest sign-in', () => {
     expect(arg).toMatch(/\/login\?r=/);
     expect(decodeURIComponent(arg.split('=')[1])).toMatch(/\/page\/5/);
     unmount();
+  });
+});
+
+describe('useSaveBookmarkModal modal title localization', () => {
+  it('uses RTL formatted verse key for RTL locale', () => {
+    mockLang = 'ar';
+    let capturedHooks: ReturnType<typeof useSaveBookmarkModal> | null = null;
+    const verseKey = '2:255';
+
+    render(
+      <HookProbe
+        type={ReadingBookmarkType.AYAH}
+        verse={{ chapterId: 2, verseNumber: 255 }}
+        onTestHook={(hooks) => {
+          capturedHooks = hooks;
+        }}
+      />,
+    );
+
+    const expectedVerseKey = toLocalizedVerseKeyRTL(verseKey, 'ar');
+    expect(capturedHooks?.modalTitle).toBe(`save-verse:${expectedVerseKey}`);
+  });
+
+  it('uses LTR formatted verse key for LTR locale', () => {
+    let capturedHooks: ReturnType<typeof useSaveBookmarkModal> | null = null;
+    const verseKey = '2:255';
+
+    render(
+      <HookProbe
+        type={ReadingBookmarkType.AYAH}
+        verse={{ chapterId: 2, verseNumber: 255 }}
+        onTestHook={(hooks) => {
+          capturedHooks = hooks;
+        }}
+      />,
+    );
+
+    const expectedVerseKey = toLocalizedVerseKey(verseKey, 'en');
+    expect(capturedHooks?.modalTitle).toBe(`save-verse:${expectedVerseKey}`);
   });
 });
 

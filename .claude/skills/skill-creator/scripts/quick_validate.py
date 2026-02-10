@@ -1,0 +1,1 @@
+../../../../.agents/skills/skill-creator/scripts/quick_validate.py

@@ -1,0 +1,1 @@
+../../../../.agents/skills/vercel-react-best-practices/rules/rerender-derived-state-no-effect.md

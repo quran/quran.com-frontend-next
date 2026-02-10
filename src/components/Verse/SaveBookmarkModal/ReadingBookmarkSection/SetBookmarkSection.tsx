@@ -7,8 +7,8 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ReadingBookmarkSection.module.scss';
 
 import Spinner from '@/dls/Spinner/Spinner';
+import BookmarkEmptyIcon from '@/icons/bookmark-empty.svg';
 import BookmarkStarIcon from '@/icons/bookmark-star.svg';
-import BookmarkBlankIcon from '@/icons/bookmark_blank.svg';
 import CheckIcon from '@/icons/check.svg';
 import QuestionIcon from '@/icons/question-mark-rounded.svg';
 
@@ -82,6 +82,7 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
 
   // Show undo as long as we have a previous value to restore, regardless of pending state
   const showUndoButton = previousBookmarkValue !== undefined;
+  const shouldShowInfo = showNewBookmark || Boolean(effectiveCurrentBookmark);
 
   return (
     <div
@@ -94,7 +95,7 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
       onKeyDown={handleKeyDown}
     >
       <div className={styles.readingBookmarkIcon}>
-        {isSelected ? <BookmarkStarIcon /> : <BookmarkBlankIcon />}
+        {isSelected ? <BookmarkStarIcon /> : <BookmarkEmptyIcon />}
       </div>
       <div className={styles.readingBookmarkContent}>
         <div className={styles.readingBookmarkTitle}>
@@ -103,43 +104,32 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
             <QuestionIcon />
           </span>
         </div>
-        <div className={styles.readingBookmarkInfo}>
-          {showNewBookmark ? (
-            <>
-              <span className={styles.label}>{t('current')}:</span>
-              <span className={styles.value}>{resourceDisplayName}</span>
-              {showUndoButton && (
-                <button
-                  type="button"
-                  className={styles.undoButton}
-                  onClick={handleUndoClick}
-                  disabled={isLoading}
-                  aria-label={t('undo')}
-                >
-                  ({t('undo')})
-                </button>
-              )}
-            </>
-          ) : (
-            <>
-              <span className={styles.label}>
-                {effectiveCurrentBookmark ? t('current') : t('none')}:
-              </span>
-              <span className={styles.value}>{displayReadingBookmark || t('no-bookmark-set')}</span>
-              {showUndoButton && (
-                <button
-                  type="button"
-                  className={styles.undoButton}
-                  onClick={handleUndoClick}
-                  disabled={isLoading}
-                  aria-label={t('undo')}
-                >
-                  ({t('undo')})
-                </button>
-              )}
-            </>
-          )}
-        </div>
+        {shouldShowInfo && (
+          <div className={styles.readingBookmarkInfo}>
+            {showNewBookmark ? (
+              <>
+                <span className={styles.label}>{t('new')}:</span>
+                <span className={styles.value}>{resourceDisplayName}</span>
+              </>
+            ) : (
+              <>
+                <span className={styles.label}>{t('current')}:</span>
+                <span className={styles.value}>{displayReadingBookmark}</span>
+              </>
+            )}
+            {showUndoButton && (
+              <button
+                type="button"
+                className={styles.undoButton}
+                onClick={handleUndoClick}
+                disabled={isLoading}
+                aria-label={t('undo')}
+              >
+                ({t('undo')})
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       {isLoading ? (
@@ -149,7 +139,11 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
           <CheckIcon />
         </div>
       ) : (
-        <div className={styles.checkbox} />
+        <div
+          className={classNames(styles.checkbox, styles.readingBookmarkRadio, {
+            [styles.checked]: isSelected,
+          })}
+        />
       )}
     </div>
   );

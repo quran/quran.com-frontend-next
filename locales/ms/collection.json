@@ -7,7 +7,9 @@
   "collection-name": "Nama koleksi",
   "collections": "Koleksi",
   "delete-bookmark": {
+    "confirmation-subtitle": "Anda akan memadam {{count}} barang daripada {{collectionName}}, Adakah anda pasti?",
     "subtitle": "Adakah anda pasti mahu memadamkan {{bookmarkName}} daripada {{collectionName}} ?",
+    "success": "Dipadam {{count}} barang.",
     "title": "Padamkan penanda halaman"
   },
   "delete-collection-action": "Padam Koleksi",

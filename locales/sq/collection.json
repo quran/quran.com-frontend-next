@@ -7,7 +7,9 @@
   "collection-name": "Emri i koleksionit",
   "collections": "Koleksionet",
   "delete-bookmark": {
+    "confirmation-subtitle": "Do të fshish {{count}} artikull(e) nga {{collectionName}}, Je i sigurt?",
     "subtitle": "Jeni i sigurt që dëshironi të fshini {{bookmarkName}} nga {{collectionName}} ?",
+    "success": "Fshirë {{count}} artikull(e).",
     "title": "Fshi faqerojtësin"
   },
   "delete-collection-action": "Fshij koleksionin",

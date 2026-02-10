@@ -83,6 +83,8 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   lastUsedReadingMode: ReadingPreference.Reading,
   selectedReflectionLanguages: [Language.EN],
   selectedLessonLanguages: [Language.EN],
+  hasCustomizedReflectionLanguages: false,
+  hasCustomizedLessonLanguages: false,
 };
 
 const THEME_INITIAL_STATE: Theme = {

@@ -1,0 +1,1 @@
+../../../../.agents/skills/vercel-react-best-practices/rules/js-batch-dom-css.md

@@ -1,3 +1,5 @@
+@use 'src/styles/utility';
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -30,6 +32,8 @@
     direction: rtl;
     display: block;
   }
+
+  @include utility.kitabFontLang;
 }
 
 .moreOrLessText {

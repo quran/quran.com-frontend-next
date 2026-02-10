@@ -2,6 +2,7 @@
 
 .bottomActionsContainer {
   overflow-x: auto;
+  scroll-behavior: smooth;
   inline-size: 100%;
   padding-block: var(--spacing-medium2-px);
   position: sticky;

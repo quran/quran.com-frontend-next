@@ -95,9 +95,7 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
     navigateToLesson(course.slug, nextLessonSlug);
   };
 
-  const shouldShowAddFeedbackButton =
-    course?.userHasFeedback === false &&
-    (course?.isCompleted === true || shouldOpenFeedbackModal === true);
+  const shouldShowAddFeedbackButton = course?.userHasFeedback !== true;
 
   return (
     <>
@@ -130,8 +128,7 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
           </Button>
         )}
       </div>
-      <div className={styles.addReflectionButton}>
-        <ReflectionButton lessonId={id} isCompleted={isCompleted} />
+      <div className={styles.secondaryButtonsContainer}>
         {shouldShowAddFeedbackButton && (
           <CourseFeedback
             shouldOpenModal={shouldOpenFeedbackModal}
@@ -139,6 +136,7 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
             source={FeedbackSource.LessonPage}
           />
         )}
+        <ReflectionButton lessonId={id} isCompleted={isCompleted} />
       </div>
     </>
   );

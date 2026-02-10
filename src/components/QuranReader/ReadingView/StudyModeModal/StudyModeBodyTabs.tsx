@@ -19,6 +19,7 @@ import RelatedVerseIcon from '@/icons/related-verses.svg';
 import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
+import { toLocalizedNumber } from '@/utils/locale';
 
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
   loading: TafsirSkeleton,
@@ -45,8 +46,8 @@ const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), {
 });
 
 export const StudyModeRelatedVersesTab = dynamic(
-  () => import('./tabs/RelatedVerses/StudyModeRelatedVersesTab'),
-  { loading: TafsirSkeleton },
+  () => import('./tabs/StudyModeRelatedVerses/StudyModeRelatedVersesTab'),
+  { loading: TafsirSkeleton, }
 );
 
 export const TAB_COMPONENTS: Partial<
@@ -60,7 +61,8 @@ export const TAB_COMPONENTS: Partial<
       questionsInitialData?: AyahQuestionsResponse;
       tafsirIdOrSlug?: string;
       hadithsInitialData?: AyahHadithsResponse;
-      onGoToVerse?: (chapterId: string, verseNumber: string) => void;
+      onGoToVerse?: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
+      setRelatedVersesCount?: (count: number) => void;
     }>
   >
 > = {
@@ -89,6 +91,7 @@ export type TabConfig = {
  * @param {string} props.verseKey - Current verse key
  * @param {Function} [props.onTabChange] - Callback when tab is clicked
  * @param {boolean} [props.hasRelatedVerses=false] - Whether the verse has related verses
+ * @param {number | null} [props.relatedVersesCount] - Count of related verses
  * @returns {TabConfig[]} Array of tab configurations
  */
 export const useStudyModeTabs = ({
@@ -96,13 +99,15 @@ export const useStudyModeTabs = ({
   verseKey,
   onTabChange,
   hasRelatedVerses = false,
+  relatedVersesCount,
 }: {
   activeTab: StudyModeTabId | null | undefined;
   verseKey: string;
   onTabChange?: (tabId: StudyModeTabId | null) => void;
   hasRelatedVerses: boolean;
+  relatedVersesCount?: number | null;
 }): TabConfig[] => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   const { data: questionData, isLoading: isQnaLoading } = useBatchedCountRangeQuestions(verseKey);
   const hasQuestions = questionData?.total > 0 || isQnaLoading;
@@ -171,7 +176,9 @@ export const useStudyModeTabs = ({
     },
     {
       id: StudyModeTabId.RELATED_VERSES,
-      label: t('related-verses'),
+      label: relatedVersesCount
+        ? `${t('related-verses')} (${toLocalizedNumber(relatedVersesCount, lang)})`
+        : t('related-verses'),
       icon: <RelatedVerseIcon />,
       onClick: () => handleTabClick(StudyModeTabId.RELATED_VERSES),
       condition: hasRelatedVerses,

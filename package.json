@@ -21,6 +21,8 @@
     "lint": "eslint . --ext=tsx,ts,js,jsx",
     "lint:fix": "yarn lint --fix",
     "lint:scss": "yarn stylelint '**/*.scss' --fix",
+    "ai:sync": "node scripts/ai/sync-links.mjs",
+    "ai:check": "node scripts/ai/check-links.mjs",
     "generate-sitemap": "next-sitemap --config next-sitemap.js && node scripts/format-sitemap.js",
     "test": "vitest run",
     "test:integration": "playwright test",

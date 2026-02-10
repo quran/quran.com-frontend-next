@@ -7,7 +7,9 @@
   "collection-name": "Название коллекции",
   "collections": "Коллекции",
   "delete-bookmark": {
+    "confirmation-subtitle": "Вы удалите {{count}} товар(ы) из {{collectionName}}, Вы уверены?",
     "subtitle": "Вы уверены, что хотите удалить {{bookmarkName}} из {{collectionName}} ?",
+    "success": "Удалено {{count}} предметы).",
     "title": "Удалить закладку"
   },
   "delete-collection-action": "Удалить коллекцию",

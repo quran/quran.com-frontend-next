@@ -1,0 +1,1 @@
+../../../../.agents/skills/vercel-react-best-practices/rules/rendering-usetransition-loading.md

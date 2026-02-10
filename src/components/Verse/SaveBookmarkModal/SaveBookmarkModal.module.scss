@@ -2,6 +2,8 @@
 @import './shared.module.scss';
 
 $outline-size: 2px;
+$guestCollectionAddButtonBlockSize: 22px;
+$guestSignInButtonHeight: 33px;
 
 .modal {
   background-color: var(--color-background-elevated-new);
@@ -125,9 +127,17 @@ $outline-size: 2px;
   inline-size: 100%;
 }
 
+.collectionsHint {
+  margin: var(--spacing-small-px);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  font-size: var(--font-size-small-px);
+  color: var(--color-text-faded-new);
+}
+
 .guestSectionTitle {
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-default);
   margin: 0;
 }
@@ -198,28 +208,16 @@ $outline-size: 2px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: var(--spacing-xsmall) var(--spacing-medium);
-
+  padding: var(--spacing-xsmall-px) var(--spacing-small-px);
   background-color: var(--color-success-medium);
-  border-radius: var(--border-radius-pill);
+  border-radius: var(--border-radius-small-px);
   border: none;
 
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-normal);
-  color: var(--color-background-default);
-
+  color: var(--color-text-white);
+  block-size: $guestSignInButtonHeight;
   cursor: pointer;
-  transition: background-color var(--transition-normal) ease;
-
-  &:active:not(:disabled) {
-    background-color: var(--color-success-dark);
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
 }
 
 $newCollectionSectionHeight: 64px;
@@ -263,13 +261,18 @@ $newCollectionSectionHeight: 64px;
 }
 
 .newCollectionButtonIconSvg {
+  display: block;
+  flex-shrink: 0;
+  overflow: visible;
+  margin-inline-end: var(--spacing-xxsmall-px);
   // SVGs should follow currentColor so they remain visible in dark mode.
   // If the SVG uses fills/strokes, enforce them.
   &,
   * {
     fill: currentColor;
-    stroke: currentColor;
   }
+  inline-size: $guestCollectionAddButtonBlockSize;
+  block-size: $guestCollectionAddButtonBlockSize;
 }
 
 .newCollectionButtonLabel {

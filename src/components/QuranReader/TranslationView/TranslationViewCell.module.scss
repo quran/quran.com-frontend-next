@@ -92,13 +92,35 @@
       color: var(--color-success-medium);
       background-color: var(--color-success-medium);
       @include utility.lighten-background-color;
+    }
 
+    &:hover:not(.bookmarkAction) {
       .icon span {
         svg {
           color: var(--color-success-medium) !important;
         }
       }
     }
+  }
+}
+
+.bookmarkAction {
+  &:hover {
+    color: var(--color-bookmark-icon);
+
+    .icon svg,
+    .icon span svg {
+      color: var(--color-bookmark-icon) !important;
+      fill: var(--color-bookmark-icon);
+    }
+  }
+}
+
+.bookmarkActionActive {
+  .icon svg,
+  .icon span svg {
+    color: var(--color-bookmark-icon);
+    fill: var(--color-bookmark-icon);
   }
 }
 

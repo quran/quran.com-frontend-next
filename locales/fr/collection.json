@@ -7,7 +7,9 @@
   "collection-name": "Nom de la collection",
   "collections": "Collections",
   "delete-bookmark": {
+    "confirmation-subtitle": "Vous allez supprimer {{count}} article(s) de {{collectionName}}, Es-tu sûr?",
     "subtitle": "Voulez-vous vraiment supprimer {{bookmarkName}} de la collection {{collectionName}} ?",
+    "success": "Supprimé {{count}} articles).",
     "title": "Supprimer le favori"
   },
   "delete-collection-action": "Supprimer la collection",

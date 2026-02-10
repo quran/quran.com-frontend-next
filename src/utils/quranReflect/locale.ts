@@ -56,6 +56,13 @@ export const localeToQuranReflectLanguageID = (locale: string): number => {
   );
 };
 
+const QURAN_REFLECT_LANGUAGE_ID_TO_LOCALE = Object.fromEntries(
+  Object.entries(LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID).map(([locale, id]) => [id, locale]),
+);
+
+export const quranReflectLanguageIDToLocale = (languageId: number): string | undefined =>
+  QURAN_REFLECT_LANGUAGE_ID_TO_LOCALE[languageId];
+
 export const localeToTranslationID = (locale: string): number | null => {
   return LOCALE_TO_TRANSLATION_ID[locale] ?? LOCALE_TO_TRANSLATION_ID[Language.EN];
 };
