@@ -10,7 +10,16 @@
     "select": "Pilih"
   },
   "collections": {
+    "detail-empty": "Mula membaca dan tambahkan koleksi anda!",
     "favorites": "Kegemaran",
+    "filters": {
+      "chapters": "Bab",
+      "clear-all": "Kosongkan semua",
+      "juz": "Juz",
+      "no-matches": "Tiada ayat yang disimpan sepadan dengan penapis anda.",
+      "no-results": "Tiada keputusan",
+      "title": "Penapis"
+    },
     "guest-promo": {
       "sign-in": "Daftar masuk",
       "subtitle": "Membandingkan dan membezakan ayat-ayat",

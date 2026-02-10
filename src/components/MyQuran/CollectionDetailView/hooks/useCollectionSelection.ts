@@ -69,6 +69,12 @@ const useCollectionSelection = ({
     });
   }, []);
 
+  const resetSelectionState = useCallback(() => {
+    setSelectedBookmarks(new Set());
+    setExpandedCardIds(new Set());
+    setIsSelectMode(false);
+  }, []);
+
   const removeBookmarkIdsFromState = useCallback((bookmarkIds: string[]) => {
     setSelectedBookmarks((prev) => {
       const next = new Set(prev);
@@ -101,6 +107,7 @@ const useCollectionSelection = ({
     handleToggleExpandCollapseAll,
     handleToggleBookmarkSelection,
     handleToggleCardExpansion,
+    resetSelectionState,
     removeBookmarkIdsFromState,
     isCardExpanded,
     isBookmarkSelected,

@@ -6,6 +6,8 @@
   "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
   "collection-name": "Collection name",
   "collections": "Collections",
+  "date-asc": "Date (Oldest)",
+  "date-desc": "Date (Newest)",
   "delete-bookmark": {
     "confirmation-subtitle": "You will delete {{count}} item(s) from {{collectionName}}, Are you sure?",
     "subtitle": "Are you sure you want to delete {{bookmarkName}} from {{collectionName}} collection?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Go to ayah",
   "load-more": "Load More",
   "no-collections": "You don't have any collections yet",
+  "quranic-asc": "Quranic order (Ascending)",
+  "quranic-desc": "Quranic order (Descending)",
   "recently-added": "Recently added",
   "recently-updated": "Recently updated",
   "verse-key": "Chapter and Verse Number"

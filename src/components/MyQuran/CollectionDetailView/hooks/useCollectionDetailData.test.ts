@@ -10,9 +10,14 @@ import { logValueChange } from '@/utils/eventLogger';
 
 let swrData: any;
 const mutate = vi.fn();
+const getJuzNumberByVerse = vi.fn();
 
 vi.mock('swr', () => ({
   default: vi.fn(() => ({ data: swrData, mutate, error: undefined })),
+}));
+
+vi.mock('../juzVerseMapping', () => ({
+  getJuzNumberByVerse: (...args: any[]) => getJuzNumberByVerse(...args),
 }));
 
 vi.mock('@/utils/auth/api', () => ({
@@ -42,6 +47,8 @@ describe('useCollectionDetailData', () => {
         ],
       },
     };
+    // Keep this deterministic for filter tests.
+    getJuzNumberByVerse.mockImplementation((chapter: number) => (chapter === 1 ? 1 : 2));
   });
 
   it('builds the SWR key with collection id and sort option', () => {
@@ -78,6 +85,43 @@ describe('useCollectionDetailData', () => {
       invalidateAllBookmarkCaches: vi.fn(),
     });
     expect(result.current.filteredBookmarks.map((b: any) => b.id)).toEqual(['b1']);
+  });
+
+  it('filters bookmarks by selectedChapterIds', () => {
+    const { result } = renderHook((props: any) => useCollectionDetailData(props), {
+      initialProps: {
+        collectionId: 'my-collection-123',
+        selectedChapterIds: ['2'],
+        invalidateAllBookmarkCaches: vi.fn(),
+      },
+    });
+
+    expect(result.current.filteredBookmarks.map((b: any) => b.id)).toEqual(['b2']);
+  });
+
+  it('filters bookmarks by selectedJuzNumbers', () => {
+    const { result } = renderHook((props: any) => useCollectionDetailData(props), {
+      initialProps: {
+        collectionId: 'my-collection-123',
+        selectedJuzNumbers: ['1'],
+        invalidateAllBookmarkCaches: vi.fn(),
+      },
+    });
+
+    expect(result.current.filteredBookmarks.map((b: any) => b.id)).toEqual(['b1']);
+  });
+
+  it('ORs chapter and juz filters when both are active', () => {
+    const { result } = renderHook((props: any) => useCollectionDetailData(props), {
+      initialProps: {
+        collectionId: 'my-collection-123',
+        selectedChapterIds: ['2'], // matches b2
+        selectedJuzNumbers: ['1'], // matches b1
+        invalidateAllBookmarkCaches: vi.fn(),
+      },
+    });
+
+    expect(result.current.filteredBookmarks.map((b: any) => b.id).sort()).toEqual(['b1', 'b2']);
   });
 
   it('onSortByChange logs value change and updates sortBy', () => {

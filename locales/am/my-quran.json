@@ -10,7 +10,16 @@
     "select": "ምረጥ"
   },
   "collections": {
+    "detail-empty": "ማንበብ ይጀምሩ እና ወደ ስብስብዎ ያክሉ!",
     "favorites": "ተወዳጆች",
+    "filters": {
+      "chapters": "ምዕራፍ",
+      "clear-all": "ሁሉንም አጽዳ",
+      "juz": "ጁዝ",
+      "no-matches": "ከማጣሪያዎችዎ ጋር የሚዛመዱ ምንም የተቀመጡ ጥቅሶች የሉም።",
+      "no-results": "ምንም ውጤቶች የሉም",
+      "title": "ማጣሪያ"
+    },
     "guest-promo": {
       "sign-in": "ይግቡ",
       "subtitle": "ጥቅሶችን አወዳድር እና አነፃፅር",

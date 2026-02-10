@@ -2,6 +2,8 @@ import { useCallback, useMemo, useState } from 'react';
 
 import useSWR from 'swr';
 
+import { getJuzNumberByVerse } from '../juzVerseMapping';
+
 import BookmarkType from '@/types/BookmarkType';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
@@ -15,12 +17,18 @@ const COLLECTION_BOOKMARKS_LIMIT = 10000;
 interface UseCollectionDetailDataParams {
   collectionId: string;
   searchQuery?: string;
+  selectedChapterIds?: string[];
+  selectedJuzNumbers?: string[];
   invalidateAllBookmarkCaches: () => void;
 }
+
+const EMPTY_STRING_ARRAY: string[] = [];
 
 const useCollectionDetailData = ({
   collectionId,
   searchQuery,
+  selectedChapterIds = EMPTY_STRING_ARRAY,
+  selectedJuzNumbers = EMPTY_STRING_ARRAY,
   invalidateAllBookmarkCaches,
 }: UseCollectionDetailDataParams) => {
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
@@ -50,12 +58,32 @@ const useCollectionDetailData = ({
   const bookmarks = useMemo(() => data?.data.bookmarks ?? [], [data]);
 
   const filteredBookmarks = useMemo(() => {
-    if (!searchQuery) return bookmarks;
-    const query = searchQuery.toLowerCase();
-    return bookmarks.filter((bookmark) =>
-      `${bookmark.key}:${bookmark.verseNumber}`.includes(query),
-    );
-  }, [bookmarks, searchQuery]);
+    const query = (searchQuery || '').trim().toLowerCase();
+
+    const hasChapterFilters = selectedChapterIds.length > 0;
+    const hasJuzFilters = selectedJuzNumbers.length > 0;
+    const shouldFilter = hasChapterFilters || hasJuzFilters;
+
+    const chapterIdSet = hasChapterFilters ? new Set(selectedChapterIds) : null;
+    const juzSet = hasJuzFilters ? new Set(selectedJuzNumbers) : null;
+
+    return bookmarks.filter((bookmark) => {
+      const verseKey = `${bookmark.key}:${bookmark.verseNumber ?? 1}`;
+      if (query && !verseKey.includes(query)) return false;
+      if (!shouldFilter) return true;
+
+      // When filtering, a filter group that isn't active should not "auto-match" everything.
+      // We OR the active filter groups together so results match *any* selected chapter/juz.
+      const matchesChapter = chapterIdSet ? chapterIdSet.has(String(bookmark.key)) : false;
+      // Juz lookup is skipped when no juz filter is active (juzSet is null).
+      const matchesJuz = juzSet
+        ? juzSet.has(
+            String(getJuzNumberByVerse(Number(bookmark.key), bookmark.verseNumber ?? 1) ?? ''),
+          )
+        : false;
+      return matchesChapter || matchesJuz;
+    });
+  }, [bookmarks, searchQuery, selectedChapterIds, selectedJuzNumbers]);
 
   const onUpdated = useCallback(() => {
     mutate();

@@ -1,3 +1,5 @@
+@use 'src/styles/breakpoints';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,11 +7,97 @@
   animation: fadeIn var(--transition-regular) ease-out;
 }
 
+.searchAndActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-medium-px);
+  margin-block-end: var(--spacing-medium2-px);
+
+  @include breakpoints.smallerThanTablet {
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+}
+
+// Spacer to preserve layout until collection search is implemented.
+// Important: do not keep an invisible input in the tab order.
+.searchSpacer {
+  flex: 1;
+  min-inline-size: min(30rem, 100%);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: var(--spacing-xsmall-px) var(--spacing-small2-px);
+  border: var(--spacing-hairline-px) solid transparent;
+  border-radius: var(--border-radius-pill);
+  // Match the old search control's height (icon + vertical padding + border).
+  min-block-size: calc(
+    var(--spacing-medium) + (2 * var(--spacing-xsmall-px)) + (2 * var(--spacing-hairline-px))
+  );
+  visibility: hidden;
+  pointer-events: none;
+
+  @include breakpoints.smallerThanTablet {
+    min-inline-size: 100%;
+  }
+}
+
 .topActions {
   display: flex;
   justify-content: flex-end;
-  gap: var(--spacing-xsmall-px);
-  margin-block-end: var(--spacing-medium2-px);
+  align-items: center;
+  gap: var(--spacing-medium-px);
+}
+
+.filterButton {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: var(--spacing-xsmall);
+  border-radius: var(--border-radius-default);
+  position: relative;
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  transition: opacity var(--transition-fast);
+
+  &:hover {
+    opacity: var(--opacity-85);
+  }
+
+  &:focus-visible {
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
+  }
+}
+
+.filterIcon {
+  color: var(--color-text-default-new);
+}
+
+.filterText {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.activeDot {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 100%;
+  // these transform numbers used number to align the dot to the inline end and block start of the icon
+  transform: translateX(-30%) translateY(-25%);
+  inline-size: var(--spacing-xxsmall-px);
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-circle);
+  background-color: var(--color-blue-buttons-and-icons);
 }
 
 .header {

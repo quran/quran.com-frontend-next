@@ -1,5 +1,7 @@
 import { TranslateFn } from './types';
 
+import type { ActiveFilterChip } from '@/components/MyQuran/SavedTabContent/ActiveFiltersChips';
+import type { CollectionFiltersDropdownProps } from '@/components/MyQuran/SavedTabContent/CollectionFiltersDropdown';
 import Bookmark from '@/types/Bookmark';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
@@ -14,6 +16,7 @@ export interface CollectionDetailViewLayoutProps {
   onSortByChange: (newSortBy: CollectionDetailSortOption) => void;
   totalCount: number;
   isOwner: boolean;
+  emptyMessage: string;
   filteredBookmarks: Bookmark[];
   onItemDeleted: (bookmarkId: string) => void;
   onShareVerse: (verseKey: string) => void;
@@ -51,4 +54,17 @@ export interface CollectionDetailViewLayoutProps {
   onDeleteCollectionConfirm: () => void;
   onDeleteCollectionCancel: () => void;
   isDeletingCollection: boolean;
+
+  chapterItems: CollectionFiltersDropdownProps['chapterItems'];
+  juzItems: CollectionFiltersDropdownProps['juzItems'];
+  selectedChapterIds: string[];
+  selectedJuzNumbers: string[];
+  onSelectedChapterIdsChange: (chapterIds: string[]) => void;
+  onSelectedJuzNumbersChange: (juzNumbers: string[]) => void;
+  activeChapterChips: ActiveFilterChip[];
+  activeJuzChips: ActiveFilterChip[];
+  hasActiveFilters: boolean;
+  onRemoveChapterFilter: (chapterId: string) => void;
+  onRemoveJuzFilter: (juzNumber: string) => void;
+  onClearAllFilters: () => void;
 }

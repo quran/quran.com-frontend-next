@@ -11,6 +11,8 @@ let bulkProps: any;
 let modalsProps: any;
 let detailProps: any;
 let sorterProps: any;
+let filtersDropdownProps: any;
+let activeFiltersProps: any;
 
 vi.mock('./CollectionDetailViewHeader', () => ({
   default: (props: any) => {
@@ -47,6 +49,22 @@ vi.mock('@/components/Collection/CollectionSorter/CollectionSorter', () => ({
   },
 }));
 
+vi.mock('@/components/MyQuran/SavedTabContent/CollectionFiltersDropdown', () => ({
+  default: (props: any) => {
+    filtersDropdownProps = props;
+    return null;
+  },
+}));
+
+vi.mock('@/components/MyQuran/SavedTabContent/ActiveFiltersChips', () => ({
+  default: (props: any) => {
+    activeFiltersProps = props;
+    return null;
+  },
+}));
+
+vi.mock('@/icons/filter-bar.svg', () => ({ default: () => null }));
+
 vi.mock('@/components/QuranReader/StudyModeContainer', () => ({
   default: () => null,
 }));
@@ -62,6 +80,8 @@ describe('CollectionDetailViewLayout', () => {
     modalsProps = undefined;
     detailProps = undefined;
     sorterProps = undefined;
+    filtersDropdownProps = undefined;
+    activeFiltersProps = undefined;
   });
 
   it('passes through props to composed components', () => {
@@ -77,6 +97,7 @@ describe('CollectionDetailViewLayout', () => {
         numericCollectionId="123"
         sortBy={'verse_key' as any}
         onSortByChange={vi.fn()}
+        emptyMessage="collections.filters.no-matches"
         totalCount={2}
         isOwner
         filteredBookmarks={[{ id: 'b1' } as any]}
@@ -116,6 +137,18 @@ describe('CollectionDetailViewLayout', () => {
         onDeleteCollectionConfirm={vi.fn()}
         onDeleteCollectionCancel={vi.fn()}
         isDeletingCollection={false}
+        chapterItems={[]}
+        juzItems={[]}
+        selectedChapterIds={[]}
+        selectedJuzNumbers={[]}
+        onSelectedChapterIdsChange={vi.fn()}
+        onSelectedJuzNumbersChange={vi.fn()}
+        activeChapterChips={[]}
+        activeJuzChips={[]}
+        hasActiveFilters={false}
+        onRemoveChapterFilter={vi.fn()}
+        onRemoveJuzFilter={vi.fn()}
+        onClearAllFilters={vi.fn()}
       />,
     );
 
@@ -125,5 +158,7 @@ describe('CollectionDetailViewLayout', () => {
     expect(bulkProps.selectedCount).toBe(1);
     expect(detailProps.bookmarks).toEqual([{ id: 'b1' }]);
     expect(modalsProps.shareVerseKey).toBe('1:1');
+    expect(filtersDropdownProps.selectedChapterIds).toEqual([]);
+    expect(activeFiltersProps.chapters).toEqual([]);
   });
 });

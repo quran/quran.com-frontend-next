@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './CollectionDetailView.module.scss';
 import CollectionDetailViewBulkActionsBar from './CollectionDetailViewBulkActionsBar';
@@ -9,9 +9,12 @@ import CollectionDetailViewModals from './CollectionDetailViewModals';
 
 import CollectionDetail from '@/components/Collection/CollectionDetail/CollectionDetail';
 import CollectionSorter from '@/components/Collection/CollectionSorter/CollectionSorter';
+import ActiveFiltersChips from '@/components/MyQuran/SavedTabContent/ActiveFiltersChips';
+import CollectionFiltersDropdown from '@/components/MyQuran/SavedTabContent/CollectionFiltersDropdown';
 import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
 import { ArrowDirection } from '@/dls/Sorter/Sorter';
+import FilterIcon from '@/icons/filter-bar.svg';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
@@ -25,6 +28,7 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
   onSortByChange,
   totalCount,
   isOwner,
+  emptyMessage,
   filteredBookmarks,
   onItemDeleted,
   onShareVerse,
@@ -62,7 +66,21 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
   onDeleteCollectionConfirm,
   onDeleteCollectionCancel,
   isDeletingCollection,
+  chapterItems,
+  juzItems,
+  selectedChapterIds,
+  selectedJuzNumbers,
+  onSelectedChapterIdsChange,
+  onSelectedJuzNumbersChange,
+  activeChapterChips,
+  activeJuzChips,
+  hasActiveFilters,
+  onRemoveChapterFilter,
+  onRemoveJuzFilter,
+  onClearAllFilters,
 }) => {
+  const [isFiltersDropdownOpen, setIsFiltersDropdownOpen] = useState(false);
+
   const sortOptions = [
     {
       id: CollectionDetailSortOption.RecentlyAdded,
@@ -78,15 +96,46 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.topActions}>
-        <CollectionSorter
-          selectedOptionId={sortBy}
-          onChange={onSortByChange}
-          options={sortOptions}
-          isSingleCollection
-          collectionId={numericCollectionId}
-        />
+      <div className={styles.searchAndActions}>
+        <div className={styles.searchSpacer} aria-hidden="true" />
+
+        <div className={styles.topActions}>
+          <CollectionFiltersDropdown
+            isOpen={isFiltersDropdownOpen}
+            onOpenChange={setIsFiltersDropdownOpen}
+            trigger={
+              <button type="button" className={styles.filterButton} aria-label={t('search.filter')}>
+                <FilterIcon className={styles.filterIcon} />
+                <span className={styles.filterText}>{t('search.filter')}</span>
+                {hasActiveFilters && <span className={styles.activeDot} />}
+              </button>
+            }
+            chapterItems={chapterItems}
+            juzItems={juzItems}
+            selectedChapterIds={selectedChapterIds}
+            selectedJuzNumbers={selectedJuzNumbers}
+            onSelectedChapterIdsChange={onSelectedChapterIdsChange}
+            onSelectedJuzNumbersChange={onSelectedJuzNumbersChange}
+          />
+
+          <CollectionSorter
+            selectedOptionId={sortBy}
+            onChange={onSortByChange}
+            options={sortOptions}
+            isSingleCollection
+            collectionId={numericCollectionId}
+          />
+        </div>
       </div>
+
+      <ActiveFiltersChips
+        chapters={activeChapterChips}
+        juz={activeJuzChips}
+        onRemoveChapter={onRemoveChapterFilter}
+        onRemoveJuz={onRemoveJuzFilter}
+        onClearAll={onClearAllFilters}
+      />
+
       <CollectionDetailViewHeader
         collectionName={collectionName}
         totalCount={totalCount}
@@ -118,6 +167,7 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
         id={numericCollectionId}
         title={collectionName}
         bookmarks={filteredBookmarks}
+        emptyMessage={emptyMessage}
         onItemDeleted={onItemDeleted}
         onShareVerse={onShareVerse}
         isOwner={isOwner}

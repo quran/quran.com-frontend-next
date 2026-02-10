@@ -6,6 +6,8 @@
   "collection-list-empty": "Список коллекций пуст. Вы еще не создали ни одной коллекции",
   "collection-name": "Название коллекции",
   "collections": "Коллекции",
+  "date-asc": "Дата (самая старая)",
+  "date-desc": "Дата (Самая новая)",
   "delete-bookmark": {
     "confirmation-subtitle": "Вы удалите {{count}} товар(ы) из {{collectionName}}, Вы уверены?",
     "subtitle": "Вы уверены, что хотите удалить {{bookmarkName}} из {{collectionName}} ?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Иди к айе",
   "load-more": "Загрузи больше",
   "no-collections": "У вас пока нет коллекций.",
+  "quranic-asc": "Коранический порядок (восходящий)",
+  "quranic-desc": "Коранический порядок (нисходящий)",
   "recently-added": "Недавно добавленный",
   "recently-updated": "Недавно обновленный",
   "verse-key": "Глава и номер стиха"

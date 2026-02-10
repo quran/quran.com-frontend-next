@@ -6,6 +6,8 @@
   "collection-list-empty": "لیست مجموعه خالی است. شما هنوز هیچ مجموعه ای ایجاد نکرده اید",
   "collection-name": "نام مجموعه",
   "collections": "مجموعه ها",
+  "date-asc": "تاریخ (قدیمی‌ترین)",
+  "date-desc": "تاریخ (جدیدترین)",
   "delete-bookmark": {
     "confirmation-subtitle": "حذف خواهید کرد. {{count}} مورد(ها) از {{collectionName}}، مطمئنی؟",
     "subtitle": "آیا مطمئنید که می‌خواهید {{bookmarkName}} از {{collectionName}} حذف کنید؟",
@@ -28,6 +30,8 @@
   "go-to-ayah": "برو به آیه",
   "load-more": "بارگذاری بیشتر",
   "no-collections": "شما هنوز هیچ مجموعه ای ندارید",
+  "quranic-asc": "ترتیب قرآن (صعودی)",
+  "quranic-desc": "ترتیب قرآن (نزولی)",
   "recently-added": "به تازگی اضافه شده",
   "recently-updated": "به تازگی به روز شده است",
   "verse-key": "شماره فصل و آیه"
