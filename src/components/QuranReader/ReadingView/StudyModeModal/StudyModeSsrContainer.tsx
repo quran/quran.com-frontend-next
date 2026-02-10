@@ -80,6 +80,8 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
     handlePreviousWord: wordNav.handlePreviousWord,
     handleNextWord: wordNav.handleNextWord,
     handleCloseWordBox: wordNav.handleCloseWordBox,
+    handleGoBack: verseNav.handleGoBack,
+    handleGoToVerse: verseNav.handleGoToVerse,
     retry: verseData.retry,
   });
 
@@ -123,6 +125,9 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
       onVerseChange={verseNav.handleVerseChange}
       onPreviousVerse={events.handlePreviousVerse}
       onNextVerse={events.handleNextVerse}
+      onGoBack={events.handleGoBack}
+      onGoToVerse={events.handleGoToVerse}
+      verseHistory={verseNav.verseHistory}
       onClose={events.handleClose}
       isLoading={verseData.isLoading}
       error={verseData.error}

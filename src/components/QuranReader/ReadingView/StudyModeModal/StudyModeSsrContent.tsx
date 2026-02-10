@@ -34,6 +34,7 @@ interface StudyModeSsrContentProps {
   questionsInitialData?: AyahQuestionsResponse;
   tafsirIdOrSlug?: string;
   hadithsInitialData?: AyahHadithsResponse;
+  onGoToVerse: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
 }
 
 const StudyModeSsrContent: React.FC<StudyModeSsrContentProps> = ({
@@ -58,6 +59,7 @@ const StudyModeSsrContent: React.FC<StudyModeSsrContentProps> = ({
   questionsInitialData,
   tafsirIdOrSlug,
   hadithsInitialData,
+  onGoToVerse,
 }) => {
   if (isLoading) {
     return (
@@ -97,6 +99,7 @@ const StudyModeSsrContent: React.FC<StudyModeSsrContentProps> = ({
           questionsInitialData={questionsInitialData}
           tafsirIdOrSlug={tafsirIdOrSlug}
           hadithsInitialData={hadithsInitialData}
+          onGoToVerse={onGoToVerse}
         />
       </div>
     );

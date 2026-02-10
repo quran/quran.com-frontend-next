@@ -41,6 +41,12 @@ interface StudyModeSsrContainerViewProps {
   isContentTabActive: boolean;
   tafsirIdOrSlug?: string;
   hadithsInitialData?: AyahHadithsResponse;
+  verseHistory?: {
+    chapterName: string;
+    localizedVerseKey: string;
+  } | null;
+  onGoBack: () => void;
+  onGoToVerse: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
 }
 
 const StudyModeSsrContainerView: React.FC<StudyModeSsrContainerViewProps> = (props) => {

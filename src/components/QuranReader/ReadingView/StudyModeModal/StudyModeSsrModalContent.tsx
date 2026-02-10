@@ -52,6 +52,12 @@ interface StudyModeSsrModalContentProps {
   isContentTabActive: boolean;
   tafsirIdOrSlug?: string;
   hadithsInitialData?: AyahHadithsResponse;
+  verseHistory?: {
+    chapterName: string;
+    localizedVerseKey: string;
+  } | null;
+  onGoBack?: () => void;
+  onGoToVerse?: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
 }
 
 const StudyModeSsrModalContent: React.FC<StudyModeSsrModalContentProps> = ({
@@ -68,6 +74,9 @@ const StudyModeSsrModalContent: React.FC<StudyModeSsrModalContentProps> = ({
   isContentTabActive,
   activeContentTab,
   selectedWordLocation,
+  verseHistory,
+  onGoBack,
+  onGoToVerse,
   ...contentProps
 }) => {
   const isVerseActionOpen = useSelector(selectVerseActionModalIsOpen);
@@ -88,6 +97,8 @@ const StudyModeSsrModalContent: React.FC<StudyModeSsrModalContentProps> = ({
       onVerseChange={onVerseChange}
       onPreviousVerse={onPreviousVerse}
       onNextVerse={onNextVerse}
+      verseHistory={verseHistory}
+      onGoBack={onGoBack}
     />
   );
 
@@ -115,6 +126,7 @@ const StudyModeSsrModalContent: React.FC<StudyModeSsrModalContentProps> = ({
           selectedVerseNumber={selectedVerseNumber}
           activeContentTab={activeContentTab}
           selectedWordLocation={selectedWordLocation}
+          onGoToVerse={onGoToVerse}
           {...contentProps}
         />
       </ContentModal>
