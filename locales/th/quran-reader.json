@@ -94,6 +94,14 @@
   "info": "ข้อมูล",
   "juz-beginning": "ส่วนต้นของญุซ",
   "languages": "ภาษา",
+  "layers": {
+    "alternative-translations": "คำแปลทางเลือก",
+    "close-explanation": "ปิดคำอธิบาย",
+    "contract": "สัญญาตัฟซีร์",
+    "expand": "ขยายความตัฟซีร์",
+    "read-explanation": "อ่านคำอธิบาย",
+    "title": "ชั้นต่างๆ"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 เรื่องราวเปลี่ยนชีวิต: บทเรียนจากซูเราะห์อัลกาห์ฟ (แบนเนอร์แผนการเรียนรู้)",
     "banner-image-description": "ดูแผนการเรียนสำหรับซูเราะห์อัล-กาห์ฟ",

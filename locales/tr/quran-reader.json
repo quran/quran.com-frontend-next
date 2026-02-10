@@ -94,6 +94,14 @@
   "info": "bilgi",
   "juz-beginning": "Cüz'ün Başlangıcı",
   "languages": "Diller",
+  "layers": {
+    "alternative-translations": "Alternatif Çeviriler",
+    "close-explanation": "Açıklamayı Kapat",
+    "contract": "Sözleşme Tefsiri",
+    "expand": "Tefsir'i genişletin",
+    "read-explanation": "Açıklamayı okuyun",
+    "title": "Katmanlar"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "Hayat Değiştiren 4 Hikaye: Kehf Suresinden Dersler öğrenme planı afişi",
     "banner-image-description": "Kehf Suresi için öğrenme planını inceleyin.",

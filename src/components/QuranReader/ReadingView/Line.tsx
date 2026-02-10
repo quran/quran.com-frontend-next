@@ -17,6 +17,7 @@ import useIntersectionObserver from '@/hooks/useObserveElement';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectStudyModeIsOpen } from '@/redux/slices/QuranReader/studyMode';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from '@/utils/verse';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
@@ -73,8 +74,9 @@ const Line = ({
     [selectedItemRef],
   );
   const { isActive } = useOnboarding();
-  // disable auto scrolling when the user is onboarding
-  const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual) && !isActive;
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const enableAutoScrolling =
+    useSelector(selectEnableAutoScrolling, shallowEqual) && !isActive && !isStudyModeOpen;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectInlineDisplayWordByWordPreferences,
     shallowEqual,

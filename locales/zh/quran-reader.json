@@ -94,6 +94,14 @@
   "info": "信息",
   "juz-beginning": "回到本卷开头",
   "languages": "语言",
+  "layers": {
+    "alternative-translations": "其他译文",
+    "close-explanation": "详细解释",
+    "contract": "契约经注",
+    "expand": "扩展经注",
+    "read-explanation": "阅读说明",
+    "title": "层"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "四个改变人生的故事：从《古兰经》第18章“山洞章”中汲取的教训 学习计划横幅",
     "banner-image-description": "查看《古兰经》第18章“山洞章”（Surah Al-Kahf）的学习计划。",

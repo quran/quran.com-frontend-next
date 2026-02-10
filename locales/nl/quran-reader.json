@@ -86,7 +86,7 @@
     "title": "Sla je voortgang op"
   },
   "hadith": {
-    "notice": "Deze lijst is niet volledig. <0>Al-Bukhari</0> en <1>Muslim</1> zijn opgenomen, en er zullen er binnenkort meer volgen, insha'Allah.",
+    "notice": "Deze lijst is niet volledig. <0>Al-Bukhari</0> en <1>Muslim</1> zijn opgenomen, en er zullen er binnenkort meer volgen, in sha Allah.",
     "title": "Hadith"
   },
   "hizb-beginning": "Begin van Hizb",
@@ -94,6 +94,14 @@
   "info": "informatie",
   "juz-beginning": "begin van Juzz",
   "languages": "Talen",
+  "layers": {
+    "alternative-translations": "Alternatieve vertalingen",
+    "close-explanation": "Uitleg sluiten",
+    "contract": "Contract Tafsir",
+    "expand": "Tafsir uitbreiden",
+    "read-explanation": "Lees de uitleg",
+    "title": "Lagen"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 levensveranderende verhalen: lessen uit Surah Al-Kahf (lesplanbanner)",
     "banner-image-description": "Bekijk het leerplan voor Surah Al-Kahf.",
@@ -192,7 +200,7 @@
   "reflections": "Reflecties",
   "reflections-desc": "Lees en deel Koran reflecties van Ayah {{ayahNumber}} van Surah {{surahName}}",
   "related-verses": "Verwante verzen",
-  "related-verses-desc": "Lees en deel koranverzen van Ayah {{ayahNumber}} van Soera {{surahName}}",
+  "related-verses-desc": "Lees en deel koran verzen van Ayah {{ayahNumber}} van Soera {{surahName}}",
   "remove-bookmark": "Bladwijzer verwijderen",
   "remove-my-reading-bookmark": "Mijn leesbladwijzer verwijderen",
   "remove-pinned-verse": "Verwijder vers {{verseKey}} van vastgepind",

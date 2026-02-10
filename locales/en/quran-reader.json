@@ -94,6 +94,14 @@
   "info": "info",
   "juz-beginning": "Beginning of Juz",
   "languages": "Languages",
+  "layers": {
+    "alternative-translations": "Alternative Translations",
+    "close-explanation": "Close Explanation",
+    "contract": "Contract Tafsir",
+    "expand": "Expand Tafsir",
+    "read-explanation": "Read Explanation",
+    "title": "Layers"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 Life-Changing Stories: Lessons From Surah Al-Kahf learning plan banner",
     "banner-image-description": "View the learning plan for Surah Al-Kahf",
@@ -179,14 +187,6 @@
     "translation": "Translation",
     "transliteration": "Transliteration",
     "what-are": "What are Qiraat?"
-  },
-  "layers": {
-    "title": "Layers",
-    "expand": "Expand Tafsir",
-    "contract": "Contract Tafsir",
-    "alternative-translations": "Alternative Translations",
-    "read-explanation": "Read Explanation",
-    "close-explanation": "Close Explanation"
   },
   "query-param-message": "You are viewing preselected reading settings. <0>Dismiss</0> to view in your current settings or <1>Save</1> to update your setting",
   "ramadan-of-reflection": "Join QuranReflect \"Ramadan of Reflection\"",

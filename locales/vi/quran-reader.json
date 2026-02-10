@@ -94,6 +94,14 @@
   "info": "thông tin",
   "juz-beginning": "Mở đầu Juz",
   "languages": "Ngôn ngữ",
+  "layers": {
+    "alternative-translations": "Các bản dịch khác",
+    "close-explanation": "Giải thích chi tiết",
+    "contract": "Hợp đồng Tafsir",
+    "expand": "Mở rộng Tafsir",
+    "read-explanation": "Đọc phần giải thích",
+    "title": "Các lớp"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 Câu chuyện thay đổi cuộc đời: Những bài học từ Surah Al-Kahf - biểu ngữ kế hoạch học tập",
     "banner-image-description": "Xem kế hoạch học tập cho Surah Al-Kahf",

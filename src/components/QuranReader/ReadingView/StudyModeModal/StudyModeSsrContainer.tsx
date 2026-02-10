@@ -14,7 +14,7 @@ import {
   useStudyModeVerseData,
   useStudyModeEventHandlers,
 } from '@/hooks/studyMode';
-import { openStudyModeSsr } from '@/redux/slices/QuranReader/studyMode';
+import { closeStudyMode, openStudyModeSsr } from '@/redux/slices/QuranReader/studyMode';
 import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Verse from '@/types/Verse';
@@ -86,7 +86,7 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
   });
 
   useEffect(() => {
-    if (!initialChapterId || !initialVerseNumber) return;
+    if (!initialChapterId || !initialVerseNumber) return undefined;
     dispatch(
       openStudyModeSsr({
         verseKey: `${initialChapterId}:${initialVerseNumber}`,
@@ -94,6 +94,9 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
         highlightedWordLocation: null,
       }),
     );
+    return () => {
+      dispatch(closeStudyMode());
+    };
   }, [initialChapterId, initialVerseNumber, initialTab, dispatch]);
 
   const isContentTabActive =
