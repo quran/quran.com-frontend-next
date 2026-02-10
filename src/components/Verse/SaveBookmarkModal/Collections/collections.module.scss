@@ -192,12 +192,15 @@ $icon-size: var(--spacing-medium2-px);
   border-radius: var(--border-radius-medium-px);
   border-color: var(--color-separators-ayah-level);
   font-size: var(--font-size-normal-px);
+  color: var(--color-text-faded-new);
+  font-weight: var(--font-weight-semibold);
 }
 
 .createButton {
   flex: 1;
   border-radius: var(--border-radius-medium-px);
   font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-semibold);
 }
 
 // New Collection View
