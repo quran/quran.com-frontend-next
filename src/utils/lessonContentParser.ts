@@ -18,7 +18,7 @@ export type ContentChunk =
 export function parseQuranUrl(href: string): VerseReference | null {
   try {
     const url = new URL(href);
-    if (!url.hostname.includes('quran.com')) return null;
+    if (url.hostname !== 'quran.com' && !url.hostname.endsWith('.quran.com')) return null;
 
     const path = url.pathname.replace(/^\//, '').replace(/\/$/, '');
 
@@ -38,10 +38,14 @@ export function parseQuranUrl(href: string): VerseReference | null {
       return { chapter: Number(match[1]), from: Number(match[2]) };
     }
 
-    // Pattern: chapter:verse
-    match = path.match(/^(\d+):(\d+)$/);
+    // Pattern: chapter:verse or chapter:from-to
+    match = path.match(/^(\d+):(\d+)(?:-(\d+))?$/);
     if (match) {
-      return { chapter: Number(match[1]), from: Number(match[2]) };
+      return {
+        chapter: Number(match[1]),
+        from: Number(match[2]),
+        to: match[3] ? Number(match[3]) : undefined,
+      };
     }
 
     return null;
@@ -50,8 +54,7 @@ export function parseQuranUrl(href: string): VerseReference | null {
   }
 }
 
-const BLOCKQUOTE_REGEX = /<blockquote[^>]*>[\s\S]*?<\/blockquote>/gi;
-const QURAN_LINK_REGEX = /href=["'](https?:\/\/quran\.com\/[^"']+)["']/i;
+const QURAN_LINK_REGEX = /href=["'](https?:\/\/(?:[a-z0-9-]+\.)*quran\.com\/[^"']+)["']/i;
 
 const processBlockquote = (
   blockquoteHtml: string,
@@ -93,11 +96,11 @@ const processBlockquote = (
 export function parseContentChunks(html: string): ContentChunk[] {
   const chunks: ContentChunk[] = [];
   let lastIndex = 0;
-  BLOCKQUOTE_REGEX.lastIndex = 0;
-  let match = BLOCKQUOTE_REGEX.exec(html);
+  const blockquoteRegex = /<blockquote[^>]*>[\s\S]*?<\/blockquote>/gi;
+  let match = blockquoteRegex.exec(html);
   while (match) {
     lastIndex = processBlockquote(match[0], match.index, lastIndex, html, chunks);
-    match = BLOCKQUOTE_REGEX.exec(html);
+    match = blockquoteRegex.exec(html);
   }
 
   if (lastIndex < html.length) {
