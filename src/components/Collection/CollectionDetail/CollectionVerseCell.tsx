@@ -19,7 +19,7 @@ import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerse
 import { getChapterData } from '@/utils/chapter';
 import { dateToMonthDayYearFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedVerseKey } from '@/utils/locale';
+import { isRTLLocale, toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
 import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
 import { makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
@@ -50,7 +50,9 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   const verseKey = makeVerseKey(chapterId, verseNumber);
   const isPinned = pinnedVerseKeysSet.has(verseKey);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
-  const localizedVerseKey = toLocalizedVerseKey(verseKey, lang);
+  const localizedVerseKey = isRTLLocale(lang)
+    ? toLocalizedVerseKeyRTL(verseKey, lang)
+    : toLocalizedVerseKey(verseKey, lang);
   const bookmarkName = `${chapterData?.transliteratedName} ${localizedVerseKey}`;
 
   const formattedDate = createdAt ? dateToMonthDayYearFormat(createdAt, lang) : null;
