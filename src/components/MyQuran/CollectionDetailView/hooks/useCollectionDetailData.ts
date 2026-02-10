@@ -89,6 +89,9 @@ const useCollectionDetailData = ({
   useEffect(() => {
     if (!fetchAll || !data) return;
 
+    const pageBookmarks = data.data.bookmarks ?? [];
+    const pagePagination = data.pagination;
+
     // When SWR returns cached data then revalidates, `data` may update for the same cursor.
     // Track pages by cursor so we can replace the page instead of appending duplicates or
     // ignoring revalidated results.
@@ -96,21 +99,21 @@ const useCollectionDetailData = ({
     setAllBookmarksPages((prevPages) => {
       const existingIndex = prevPages.findIndex((page) => page.cursor === pageCursor);
       if (existingIndex === -1) {
-        return [...prevPages, { cursor: pageCursor, bookmarks }];
+        return [...prevPages, { cursor: pageCursor, bookmarks: pageBookmarks }];
       }
       const nextPages = prevPages.slice();
-      nextPages[existingIndex] = { cursor: pageCursor, bookmarks };
+      nextPages[existingIndex] = { cursor: pageCursor, bookmarks: pageBookmarks };
       return nextPages;
     });
 
     // Continue fetching if there are more pages
-    if (pagination?.hasNextPage && pagination?.endCursor) {
+    if (pagePagination?.hasNextPage && pagePagination?.endCursor) {
       // Only update cursor if it's different to avoid triggering unnecessary fetches
-      if (pagination.endCursor !== currentCursor) {
-        setCurrentCursor(pagination.endCursor);
+      if (pagePagination.endCursor !== currentCursor) {
+        setCurrentCursor(pagePagination.endCursor);
       }
     }
-  }, [fetchAll, data, pagination, bookmarks, currentCursor]);
+  }, [fetchAll, data, currentCursor]);
 
   const filteredBookmarks = useMemo(() => {
     const sourcedBookmarks = fetchAll ? allBookmarks : bookmarks;
