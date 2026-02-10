@@ -34,6 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   if (!Number.isFinite(chapterNum) || !Number.isFinite(fromNum)) {
     return res.status(400).json({ error: 'Invalid chapter or from params' });
   }
+
   try {
     const data = await getAyahWidgetData({
       ayah: `${chapterNum}:${fromNum}`,
@@ -47,6 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       showTafsirs: false,
       showReflections: false,
       showLessons: false,
+      showAnswers: false,
     });
 
     return res.status(200).json(data);

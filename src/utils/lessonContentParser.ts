@@ -5,8 +5,8 @@ export type VerseReference = {
 };
 
 export type ContentChunk =
-  | { type: 'html'; content: string }
-  | { type: 'verse'; reference: VerseReference; originalHtml: string };
+  | { type: 'html'; key: string; content: string }
+  | { type: 'verse'; key: string; reference: VerseReference; originalHtml: string };
 
 /**
  * Parse a quran.com URL into a verse reference.
@@ -66,16 +66,19 @@ const processBlockquote = (
   const reference = parseQuranUrl(linkMatch[1]);
   if (!reference) return lastIndex;
 
-  // Add HTML before this blockquote
   if (startIndex > lastIndex) {
     const htmlBefore = html.slice(lastIndex, startIndex);
     if (htmlBefore.trim()) {
-      chunks.push({ type: 'html', content: htmlBefore });
+      chunks.push({ type: 'html', key: `html-${lastIndex}`, content: htmlBefore });
     }
   }
 
-  // Add verse chunk with original HTML for fallback
-  chunks.push({ type: 'verse', reference, originalHtml: blockquoteHtml });
+  chunks.push({
+    type: 'verse',
+    key: `verse-${startIndex}`,
+    reference,
+    originalHtml: blockquoteHtml,
+  });
 
   return startIndex + blockquoteHtml.length;
 };
@@ -90,22 +93,19 @@ const processBlockquote = (
 export function parseContentChunks(html: string): ContentChunk[] {
   const chunks: ContentChunk[] = [];
   let lastIndex = 0;
-  let match: RegExpExecArray | null;
-
   BLOCKQUOTE_REGEX.lastIndex = 0;
-
-  // eslint-disable-next-line no-cond-assign
-  while ((match = BLOCKQUOTE_REGEX.exec(html)) !== null) {
+  let match = BLOCKQUOTE_REGEX.exec(html);
+  while (match) {
     lastIndex = processBlockquote(match[0], match.index, lastIndex, html, chunks);
+    match = BLOCKQUOTE_REGEX.exec(html);
   }
 
-  // Add remaining HTML
   if (lastIndex < html.length) {
     const remaining = html.slice(lastIndex);
     if (remaining.trim()) {
-      chunks.push({ type: 'html', content: remaining });
+      chunks.push({ type: 'html', key: `html-${lastIndex}`, content: remaining });
     }
   }
 
-  return chunks.length === 0 ? [{ type: 'html', content: html }] : chunks;
+  return chunks.length === 0 ? [{ type: 'html', key: 'html-0', content: html }] : chunks;
 }
