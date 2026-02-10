@@ -94,6 +94,14 @@
   "info": "informasi",
   "juz-beginning": "Awal Juz",
   "languages": "Bahasa",
+  "layers": {
+    "alternative-translations": "Terjemahan Alternatif",
+    "close-explanation": "Penjelasan Lengkap",
+    "contract": "Tafsir Kontrak",
+    "expand": "Perluas Tafsir",
+    "read-explanation": "Baca Penjelasan",
+    "title": "Lapisan"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 Kisah yang Mengubah Hidup: Pelajaran dari Surah Al-Kahf (spanduk rencana pembelajaran)",
     "banner-image-description": "Lihat rencana pembelajaran untuk Surah Al-Kahf",

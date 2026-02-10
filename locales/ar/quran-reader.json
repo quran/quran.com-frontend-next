@@ -94,6 +94,14 @@
   "info": "معلومات",
   "juz-beginning": "بداية الجزء",
   "languages": "اللغات",
+  "layers": {
+    "alternative-translations": "ترجمات بديلة",
+    "close-explanation": "شرح مفصل",
+    "contract": "تفسير العقود",
+    "expand": "توسيع التفسير",
+    "read-explanation": "اقرأ الشرح",
+    "title": "الطبقات"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 قصص تُغير الحياة: دروس من خطة التعلم سورة الكهف",
     "banner-image-description": "اطلع على خطة التعلم لسورة الكهف",
@@ -173,7 +181,7 @@
     "learn-more": "انقر هنا لمعرفة المزيد",
     "no-junctures": "لا توجد قراءات بديلة متاحة لهذه الآية",
     "reader-bio": "سيرة القارئ",
-    "readers": "المستخدمين",
+    "readers": "المستخدمون",
     "readings": "قراءات",
     "title": "قراءات",
     "translation": "ترجمة",

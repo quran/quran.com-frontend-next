@@ -86,7 +86,7 @@
     "title": "Sauvegardez votre progression"
   },
   "hadith": {
-    "notice": "Cette liste n'est pas exhaustive. <0>Al-Bukhari</0> et <1>Muslim</1> y figurent, et d'autres suivront bientôt, insha'Allah.",
+    "notice": "Cette liste n'est pas exhaustive. <0>Al-Bukhari</0> et <1>Muslim</1> y figurent, et d'autres suivront bientôt, inshAllah.",
     "title": "Hadith"
   },
   "hizb-beginning": "Début du Hizb",
@@ -94,6 +94,14 @@
   "info": "info",
   "juz-beginning": "Début du Juz",
   "languages": "Langues",
+  "layers": {
+    "alternative-translations": "Traductions alternatives",
+    "close-explanation": "Explication détaillée",
+    "contract": "Contrat Tafsir",
+    "expand": "Développer le Tafsir",
+    "read-explanation": "Lire l'explication",
+    "title": "Couches"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 histoires qui changent la vie : Leçons tirées de la sourate Al-Kahf (bannière du plan d’apprentissage)",
     "banner-image-description": "Consultez le plan d'apprentissage de la sourate Al-Kahf.",

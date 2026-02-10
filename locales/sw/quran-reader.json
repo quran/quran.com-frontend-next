@@ -94,6 +94,14 @@
   "info": "taarifa",
   "juz-beginning": "Mwanzo wa Juzuu",
   "languages": "Lugha",
+  "layers": {
+    "alternative-translations": "Tafsiri Mbadala",
+    "close-explanation": "Funga Maelezo",
+    "contract": "Tafsir ya Mkataba",
+    "expand": "Panua Tafsir",
+    "read-explanation": "Soma Maelezo",
+    "title": "Tabaka"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "Visa 4 Vinavyobadilisha Maisha: Bango la Masomo Kutoka kwa Mpango wa Kujifunza la Sura Al-Kahf",
     "banner-image-description": "Tazama mpango wa kujifunza wa Sura Al-Kahf",

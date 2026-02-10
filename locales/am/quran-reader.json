@@ -94,6 +94,14 @@
   "info": "መረጃ",
   "juz-beginning": "የጁዝ መጀመሪያ",
   "languages": "ቋንቋዎች",
+  "layers": {
+    "alternative-translations": "አማራጭ ትርጉሞች",
+    "close-explanation": "ማብራሪያን ዝጋ",
+    "contract": "የኮንትራት ታፍሲር",
+    "expand": "ታፍሲርን ዘርጋ",
+    "read-explanation": "ማብራሪያውን ያንብቡ",
+    "title": "ንብርብሮች"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 ሕይወትን የሚቀይሩ ታሪኮች፡ ከሱራ አል-ካህፍ የመማሪያ ዕቅድ ባነር የተገኙ ትምህርቶች",
     "banner-image-description": "የሱረቱል አል-ካህፍን የመማሪያ እቅድ ይመልከቱ",
