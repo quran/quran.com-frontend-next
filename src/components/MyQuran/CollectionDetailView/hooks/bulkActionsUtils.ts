@@ -65,7 +65,7 @@ export const buildBulkCopyBlobPromise = async (params: {
   );
 
   const rejected = settledTexts.find((r) => r.status === 'rejected');
-  if (rejected) throw rejected.reason;
+  if (rejected) throw rejected;
 
   const texts = settledTexts.map((r) => (r as PromiseFulfilledResult<string>).value);
 
