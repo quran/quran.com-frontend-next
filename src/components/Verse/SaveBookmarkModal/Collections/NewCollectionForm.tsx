@@ -37,11 +37,18 @@ const NewCollectionForm: React.FC<NewCollectionFormProps> = ({
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>): void => {
-      if (e.key === 'Enter' && newCollectionName.trim()) {
-        onCreate();
-      }
+      if (e.key !== 'Enter') return;
+
+      // Avoid submitting any parent <form> and prevent key events from bubbling to
+      // surrounding popovers/modals, even if submission is already in progress.
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (!newCollectionName.trim() || isSubmittingCollection) return;
+
+      onCreate();
     },
-    [newCollectionName, onCreate],
+    [newCollectionName, isSubmittingCollection, onCreate],
   );
 
   return (
@@ -65,6 +72,7 @@ const NewCollectionForm: React.FC<NewCollectionFormProps> = ({
           <CloseIcon />
         </button>
       </div>
+      <hr className={styles.divider} />
 
       <div className={styles.newCollectionForm}>
         <label htmlFor="collection-name" className={styles.inputLabel}>

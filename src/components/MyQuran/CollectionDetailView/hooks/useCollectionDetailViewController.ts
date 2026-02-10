@@ -47,6 +47,7 @@ const useCollectionDetailViewController = ({
     collectionId,
     searchQuery,
     invalidateAllBookmarkCaches,
+    fetchAll: true,
   });
   const selection = useCollectionSelection({
     filteredBookmarks: dataState.filteredBookmarks,
@@ -110,7 +111,10 @@ const useCollectionDetailViewController = ({
   );
 
   const isOwner = dataState.data?.data?.isOwner ?? false;
-  const totalCount = useMemo(() => dataState.data?.data?.bookmarks.length ?? 0, [dataState.data]);
+  const totalCount = useMemo(
+    () => dataState.data?.data?.collection?.count ?? dataState.bookmarks.length ?? 0,
+    [dataState.data, dataState.bookmarks.length],
+  );
 
   return {
     t,

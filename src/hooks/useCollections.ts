@@ -73,7 +73,7 @@ const useCollections = ({
   } = useSWR<{ data: Collection[] }>(
     isLoggedIn ? makeCollectionsUrl({ type }) : null,
     () => getCollectionsList({}), // No type filter to fetch empty collections
-    { ...mutatingFetcherConfig, revalidateIfStale: true },
+    { ...mutatingFetcherConfig, revalidateOnFocus: false, revalidateOnReconnect: true },
   );
 
   const collections = useMemo(() => collectionsData?.data || [], [collectionsData?.data]);

@@ -49,6 +49,16 @@ $icon-size: var(--spacing-medium2-px);
   overflow-y: auto;
   border-radius: var(--border-radius-medium-px);
 
+  // Reserve space for scrollbar where supported to avoid overlaying content.
+  @supports (scrollbar-gutter: stable) {
+    scrollbar-gutter: stable;
+  }
+
+  // In RTL, scrollbars are on the left (inline-end) which can visually collide with cards.
+  [dir='rtl'] & {
+    padding-inline-end: var(--spacing-xxsmall-px);
+  }
+
   @include breakpoints.smallerThanTablet {
     max-block-size: $max-block-size;
   }
@@ -159,6 +169,7 @@ $icon-size: var(--spacing-medium2-px);
   border: var(--border-width-small-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-large-px);
   font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
   background-color: var(--color-background-default);
   color: var(--color-text-default);
   outline: none;
@@ -219,8 +230,13 @@ $icon-size: var(--spacing-medium2-px);
   }
 
   svg {
-    inline-size: var(--spacing-small2-px);
-    block-size: var(--spacing-small2-px);
-    padding: var(--spacing-small2-px);
+    display: block;
+    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
+  }
+
+  // Flip back chevron direction in RTL.
+  [dir='rtl'] & svg {
+    transform: scaleX(-1);
   }
 }

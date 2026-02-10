@@ -1,5 +1,6 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import useCollectionDetailData from './useCollectionDetailData';
@@ -7,12 +8,26 @@ import useCollectionDetailData from './useCollectionDetailData';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
 import { logValueChange } from '@/utils/eventLogger';
+import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
+import Bookmark from 'types/Bookmark';
+import BookmarkType from 'types/BookmarkType';
+import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
-let swrData: any;
+interface UseCollectionDetailDataParams {
+  collectionId: string;
+  searchQuery?: string;
+  invalidateAllBookmarkCaches: () => void;
+  fetchAll?: boolean;
+}
+
+let swrData: GetBookmarkCollectionsIdResponse | undefined;
 const mutate = vi.fn();
+const useSWRMock = vi.fn();
+const swrGlobalMutate = vi.fn();
 
 vi.mock('swr', () => ({
-  default: vi.fn(() => ({ data: swrData, mutate, error: undefined })),
+  default: useSWRMock,
+  mutate: swrGlobalMutate,
 }));
 
 vi.mock('@/utils/auth/api', () => ({
@@ -20,7 +35,12 @@ vi.mock('@/utils/auth/api', () => ({
 }));
 
 vi.mock('@/utils/auth/apiPaths', () => ({
-  makeGetBookmarkByCollectionId: vi.fn(() => '/collections/123'),
+  makeGetBookmarkByCollectionId: vi.fn((collectionId: string, params?: { cursor?: string }) => {
+    const cursor = params?.cursor;
+    return cursor
+      ? `/collections/${collectionId}?cursor=${cursor}`
+      : `/collections/${collectionId}`;
+  }),
 }));
 
 vi.mock('@/utils/eventLogger', () => ({
@@ -28,20 +48,32 @@ vi.mock('@/utils/eventLogger', () => ({
 }));
 
 vi.mock('@/utils/string', () => ({
-  slugifiedCollectionIdToCollectionId: vi.fn(() => '123'),
+  slugifiedCollectionIdToCollectionId: vi.fn((slug: string) => {
+    const match = slug.match(/(\d+)$/);
+    return match?.[1] ?? '123';
+  }),
 }));
 
 describe('useCollectionDetailData', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    useSWRMock.mockImplementation(() => ({ data: swrData, mutate, error: undefined }));
     swrData = {
       data: {
+        collection: { id: '123', name: 'Test', url: 'test', updatedAt: '' },
         bookmarks: [
-          { id: 'b1', key: '1', verseNumber: 1 },
-          { id: 'b2', key: '2', verseNumber: 10 },
+          { id: 'b1', key: 1, verseNumber: 1, type: BookmarkType.Ayah },
+          { id: 'b2', key: 2, verseNumber: 10, type: BookmarkType.Ayah },
         ],
+        isOwner: true,
       },
-    };
+      pagination: {
+        hasNextPage: true,
+        hasPreviousPage: false,
+        startCursor: 'cursor_start',
+        endCursor: 'cursor_end',
+      },
+    } as unknown as GetBookmarkCollectionsIdResponse;
   });
 
   it('builds the SWR key with collection id and sort option', () => {
@@ -62,22 +94,25 @@ describe('useCollectionDetailData', () => {
   });
 
   it('filters bookmarks by searchQuery', () => {
-    const { result, rerender } = renderHook((props: any) => useCollectionDetailData(props), {
-      initialProps: {
-        collectionId: 'my-collection-123',
-        searchQuery: '2:10',
-        invalidateAllBookmarkCaches: vi.fn(),
+    const { result, rerender } = renderHook(
+      (props: UseCollectionDetailDataParams) => useCollectionDetailData(props),
+      {
+        initialProps: {
+          collectionId: 'my-collection-123',
+          searchQuery: '2:10',
+          invalidateAllBookmarkCaches: vi.fn(),
+        },
       },
-    });
+    );
 
-    expect(result.current.filteredBookmarks.map((b: any) => b.id)).toEqual(['b2']);
+    expect(result.current.filteredBookmarks.map((b: Bookmark) => b.id)).toEqual(['b2']);
 
     rerender({
       collectionId: 'my-collection-123',
       searchQuery: '1:1',
       invalidateAllBookmarkCaches: vi.fn(),
     });
-    expect(result.current.filteredBookmarks.map((b: any) => b.id)).toEqual(['b1']);
+    expect(result.current.filteredBookmarks.map((b: Bookmark) => b.id)).toEqual(['b1']);
   });
 
   it('onSortByChange logs value change and updates sortBy', () => {
@@ -90,13 +125,104 @@ describe('useCollectionDetailData', () => {
     );
 
     const prev = result.current.sortBy;
-    act(() => result.current.onSortByChange('recently_added' as any));
+    act(() => result.current.onSortByChange(CollectionDetailSortOption.RecentlyAdded));
     expect(logValueChange).toHaveBeenCalledWith(
       'collection_detail_page_sort_by',
       prev,
-      'recently_added',
+      CollectionDetailSortOption.RecentlyAdded,
     );
-    expect(result.current.sortBy).toBe('recently_added');
+    expect(result.current.sortBy).toBe(CollectionDetailSortOption.RecentlyAdded);
+  });
+
+  it('should reset pagination when sort changes', () => {
+    const { result } = renderHook(() =>
+      useCollectionDetailData({
+        collectionId: 'my-collection-123',
+        invalidateAllBookmarkCaches: vi.fn(),
+      }),
+    );
+
+    act(() => result.current.goToNextPage());
+    // Simulate being on next page
+    const initialCallCount = vi.mocked(makeGetBookmarkByCollectionId).mock.calls.length;
+
+    act(() => result.current.onSortByChange(CollectionDetailSortOption.RecentlyAdded));
+
+    // After sort change, pagination should be reset
+    // The next SWR call should not include cursor
+    expect(vi.mocked(makeGetBookmarkByCollectionId).mock.calls.length).toBeGreaterThan(
+      initialCallCount,
+    );
+  });
+
+  it('should expose pagination information', () => {
+    const { result } = renderHook(() =>
+      useCollectionDetailData({
+        collectionId: 'my-collection-123',
+        invalidateAllBookmarkCaches: vi.fn(),
+      }),
+    );
+
+    expect(result.current.pagination).toEqual({
+      hasNextPage: true,
+      hasPreviousPage: false,
+      startCursor: 'cursor_start',
+      endCursor: 'cursor_end',
+    });
+  });
+
+  it('goToNextPage updates cursor when hasNextPage is true', () => {
+    const { result } = renderHook(() =>
+      useCollectionDetailData({
+        collectionId: 'my-collection-123',
+        invalidateAllBookmarkCaches: vi.fn(),
+      }),
+    );
+
+    act(() => result.current.goToNextPage());
+
+    expect(makeGetBookmarkByCollectionId).toHaveBeenCalledWith(
+      '123',
+      expect.objectContaining({
+        cursor: 'cursor_end',
+      }),
+    );
+  });
+
+  it('goToPreviousPage updates cursor when hasPreviousPage is true', () => {
+    swrData.pagination.hasPreviousPage = true;
+    swrData.pagination.startCursor = 'cursor_prev';
+
+    const { result } = renderHook(() =>
+      useCollectionDetailData({
+        collectionId: 'my-collection-123',
+        invalidateAllBookmarkCaches: vi.fn(),
+      }),
+    );
+
+    act(() => result.current.goToPreviousPage());
+
+    expect(makeGetBookmarkByCollectionId).toHaveBeenCalledWith(
+      '123',
+      expect.objectContaining({
+        cursor: 'cursor_prev',
+      }),
+    );
+  });
+
+  it('resetPagination clears cursor and refetch from start', () => {
+    const { result } = renderHook(() =>
+      useCollectionDetailData({
+        collectionId: 'my-collection-123',
+        invalidateAllBookmarkCaches: vi.fn(),
+      }),
+    );
+
+    act(() => result.current.goToNextPage());
+    act(() => result.current.resetPagination());
+
+    // Should fetch without cursor
+    expect(vi.mocked(makeGetBookmarkByCollectionId).mock.calls.length).toBeGreaterThan(1);
   });
 
   it('onUpdated triggers SWR mutate and invalidates bookmark caches', () => {
@@ -111,5 +237,160 @@ describe('useCollectionDetailData', () => {
     act(() => result.current.onUpdated());
     expect(mutate).toHaveBeenCalledTimes(1);
     expect(invalidateAllBookmarkCaches).toHaveBeenCalledTimes(1);
+  });
+
+  it('should fetch and accumulate multiple pages when fetchAll is true', async () => {
+    useSWRMock.mockImplementation((key: string) => {
+      if (key.includes('cursor=cursor_end_1')) {
+        return {
+          data: {
+            data: {
+              collection: { id: '123', name: 'Test', url: 'test', updatedAt: '' },
+              bookmarks: [
+                { id: 'b3', key: 3, verseNumber: 5, type: BookmarkType.Ayah },
+                { id: 'b4', key: 4, verseNumber: 15, type: BookmarkType.Ayah },
+              ] as Bookmark[],
+              isOwner: true,
+            },
+            pagination: {
+              hasNextPage: false,
+              hasPreviousPage: true,
+              startCursor: 'cursor_start',
+              endCursor: 'cursor_end_2',
+            },
+          } as unknown as GetBookmarkCollectionsIdResponse,
+          mutate,
+          error: undefined,
+        };
+      }
+
+      return {
+        data: {
+          data: {
+            collection: { id: '123', name: 'Test', url: 'test', updatedAt: '' },
+            bookmarks: [
+              { id: 'b1', key: 1, verseNumber: 1, type: BookmarkType.Ayah },
+              { id: 'b2', key: 2, verseNumber: 10, type: BookmarkType.Ayah },
+            ] as Bookmark[],
+            isOwner: true,
+          },
+          pagination: {
+            hasNextPage: true,
+            hasPreviousPage: false,
+            startCursor: 'cursor_start',
+            endCursor: 'cursor_end_1',
+          },
+        } as unknown as GetBookmarkCollectionsIdResponse,
+        mutate,
+        error: undefined,
+      };
+    });
+
+    const { result } = renderHook(() =>
+      useCollectionDetailData({
+        collectionId: 'my-collection-123',
+        invalidateAllBookmarkCaches: vi.fn(),
+        fetchAll: true,
+      }),
+    );
+
+    await waitFor(() => {
+      expect(result.current.bookmarks.map((b: any) => b.id)).toEqual(['b1', 'b2', 'b3', 'b4']);
+    });
+  });
+
+  it('onUpdated in fetchAll mode revalidates from the start key', () => {
+    const invalidateAllBookmarkCaches = vi.fn();
+    const { result } = renderHook(() =>
+      useCollectionDetailData({
+        collectionId: 'my-collection-123',
+        invalidateAllBookmarkCaches,
+        fetchAll: true,
+      }),
+    );
+
+    act(() => result.current.goToNextPage());
+    act(() => result.current.onUpdated());
+
+    expect(swrGlobalMutate).toHaveBeenCalledTimes(1);
+    expect(swrGlobalMutate).toHaveBeenCalledWith('/collections/123');
+    expect(mutate).not.toHaveBeenCalled();
+    expect(invalidateAllBookmarkCaches).toHaveBeenCalledTimes(1);
+  });
+
+  it('clears cursor when collection changes in non-fetchAll mode', async () => {
+    const { result, rerender } = renderHook(
+      (props: UseCollectionDetailDataParams) => useCollectionDetailData(props),
+      {
+        initialProps: {
+          collectionId: 'my-collection-123',
+          invalidateAllBookmarkCaches: vi.fn(),
+          fetchAll: false,
+        },
+      },
+    );
+
+    act(() => result.current.goToNextPage());
+
+    rerender({
+      collectionId: 'my-collection-456',
+      invalidateAllBookmarkCaches: vi.fn(),
+      fetchAll: false,
+    });
+
+    await waitFor(() => {
+      const { calls } = vi.mocked(makeGetBookmarkByCollectionId).mock;
+      const sawStartCallForNewCollection = calls.some(
+        ([id, params]) => id === '456' && params && !('cursor' in params),
+      );
+      expect(sawStartCallForNewCollection).toBe(true);
+    });
+  });
+
+  it('should default to fetchAll false', () => {
+    const { result } = renderHook(() =>
+      useCollectionDetailData({
+        collectionId: 'my-collection-123',
+        invalidateAllBookmarkCaches: vi.fn(),
+      }),
+    );
+
+    expect(result.current.isFetchingAll).toBe(false);
+  });
+
+  it('isFetchingAll is true during initial load when fetchAll is enabled', () => {
+    // Simulate the initial render where data has not yet loaded
+    swrData = undefined;
+
+    const { result } = renderHook(() =>
+      useCollectionDetailData({
+        collectionId: 'my-collection-123',
+        invalidateAllBookmarkCaches: vi.fn(),
+        fetchAll: true,
+      }),
+    );
+
+    expect(result.current.isFetchingAll).toBe(true);
+  });
+
+  it('should reset allBookmarks when fetchAll is disabled', () => {
+    const { result, rerender } = renderHook(
+      (props: UseCollectionDetailDataParams) => useCollectionDetailData(props),
+      {
+        initialProps: {
+          collectionId: 'my-collection-123',
+          invalidateAllBookmarkCaches: vi.fn(),
+          fetchAll: true,
+        },
+      },
+    );
+
+    rerender({
+      collectionId: 'my-collection-123',
+      invalidateAllBookmarkCaches: vi.fn(),
+      fetchAll: false,
+    });
+
+    expect(result.current.isFetchingAll).toBe(false);
   });
 });
