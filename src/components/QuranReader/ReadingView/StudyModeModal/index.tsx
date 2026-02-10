@@ -399,6 +399,7 @@ const StudyModeModal: React.FC<Props> = ({
       StudyModeTabId.ANSWERS,
       StudyModeTabId.QIRAAT,
       StudyModeTabId.RELATED_VERSES,
+      StudyModeTabId.HADITH,
     ].includes(activeContentTab);
 
   const header = (

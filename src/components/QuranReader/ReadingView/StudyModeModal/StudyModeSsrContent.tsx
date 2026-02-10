@@ -7,6 +7,7 @@ import StudyModeSkeleton from './StudyModeSkeleton';
 
 import Error from '@/components/Error';
 import { TestId } from '@/tests/test-ids';
+import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Verse from '@/types/Verse';
 import Word from '@/types/Word';
@@ -32,6 +33,7 @@ interface StudyModeSsrContentProps {
   questionId?: string;
   questionsInitialData?: AyahQuestionsResponse;
   tafsirIdOrSlug?: string;
+  hadithsInitialData?: AyahHadithsResponse;
   onGoToVerse: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
 }
 
@@ -56,6 +58,7 @@ const StudyModeSsrContent: React.FC<StudyModeSsrContentProps> = ({
   questionId,
   questionsInitialData,
   tafsirIdOrSlug,
+  hadithsInitialData,
   onGoToVerse,
 }) => {
   if (isLoading) {
@@ -95,6 +98,7 @@ const StudyModeSsrContent: React.FC<StudyModeSsrContentProps> = ({
           questionId={questionId}
           questionsInitialData={questionsInitialData}
           tafsirIdOrSlug={tafsirIdOrSlug}
+          hadithsInitialData={hadithsInitialData}
           onGoToVerse={onGoToVerse}
         />
       </div>

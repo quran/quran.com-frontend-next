@@ -1,0 +1,4 @@
+{
+  "description": "Temukan hadits dan riwayat otentik yang berkaitan dengan Ayat {{ayahNumber}} dari Surah {{surahName}}Akses tradisi ilmiah yang terkait dengan ayat Al-Quran ini.",
+  "title": "Hadits {{surahName}} - {{ayahNumber}}"
+}

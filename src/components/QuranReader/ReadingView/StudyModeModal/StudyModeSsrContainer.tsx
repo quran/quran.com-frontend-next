@@ -15,6 +15,7 @@ import {
   useStudyModeEventHandlers,
 } from '@/hooks/studyMode';
 import { openStudyModeSsr } from '@/redux/slices/QuranReader/studyMode';
+import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Verse from '@/types/Verse';
 
@@ -26,6 +27,7 @@ interface StudyModeSsrContainerProps {
   tafsirIdOrSlug?: string;
   questionId?: string;
   questionsInitialData?: AyahQuestionsResponse;
+  hadithsInitialData?: AyahHadithsResponse;
 }
 
 const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
@@ -36,6 +38,7 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
   tafsirIdOrSlug,
   questionId,
   questionsInitialData,
+  hadithsInitialData,
 }) => {
   const { t } = useTranslation('quran-reader');
   const dispatch = useDispatch();
@@ -101,6 +104,7 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
       StudyModeTabId.LESSONS,
       StudyModeTabId.ANSWERS,
       StudyModeTabId.QIRAAT,
+      StudyModeTabId.HADITH,
       StudyModeTabId.RELATED_VERSES,
     ].includes(activeContentTab);
 
@@ -145,6 +149,7 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
       questionsInitialData={isInitialVerse ? questionsInitialData : undefined}
       isContentTabActive={isContentTabActive}
       tafsirIdOrSlug={tafsirIdOrSlug}
+      hadithsInitialData={hadithsInitialData}
     />
   );
 };
