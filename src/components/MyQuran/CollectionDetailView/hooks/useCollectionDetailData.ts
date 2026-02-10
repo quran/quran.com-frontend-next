@@ -17,16 +17,18 @@ const COLLECTION_BOOKMARKS_LIMIT = 10000;
 interface UseCollectionDetailDataParams {
   collectionId: string;
   searchQuery?: string;
-  selectedChapterIds: string[];
-  selectedJuzNumbers: string[];
+  selectedChapterIds?: string[];
+  selectedJuzNumbers?: string[];
   invalidateAllBookmarkCaches: () => void;
 }
+
+const EMPTY_STRING_ARRAY: string[] = [];
 
 const useCollectionDetailData = ({
   collectionId,
   searchQuery,
-  selectedChapterIds,
-  selectedJuzNumbers,
+  selectedChapterIds = EMPTY_STRING_ARRAY,
+  selectedJuzNumbers = EMPTY_STRING_ARRAY,
   invalidateAllBookmarkCaches,
 }: UseCollectionDetailDataParams) => {
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
