@@ -129,7 +129,12 @@ const CollectionFiltersDropdown: React.FC<CollectionFiltersDropdownProps> = ({
   }) => {
     return (
       <div className={styles.panel} data-view={view} aria-label={opts.title}>
-        <button type="button" className={styles.backRow} onClick={() => setView('root')}>
+        <button
+          type="button"
+          className={styles.backRow}
+          onClick={() => setView('root')}
+          aria-label={tCommon('back')}
+        >
           <ChevronLeftIcon className={styles.backChevron} />
           <span className={styles.backText}>{opts.title}</span>
         </button>

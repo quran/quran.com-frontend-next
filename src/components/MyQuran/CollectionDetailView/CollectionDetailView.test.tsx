@@ -96,6 +96,40 @@ vi.mock('@/components/Collection/CollectionSorter/CollectionSorter', () => ({
   default: () => <div data-testid="collection-sorter" />,
 }));
 
+vi.mock('@/components/MyQuran/SavedTabContent/CollectionFiltersDropdown', () => ({
+  default: ({
+    trigger,
+    selectedChapterIds,
+    selectedJuzNumbers,
+    onSelectedChapterIdsChange,
+    onSelectedJuzNumbersChange,
+  }: any) => (
+    <div data-testid="collection-filters-dropdown">
+      {trigger}
+      <button type="button" onClick={() => onSelectedChapterIdsChange(['1'])}>
+        chapter-1
+      </button>
+      <button type="button" onClick={() => onSelectedChapterIdsChange(['2'])}>
+        chapter-2
+      </button>
+      <button type="button" onClick={() => onSelectedChapterIdsChange([])}>
+        clear-chapters
+      </button>
+      <button type="button" onClick={() => onSelectedJuzNumbersChange(['1'])}>
+        juz-1
+      </button>
+      <button type="button" onClick={() => onSelectedJuzNumbersChange(['2'])}>
+        juz-2
+      </button>
+      <button type="button" onClick={() => onSelectedJuzNumbersChange([])}>
+        clear-juz
+      </button>
+      <div data-testid="selected-chapters">{selectedChapterIds?.join(',') ?? ''}</div>
+      <div data-testid="selected-juz">{selectedJuzNumbers?.join(',') ?? ''}</div>
+    </div>
+  ),
+}));
+
 vi.mock('@/components/Collection/CollectionActionsPopover/CollectionBulkActionsPopover', () => ({
   default: ({ children }: any) => <div data-testid="bulk-actions">{children}</div>,
 }));
@@ -185,6 +219,7 @@ vi.mock('@/icons/menu_more_horiz.svg', () => ({ default: () => <div /> }));
 vi.mock('@/icons/filter.svg', () => ({ default: () => <div /> }));
 vi.mock('@/icons/filter-bar.svg', () => ({ default: () => <div /> }));
 vi.mock('@/icons/search.svg', () => ({ default: () => <div /> }));
+vi.mock('@/icons/close.svg', () => ({ default: () => <div /> }));
 
 const buildSWRData = (collectionId: string, name: string, isOwner = true) => ({
   data: {
@@ -325,5 +360,130 @@ describe('CollectionDetailView', () => {
 
     expect(screen.queryByRole('button', { name: 'edit' })).toBeNull();
     expect(screen.queryByRole('button', { name: 'delete' })).toBeNull();
+  });
+
+  it('filters bookmarks by selected chapter', async () => {
+    const bookmarks = [
+      {
+        id: 'b-1-early',
+        key: 1,
+        verseNumber: 1,
+        createdAt: new Date(2025, 0, 1).toISOString(),
+        type: 'ayah',
+      },
+      {
+        id: 'b-2',
+        key: 2,
+        verseNumber: 1,
+        createdAt: new Date(2025, 0, 2).toISOString(),
+        type: 'ayah',
+      },
+      {
+        id: 'b-1-late',
+        key: 1,
+        verseNumber: 2,
+        createdAt: new Date(2025, 0, 3).toISOString(),
+        type: 'ayah',
+      },
+    ];
+
+    swrData = buildSWRData('123', 'My Collection');
+    // @ts-ignore - partial shape is fine for tests
+    swrData.data.bookmarks = bookmarks;
+
+    renderCollectionDetailView();
+
+    expect(screen.getByTestId('bookmarks-count').textContent).toBe('3');
+
+    fireEvent.click(screen.getByRole('button', { name: 'chapter-1' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('bookmarks-count').textContent).toBe('2');
+      // default sort: newest first within filtered set
+      expect(screen.getByTestId('first-bookmark-id').textContent).toBe('b-1-late');
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'chapter-2' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('bookmarks-count').textContent).toBe('1');
+      expect(screen.getByTestId('first-bookmark-id').textContent).toBe('b-2');
+    });
+  });
+
+  it('filters bookmarks by selected juz (using juz mapping)', async () => {
+    // 2:142 is the start of Juz 2 in standard Qur'an partitioning.
+    const bookmarks = [
+      {
+        id: 'b-2-1',
+        key: 2,
+        verseNumber: 1,
+        createdAt: new Date(2025, 0, 1).toISOString(),
+        type: 'ayah',
+      },
+      {
+        id: 'b-2-142',
+        key: 2,
+        verseNumber: 142,
+        createdAt: new Date(2025, 0, 2).toISOString(),
+        type: 'ayah',
+      },
+      {
+        id: 'b-1-1',
+        key: 1,
+        verseNumber: 1,
+        createdAt: new Date(2025, 0, 3).toISOString(),
+        type: 'ayah',
+      },
+    ];
+
+    swrData = buildSWRData('123', 'My Collection');
+    // @ts-ignore - partial shape is fine for tests
+    swrData.data.bookmarks = bookmarks;
+
+    renderCollectionDetailView();
+
+    fireEvent.click(screen.getByRole('button', { name: 'juz-2' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('bookmarks-count').textContent).toBe('1');
+      expect(screen.getByTestId('first-bookmark-id').textContent).toBe('b-2-142');
+    });
+  });
+
+  it('shows no-matches empty state when active filters produce no results', async () => {
+    const bookmarks = [
+      {
+        id: 'b-1-1',
+        key: 1,
+        verseNumber: 1,
+        createdAt: new Date(2025, 0, 1).toISOString(),
+        type: 'ayah',
+      },
+      {
+        id: 'b-2-142',
+        key: 2,
+        verseNumber: 142,
+        createdAt: new Date(2025, 0, 2).toISOString(),
+        type: 'ayah',
+      },
+    ];
+
+    swrData = buildSWRData('123', 'My Collection');
+    // @ts-ignore - partial shape is fine for tests
+    swrData.data.bookmarks = bookmarks;
+
+    renderCollectionDetailView();
+
+    // Chapter 1 is in Juz 1, so combining Chapter 1 + Juz 2 yields zero matches.
+    fireEvent.click(screen.getByRole('button', { name: 'chapter-1' }));
+    fireEvent.click(screen.getByRole('button', { name: 'juz-2' }));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('bookmarks-count').textContent).toBe('0');
+      expect(screen.getByTestId('empty-message').textContent).toBe(
+        'collections.filters.no-matches',
+      );
+    });
   });
 });
