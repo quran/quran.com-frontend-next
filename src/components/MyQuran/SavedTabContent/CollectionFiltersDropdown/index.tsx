@@ -167,7 +167,6 @@ const CollectionFiltersDropdown: React.FC<CollectionFiltersDropdownProps> = ({
                 <PrimitiveDropdownMenu.Item key={item.value} asChild>
                   <button
                     type="button"
-                    key={item.value}
                     className={classNames(styles.optionRow, isSelected && styles.optionRowSelected)}
                     onClick={() => opts.onToggle(item.value)}
                     aria-pressed={isSelected}
