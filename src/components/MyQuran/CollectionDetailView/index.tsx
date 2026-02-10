@@ -307,10 +307,11 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       if (query && !bookmark.verseKey.includes(query)) return false;
       if (!shouldFilter) return true;
 
-      return (
-        (chapterIdSet ? chapterIdSet.has(String(bookmark.key)) : false) ||
-        (juzSet ? juzSet.has(String(bookmark.juzNumber ?? '')) : false)
-      );
+      const matchesChapter = chapterIdSet ? chapterIdSet.has(String(bookmark.key)) : true;
+      const matchesJuz = juzSet ? juzSet.has(String(bookmark.juzNumber ?? '')) : true;
+
+      // When both filters are active, require both matches (AND) so adding a filter always narrows results.
+      return matchesChapter && matchesJuz;
     });
   }, [bookmarksWithMeta, searchQuery, selectedChapterIds, selectedJuzNumbers]);
 
