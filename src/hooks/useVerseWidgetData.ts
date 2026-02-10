@@ -12,7 +12,9 @@ import { fetcher } from 'src/api';
 const resolveTheme = (type: string): string => {
   if (type !== ThemeType.Auto) return type;
   if (typeof window === 'undefined') return ThemeType.Light;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? ThemeType.Dark : ThemeType.Light;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? ThemeType.Dark
+    : ThemeType.Light;
 };
 
 const useVerseWidgetData = (reference: VerseReference) => {
