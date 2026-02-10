@@ -108,14 +108,8 @@ type NormalizedWordRange = {
   endWordIndex: number;
 };
 
-const clampWordIndex = (value: number, length: number): number => {
-  if (value < 0) return 0;
-  if (value > length) return length;
-  return value;
-};
-
 /**
- * Normalize and clamp a word range into [0..length-1] (end is inclusive).
+ * Normalize and clamp a word range into [0..length-1].
  *
  * @param {number} length - Number of words.
  * @param {number | undefined} startWordIndex - Requested start index.
@@ -127,27 +121,20 @@ export const normalizeWordRange = (
   startWordIndex?: number,
   endWordIndex?: number,
 ): NormalizedWordRange | undefined => {
-  const safeLength = Math.max(0, Math.trunc(length));
-  if (!safeLength) return undefined;
+  if (!length) return undefined;
 
-  const lastWordIndex = safeLength - 1;
-  const rawStart = Number.isFinite(startWordIndex) ? Math.trunc(startWordIndex as number) : 0;
-  const rawEnd = Number.isFinite(endWordIndex) ? Math.trunc(endWordIndex as number) : lastWordIndex;
+  const lastWordIndex = length - 1;
+  const start = Math.max(0, Math.min(startWordIndex ?? 0, lastWordIndex));
+  const end = Math.max(0, Math.min(endWordIndex ?? lastWordIndex, lastWordIndex));
 
-  const normalizedStart = clampWordIndex(rawStart, lastWordIndex);
-  const normalizedEnd = clampWordIndex(rawEnd, lastWordIndex);
+  if (start > end) return undefined;
 
-  if (normalizedStart > normalizedEnd) return undefined;
-
-  return {
-    startWordIndex: normalizedStart,
-    endWordIndex: normalizedEnd,
-  };
+  return { startWordIndex: start, endWordIndex: end };
 };
 
 /**
  * Trim Arabic words using an inclusive start / inclusive end range.
- * The verse-end marker token is preserved when the selected range includes
+ * The verse-end number token is preserved when the selected range includes
  * the last Arabic word of the verse.
  *
  * @param {Word[]} words - Verse words.
@@ -155,7 +142,6 @@ export const normalizeWordRange = (
  * @returns {Word[]} Trimmed words.
  */
 export const trimArabicWords = (words: Word[], trimRange?: WordTrimRange): Word[] => {
-  if (!words.length) return words;
   if (!trimRange) return words;
 
   const arabicWords = words.filter((word) => word.charTypeName !== 'end');
@@ -169,29 +155,27 @@ export const trimArabicWords = (words: Word[], trimRange?: WordTrimRange): Word[
 
   if (!normalized) return [];
 
-  const trimmedArabicWords = arabicWords.slice(
-    normalized.startWordIndex,
-    normalized.endWordIndex + 1,
-  );
-  const includesLastArabicWord = normalized.endWordIndex === arabicWords.length - 1;
+  const trimmed = arabicWords.slice(normalized.startWordIndex, normalized.endWordIndex + 1);
 
-  if (includesLastArabicWord && verseEndWords.length) {
-    return [...trimmedArabicWords, ...verseEndWords];
+  // Preserve verse-end marker if last Arabic word is included
+  if (normalized.endWordIndex === arabicWords.length - 1 && verseEndWords.length) {
+    return [...trimmed, ...verseEndWords];
   }
 
-  return trimmedArabicWords;
+  return trimmed;
 };
 
 /**
- * Trim translation text by words in plain-text mode (HTML stripped first).
+ * Trim translation text by words in plain-text mode
  *
- * @param {string} text - Translation text (possibly HTML).
+ * @param {string} text - Translation text.
  * @param {WordTrimRange} trimRange - Trim range.
  * @returns {string} Trimmed plain text.
  */
 export const trimTranslationTextPlain = (text: string, trimRange: WordTrimRange): string => {
-  const plainText = stripHtml(text || '');
-  const words = plainText.trim() ? plainText.trim().split(/\s+/) : [];
+  const plainText = stripHtml(text);
+  const words = plainText.split(/\s+/).filter(Boolean);
+
   const normalized = normalizeWordRange(
     words.length,
     trimRange.startWordIndex,
@@ -203,6 +187,11 @@ export const trimTranslationTextPlain = (text: string, trimRange: WordTrimRange)
   return words.slice(normalized.startWordIndex, normalized.endWordIndex + 1).join(' ');
 };
 
+/**
+ * Resolve the effective trim range for a verse based on its position and the overall range settings.
+ *
+ * @returns {WordTrimRange | undefined} The resolved trim range for the verse, or undefined if no trimming should be applied.
+ */
 const resolveVerseTrimRange = (
   trimRange: WordTrimRange | undefined,
   isRangeEnabled: boolean,
@@ -223,18 +212,10 @@ const resolveVerseTrimRange = (
   return scopedRange;
 };
 
-const hasAnyWidgetTrim = (trim?: WidgetTrimOptions): boolean =>
-  Boolean(trim?.arabic) || Boolean(trim?.translations && Object.keys(trim.translations).length > 0);
-
 type VerseTrimPosition = {
   isFirstVerse: boolean;
   isLastVerse: boolean;
 };
-
-const getVerseTrimPosition = (index: number, totalVerses: number): VerseTrimPosition => ({
-  isFirstVerse: index === 0,
-  isLastVerse: index === totalVerses - 1,
-});
 
 const trimVerseTranslations = (
   verse: Verse,
@@ -300,11 +281,17 @@ export const applyWidgetTrimToVerses = (
   trim: WidgetTrimOptions | undefined,
   isRangeEnabled: boolean,
 ): Verse[] => {
-  if (!verses.length || !trim || !hasAnyWidgetTrim(trim)) return verses;
+  if (!verses.length || !trim) return verses;
+  if (!trim.arabic && !trim.translations) return verses;
 
-  return verses.map((verse, index) =>
-    applyTrimToVerse(verse, trim, isRangeEnabled, getVerseTrimPosition(index, verses.length)),
-  );
+  return verses.map((verse, index) => {
+    // Determine if this verse is the first or last in the range for trimming purposes
+    const position = {
+      isFirstVerse: index === 0,
+      isLastVerse: index === verses.length - 1,
+    };
+    return applyTrimToVerse(verse, trim, isRangeEnabled, position);
+  });
 };
 
 /**
