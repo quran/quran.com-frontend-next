@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import {
