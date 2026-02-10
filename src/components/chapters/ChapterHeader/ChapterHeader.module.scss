@@ -159,7 +159,7 @@ $bismillahSvgInlineSizeMobile: 148px;
 
 .chapterTitleWithTranslationName {
   justify-content: center;
-  column-gap: var(--spacing-small-px);
+  column-gap: var(--spacing-medium2-px);
 }
 
 .chapterNumber {
@@ -216,7 +216,7 @@ $bismillahSvgInlineSizeMobile: 148px;
 
 .infoIconButtonWithSurahName {
   align-self: center;
-  margin-inline-end: var(--spacing-xxsmall-px);
+  margin-inline-end: var(--spacing-medium-px);
 }
 
 .arabicSurahNameContainer {
@@ -341,6 +341,10 @@ div {
   // a hack to make it visually aligned with the surah name
   /* stylelint-disable-next-line csstools/use-logical */
   margin-left: calc(var(--spacing-medium-plus-px) * -1);
+
+  // add extra space to right to fix overlap, (calligraphy is off sometime)
+  /* stylelint-disable-next-line csstools/use-logical */
+  margin-right: var(--spacing-xxsmall-px);
 }
 
 .chapterEventWrapper {
