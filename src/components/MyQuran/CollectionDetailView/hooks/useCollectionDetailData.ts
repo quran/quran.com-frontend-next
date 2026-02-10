@@ -91,9 +91,9 @@ const useCollectionDetailData = ({
       if (existingIndex === -1) {
         return [...prevPages, { cursor: pageCursor, bookmarks: pageBookmarks }];
       }
-      const nextPages = prevPages.slice();
-      nextPages[existingIndex] = { cursor: pageCursor, bookmarks: pageBookmarks };
-      return nextPages;
+      return prevPages.map((page, idx) =>
+        idx === existingIndex ? { cursor: pageCursor, bookmarks: pageBookmarks } : page,
+      );
     });
 
     // Continue fetching if there are more pages
