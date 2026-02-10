@@ -43,9 +43,6 @@ const useCollectionDetailData = ({
     (newSortByVal: CollectionDetailSortOption) => {
       logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
       setSortBy(newSortByVal);
-      // Reset pagination when sort changes
-      setCurrentCursor(undefined);
-      setAllBookmarksPages([]);
     },
     [sortBy],
   );
@@ -80,10 +77,11 @@ const useCollectionDetailData = ({
     [allBookmarksPages],
   );
 
+  // Reset pagination when the collection, fetch mode, or sort order changes
   useEffect(() => {
     setCurrentCursor(undefined);
     setAllBookmarksPages([]);
-  }, [fetchAll, numericCollectionId]);
+  }, [fetchAll, numericCollectionId, sortBy]);
 
   // Auto-fetch all pages when fetchAll is enabled
   useEffect(() => {
