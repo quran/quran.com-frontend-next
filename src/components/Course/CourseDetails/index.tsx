@@ -123,7 +123,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
             </>
           )}
           <DetailSection
-            title={t('about-author')}
+            title={t('about-author', { count: course.authors.length })}
             description={<AuthorsDetails authors={course.authors} />}
           />
           {course?.editors?.length > 0 && (
