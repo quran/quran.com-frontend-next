@@ -73,7 +73,13 @@ const useCollections = ({
   } = useSWR<{ data: Collection[] }>(
     isLoggedIn ? makeCollectionsUrl({ type }) : null,
     () => getCollectionsList({}), // No type filter to fetch empty collections
-    { ...mutatingFetcherConfig, revalidateOnFocus: false, revalidateOnReconnect: true },
+    // revalidateOnFocus disabled: immediate focus revalidation races with token refresh,
+    // clearing the session cookie and permanently wiping cached data (see docs/SWR_IMMUTABLE_VS_SWR.md).
+    {
+      ...mutatingFetcherConfig,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: true,
+    },
   );
 
   const collections = useMemo(() => collectionsData?.data || [], [collectionsData?.data]);
