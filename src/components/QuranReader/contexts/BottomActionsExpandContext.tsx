@@ -20,4 +20,17 @@ export const BottomActionsExpandProvider: React.FC<{
   );
 };
 
-export const useBottomActionsExpand = () => useContext(BottomActionsExpandContext);
+/**
+ * Consumers are expected to be wrapped in {@link BottomActionsExpandProvider}.
+ *
+ * Some parts of the app (e.g. Collection cards, bottom-sheet modals) reuse
+ * `BottomActions` outside of TranslationView, so we provide a local fallback
+ * state instead of crashing when the provider is missing.
+ * @returns {BottomActionsExpandContextType} An object containing `isExpanded` and `setIsExpanded`.
+ */
+export const useBottomActionsExpand = (): BottomActionsExpandContextType => {
+  const contextValue = useContext(BottomActionsExpandContext);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return contextValue ?? { isExpanded, setIsExpanded };
+};
