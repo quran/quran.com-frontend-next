@@ -75,7 +75,7 @@ const useCollectionDetailData = ({
       // When filtering, a filter group that isn't active should not "auto-match" everything.
       // We OR the active filter groups together so results match *any* selected chapter/juz.
       const matchesChapter = chapterIdSet ? chapterIdSet.has(String(bookmark.key)) : false;
-      // considered only computing the Juz number when hasJuzFilters is true.
+      // Juz lookup is skipped when no juz filter is active (juzSet is null).
       const matchesJuz = juzSet
         ? juzSet.has(
             String(getJuzNumberByVerse(Number(bookmark.key), bookmark.verseNumber ?? 1) ?? ''),
