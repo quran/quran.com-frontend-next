@@ -7,12 +7,14 @@ import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import useBatchedCountRangeHadiths from '@/hooks/auth/useBatchedCountRangeHadiths';
+import useBatchedCountRangeLayeredTranslations from '@/hooks/auth/useBatchedCountRangeLayeredTranslations';
 import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import HadithIcon from '@/icons/bx-book.svg';
 import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
+import LayerIcon from '@/icons/layer.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import QiraatIcon from '@/icons/qiraat-icon.svg';
@@ -26,6 +28,7 @@ import {
   getVerseAnswersNavigationUrl,
   getVerseHadithsNavigationUrl,
   getVerseLessonNavigationUrl,
+  getVerseLayersNavigationUrl,
   getVerseQiraatNavigationUrl,
   getVerseReflectionNavigationUrl,
   getVerseRelatedVersesNavigationUrl,
@@ -81,6 +84,8 @@ const BottomActions = ({
   // Use backend qiraat count to check if qiraat exist for this verse
   const { data: qiraatCount } = useBatchedCountRangeQiraat(verseKey);
   const hasQiraatData = (qiraatCount ?? 0) > 0;
+  const { data: layersCount } = useBatchedCountRangeLayeredTranslations(verseKey);
+  const hasLayersData = (layersCount ?? 0) > 0;
 
   // Use backend hadith count to check if hadiths exist for this verse
   const { data: hadithCount } = useBatchedCountRangeHadiths(verseKey);
@@ -90,6 +95,7 @@ const BottomActions = ({
     return () => {
       const tabIdMap: Record<TabId, StudyModeTabId> = {
         [TabId.TAFSIR]: StudyModeTabId.TAFSIR,
+        [TabId.LAYERS]: StudyModeTabId.LAYERS,
         [TabId.REFLECTIONS]: StudyModeTabId.REFLECTIONS,
         [TabId.LESSONS]: StudyModeTabId.LESSONS,
         [TabId.RELATED_VERSES]: StudyModeTabId.RELATED_VERSES,
@@ -123,6 +129,13 @@ const BottomActions = ({
         getVerseSelectedTafsirNavigationUrl(chapterId, Number(verseNumber), tafsirs[0]),
       ),
       condition: true,
+    },
+    {
+      id: TabId.LAYERS,
+      label: t('quran-reader:layers.title'),
+      icon: <LayerIcon color="var(--color-blue-buttons-and-icons)" />,
+      onClick: createTabHandler(TabId.LAYERS, () => getVerseLayersNavigationUrl(verseKey)),
+      condition: hasLayersData,
     },
     {
       id: TabId.LESSONS,

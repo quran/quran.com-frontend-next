@@ -180,6 +180,14 @@
     "transliteration": "Transliteration",
     "what-are": "What are Qiraat?"
   },
+  "layers": {
+    "title": "Layers",
+    "expand": "Expand Tafsir",
+    "contract": "Contract Tafsir",
+    "alternative-translations": "Alternative Translations",
+    "read-explanation": "Read Explanation",
+    "close-explanation": "Close Explanation"
+  },
   "query-param-message": "You are viewing preselected reading settings. <0>Dismiss</0> to view in your current settings or <1>Save</1> to update your setting",
   "ramadan-of-reflection": "Join QuranReflect \"Ramadan of Reflection\"",
   "read-more-quran-reflect": "Read More on QuranReflect",

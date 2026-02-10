@@ -50,6 +50,7 @@ import {
   getVerseLessonNavigationUrl,
   getVerseAnswersNavigationUrl,
   getVerseQiraatNavigationUrl,
+  getVerseLayersNavigationUrl,
 } from '@/utils/navigation';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
@@ -145,6 +146,8 @@ const StudyModeModal: React.FC<Props> = ({
         fakeNavigate(getVerseReflectionNavigationUrl(newVerseKey), router.locale || 'en');
       } else if (tab === StudyModeTabId.LESSONS) {
         fakeNavigate(getVerseLessonNavigationUrl(newVerseKey), router.locale || 'en');
+      } else if (tab === StudyModeTabId.LAYERS) {
+        fakeNavigate(getVerseLayersNavigationUrl(newVerseKey), router.locale || 'en');
       } else if (tab === StudyModeTabId.QIRAAT) {
         fakeNavigate(getVerseQiraatNavigationUrl(newVerseKey), router.locale || Language.EN);
       }
@@ -335,6 +338,8 @@ const StudyModeModal: React.FC<Props> = ({
         fakeNavigate(getVerseReflectionNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === StudyModeTabId.LESSONS) {
         fakeNavigate(getVerseLessonNavigationUrl(currentVerseKey), router.locale);
+      } else if (tabId === StudyModeTabId.LAYERS) {
+        fakeNavigate(getVerseLayersNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === StudyModeTabId.ANSWERS) {
         fakeNavigate(getVerseAnswersNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === StudyModeTabId.QIRAAT) {
@@ -394,6 +399,7 @@ const StudyModeModal: React.FC<Props> = ({
     activeContentTab &&
     [
       StudyModeTabId.TAFSIR,
+      StudyModeTabId.LAYERS,
       StudyModeTabId.REFLECTIONS,
       StudyModeTabId.LESSONS,
       StudyModeTabId.ANSWERS,

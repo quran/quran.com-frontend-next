@@ -57,19 +57,35 @@ const CollectionVerseCellMenu: React.FC<CollectionVerseCellMenuProps> = ({
     >
       <div>
         {isOwner && (
-          <PopoverMenu.Item onClick={onDelete} shouldCloseMenuAfterClick icon={<TrashIcon />}>
+          <PopoverMenu.Item
+            onClick={onDelete}
+            shouldCloseMenuAfterClick
+            shouldStopPropagation
+            icon={<TrashIcon />}
+          >
             {t('common:delete')}
           </PopoverMenu.Item>
         )}
-        <PopoverMenu.Item onClick={onShare} icon={<ShareIcon />} shouldCloseMenuAfterClick>
+        <PopoverMenu.Item
+          onClick={onShare}
+          icon={<ShareIcon />}
+          shouldCloseMenuAfterClick
+          shouldStopPropagation
+        >
           {t('common:share')}
         </PopoverMenu.Item>
-        <PopoverMenu.Item onClick={onCopy} icon={<CopyIcon />} shouldCloseMenuAfterClick>
+        <PopoverMenu.Item
+          onClick={onCopy}
+          icon={<CopyIcon />}
+          shouldCloseMenuAfterClick
+          shouldStopPropagation
+        >
           {t('common:copy')}
         </PopoverMenu.Item>
         <PopoverMenu.Item
           onClick={onPinToggle}
           shouldCloseMenuAfterClick
+          shouldStopPropagation
           icon={
             <IconContainer
               icon={isPinned ? <PinFilledIcon /> : <PinIcon />}
