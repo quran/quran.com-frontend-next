@@ -12,13 +12,13 @@ type Props = {
 };
 
 const VerseChunkWidget: React.FC<Props> = ({ reference, fallbackHtml }) => {
-  const { data, error, isValidating } = useVerseWidgetData(reference);
+  const { data, isValidating } = useVerseWidgetData(reference);
 
   if (isValidating && !data) {
     return <Skeleton className={styles.widgetSkeleton} />;
   }
 
-  if (error || !data?.verses?.length) {
+  if (!data?.verses?.length) {
     return <HtmlContent html={fallbackHtml} />;
   }
 
