@@ -44,7 +44,7 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   const { data, isLoading, error, hasData, refetch } = useLayeredTranslationData(verseKey);
   const scaleClass = styles[`layers-font-size-${quranReaderStyles.layersFontScale}`];
 
-  const [layerMode, setLayerMode] = useState<LayerMode>(LayerMode.Expanded);
+  const [layerMode, setLayerMode] = useState<LayerMode>(LayerMode.Collapsed);
   const [selectedOptionByGroup, setSelectedOptionByGroup] = useState<Record<string, string>>({});
   const [activeGroupKey, setActiveGroupKey] = useState<string | null>(null);
   const [isExplanationOpen, setIsExplanationOpen] = useState(false);
@@ -62,7 +62,7 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   }, []);
 
   useEffect(() => {
-    setLayerMode(LayerMode.Expanded);
+    setLayerMode(LayerMode.Collapsed);
     setSelectedOptionByGroup({});
     setActiveGroupKey(null);
     setIsExplanationOpen(false);
