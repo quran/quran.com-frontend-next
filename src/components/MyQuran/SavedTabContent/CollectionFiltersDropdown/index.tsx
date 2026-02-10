@@ -39,7 +39,7 @@ const buildNextSelectedValues = (current: string[], value: string) => {
   const set = new Set(current);
   if (set.has(value)) set.delete(value);
   else set.add(value);
-  return Array.from(set);
+  return Array.from(set).sort((a, b) => Number(a) - Number(b));
 };
 
 const CollectionFiltersDropdown: React.FC<CollectionFiltersDropdownProps> = ({
