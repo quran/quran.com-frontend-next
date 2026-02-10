@@ -195,7 +195,7 @@ describe('useCollectionDetailData', () => {
     expect(result.current.sortBy).toBe(CollectionDetailSortOption.RecentlyAdded);
   });
 
-  it('should reset pagination when sort changes', () => {
+  it('should reset pagination when sort changes', async () => {
     const { result } = renderHook(() =>
       useCollectionDetailData({
         collectionId: 'my-collection-123',
@@ -203,17 +203,32 @@ describe('useCollectionDetailData', () => {
       }),
     );
 
+    // Enable pagination so goToNextPage() actually advances the cursor.
+    swrData!.pagination.hasNextPage = true;
+    swrData!.pagination.endCursor = 'cursor_end_page_2';
+
     act(() => result.current.goToNextPage());
-    // Simulate being on next page
-    const initialCallCount = vi.mocked(makeGetBookmarkByCollectionId).mock.calls.length;
+    await waitFor(() => {
+      expect(makeGetBookmarkByCollectionId).toHaveBeenCalledWith(
+        '123',
+        expect.objectContaining({
+          cursor: 'cursor_end_page_2',
+        }),
+      );
+    });
 
     act(() => result.current.onSortByChange(CollectionDetailSortOption.RecentlyAdded));
 
-    // After sort change, pagination should be reset
-    // The next SWR call should not include cursor
-    expect(vi.mocked(makeGetBookmarkByCollectionId).mock.calls.length).toBeGreaterThan(
-      initialCallCount,
-    );
+    // After a sort change, the hook must never request the new sort with the old cursor.
+    await waitFor(() => {
+      const { calls } = vi.mocked(makeGetBookmarkByCollectionId).mock;
+      const recentlyAddedCalls = calls.filter(
+        ([, params]) => (params as any)?.sortBy === CollectionDetailSortOption.RecentlyAdded,
+      );
+      expect(recentlyAddedCalls.length).toBeGreaterThan(0);
+      const lastParams = recentlyAddedCalls[recentlyAddedCalls.length - 1]?.[1] as any;
+      expect('cursor' in lastParams).toBe(false);
+    });
   });
 
   it('should expose pagination information', () => {
