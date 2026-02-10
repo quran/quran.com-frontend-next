@@ -45,7 +45,7 @@ const StudyModeRelatedVerseContent: React.FC<StudyModeRelatedVerseContentProps> 
   const [chapterId, verseNumber] = relatedVerse.verseKey.split(':');
 
   const handleGoToVerse = useCallback(() => {
-    logButtonClick('study_mode_related_verse_goto', { verseKey: relatedVerse.verseKey });
+    logButtonClick('study_mode_goto_verse', { verseKey: relatedVerse.verseKey });
     onGoToVerse?.(chapterId, verseNumber, currentVerseKey);
   }, [chapterId, verseNumber, onGoToVerse, relatedVerse.verseKey, currentVerseKey]);
 
