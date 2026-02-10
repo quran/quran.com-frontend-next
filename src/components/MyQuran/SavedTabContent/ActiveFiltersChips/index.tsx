@@ -27,35 +27,39 @@ const ActiveFiltersChips: React.FC<Props> = ({
   onClearAll,
 }) => {
   const { t } = useTranslation('my-quran');
+  const { t: tCommon } = useTranslation('common');
 
   const hasAny = chapters.length > 0 || juz.length > 0;
   if (!hasAny) return null;
 
   return (
     <div className={styles.container} data-testid="collection-active-filters">
-      <div className={styles.chips}>
-        {chapters.map((chip) => (
-          <button
-            key={`chapter-${chip.id}`}
-            type="button"
-            className={styles.chip}
-            onClick={() => onRemoveChapter(chip.id)}
-          >
-            <span className={styles.chipLabel}>{chip.label}</span>
-            <CloseIcon className={styles.removeIcon} />
-          </button>
-        ))}
-        {juz.map((chip) => (
-          <button
-            key={`juz-${chip.id}`}
-            type="button"
-            className={styles.chip}
-            onClick={() => onRemoveJuz(chip.id)}
-          >
-            <span className={styles.chipLabel}>{chip.label}</span>
-            <CloseIcon className={styles.removeIcon} />
-          </button>
-        ))}
+      <div className={styles.left}>
+        <span className={styles.label}>{tCommon('search.filters')}:</span>
+        <div className={styles.chips}>
+          {chapters.map((chip) => (
+            <button
+              key={`chapter-${chip.id}`}
+              type="button"
+              className={styles.chip}
+              onClick={() => onRemoveChapter(chip.id)}
+            >
+              <span className={styles.chipLabel}>{chip.label}</span>
+              <CloseIcon className={styles.removeIcon} />
+            </button>
+          ))}
+          {juz.map((chip) => (
+            <button
+              key={`juz-${chip.id}`}
+              type="button"
+              className={styles.chip}
+              onClick={() => onRemoveJuz(chip.id)}
+            >
+              <span className={styles.chipLabel}>{chip.label}</span>
+              <CloseIcon className={styles.removeIcon} />
+            </button>
+          ))}
+        </div>
       </div>
       <button type="button" className={styles.clearAll} onClick={onClearAll}>
         {t('collections.filters.clear-all')}

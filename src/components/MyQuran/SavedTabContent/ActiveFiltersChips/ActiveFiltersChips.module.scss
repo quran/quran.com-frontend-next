@@ -1,10 +1,24 @@
 .container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: var(--spacing-medium-px);
   margin-block-end: var(--spacing-medium2-px);
   flex-wrap: wrap;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small2-px);
+  flex-wrap: wrap;
+  min-inline-size: 0;
+}
+
+.label {
+  color: var(--color-text-faded-new);
+  font-size: var(--font-size-small-px);
+  white-space: nowrap;
 }
 
 .chips {
@@ -19,8 +33,8 @@
   gap: var(--spacing-xxsmall-px);
   padding: var(--spacing-micro2-px) var(--spacing-small2-px);
   border-radius: var(--border-radius-pill);
-  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
-  background: var(--color-background-elevated-new);
+  border: var(--spacing-hairline-px) solid var(--color-daily-progress);
+  background: var(--color-background-default);
   color: var(--color-text-link-new);
   font-size: var(--font-size-small-px);
   cursor: pointer;
@@ -43,8 +57,9 @@
 }
 
 .removeIcon {
-  inline-size: var(--spacing-small-px);
-  block-size: var(--spacing-small-px);
+  inline-size: var(--spacing-small2-px);
+  block-size: var(--spacing-small2-px);
+  flex-shrink: 0;
 }
 
 .clearAll {

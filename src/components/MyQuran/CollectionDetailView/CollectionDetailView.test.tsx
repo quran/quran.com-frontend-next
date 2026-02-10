@@ -501,16 +501,16 @@ describe('CollectionDetailView', () => {
   it('shows no-matches empty state when active filters produce no results', async () => {
     const bookmarks = [
       {
-        id: 'b-1-1',
-        key: 1,
+        id: 'b-2-1',
+        key: 2,
         verseNumber: 1,
         createdAt: new Date(2025, 0, 1).toISOString(),
         type: 'ayah',
       },
       {
-        id: 'b-2-142',
+        id: 'b-2-2',
         key: 2,
-        verseNumber: 142,
+        verseNumber: 2,
         createdAt: new Date(2025, 0, 2).toISOString(),
         type: 'ayah',
       },
@@ -522,7 +522,7 @@ describe('CollectionDetailView', () => {
 
     renderCollectionDetailView();
 
-    // Chapter 1 is in Juz 1, so combining Chapter 1 + Juz 2 yields zero matches.
+    // None of the bookmarks are in Chapter 1 or Juz 2, so active filters should yield zero matches.
     fireEvent.click(screen.getByRole('button', { name: 'chapter-1' }));
     fireEvent.click(screen.getByRole('button', { name: 'juz-2' }));
 

@@ -72,12 +72,16 @@ const useCollectionDetailData = ({
       if (query && !verseKey.includes(query)) return false;
       if (!shouldFilter) return true;
 
-      const matchesChapter = chapterIdSet ? chapterIdSet.has(String(bookmark.key)) : true;
-      const juzNumber = getJuzNumberByVerse(Number(bookmark.key), bookmark.verseNumber ?? 1);
-      const matchesJuz = juzSet ? juzSet.has(String(juzNumber ?? '')) : true;
-
-      // When both filters are active, require both matches (AND) so adding a filter always narrows results.
-      return matchesChapter && matchesJuz;
+      // When filtering, a filter group that isn't active should not "auto-match" everything.
+      // We OR the active filter groups together so results match *any* selected chapter/juz.
+      const matchesChapter = chapterIdSet ? chapterIdSet.has(String(bookmark.key)) : false;
+      // considered only computing the Juz number when hasJuzFilters is true.
+      const matchesJuz = juzSet
+        ? juzSet.has(
+            String(getJuzNumberByVerse(Number(bookmark.key), bookmark.verseNumber ?? 1) ?? ''),
+          )
+        : false;
+      return matchesChapter || matchesJuz;
     });
   }, [bookmarks, searchQuery, selectedChapterIds, selectedJuzNumbers]);
 
