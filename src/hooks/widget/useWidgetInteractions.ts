@@ -135,8 +135,7 @@ const useWidgetInteractions = (options?: WidgetOptions, widgetRef?: WidgetRootRe
 
   useEffect(() => {
     if (!options) return undefined;
-    const isEmbed =
-      typeof window !== 'undefined' && window.location.pathname.startsWith('/embed/');
+    const isEmbed = typeof window !== 'undefined' && window.location.pathname.startsWith('/embed/');
 
     if (isEmbed && !hasLoggedViewRef.current) {
       logEvent('embed_widget_view', {
