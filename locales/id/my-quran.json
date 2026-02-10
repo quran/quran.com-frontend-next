@@ -10,7 +10,16 @@
     "select": "Memilih"
   },
   "collections": {
+    "detail-empty": "Mulailah membaca dan tambahkan ke koleksi Anda!",
     "favorites": "Favorit",
+    "filters": {
+      "chapters": "Bab",
+      "clear-all": "Hapus semua",
+      "juz": "Juz",
+      "no-matches": "Tidak ada ayat tersimpan yang sesuai dengan filter Anda.",
+      "no-results": "Tidak ada hasil",
+      "title": "Menyaring"
+    },
     "guest-promo": {
       "sign-in": "Masuk",
       "subtitle": "Bandingkan dan kontraskan ayat-ayat",

@@ -10,7 +10,16 @@
     "select": "Sélectionner"
   },
   "collections": {
+    "detail-empty": "Commencez à lire et enrichissez votre collection !",
     "favorites": "Favoris",
+    "filters": {
+      "chapters": "Chapitre",
+      "clear-all": "Effacer tout",
+      "juz": "Juz",
+      "no-matches": "Aucun verset enregistré ne correspond à vos filtres.",
+      "no-results": "Aucun résultat",
+      "title": "Filtre"
+    },
     "guest-promo": {
       "sign-in": "Se connecter",
       "subtitle": "Comparer et opposer les versets",

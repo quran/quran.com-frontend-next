@@ -6,6 +6,8 @@
   "collection-list-empty": "Senarai koleksi kosong. Anda belum membuat sebarang koleksi lagi",
   "collection-name": "Nama koleksi",
   "collections": "Koleksi",
+  "date-asc": "Tarikh (Paling Lama)",
+  "date-desc": "Tarikh (Terbaharu)",
   "delete-bookmark": {
     "confirmation-subtitle": "Anda akan memadam {{count}} barang daripada {{collectionName}}, Adakah anda pasti?",
     "subtitle": "Adakah anda pasti mahu memadamkan {{bookmarkName}} daripada {{collectionName}} ?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Pergi ke ayah",
   "load-more": "Buka Lagi",
   "no-collections": "Anda belum mempunyai sebarang koleksi lagi",
+  "quranic-asc": "Susunan Al-Quran (Menaik)",
+  "quranic-desc": "Susunan Al-Quran (Menurun)",
   "recently-added": "Baru ditambah",
   "recently-updated": "Dikemas kini baru-baru ini",
   "verse-key": "Surah dan Nombor Ayat"

@@ -6,8 +6,10 @@
   "collection-list-empty": "مجموعات کی فہرست خالی ہے۔ آپ نے ابھی تک کوئی کلیکشن نہیں بنائ۔",
   "collection-name": "کلیکشن کا نام",
   "collections": "مجموعات",
+  "date-asc": "تاریخ (سب سے پرانی)",
+  "date-desc": "تاریخ (تازہ ترین)",
   "delete-bookmark": {
-    "confirmation-subtitle": "آپ حذف کر دیں گے۔ {{count}} سے آئٹم {{collectionName}}، کیا آپ کو یقین ہے؟",
+    "confirmation-subtitle": "کیا آپ واقعی{{collectionName}}سے{{count}}آئٹم حذف کرنا چاہتے ہیں؟",
     "subtitle": "کیا آپ واقعی {{bookmarkName}} کو {{collectionName}} کلیکشن سے ڈلیٹ کرنا چاہتے ہیں؟",
     "success": "حذف کر دیا گیا۔ {{count}} اشیاء",
     "title": "بک مارک کو ڈلیٹ کریں۔"
@@ -28,6 +30,8 @@
   "go-to-ayah": "آیت پر جائیں۔",
   "load-more": "مزید لوڈ کریں",
   "no-collections": "آپ کے پاس فی الحال کوئی کلیکشن موجود نہیں",
+  "quranic-asc": "قرآنی ترتیب (صعودی)",
+  "quranic-desc": "قرآنی ترتیب (نزولی)",
   "recently-added": "حال ہی میں شامل کیا گیا۔",
   "recently-updated": "حال ہی میں اپ ڈیٹ کیا گیا۔",
   "verse-key": "سورہ اور آیت نمبر"

@@ -6,6 +6,8 @@
   "collection-list-empty": "收藏列表为空。您还没有创建任何收藏",
   "collection-name": "收藏名称",
   "collections": "收藏品",
+  "date-asc": "日期（最早）",
+  "date-desc": "日期（最新）",
   "delete-bookmark": {
     "confirmation-subtitle": "您将删除 {{count}} 来自 {{collectionName}}， 你确定吗？",
     "subtitle": "确定要从{{collectionName}}收藏中删除{{bookmarkName}}吗？",
@@ -28,6 +30,8 @@
   "go-to-ayah": "去啊啊",
   "load-more": "继续显示",
   "no-collections": "您目前还没有任何收藏。",
+  "quranic-asc": "古兰经顺序（升序）",
+  "quranic-desc": "古兰经顺序（降序）",
   "recently-added": "最近添加的",
   "recently-updated": "最近更新",
   "verse-key": "章节编号"

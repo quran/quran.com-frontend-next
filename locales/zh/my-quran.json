@@ -10,7 +10,16 @@
     "select": "选择"
   },
   "collections": {
+    "detail-empty": "开始阅读，丰富你的收藏吧！",
     "favorites": "收藏夹",
+    "filters": {
+      "chapters": "章",
+      "clear-all": "全部清除",
+      "juz": "Juz",
+      "no-matches": "没有已保存的诗句符合您的筛选条件。",
+      "no-results": "没有结果",
+      "title": "筛选"
+    },
     "guest-promo": {
       "sign-in": "登入",
       "subtitle": "比较和对比诗句",

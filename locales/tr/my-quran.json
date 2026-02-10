@@ -10,7 +10,16 @@
     "select": "Seçme"
   },
   "collections": {
+    "detail-empty": "Okumaya başlayın ve koleksiyonunuza ekleyin!",
     "favorites": "Favoriler",
+    "filters": {
+      "chapters": "Bölüm",
+      "clear-all": "Tümünü temizle",
+      "juz": "Juz",
+      "no-matches": "Kaydedilen ayetlerden hiçbiri filtrelerinizle eşleşmiyor.",
+      "no-results": "Sonuç bulunamadı.",
+      "title": "Filtrele"
+    },
     "guest-promo": {
       "sign-in": "Giriş yap",
       "subtitle": "Ayetler arasındaki benzerlikleri ve farklılıkları karşılaştırın.",

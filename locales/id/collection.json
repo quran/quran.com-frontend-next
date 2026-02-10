@@ -6,6 +6,8 @@
   "collection-list-empty": "Daftar koleksi kosong. Anda belum membuat koleksi apa pun",
   "collection-name": "Nama koleksi",
   "collections": "Koleksi",
+  "date-asc": "Tanggal (Terlama)",
+  "date-desc": "Tanggal (Terbaru)",
   "delete-bookmark": {
     "confirmation-subtitle": "Anda akan menghapus {{count}} item dari {{collectionName}}, Apa kamu yakin?",
     "subtitle": "Yakin ingin menghapus {{PenandaName}} dari {{collectionName}} ?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Pergi ke ayat",
   "load-more": "Muat lebih banyak",
   "no-collections": "Anda belum memiliki koleksi apa pun",
+  "quranic-asc": "Urutan Al-Quran (Naik)",
+  "quranic-desc": "Urutan Al-Quran (Menurun)",
   "recently-added": "Baru ditambahkan",
   "recently-updated": "Baru diperbarui",
   "verse-key": "Nomor Bab dan Ayat"

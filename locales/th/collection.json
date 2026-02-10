@@ -6,6 +6,8 @@
   "collection-list-empty": "รายการคอลเลกชันว่างเปล่า คุณยังไม่ได้สร้างคอลเล็กชันใดๆ เลย",
   "collection-name": "ชื่อคอลเลกชัน",
   "collections": "คอลเลกชัน",
+  "date-asc": "วันที่ (เก่าที่สุด)",
+  "date-desc": "วันที่ (ล่าสุด)",
   "delete-bookmark": {
     "confirmation-subtitle": "คุณจะลบ {{count}} รายการจาก {{collectionName}}คุณแน่ใจเหรอ?",
     "subtitle": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{bookmarkName}} จาก {{collectionName}}",
@@ -28,6 +30,8 @@
   "go-to-ayah": "ไปที่อายะห์",
   "load-more": "โหลดเพิ่มเติม",
   "no-collections": "คุณยังไม่มีคอลเลกชันใดๆ เลย",
+  "quranic-asc": "ลำดับตามคัมภีร์อัลกุรอาน (จากล่างขึ้นบน)",
+  "quranic-desc": "ลำดับตามคัมภีร์อัลกุรอาน (จากบนลงล่าง)",
   "recently-added": "เพิ่มล่าสุด",
   "recently-updated": "อัพเดทล่าสุด",
   "verse-key": "เลขที่ซุเราะห์และอายะห์"

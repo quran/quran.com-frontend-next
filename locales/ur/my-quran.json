@@ -1,16 +1,25 @@
 {
   "bulk-actions": {
-    "actions": "اعمال",
-    "actions-count": "اعمال ({{count}})",
-    "cancel": "منسوخ کریں۔",
-    "collapse-all": "سبھی کو سکیڑیں۔",
-    "expand-all": "سبھی کو پھیلائیں۔",
+    "actions": "عملی اقدامات",
+    "actions-count": "عملی اقدامات ({{count}})",
+    "cancel": "منسوخ کریں",
+    "collapse-all": "سب بند کریں",
+    "expand-all": "تمام تفصیل دکھائیں",
     "pin": "پن",
-    "pin-verses": "آیات کو پن کریں۔",
-    "select": "منتخب کریں۔"
+    "pin-verses": "آیات کو پن کریں",
+    "select": "منتخب کریں"
   },
   "collections": {
+    "detail-empty": "پڑھنا شروع کریں اور اپنے مجموعہ میں شامل کریں!",
     "favorites": "پسندیدہ",
+    "filters": {
+      "chapters": "باب",
+      "clear-all": "سب صاف کریں۔",
+      "juz": "جوز",
+      "no-matches": "کوئی بھی محفوظ کردہ آیات آپ کے فلٹرز سے مماثل نہیں ہیں۔",
+      "no-results": "کوئی نتیجہ نہیں۔",
+      "title": "فلٹر"
+    },
     "guest-promo": {
       "sign-in": "سائن ان کریں",
       "subtitle": "آیات کا تقابلی جائزہ لیں اور فرق واضح کریں",

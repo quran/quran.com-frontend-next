@@ -6,6 +6,8 @@
   "collection-list-empty": "Verzamellijst is leeg. Je hebt nog geen collectie gemaakt",
   "collection-name": "Collectienaam",
   "collections": "Collecties",
+  "date-asc": "Datum (oudste)",
+  "date-desc": "Datum (nieuwste)",
   "delete-bookmark": {
     "confirmation-subtitle": "Je gaat verwijderen {{count}} artikel(en) van {{collectionName}}Weet je het zeker?",
     "subtitle": "Weet u zeker dat u {{bookmarkName}} uit {{collectionName}} wilt verwijderen?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Ga naar ayah",
   "load-more": "Meer laden",
   "no-collections": "Je hebt nog geen collecties.",
+  "quranic-asc": "Koranische volgorde (oplopend)",
+  "quranic-desc": "Koranische volgorde (aflopend)",
   "recently-added": "Recent toegevoegd",
   "recently-updated": "Recentelijk bijgewerkt",
   "verse-key": "Hoofdstuk- en versnummer"

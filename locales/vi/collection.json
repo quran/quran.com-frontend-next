@@ -6,6 +6,8 @@
   "collection-list-empty": "Danh sách bộ sưu tập trống. Bạn chưa tạo bất kỳ bộ sưu tập nào.",
   "collection-name": "Tên bộ sưu tập",
   "collections": "Bộ sưu tập",
+  "date-asc": "Ngày (Cũ nhất)",
+  "date-desc": "Ngày (Mới nhất)",
   "delete-bookmark": {
     "confirmation-subtitle": "Bạn sẽ xóa {{count}} mục(s) từ {{collectionName}}Bạn có chắc không?",
     "subtitle": "Bạn có chắc chắn muốn xóa không? {{bookmarkName}} từ bộ sưu tập {{collectionName}}?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Đi đến Ayah",
   "load-more": "Tải thêm",
   "no-collections": "Bạn chưa có bộ sưu tập nào cả.",
+  "quranic-asc": "Thứ tự các câu trong kinh Qur'an (tăng dần)",
+  "quranic-desc": "Thứ tự trong kinh Qur'an (giảm dần)",
   "recently-added": "Mới thêm",
   "recently-updated": "Mới cập nhật",
   "verse-key": "Số chương và câu"

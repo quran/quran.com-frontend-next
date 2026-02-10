@@ -6,6 +6,8 @@
   "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
   "collection-name": "Collection name",
   "collections": "Collections",
+  "date-asc": "Date (Oldest)",
+  "date-desc": "Date (Newest)",
   "delete-bookmark": {
     "confirmation-subtitle": "You will delete {{count}} item(s) from {{collectionName}}, Are you sure?",
     "subtitle": "Are you sure you want to delete {{bookmarkName}} from {{collectionName}} collection?",
@@ -20,8 +22,6 @@
     "subtitle-tagged": "Are you sure you want to delete <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Delete Collection"
   },
-  "date-asc": "Date (Oldest)",
-  "date-desc": "Date (Newest)",
   "edit-collection": "Edit Collection",
   "edit-collection-name-required": "Enter a collection name to save.",
   "edit-collection-success": "Collection updated successfully",

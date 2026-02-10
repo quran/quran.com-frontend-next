@@ -6,6 +6,8 @@
   "collection-list-empty": "A lista de coleções está vazia. Você ainda não criou nenhuma coleção",
   "collection-name": "Nome da coleção",
   "collections": "Coleções",
+  "date-asc": "Data (Mais antiga)",
+  "date-desc": "Data (Mais recente)",
   "delete-bookmark": {
     "confirmation-subtitle": "Você irá excluir {{count}} item(ns) de {{collectionName}}, Tem certeza?",
     "subtitle": "Tem certeza de que deseja excluir {{bookmarkName}} da {{collectionName}} ?",
@@ -28,6 +30,8 @@
   "go-to-ayah": "Vá para ayah",
   "load-more": "Carregue mais",
   "no-collections": "Você ainda não tem nenhuma coleção.",
+  "quranic-asc": "Ordem corânica (ascendente)",
+  "quranic-desc": "Ordem corânica (descendente)",
   "recently-added": "Adicionado recentemente",
   "recently-updated": "Atualizado recentemente",
   "verse-key": "Número do Capítulo e do Versículo"
