@@ -7,6 +7,7 @@ import styles from './CollectionVerseCell.module.scss';
 
 import { fetcher } from '@/api';
 import Error from '@/components/Error';
+import { BottomActionsExpandProvider } from '@/components/QuranReader/contexts/BottomActionsExpandContext';
 import BottomActions from '@/components/QuranReader/TranslationView/BottomActions';
 import TopActions from '@/components/QuranReader/TranslationView/TopActions';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
@@ -108,11 +109,13 @@ const VerseDisplay: React.FC<VerseDisplayProps> = ({ chapterId, verseNumber }) =
         </div>
       </div>
 
-      <BottomActions
-        className={styles.bottomActionsContainer}
-        verseKey={verse.verseKey}
-        hasRelatedVerses={verse.hasRelatedVerses}
-      />
+      <BottomActionsExpandProvider>
+        <BottomActions
+          className={styles.bottomActionsContainer}
+          verseKey={verse.verseKey}
+          hasRelatedVerses={verse.hasRelatedVerses}
+        />
+      </BottomActionsExpandProvider>
     </>
   );
 };

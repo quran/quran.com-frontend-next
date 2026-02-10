@@ -5,6 +5,7 @@ import { Separator } from '@radix-ui/react-separator';
 import styles from './WordMobileModal.module.scss';
 
 import Modal from '@/components/dls/Modal/Modal';
+import { BottomActionsExpandProvider } from '@/components/QuranReader/contexts/BottomActionsExpandContext';
 import BottomActions from '@/components/QuranReader/TranslationView/BottomActions';
 import TopActions from '@/components/QuranReader/TranslationView/TopActions';
 import Verse from 'types/Verse';
@@ -41,11 +42,13 @@ const WordMobileModal: React.FC<Props> = ({ isOpen, onClose, verse }) => {
           <Separator className={styles.separator} />
 
           <div className={styles.bottomActionsContainer}>
-            <BottomActions
-              verseKey={verse.verseKey}
-              isTranslationView={false}
-              hasRelatedVerses={verse.hasRelatedVerses}
-            />
+            <BottomActionsExpandProvider>
+              <BottomActions
+                verseKey={verse.verseKey}
+                isTranslationView={false}
+                hasRelatedVerses={verse.hasRelatedVerses}
+              />
+            </BottomActionsExpandProvider>
           </div>
         </div>
       </Modal.Body>

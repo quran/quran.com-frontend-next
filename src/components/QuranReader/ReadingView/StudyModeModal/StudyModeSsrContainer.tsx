@@ -103,6 +103,7 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
     activeContentTab &&
     [
       StudyModeTabId.TAFSIR,
+      StudyModeTabId.LAYERS,
       StudyModeTabId.REFLECTIONS,
       StudyModeTabId.LESSONS,
       StudyModeTabId.ANSWERS,

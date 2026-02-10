@@ -1,29 +1,23 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 
 import { useSelector as useXStateSelector } from '@xstate/react';
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 
 import styles from './StudyModeBottomActions.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
-import useIsMobile from '@/hooks/useIsMobile';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 export enum StudyModeTabId {
   TAFSIR = 'tafsir',
+  LAYERS = 'layers',
   LESSONS = 'lessons',
   REFLECTIONS = 'reflections',
   ANSWERS = 'answers',
   QIRAAT = 'qiraat',
   RELATED_VERSES = 'related_verses',
   HADITH = 'hadith',
-}
-
-enum ExpandableTabId {
-  EXPAND = 'expand-tabs',
-  COLLAPSE = 'collapse-tabs',
 }
 
 export interface StudyModeTabConfig {
@@ -39,12 +33,7 @@ interface StudyModeBottomActionsProps {
   activeTab?: StudyModeTabId | null;
 }
 
-const MAX_SHOWN_TABS = 4;
-
 const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, activeTab }) => {
-  const { t } = useTranslation('common');
-  const [isExpanded, setIsExpanded] = useState(false);
-  const isMobile = useIsMobile();
   const tabRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const audioService = useContext(AudioPlayerMachineContext);
   const isAudioVisible = useXStateSelector(audioService, selectIsAudioPlayerVisible);
@@ -71,36 +60,6 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
 
   const filteredTabs = useMemo(() => tabs.filter((tab) => tab.condition !== false), [tabs]);
 
-  const tabsToRender = useMemo(() => {
-    if (filteredTabs.length <= MAX_SHOWN_TABS || isMobile) {
-      return filteredTabs;
-    }
-
-    if (isExpanded) {
-      return [
-        ...filteredTabs,
-        {
-          id: ExpandableTabId.COLLAPSE,
-          label: t('tab-see-less'),
-          icon: null,
-          onClick: () => setIsExpanded(false),
-          condition: true,
-        },
-      ];
-    }
-
-    return [
-      ...filteredTabs.slice(0, MAX_SHOWN_TABS),
-      {
-        id: ExpandableTabId.EXPAND,
-        label: t('tab-see-more'),
-        icon: null,
-        onClick: () => setIsExpanded(true),
-        condition: true,
-      },
-    ];
-  }, [filteredTabs, isExpanded, isMobile, t]);
-
   return (
     <div
       className={classNames(styles.bottomActionsContainer, {
@@ -108,7 +67,7 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
       })}
     >
       <div className={styles.tabsContainer}>
-        {tabsToRender.map((tab, index) => (
+        {filteredTabs.map((tab, index) => (
           <React.Fragment key={tab.id}>
             <div
               ref={(el) => {
@@ -127,7 +86,7 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
               <span className={styles.tabIcon}>{tab.icon}</span>
               <span className={styles.tabLabel}>{tab.label}</span>
             </div>
-            {index < tabsToRender.length - 1 && (
+            {index < filteredTabs.length - 1 && (
               <div className={styles.separatorContainer}>
                 <Separator isVertical weight={SeparatorWeight.SemiBold} />
               </div>
