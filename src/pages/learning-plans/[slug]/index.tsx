@@ -51,7 +51,7 @@ const LearningPlanPage: NextPage<Props> = ({ course }) => {
         languageAlternates={getLanguageAlternates(url)}
         image={course.thumbnail}
         imageWidth={1200}
-        imageHeight={630}
+        imageHeight={1000}
       />
       <div className={layoutStyles.pageContainer}>
         <div className={styles.container}>
