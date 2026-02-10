@@ -122,6 +122,15 @@ type TranslateFn = (key: string, query?: Record<string, unknown>) => string;
 
 const isArabicOrUrduLang = (lang: string) => lang === 'ar' || lang === 'ur';
 
+const getSurahName = (chaptersData: unknown, chapterId: string, lang: string): string => {
+  const chapter = getChapterData(chaptersData as Parameters<typeof getChapterData>[0], chapterId);
+  const isArabicOrUrdu = isArabicOrUrduLang(lang);
+  return (
+    (isArabicOrUrdu && chapter?.nameArabic ? chapter?.nameArabic : chapter?.transliteratedName) ||
+    ''
+  );
+};
+
 const getCollectionItemsLabel = (totalCount: number, lang: string, t: TranslateFn) => {
   const count = toLocalizedNumber(totalCount, lang);
   return totalCount === 1
@@ -158,23 +167,18 @@ const makeSortOptions = (t: TranslateFn) => [
 ];
 
 const buildChapterItems = (chaptersData: unknown, lang: string) => {
-  const isArabicOrUrdu = isArabicOrUrduLang(lang);
   // Ensure stable 1 -> 114 ordering.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return Array.from({ length: 114 }, (unusedValue, index) => index + 1)
     .map((chapterId) => {
-      const chapter = getChapterData(
-        chaptersData as Parameters<typeof getChapterData>[0],
-        String(chapterId),
-      );
-      const surahName = isArabicOrUrdu ? chapter?.nameArabic : chapter?.transliteratedName;
+      const surahName = getSurahName(chaptersData, String(chapterId), lang);
       const localized = toLocalizedNumber(chapterId, lang);
       const numericLabel = `${chapterId}.`;
       const localizedLabel = `${localized}.`;
       return {
         value: String(chapterId),
-        label: `${localizedLabel} ${surahName || ''}`.trim(),
-        searchText: `${numericLabel} ${surahName || ''} ${chapterId}`.trim().toLowerCase(),
+        label: `${localizedLabel} ${surahName}`.trim(),
+        searchText: `${numericLabel} ${surahName} ${chapterId}`.trim().toLowerCase(),
       };
     })
     .filter((item) => item.label);
@@ -199,16 +203,11 @@ const buildActiveChapterChips = (
   lang: string,
   selectedChapterIds: string[],
 ): ActiveFilterChip[] => {
-  const isArabicOrUrdu = isArabicOrUrduLang(lang);
   return selectedChapterIds
     .map((chapterIdStr) => {
-      const chapter = getChapterData(
-        chaptersData as Parameters<typeof getChapterData>[0],
-        chapterIdStr,
-      );
-      const surahName = isArabicOrUrdu ? chapter?.nameArabic : chapter?.transliteratedName;
+      const surahName = getSurahName(chaptersData, chapterIdStr, lang);
       const localized = toLocalizedNumber(Number(chapterIdStr), lang);
-      return { id: chapterIdStr, label: `${localized}. ${surahName || ''}`.trim() };
+      return { id: chapterIdStr, label: `${localized}. ${surahName}`.trim() };
     })
     .filter((chip) => chip.label);
 };
