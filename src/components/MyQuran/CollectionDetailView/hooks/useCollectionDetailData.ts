@@ -46,12 +46,19 @@ const useCollectionDetailData = ({
   const [allBookmarksPages, setAllBookmarksPages] = useState<CollectionBookmarksPage[]>([]);
   const numericCollectionId = slugifiedCollectionIdToCollectionId(collectionId);
 
+  const resetPagination = useCallback(() => {
+    setCurrentCursor(undefined);
+    setAllBookmarksPages([]);
+  }, []);
+
   const onSortByChange = useCallback(
     (newSortByVal: CollectionDetailSortOption) => {
       logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
       setSortBy(newSortByVal);
+      // Reset pagination to avoid requesting the new sort with the old cursor
+      resetPagination();
     },
-    [sortBy],
+    [sortBy, resetPagination],
   );
 
   const fetchUrl = useMemo(() => {
@@ -78,9 +85,8 @@ const useCollectionDetailData = ({
 
   // Reset pagination when the collection, fetch mode, or sort order changes
   useEffect(() => {
-    setCurrentCursor(undefined);
-    setAllBookmarksPages([]);
-  }, [fetchAll, numericCollectionId, sortBy]);
+    resetPagination();
+  }, [fetchAll, numericCollectionId, resetPagination]);
 
   // Auto-fetch all pages when fetchAll is enabled
   useEffect(() => {
@@ -146,11 +152,6 @@ const useCollectionDetailData = ({
       setCurrentCursor(pagination.endCursor);
     }
   }, [pagination]);
-
-  const resetPagination = useCallback(() => {
-    setCurrentCursor(undefined);
-    setAllBookmarksPages([]);
-  }, []);
 
   const onUpdated = useCallback(() => {
     // Reset pagination first to avoid revalidating (and re-appending) only the last fetched page
