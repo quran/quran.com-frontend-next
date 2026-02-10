@@ -261,3 +261,7 @@
 .ayahSeparatorContainer {
   @include utility.edgeHorizontalPadding;
 }
+
+.semibold {
+  font-weight: var(--font-weight-semibold);
+}

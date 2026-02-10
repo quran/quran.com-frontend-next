@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './TranslationViewCell.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
+import { useBottomActionsExpand } from '@/components/QuranReader/contexts/BottomActionsExpandContext';
 import useIsMobile from '@/hooks/useIsMobile';
 import { isRTLLocale } from '@/utils/locale';
 
@@ -30,6 +31,7 @@ export interface TabConfig {
   icon: JSX.Element;
   onClick: (e: React.MouseEvent | React.KeyboardEvent) => void;
   condition: boolean | undefined;
+  isAdditionalTab?: boolean;
 }
 
 interface BottomActionsTabsProps {
@@ -47,7 +49,7 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
 }) => {
   const { t, lang } = useTranslation('common');
   const isRTL = isRTLLocale(lang);
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const { isExpanded, setIsExpanded } = useBottomActionsExpand();
   const isMobile = useIsMobile();
 
   const handleTabClick = (
@@ -80,6 +82,7 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
           icon: null,
           onClick: () => setIsExpanded(false),
           condition: true,
+          isAdditionalTab: true,
         },
       ];
     }
@@ -92,9 +95,10 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
         icon: null,
         onClick: () => setIsExpanded(true),
         condition: true,
+        isAdditionalTab: true,
       },
     ];
-  }, [filteredTabs, isExpanded, t, isMobile]);
+  }, [filteredTabs, isExpanded, setIsExpanded, t, isMobile]);
 
   return (
     <div className={styles.bottomActionsContainer}>
@@ -107,7 +111,10 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
         {tabsToRender.map((tab, index) => (
           <React.Fragment key={tab.id}>
             <div
-              className={classNames(styles.tabItem, { [styles.tabItemRTL]: isRTL })}
+              className={classNames(styles.tabItem, {
+                [styles.tabItemRTL]: isRTL,
+                [styles.semibold]: tab.isAdditionalTab,
+              })}
               data-testid={`bottom-action-tab-${tab.id}`}
               onClick={(e) => handleTabClick(e, tab.onClick)}
               onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
