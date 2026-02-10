@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
+import { BottomActionsExpandProvider } from '../contexts/BottomActionsExpandContext';
 import onCopyQuranWords from '../onCopyQuranWords';
 import QueryParamMessage from '../QueryParamMessage';
 
@@ -135,7 +136,7 @@ const TranslationView = ({
   const isSingleVerse = quranReaderDataType === QuranReaderDataType.Verse;
 
   return (
-    <>
+    <BottomActionsExpandProvider>
       {shouldShowQueryParamMessage && (
         <QueryParamMessage
           translationsQueryParamDifferent={translationsQueryParamDifferent}
@@ -159,7 +160,7 @@ const TranslationView = ({
           itemContent={itemContentRenderer}
         />
       </div>
-    </>
+    </BottomActionsExpandProvider>
   );
 };
 
