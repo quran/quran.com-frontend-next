@@ -1,12 +1,15 @@
-import { useState, useCallback, useContext } from 'react';
+import { useState, useCallback, useContext, useMemo } from 'react';
 
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import DataContext from '@/contexts/DataContext';
 import { setVerseKey } from '@/redux/slices/QuranReader/studyMode';
+import { isRTLLocale, toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
 import { fakeNavigateReplace } from '@/utils/navigation';
+import { getChapterNumberFromKey } from '@/utils/verse';
 
 interface UseStudyModeVerseNavigationProps {
   initialChapterId: string;
@@ -29,6 +32,12 @@ interface UseStudyModeVerseNavigationReturn {
   handleVerseChange: (verseNumber: string) => void;
   handlePreviousVerse: () => void;
   handleNextVerse: () => void;
+  handleGoBack: () => void;
+  handleGoToVerse: (chapterId: string, verseNumber: string, shouldAddToHistory?: boolean) => void;
+  verseHistory?: {
+    chapterName: string;
+    localizedVerseKey: string;
+  } | null;
 }
 
 const useStudyModeVerseNavigation = ({
@@ -40,75 +49,84 @@ const useStudyModeVerseNavigation = ({
   const router = useRouter();
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
+  const { lang } = useTranslation();
 
   const safeChapterId = initialChapterId || '1';
   const safeVerseNumber = initialVerseNumber || '1';
 
   const [selectedChapterId, setSelectedChapterId] = useState(safeChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(safeVerseNumber);
-
+  const [versesHistory, setVersesHistory] = useState<string[]>([]);
   const verseKey = `${selectedChapterId}:${selectedVerseNumber}`;
 
-  const handleChapterChange = useCallback(
-    (newChapterId: string) => {
+  const navigateToVerse = useCallback(
+    (newChapterId: string, newVerseNumber: string, shouldAddToHistory = true) => {
+      // Add current verse to history before navigating
+      if (shouldAddToHistory) {
+        setVersesHistory((prev) => [...prev, verseKey]);
+      }
+
       setSelectedChapterId(newChapterId);
-      setSelectedVerseNumber('1');
-      dispatch(setVerseKey(`${newChapterId}:1`));
-      const url = getNavigationUrlForTab(newChapterId, '1', activeContentTab);
+      setSelectedVerseNumber(newVerseNumber);
+      dispatch(setVerseKey(`${newChapterId}:${newVerseNumber}`));
+      const url = getNavigationUrlForTab(newChapterId, newVerseNumber, activeContentTab);
       if (url) {
         fakeNavigateReplace(url, router.locale || 'en');
       }
     },
-    [dispatch, activeContentTab, getNavigationUrlForTab, router.locale],
+    [dispatch, activeContentTab, getNavigationUrlForTab, router.locale, verseKey],
+  );
+
+  const handleChapterChange = useCallback(
+    (newChapterId: string) => {
+      navigateToVerse(newChapterId, '1');
+    },
+    [navigateToVerse],
   );
 
   const handleVerseChange = useCallback(
     (newVerseNumber: string) => {
-      setSelectedVerseNumber(newVerseNumber);
-      dispatch(setVerseKey(`${selectedChapterId}:${newVerseNumber}`));
-      const url = getNavigationUrlForTab(selectedChapterId, newVerseNumber, activeContentTab);
-      if (url) {
-        fakeNavigateReplace(url, router.locale || 'en');
-      }
+      navigateToVerse(selectedChapterId, newVerseNumber);
     },
-    [dispatch, selectedChapterId, activeContentTab, getNavigationUrlForTab, router.locale],
+    [navigateToVerse, selectedChapterId],
   );
 
   const handlePreviousVerse = useCallback(() => {
     const currentVerseNum = Number(selectedVerseNumber);
     const newVerseNumber = String(currentVerseNum - 1);
-    setSelectedVerseNumber(newVerseNumber);
-    dispatch(setVerseKey(`${selectedChapterId}:${newVerseNumber}`));
-    const url = getNavigationUrlForTab(selectedChapterId, newVerseNumber, activeContentTab);
-    if (url) {
-      fakeNavigateReplace(url, router.locale || 'en');
-    }
-  }, [
-    selectedVerseNumber,
-    selectedChapterId,
-    dispatch,
-    activeContentTab,
-    getNavigationUrlForTab,
-    router.locale,
-  ]);
+    navigateToVerse(selectedChapterId, newVerseNumber, false);
+  }, [selectedVerseNumber, navigateToVerse, selectedChapterId]);
 
   const handleNextVerse = useCallback(() => {
     const currentVerseNum = Number(selectedVerseNumber);
     const newVerseNumber = String(currentVerseNum + 1);
-    setSelectedVerseNumber(newVerseNumber);
-    dispatch(setVerseKey(`${selectedChapterId}:${newVerseNumber}`));
-    const url = getNavigationUrlForTab(selectedChapterId, newVerseNumber, activeContentTab);
-    if (url) {
-      fakeNavigateReplace(url, router.locale || 'en');
-    }
-  }, [
-    selectedVerseNumber,
-    selectedChapterId,
-    dispatch,
-    activeContentTab,
-    getNavigationUrlForTab,
-    router.locale,
-  ]);
+    navigateToVerse(selectedChapterId, newVerseNumber, false);
+  }, [selectedVerseNumber, navigateToVerse, selectedChapterId]);
+
+  const handleGoBack = useCallback(() => {
+    if (versesHistory.length === 0) return;
+
+    const previousVerseKey = versesHistory[versesHistory.length - 1];
+    setVersesHistory((prev) => prev.slice(0, -1));
+
+    const [prevChapterId, prevVerseNumber] = previousVerseKey.split(':');
+
+    // Don't add to history when going back
+    navigateToVerse(prevChapterId, prevVerseNumber, false);
+  }, [versesHistory, navigateToVerse]);
+
+  const verseHistory = useMemo(() => {
+    if (versesHistory.length === 0) return null;
+    const prevVerseKey = versesHistory[versesHistory.length - 1];
+    const chapter = chaptersData?.[getChapterNumberFromKey(prevVerseKey)];
+    const localizedVerseKey = isRTLLocale(lang)
+      ? toLocalizedVerseKeyRTL(prevVerseKey, lang)
+      : toLocalizedVerseKey(prevVerseKey, lang);
+    return {
+      localizedVerseKey,
+      chapterName: chapter?.transliteratedName || '',
+    };
+  }, [versesHistory, chaptersData, lang]);
 
   const canNavigatePrev = Number(selectedVerseNumber) > 1;
   const currentChapter = chaptersData?.[Number(selectedChapterId)];
@@ -126,6 +144,9 @@ const useStudyModeVerseNavigation = ({
     handleVerseChange,
     handlePreviousVerse,
     handleNextVerse,
+    handleGoBack,
+    handleGoToVerse: navigateToVerse,
+    verseHistory,
   };
 };
 

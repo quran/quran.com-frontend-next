@@ -100,7 +100,7 @@ const StudyModeModal: React.FC<Props> = ({
     highlightedWordLocation,
   );
   const [showWordBox, setShowWordBox] = useState<boolean>(!!highlightedWordLocation);
-  const [verseHistory, setVerseHistory] = useState<string[]>([]);
+  const [versesHistory, setVersesHistory] = useState<string[]>([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -236,26 +236,26 @@ const StudyModeModal: React.FC<Props> = ({
       updateUrlForActiveTab(newChapterId, newVerseNumber, activeContentTab);
 
       if (previousVerseKey) {
-        setVerseHistory((prev) => [...prev, previousVerseKey]);
+        setVersesHistory((prev) => [...prev, previousVerseKey]);
       }
     },
     [dispatch, activeContentTab, updateUrlForActiveTab],
   );
 
   const handleGoBack = useCallback(() => {
-    if (verseHistory.length === 0) return;
+    if (versesHistory.length === 0) return;
 
-    const previousVerseKey = verseHistory[verseHistory.length - 1];
+    const previousVerseKey = versesHistory[versesHistory.length - 1];
     logButtonClick('study_mode_go_back', { verseKey: previousVerseKey });
 
-    setVerseHistory((prev) => prev.slice(0, -1));
+    setVersesHistory((prev) => prev.slice(0, -1));
 
     const [prevChapterId, prevVerseNumber] = previousVerseKey.split(':');
     setSelectedChapterId(prevChapterId);
     setSelectedVerseNumber(prevVerseNumber);
     dispatch(setVerseKey(previousVerseKey));
     updateUrlForActiveTab(prevChapterId, prevVerseNumber, activeContentTab);
-  }, [verseHistory, dispatch, activeContentTab, updateUrlForActiveTab]);
+  }, [versesHistory, dispatch, activeContentTab, updateUrlForActiveTab]);
 
   const canNavigatePrev = Number(selectedVerseNumber) > 1;
   const currentChapter = chaptersData[Number(selectedChapterId)];
@@ -375,9 +375,9 @@ const StudyModeModal: React.FC<Props> = ({
     }
   }, [isPinned, verseKey, pinVerseWithSync, unpinVerseWithSync]);
 
-  const previousVerseFromHistory = useMemo(() => {
-    if (verseHistory.length === 0) return null;
-    const prevVerseKey = verseHistory[verseHistory.length - 1];
+  const verseHistory = useMemo(() => {
+    if (versesHistory.length === 0) return null;
+    const prevVerseKey = versesHistory[versesHistory.length - 1];
     const chapter = chaptersData?.[getChapterNumberFromKey(prevVerseKey)];
     const localizedVerseKey = isRTLLocale(lang)
       ? toLocalizedVerseKeyRTL(prevVerseKey, lang)
@@ -386,9 +386,9 @@ const StudyModeModal: React.FC<Props> = ({
       localizedVerseKey,
       chapterName: chapter?.transliteratedName || '',
     };
-  }, [verseHistory, chaptersData, lang]);
+  }, [versesHistory, chaptersData, lang]);
 
-  const showHeaderLeftControls = verseHistory.length > 0;
+  const showHeaderLeftControls = versesHistory.length > 0;
 
   const isContentTabActive =
     activeContentTab &&
@@ -419,7 +419,7 @@ const StudyModeModal: React.FC<Props> = ({
           >
             <ChevronLeftIcon />
             <p>
-              {previousVerseFromHistory?.chapterName} {previousVerseFromHistory?.localizedVerseKey}
+              {verseHistory?.chapterName} {verseHistory?.localizedVerseKey}
             </p>
           </Button>
         </div>
