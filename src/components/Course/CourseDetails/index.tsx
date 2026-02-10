@@ -86,14 +86,14 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
         variant={ButtonVariant.Ghost}
       >
         <ArrowLeft />
-        <p className={styles.backText}>{t('back-to-learning-plans')}</p>
+        <span className={styles.backText}>{t('back-to-learning-plans')}</span>
       </Button>
       <div className={styles.topSection}>
         <div
           className={classNames(styles.headerContainer, { [styles.completedHeader]: isCompleted })}
         >
-          <div className={styles.title}>
-            {title}
+          <div className={styles.titleRow}>
+            <h1 className={styles.title}>{title}</h1>
             {isCompleted && <Pill containerClassName={styles.completedPill}>{t('completed')}</Pill>}
           </div>
           {isCompleted ? (
