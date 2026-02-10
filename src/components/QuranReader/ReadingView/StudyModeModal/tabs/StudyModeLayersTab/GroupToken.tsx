@@ -25,6 +25,7 @@ const GroupToken: React.FC<GroupTokenProps> = ({ isActive, selectedOptionHtml, o
       onClick={onClick}
       onKeyDown={(event) => {
         if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
           onClick();
         }
       }}

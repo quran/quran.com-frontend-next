@@ -81,7 +81,12 @@ const GroupPanel: React.FC<GroupPanelProps> = ({
 
       {!!group.explanationHtml && (
         <div className={styles.explanationWrapper}>
-          <button type="button" className={styles.explanationToggle} onClick={onExplanationToggle}>
+          <button
+            type="button"
+            className={styles.explanationToggle}
+            onClick={onExplanationToggle}
+            aria-expanded={isExplanationOpen}
+          >
             <span>
               {isExplanationOpen ? t('layers.close-explanation') : t('layers.read-explanation')}
             </span>
