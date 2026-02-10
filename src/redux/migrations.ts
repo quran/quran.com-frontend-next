@@ -356,4 +356,11 @@ export default {
       hadithFontScale: initialState.quranReaderStyles.hadithFontScale,
     },
   }),
+  45: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      layersFontScale: initialState.quranReaderStyles.layersFontScale,
+    },
+  }),
 };

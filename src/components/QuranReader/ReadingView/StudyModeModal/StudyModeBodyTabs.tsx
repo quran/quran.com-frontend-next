@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useLayoutEffect } from 'react';
 
 import dynamic from 'next/dynamic';
@@ -7,11 +8,13 @@ import { StudyModeTabId } from './StudyModeBottomActions';
 
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useBatchedCountRangeHadiths from '@/hooks/auth/useBatchedCountRangeHadiths';
+import useBatchedCountRangeLayeredTranslations from '@/hooks/auth/useBatchedCountRangeLayeredTranslations';
 import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import HadithIcon from '@/icons/bx-book.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
+import LayerIcon from '@/icons/layer.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import QiraatIcon from '@/icons/qiraat-icon.svg';
@@ -34,6 +37,10 @@ export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessons
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
+  loading: TafsirSkeleton,
+});
+
+const StudyModeLayersTab = dynamic(() => import('./tabs/StudyModeLayersTab'), {
   loading: TafsirSkeleton,
 });
 
@@ -62,6 +69,7 @@ interface TabProps {
 
 export const TAB_COMPONENTS: Partial<Record<StudyModeTabId, React.ComponentType<TabProps>>> = {
   [StudyModeTabId.TAFSIR]: StudyModeTafsirTab,
+  [StudyModeTabId.LAYERS]: StudyModeLayersTab,
   [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
   [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
   [StudyModeTabId.ANSWERS]: StudyModeAnswersTab,
@@ -110,6 +118,9 @@ export const useStudyModeTabs = ({
 
   const { data: qiraatCount, isLoading: isLoadingQiraat } = useBatchedCountRangeQiraat(verseKey);
   const hasQiraat = (qiraatCount ?? 0) > 0 || isLoadingQiraat;
+  const { data: layersCount, isLoading: isLoadingLayers } =
+    useBatchedCountRangeLayeredTranslations(verseKey);
+  const hasLayers = (layersCount ?? 0) > 0 || isLoadingLayers;
 
   const { data: hadithCount, isLoading: isLoadingHadiths } = useBatchedCountRangeHadiths(verseKey);
   const hasHadiths = (hadithCount ?? 0) > 0 || isLoadingHadiths;
@@ -119,7 +130,8 @@ export const useStudyModeTabs = ({
     if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) onTabChange?.(null);
     if (activeTab === StudyModeTabId.QIRAAT && !hasQiraat) onTabChange?.(null);
     if (activeTab === StudyModeTabId.HADITH && !hasHadiths) onTabChange?.(null);
-  }, [activeTab, hasQuestions, hasQiraat, hasHadiths, onTabChange]);
+    if (activeTab === StudyModeTabId.LAYERS && !hasLayers) onTabChange?.(null);
+  }, [activeTab, hasQuestions, hasQiraat, hasHadiths, hasLayers, onTabChange]);
 
   const handleTabClick = (tabId: StudyModeTabId) => {
     const newTab = activeTab === tabId ? null : tabId;
@@ -130,9 +142,16 @@ export const useStudyModeTabs = ({
     {
       id: StudyModeTabId.TAFSIR,
       label: t('quran-reader:tafsirs'),
-      icon: <BookIcon />,
+      icon: <BookIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: () => handleTabClick(StudyModeTabId.TAFSIR),
       condition: true,
+    },
+    {
+      id: StudyModeTabId.LAYERS,
+      label: t('quran-reader:layers.title'),
+      icon: <LayerIcon />,
+      onClick: () => handleTabClick(StudyModeTabId.LAYERS),
+      condition: hasLayers,
     },
     {
       id: StudyModeTabId.LESSONS,

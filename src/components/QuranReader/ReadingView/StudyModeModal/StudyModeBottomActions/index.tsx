@@ -8,6 +8,7 @@ import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator
 
 export enum StudyModeTabId {
   TAFSIR = 'tafsir',
+  LAYERS = 'layers',
   LESSONS = 'lessons',
   REFLECTIONS = 'reflections',
   ANSWERS = 'answers',
