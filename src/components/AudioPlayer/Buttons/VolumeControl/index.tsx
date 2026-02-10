@@ -75,6 +75,7 @@ const VolumeControl = ({ shouldUseModalZIndex }: VolumeControlProps) => {
             tooltip={t('audio.player.volume-control')}
             shape={ButtonShape.Circle}
             variant={ButtonVariant.Ghost}
+            shouldFlipOnRTL={false}
           >
             {VOLUME_ICONS[icon]}
           </Button>
