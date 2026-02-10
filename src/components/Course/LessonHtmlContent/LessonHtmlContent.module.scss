@@ -1,0 +1,12 @@
+.widgetSkeleton {
+  display: block;
+  block-size: 200px;
+  margin-block: var(--spacing-medium);
+  border-radius: var(--border-radius-default);
+}
+
+.container {
+  :global(.quran-widget) {
+    margin-block: var(--spacing-medium);
+  }
+}
