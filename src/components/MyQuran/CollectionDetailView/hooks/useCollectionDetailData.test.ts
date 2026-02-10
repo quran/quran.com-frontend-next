@@ -220,31 +220,6 @@ describe('useCollectionDetailData', () => {
     );
   });
 
-  it('goToPreviousPage updates cursor when hasPreviousPage is true', () => {
-    swrData.pagination = {
-      hasNextPage: false,
-      hasPreviousPage: true,
-      startCursor: 'cursor_prev',
-      endCursor: 'cursor_end',
-    };
-
-    const { result } = renderHook(() =>
-      useCollectionDetailData({
-        collectionId: 'my-collection-123',
-        invalidateAllBookmarkCaches: vi.fn(),
-      }),
-    );
-
-    act(() => result.current.goToPreviousPage());
-
-    expect(makeGetBookmarkByCollectionId).toHaveBeenCalledWith(
-      '123',
-      expect.objectContaining({
-        cursor: 'cursor_prev',
-      }),
-    );
-  });
-
   it('resetPagination clears cursor and refetch from start', () => {
     swrData.pagination = {
       hasNextPage: true,

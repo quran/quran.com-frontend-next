@@ -127,12 +127,6 @@ const useCollectionDetailData = ({
     }
   }, [pagination]);
 
-  const goToPreviousPage = useCallback(() => {
-    if (pagination?.hasPreviousPage && pagination?.startCursor) {
-      setCurrentCursor(pagination.startCursor);
-    }
-  }, [pagination]);
-
   const resetPagination = useCallback(() => {
     setCurrentCursor(undefined);
     setAllBookmarksPages([]);
@@ -167,7 +161,6 @@ const useCollectionDetailData = ({
     pagination,
     onUpdated,
     goToNextPage,
-    goToPreviousPage,
     resetPagination,
     isFetchingAll,
   };
