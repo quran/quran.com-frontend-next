@@ -25,6 +25,14 @@
   "max-file-size": "最大限度 {{size}}",
   "my-profile": "我的个人资料",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "如果您一段时间内没有取得学习进度，我们将发送电子邮件提醒您完成古兰经学习目标。",
+      "title": "目标提醒"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Surah Al-Mulk 2026 斋月挑战",
+      "title": "每日斋月挑战"
+    },
     "quran-reading-program": {
       "description": "我们将通过电子邮件发送每周阅读作业链接、反思提示以及其他资源，以帮助您保持学习进度。",
       "title": "一年读完古兰经"
