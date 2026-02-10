@@ -39,6 +39,7 @@
 .title {
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-jumbo);
+  text-wrap: pretty;
   @include utility.kitabFontHtmlLang;
 
   @include breakpoints.smallerThanTablet {
@@ -47,7 +48,7 @@
   }
 }
 
-.completedPill {
+.title .completedPill {
   vertical-align: middle;
   margin-inline-start: var(--spacing-small-px);
   font-size: var(--font-size-small-px);
