@@ -1,10 +1,13 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 
+import { useSelector as useXStateSelector } from '@xstate/react';
 import classNames from 'classnames';
 
 import styles from './StudyModeBottomActions.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
+import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 export enum StudyModeTabId {
   TAFSIR = 'tafsir',
@@ -32,6 +35,8 @@ interface StudyModeBottomActionsProps {
 
 const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, activeTab }) => {
   const tabRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isAudioVisible = useXStateSelector(audioService, selectIsAudioPlayerVisible);
 
   useEffect(() => {
     if (activeTab && tabRefs.current[activeTab]) {
@@ -47,8 +52,7 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
   };
 
   const handleTabKeyDown = (e: React.KeyboardEvent, onClick: () => void) => {
-    // Only trigger on Enter or Space key
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === 'Enter' || (e.key === ' ' && !isAudioVisible)) {
       e.preventDefault();
       onClick();
     }

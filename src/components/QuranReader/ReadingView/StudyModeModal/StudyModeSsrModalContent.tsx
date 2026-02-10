@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { useSelector as useXStateSelector } from '@xstate/react';
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
@@ -19,6 +21,11 @@ import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Verse from '@/types/Verse';
 import Word from '@/types/Word';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+
+const AudioPlayerBody = dynamic(() => import('@/components/AudioPlayer/AudioPlayerBody'), {
+  ssr: false,
+});
 
 interface StudyModeSsrModalContentProps {
   t: (key: string) => string;
@@ -82,6 +89,8 @@ const StudyModeSsrModalContent: React.FC<StudyModeSsrModalContentProps> = ({
   const isVerseActionOpen = useSelector(selectVerseActionModalIsOpen);
   const wasOpenedFromStudyMode = useSelector(selectVerseActionModalWasOpenedFromStudyMode);
   const isSsrMode = useSelector(selectStudyModeIsSsrMode);
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isAudioVisible = useXStateSelector(audioService, (state) => state.matches('VISIBLE'));
 
   // Hide when verse action is open and was opened from SSR study mode
   const shouldHide = isVerseActionOpen && wasOpenedFromStudyMode && isSsrMode;
@@ -120,6 +129,13 @@ const StudyModeSsrModalContent: React.FC<StudyModeSsrModalContentProps> = ({
           [styles.bottomSheetInnerContent]: isContentTabActive,
         })}
         dataTestId={TestId.STUDY_MODE_MODAL}
+        footer={
+          isAudioVisible ? (
+            <div className={styles.audioPlayerFooter}>
+              <AudioPlayerBody isEmbedded />
+            </div>
+          ) : undefined
+        }
       >
         <StudyModeSsrContent
           selectedChapterId={selectedChapterId}

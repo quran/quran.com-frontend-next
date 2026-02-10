@@ -30,6 +30,8 @@ export type ContentModalProps = {
   isBottomSheetOnMobile?: boolean;
   isFakeSEOFriendlyMode?: boolean;
   dataTestId?: string;
+  footer?: React.ReactNode;
+  footerClassName?: string;
 };
 
 export const SCROLLBAR_WIDTH = 15;

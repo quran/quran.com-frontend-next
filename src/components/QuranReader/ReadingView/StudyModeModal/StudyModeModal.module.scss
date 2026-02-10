@@ -211,6 +211,8 @@ button.pinButton {
 .modalHeader {
   padding-inline-end: 0;
   background-color: var(--color-background-elevated-new);
+  flex-shrink: 0;
+  z-index: 3;
   @include breakpoints.smallerThanTablet {
     padding: 0;
     padding-block-end: var(--spacing-medium-px);
@@ -358,6 +360,14 @@ div.bottomSheetInnerContent {
   block-size: var(--spacing-medium2-px);
   inline-size: calc(var(--spacing-mega-px) * 1.2);
   border-radius: var(--border-radius-default);
+}
+
+.audioPlayerFooter {
+  position: relative;
+  background: var(--color-background-elevated-new);
+  border-block-start: 1px solid var(--color-borders-hairline);
+  flex-shrink: 0;
+  z-index: 2;
 }
 
 // SSR modal hidden state - when verse action modal is open

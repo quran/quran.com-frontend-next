@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import { closeStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import Word from '@/types/Word';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { getSurahNavigationUrl } from '@/utils/navigation';
@@ -43,6 +45,7 @@ const useStudyModeEventHandlers = ({
   retry,
 }: UseStudyModeEventHandlersProps) => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const onPreviousVerse = useCallback(() => {
     logButtonClick('study_mode_previous_verse', {
@@ -71,10 +74,11 @@ const useStudyModeEventHandlers = ({
 
   const handleClose = useCallback(() => {
     logButtonClick('study_mode_close', { verseKey });
+    dispatch(closeStudyMode());
     const chapterUrl = getSurahNavigationUrl(selectedChapterId);
     const urlWithVerse = `${chapterUrl}?startingVerse=${selectedVerseNumber}`;
     router.replace(urlWithVerse, undefined, { scroll: false });
-  }, [selectedChapterId, selectedVerseNumber, router, verseKey]);
+  }, [selectedChapterId, selectedVerseNumber, router, verseKey, dispatch]);
 
   const handleRetry = useCallback(() => {
     logButtonClick('study_mode_retry', { verseKey });

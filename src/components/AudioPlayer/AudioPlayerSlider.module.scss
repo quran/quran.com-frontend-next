@@ -37,6 +37,13 @@
   }
 }
 
+.embeddedSliderContainer {
+  position: absolute;
+  inset-inline-start: 0;
+  transform: none;
+  inset-block-end: 100%;
+}
+
 .currentTime,
 .remainingTime {
   display: inline-block;
