@@ -120,7 +120,7 @@ const useCollectionDetailData = ({
 
   const filteredBookmarks = useMemo(() => {
     const sourcedBookmarks = fetchAll ? allBookmarks : bookmarks;
-    const query = searchQuery.toLowerCase();
+    const query = searchQuery?.toLowerCase()?.trim() ?? '';
 
     const hasChapterFilters = selectedChapterIds.length > 0;
     const hasJuzFilters = selectedJuzNumbers.length > 0;
