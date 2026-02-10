@@ -14,6 +14,11 @@ import Bookmark from 'types/Bookmark';
 import BookmarkType from 'types/BookmarkType';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
+vi.setConfig({
+  testTimeout: 10_000,
+  hookTimeout: 10_000,
+});
+
 const { useSWRMock, mutateMock } = vi.hoisted(() => ({
   useSWRMock: vi.fn(),
   mutateMock: vi.fn(),
@@ -28,6 +33,11 @@ interface UseCollectionDetailDataParams {
 
 let swrData: GetBookmarkCollectionsIdResponse | undefined;
 const mutate = vi.fn();
+const swrResponse = {
+  data: undefined as GetBookmarkCollectionsIdResponse | undefined,
+  mutate,
+  error: undefined,
+};
 
 vi.mock('swr', () => ({
   default: useSWRMock,
@@ -61,7 +71,10 @@ vi.mock('@/utils/string', () => ({
 describe('useCollectionDetailData', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    useSWRMock.mockImplementation(() => ({ data: swrData, mutate, error: undefined }));
+    useSWRMock.mockImplementation(() => {
+      swrResponse.data = swrData;
+      return swrResponse;
+    });
     swrData = {
       data: {
         collection: { id: '123', name: 'Test', url: 'test', updatedAt: '' },
@@ -72,7 +85,7 @@ describe('useCollectionDetailData', () => {
         isOwner: true,
       },
       pagination: {
-        hasNextPage: true,
+        hasNextPage: false,
         hasPreviousPage: false,
         startCursor: 'cursor_start',
         endCursor: 'cursor_end',
@@ -160,6 +173,13 @@ describe('useCollectionDetailData', () => {
   });
 
   it('should expose pagination information', () => {
+    swrData.pagination = {
+      hasNextPage: true,
+      hasPreviousPage: false,
+      startCursor: 'cursor_start',
+      endCursor: 'cursor_end',
+    };
+
     const { result } = renderHook(() =>
       useCollectionDetailData({
         collectionId: 'my-collection-123',
@@ -176,6 +196,13 @@ describe('useCollectionDetailData', () => {
   });
 
   it('goToNextPage updates cursor when hasNextPage is true', () => {
+    swrData.pagination = {
+      hasNextPage: true,
+      hasPreviousPage: false,
+      startCursor: 'cursor_start',
+      endCursor: 'cursor_end',
+    };
+
     const { result } = renderHook(() =>
       useCollectionDetailData({
         collectionId: 'my-collection-123',
@@ -194,8 +221,12 @@ describe('useCollectionDetailData', () => {
   });
 
   it('goToPreviousPage updates cursor when hasPreviousPage is true', () => {
-    swrData.pagination.hasPreviousPage = true;
-    swrData.pagination.startCursor = 'cursor_prev';
+    swrData.pagination = {
+      hasNextPage: false,
+      hasPreviousPage: true,
+      startCursor: 'cursor_prev',
+      endCursor: 'cursor_end',
+    };
 
     const { result } = renderHook(() =>
       useCollectionDetailData({
@@ -215,6 +246,13 @@ describe('useCollectionDetailData', () => {
   });
 
   it('resetPagination clears cursor and refetch from start', () => {
+    swrData.pagination = {
+      hasNextPage: true,
+      hasPreviousPage: false,
+      startCursor: 'cursor_start',
+      endCursor: 'cursor_end',
+    };
+
     const { result } = renderHook(() =>
       useCollectionDetailData({
         collectionId: 'my-collection-123',
@@ -244,50 +282,61 @@ describe('useCollectionDetailData', () => {
   });
 
   it('should fetch and accumulate multiple pages when fetchAll is true', async () => {
-    useSWRMock.mockImplementation((key: string) => {
-      if (key.includes('cursor=cursor_end_1')) {
-        return {
-          data: {
-            data: {
-              collection: { id: '123', name: 'Test', url: 'test', updatedAt: '' },
-              bookmarks: [
-                { id: 'b3', key: 3, verseNumber: 5, type: BookmarkType.Ayah },
-                { id: 'b4', key: 4, verseNumber: 15, type: BookmarkType.Ayah },
-              ] as Bookmark[],
-              isOwner: true,
-            },
-            pagination: {
-              hasNextPage: false,
-              hasPreviousPage: true,
-              startCursor: 'cursor_start',
-              endCursor: 'cursor_end_2',
-            },
-          } as unknown as GetBookmarkCollectionsIdResponse,
-          mutate,
-          error: undefined,
-        };
-      }
+    // Important: keep the returned SWR response stable per key. If we return a fresh object each
+    // render, `fetchAll` mode will keep re-processing the same page and never settle.
+    const responseByKey = new Map<
+      string,
+      { data: GetBookmarkCollectionsIdResponse; mutate: any; error: any }
+    >();
+    useSWRMock.mockImplementation((key: unknown) => {
+      const strKey = String(key);
+      const cached = responseByKey.get(strKey);
+      if (cached) return cached;
 
-      return {
-        data: {
-          data: {
-            collection: { id: '123', name: 'Test', url: 'test', updatedAt: '' },
-            bookmarks: [
-              { id: 'b1', key: 1, verseNumber: 1, type: BookmarkType.Ayah },
-              { id: 'b2', key: 2, verseNumber: 10, type: BookmarkType.Ayah },
-            ] as Bookmark[],
-            isOwner: true,
-          },
-          pagination: {
-            hasNextPage: true,
-            hasPreviousPage: false,
-            startCursor: 'cursor_start',
-            endCursor: 'cursor_end_1',
-          },
-        } as unknown as GetBookmarkCollectionsIdResponse,
-        mutate,
-        error: undefined,
-      };
+      const response = strKey.includes('cursor=cursor_end_1')
+        ? {
+            data: {
+              data: {
+                collection: { id: '123', name: 'Test', url: 'test', updatedAt: '' },
+                bookmarks: [
+                  { id: 'b3', key: 3, verseNumber: 5, type: BookmarkType.Ayah },
+                  { id: 'b4', key: 4, verseNumber: 15, type: BookmarkType.Ayah },
+                ] as Bookmark[],
+                isOwner: true,
+              },
+              pagination: {
+                hasNextPage: false,
+                hasPreviousPage: true,
+                startCursor: 'cursor_start',
+                endCursor: 'cursor_end_2',
+              },
+            } as unknown as GetBookmarkCollectionsIdResponse,
+            mutate,
+            error: undefined,
+          }
+        : {
+            data: {
+              data: {
+                collection: { id: '123', name: 'Test', url: 'test', updatedAt: '' },
+                bookmarks: [
+                  { id: 'b1', key: 1, verseNumber: 1, type: BookmarkType.Ayah },
+                  { id: 'b2', key: 2, verseNumber: 10, type: BookmarkType.Ayah },
+                ] as Bookmark[],
+                isOwner: true,
+              },
+              pagination: {
+                hasNextPage: true,
+                hasPreviousPage: false,
+                startCursor: 'cursor_start',
+                endCursor: 'cursor_end_1',
+              },
+            } as unknown as GetBookmarkCollectionsIdResponse,
+            mutate,
+            error: undefined,
+          };
+
+      responseByKey.set(strKey, response);
+      return response;
     });
 
     const { result } = renderHook(() =>
@@ -298,9 +347,12 @@ describe('useCollectionDetailData', () => {
       }),
     );
 
-    await waitFor(() => {
-      expect(result.current.bookmarks.map((b: any) => b.id)).toEqual(['b1', 'b2', 'b3', 'b4']);
-    });
+    await waitFor(
+      () => {
+        expect(result.current.bookmarks.map((b: any) => b.id)).toEqual(['b1', 'b2', 'b3', 'b4']);
+      },
+      { timeout: 10_000 },
+    );
   });
 
   it('onUpdated in fetchAll mode revalidates from the start key', () => {

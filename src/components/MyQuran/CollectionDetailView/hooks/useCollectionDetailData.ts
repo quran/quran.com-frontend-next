@@ -105,7 +105,10 @@ const useCollectionDetailData = ({
 
     // Continue fetching if there are more pages
     if (pagination?.hasNextPage && pagination?.endCursor) {
-      setCurrentCursor(pagination.endCursor);
+      // Only update cursor if it's different to avoid triggering unnecessary fetches
+      if (pagination.endCursor !== currentCursor) {
+        setCurrentCursor(pagination.endCursor);
+      }
     }
   }, [fetchAll, data, pagination, bookmarks, currentCursor]);
 
