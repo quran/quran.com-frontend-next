@@ -1,0 +1,1 @@
+../../../../.agents/skills/pdf/scripts/convert_pdf_to_images.py

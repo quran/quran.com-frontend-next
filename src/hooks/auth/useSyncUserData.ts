@@ -4,6 +4,7 @@ import { useEffect, useCallback, useRef } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
+import { useAuthContext } from '@/contexts/AuthContext';
 import { READING_BOOKMARK_KEY } from '@/hooks/auth/useGlobalReadingBookmark';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import { logErrorToSentry } from '@/lib/sentry';
@@ -142,6 +143,8 @@ const useSyncUserData = () => {
   const isSyncingRef = useRef(false);
   const hasSyncedRef = useRef(false);
   const { isLoggedIn } = useIsLoggedIn();
+  const { state: authState } = useAuthContext();
+  const userId = authState?.user?.id;
   const isPersistGateHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
@@ -166,7 +169,7 @@ const useSyncUserData = () => {
         mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
         mutate(makeReadingSessionsUrl());
         // Invalidate reading bookmark cache explicitly since it has a custom key pattern
-        mutate(READING_BOOKMARK_KEY(mushafId));
+        mutate(READING_BOOKMARK_KEY(mushafId, userId));
         mutate(isBookmarkCacheKey, undefined, { revalidate: true });
         setLastSyncAt(new Date(lastSyncAt));
         hasSyncedRef.current = true;
@@ -184,7 +187,7 @@ const useSyncUserData = () => {
         }
       }
     },
-    [bookmarkedVerses, bookmarkedPages, recentReadingSessions, mushafId, mutate],
+    [bookmarkedVerses, bookmarkedPages, recentReadingSessions, mushafId, mutate, userId],
   );
 
   useEffect(() => {

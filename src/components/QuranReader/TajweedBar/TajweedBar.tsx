@@ -12,6 +12,7 @@ import {
   selectIsTajweedBarExpanded,
   setIsTajweedBarExpanded,
 } from '@/redux/slices/QuranReader/contextMenu';
+import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { logEvent } from '@/utils/eventLogger';
 
 // Ensures bar starts off-screen before measurement to prevent flash on mount
@@ -32,6 +33,7 @@ const TajweedColors = () => {
   const dispatch = useDispatch();
 
   const showTajweedBar = useSelector(selectIsTajweedBarExpanded);
+  const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
 
   const { themeVariant } = useThemeDetector();
 
@@ -48,6 +50,7 @@ const TajweedColors = () => {
     <div
       className={classNames(styles.container, {
         [styles.hiddenContainer]: !showTajweedBar,
+        [styles.withSidebarNavigation]: isSidebarNavigationVisible,
       })}
     >
       <div

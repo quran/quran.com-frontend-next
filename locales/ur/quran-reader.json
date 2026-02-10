@@ -13,6 +13,7 @@
     "next-verse": "اگلی آیت",
     "next-word": "اگلا لفظ",
     "open-study-mode": "مطالعہ کا موڈ کھولیں",
+    "previous-related-verse": "پچھلی متعلقہ آیت",
     "previous-verse": "پچھلی آیت",
     "previous-word": "پچھلا لفظ",
     "read-ayah-refls": "آیت کے تدبرات پڑھیں",
@@ -85,6 +86,7 @@
     "title": "اپنی پیش رفت محفوظ کریں"
   },
   "hadith": {
+    "notice": "یہ فہرست مکمل نہیں ہے۔ <0>البخاری</0> اور <1>مسلم</1> شامل ہیں، انشااللہ جلد آنے والے مزید کے ساتھ۔",
     "title": "حدیث"
   },
   "hizb-beginning": "حزب کا آغاز",
@@ -197,6 +199,9 @@
   "removed-from": "{{collectionName}} سے حزف كر دیا گیا ہے۔",
   "revelation-order-notice": "نوٹ: آپ قرآن کو نزول کی ترتیب سے دیکھ رہے ہیں۔ اصل ترتیب پر واپس جانے کے لیے <link> یہاں کلک کریں </link> ۔",
   "rub-beginning": "ربع الحزب کا آغاز",
+  "save-bookmark-modal": {
+    "collections-hint": "اگر آپ ایک سے زائد بُک مارکس محفوظ کر رہے ہیں تو کلیکشنز استعمال کریں:"
+  },
   "save-page": "صفحہ محفوظ کریں {{pageNumber}}",
   "save-pinned-to-collection": "کلیکشن میں محفوظ کریں",
   "save-to": "سيو کریں...",

@@ -1,0 +1,1 @@
+../../../../skills/agent-browser/templates/authenticated-session.sh

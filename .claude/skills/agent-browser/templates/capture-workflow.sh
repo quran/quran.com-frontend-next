@@ -1,0 +1,1 @@
+../../../../.agents/skills/agent-browser/templates/capture-workflow.sh

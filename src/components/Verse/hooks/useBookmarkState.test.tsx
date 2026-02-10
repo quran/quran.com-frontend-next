@@ -67,6 +67,16 @@ vi.mock('@/utils/auth/login', () => ({ isLoggedIn: () => false }));
 vi.mock('@/redux/slices/QuranReader/styles', () => ({
   selectQuranReaderStyles: (state: any) => state.quranReaderStyles,
 }));
+vi.mock('@/contexts/AuthContext', () => ({
+  useAuthContext: () => ({
+    state: {
+      user: { id: 'test-user-123' },
+      accessToken: 'test-token',
+      refreshToken: 'test-refresh-token',
+      expiryDate: new Date(Date.now() + 3600000).toISOString(),
+    },
+  }),
+}));
 
 const Probe: React.FC = () => {
   const { isVerseBookmarked, isVerseReadingBookmark, isVerseBookmarkedLoading } =

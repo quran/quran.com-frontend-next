@@ -11,10 +11,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: "yarn"
+          cache: 'yarn'
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Run tests 
+      - name: Validate AI standards links
+        run: yarn ai:check
+      - name: Run tests
         run: yarn test
-      
-          

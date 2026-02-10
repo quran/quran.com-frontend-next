@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -16,6 +17,7 @@ import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import { selectPinnedVerses, selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ChaptersData from '@/types/ChaptersData';
@@ -33,6 +35,7 @@ const PinnedVersesBar: React.FC = () => {
   const pinnedVerses = useSelector(selectPinnedVerses, shallowEqual);
   const pinnedVerseKeys = useSelector(selectPinnedVerseKeys, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
+  const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
 
   const { unpinVerseWithSync, clearPinnedWithSync } = usePinnedVerseSync();
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
@@ -121,7 +124,11 @@ const PinnedVersesBar: React.FC = () => {
 
   return (
     <>
-      <div className={styles.container}>
+      <div
+        className={classNames(styles.container, {
+          [styles.withSidebarNavigation]: isSidebarNavigationVisible,
+        })}
+      >
         <PinnedVersesContent
           pinnedVerses={pinnedVerses}
           selectedVerseKey={null}

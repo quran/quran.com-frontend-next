@@ -1,0 +1,54 @@
+import { TranslateFn } from './types';
+
+import Bookmark from '@/types/Bookmark';
+import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
+
+export interface CollectionDetailViewLayoutProps {
+  collectionName: string;
+  onBack: () => void;
+  isDefault?: boolean;
+  lang: string;
+  t: TranslateFn;
+  numericCollectionId: string;
+  sortBy: CollectionDetailSortOption;
+  onSortByChange: (newSortBy: CollectionDetailSortOption) => void;
+  totalCount: number;
+  isOwner: boolean;
+  filteredBookmarks: Bookmark[];
+  onItemDeleted: (bookmarkId: string) => void;
+  onShareVerse: (verseKey: string) => void;
+  isSelectMode: boolean;
+  isAllExpanded: boolean;
+  selectedCount: number;
+  onToggleSelectMode: () => void;
+  onToggleExpandCollapseAll: () => void;
+  onToggleBookmarkSelection: (bookmarkId: string) => void;
+  onToggleCardExpansion: (bookmarkId: string) => void;
+  isCardExpanded: (bookmarkId: string) => boolean;
+  isBookmarkSelected: (bookmarkId: string) => boolean;
+  onHeaderNoteClick: () => void;
+  onHeaderPinAllClick: () => void;
+  onHeaderEditClick: () => void;
+  onHeaderDeleteClick: () => void;
+  onBulkNoteClick: () => void;
+  onBulkPinSelectedClick: () => void;
+  onBulkCopyClick: () => void;
+  onBulkDeleteClick: () => void;
+  shareVerseKey: string | null;
+  onShareModalClose: () => void;
+  isDeleteBookmarksModalOpen: boolean;
+  isDeletingBookmarks: boolean;
+  pendingDeleteBookmarkIds: string[];
+  onBulkDeleteCancel: () => void;
+  onBulkDeleteConfirm: () => void;
+  isNoteModalOpen: boolean;
+  noteModalVerseKeys: string[];
+  onNoteModalClose: () => void;
+  isEditModalOpen: boolean;
+  onEditSubmit: (formData: { name: string }) => Promise<void>;
+  onEditModalClose: () => void;
+  isDeleteCollectionModalOpen: boolean;
+  onDeleteCollectionConfirm: () => void;
+  onDeleteCollectionCancel: () => void;
+  isDeletingCollection: boolean;
+}

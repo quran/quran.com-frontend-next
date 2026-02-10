@@ -4,6 +4,7 @@ import { StudyModeTabId } from './StudyModeBottomActions';
 import StudyModeSsrModalContent from './StudyModeSsrModalContent';
 
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
+import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Verse from '@/types/Verse';
 import Word from '@/types/Word';
@@ -39,6 +40,13 @@ interface StudyModeSsrContainerViewProps {
   questionsInitialData?: AyahQuestionsResponse;
   isContentTabActive: boolean;
   tafsirIdOrSlug?: string;
+  hadithsInitialData?: AyahHadithsResponse;
+  verseHistory?: {
+    chapterName: string;
+    localizedVerseKey: string;
+  } | null;
+  onGoBack: () => void;
+  onGoToVerse: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
 }
 
 const StudyModeSsrContainerView: React.FC<StudyModeSsrContainerViewProps> = (props) => {

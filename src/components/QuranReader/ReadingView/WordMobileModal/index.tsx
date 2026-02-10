@@ -13,7 +13,6 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   verse?: Verse;
-  bookmarksRangeUrl?: string | null;
 }
 
 /**
@@ -21,7 +20,7 @@ interface Props {
  * Displays top actions and bottom actions
  * @returns {React.FC} React component for mobile word actions modal
  */
-const WordMobileModal: React.FC<Props> = ({ isOpen, onClose, verse, bookmarksRangeUrl }) => {
+const WordMobileModal: React.FC<Props> = ({ isOpen, onClose, verse }) => {
   if (!verse) return null;
 
   return (
@@ -36,11 +35,7 @@ const WordMobileModal: React.FC<Props> = ({ isOpen, onClose, verse, bookmarksRan
       <Modal.Body>
         <div className={styles.container}>
           <div className={styles.topActionsContainer}>
-            <TopActions
-              verse={verse}
-              bookmarksRangeUrl={bookmarksRangeUrl || ''}
-              isTranslationView={false}
-            />
+            <TopActions verse={verse} isTranslationView={false} />
           </div>
 
           <Separator className={styles.separator} />

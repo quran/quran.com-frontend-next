@@ -20,8 +20,6 @@ import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translati
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
-import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -37,8 +35,6 @@ interface VerseResponse {
 
 const VerseDisplay: React.FC<VerseDisplayProps> = ({ chapterId, verseNumber }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { quranFont, mushafLines } = quranReaderStyles;
-  const { mushaf } = getMushafId(quranFont, mushafLines);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const wordByWordLocale = useSelector(selectWordByWordLocale);
   const isPersistGateHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
@@ -76,10 +72,6 @@ const VerseDisplay: React.FC<VerseDisplayProps> = ({ chapterId, verseNumber }) =
   const versesForFont = useMemo(() => (verse ? [verse] : []), [verse]);
   useQcfFont(quranReaderStyles.quranFont, versesForFont);
 
-  const bookmarksRangeUrl = isLoggedIn()
-    ? makeBookmarksRangeUrl(mushaf, chapterId, verseNumber, 1)
-    : '';
-
   if (error && !isValidating) {
     return <Error onRetryClicked={mutate} error={error} />;
   }
@@ -96,11 +88,7 @@ const VerseDisplay: React.FC<VerseDisplayProps> = ({ chapterId, verseNumber }) =
 
   return (
     <>
-      <TopActions
-        verse={verse}
-        bookmarksRangeUrl={bookmarksRangeUrl}
-        className={styles.topActionsContainer}
-      />
+      <TopActions verse={verse} className={styles.topActionsContainer} />
 
       <div className={styles.contentContainer}>
         <div className={styles.arabicVerseContainer}>

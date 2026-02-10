@@ -1,0 +1,1 @@
+../../../../.agents/quran/skills/pdf/scripts/check_bounding_boxes_test.py

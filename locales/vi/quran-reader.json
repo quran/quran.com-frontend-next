@@ -13,6 +13,7 @@
     "next-verse": "Đoạn tiếp theo",
     "next-word": "Từ tiếp theo",
     "open-study-mode": "Chế độ học tập mở",
+    "previous-related-verse": "Câu thơ liên quan trước đó",
     "previous-verse": "Câu thơ trước",
     "previous-word": "Từ trước đó",
     "read-ayah-refls": "Đọc Suy ngẫm Ayah",
@@ -85,6 +86,7 @@
     "title": "Lưu lại tiến trình của bạn"
   },
   "hadith": {
+    "notice": "Danh sách này chưa đầy đủ. <0>Al-Bukhari</0> và <1>Muslim</1> đã được bao gồm, và sẽ sớm có thêm nhiều tác phẩm khác nữa, InshAllah.",
     "title": "Hadith"
   },
   "hizb-beginning": "Mở đầu Hizb",
@@ -197,6 +199,9 @@
   "removed-from": "Đã xóa khỏi {{collectionName}}",
   "revelation-order-notice": "Lưu ý: bạn đang đọc Qur'an theo thứ tự mặc khải. <link>Nhấp vào đây</link> để quay lại thứ tự mặc định.",
   "rub-beginning": "Mở đầu Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Bạn muốn lưu nhiều hơn một dấu trang? Hãy sử dụng bộ sưu tập:"
+  },
   "save-page": "Lưu trang {{pageNumber}}",
   "save-pinned-to-collection": "Lưu vào bộ sưu tập",
   "save-to": "Lưu vào...",

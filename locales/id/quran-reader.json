@@ -13,6 +13,7 @@
     "next-verse": "Ayat selanjutnya",
     "next-word": "Kata selanjutnya",
     "open-study-mode": "Mode belajar terbuka",
+    "previous-related-verse": "Ayat terkait sebelumnya",
     "previous-verse": "Ayat sebelumnya",
     "previous-word": "Kata sebelumnya",
     "read-ayah-refls": "Baca Refleksi Ayat",
@@ -85,6 +86,7 @@
     "title": "Simpan Kemajuan Anda"
   },
   "hadith": {
+    "notice": "Daftar ini tidak lengkap. <0>Al-Bukhari</0> dan <1>Muslim</1> termasuk di dalamnya, dan akan ada lebih banyak lagi yang menyusul segera, insya Allah.",
     "title": "Hadits"
   },
   "hizb-beginning": "Awal Hizb",
@@ -197,6 +199,9 @@
   "removed-from": "Dihapus dari {{collectionName}}",
   "revelation-order-notice": "Catatan: Anda menavigasi Al-Qur'an berdasarkan urutan wahyu. <link> Klik di sini </link> untuk kembali ke urutan default.",
   "rub-beginning": "Awal Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Ingin menyimpan lebih dari satu bookmark? Gunakan koleksi:"
+  },
   "save-page": "Simpan Halaman {{pageNumber}}",
   "save-pinned-to-collection": "Simpan ke Koleksi",
   "save-to": "Menyimpan ke...",

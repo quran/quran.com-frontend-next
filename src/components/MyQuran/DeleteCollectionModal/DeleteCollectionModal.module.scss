@@ -34,10 +34,10 @@ $border-width-default: var(--spacing-hairline-px);
 }
 
 .title {
-  font-size: var(--font-size-large-px);
+  font-size: var(--font-size-normal-px);
   font-style: normal;
   font-weight: var(--font-weight-bold);
-  line-height: var(--font-size-large-px);
+  line-height: var(--font-size-normal-px);
   display: flex;
   align-items: center;
   color: var(--color-text-faded-new);
@@ -109,6 +109,7 @@ $border-width-default: var(--spacing-hairline-px);
   border-width: $border-width-default;
   border-color: var(--color-separators-ayah-level);
   font-size: var(--font-size-normal-px);
+  color: var(--color-text-faded-new);
 }
 
 .deleteButton {

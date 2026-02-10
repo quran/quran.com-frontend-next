@@ -12,7 +12,7 @@
   "contributors": "Wachangiaji",
   "day": "Siku",
   "description": "Maelezo",
-  "duration-daily": "Kila Somo fupi huchukua chini ya dakika {{dailyMins}} kukamilisha {{days}} ya Masomo",
+  "duration-daily": "Kila Somo fupi huchukua chini ya dakika {{dailyMins}} kukamilisha Masomo {{days}}",
   "empty-learning-plans": "Bado hujajiandikisha katika <link> Mipango yoyote ya Mafunzo </link>.",
   "enroll": "Jiandikishe",
   "enroll-success": "Hongera, Umeongeza {{title}} kwenye orodha yako!",
@@ -38,6 +38,7 @@
   "prev-lesson": "Somo Lililotangulia",
   "reflection-description-1": "Kubofya \"Andika Tafakari\" kutakupeleka kwenye QuranReflect, jukwaa la kushiriki tafakari za kibinafsi kuhusu Qur'ani. Tofauti na Tafsir (Fasiri za kitaalamu), tafakuri ni utambuzi wa kibinafsi na uzoefu unaohusiana na aya.",
   "reflection-description-2": "Ukichapisha hadharani, tafakari yako itakaguliwa na timu ya wasimamizi na itaonekana kwa jumuiya ya QuranReflect.",
+  "repeat-learning-plan": "Mpango wa Kujifunza wa Kurudia",
   "start-here": "Anza Hapa",
   "tabs": {
     "main": "Maelezo kuu",

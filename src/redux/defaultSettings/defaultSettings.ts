@@ -61,6 +61,7 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   wordByWordFontScale: 3,
   qnaFontScale: 3,
   surahInfoFontScale: 3,
+  hadithFontScale: 3,
   quranFont: QuranFont.MadaniV1,
   mushafLines: MushafLines.SixteenLines,
   isUsingDefaultFont: true,
@@ -82,6 +83,8 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   lastUsedReadingMode: ReadingPreference.Reading,
   selectedReflectionLanguages: [Language.EN],
   selectedLessonLanguages: [Language.EN],
+  hasCustomizedReflectionLanguages: false,
+  hasCustomizedLessonLanguages: false,
 };
 
 const THEME_INITIAL_STATE: Theme = {

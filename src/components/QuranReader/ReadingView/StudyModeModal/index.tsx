@@ -24,6 +24,7 @@ import ContentModal from '@/dls/ContentModal/ContentModal';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import CloseIcon from '@/icons/close.svg';
 import PinFilledIcon from '@/icons/pin-filled.svg';
 import PinIcon from '@/icons/pin.svg';
@@ -42,9 +43,8 @@ import Verse from '@/types/Verse';
 import Word, { CharType } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
-import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { toLocalizedVerseKey, toLocalizedVerseKeyRTL, isRTLLocale } from '@/utils/locale';
 import {
   fakeNavigate,
   getVerseSelectedTafsirNavigationUrl,
@@ -83,7 +83,7 @@ const StudyModeModal: React.FC<Props> = ({
   highlightedWordLocation,
   initialActiveTab,
 }) => {
-  const { t } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation('quran-reader');
   const router = useRouter();
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
@@ -109,6 +109,7 @@ const StudyModeModal: React.FC<Props> = ({
     highlightedWordLocation,
   );
   const [showWordBox, setShowWordBox] = useState<boolean>(!!highlightedWordLocation);
+  const [versesHistory, setVersesHistory] = useState<string[]>([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -192,11 +193,6 @@ const StudyModeModal: React.FC<Props> = ({
     };
   }, [rawVerse, selectedChapterId]);
 
-  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
-  const bookmarksRangeUrl = isLoggedIn()
-    ? makeBookmarksRangeUrl(mushafId, Number(selectedChapterId), Number(selectedVerseNumber), 1)
-    : '';
-
   const versesForFont = useMemo(() => (currentVerse ? [currentVerse] : []), [currentVerse]);
   useQcfFont(quranReaderStyles.quranFont, versesForFont);
 
@@ -240,16 +236,35 @@ const StudyModeModal: React.FC<Props> = ({
   }, [selectedVerseNumber, selectedChapterId, dispatch, activeContentTab, updateUrlForActiveTab]);
 
   const handleGoToVerse = useCallback(
-    (newChapterId: string, newVerseNumber: string) => {
+    (newChapterId: string, newVerseNumber: string, previousVerseKey?: string) => {
       const newVerseKey = `${newChapterId}:${newVerseNumber}`;
-      logButtonClick('study_mode_goto_verse', { verseKey: newVerseKey });
+      logButtonClick('study_mode_goto_verse', { verseKey: newVerseKey, previousVerseKey });
       setSelectedChapterId(newChapterId);
       setSelectedVerseNumber(newVerseNumber);
       dispatch(setVerseKey(newVerseKey));
       updateUrlForActiveTab(newChapterId, newVerseNumber, activeContentTab);
+
+      if (previousVerseKey) {
+        setVersesHistory((prev) => [...prev, previousVerseKey]);
+      }
     },
     [dispatch, activeContentTab, updateUrlForActiveTab],
   );
+
+  const handleGoBack = useCallback(() => {
+    if (versesHistory.length === 0) return;
+
+    const previousVerseKey = versesHistory[versesHistory.length - 1];
+    logButtonClick('study_mode_go_back', { verseKey: previousVerseKey });
+
+    setVersesHistory((prev) => prev.slice(0, -1));
+
+    const [prevChapterId, prevVerseNumber] = previousVerseKey.split(':');
+    setSelectedChapterId(prevChapterId);
+    setSelectedVerseNumber(prevVerseNumber);
+    dispatch(setVerseKey(previousVerseKey));
+    updateUrlForActiveTab(prevChapterId, prevVerseNumber, activeContentTab);
+  }, [versesHistory, dispatch, activeContentTab, updateUrlForActiveTab]);
 
   const canNavigatePrev = Number(selectedVerseNumber) > 1;
   const currentChapter = chaptersData[Number(selectedChapterId)];
@@ -369,6 +384,21 @@ const StudyModeModal: React.FC<Props> = ({
     }
   }, [isPinned, verseKey, pinVerseWithSync, unpinVerseWithSync]);
 
+  const verseHistory = useMemo(() => {
+    if (versesHistory.length === 0) return null;
+    const prevVerseKey = versesHistory[versesHistory.length - 1];
+    const chapter = chaptersData?.[getChapterNumberFromKey(prevVerseKey)];
+    const localizedVerseKey = isRTLLocale(lang)
+      ? toLocalizedVerseKeyRTL(prevVerseKey, lang)
+      : toLocalizedVerseKey(prevVerseKey, lang);
+    return {
+      localizedVerseKey,
+      chapterName: chapter?.transliteratedName || '',
+    };
+  }, [versesHistory, chaptersData, lang]);
+
+  const showHeaderLeftControls = versesHistory.length > 0;
+
   const isContentTabActive =
     activeContentTab &&
     [
@@ -378,64 +408,90 @@ const StudyModeModal: React.FC<Props> = ({
       StudyModeTabId.ANSWERS,
       StudyModeTabId.QIRAAT,
       StudyModeTabId.RELATED_VERSES,
+      StudyModeTabId.HADITH,
     ].includes(activeContentTab);
 
   const header = (
-    <div className={styles.header}>
-      <div className={styles.selectionWrapper}>
-        <SearchableVerseSelector
-          selectedChapterId={selectedChapterId}
-          selectedVerseNumber={selectedVerseNumber}
-          onChapterChange={handleChapterChange}
-          onVerseChange={handleVerseChange}
-        />
+    <div
+      className={classNames(styles.header, {
+        [styles.hideHeaderLeftControls]: !showHeaderLeftControls,
+      })}
+    >
+      {showHeaderLeftControls && (
+        <div className={styles.headerLeftControls}>
+          <Button
+            className={styles.previousRelatedVerseButton}
+            contentClassName={styles.previousRelatedVerseButtonContent}
+            size={ButtonSize.Small}
+            variant={ButtonVariant.Compact}
+            onClick={handleGoBack}
+            ariaLabel={t('aria.previous-related-verse')}
+          >
+            <ChevronLeftIcon />
+            <p>
+              {verseHistory?.chapterName} {verseHistory?.localizedVerseKey}
+            </p>
+          </Button>
+        </div>
+      )}
+      <div className={styles.headerMiddleControls}>
+        <div className={styles.selectionWrapper}>
+          <SearchableVerseSelector
+            selectedChapterId={selectedChapterId}
+            selectedVerseNumber={selectedVerseNumber}
+            onChapterChange={handleChapterChange}
+            onVerseChange={handleVerseChange}
+          />
+        </div>
+        <Button
+          size={ButtonSize.Small}
+          variant={ButtonVariant.Ghost}
+          onClick={handlePreviousVerse}
+          className={classNames(styles.navButton, styles.prevButton)}
+          ariaLabel={t('aria.previous-verse')}
+          isDisabled={!canNavigatePrev}
+          shouldFlipOnRTL={false}
+        >
+          <ArrowIcon />
+        </Button>
+        <Button
+          size={ButtonSize.Small}
+          variant={ButtonVariant.Ghost}
+          onClick={handleNextVerse}
+          className={classNames(styles.navButton, styles.nextButton)}
+          ariaLabel={t('aria.next-verse')}
+          isDisabled={!canNavigateNext}
+          shouldFlipOnRTL={false}
+        >
+          <ArrowIcon />
+        </Button>
+        <Button
+          size={ButtonSize.Small}
+          variant={ButtonVariant.Ghost}
+          shape={ButtonShape.Circle}
+          onClick={handlePinClick}
+          className={styles.pinButton}
+          ariaLabel={isPinned ? t('unpin-verse') : t('pin-verse')}
+          tooltip={isPinned ? t('unpin-verse') : t('pin-verse')}
+        >
+          {isPinned ? (
+            <PinFilledIcon className={classNames(styles.pinIcon, styles.pinIconFilled)} />
+          ) : (
+            <PinIcon className={styles.pinIcon} />
+          )}
+        </Button>
       </div>
-      <Button
-        size={ButtonSize.Small}
-        variant={ButtonVariant.Ghost}
-        onClick={handlePreviousVerse}
-        className={classNames(styles.navButton, styles.prevButton)}
-        ariaLabel={t('aria.previous-verse')}
-        isDisabled={!canNavigatePrev}
-        shouldFlipOnRTL={false}
-      >
-        <ArrowIcon />
-      </Button>
-      <Button
-        size={ButtonSize.Small}
-        variant={ButtonVariant.Ghost}
-        onClick={handleNextVerse}
-        className={classNames(styles.navButton, styles.nextButton)}
-        ariaLabel={t('aria.next-verse')}
-        isDisabled={!canNavigateNext}
-        shouldFlipOnRTL={false}
-      >
-        <ArrowIcon />
-      </Button>
-      <Button
-        size={ButtonSize.Small}
-        variant={ButtonVariant.Ghost}
-        shape={ButtonShape.Circle}
-        onClick={handlePinClick}
-        className={styles.pinButton}
-        ariaLabel={isPinned ? t('unpin-verse') : t('pin-verse')}
-        tooltip={isPinned ? t('unpin-verse') : t('pin-verse')}
-      >
-        {isPinned ? (
-          <PinFilledIcon className={classNames(styles.pinIcon, styles.pinIconFilled)} />
-        ) : (
-          <PinIcon className={styles.pinIcon} />
-        )}
-      </Button>
-      <Button
-        variant={ButtonVariant.Ghost}
-        shape={ButtonShape.Circle}
-        onClick={handleClose}
-        className={styles.closeButton}
-        ariaLabel={t('aria.close')}
-      >
-        <CloseIcon />
-      </Button>
+      <div className={styles.headerRightControls}>
+        <Button
+          variant={ButtonVariant.Ghost}
+          shape={ButtonShape.Circle}
+          onClick={handleClose}
+          className={styles.closeButton}
+          ariaLabel={t('aria.close')}
+        >
+          <CloseIcon />
+        </Button>
+      </div>
     </div>
   );
 
@@ -461,7 +517,6 @@ const StudyModeModal: React.FC<Props> = ({
       return (
         <StudyModeBody
           verse={currentVerse}
-          bookmarksRangeUrl={bookmarksRangeUrl}
           selectedWord={selectedWord}
           selectedWordLocation={selectedWordLocation}
           showWordBox={showWordBox}
