@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
+
 import { renderHook, act, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -13,6 +14,11 @@ import Bookmark from 'types/Bookmark';
 import BookmarkType from 'types/BookmarkType';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
+const { useSWRMock, mutateMock } = vi.hoisted(() => ({
+  useSWRMock: vi.fn(),
+  mutateMock: vi.fn(),
+}));
+
 interface UseCollectionDetailDataParams {
   collectionId: string;
   searchQuery?: string;
@@ -22,12 +28,10 @@ interface UseCollectionDetailDataParams {
 
 let swrData: GetBookmarkCollectionsIdResponse | undefined;
 const mutate = vi.fn();
-const useSWRMock = vi.fn();
-const swrGlobalMutate = vi.fn();
 
 vi.mock('swr', () => ({
   default: useSWRMock,
-  mutate: swrGlobalMutate,
+  mutate: mutateMock,
 }));
 
 vi.mock('@/utils/auth/api', () => ({
@@ -300,6 +304,9 @@ describe('useCollectionDetailData', () => {
   });
 
   it('onUpdated in fetchAll mode revalidates from the start key', () => {
+    // Keep this test deterministic: we only care about global revalidation from the start key,
+    // not auto-pagination behavior.
+    swrData.pagination.hasNextPage = false;
     const invalidateAllBookmarkCaches = vi.fn();
     const { result } = renderHook(() =>
       useCollectionDetailData({
@@ -312,8 +319,8 @@ describe('useCollectionDetailData', () => {
     act(() => result.current.goToNextPage());
     act(() => result.current.onUpdated());
 
-    expect(swrGlobalMutate).toHaveBeenCalledTimes(1);
-    expect(swrGlobalMutate).toHaveBeenCalledWith('/collections/123');
+    expect(mutateMock).toHaveBeenCalledTimes(1);
+    expect(mutateMock).toHaveBeenCalledWith('/collections/123');
     expect(mutate).not.toHaveBeenCalled();
     expect(invalidateAllBookmarkCaches).toHaveBeenCalledTimes(1);
   });
@@ -374,6 +381,8 @@ describe('useCollectionDetailData', () => {
   });
 
   it('should reset allBookmarks when fetchAll is disabled', () => {
+    // Avoid auto-pagination to keep state transitions predictable for this test.
+    swrData.pagination.hasNextPage = false;
     const { result, rerender } = renderHook(
       (props: UseCollectionDetailDataParams) => useCollectionDetailData(props),
       {

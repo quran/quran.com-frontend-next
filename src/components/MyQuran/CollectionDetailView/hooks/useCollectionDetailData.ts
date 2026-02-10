@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useSWR, { mutate as globalMutate } from 'swr';
 
@@ -19,6 +19,15 @@ interface UseCollectionDetailDataParams {
   fetchAll?: boolean;
 }
 
+type CollectionBookmarksPage = {
+  /**
+   * SWR cursor for the page. We use a synthetic "start" token for the first page to keep
+   * page identity stable across revalidations.
+   */
+  cursor: string;
+  bookmarks: GetBookmarkCollectionsIdResponse['data']['bookmarks'];
+};
+
 const useCollectionDetailData = ({
   collectionId,
   searchQuery,
@@ -27,10 +36,7 @@ const useCollectionDetailData = ({
 }: UseCollectionDetailDataParams) => {
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
   const [currentCursor, setCurrentCursor] = useState<string | undefined>(undefined);
-  const [allBookmarks, setAllBookmarks] = useState<
-    GetBookmarkCollectionsIdResponse['data']['bookmarks']
-  >([]);
-  const lastAppendedCursorRef = useRef<string | null>(null);
+  const [allBookmarksPages, setAllBookmarksPages] = useState<CollectionBookmarksPage[]>([]);
   const numericCollectionId = slugifiedCollectionIdToCollectionId(collectionId);
 
   const onSortByChange = useCallback(
@@ -39,8 +45,7 @@ const useCollectionDetailData = ({
       setSortBy(newSortByVal);
       // Reset pagination when sort changes
       setCurrentCursor(undefined);
-      setAllBookmarks([]);
-      lastAppendedCursorRef.current = null;
+      setAllBookmarksPages([]);
     },
     [sortBy],
   );
@@ -70,22 +75,33 @@ const useCollectionDetailData = ({
 
   const bookmarks = useMemo(() => data?.data.bookmarks ?? [], [data]);
   const pagination = useMemo(() => data?.pagination, [data]);
+  const allBookmarks = useMemo(
+    () => allBookmarksPages.flatMap((page) => page.bookmarks),
+    [allBookmarksPages],
+  );
 
   useEffect(() => {
     setCurrentCursor(undefined);
-    setAllBookmarks([]);
-    lastAppendedCursorRef.current = null;
+    setAllBookmarksPages([]);
   }, [fetchAll, numericCollectionId]);
 
   // Auto-fetch all pages when fetchAll is enabled
   useEffect(() => {
     if (!fetchAll || !data) return;
 
+    // When SWR returns cached data then revalidates, `data` may update for the same cursor.
+    // Track pages by cursor so we can replace the page instead of appending duplicates or
+    // ignoring revalidated results.
     const pageCursor = currentCursor ?? 'start';
-    if (lastAppendedCursorRef.current === pageCursor) return;
-
-    lastAppendedCursorRef.current = pageCursor;
-    setAllBookmarks((prevBookmarks) => [...prevBookmarks, ...bookmarks]);
+    setAllBookmarksPages((prevPages) => {
+      const existingIndex = prevPages.findIndex((page) => page.cursor === pageCursor);
+      if (existingIndex === -1) {
+        return [...prevPages, { cursor: pageCursor, bookmarks }];
+      }
+      const nextPages = prevPages.slice();
+      nextPages[existingIndex] = { cursor: pageCursor, bookmarks };
+      return nextPages;
+    });
 
     // Continue fetching if there are more pages
     if (pagination?.hasNextPage && pagination?.endCursor) {
@@ -116,8 +132,7 @@ const useCollectionDetailData = ({
 
   const resetPagination = useCallback(() => {
     setCurrentCursor(undefined);
-    setAllBookmarks([]);
-    lastAppendedCursorRef.current = null;
+    setAllBookmarksPages([]);
   }, []);
 
   const onUpdated = useCallback(() => {
@@ -125,8 +140,7 @@ const useCollectionDetailData = ({
     // when `fetchAll` is enabled.
     if (fetchAll) setCurrentCursor(undefined);
     invalidateAllBookmarkCaches();
-    setAllBookmarks([]);
-    lastAppendedCursorRef.current = null;
+    setAllBookmarksPages([]);
 
     if (fetchAll) {
       globalMutate(startFetchUrl);
