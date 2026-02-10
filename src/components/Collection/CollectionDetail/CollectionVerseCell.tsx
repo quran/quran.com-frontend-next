@@ -19,7 +19,7 @@ import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerse
 import { getChapterData } from '@/utils/chapter';
 import { dateToMonthDayYearFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedVerseKey } from '@/utils/locale';
+import { isRTLLocale, toLocalizedVerseKey } from '@/utils/locale';
 import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
 import { makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
@@ -51,9 +51,8 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   const isPinned = pinnedVerseKeysSet.has(verseKey);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
   const localizedVerseKey = toLocalizedVerseKey(verseKey, lang);
-  const shouldShowArabicSurahName = lang === 'ar' || lang === 'ur';
   const surahName =
-    (shouldShowArabicSurahName ? chapterData?.nameArabic : chapterData?.transliteratedName) ||
+    (isRTLLocale(lang) ? chapterData?.nameArabic : chapterData?.transliteratedName) ||
     chapterData?.transliteratedName ||
     chapterData?.nameArabic;
   const bookmarkName = `${surahName || ''} ${localizedVerseKey}`.trim();

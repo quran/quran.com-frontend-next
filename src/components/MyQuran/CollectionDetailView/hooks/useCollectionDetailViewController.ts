@@ -48,14 +48,21 @@ const buildChapterItems = (
         chaptersData as Parameters<typeof getChapterData>[0],
         String(chapterId),
       );
-      const surahName = isArabicOrUrdu ? chapter?.nameArabic : chapter?.transliteratedName;
+      // `data/chapters/*.json` is not consistent across locales (and is often a partial Chapter shape).
+      // Prefer Arabic-script names for Arabic/Urdu (fallback to transliteration if needed).
+      const surahName = isArabicOrUrdu
+        ? chapter?.nameArabic || chapter?.transliteratedName
+        : chapter?.transliteratedName;
       const localized = toLocalizedNumber(chapterId, lang);
       const numericLabel = `${chapterId}.`;
       const localizedLabel = `${localized}.`;
       return {
         value: String(chapterId),
         label: `${localizedLabel} ${surahName || ''}`.trim(),
-        searchText: `${numericLabel} ${surahName || ''} ${chapterId}`.trim().toLowerCase(),
+        // Include both numeric and localized digits so RTL locales can search using either.
+        searchText: `${numericLabel} ${localizedLabel} ${surahName || ''} ${chapterId}`
+          .trim()
+          .toLowerCase(),
       };
     })
     .filter((item) => item.label);
@@ -92,7 +99,9 @@ const buildActiveChapterChips = (
         chaptersData as Parameters<typeof getChapterData>[0],
         chapterIdStr,
       );
-      const surahName = isArabicOrUrdu ? chapter?.nameArabic : chapter?.transliteratedName;
+      const surahName = isArabicOrUrdu
+        ? chapter?.nameArabic || chapter?.transliteratedName
+        : chapter?.transliteratedName;
       const localized = toLocalizedNumber(Number(chapterIdStr), lang);
       return { id: chapterIdStr, label: `${localized}. ${surahName || ''}`.trim() };
     })

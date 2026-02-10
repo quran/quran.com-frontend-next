@@ -14,6 +14,7 @@ import PopoverMenu, {
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import SearchIcon from '@/icons/search.svg';
+import { isRTLLocale } from '@/utils/locale';
 
 type FilterItem = {
   value: string;
@@ -53,8 +54,11 @@ const CollectionFiltersDropdown: React.FC<CollectionFiltersDropdownProps> = ({
   onSelectedChapterIdsChange,
   onSelectedJuzNumbersChange,
 }) => {
-  const { t } = useTranslation('my-quran');
+  const { t, lang } = useTranslation('my-quran');
   const { t: tCommon } = useTranslation('common');
+  const isRtl = isRTLLocale(lang);
+  const NextChevronIcon = isRtl ? ChevronLeftIcon : ChevronRightIcon;
+  const BackChevronIcon = isRtl ? ChevronRightIcon : ChevronLeftIcon;
 
   const [view, setView] = useState<View>('root');
   const [chapterQuery, setChapterQuery] = useState('');
@@ -106,7 +110,7 @@ const CollectionFiltersDropdown: React.FC<CollectionFiltersDropdownProps> = ({
         aria-label={t('collections.filters.chapters')}
       >
         <span className={styles.rootRowText}>{t('collections.filters.chapters')}</span>
-        <ChevronRightIcon className={styles.chevron} />
+        <NextChevronIcon className={styles.chevron} />
       </button>
       <button
         type="button"
@@ -115,7 +119,7 @@ const CollectionFiltersDropdown: React.FC<CollectionFiltersDropdownProps> = ({
         aria-label={t('collections.filters.juz')}
       >
         <span className={styles.rootRowText}>{t('collections.filters.juz')}</span>
-        <ChevronRightIcon className={styles.chevron} />
+        <NextChevronIcon className={styles.chevron} />
       </button>
     </div>
   );
@@ -136,7 +140,7 @@ const CollectionFiltersDropdown: React.FC<CollectionFiltersDropdownProps> = ({
           onClick={() => setView('root')}
           aria-label={tCommon('back')}
         >
-          <ChevronLeftIcon className={styles.backChevron} />
+          <BackChevronIcon className={styles.backChevron} />
           <span className={styles.backText}>{opts.title}</span>
         </button>
 
