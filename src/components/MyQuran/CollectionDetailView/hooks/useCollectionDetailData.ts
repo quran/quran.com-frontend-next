@@ -56,14 +56,6 @@ const useCollectionDetailData = ({
     });
   }, [numericCollectionId, sortBy, currentCursor]);
 
-  const startFetchUrl = useMemo(() => {
-    return makeGetBookmarkByCollectionId(numericCollectionId, {
-      sortBy,
-      type: BookmarkType.Ayah,
-      limit: COLLECTION_BOOKMARKS_PER_PAGE,
-    });
-  }, [numericCollectionId, sortBy]);
-
   const { data, mutate, error } = useSWR<GetBookmarkCollectionsIdResponse>(
     fetchUrl,
     privateFetcher,
@@ -141,12 +133,19 @@ const useCollectionDetailData = ({
     setAllBookmarksPages([]);
 
     if (fetchAll) {
-      globalMutate(startFetchUrl);
+      // Revalidate the first page URL for the current sort order
+      globalMutate(
+        makeGetBookmarkByCollectionId(numericCollectionId, {
+          sortBy,
+          type: BookmarkType.Ayah,
+          limit: COLLECTION_BOOKMARKS_PER_PAGE,
+        }),
+      );
       return;
     }
 
     mutate();
-  }, [fetchAll, invalidateAllBookmarkCaches, mutate, startFetchUrl]);
+  }, [fetchAll, invalidateAllBookmarkCaches, mutate, numericCollectionId, sortBy]);
 
   const isFetchingAll = fetchAll && (!data || pagination?.hasNextPage === true);
 
