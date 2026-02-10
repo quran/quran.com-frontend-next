@@ -105,7 +105,9 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
               >
                 {bookmarkName}
               </Link>
-              {formattedDate && <div className={styles.bookmarkDate}>{formattedDate}</div>}
+              {isOwner && formattedDate && (
+                <div className={styles.bookmarkDate}>{formattedDate}</div>
+              )}
             </div>
             <div className={styles.headerRight}>
               {isSelectMode ? (
