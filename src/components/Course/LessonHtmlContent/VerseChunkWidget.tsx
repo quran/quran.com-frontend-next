@@ -14,11 +14,10 @@ type Props = {
 const VerseChunkWidget: React.FC<Props> = ({ reference, fallbackHtml }) => {
   const { data, error, isValidating } = useVerseWidgetData(reference);
 
-  // Loading state: validating and no data yet
   if (isValidating && !data) {
     return <Skeleton className={styles.widgetSkeleton} />;
   }
-  // Graceful degradation: show original blockquote
+
   if (error || !data?.verses?.length) {
     return <HtmlContent html={fallbackHtml} />;
   }

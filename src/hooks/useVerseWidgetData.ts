@@ -12,11 +12,9 @@ const useVerseWidgetData = (reference: VerseReference) => {
   const selectedTranslations = useSelector(selectSelectedTranslations);
   const theme = useSelector(selectTheme);
 
-  // Fallback to Clear Quran if no user translations
   const translationIds =
     selectedTranslations?.length > 0 ? selectedTranslations : DEFAULT_TRANSLATIONS;
 
-  // Build query string with all options (for proper cache key)
   const params = new URLSearchParams({
     chapter: String(reference.chapter),
     from: String(reference.from),
