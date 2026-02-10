@@ -25,7 +25,7 @@ const QURAN_JUZ_COUNT = 30;
 interface UseCollectionDetailViewControllerParams {
   collectionId: string;
   collectionName: string;
-  searchQuery?: string;
+  searchQuery: string;
   onSearchChange: (query: string) => void;
   isDefault?: boolean;
   onCollectionUpdateRequest?: (collectionId: string, newName: string) => Promise<boolean>;
