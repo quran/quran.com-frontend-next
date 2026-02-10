@@ -94,6 +94,14 @@
   "info": "اطلاعات",
   "juz-beginning": "آغاز جزء",
   "languages": "زبان‌ها",
+  "layers": {
+    "alternative-translations": "ترجمه‌های جایگزین",
+    "close-explanation": "توضیح را ببندید",
+    "contract": "تفسیر قرارداد",
+    "expand": "تفسیر را گسترش دهید",
+    "read-explanation": "توضیح را بخوانید",
+    "title": "لایه‌ها"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "بنر طرح یادگیری ۴ داستان متحول کننده زندگی: درس‌هایی از سوره کهف",
     "banner-image-description": "طرح یادگیری سوره کهف را مشاهده کنید",

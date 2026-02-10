@@ -94,6 +94,14 @@
   "info": "информация",
   "juz-beginning": "Начало жуза",
   "languages": "Языки",
+  "layers": {
+    "alternative-translations": "Альтернативные переводы",
+    "close-explanation": "Закрыть пояснение",
+    "contract": "Договорной тафсир",
+    "expand": "Развернуть Тафсир",
+    "read-explanation": "Прочитайте пояснение.",
+    "title": "Слои"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 истории, изменившие жизнь: уроки из суры Аль-Кахф (баннер учебного плана)",
     "banner-image-description": "Ознакомьтесь с планом обучения по суре Аль-Кахф.",

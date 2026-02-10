@@ -86,7 +86,7 @@
     "title": "Guarda tu progreso"
   },
   "hadith": {
-    "notice": "Esta lista no es exhaustiva. Se incluyen <0>Al-Bujari</0> y <1>Muslim</1>, y pronto habrá más, insha'Allah.",
+    "notice": "Esta lista no es exhaustiva. Se incluyen <0>Al-Bujari</0> y <1>Muslim</1>, y pronto habrá más, inshAllah.",
     "title": "Hadith"
   },
   "hizb-beginning": "Comienzo de Hizb",
@@ -94,6 +94,14 @@
   "info": "información",
   "juz-beginning": "Comienzo del juz",
   "languages": "Idiomas",
+  "layers": {
+    "alternative-translations": "Traducciones alternativas",
+    "close-explanation": "Cerrar Explicación",
+    "contract": "Tafsir del contrato",
+    "expand": "Ampliar Tafsir",
+    "read-explanation": "Leer explicación",
+    "title": "Capas"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "Cuatro historias que cambian la vida: Lecciones de la Sura Al-Kahf (banner del plan de aprendizaje)",
     "banner-image-description": "Ver el plan de aprendizaje de Surah Al-Kahf",

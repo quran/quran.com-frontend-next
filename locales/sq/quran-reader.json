@@ -86,7 +86,7 @@
     "title": "Ruaj progresin tënd"
   },
   "hadith": {
-    "notice": "Kjo listë nuk është shteruese. Përfshihen <0>Al-Buhari</0> dhe <1>Muslimi</1>, dhe së shpejti do të shfaqen edhe të tjera, insha'Allah.",
+    "notice": "Kjo listë nuk është shteruese. Përfshihen <0>Al-Buhari</0> dhe <1>Muslimi</1>, dhe së shpejti do të shfaqen edhe të tjera, inshAllah.",
     "title": "Hadith"
   },
   "hizb-beginning": "Fillimi i Hizbit",
@@ -94,6 +94,14 @@
   "info": "informacion",
   "juz-beginning": "Fillimi i Xhuzit",
   "languages": "Gjuhët",
+  "layers": {
+    "alternative-translations": "Përkthime Alternative",
+    "close-explanation": "Mbyll Shpjegimin",
+    "contract": "Kontrata e Tafsirit",
+    "expand": "Zgjero Tefsirin",
+    "read-explanation": "Lexo Shpjegimin",
+    "title": "Shtresat"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 Histori që të Ndryshojnë Jetën: Mësime nga Surja Al-Kahf, plan mësimor",
     "banner-image-description": "Shikoni planin e të nxënit për Suren El-Kehf",

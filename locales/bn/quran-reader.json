@@ -13,7 +13,7 @@
     "next-verse": "পরবর্তী পদ",
     "next-word": "পরবর্তী শব্দ",
     "open-study-mode": "ওপেন স্টাডি মোড",
-    "previous-related-verse": "পূর্ববর্তী সম্পর্কিত পদ",
+    "previous-related-verse": "আগের সম্পর্কিত আয়াত”",
     "previous-verse": "পূর্ববর্তী পদ",
     "previous-word": "পূর্ববর্তী শব্দ",
     "read-ayah-refls": "আয়াতের প্রতিফলন পড়ুন",
@@ -41,7 +41,7 @@
   "download-copy": "আপনি যদি টেক্সট ফাইল ডাউনলোড করতে চান।",
   "edgham": "ইদগাম",
   "ekhfa": "ইখফা ও ঘুন্না",
-  "embed-widget": "উইজেট এম্বেড করুন",
+  "embed-widget": "উইজেট সংযুক্ত করুন",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "স্ট্রিক ট্র্যাক করুন, কাস্টম লক্ষ্য তৈরি করুন, ধারাবাহিক থাকুন",
     "achieve-quran-goals-responsive": "তোমার কুরআনের লক্ষ্য অর্জন করো",
@@ -86,7 +86,7 @@
     "title": "আপনার অগ্রগতি সংরক্ষণ করুন"
   },
   "hadith": {
-    "notice": "এই তালিকাটি সম্পূর্ণ নয়। <0>আল-বুখারী</0> এবং <1>মুসলিম</1> অন্তর্ভুক্ত করা হয়েছে, আরও শীঘ্রই আসবে, ইনশাআল্লাহ।",
+    "notice": "এই তালিকাটি এখনো সম্পূর্ণ নয়। <0>আল-বুখারি</0> ও <1>মুসলিম</1> অন্তর্ভুক্ত করা হয়েছে, এবং শীঘ্রই আরও যোগ করা হবে, ইনশাআল্লাহ।",
     "title": "হাদিস"
   },
   "hizb-beginning": "হিযবের সূচনা",
@@ -94,6 +94,14 @@
   "info": "তথ্য",
   "juz-beginning": "জুজের শুরু",
   "languages": "ভাষাসমূহ",
+  "layers": {
+    "alternative-translations": "বিকল্প অনুবাদ",
+    "close-explanation": "ব্যাখ্যা বন্ধ করুন",
+    "contract": "চুক্তি তাফসির",
+    "expand": "তাফসির সম্প্রসারণ করুন",
+    "read-explanation": "ব্যাখ্যা পড়ুন",
+    "title": "স্তরসমূহ"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "৪টি জীবন পরিবর্তনকারী গল্প: সূরা আল-কাহফ থেকে শিক্ষা, শেখার পরিকল্পনা ব্যানার",
     "banner-image-description": "সূরা আল-কাহফের শেখার পরিকল্পনা দেখুন",
@@ -191,8 +199,8 @@
   "reflection-not-available": "এই আয়াতের জন্য কোনো পর্যালোচনা করা প্রতিফলন নেই",
   "reflections": "প্রতিফলন",
   "reflections-desc": "সূরা {{surahName}} {{ayahNumber}} এর কুরআনের প্রতিফলন পড়ুন এবং শেয়ার করুন",
-  "related-verses": "সম্পর্কিত আয়াত",
-  "related-verses-desc": "কুরআন সম্পর্কিত আয়াত পড়ুন এবং শেয়ার করুন {{ayahNumber}} সূরার {{surahName}}",
+  "related-verses": "সংশ্লিষ্ট আয়াতসমূহ",
+  "related-verses-desc": "{{ayahNumber}}  সূরার{{surahName}}  \\nআয়াতের সাথে সম্পর্কিত কুরআনের আয়াতগুলো পড়ুন ও শেয়ার করুন।",
   "remove-bookmark": "বুকমার্ক সরান",
   "remove-my-reading-bookmark": "আমার পঠন বুকমার্কটি সরান",
   "remove-pinned-verse": "পদ্যটি সরান {{verseKey}} পিন করা থেকে",
@@ -200,7 +208,7 @@
   "revelation-order-notice": "দ্রষ্টব্য: আপনি ওহীর ক্রম অনুসারে কুরআন নেভিগেট করছেন। ডিফল্ট অর্ডারে ফিরে যেতে <link> এখানে ক্লিক করুন </link> ।",
   "rub-beginning": "রুবেল হিজবের সূচনা",
   "save-bookmark-modal": {
-    "collections-hint": "একাধিক বুকমার্ক সংরক্ষণ করছেন? সংগ্রহ ব্যবহার করুন:"
+    "collections-hint": "একাধিক বুকমার্ক সংরক্ষণ করতে চান? কালেকশন ব্যবহার করুন:"
   },
   "save-page": "পৃষ্ঠা সংরক্ষণ করুন {{pageNumber}}",
   "save-pinned-to-collection": "সংগ্রহে সংরক্ষণ করুন",

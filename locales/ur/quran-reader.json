@@ -94,6 +94,14 @@
   "info": "معلومات",
   "juz-beginning": "پارے کا آغاز",
   "languages": "زبانیں",
+  "layers": {
+    "alternative-translations": "متبادل تراجم",
+    "close-explanation": "وضاحت بند کریں۔",
+    "contract": "معاہدہ تفسیر",
+    "expand": "تفسیر کو وسعت دیں۔",
+    "read-explanation": "وضاحت پڑھیں",
+    "title": "تہیں"
+  },
   "learning-plan-banner-al-kahf": {
     "banner-image-alt-text": "4 زندگی بدل دینے والی کہانیاں: سورہ الکہف لرننگ پلان بینر سے لیے گئے اسباق",
     "banner-image-description": "سورہ کہف کا تعلیمی پلان ملاحظہ کریں",
