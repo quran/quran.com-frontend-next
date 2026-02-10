@@ -16,7 +16,7 @@ $searchIconSize: 13px;
   gap: var(--spacing-small-px);
   flex-direction: column;
   padding: var(--spacing-small-px) 0;
-  :not(:last-child):not(svg) {
+  :not(:last-child):not(svg):not(button) {
     margin-block-end: var(--spacing-xxsmall-px);
   }
 }

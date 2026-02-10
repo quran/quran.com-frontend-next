@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import * as PrimitiveDropdownMenu from '@radix-ui/react-dropdown-menu';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -159,15 +160,17 @@ const CollectionFiltersDropdown: React.FC<CollectionFiltersDropdownProps> = ({
             opts.items.map((item) => {
               const isSelected = opts.selectedSet.has(item.value);
               return (
-                <button
-                  key={item.value}
-                  type="button"
-                  className={classNames(styles.optionRow, isSelected && styles.optionRowSelected)}
-                  onClick={() => opts.onToggle(item.value)}
-                  aria-pressed={isSelected}
-                >
-                  <span className={styles.optionLabel}>{item.label}</span>
-                </button>
+                <PrimitiveDropdownMenu.Item key={item.value} asChild className={styles.optionItem}>
+                  <button
+                    type="button"
+                    key={item.value}
+                    className={classNames(styles.optionRow, isSelected && styles.optionRowSelected)}
+                    onClick={() => opts.onToggle(item.value)}
+                    aria-pressed={isSelected}
+                  >
+                    <span className={styles.optionLabel}>{item.label}</span>
+                  </button>
+                </PrimitiveDropdownMenu.Item>
               );
             })
           )}
