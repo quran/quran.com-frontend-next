@@ -135,8 +135,10 @@ const useWidgetInteractions = (options?: WidgetOptions, widgetRef?: WidgetRootRe
 
   useEffect(() => {
     if (!options) return undefined;
+    const isEmbed =
+      typeof window !== 'undefined' && window.location.pathname.startsWith('/embed/');
 
-    if (!hasLoggedViewRef.current) {
+    if (isEmbed && !hasLoggedViewRef.current) {
       logEvent('embed_widget_view', {
         ayah: options.ayah,
         rangeEnd: options.rangeEnd,
@@ -188,6 +190,7 @@ const useWidgetInteractions = (options?: WidgetOptions, widgetRef?: WidgetRootRe
     });
 
     const logWidgetEvent = (eventName: string, eventParams: Record<string, unknown> = {}) => {
+      if (!isEmbed) return;
       logEvent(eventName, {
         ...buildCommonEventParams(),
         ...eventParams,
