@@ -1,0 +1,110 @@
+@use 'src/styles/breakpoints';
+
+$close-icon-h: var(--spacing-medium3-px);
+$close-icon-w: var(--spacing-medium2-px);
+$modal-padding: var(--spacing-xlarge-px);
+$border-width-default: var(--spacing-hairline-px);
+
+.modal {
+  background-color: var(--color-background-elevated-new);
+
+  > div {
+    padding: $modal-padding !important;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    > div {
+      padding: var(--spacing-medium-px) !important;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  flex-direction: column;
+  gap: var(--spacing-medium2-px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+
+.title {
+  font-size: var(--font-size-large-px);
+  font-style: normal;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-size-large-px);
+  display: flex;
+  align-items: center;
+  color: var(--color-text-faded-new);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: var(--border-radius-rounded);
+  color: var(--color-text-default);
+
+  svg {
+    block-size: $close-icon-h;
+    inline-size: $close-icon-w;
+  }
+}
+
+.divider {
+  inline-size: 100%;
+  border: none;
+  border-block-start: $border-width-default solid var(--color-separators-ayah-level);
+  margin: auto;
+}
+
+.content {
+  margin-block-start: var(--spacing-medium2-px);
+  margin-block-end: var(--spacing-medium2-px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-normal-px);
+}
+
+.subtitle {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-default);
+  text-align: center;
+  margin: 0;
+}
+
+.footer {
+  display: flex;
+  gap: var(--spacing-medium2-px);
+}
+
+.cancelButton {
+  flex: 1;
+  border-radius: var(--border-radius-medium-px);
+  border-width: $border-width-default;
+  border-color: var(--color-separators-ayah-level);
+  font-size: var(--font-size-normal-px);
+}
+
+.deleteButton {
+  flex: 1;
+  background-color: var(--color-error-deep);
+  border-radius: var(--border-radius-medium-px);
+  font-size: var(--font-size-normal-px);
+  border-width: $border-width-default;
+  border-color: var(--color-error-deep);
+}

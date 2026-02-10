@@ -7,7 +7,9 @@
   "collection-name": "စုစည်းမှုအမည်",
   "collections": "စုစည်းမှုများ",
   "delete-bookmark": {
+    "confirmation-subtitle": "မင်းဖျက်ပစ်လိမ့်မယ် {{count}} မှ ပစ္စည်း(များ) {{collectionName}}, သေချာလား?",
     "subtitle": "ဖျက်ချင်တာ သေချာလား {{bookmarkName}} မှ {{collectionName}} စုဆောင်းမှု?",
+    "success": "ဖျက်လိုက်ပါပြီ {{count}} ပစ္စည်း(များ)။",
     "title": "စာညှပ်ကို ဖျက်ပါ"
   },
   "delete-collection-action": "စုစည်းမှုကို ဖျက်ပါ",

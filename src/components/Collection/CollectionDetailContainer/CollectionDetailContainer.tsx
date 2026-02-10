@@ -13,6 +13,7 @@ import Button, { ButtonVariant } from '@/components/dls/Button/Button';
 import backButtonStyles from '@/components/MyQuran/CollectionDetailView/CollectionDetailView.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
+import ShareQuranModal from '@/components/QuranReader/ReadingView/ShareQuranModal';
 import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
@@ -23,7 +24,7 @@ import ChevronLeft from '@/icons/chevron-left.svg';
 import Error from '@/pages/_error';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getLanguageAlternates } from '@/utils/locale';
+import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getCollectionNavigationUrl, ROUTES } from '@/utils/navigation';
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
@@ -39,6 +40,8 @@ type CollectionDetailContainerProps = {
   getSWRKey: (pageIndex, previousData) => string;
   shouldDeleteBookmark?: boolean;
 };
+
+const SINGLE_ITEM_COUNT = 1;
 
 const CollectionDetailContainer = ({
   title,
@@ -57,6 +60,7 @@ const CollectionDetailContainer = ({
 
   // State for managing which bookmark card is expanded
   const [expandedBookmarkId, setExpandedBookmarkId] = useState<Set<string>>(new Set());
+  const [shareVerseKey, setShareVerseKey] = useState<string | null>(null);
 
   const { data, size, setSize, mutate, isValidating, error } =
     useSWRInfinite<GetBookmarkCollectionsIdResponse>(getSWRKey, privateFetcher);
@@ -86,11 +90,27 @@ const CollectionDetailContainer = ({
   const onItemDeleted = (bookmarkId: string) => {
     if (shouldDeleteBookmark) {
       deleteBookmarkById(bookmarkId)
-        .then(() => onUpdated())
+        .then(() => {
+          onUpdated();
+          toast(
+            t('collection:delete-bookmark.success', {
+              count: toLocalizedNumber(SINGLE_ITEM_COUNT, lang),
+            }),
+            { status: ToastStatus.Success },
+          );
+        })
         .catch(() => toast(t('common:error.general'), { status: ToastStatus.Error }));
     } else {
       deleteCollectionBookmarkById(collectionId, bookmarkId)
-        .then(() => onUpdated())
+        .then(() => {
+          onUpdated();
+          toast(
+            t('collection:delete-bookmark.success', {
+              count: toLocalizedNumber(SINGLE_ITEM_COUNT, lang),
+            }),
+            { status: ToastStatus.Success },
+          );
+        })
         .catch(() => toast(t('common:error.general'), { status: ToastStatus.Error }));
     }
   };
@@ -110,6 +130,14 @@ const CollectionDetailContainer = ({
 
   // Check if a specific card is expanded
   const isCardExpanded = (bookmarkId: string) => expandedBookmarkId.has(bookmarkId);
+
+  const handleShareVerse = (verseKey: string) => {
+    setShareVerseKey(verseKey);
+  };
+
+  const handleShareModalClose = () => {
+    setShareVerseKey(null);
+  };
 
   const handleBackClick = () => {
     if (typeof window !== 'undefined' && window.history.length > 1) {
@@ -160,6 +188,7 @@ const CollectionDetailContainer = ({
             title={collectionTitle}
             bookmarks={bookmarks}
             onItemDeleted={onItemDeleted}
+            onShareVerse={handleShareVerse}
             isOwner={isOwner}
             onToggleCardExpansion={onToggleCardExpansion}
             isCardExpanded={isCardExpanded}
@@ -182,6 +211,11 @@ const CollectionDetailContainer = ({
 
       <StudyModeContainer />
       <VerseActionModalContainer />
+      <ShareQuranModal
+        isOpen={!!shareVerseKey}
+        onClose={handleShareModalClose}
+        verse={shareVerseKey ? { verseKey: shareVerseKey } : undefined}
+      />
     </>
   );
 };

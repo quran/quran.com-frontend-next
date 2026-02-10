@@ -1,0 +1,4 @@
+{
+  "description": "Scopri gli Hadith autentici e le narrazioni relative all'Ayah {{ayahNumber}} della Sura {{surahName}}Accedi alle tradizioni accademiche collegate a questo versetto coranico.",
+  "title": "Hadith {{surahName}} - {{ayahNumber}}"
+}

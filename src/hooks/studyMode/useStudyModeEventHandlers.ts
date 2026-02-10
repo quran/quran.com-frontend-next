@@ -20,6 +20,8 @@ interface UseStudyModeEventHandlersProps {
   handlePreviousWord: () => void;
   handleNextWord: () => void;
   handleCloseWordBox: () => void;
+  handleGoBack: () => void;
+  handleGoToVerse: (chapterId: string, verseNumber: string, shouldAddToHistory?: boolean) => void;
   retry: () => void;
 }
 
@@ -36,6 +38,8 @@ const useStudyModeEventHandlers = ({
   handlePreviousWord,
   handleNextWord,
   handleCloseWordBox,
+  handleGoBack,
+  handleGoToVerse,
   retry,
 }: UseStudyModeEventHandlersProps) => {
   const router = useRouter();
@@ -100,6 +104,22 @@ const useStudyModeEventHandlers = ({
     handleCloseWordBox();
   }, [handleCloseWordBox]);
 
+  const onGoBack = useCallback(() => {
+    logButtonClick('study_mode_go_back', { verseKey });
+    handleGoBack();
+  }, [handleGoBack, verseKey]);
+
+  const onGoToVerse = useCallback(
+    (chapterId: string, verseNumber: string, previousVerseKey?: string) => {
+      logButtonClick('study_mode_goto_verse', {
+        verseKey: `${chapterId}:${verseNumber}`,
+        previousVerseKey,
+      });
+      handleGoToVerse(chapterId, verseNumber);
+    },
+    [handleGoToVerse],
+  );
+
   return {
     handlePreviousVerse: onPreviousVerse,
     handleNextVerse: onNextVerse,
@@ -110,6 +130,8 @@ const useStudyModeEventHandlers = ({
     handlePreviousWord: onPreviousWord,
     handleNextWord: onNextWord,
     handleCloseWordBox: onCloseWordBox,
+    handleGoBack: onGoBack,
+    handleGoToVerse: onGoToVerse,
   };
 };
 

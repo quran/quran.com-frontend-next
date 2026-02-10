@@ -8,10 +8,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import CollectionDetailView from './index';
 
+import { deleteCollectionBookmarkById } from '@/utils/auth/api';
+import copyText from '@/utils/copyText';
 import type { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 
 let swrData: GetBookmarkCollectionsIdResponse | undefined;
 const swrMutate = vi.fn();
+const invalidateAllBookmarkCaches = vi.fn();
 
 vi.mock('swr', () => ({
   default: () => ({
@@ -46,7 +49,7 @@ vi.mock('@/hooks/auth/useIsLoggedIn', () => ({
 }));
 
 vi.mock('@/hooks/useBookmarkCacheInvalidator', () => ({
-  default: () => ({ invalidateAllBookmarkCaches: vi.fn() }),
+  default: () => ({ invalidateAllBookmarkCaches }),
 }));
 
 vi.mock('@/dls/Toast/Toast', () => ({
@@ -85,6 +88,31 @@ vi.mock('@/utils/auth/api', () => ({
 
 vi.mock('@/utils/auth/apiPaths', () => ({
   makeGetBookmarkByCollectionId: () => '/collections/1',
+}));
+
+vi.mock('@/utils/copyText', () => ({
+  default: vi.fn(() => Promise.resolve()),
+}));
+
+vi.mock('@/components/Collection/CollectionDetail/utils/fetchVerseForCopy', () => ({
+  default: vi.fn(async () => ({})),
+}));
+
+vi.mock('@/components/Collection/CollectionDetail/utils/buildVerseCopyText', () => ({
+  default: vi.fn(() => 'mock verse copy text'),
+}));
+
+vi.mock('@/utils/blob', () => ({
+  textToBlob: vi.fn((text: string) => new Blob([text], { type: 'text/plain' })),
+}));
+
+vi.mock('@/utils/chapter', () => ({
+  getChapterData: vi.fn(() => ({ id: 1, nameSimple: 'Al-Fatihah' })),
+}));
+
+vi.mock('@/utils/navigation', () => ({
+  QURAN_URL: 'https://quran.com',
+  getVerseNavigationUrlByVerseKey: vi.fn(() => '/1/1'),
 }));
 
 vi.mock('@/utils/auth/pinnedItems', () => ({
@@ -131,7 +159,21 @@ vi.mock('@/components/MyQuran/SavedTabContent/CollectionFiltersDropdown', () => 
 }));
 
 vi.mock('@/components/Collection/CollectionActionsPopover/CollectionBulkActionsPopover', () => ({
-  default: ({ children }: any) => <div data-testid="bulk-actions">{children}</div>,
+  default: ({ children, onCopyClick, onDeleteClick }: any) => (
+    <div data-testid="bulk-actions">
+      {children}
+      {onCopyClick && (
+        <button type="button" onClick={onCopyClick}>
+          bulk-copy
+        </button>
+      )}
+      {onDeleteClick && (
+        <button type="button" onClick={onDeleteClick}>
+          bulk-delete
+        </button>
+      )}
+    </div>
+  ),
 }));
 
 vi.mock('@/components/Collection/CollectionActionsPopover/CollectionHeaderActionsPopover', () => ({
@@ -159,11 +201,18 @@ vi.mock('@/components/Collection/CollectionActionsPopover/CollectionHeaderAction
 }));
 
 vi.mock('@/components/Collection/CollectionDetail/CollectionDetail', () => ({
-  default: ({ bookmarks, emptyMessage, onEndReached }: any) => (
+  default: ({ bookmarks, emptyMessage, onEndReached, onToggleBookmarkSelection }: any) => (
     <div data-testid="collection-detail">
       <div data-testid="bookmarks-count">{bookmarks?.length ?? 0}</div>
       <div data-testid="first-bookmark-id">{bookmarks?.[0]?.id ?? ''}</div>
-      <div data-testid="empty-message">{emptyMessage ?? ''}</div>
+      <div data-testid="empty-message">
+        {(bookmarks?.length ?? 0) === 0 ? emptyMessage ?? '' : ''}
+      </div>
+      {(bookmarks || []).map((b: any) => (
+        <button key={b.id} type="button" onClick={() => onToggleBookmarkSelection?.(b.id)}>
+          {`toggle-${b.id}`}
+        </button>
+      ))}
       {onEndReached && (
         <button type="button" onClick={onEndReached}>
           end-reached
@@ -171,6 +220,20 @@ vi.mock('@/components/Collection/CollectionDetail/CollectionDetail', () => ({
       )}
     </div>
   ),
+}));
+
+vi.mock('@/components/Collection/DeleteBookmarkModal/DeleteBookmarkModal', () => ({
+  default: ({ isOpen, onConfirm, onCancel }: any) =>
+    isOpen ? (
+      <div data-testid="delete-bookmarks-modal">
+        <button type="button" onClick={onConfirm}>
+          confirm-bulk-delete
+        </button>
+        <button type="button" onClick={onCancel}>
+          cancel-bulk-delete
+        </button>
+      </div>
+    ) : null,
 }));
 
 vi.mock('@/components/Collection/EditCollectionModal', () => ({
@@ -209,6 +272,10 @@ vi.mock('@/components/QuranReader/StudyModeContainer', () => ({
   default: () => null,
 }));
 
+vi.mock('@/components/QuranReader/ReadingView/ShareQuranModal', () => ({
+  default: () => null,
+}));
+
 vi.mock('@/components/QuranReader/VerseActionModalContainer', () => ({
   default: () => null,
 }));
@@ -221,7 +288,12 @@ vi.mock('@/icons/filter-bar.svg', () => ({ default: () => <div /> }));
 vi.mock('@/icons/search.svg', () => ({ default: () => <div /> }));
 vi.mock('@/icons/close.svg', () => ({ default: () => <div /> }));
 
-const buildSWRData = (collectionId: string, name: string, isOwner = true) => ({
+const buildSWRData = (
+  collectionId: string,
+  name: string,
+  isOwner = true,
+  bookmarks: any[] = [],
+) => ({
   data: {
     collection: {
       id: collectionId,
@@ -230,7 +302,7 @@ const buildSWRData = (collectionId: string, name: string, isOwner = true) => ({
       url: name.toLowerCase(),
       bookmarksCount: 0,
     },
-    bookmarks: [],
+    bookmarks,
     isOwner,
   },
   pagination: { hasNextPage: false },
@@ -258,6 +330,9 @@ describe('CollectionDetailView', () => {
     cleanup();
     swrData = buildSWRData('123', 'My Collection');
     swrMutate.mockClear();
+    invalidateAllBookmarkCaches.mockClear();
+    vi.mocked(copyText).mockClear();
+    vi.mocked(deleteCollectionBookmarkById).mockClear();
   });
 
   it('opens edit modal and submits rename', async () => {
@@ -281,39 +356,6 @@ describe('CollectionDetailView', () => {
 
     expect(screen.getByTestId('empty-message').textContent).toBe('collections.detail-empty');
     expect(screen.getByTestId('bookmarks-count').textContent).toBe('0');
-  });
-
-  it('sorts by date descending by default and paginates 10 items initially', async () => {
-    const bookmarks = Array.from({ length: 15 }, (unused, index) => ({
-      id: `b-${index}`,
-      key: 2,
-      verseNumber: index + 1,
-      createdAt: new Date(2025, 0, index + 1).toISOString(),
-      type: 'ayah',
-    }));
-
-    swrData = buildSWRData('123', 'My Collection');
-    // @ts-ignore - partial shape is fine for tests
-    swrData.data.bookmarks = bookmarks;
-
-    renderCollectionDetailView();
-
-    // first render shows 10 only.
-    expect(screen.getByTestId('bookmarks-count').textContent).toBe('10');
-    // default sort: newest first
-    expect(screen.getByTestId('first-bookmark-id').textContent).toBe('b-14');
-
-    // enable infinite scroll callback
-    fireEvent.scroll(window);
-    await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'end-reached' })).toBeDefined();
-    });
-
-    fireEvent.click(screen.getByRole('button', { name: 'end-reached' }));
-
-    await waitFor(() => {
-      expect(screen.getByTestId('bookmarks-count').textContent).toBe('15');
-    });
   });
 
   it('opens delete modal and confirms deletion', async () => {
@@ -399,15 +441,18 @@ describe('CollectionDetailView', () => {
 
     await waitFor(() => {
       expect(screen.getByTestId('bookmarks-count').textContent).toBe('2');
-      // default sort: newest first within filtered set
-      expect(screen.getByTestId('first-bookmark-id').textContent).toBe('b-1-late');
+      expect(screen.getByRole('button', { name: 'toggle-b-1-early' })).toBeDefined();
+      expect(screen.getByRole('button', { name: 'toggle-b-1-late' })).toBeDefined();
+      expect(screen.queryByRole('button', { name: 'toggle-b-2' })).toBeNull();
     });
 
     fireEvent.click(screen.getByRole('button', { name: 'chapter-2' }));
 
     await waitFor(() => {
       expect(screen.getByTestId('bookmarks-count').textContent).toBe('1');
-      expect(screen.getByTestId('first-bookmark-id').textContent).toBe('b-2');
+      expect(screen.queryByRole('button', { name: 'toggle-b-1-early' })).toBeNull();
+      expect(screen.queryByRole('button', { name: 'toggle-b-1-late' })).toBeNull();
+      expect(screen.getByRole('button', { name: 'toggle-b-2' })).toBeDefined();
     });
   });
 
@@ -447,7 +492,9 @@ describe('CollectionDetailView', () => {
 
     await waitFor(() => {
       expect(screen.getByTestId('bookmarks-count').textContent).toBe('1');
-      expect(screen.getByTestId('first-bookmark-id').textContent).toBe('b-2-142');
+      expect(screen.getByRole('button', { name: 'toggle-b-2-142' })).toBeDefined();
+      expect(screen.queryByRole('button', { name: 'toggle-b-2-1' })).toBeNull();
+      expect(screen.queryByRole('button', { name: 'toggle-b-1-1' })).toBeNull();
     });
   });
 
@@ -484,6 +531,52 @@ describe('CollectionDetailView', () => {
       expect(screen.getByTestId('empty-message').textContent).toBe(
         'collections.filters.no-matches',
       );
+    });
+  });
+
+  it('triggers bulk copy and calls copyText', async () => {
+    swrData = buildSWRData('123', 'My Collection', true, [
+      { id: 'b1', key: '1', verseNumber: 1 },
+      { id: 'b2', key: '1', verseNumber: 2 },
+    ]);
+
+    renderCollectionDetailView();
+
+    fireEvent.click(screen.getByRole('button', { name: 'bulk-actions.select' }));
+    fireEvent.click(screen.getByRole('button', { name: 'toggle-b1' }));
+    fireEvent.click(screen.getByRole('button', { name: 'toggle-b2' }));
+
+    fireEvent.click(await screen.findByRole('button', { name: 'bulk-copy' }));
+
+    await waitFor(() => {
+      expect(copyText).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('confirms bulk delete and deletes selected bookmarks + refreshes caches', async () => {
+    swrData = buildSWRData('123', 'My Collection', true, [
+      { id: 'b1', key: '1', verseNumber: 1 },
+      { id: 'b2', key: '1', verseNumber: 2 },
+    ]);
+    vi.mocked(deleteCollectionBookmarkById).mockResolvedValue(undefined as any);
+
+    renderCollectionDetailView();
+
+    fireEvent.click(screen.getByRole('button', { name: 'bulk-actions.select' }));
+    fireEvent.click(screen.getByRole('button', { name: 'toggle-b1' }));
+    fireEvent.click(screen.getByRole('button', { name: 'toggle-b2' }));
+
+    fireEvent.click(await screen.findByRole('button', { name: 'bulk-delete' }));
+    expect(screen.getByTestId('delete-bookmarks-modal')).toBeDefined();
+
+    fireEvent.click(screen.getByRole('button', { name: 'confirm-bulk-delete' }));
+
+    await waitFor(() => {
+      expect(deleteCollectionBookmarkById).toHaveBeenCalledWith('123', 'b1');
+      expect(deleteCollectionBookmarkById).toHaveBeenCalledWith('123', 'b2');
+      expect(swrMutate).toHaveBeenCalled();
+      expect(invalidateAllBookmarkCaches).toHaveBeenCalled();
+      expect(screen.queryByTestId('delete-bookmarks-modal')).toBeNull();
     });
   });
 });

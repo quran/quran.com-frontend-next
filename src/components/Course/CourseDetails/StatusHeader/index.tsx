@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
-import CompletedStatus from '@/components/Course/CompletedStatus';
 import Button from '@/dls/Button/Button';
 import { useToast, ToastStatus } from '@/dls/Toast/Toast';
 import { Course } from '@/types/auth/Course';
@@ -25,7 +24,7 @@ type Props = {
 };
 
 const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
-  const { id, isUserEnrolled, slug, isCompleted, lessons, allowGuestAccess } = course;
+  const { id, isUserEnrolled, slug, lessons, allowGuestAccess } = course;
   const router = useRouter();
   const { t } = useTranslation('learn');
   const toast = useToast();
@@ -89,9 +88,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
     }
     return renderStartHereButton();
   }
-  if (isCompleted) {
-    return <CompletedStatus course={course} />;
-  }
+
   if (isUserEnrolled) {
     return <StartOrContinueLearning course={course} />;
   }
