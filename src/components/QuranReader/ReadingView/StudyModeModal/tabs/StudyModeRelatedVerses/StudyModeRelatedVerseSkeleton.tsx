@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import styles from './RelatedVerses.module.scss';
+import styles from './StudyModeRelatedVerses.module.scss';
 
 import Skeleton from '@/dls/Skeleton/Skeleton';
 
-const RelatedVerseSkeleton = () => {
+const StudyModeRelatedVerseSkeleton = () => {
   return (
     <div className={styles.skeletonContainer}>
       <Skeleton className={styles.skeleton} />
@@ -13,4 +13,4 @@ const RelatedVerseSkeleton = () => {
   );
 };
 
-export default RelatedVerseSkeleton;
+export default StudyModeRelatedVerseSkeleton;

@@ -250,6 +250,14 @@ export const getVerseRelatedVersesNavigationUrl = (verseKey: string): string =>
 export const getVerseQiraatNavigationUrl = (verseKey: string): string => `/${verseKey}/qiraat`;
 
 /**
+ * Get the href link to Hadith of Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseHadithsNavigationUrl = (verseKey: string): string => `/${verseKey}/hadith`;
+
+/**
  * Get the href link to Layers of Ayah.
  *
  * @param {string} verseKey

@@ -98,6 +98,24 @@ const getVersesWithQiraat = async () => {
     .map(([key]) => key);
 };
 
+const getVersesWithHadiths = async () => {
+  const hadithURL = `${API_CONTENT_URL}${QDC_PREFIX}/hadith_references/count_within_range?from=1:1&to=114:6&language=en`;
+  const { signature, timestamp } = generateSignature(hadithURL);
+
+  const res = await fetch(hadithURL, {
+    headers: {
+      'x-auth-signature': signature,
+      'x-timestamp': timestamp,
+      'x-internal-client': process.env.INTERNAL_CLIENT_ID,
+    },
+  });
+
+  const data = await res.json();
+  return Object.entries(data)
+    .filter(([, count]) => count > 0)
+    .map(([key]) => key);
+};
+
 const getVersesWithLayeredTranslations = async () => {
   const layeredTranslationsURL = `${API_CONTENT_URL}${QDC_PREFIX}/layered_translations/count_within_range?from=1:1&to=114:6`;
   const { signature, timestamp } = generateSignature(layeredTranslationsURL);
@@ -290,7 +308,14 @@ module.exports = {
           result.push({ loc: location, alternateRefs: getAlternateRefs('', false, '', location) });
         });
 
-        // 14. /verseKey for verses that have Layered Translations
+        // 14. /verseKey for verses that have Hadith references
+        const versesWithHadiths = await getVersesWithHadiths();
+        versesWithHadiths.forEach((verseKey) => {
+          const location = `${verseKey}/hadith`;
+          result.push({ loc: location, alternateRefs: getAlternateRefs('', false, '', location) });
+        });
+
+        // 15. /verseKey for verses that have Layered Translations
         const versesWithLayeredTranslations = await getVersesWithLayeredTranslations();
         versesWithLayeredTranslations.forEach((verseKey) => {
           const location = `${verseKey}/layers`;

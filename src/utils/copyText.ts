@@ -19,15 +19,25 @@ import clipboardCopy from 'clipboard-copy';
  */
 const copyText = async (textBlobPromise: Promise<Blob>) => {
   try {
-    // Try to copy with promise value (works in safari)
+    // Try to copy with promise value (works in Safari when invoked from a user gesture).
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    navigator.clipboard.write([new ClipboardItem({ 'text/plain': textBlobPromise })]);
+    if (
+      typeof navigator !== 'undefined' &&
+      navigator?.clipboard?.write &&
+      typeof ClipboardItem !== 'undefined'
+    ) {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      await navigator.clipboard.write([new ClipboardItem({ 'text/plain': textBlobPromise })]);
+      return;
+    }
   } catch (e) {
-    // otherwise fallback to use clipboardCopy library
-    const blob = await textBlobPromise;
-    const text = await blob.text();
-    await clipboardCopy(text);
+    // fall through to the fallback below
   }
+
+  // Fallback to use clipboardCopy library (execCommand-based).
+  const blob = await textBlobPromise;
+  const text = await blob.text();
+  await clipboardCopy(text);
 };
 
 export default copyText;

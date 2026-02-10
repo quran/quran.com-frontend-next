@@ -16,6 +16,7 @@ export enum TabId {
   LESSONS = 'lessons',
   ANSWERS = 'answers',
   QIRAAT = 'qiraat',
+  HADITH = 'hadith',
   RELATED_VERSES = 'related-verses',
 }
 

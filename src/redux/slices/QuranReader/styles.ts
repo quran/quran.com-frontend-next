@@ -80,6 +80,8 @@ export const quranReaderStylesSlice = createSlice({
     }),
     increaseQnaFontScale: (state) => ({ ...state, qnaFontScale: state.qnaFontScale + 1 }),
     decreaseQnaFontScale: (state) => ({ ...state, qnaFontScale: state.qnaFontScale - 1 }),
+    increaseHadithFontScale: (state) => ({ ...state, hadithFontScale: state.hadithFontScale + 1 }),
+    decreaseHadithFontScale: (state) => ({ ...state, hadithFontScale: state.hadithFontScale - 1 }),
     increaseSurahInfoFontScale: (state) => ({
       ...state,
       surahInfoFontScale: state.surahInfoFontScale + 1,
@@ -170,6 +172,8 @@ export const {
   decreaseQnaFontScale,
   increaseSurahInfoFontScale,
   decreaseSurahInfoFontScale,
+  increaseHadithFontScale,
+  decreaseHadithFontScale,
   increaseLayersFontScale,
   decreaseLayersFontScale,
   setMushafLines,

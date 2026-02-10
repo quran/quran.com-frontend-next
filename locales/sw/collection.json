@@ -7,25 +7,27 @@
   "collection-name": "Jina la mkusanyiko",
   "collections": "Mikusanyiko",
   "delete-bookmark": {
+    "confirmation-subtitle": "Utafuta {{count}} bidhaa(vipengee) kutoka {{collectionName}}Una uhakika?",
     "subtitle": "Je, una uhakika unataka kufuta {{bookmarkName}} kutoka kwenye mkusanyiko wa {{collectionName}}?",
+    "success": "Imefutwa {{count}} kipengee(vipengee).",
     "title": "Futa alamisho"
   },
   "delete-collection-action": "Futa Mkusanyiko",
   "delete-collection-success": "Mkusanyiko umefutwa kwa mafanikio",
   "delete-collection": {
-    "description": "Utapoteza mistari yote iliyohifadhiwa ndani ya mkusanyiko huu.",
+    "description": "Utapoteza aya zote zilizohifadhiwa ndani ya mkusanyiko huu.",
     "subtitle": "Je, una uhakika unataka kufuta mkusanyiko {{collectionName}}?",
     "subtitle-tagged": "Una uhakika unataka kufuta <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Futa mkusanyiko"
   },
   "edit-collection": "Hariri Mkusanyiko",
-  "edit-collection-name-required": "Ingiza jina la mkusanyiko ili uhifadhi.",
+  "edit-collection-name-required": "Andika jina la mkusanyiko kuhifadhi.",
   "edit-collection-success": "Mkusanyiko umesasishwa kwa mafanikio",
   "empty": "Mkusanyiko ni tupu",
   "expand-all": "Panua aya zote",
   "go-to-ayah": "Nenda kwa aya",
   "load-more": "Pakia Zaidi",
-  "no-collections": "Bado huna mikusanyiko yoyote",
+  "no-collections": "Huna mikusanyiko yoyote kwa sasa",
   "recently-added": "Iliyoongezwa hivi karibuni",
   "recently-updated": "Imesasishwa hivi karibuni",
   "verse-key": "Sura na Nambari ya Aya"

@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import useBatchedCountRangeHadiths from '@/hooks/auth/useBatchedCountRangeHadiths';
 import useBatchedCountRangeLayeredTranslations from '@/hooks/auth/useBatchedCountRangeLayeredTranslations';
 import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
+import HadithIcon from '@/icons/bx-book.svg';
 import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LayerIcon from '@/icons/layer.svg';
@@ -24,6 +26,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import {
   fakeNavigate,
   getVerseAnswersNavigationUrl,
+  getVerseHadithsNavigationUrl,
   getVerseLessonNavigationUrl,
   getVerseLayersNavigationUrl,
   getVerseQiraatNavigationUrl,
@@ -84,6 +87,10 @@ const BottomActions = ({
   const { data: layersCount } = useBatchedCountRangeLayeredTranslations(verseKey);
   const hasLayersData = (layersCount ?? 0) > 0;
 
+  // Use backend hadith count to check if hadiths exist for this verse
+  const { data: hadithCount } = useBatchedCountRangeHadiths(verseKey);
+  const hasHadiths = (hadithCount ?? 0) > 0;
+
   const createTabHandler = (tabType: TabId, navigationFn: () => string) => {
     return () => {
       const tabIdMap: Record<TabId, StudyModeTabId> = {
@@ -94,6 +101,7 @@ const BottomActions = ({
         [TabId.RELATED_VERSES]: StudyModeTabId.RELATED_VERSES,
         [TabId.ANSWERS]: StudyModeTabId.ANSWERS,
         [TabId.QIRAAT]: StudyModeTabId.QIRAAT,
+        [TabId.HADITH]: StudyModeTabId.HADITH,
       };
 
       const studyModeTab = tabIdMap[tabType];
@@ -156,6 +164,13 @@ const BottomActions = ({
       icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: createTabHandler(TabId.QIRAAT, () => getVerseQiraatNavigationUrl(verseKey)),
       condition: hasQiraatData,
+    },
+    {
+      id: TabId.HADITH,
+      label: t('quran-reader:hadith.title'),
+      icon: <HadithIcon color="var(--color-blue-buttons-and-icons)" />,
+      onClick: createTabHandler(TabId.HADITH, () => getVerseHadithsNavigationUrl(verseKey)),
+      condition: hasHadiths,
     },
     {
       id: TabId.RELATED_VERSES,

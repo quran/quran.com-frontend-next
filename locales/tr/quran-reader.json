@@ -13,6 +13,7 @@
     "next-verse": "Sonraki ayet",
     "next-word": "Sonraki kelime",
     "open-study-mode": "Açık çalışma modu",
+    "previous-related-verse": "Önceki ilgili ayet",
     "previous-verse": "Önceki ayet",
     "previous-word": "Önceki kelime",
     "read-ayah-refls": "Ayetin Yansımalarını Okuyun",
@@ -85,6 +86,7 @@
     "title": "İlerlemenizi Kaydedin"
   },
   "hadith": {
+    "notice": "Bu liste kapsamlı değildir. <0>Buhari</0> ve <1>Müslim</1> de dahil edilmiştir ve inşallah yakında daha fazlası eklenecektir.",
     "title": "Hadis"
   },
   "hizb-beginning": "Hizb'in Başlangıcı",

@@ -98,6 +98,7 @@
       "notes",
       "surah-info"
     ],
+    "/[chapterId]/hadith": ["quran-reader", "reading-goal", "notes", "surah-info", "hadith"],
     "/my-quran": ["my-quran", "notes", "collection", "quran-reader"],
     "/embed": ["embed"],
     "/embed/v1": ["embed"]

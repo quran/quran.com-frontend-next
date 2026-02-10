@@ -114,6 +114,15 @@ $icon-size: var(--spacing-medium2-px);
   gap: var(--spacing-xxsmall);
 }
 
+.collectionRadio {
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+  border: var(--spacing-micro-px) solid var(--color-borders-hairline);
+  border-radius: 50%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
 .defaultLabel {
   font-size: var(--font-size-xsmall);
   color: var(--color-text-faded);

@@ -13,6 +13,7 @@
     "next-verse": "Volgende couplet",
     "next-word": "Volgend woord",
     "open-study-mode": "Open studiemodus",
+    "previous-related-verse": "Vorig verwant vers",
     "previous-verse": "Vorig vers",
     "previous-word": "Vorig woord",
     "read-ayah-refls": "Lees Ayah Reflecties",
@@ -85,6 +86,7 @@
     "title": "Sla je voortgang op"
   },
   "hadith": {
+    "notice": "Deze lijst is niet volledig. <0>Al-Bukhari</0> en <1>Muslim</1> zijn opgenomen, en er zullen er binnenkort meer volgen, insha'Allah.",
     "title": "Hadith"
   },
   "hizb-beginning": "Begin van Hizb",

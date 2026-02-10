@@ -13,6 +13,7 @@
     "next-verse": "Aya unaofuata",
     "next-word": "Neno linalofuata",
     "open-study-mode": "Fungua hali ya kujifunza",
+    "previous-related-verse": "Mstari uliotangulia unaohusiana",
     "previous-verse": "Aya iliotangulia",
     "previous-word": "Neno lililotangulia",
     "read-ayah-refls": "Soma Tafakari za Aya",
@@ -85,6 +86,7 @@
     "title": "Hifadhi Maendeleo Yako"
   },
   "hadith": {
+    "notice": "Orodha hii si kamili. <0>Al-Bukhari</0> na <1>Muslim</1> wamejumuishwa, na wengine wanakuja hivi karibuni, InshaAllah.",
     "title": "Hadithi"
   },
   "hizb-beginning": "Mwanzo wa Hizb",

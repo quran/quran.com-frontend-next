@@ -7,7 +7,9 @@
   "collection-name": "نام مجموعه",
   "collections": "مجموعه ها",
   "delete-bookmark": {
+    "confirmation-subtitle": "حذف خواهید کرد. {{count}} مورد(ها) از {{collectionName}}، مطمئنی؟",
     "subtitle": "آیا مطمئنید که می‌خواهید {{bookmarkName}} از {{collectionName}} حذف کنید؟",
+    "success": "حذف شده {{count}} مورد(ها).",
     "title": "حذف نشانک"
   },
   "delete-collection-action": "حذف مجموعه",

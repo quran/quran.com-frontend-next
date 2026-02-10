@@ -13,6 +13,7 @@
     "next-verse": "Vargu tjetër",
     "next-word": "Fjala tjetër",
     "open-study-mode": "Modaliteti i studimit i hapur",
+    "previous-related-verse": "Vargu i mëparshëm i lidhur",
     "previous-verse": "Vargu i mëparshëm",
     "previous-word": "Fjala e mëparshme",
     "read-ayah-refls": "Lexoni Reflektime të Ajetit",
@@ -85,6 +86,7 @@
     "title": "Ruaj progresin tënd"
   },
   "hadith": {
+    "notice": "Kjo listë nuk është shteruese. Përfshihen <0>Al-Buhari</0> dhe <1>Muslimi</1>, dhe së shpejti do të shfaqen edhe të tjera, insha'Allah.",
     "title": "Hadith"
   },
   "hizb-beginning": "Fillimi i Hizbit",
