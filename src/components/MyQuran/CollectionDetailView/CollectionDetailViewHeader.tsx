@@ -11,7 +11,7 @@ import { toLocalizedNumber } from '@/utils/locale';
 
 interface CollectionDetailViewHeaderProps {
   collectionName: string;
-  totalCount: number;
+  totalCount: number | null;
   lang: string;
   t: TranslateFn;
   onBack: () => void;
@@ -36,6 +36,15 @@ const CollectionDetailViewHeader: React.FC<CollectionDetailViewHeaderProps> = ({
   onEditClick,
   onDeleteClick,
 }) => {
+  let countLabel: React.ReactNode;
+  if (totalCount === null) {
+    countLabel = t('common:loading');
+  } else if (totalCount === 1) {
+    countLabel = t('collections.items', { count: toLocalizedNumber(totalCount, lang) });
+  } else {
+    countLabel = t('collections.items_plural', { count: toLocalizedNumber(totalCount, lang) });
+  }
+
   return (
     <div className={styles.header}>
       <Button onClick={onBack} variant={ButtonVariant.Ghost} className={styles.backButton}>
@@ -43,11 +52,7 @@ const CollectionDetailViewHeader: React.FC<CollectionDetailViewHeaderProps> = ({
         <span>{collectionName}</span>
       </Button>
       <div className={styles.badgeContainer}>
-        <span className={styles.badge}>
-          {totalCount === 1
-            ? t('collections.items', { count: toLocalizedNumber(totalCount, lang) })
-            : t('collections.items_plural', { count: toLocalizedNumber(totalCount, lang) })}
-        </span>
+        <span className={styles.badge}>{countLabel}</span>
         <CollectionHeaderActionsPopover
           onNoteClick={onNoteClick}
           onPinVersesClick={onPinVersesClick}

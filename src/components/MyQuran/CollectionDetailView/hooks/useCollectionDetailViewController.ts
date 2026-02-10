@@ -111,10 +111,12 @@ const useCollectionDetailViewController = ({
   );
 
   const isOwner = dataState.data?.data?.isOwner ?? false;
-  const totalCount = useMemo(
-    () => dataState.data?.data?.collection?.count ?? dataState.bookmarks.length ?? 0,
-    [dataState.data, dataState.bookmarks.length],
-  );
+  const totalCount = useMemo(() => {
+    const serverCount = dataState.data?.data?.collection?.count;
+    if (typeof serverCount === 'number') return serverCount;
+    if (dataState.isFetchingAll) return null;
+    return dataState.bookmarks.length ?? 0;
+  }, [dataState.data, dataState.isFetchingAll, dataState.bookmarks.length]);
 
   return {
     t,

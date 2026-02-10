@@ -13,7 +13,7 @@ export interface CollectionDetailViewLayoutProps {
   numericCollectionId: string;
   sortBy: CollectionDetailSortOption;
   onSortByChange: (newSortBy: CollectionDetailSortOption) => void;
-  totalCount: number;
+  totalCount: number | null;
   isOwner: boolean;
   filteredBookmarks: Bookmark[];
   onItemDeleted: (bookmarkId: string) => void;
