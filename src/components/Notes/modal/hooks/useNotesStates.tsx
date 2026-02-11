@@ -2,42 +2,46 @@ import { useCallback, useEffect, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import {
+  MAX_NOTE_LENGTH,
+  MIN_NOTE_LENGTH,
+  NoteFormError,
+  NoteFormErrorId,
+  NoteFormErrors,
+} from '@/components/Notes/modal/validation';
 import { logErrorToSentry } from '@/lib/sentry';
 import { toLocalizedNumber } from '@/utils/locale';
 
-const MIN_NOTE_LENGTH = 6;
-const MAX_NOTE_LENGTH = 10000;
+export type OnSaveNote = (config: {
+  note: string;
+  isPublic: boolean;
+}) => Promise<void | NoteFormErrors | null>;
 
 export enum LoadingState {
   Public = 'public',
   Private = 'private',
 }
 
-interface ValidationError {
-  id: string;
-  message: string;
-}
-
 export const useNotesStates = (
   initialNote: string,
-  onSaveNote: ({ note, isPublic }: { note: string; isPublic: boolean }) => Promise<void>,
+  onSaveNote: OnSaveNote,
   onMyNotes?: () => void,
   isModalOpen?: boolean,
 ) => {
   const { t, lang } = useTranslation();
 
   const [noteInput, setNoteInput] = useState(initialNote);
-  const [errors, setErrors] = useState<Record<string, ValidationError>>({});
+  const [errors, setErrors] = useState<Record<string, NoteFormError>>({});
   const [loading, setLoading] = useState<LoadingState | null>(null);
 
-  const setNoteError = useCallback((id: string, message: string) => {
+  const setNoteError = useCallback((id: NoteFormErrorId, message: string) => {
     setErrors((prevErrors) => ({ ...prevErrors, note: { id, message } }));
   }, []);
 
   const validateNoteInput = useCallback((): boolean => {
     if (!noteInput) {
       setNoteError(
-        'required-field',
+        NoteFormErrorId.RequiredField,
         t('common:validation.required-field', { field: t('notes:note') }),
       );
 
@@ -46,7 +50,7 @@ export const useNotesStates = (
 
     if (noteInput.length < MIN_NOTE_LENGTH) {
       setNoteError(
-        'minimum-length',
+        NoteFormErrorId.MinimumLength,
         t('common:validation.minimum-length', {
           field: t('notes:note'),
           value: toLocalizedNumber(MIN_NOTE_LENGTH, lang),
@@ -58,7 +62,7 @@ export const useNotesStates = (
 
     if (noteInput.length > MAX_NOTE_LENGTH) {
       setNoteError(
-        'maximum-length',
+        NoteFormErrorId.MaximumLength,
         t('common:validation.maximum-length', {
           field: t('notes:note'),
           value: toLocalizedNumber(MAX_NOTE_LENGTH, lang),
@@ -77,9 +81,13 @@ export const useNotesStates = (
 
       try {
         setLoading(isPublic ? LoadingState.Public : LoadingState.Private);
-        await onSaveNote({ note: noteInput, isPublic });
-        setNoteInput('');
-        onMyNotes?.();
+        const noteFormErrors = await onSaveNote({ note: noteInput, isPublic });
+        if (noteFormErrors && Object.keys(noteFormErrors).length > 0) {
+          setErrors(noteFormErrors);
+        } else {
+          setNoteInput('');
+          onMyNotes?.();
+        }
       } catch (error) {
         logErrorToSentry(error, {
           transactionName: isPublic ? 'notes.post-to-qr' : 'notes.save-privately',
@@ -114,6 +122,7 @@ export const useNotesStates = (
     noteInput,
     errors,
     loading,
+    setErrors,
     validateNoteInput,
     onNoteInputChange,
     onPrivateSave,

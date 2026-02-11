@@ -5,6 +5,7 @@ import { useSWRConfig } from 'swr';
 
 import { LOADING_POST_ID } from '@/components/Notes/modal/constant';
 import Header from '@/components/Notes/modal/Header';
+import type { OnSaveNote } from '@/components/Notes/modal/hooks/useNotesStates';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
   getNoteFromResponse,
@@ -13,6 +14,7 @@ import {
   CacheAction,
   addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
+import { getNoteServerErrors, isSuccess } from '@/components/Notes/modal/validation';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { Note } from '@/types/auth/Note';
@@ -39,19 +41,14 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
   flushNotesList = false,
 }) => {
   const chaptersData = useContext(DataContext);
-  const { t } = useTranslation('notes');
+  const { t, lang } = useTranslation('notes');
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
 
-  const handleSaveNote = async ({
-    note: noteBody,
-    isPublic,
-  }: {
-    note: string;
-    isPublic: boolean;
-  }) => {
+  const handleSaveNote: OnSaveNote = async ({ note: noteBody, isPublic }) => {
     try {
       const data = await updateNote(note.id, noteBody, isPublic);
+      if (!isSuccess(data)) return getNoteServerErrors(data, t, lang);
 
       const isFailedToPublish = isNotePublishFailed(data);
       const noteFromResponse = getNoteFromResponse(data);
@@ -77,6 +74,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
       });
 
       onSuccess?.({ note: noteFromResponse, isPublished: isPublic && !isFailedToPublish });
+      return null;
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
       throw error;

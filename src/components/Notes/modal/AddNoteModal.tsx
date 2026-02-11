@@ -5,6 +5,7 @@ import { useSWRConfig } from 'swr';
 
 import { LOADING_POST_ID } from '@/components/Notes/modal/constant';
 import Header from '@/components/Notes/modal/Header';
+import { OnSaveNote } from '@/components/Notes/modal/hooks/useNotesStates';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
   CacheAction,
@@ -13,6 +14,7 @@ import {
   isNotePublishFailed,
   addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
+import { getNoteServerErrors, isSuccess } from '@/components/Notes/modal/validation';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { addNote } from '@/utils/auth/api';
 import { verseKeysToRanges } from '@/utils/verseKeys';
@@ -36,7 +38,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
   onMyNotes,
   onBack,
 }) => {
-  const { t } = useTranslation('notes');
+  const { t, lang } = useTranslation('notes');
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
 
@@ -54,13 +56,10 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
     return verseKeysToRanges(verseKeys);
   }, [verseKeys]);
 
-  const handleSaveNote = async ({ note, isPublic }: { note: string; isPublic: boolean }) => {
+  const handleSaveNote: OnSaveNote = async ({ note, isPublic }) => {
     try {
-      const data = await addNote({
-        body: note,
-        ranges,
-        saveToQR: isPublic,
-      });
+      const data = await addNote({ body: note, ranges, saveToQR: isPublic });
+      if (!isSuccess(data)) return getNoteServerErrors(data, t, lang);
 
       const isFailedToPublish = isNotePublishFailed(data);
       const noteFromResponse = getNoteFromResponse(data);
@@ -84,6 +83,8 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
         flushNotesList: true,
         action: CacheAction.CREATE,
       });
+
+      return null;
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
       throw error;
