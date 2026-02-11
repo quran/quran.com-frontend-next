@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import React, { useCallback, useEffect, useRef } from 'react';
 
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AdvancedCopyModal from './AdvancedCopyModal';
@@ -17,6 +18,7 @@ import {
 } from '@/redux/slices/QuranReader/studyMode';
 import {
   closeVerseActionModal,
+  openBookmarkModal,
   selectVerseActionModalEditingNote,
   selectVerseActionModalIsOpen,
   selectVerseActionModalIsTranslationView,
@@ -32,11 +34,15 @@ import {
   VerseActionModalType,
 } from '@/redux/slices/QuranReader/verseActionModal';
 import { Note } from '@/types/auth/Note';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
+import { consumePendingBookmarkModalRestore } from '@/utils/pendingBookmarkModalRestore';
 
 const VerseActionModalContainer: React.FC = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const hasClosedStudyModeRef = useRef(false);
+  const hasCheckedPendingRestoreRef = useRef(false);
 
   const isOpen = useSelector(selectVerseActionModalIsOpen);
   const modalType = useSelector(selectVerseActionModalType);
@@ -51,6 +57,25 @@ const VerseActionModalContainer: React.FC = () => {
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
 
   const { data: notesCount } = useBatchedCountRangeNotes(isOpen && verseKey ? verseKey : null);
+
+  useEffect(() => {
+    if (hasCheckedPendingRestoreRef.current) return;
+    if (!router.isReady) return;
+    if (isOpen) return;
+    if (!isLoggedIn()) return;
+
+    hasCheckedPendingRestoreRef.current = true;
+
+    const pendingRestore = consumePendingBookmarkModalRestore(router.asPath);
+    if (!pendingRestore) return;
+
+    dispatch(
+      openBookmarkModal({
+        verseKey: pendingRestore.verseKey,
+        verse: pendingRestore.verse,
+      }),
+    );
+  }, [dispatch, isOpen, router.asPath, router.isReady]);
 
   useEffect(() => {
     if (isOpen && wasOpenedFromStudyMode && !hasClosedStudyModeRef.current) {

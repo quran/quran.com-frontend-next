@@ -27,7 +27,12 @@ import {
   toLocalizedVerseKey,
   toLocalizedVerseKeyRTL,
 } from '@/utils/locale';
-import { getChapterWithStartingVerseUrl, getPageNavigationUrl } from '@/utils/navigation';
+import {
+  getChapterWithStartingVerseUrl,
+  getLoginNavigationUrl,
+  getPageNavigationUrl,
+} from '@/utils/navigation';
+import { setPendingBookmarkModalRestore } from '@/utils/pendingBookmarkModalRestore';
 
 interface UseSaveBookmarkModalOptions {
   type: ReadingBookmarkType;
@@ -276,10 +281,18 @@ const useSaveBookmarkModal = ({
     const redirectUrl = isVerse
       ? getChapterWithStartingVerseUrl(`${verse.chapterId}:${verse.verseNumber}`)
       : getPageNavigationUrl(pageNumber);
-    router.push(`/login?r=${encodeURIComponent(redirectUrl)}`);
+    if (isVerse && verse) {
+      setPendingBookmarkModalRestore({
+        verse,
+        verseKey,
+        redirectUrl,
+      });
+    }
+
+    router.push(getLoginNavigationUrl(redirectUrl));
 
     onClose();
-  }, [isVerse, verse, pageNumber, onClose, router]);
+  }, [isVerse, verse, verseKey, pageNumber, onClose, router]);
 
   const isDataReady =
     isPage ||

@@ -8,6 +8,7 @@ import useSaveBookmarkModal from './useSaveBookmarkModal';
 
 import { ReadingBookmarkType } from '@/types/Bookmark';
 import { toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
+import { clearPendingBookmarkModalRestore } from '@/utils/pendingBookmarkModalRestore';
 
 let mockLang = 'en';
 
@@ -72,6 +73,7 @@ vi.mock('@/utils/auth/login', () => ({ isLoggedIn: () => false }));
 
 beforeEach(() => {
   mockLang = 'en';
+  clearPendingBookmarkModalRestore();
 });
 
 const HookProbe: React.FC<{
@@ -104,7 +106,15 @@ describe('useSaveBookmarkModal guest sign-in', () => {
     expect(router.push).toHaveBeenCalled();
     const arg = (router.push as any).mock.calls.pop()[0] as string;
     expect(arg).toMatch(/\/login\?r=/);
-    expect(decodeURIComponent(arg.split('=')[1])).toMatch(/\/2\?startingVerse=255/);
+    const redirectUrl = decodeURIComponent(arg.slice(arg.indexOf('=') + 1));
+    expect(redirectUrl).toMatch(/\/2\?startingVerse=255/);
+
+    const pendingRestore = window.sessionStorage.getItem('pending-bookmark-modal-restore');
+    expect(pendingRestore).toBeTruthy();
+
+    const parsedPendingRestore = JSON.parse(pendingRestore as string);
+    expect(parsedPendingRestore.verseKey).toBe('2:255');
+    expect(parsedPendingRestore.redirectUrl).toBe('/2?startingVerse=255');
   });
 
   it('pushes login redirect for page', async () => {
@@ -118,6 +128,7 @@ describe('useSaveBookmarkModal guest sign-in', () => {
     const arg = (router.push as any).mock.calls.pop()[0] as string;
     expect(arg).toMatch(/\/login\?r=/);
     expect(decodeURIComponent(arg.split('=')[1])).toMatch(/\/page\/5/);
+    expect(window.sessionStorage.getItem('pending-bookmark-modal-restore')).toBeNull();
     unmount();
   });
 });

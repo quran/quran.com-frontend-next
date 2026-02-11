@@ -1,0 +1,119 @@
+import React from 'react';
+
+import { render, waitFor } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import VerseActionModalContainer from '.';
+
+const mockDispatch = vi.fn();
+let mockState: any;
+let mockRouter = {
+  isReady: true,
+  asPath: '/2?startingVerse=255',
+};
+const mockConsumePendingRestore = vi.fn();
+const mockIsLoggedIn = vi.fn();
+
+vi.mock('react-redux', () => ({
+  useDispatch: () => mockDispatch,
+  useSelector: (selector: any) => selector(mockState),
+}));
+
+vi.mock('next/router', () => ({
+  useRouter: () => mockRouter,
+}));
+
+vi.mock('@/hooks/auth/useBatchedCountRangeNotes', () => ({
+  default: () => ({ data: 0 }),
+}));
+
+vi.mock('@/utils/auth/login', () => ({
+  isLoggedIn: () => mockIsLoggedIn(),
+}));
+
+vi.mock('@/utils/pendingBookmarkModalRestore', () => ({
+  consumePendingBookmarkModalRestore: (...args: unknown[]) => mockConsumePendingRestore(...args),
+}));
+
+vi.mock('./AdvancedCopyModal', () => ({ default: () => null }));
+vi.mock('./BookmarkModal', () => ({ default: () => null }));
+vi.mock('./FeedbackModal', () => ({ default: () => null }));
+vi.mock('./NotesModals', () => ({ default: () => null }));
+vi.mock('./ReaderBioModal', () => ({ default: () => null }));
+
+const createDefaultState = () => ({
+  verseActionModal: {
+    isOpen: false,
+    modalType: null,
+    verseKey: null,
+    verse: null,
+    editingNote: null,
+    isTranslationView: false,
+    bookmarksRangeUrl: '',
+    wasOpenedFromStudyMode: false,
+    studyModeRestoreState: null,
+    readerBioReader: null,
+    previousModalType: null,
+  },
+  studyMode: {
+    isOpen: false,
+    isSsrMode: false,
+    verseKey: null,
+    activeTab: null,
+    highlightedWordLocation: null,
+    previousState: null,
+    showPinnedSection: false,
+  },
+});
+
+describe('VerseActionModalContainer bookmark restore', () => {
+  beforeEach(() => {
+    mockDispatch.mockReset();
+    mockConsumePendingRestore.mockReset();
+    mockIsLoggedIn.mockReset();
+    mockRouter = {
+      isReady: true,
+      asPath: '/2?startingVerse=255',
+    };
+    mockState = createDefaultState();
+  });
+
+  it('opens bookmark modal from pending restore payload for logged in users', async () => {
+    mockIsLoggedIn.mockReturnValue(true);
+    mockConsumePendingRestore.mockReturnValue({
+      verseKey: '2:255',
+      verse: {
+        chapterId: 2,
+        verseNumber: 255,
+        verseKey: '2:255',
+      },
+      redirectUrl: '/2?startingVerse=255',
+      createdAt: Date.now(),
+    });
+
+    render(<VerseActionModalContainer />);
+
+    await waitFor(() => {
+      expect(mockConsumePendingRestore).toHaveBeenCalledWith('/2?startingVerse=255');
+      expect(mockDispatch).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'verseActionModal/openBookmarkModal',
+          payload: expect.objectContaining({
+            verseKey: '2:255',
+          }),
+        }),
+      );
+    });
+  });
+
+  it('does not attempt restore when user is not logged in', async () => {
+    mockIsLoggedIn.mockReturnValue(false);
+
+    render(<VerseActionModalContainer />);
+
+    await waitFor(() => {
+      expect(mockConsumePendingRestore).not.toHaveBeenCalled();
+      expect(mockDispatch).not.toHaveBeenCalled();
+    });
+  });
+});
