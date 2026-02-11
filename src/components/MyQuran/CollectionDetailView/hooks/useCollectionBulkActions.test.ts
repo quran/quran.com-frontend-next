@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { renderHook, act } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -113,6 +114,69 @@ describe('useCollectionBulkActions', () => {
     });
 
     expect(toast).toHaveBeenCalledWith('common:error.general', { status: ToastStatus.Error });
+  });
+
+  it('copy all calls copyText with filtered bookmarks and shows success toast', async () => {
+    const toast = vi.fn();
+    const filteredBookmarks = [
+      { id: 'b1', key: '1', verseNumber: 1 },
+      { id: 'b2', key: '1', verseNumber: 2 },
+    ] as any;
+    vi.mocked(buildBulkCopyBlobPromise).mockResolvedValue(new Blob(['x']) as any);
+    vi.mocked(copyText).mockResolvedValue(undefined as any);
+
+    const { result } = renderHook(() =>
+      useCollectionBulkActions({
+        chaptersData,
+        lang,
+        t: t as any,
+        toast: toast as any,
+        numericCollectionId: '123',
+        filteredBookmarks,
+        selectedBookmarks: new Set(),
+        selectedTranslations,
+        onUpdated: vi.fn(),
+        removeBookmarkIdsFromState: vi.fn(),
+      }),
+    );
+
+    await act(async () => {
+      await result.current.handleCopyAllClick();
+    });
+
+    expect(buildBulkCopyBlobPromise).toHaveBeenCalledTimes(1);
+    expect(buildBulkCopyBlobPromise).toHaveBeenCalledWith(
+      expect.objectContaining({ selectedBookmarks: filteredBookmarks }),
+    );
+    expect(copyText).toHaveBeenCalledWith(expect.any(Promise));
+    expect(toast).toHaveBeenCalledWith('common:copied!', { status: ToastStatus.Success });
+  });
+
+  it('copy all is a no-op when filtered bookmarks are empty', async () => {
+    const toast = vi.fn();
+
+    const { result } = renderHook(() =>
+      useCollectionBulkActions({
+        chaptersData,
+        lang,
+        t: t as any,
+        toast: toast as any,
+        numericCollectionId: '123',
+        filteredBookmarks: [],
+        selectedBookmarks: new Set(['b1']),
+        selectedTranslations,
+        onUpdated: vi.fn(),
+        removeBookmarkIdsFromState: vi.fn(),
+      }),
+    );
+
+    await act(async () => {
+      await result.current.handleCopyAllClick();
+    });
+
+    expect(buildBulkCopyBlobPromise).not.toHaveBeenCalled();
+    expect(copyText).not.toHaveBeenCalled();
+    expect(toast).not.toHaveBeenCalled();
   });
 
   it('bulk delete confirm removes deleted ids and keeps failed ids pending', async () => {
