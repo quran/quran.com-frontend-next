@@ -44,6 +44,8 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   const { data, isLoading, error, hasData, refetch } = useLayeredTranslationData(verseKey);
   const scaleClass = styles[`layers-font-size-${quranReaderStyles.layersFontScale}`];
 
+  const isExpandable = data?.expandedTemplate?.trim() !== data?.collapsedTemplate?.trim();
+
   const [layerMode, setLayerMode] = useState<LayerMode>(LayerMode.Collapsed);
   const [selectedOptionByGroup, setSelectedOptionByGroup] = useState<Record<string, string>>({});
   const [activeGroupKey, setActiveGroupKey] = useState<string | null>(null);
@@ -190,7 +192,11 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
 
   return (
     <div className={classNames(styles.container, scaleClass)}>
-      <LayerControls layerMode={layerMode} setLayerMode={setLayerMode} />
+      <LayerControls
+        layerMode={layerMode}
+        setLayerMode={setLayerMode}
+        isExpandable={isExpandable}
+      />
 
       {data.resource.description && (
         <div>
