@@ -46,6 +46,7 @@
     "achieve-quran-goals-desktop": "تتبع سلسلة الإنجازات، أنشئ أهدافًا مخصصة، حافظ على الاستمرارية",
     "achieve-quran-goals-responsive": "حقق أهدافك القرآنية",
     "beginning-of-surah": "اقرأ مرة أخرى",
+    "cta": "تابع القراءة",
     "day-streak": "سلسلة الأيام",
     "days-streak": "سلسلة الأيام",
     "explore": "استكشف",
@@ -96,7 +97,7 @@
   "languages": "اللغات",
   "layers": {
     "alternative-translations": "ترجمات بديلة",
-    "close-explanation": "شرح مفصل",
+    "close-explanation": "إغلاق الشرح",
     "contract": "تفسير العقود",
     "expand": "توسيع التفسير",
     "read-explanation": "اقرأ الشرح",
