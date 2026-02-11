@@ -39,6 +39,7 @@ const SavedTabContent: React.FC = () => {
   const [isSubmittingCollection, setIsSubmittingCollection] = useState(false);
   const [selectedCollection, setSelectedCollection] = useState<CollectionItem | null>(null);
 
+  const onCloseNewCollectionModal = useCallback(() => setIsNewCollectionModalOpen(false), []);
   const onNewCollectionClick = useCallback(() => setIsNewCollectionModalOpen(true), []);
   const onCollectionClick = useCallback((c: CollectionItem) => {
     setSearchQuery('');
@@ -152,15 +153,20 @@ const SavedTabContent: React.FC = () => {
         </>
       )}
 
-      <Modal isOpen={isNewCollectionModalOpen} onClose={() => setIsNewCollectionModalOpen(false)}>
+      <Modal
+        isOpen={isNewCollectionModalOpen}
+        onClose={onCloseNewCollectionModal}
+        onClickOutside={onCloseNewCollectionModal}
+        onEscapeKeyDown={onCloseNewCollectionModal}
+      >
         <NewCollectionForm
           newCollectionName={newCollectionName}
           isSubmittingCollection={isSubmittingCollection}
           onNameChange={setNewCollectionName}
-          onBack={() => setIsNewCollectionModalOpen(false)}
-          onCancel={() => setIsNewCollectionModalOpen(false)}
+          onBack={onCloseNewCollectionModal}
+          onCancel={onCloseNewCollectionModal}
           onCreate={onNewCollectionCreated}
-          onClose={() => setIsNewCollectionModalOpen(false)}
+          onClose={onCloseNewCollectionModal}
         />
       </Modal>
     </div>
