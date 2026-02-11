@@ -57,7 +57,7 @@ const SaveToCollectionModal = ({
     logButtonClick('save_to_collection_modal_submit');
     onNewCollectionCreated(trimmedCollectionName)
       .then(() => {
-        onClose();
+        onClose?.();
         toast(t('quran-reader:saved-to', { collectionName: trimmedCollectionName }), {
           status: ToastStatus.Success,
         });
