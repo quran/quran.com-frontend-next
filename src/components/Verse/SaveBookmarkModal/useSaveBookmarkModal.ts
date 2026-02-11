@@ -291,7 +291,11 @@ const useSaveBookmarkModal = ({
 
     if (isVerse && verse) {
       setPendingBookmarkModalRestore({
-        verse,
+        verse: {
+          chapterId: verse.chapterId,
+          verseNumber: verse.verseNumber,
+          verseKey: verse.verseKey,
+        },
         verseKey,
         redirectUrl,
       });

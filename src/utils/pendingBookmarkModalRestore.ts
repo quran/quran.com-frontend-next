@@ -4,8 +4,10 @@ import QueryParam from 'types/QueryParam';
 const STORAGE_KEY = 'pending-bookmark-modal-restore';
 const MAX_PENDING_AGE_MS = 30 * 60 * 1000; // 30 minutes
 
+export type PendingBookmarkModalVerse = Pick<Verse, 'chapterId' | 'verseNumber' | 'verseKey'>;
+
 export interface PendingBookmarkModalRestorePayload {
-  verse: Verse;
+  verse: PendingBookmarkModalVerse;
   verseKey: string;
   redirectUrl: string;
   createdAt: number;
@@ -45,11 +47,7 @@ const doesCurrentPathMatchRedirect = (currentPath: string, redirectUrl: string):
   const currentPathname = normalizePathname(current.pathname);
   const currentPathWithoutLocale = normalizePathname(stripLocalePrefix(currentPathname));
 
-  if (
-    currentPathname !== expectedPath &&
-    currentPathWithoutLocale !== expectedPath &&
-    !currentPathname.endsWith(expectedPath)
-  ) {
+  if (currentPathname !== expectedPath && currentPathWithoutLocale !== expectedPath) {
     return false;
   }
 
@@ -59,11 +57,14 @@ const doesCurrentPathMatchRedirect = (currentPath: string, redirectUrl: string):
   return current.searchParams.get(QueryParam.STARTING_VERSE) === expectedStartingVerse;
 };
 
-const hasValidVerseData = (verse: Partial<Verse> | null | undefined): verse is Verse => {
+const isValidVerse = (
+  verse: Partial<PendingBookmarkModalVerse> | null | undefined,
+): verse is PendingBookmarkModalVerse => {
   if (!verse) return false;
   if (!verse.chapterId) return false;
   if (!Number.isFinite(Number(verse.verseNumber))) return false;
-  if (!verse.verseKey) return false;
+  if (!verse.verseKey || typeof verse.verseKey !== 'string') return false;
+
   return true;
 };
 
@@ -71,7 +72,7 @@ const isValidPayload = (
   payload: Partial<PendingBookmarkModalRestorePayload> | null | undefined,
 ): payload is PendingBookmarkModalRestorePayload => {
   if (!payload) return false;
-  if (!hasValidVerseData(payload.verse)) return false;
+  if (!isValidVerse(payload.verse)) return false;
   if (!payload.verseKey || typeof payload.verseKey !== 'string') return false;
   if (!payload.redirectUrl || typeof payload.redirectUrl !== 'string') return false;
   if (!Number.isFinite(payload.createdAt)) return false;

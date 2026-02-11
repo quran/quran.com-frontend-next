@@ -67,6 +67,19 @@ describe('pendingBookmarkModalRestore', () => {
     expect(window.sessionStorage.getItem(STORAGE_KEY)).toBeTruthy();
   });
 
+  it('does not consume when path only matches by suffix', () => {
+    setPendingBookmarkModalRestore({
+      verse: createVerse(),
+      verseKey: '2:255',
+      redirectUrl: '/2?startingVerse=255',
+    });
+
+    const consumedPayload = consumePendingBookmarkModalRestore('/page/2?startingVerse=255');
+
+    expect(consumedPayload).toBeNull();
+    expect(window.sessionStorage.getItem(STORAGE_KEY)).toBeTruthy();
+  });
+
   it('clears payload when it is older than max allowed age', () => {
     const now = new Date('2026-02-11T00:00:00.000Z').getTime();
     vi.spyOn(Date, 'now').mockReturnValue(now);
@@ -100,7 +113,7 @@ describe('pendingBookmarkModalRestore', () => {
     window.sessionStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({
-        verse: { chapterId: 2, verseKey: '2:255' },
+        verse: { chapterId: 2, verseNumber: 255 },
         verseKey: '2:255',
         redirectUrl: '/2?startingVerse=255',
         createdAt: Date.now(),

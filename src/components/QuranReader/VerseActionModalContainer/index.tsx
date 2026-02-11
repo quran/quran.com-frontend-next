@@ -34,6 +34,7 @@ import {
   VerseActionModalType,
 } from '@/redux/slices/QuranReader/verseActionModal';
 import { Note } from '@/types/auth/Note';
+import Verse from '@/types/Verse';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import { consumePendingBookmarkModalRestore } from '@/utils/pendingBookmarkModalRestore';
@@ -68,7 +69,7 @@ const VerseActionModalContainer: React.FC = () => {
     dispatch(
       openBookmarkModal({
         verseKey: pendingRestore.verseKey,
-        verse: pendingRestore.verse,
+        verse: pendingRestore.verse as Verse,
       }),
     );
   }, [dispatch, isOpen, router.asPath, router.isReady]);
