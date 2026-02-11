@@ -87,7 +87,7 @@
     "title": "İlerlemenizi Kaydedin"
   },
   "hadith": {
-    "notice": "Bu liste kapsamlı değildir. <0>Buhari</0> ve <1>Müslim</1> de dahil edilmiştir ve inşallah yakında daha fazlası eklenecektir.",
+    "notice": "Sadece Kur'an ayetlerine açıkça atıfta bulunan hadisler dahil edilmiştir ve bu seçki kapsamlı değildir. Rivayetler, Sunnah.com aracılığıyla alıntılanan <0>Sahih el-Buhari</0> ve <1>Sahih Müslim</1>'den seçilen ayetlerle eşleşecek şekilde derlenmiştir.",
     "title": "Hadis"
   },
   "hizb-beginning": "Hizb'in Başlangıcı",
