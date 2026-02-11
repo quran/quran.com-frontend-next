@@ -57,7 +57,7 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   const chapterName = isRTLLocale(lang)
     ? chapterData?.nameArabic || chapterData?.transliteratedName
     : chapterData?.transliteratedName;
-  const bookmarkName = `${chapterName} ${localizedVerseKey}`;
+  const bookmarkName = `${chapterName ?? ''} ${localizedVerseKey}`;
 
   const formattedDate = createdAt ? dateToMonthDayYearFormat(createdAt, lang) : null;
 
