@@ -95,7 +95,7 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
     navigateToLesson(course.slug, nextLessonSlug);
   };
 
-  const shouldShowAddFeedbackButton = course?.userHasFeedback !== true;
+  const shouldShowAddFeedbackButton = isLast && course?.userHasFeedback !== true;
 
   return (
     <>
