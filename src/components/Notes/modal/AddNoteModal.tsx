@@ -5,7 +5,7 @@ import { useSWRConfig } from 'swr';
 
 import { LOADING_POST_ID } from '@/components/Notes/modal/constant';
 import Header from '@/components/Notes/modal/Header';
-import { OnSaveNote } from '@/components/Notes/modal/hooks/useNotesStates';
+import type { OnSaveNote } from '@/components/Notes/modal/hooks/useNotesStates';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
   CacheAction,
