@@ -84,14 +84,24 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
 
   const sortOptions = [
     {
-      id: CollectionDetailSortOption.RecentlyAdded,
-      label: t('collection:recently-added'),
+      id: CollectionDetailSortOption.DateDesc,
+      label: t('collection:date-desc'),
       direction: ArrowDirection.Down,
     },
     {
-      id: CollectionDetailSortOption.VerseKey,
-      label: t('collection:verse-key'),
+      id: CollectionDetailSortOption.DateAsc,
+      label: t('collection:date-asc'),
       direction: ArrowDirection.Up,
+    },
+    {
+      id: CollectionDetailSortOption.QuranicOrderAsc,
+      label: t('collection:quranic-asc'),
+      direction: ArrowDirection.Up,
+    },
+    {
+      id: CollectionDetailSortOption.QuranicOrderDesc,
+      label: t('collection:quranic-desc'),
+      direction: ArrowDirection.Down,
     },
   ];
 

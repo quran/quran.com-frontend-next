@@ -84,8 +84,27 @@ describe('useCollectionDetailData', () => {
       data: {
         collection: { id: '123', name: 'Test', url: 'test', updatedAt: '' },
         bookmarks: [
-          { id: 'b1', key: 1, verseNumber: 1, type: BookmarkType.Ayah },
-          { id: 'b2', key: 2, verseNumber: 10, type: BookmarkType.Ayah },
+          {
+            id: 'b1',
+            key: 1,
+            verseNumber: 1,
+            type: BookmarkType.Ayah,
+            createdAt: '2024-01-01T00:00:00.000Z',
+          },
+          {
+            id: 'b2',
+            key: 2,
+            verseNumber: 10,
+            type: BookmarkType.Ayah,
+            createdAt: '2024-01-02T00:00:00.000Z',
+          },
+          {
+            id: 'b3',
+            key: 114,
+            verseNumber: 6,
+            type: BookmarkType.Ayah,
+            createdAt: '2023-12-31T00:00:00.000Z',
+          },
         ],
         isOwner: true,
       },
@@ -111,69 +130,22 @@ describe('useCollectionDetailData', () => {
     expect(makeGetBookmarkByCollectionId).toHaveBeenCalledWith(
       '123',
       expect.objectContaining({
+        sortBy: CollectionDetailSortOption.VerseKey,
         limit: expect.any(Number),
       }),
     );
     expect(privateFetcher).toBeDefined();
   });
 
-  it('filters bookmarks by searchQuery', () => {
-    const { result, rerender } = renderHook(
-      (props: UseCollectionDetailDataParams) => useCollectionDetailData(props),
-      {
-        initialProps: {
-          collectionId: 'my-collection-123',
-          searchQuery: '2:10',
-          invalidateAllBookmarkCaches: vi.fn(),
-        },
-      },
+  it('defaults sortBy to DateDesc', () => {
+    const { result } = renderHook(() =>
+      useCollectionDetailData({
+        collectionId: 'my-collection-123',
+        invalidateAllBookmarkCaches: vi.fn(),
+      }),
     );
 
-    expect(result.current.filteredBookmarks.map((b: Bookmark) => b.id)).toEqual(['b2']);
-
-    rerender({
-      collectionId: 'my-collection-123',
-      searchQuery: '1:1',
-      invalidateAllBookmarkCaches: vi.fn(),
-    });
-    expect(result.current.filteredBookmarks.map((b: Bookmark) => b.id)).toEqual(['b1']);
-  });
-
-  it('filters bookmarks by selectedChapterIds', () => {
-    const { result } = renderHook((props: any) => useCollectionDetailData(props), {
-      initialProps: {
-        collectionId: 'my-collection-123',
-        selectedChapterIds: ['2'],
-        invalidateAllBookmarkCaches: vi.fn(),
-      },
-    });
-
-    expect(result.current.filteredBookmarks.map((b: any) => b.id)).toEqual(['b2']);
-  });
-
-  it('filters bookmarks by selectedJuzNumbers', () => {
-    const { result } = renderHook((props: any) => useCollectionDetailData(props), {
-      initialProps: {
-        collectionId: 'my-collection-123',
-        selectedJuzNumbers: ['1'],
-        invalidateAllBookmarkCaches: vi.fn(),
-      },
-    });
-
-    expect(result.current.filteredBookmarks.map((b: any) => b.id)).toEqual(['b1']);
-  });
-
-  it('ORs chapter and juz filters when both are active', () => {
-    const { result } = renderHook((props: any) => useCollectionDetailData(props), {
-      initialProps: {
-        collectionId: 'my-collection-123',
-        selectedChapterIds: ['2'], // matches b2
-        selectedJuzNumbers: ['1'], // matches b1
-        invalidateAllBookmarkCaches: vi.fn(),
-      },
-    });
-
-    expect(result.current.filteredBookmarks.map((b: any) => b.id).sort()).toEqual(['b1', 'b2']);
+    expect(result.current.sortBy).toBe(CollectionDetailSortOption.DateDesc);
   });
 
   it('onSortByChange logs value change and updates sortBy', () => {
@@ -186,16 +158,16 @@ describe('useCollectionDetailData', () => {
     );
 
     const prev = result.current.sortBy;
-    act(() => result.current.onSortByChange(CollectionDetailSortOption.RecentlyAdded));
+    act(() => result.current.onSortByChange(CollectionDetailSortOption.DateAsc));
     expect(logValueChange).toHaveBeenCalledWith(
       'collection_detail_page_sort_by',
       prev,
-      CollectionDetailSortOption.RecentlyAdded,
+      CollectionDetailSortOption.DateAsc,
     );
-    expect(result.current.sortBy).toBe(CollectionDetailSortOption.RecentlyAdded);
+    expect(result.current.sortBy).toBe(CollectionDetailSortOption.DateAsc);
   });
 
-  it('should reset pagination when sort changes', async () => {
+  it('does not refetch when UI sort changes', async () => {
     const { result } = renderHook(() =>
       useCollectionDetailData({
         collectionId: 'my-collection-123',
@@ -217,18 +189,10 @@ describe('useCollectionDetailData', () => {
       );
     });
 
-    act(() => result.current.onSortByChange(CollectionDetailSortOption.RecentlyAdded));
-
-    // After a sort change, the hook must never request the new sort with the old cursor.
-    await waitFor(() => {
-      const { calls } = vi.mocked(makeGetBookmarkByCollectionId).mock;
-      const recentlyAddedCalls = calls.filter(
-        ([, params]) => (params as any)?.sortBy === CollectionDetailSortOption.RecentlyAdded,
-      );
-      expect(recentlyAddedCalls.length).toBeGreaterThan(0);
-      const lastParams = recentlyAddedCalls[recentlyAddedCalls.length - 1]?.[1] as any;
-      expect('cursor' in lastParams).toBe(false);
-    });
+    const callsBeforeSort = vi.mocked(makeGetBookmarkByCollectionId).mock.calls.length;
+    act(() => result.current.onSortByChange(CollectionDetailSortOption.DateAsc));
+    const callsAfterSort = vi.mocked(makeGetBookmarkByCollectionId).mock.calls.length;
+    expect(callsAfterSort).toBe(callsBeforeSort);
   });
 
   it('should expose pagination information', () => {
