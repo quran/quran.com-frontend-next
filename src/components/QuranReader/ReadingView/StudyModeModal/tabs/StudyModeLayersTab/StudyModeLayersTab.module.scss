@@ -340,7 +340,7 @@ $font-scale-15: 0.9375; // 16px * 0.9375 = 15px
 }
 
 .footnoteContainer {
-  --font-size-large: calc(var(--layers-base-font-size) * 1); // base 3 => 17.5px
+  --font-size-large: var(--layers-base-font-size); // base 3 => 16px
   --font-size-normal: calc(var(--layers-base-font-size) * #{$font-scale-14}); // base 3 => 14px
   --font-size-xsmall: calc(var(--layers-base-font-size) * #{$font-scale-10}); // base 3 => 10px
   font-size: var(--font-size-normal);
