@@ -66,7 +66,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
 
       if (isFailedToPublish) {
         toast(t('notes:save-publish-failed'), { status: ToastStatus.Error });
-      } else if (!isNotSuccess && noteFromResponse?.id.toString() && noteFromResponse?.updatedAt) {
+      } else if (!isNotSuccess && noteFromResponse?.id.toString() && noteFromResponse?.createdAt) {
         toast(t('notes:save-success'), { status: ToastStatus.Success });
       } else {
         return getNoteServerErrors(data, t, lang);
