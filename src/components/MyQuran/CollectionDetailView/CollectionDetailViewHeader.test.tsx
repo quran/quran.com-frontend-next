@@ -14,7 +14,14 @@ vi.mock('@/icons/chevron-left.svg', () => ({ default: () => <span>chev</span> })
 vi.mock('@/icons/menu_more_horiz.svg', () => ({ default: () => <span>more</span> }));
 
 vi.mock('@/components/Collection/CollectionActionsPopover/CollectionHeaderActionsPopover', () => ({
-  default: ({ children, onEditClick, onDeleteClick, onPinVersesClick, onNoteClick }: any) => (
+  default: ({
+    children,
+    onEditClick,
+    onDeleteClick,
+    onCopyClick,
+    onPinVersesClick,
+    onNoteClick,
+  }: any) => (
     <div data-testid="header-actions">
       {children}
       {onEditClick && (
@@ -25,6 +32,11 @@ vi.mock('@/components/Collection/CollectionActionsPopover/CollectionHeaderAction
       {onDeleteClick && (
         <button type="button" onClick={onDeleteClick}>
           delete
+        </button>
+      )}
+      {onCopyClick && (
+        <button type="button" onClick={onCopyClick}>
+          copy
         </button>
       )}
       <button type="button" onClick={onPinVersesClick}>
@@ -54,6 +66,7 @@ describe('CollectionDetailViewHeader', () => {
         lang="en"
         t={t as any}
         onBack={vi.fn()}
+        onCopyClick={vi.fn()}
         onNoteClick={vi.fn()}
         onPinVersesClick={vi.fn()}
         onEditClick={vi.fn()}
@@ -70,6 +83,7 @@ describe('CollectionDetailViewHeader', () => {
         lang="en"
         t={t as any}
         onBack={vi.fn()}
+        onCopyClick={vi.fn()}
         onNoteClick={vi.fn()}
         onPinVersesClick={vi.fn()}
         onEditClick={vi.fn()}
@@ -89,6 +103,7 @@ describe('CollectionDetailViewHeader', () => {
         lang="en"
         t={t as any}
         onBack={onBack}
+        onCopyClick={vi.fn()}
         onNoteClick={vi.fn()}
         onPinVersesClick={vi.fn()}
         onEditClick={vi.fn()}
@@ -109,6 +124,7 @@ describe('CollectionDetailViewHeader', () => {
         t={t as any}
         onBack={vi.fn()}
         isDefault
+        onCopyClick={vi.fn()}
         onNoteClick={vi.fn()}
         onPinVersesClick={vi.fn()}
         onEditClick={vi.fn()}

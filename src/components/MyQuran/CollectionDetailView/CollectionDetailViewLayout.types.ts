@@ -30,6 +30,7 @@ export interface CollectionDetailViewLayoutProps {
   onToggleCardExpansion: (bookmarkId: string) => void;
   isCardExpanded: (bookmarkId: string) => boolean;
   isBookmarkSelected: (bookmarkId: string) => boolean;
+  onHeaderCopyClick: () => void;
   onHeaderNoteClick: () => void;
   onHeaderPinAllClick: () => void;
   onHeaderEditClick: () => void;

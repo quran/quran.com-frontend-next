@@ -112,6 +112,7 @@ describe('CollectionDetailViewLayout', () => {
         onToggleCardExpansion={vi.fn()}
         isCardExpanded={vi.fn(() => false)}
         isBookmarkSelected={vi.fn(() => false)}
+        onHeaderCopyClick={vi.fn()}
         onHeaderNoteClick={vi.fn()}
         onHeaderPinAllClick={vi.fn()}
         onHeaderEditClick={vi.fn()}

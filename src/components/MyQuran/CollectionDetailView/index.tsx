@@ -81,6 +81,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       onToggleCardExpansion={controller.handleToggleCardExpansion}
       isCardExpanded={controller.isCardExpanded}
       isBookmarkSelected={controller.isBookmarkSelected}
+      onHeaderCopyClick={controller.handleCopyAllClick}
       onHeaderNoteClick={controller.handleNoteClick}
       onHeaderPinAllClick={controller.handlePinAllVerses}
       onHeaderEditClick={controller.handleEditClick}

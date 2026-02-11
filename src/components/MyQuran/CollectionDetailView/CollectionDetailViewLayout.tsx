@@ -42,6 +42,7 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
   onToggleCardExpansion,
   isCardExpanded,
   isBookmarkSelected,
+  onHeaderCopyClick,
   onHeaderNoteClick,
   onHeaderPinAllClick,
   onHeaderEditClick,
@@ -155,6 +156,7 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
         onBack={onBack}
         isDefault={isDefault}
         isFetchingAll={isFetchingAll}
+        onCopyClick={onHeaderCopyClick}
         onNoteClick={onHeaderNoteClick}
         onPinVersesClick={onHeaderPinAllClick}
         onEditClick={onHeaderEditClick}

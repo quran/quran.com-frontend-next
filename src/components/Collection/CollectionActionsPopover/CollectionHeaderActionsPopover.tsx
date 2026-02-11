@@ -7,12 +7,14 @@ import styles from './CollectionActionsPopover.module.scss';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu, { PopoverMenuAlign } from '@/dls/PopoverMenu/PopoverMenu';
 import EditIcon from '@/icons/bx-edit-alt.svg';
+import CopyIcon from '@/icons/copy.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 import PinIcon from '@/icons/pin.svg';
 import TrashIcon from '@/icons/trash.svg';
 
 type CollectionHeaderActionsPopoverProps = {
   children: React.ReactNode;
+  onCopyClick?: () => void;
   onNoteClick: () => void;
   onPinVersesClick: () => void;
   onEditClick?: () => void;
@@ -24,6 +26,7 @@ type CollectionHeaderActionsPopoverProps = {
 
 const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverProps> = ({
   children,
+  onCopyClick,
   onNoteClick,
   onPinVersesClick,
   onEditClick,
@@ -68,6 +71,23 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
             icon={<TrashIcon />}
           />
           <span className={styles.menuItemText}>{t('collection:delete-collection-action')}</span>
+        </PopoverMenu.Item>
+      )}
+      {onCopyClick && (
+        <PopoverMenu.Item
+          onClick={onCopyClick}
+          shouldCloseMenuAfterClick
+          isDisabled={isDisabledAllActions}
+          dataTestId={`${dataTestPrefix}-copy`}
+          className={styles.menuItem}
+        >
+          <IconContainer
+            className={styles.iconWrapper}
+            size={IconSize.Custom}
+            shouldForceSetColors={false}
+            icon={<CopyIcon />}
+          />
+          <span className={styles.menuItemText}>{t('common:copy')}</span>
         </PopoverMenu.Item>
       )}
       <PopoverMenu.Item

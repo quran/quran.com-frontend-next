@@ -17,6 +17,7 @@ interface CollectionDetailViewHeaderProps {
   onBack: () => void;
   isDefault?: boolean;
   isFetchingAll?: boolean;
+  onCopyClick: () => void;
   onNoteClick: () => void;
   onPinVersesClick: () => void;
   onEditClick: () => void;
@@ -31,6 +32,7 @@ const CollectionDetailViewHeader: React.FC<CollectionDetailViewHeaderProps> = ({
   onBack,
   isDefault,
   isFetchingAll,
+  onCopyClick,
   onNoteClick,
   onPinVersesClick,
   onEditClick,
@@ -54,6 +56,7 @@ const CollectionDetailViewHeader: React.FC<CollectionDetailViewHeaderProps> = ({
       <div className={styles.badgeContainer}>
         <span className={styles.badge}>{countLabel}</span>
         <CollectionHeaderActionsPopover
+          onCopyClick={onCopyClick}
           onNoteClick={onNoteClick}
           onPinVersesClick={onPinVersesClick}
           onEditClick={isDefault ? undefined : onEditClick}
