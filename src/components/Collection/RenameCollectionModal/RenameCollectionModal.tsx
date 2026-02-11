@@ -4,13 +4,14 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './RenameCollectionModal.module.scss';
 
+import {
+  COLLECTION_NAME_MAX_LENGTH,
+  COLLECTION_NAME_MIN_LENGTH,
+} from '@/components/Collection/collectionNameValidation';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import Modal from '@/dls/Modal/Modal';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
-
-const COLLECTION_NAME_MIN_LENGTH = 1;
-const COLLECTION_NAME_MAX_LENGTH = 255;
 
 export type Collection = {
   id: number | string;
@@ -44,7 +45,13 @@ const RenameCollectionModal = ({
                 placeholder: t('quran-reader:new-collection-name'),
                 defaultValue,
                 rules: [
-                  { type: RuleType.Required, value: true, errorMessage: 'Required' },
+                  {
+                    type: RuleType.Required,
+                    value: true,
+                    errorMessage: t('common:errors.required', {
+                      fieldName: t('collection:collection-name'),
+                    }),
+                  },
                   {
                     type: RuleType.MinimumLength,
                     value: COLLECTION_NAME_MIN_LENGTH,

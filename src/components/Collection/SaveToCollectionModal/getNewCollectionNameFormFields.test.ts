@@ -23,7 +23,7 @@ it('returns the expected collection name field rules', () => {
   expect(nameField.field).toBe('name');
   expect(nameField.placeholder).toBe('New Collection Name');
   expect(nameField.rules).toEqual([
-    { type: RuleType.Required, value: true, errorMessage: 'Required' },
+    { type: RuleType.Required, value: true, errorMessage: 'REQUIRED_Collection name' },
     { type: RuleType.MinimumLength, value: 1, errorMessage: 'MIN_1_Collection name' },
     { type: RuleType.MaximumLength, value: 255, errorMessage: 'MAX_255_Collection name' },
     {
@@ -43,7 +43,10 @@ it('enforces collection name validation boundaries', () => {
     (value: string) => string | true
   >;
 
-  expect(reactHookFormRules.required).toEqual({ value: true, message: 'Required' });
+  expect(reactHookFormRules.required).toEqual({
+    value: true,
+    message: 'REQUIRED_Collection name',
+  });
   expect(customValidations.minLength('')).toBe('MIN_1_Collection name');
   expect(customValidations.minLength('a')).toBe(true);
   expect(customValidations.maxLength('a'.repeat(255))).toBe(true);

@@ -4,13 +4,14 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './EditCollectionModal.module.scss';
 
+import {
+  COLLECTION_NAME_MAX_LENGTH,
+  COLLECTION_NAME_MIN_LENGTH,
+} from '@/components/Collection/collectionNameValidation';
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Modal from '@/dls/Modal/Modal';
 import { ContentSide } from '@/dls/Tooltip';
 import CloseIcon from '@/icons/close.svg';
-
-const COLLECTION_NAME_MIN_LENGTH = 1;
-const COLLECTION_NAME_MAX_LENGTH = 255;
 
 interface EditCollectionModalProps {
   isOpen: boolean;

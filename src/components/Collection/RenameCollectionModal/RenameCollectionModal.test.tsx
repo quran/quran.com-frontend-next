@@ -29,6 +29,7 @@ vi.mock('next-translate/useTranslation', () => ({
     t: (key: string, params?: Record<string, unknown>) => {
       if (key === 'common:errors.min') return `MIN_${params?.min}`;
       if (key === 'common:errors.max') return `MAX_${params?.max}`;
+      if (key === 'common:errors.required') return `REQUIRED_${params?.fieldName}`;
       if (key === 'collection:collection-name') return 'Collection name';
       return key;
     },
@@ -55,7 +56,7 @@ describe('RenameCollectionModal', () => {
     expect(capturedFormFields[0].field).toBe('name');
     expect(capturedFormFields[0].defaultValue).toBe('My collection');
     expect(capturedFormFields[0].rules).toEqual([
-      { type: RuleType.Required, value: true, errorMessage: 'Required' },
+      { type: RuleType.Required, value: true, errorMessage: 'REQUIRED_Collection name' },
       { type: RuleType.MinimumLength, value: 1, errorMessage: 'MIN_1' },
       { type: RuleType.MaximumLength, value: 255, errorMessage: 'MAX_255' },
     ]);

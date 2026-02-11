@@ -4,12 +4,13 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './collections.module.scss';
 
+import {
+  COLLECTION_NAME_MAX_LENGTH,
+  COLLECTION_NAME_MIN_LENGTH,
+} from '@/components/Collection/collectionNameValidation';
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import CloseIcon from '@/icons/close.svg';
-
-const COLLECTION_NAME_MIN_LENGTH = 1;
-const COLLECTION_NAME_MAX_LENGTH = 255;
 
 interface NewCollectionFormProps {
   newCollectionName: string;

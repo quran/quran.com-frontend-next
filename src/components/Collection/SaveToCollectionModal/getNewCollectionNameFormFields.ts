@@ -1,13 +1,18 @@
+import {
+  COLLECTION_NAME_MAX_LENGTH,
+  COLLECTION_NAME_MIN_LENGTH,
+  COLLECTION_NAME_NON_WHITESPACE_REGEX,
+} from '@/components/Collection/collectionNameValidation';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
-const COLLECTION_NAME_MIN_LENGTH = 1;
-const COLLECTION_NAME_MAX_LENGTH = 255;
-const NON_WHITESPACE_REGEX = '\\S';
-
 const getNewCollectionNameRules = (t: any, fieldName: string) => [
-  { type: RuleType.Required, value: true, errorMessage: 'Required' },
+  {
+    type: RuleType.Required,
+    value: true,
+    errorMessage: t('common:errors.required', { fieldName }),
+  },
   {
     type: RuleType.MinimumLength,
     value: COLLECTION_NAME_MIN_LENGTH,
@@ -27,7 +32,7 @@ const getNewCollectionNameRules = (t: any, fieldName: string) => [
   {
     name: 'hasNonWhitespace',
     type: RuleType.Regex,
-    value: NON_WHITESPACE_REGEX,
+    value: COLLECTION_NAME_NON_WHITESPACE_REGEX,
     errorMessage: t('common:errors.required', { fieldName }),
   },
 ];
