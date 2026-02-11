@@ -10,6 +10,7 @@ import FeedbackModal from './FeedbackModal';
 import NotesModals from './NotesModals';
 import ReaderBioModal from './ReaderBioModal';
 
+import { getChapterVerses } from '@/api';
 import useBatchedCountRangeNotes from '@/hooks/auth/useBatchedCountRangeNotes';
 import {
   closeStudyMode,
@@ -34,10 +35,10 @@ import {
   VerseActionModalType,
 } from '@/redux/slices/QuranReader/verseActionModal';
 import { Note } from '@/types/auth/Note';
-import Verse from '@/types/Verse';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import { consumePendingBookmarkModalRestore } from '@/utils/pendingBookmarkModalRestore';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 const VerseActionModalContainer: React.FC = () => {
   const dispatch = useDispatch();
@@ -65,14 +66,29 @@ const VerseActionModalContainer: React.FC = () => {
 
     const pendingRestore = consumePendingBookmarkModalRestore(router.asPath);
     if (!pendingRestore) return;
+    const restoreBookmarkModal = async () => {
+      try {
+        const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(pendingRestore.verseKey);
+        const response = await getChapterVerses(chapterId, router.locale || 'en', {
+          page: verseNumber,
+          perPage: 1,
+        });
+        const restoredVerse = response?.verses?.[0];
+        if (!restoredVerse) return;
 
-    dispatch(
-      openBookmarkModal({
-        verseKey: pendingRestore.verseKey,
-        verse: pendingRestore.verse as Verse,
-      }),
-    );
-  }, [dispatch, isOpen, router.asPath, router.isReady]);
+        dispatch(
+          openBookmarkModal({
+            verseKey: pendingRestore.verseKey,
+            verse: restoredVerse,
+          }),
+        );
+      } catch {
+        // Ignore failures and avoid blocking reader interactions.
+      }
+    };
+
+    restoreBookmarkModal();
+  }, [dispatch, isOpen, router.asPath, router.isReady, router.locale]);
 
   useEffect(() => {
     if (isOpen && wasOpenedFromStudyMode && !hasClosedStudyModeRef.current) {

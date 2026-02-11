@@ -10,9 +10,11 @@ let mockState: any;
 let mockRouter = {
   isReady: true,
   asPath: '/2?startingVerse=255',
+  locale: 'en',
 };
 const mockConsumePendingRestore = vi.fn();
 const mockIsLoggedIn = vi.fn();
+const mockGetChapterVerses = vi.fn();
 
 vi.mock('react-redux', () => ({
   useDispatch: () => mockDispatch,
@@ -25,6 +27,10 @@ vi.mock('next/router', () => ({
 
 vi.mock('@/hooks/auth/useBatchedCountRangeNotes', () => ({
   default: () => ({ data: 0 }),
+}));
+
+vi.mock('@/api', () => ({
+  getChapterVerses: (...args: unknown[]) => mockGetChapterVerses(...args),
 }));
 
 vi.mock('@/utils/auth/login', () => ({
@@ -71,9 +77,11 @@ describe('VerseActionModalContainer bookmark restore', () => {
     mockDispatch.mockReset();
     mockConsumePendingRestore.mockReset();
     mockIsLoggedIn.mockReset();
+    mockGetChapterVerses.mockReset();
     mockRouter = {
       isReady: true,
       asPath: '/2?startingVerse=255',
+      locale: 'en',
     };
     mockState = createDefaultState();
   });
@@ -90,11 +98,21 @@ describe('VerseActionModalContainer bookmark restore', () => {
       redirectUrl: '/2?startingVerse=255',
       createdAt: Date.now(),
     });
+    mockGetChapterVerses.mockResolvedValue({
+      verses: [
+        {
+          chapterId: 2,
+          verseNumber: 255,
+          verseKey: '2:255',
+        },
+      ],
+    });
 
     render(<VerseActionModalContainer />);
 
     await waitFor(() => {
       expect(mockConsumePendingRestore).toHaveBeenCalledWith('/2?startingVerse=255');
+      expect(mockGetChapterVerses).toHaveBeenCalledWith('2', 'en', { page: '255', perPage: 1 });
       expect(mockDispatch).toHaveBeenCalledWith(
         expect.objectContaining({
           type: 'verseActionModal/openBookmarkModal',
