@@ -14,7 +14,7 @@ import {
   isNotePublishFailed,
   addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
-import { getNoteServerErrors, isSuccess } from '@/components/Notes/modal/validation';
+import { getNoteServerErrors, isKeyAndValuePresent } from '@/components/Notes/modal/validation';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { addNote } from '@/utils/auth/api';
 import { verseKeysToRanges } from '@/utils/verseKeys';
@@ -56,18 +56,20 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
     return verseKeysToRanges(verseKeys);
   }, [verseKeys]);
 
-  const handleSaveNote: OnSaveNote = async ({ note, isPublic }) => {
+  const handleSaveNote: OnSaveNote = async ({ note: noteBody, isPublic }) => {
     try {
-      const data = await addNote({ body: note, ranges, saveToQR: isPublic });
-      if (!isSuccess(data)) return getNoteServerErrors(data, t, lang);
+      const data = await addNote({ body: noteBody, ranges, saveToQR: isPublic });
 
-      const isFailedToPublish = isNotePublishFailed(data);
+      const isNotSuccess = isKeyAndValuePresent(data, 'success', false);
+      const isFailedToPublish = isNotePublishFailed(data) && !isNotSuccess;
       const noteFromResponse = getNoteFromResponse(data);
 
       if (isFailedToPublish) {
         toast(t('notes:save-publish-failed'), { status: ToastStatus.Error });
-      } else {
+      } else if (!isNotSuccess && noteFromResponse?.id.toString() && noteFromResponse?.updatedAt) {
         toast(t('notes:save-success'), { status: ToastStatus.Success });
+      } else {
+        return getNoteServerErrors(data, t, lang);
       }
 
       invalidateCache({

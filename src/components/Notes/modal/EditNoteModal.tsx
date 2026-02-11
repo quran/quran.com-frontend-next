@@ -14,7 +14,7 @@ import {
   CacheAction,
   addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
-import { getNoteServerErrors, isSuccess } from '@/components/Notes/modal/validation';
+import { getNoteServerErrors, isKeyAndValuePresent } from '@/components/Notes/modal/validation';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { Note } from '@/types/auth/Note';
@@ -48,33 +48,34 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
   const handleSaveNote: OnSaveNote = async ({ note: noteBody, isPublic }) => {
     try {
       const data = await updateNote(note.id, noteBody, isPublic);
-      if (!isSuccess(data)) return getNoteServerErrors(data, t, lang);
 
-      const isFailedToPublish = isNotePublishFailed(data);
+      const isNotSuccess = isKeyAndValuePresent(data, 'success', false);
+      const isFailedToPublish = isNotePublishFailed(data) && !isNotSuccess;
       const noteFromResponse = getNoteFromResponse(data);
 
       if (isFailedToPublish) {
         toast(t('notes:update-publish-failed'), { status: ToastStatus.Error });
-      } else {
+      } else if (!isNotSuccess && noteFromResponse?.id.toString() && noteFromResponse?.updatedAt) {
         toast(t('notes:update-success'), { status: ToastStatus.Success });
+      } else {
+        return getNoteServerErrors(data, t, lang);
       }
+
+      const noteToUpdate = { ...note, ...noteFromResponse };
+      const isPrivate = isFailedToPublish || !isPublic;
 
       invalidateCache({
         mutate,
         cache,
         verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
-        note:
-          isFailedToPublish || !isPublic
-            ? { ...note, ...noteFromResponse }
-            : addReflectionEntityToNote({ ...note, ...noteFromResponse }, LOADING_POST_ID),
+        note: isPrivate ? noteToUpdate : addReflectionEntityToNote(noteToUpdate, LOADING_POST_ID),
         invalidateCount: true,
         invalidateReflections: isPublic,
         flushNotesList,
         action: CacheAction.UPDATE,
       });
 
-      onSuccess?.({ note: noteFromResponse, isPublished: isPublic && !isFailedToPublish });
-      return null;
+      return onSuccess?.({ note: noteFromResponse, isPublished: isPublic && !isFailedToPublish });
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
       throw error;

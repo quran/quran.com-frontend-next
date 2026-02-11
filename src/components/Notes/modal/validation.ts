@@ -8,20 +8,17 @@ export const MIN_NOTE_LENGTH = 6;
 export const MAX_NOTE_LENGTH = 10000;
 
 /**
- * Checks if an unknown response has a `success` key and determines success status.
+ * Checks whether the provided response object contains the specified key with the given value.
  *
- * - If `success` key does NOT exist → returns `true` (assume success, no error)
- * - If `success` key exists and is `true` → returns `true` (success)
- * - If `success` key exists and is `false` → returns `false` (error/failed)
- *
- * @param {unknown} response - The API response to check
- * @returns {boolean} True if successful or no success key, false if explicitly failed
+ * @param {unknown} response - The object to inspect.
+ * @param {string} key - The key to check for in the object.
+ * @param {unknown} value - The value to compare against the value at the specified key.
+ * @returns {boolean} True if the key exists in the object and its value matches the provided value, false otherwise.
  */
-export const isSuccess = (response: unknown): boolean => {
-  if (response === null || typeof response !== 'object') return true;
+export const isKeyAndValuePresent = (response: unknown, key: string, value: unknown): boolean => {
+  if (response === null || typeof response !== 'object') return false;
   const responseObj = response as Record<string, unknown>;
-  if (!('success' in responseObj)) return true;
-  return !!responseObj.success;
+  return key in responseObj && responseObj[key] === value;
 };
 
 export enum NoteFormErrorId {
