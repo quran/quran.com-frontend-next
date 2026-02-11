@@ -179,6 +179,33 @@ describe('useCollectionBulkActions', () => {
     expect(toast).not.toHaveBeenCalled();
   });
 
+  it('copy all shows error toast when copy fails', async () => {
+    const toast = vi.fn();
+    vi.mocked(buildBulkCopyBlobPromise).mockResolvedValue(new Blob(['x']) as any);
+    vi.mocked(copyText).mockRejectedValue(new Error('clipboard'));
+
+    const { result } = renderHook(() =>
+      useCollectionBulkActions({
+        chaptersData,
+        lang,
+        t: t as any,
+        toast: toast as any,
+        numericCollectionId: '123',
+        filteredBookmarks: [{ id: 'b1', key: '1', verseNumber: 1 }] as any,
+        selectedBookmarks: new Set(),
+        selectedTranslations,
+        onUpdated: vi.fn(),
+        removeBookmarkIdsFromState: vi.fn(),
+      }),
+    );
+
+    await act(async () => {
+      await result.current.handleCopyAllClick();
+    });
+
+    expect(toast).toHaveBeenCalledWith('common:error.general', { status: ToastStatus.Error });
+  });
+
   it('bulk delete confirm removes deleted ids and keeps failed ids pending', async () => {
     const toast = vi.fn();
     const onUpdated = vi.fn();
