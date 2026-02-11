@@ -91,6 +91,11 @@ const SavedTabContent: React.FC = () => {
     [collections, t],
   );
 
+  const selectedCollectionName = useMemo(() => {
+    if (!selectedCollection) return '';
+    return selectedCollection.isDefault ? t('collections.favorites') : selectedCollection.name;
+  }, [selectedCollection, t]);
+
   const filteredCollections = useMemo(() => {
     if (!searchQuery.trim()) return collectionItems;
     const query = searchQuery.toLowerCase();
@@ -121,7 +126,7 @@ const SavedTabContent: React.FC = () => {
       {selectedCollection ? (
         <CollectionDetailView
           collectionId={selectedCollection.id}
-          collectionName={selectedCollection.name}
+          collectionName={selectedCollectionName}
           onBack={onBackToCollections}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}

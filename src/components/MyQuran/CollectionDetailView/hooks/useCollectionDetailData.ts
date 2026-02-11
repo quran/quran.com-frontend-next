@@ -1,6 +1,6 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import useSWR from 'swr';
+import useSWR, { mutate as globalMutate } from 'swr';
 
 import { getJuzNumberByVerse } from '../juzVerseMapping';
 
@@ -12,7 +12,7 @@ import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
-const COLLECTION_BOOKMARKS_LIMIT = 10000;
+const COLLECTION_BOOKMARKS_PER_PAGE = 20;
 
 interface UseCollectionDetailDataParams {
   collectionId: string;
@@ -20,8 +20,17 @@ interface UseCollectionDetailDataParams {
   selectedChapterIds?: string[];
   selectedJuzNumbers?: string[];
   invalidateAllBookmarkCaches: () => void;
+  fetchAll?: boolean;
 }
 
+type CollectionBookmarksPage = {
+  /**
+   * SWR cursor for the page. We use a synthetic "start" token for the first page to keep
+   * page identity stable across revalidations.
+   */
+  cursor: string;
+  bookmarks: GetBookmarkCollectionsIdResponse['data']['bookmarks'];
+};
 const EMPTY_STRING_ARRAY: string[] = [];
 
 const useCollectionDetailData = ({
@@ -30,35 +39,88 @@ const useCollectionDetailData = ({
   selectedChapterIds = EMPTY_STRING_ARRAY,
   selectedJuzNumbers = EMPTY_STRING_ARRAY,
   invalidateAllBookmarkCaches,
+  fetchAll = false,
 }: UseCollectionDetailDataParams) => {
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
+  const [currentCursor, setCurrentCursor] = useState<string | undefined>(undefined);
+  const [allBookmarksPages, setAllBookmarksPages] = useState<CollectionBookmarksPage[]>([]);
   const numericCollectionId = slugifiedCollectionIdToCollectionId(collectionId);
+
+  const resetPagination = useCallback(() => {
+    setCurrentCursor(undefined);
+    setAllBookmarksPages([]);
+  }, []);
 
   const onSortByChange = useCallback(
     (newSortByVal: CollectionDetailSortOption) => {
       logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
       setSortBy(newSortByVal);
+      // Reset pagination to avoid requesting the new sort with the old cursor
+      resetPagination();
     },
-    [sortBy],
+    [sortBy, resetPagination],
   );
 
   const fetchUrl = useMemo(() => {
     return makeGetBookmarkByCollectionId(numericCollectionId, {
       sortBy,
       type: BookmarkType.Ayah,
-      limit: COLLECTION_BOOKMARKS_LIMIT,
+      limit: COLLECTION_BOOKMARKS_PER_PAGE,
+      ...(currentCursor && { cursor: currentCursor }),
     });
-  }, [numericCollectionId, sortBy]);
+  }, [numericCollectionId, sortBy, currentCursor]);
 
   const { data, mutate, error } = useSWR<GetBookmarkCollectionsIdResponse>(
     fetchUrl,
     privateFetcher,
+    { revalidateOnFocus: false, revalidateOnReconnect: true },
   );
 
   const bookmarks = useMemo(() => data?.data.bookmarks ?? [], [data]);
+  const pagination = useMemo(() => data?.pagination, [data]);
+  const allBookmarks = useMemo(
+    () => allBookmarksPages.flatMap((page) => page.bookmarks),
+    [allBookmarksPages],
+  );
+
+  // Reset pagination when the collection, fetch mode, or sort order changes
+  useEffect(() => {
+    resetPagination();
+  }, [fetchAll, numericCollectionId, resetPagination]);
+
+  // Auto-fetch all pages when fetchAll is enabled
+  useEffect(() => {
+    if (!fetchAll || !data) return;
+
+    const pageBookmarks = data.data.bookmarks ?? [];
+    const pagePagination = data.pagination;
+
+    // When SWR returns cached data then revalidates, `data` may update for the same cursor.
+    // Track pages by cursor so we can replace the page instead of appending duplicates or
+    // ignoring revalidated results.
+    const pageCursor = currentCursor ?? 'start';
+    setAllBookmarksPages((prevPages) => {
+      const existingIndex = prevPages.findIndex((page) => page.cursor === pageCursor);
+      if (existingIndex === -1) {
+        return [...prevPages, { cursor: pageCursor, bookmarks: pageBookmarks }];
+      }
+      return prevPages.map((page, idx) =>
+        idx === existingIndex ? { cursor: pageCursor, bookmarks: pageBookmarks } : page,
+      );
+    });
+
+    // Continue fetching if there are more pages
+    if (pagePagination?.hasNextPage && pagePagination?.endCursor) {
+      // Only update cursor if it's different to avoid triggering unnecessary fetches
+      if (pagePagination.endCursor !== currentCursor) {
+        setCurrentCursor(pagePagination.endCursor);
+      }
+    }
+  }, [fetchAll, data, currentCursor]);
 
   const filteredBookmarks = useMemo(() => {
-    const query = (searchQuery || '').trim().toLowerCase();
+    const sourcedBookmarks = fetchAll ? allBookmarks : bookmarks;
+    const query = (searchQuery ?? '').trim().toLowerCase();
 
     const hasChapterFilters = selectedChapterIds.length > 0;
     const hasJuzFilters = selectedJuzNumbers.length > 0;
@@ -67,7 +129,7 @@ const useCollectionDetailData = ({
     const chapterIdSet = hasChapterFilters ? new Set(selectedChapterIds) : null;
     const juzSet = hasJuzFilters ? new Set(selectedJuzNumbers) : null;
 
-    return bookmarks.filter((bookmark) => {
+    return sourcedBookmarks.filter((bookmark) => {
       const verseKey = `${bookmark.key}:${bookmark.verseNumber ?? 1}`;
       if (query && !verseKey.includes(query)) return false;
       if (!shouldFilter) return true;
@@ -83,12 +145,39 @@ const useCollectionDetailData = ({
         : false;
       return matchesChapter || matchesJuz;
     });
-  }, [bookmarks, searchQuery, selectedChapterIds, selectedJuzNumbers]);
+  }, [bookmarks, searchQuery, selectedChapterIds, selectedJuzNumbers, allBookmarks, fetchAll]);
+
+  const goToNextPage = useCallback(() => {
+    if (pagination?.hasNextPage && pagination?.endCursor) {
+      setCurrentCursor(pagination.endCursor);
+    }
+  }, [pagination]);
 
   const onUpdated = useCallback(() => {
-    mutate();
+    // Reset pagination first to avoid revalidating (and re-appending) only the last fetched page
+    // when `fetchAll` is enabled.
+    if (fetchAll) setCurrentCursor(undefined);
     invalidateAllBookmarkCaches();
-  }, [invalidateAllBookmarkCaches, mutate]);
+    setAllBookmarksPages([]);
+
+    if (fetchAll) {
+      // Revalidate the first page URL for the current sort order
+      globalMutate(
+        makeGetBookmarkByCollectionId(numericCollectionId, {
+          sortBy,
+          type: BookmarkType.Ayah,
+          limit: COLLECTION_BOOKMARKS_PER_PAGE,
+        }),
+      );
+      return;
+    }
+
+    mutate();
+  }, [fetchAll, invalidateAllBookmarkCaches, mutate, numericCollectionId, sortBy]);
+
+  const hasNextPage = pagination?.hasNextPage === true;
+  const hasValidEndCursor = Boolean(pagination?.endCursor);
+  const isFetchingAll = fetchAll && (!data || (hasNextPage && hasValidEndCursor));
 
   return {
     numericCollectionId,
@@ -97,9 +186,13 @@ const useCollectionDetailData = ({
     data,
     mutate,
     error,
-    bookmarks,
+    bookmarks: fetchAll ? allBookmarks : bookmarks,
     filteredBookmarks,
+    pagination,
     onUpdated,
+    goToNextPage,
+    resetPagination,
+    isFetchingAll,
   };
 };
 

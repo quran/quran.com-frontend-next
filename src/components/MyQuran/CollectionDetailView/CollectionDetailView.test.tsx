@@ -1,6 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
+
 import React from 'react';
 
 import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
@@ -12,17 +13,22 @@ import { deleteCollectionBookmarkById } from '@/utils/auth/api';
 import copyText from '@/utils/copyText';
 import type { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 
+// Import after mock
+
+const { useSWRMock, mutateMock, useSWRConfigMock } = vi.hoisted(() => ({
+  useSWRMock: vi.fn(),
+  mutateMock: vi.fn(),
+  useSWRConfigMock: vi.fn(() => ({ mutate: vi.fn() })),
+}));
+
 let swrData: GetBookmarkCollectionsIdResponse | undefined;
 const swrMutate = vi.fn();
 const invalidateAllBookmarkCaches = vi.fn();
 
 vi.mock('swr', () => ({
-  default: () => ({
-    data: swrData,
-    error: undefined,
-    mutate: swrMutate,
-  }),
-  useSWRConfig: () => ({ mutate: vi.fn() }),
+  default: useSWRMock,
+  mutate: mutateMock,
+  useSWRConfig: useSWRConfigMock,
 }));
 
 vi.mock('next/router', () => ({
@@ -329,6 +335,8 @@ describe('CollectionDetailView', () => {
   beforeEach(() => {
     cleanup();
     swrData = buildSWRData('123', 'My Collection');
+    useSWRMock.mockImplementation(() => ({ data: swrData, error: undefined, mutate: swrMutate }));
+    useSWRConfigMock.mockReturnValue({ mutate: vi.fn() });
     swrMutate.mockClear();
     invalidateAllBookmarkCaches.mockClear();
     vi.mocked(copyText).mockClear();
@@ -574,7 +582,7 @@ describe('CollectionDetailView', () => {
     await waitFor(() => {
       expect(deleteCollectionBookmarkById).toHaveBeenCalledWith('123', 'b1');
       expect(deleteCollectionBookmarkById).toHaveBeenCalledWith('123', 'b2');
-      expect(swrMutate).toHaveBeenCalled();
+      expect(mutateMock).toHaveBeenCalled();
       expect(invalidateAllBookmarkCaches).toHaveBeenCalled();
       expect(screen.queryByTestId('delete-bookmarks-modal')).toBeNull();
     });

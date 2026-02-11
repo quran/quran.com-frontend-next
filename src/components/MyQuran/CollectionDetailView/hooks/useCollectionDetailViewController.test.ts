@@ -42,6 +42,7 @@ vi.mock('./useCollectionDetailData', () => ({
     data: { data: { bookmarks: [{ id: 'b1' }, { id: 'b2' }], isOwner: true } },
     mutate: vi.fn(),
     error: undefined,
+    bookmarks: [{ id: 'b1' }, { id: 'b2' }],
     filteredBookmarks: [{ id: 'b1' }, { id: 'b2' }],
     onUpdated,
   }),
@@ -114,7 +115,7 @@ describe('useCollectionDetailViewController', () => {
   });
 
   it('onItemDeleted calls API, refreshes data, and shows success toast', async () => {
-    vi.mocked(deleteCollectionBookmarkById).mockResolvedValue(undefined as any);
+    vi.mocked(deleteCollectionBookmarkById).mockResolvedValue(undefined as unknown as void);
 
     const { result } = renderHook(() =>
       useCollectionDetailViewController({ collectionId: 'slug', collectionName: 'Name' }),

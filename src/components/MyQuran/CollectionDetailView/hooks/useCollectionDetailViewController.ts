@@ -153,6 +153,7 @@ const useCollectionDetailViewController = ({
     selectedChapterIds,
     selectedJuzNumbers,
     invalidateAllBookmarkCaches,
+    fetchAll: true,
   });
   const selection = useCollectionSelection({
     filteredBookmarks: dataState.filteredBookmarks,
@@ -271,10 +272,14 @@ const useCollectionDetailViewController = ({
   );
 
   const isOwner = dataState.data?.data?.isOwner ?? false;
-  const bookmarksCount = useMemo(
-    () => dataState.data?.data?.bookmarks.length ?? 0,
-    [dataState.data],
-  );
+
+  const bookmarksCount = useMemo(() => {
+    const serverCount = dataState.data?.data?.collection?.count;
+    if (typeof serverCount === 'number') return serverCount;
+    if (dataState.isFetchingAll) return null;
+    return dataState.bookmarks.length ?? 0;
+  }, [dataState.data, dataState.isFetchingAll, dataState.bookmarks.length]);
+
   const totalCount = useMemo(
     () => dataState.filteredBookmarks.length ?? 0,
     [dataState.filteredBookmarks],

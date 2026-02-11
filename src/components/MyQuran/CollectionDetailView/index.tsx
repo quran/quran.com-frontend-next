@@ -60,6 +60,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       collectionName={controller.collectionName}
       onBack={onBack}
       isDefault={controller.isDefault}
+      isFetchingAll={controller.isFetchingAll}
       lang={controller.lang}
       t={controller.t}
       numericCollectionId={controller.numericCollectionId}

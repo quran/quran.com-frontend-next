@@ -21,6 +21,7 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
   collectionName,
   onBack,
   isDefault,
+  isFetchingAll,
   lang,
   t,
   numericCollectionId,
@@ -143,6 +144,7 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
         t={t}
         onBack={onBack}
         isDefault={isDefault}
+        isFetchingAll={isFetchingAll}
         onNoteClick={onHeaderNoteClick}
         onPinVersesClick={onHeaderPinAllClick}
         onEditClick={onHeaderEditClick}
@@ -152,6 +154,7 @@ const CollectionDetailViewLayout: React.FC<CollectionDetailViewLayoutProps> = ({
         isAllExpanded={isAllExpanded}
         isSelectMode={isSelectMode}
         isOwner={isOwner}
+        isFetchingAll={isFetchingAll}
         lang={lang}
         selectedCount={selectedCount}
         t={t}

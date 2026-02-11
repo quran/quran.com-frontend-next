@@ -9,12 +9,13 @@ export interface CollectionDetailViewLayoutProps {
   collectionName: string;
   onBack: () => void;
   isDefault?: boolean;
+  isFetchingAll?: boolean;
   lang: string;
   t: TranslateFn;
   numericCollectionId: string;
   sortBy: CollectionDetailSortOption;
   onSortByChange: (newSortBy: CollectionDetailSortOption) => void;
-  totalCount: number;
+  totalCount: number | null;
   isOwner: boolean;
   emptyMessage: string;
   filteredBookmarks: Bookmark[];
