@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import getNewCollectionNameFormFields from './getNewCollectionNameFormFields';
 import styles from './SaveToCollectionModal.module.scss';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
@@ -16,13 +17,7 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ArrowIcon from '@/icons/arrow.svg';
 import PlusIcon from '@/icons/plus.svg';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { RuleType } from 'types/FieldRule';
-import { FormFieldType } from 'types/FormField';
 
-/**
- * UI-specific collection type for the save modal with checked state
- * This is different from types/Collection which is the API response type
- */
 export type CollectionOption = {
   id: string;
   name: string;
@@ -135,14 +130,7 @@ const SaveToCollectionModal = ({
         {isAddingNewCollection ? (
           <div className={styles.newCollectionFormContainer}>
             <FormBuilder
-              formFields={[
-                {
-                  field: 'name',
-                  placeholder: t('quran-reader:new-collection-name'),
-                  rules: [{ type: RuleType.Required, value: true, errorMessage: 'Required' }],
-                  type: FormFieldType.Text,
-                },
-              ]}
+              formFields={getNewCollectionNameFormFields(t)}
               actionText={t('common:submit')}
               isSubmitting={isSubmitting}
               onSubmit={handleSubmit}
