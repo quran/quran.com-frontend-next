@@ -1,10 +1,11 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable react/no-multi-comp */
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -22,6 +23,8 @@ import EmptyTranslationMessage from '@/components/QuranReader/ContextMenu/compon
 import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
 import onCopyQuranWords from '@/components/QuranReader/onCopyQuranWords';
 import QueryParamMessage from '@/components/QuranReader/QueryParamMessage';
+import DataContext from '@/contexts/DataContext';
+import StartingVerseHighlightContext from '@/contexts/StartingVerseHighlightContext';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
@@ -34,6 +37,7 @@ import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
+import { isValidVerseId } from '@/utils/validator';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import Verse from 'types/Verse';
@@ -55,6 +59,7 @@ type ReadingViewProps = {
 };
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1200;
+const STARTING_VERSE_HIGHLIGHT_DURATION_MS = 10000;
 
 const getInitialMushafMap = (initialData: VersesResponse): Record<number, Verse[]> => {
   const firstVerse = initialData?.verses?.[0];
@@ -73,9 +78,15 @@ const ReadingView = ({
   resourceId,
   readingPreference,
 }: ReadingViewProps) => {
+  const router = useRouter();
+  const chaptersData = useContext(DataContext);
   const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>(() =>
     getInitialMushafMap(initialData),
   );
+  const [startingVerseHighlightVerseKey, setStartingVerseHighlightVerseKey] = useState<
+    string | undefined
+  >(undefined);
+
   const { lang } = useTranslation('quran-reader');
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const lastReadPageNumber = useSelector(selectedLastReadPage, shallowEqual);
@@ -94,6 +105,18 @@ const ReadingView = ({
     quranReaderDataType !== QuranReaderDataType.Chapter &&
     firstVerse.verseNumber !== 1;
 
+  // Get the chapterId and startingVerse from the query params
+  const chapterIdQueryParam = router.query.chapterId;
+  const chapterId = Array.isArray(chapterIdQueryParam)
+    ? chapterIdQueryParam[0]
+    : chapterIdQueryParam;
+
+  // Get the startingVerse from the query params. Used to highlight the verse in mushaf mode.
+  const startingVerseQueryParam = router.query[QueryParam.STARTING_VERSE];
+  const startingVerse = Array.isArray(startingVerseQueryParam)
+    ? startingVerseQueryParam[0]
+    : startingVerseQueryParam;
+
   const verses = useMemo(
     () => Object.values(mushafPageToVersesMap).flat(),
     [mushafPageToVersesMap],
@@ -110,6 +133,40 @@ const ReadingView = ({
   }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
     QueryParam.WBW_LOCALE,
   );
+
+  useEffect(() => {
+    if (
+      quranReaderDataType !== QuranReaderDataType.Chapter ||
+      readingPreference !== ReadingPreference.Reading ||
+      !chapterId ||
+      !startingVerse
+    ) {
+      setStartingVerseHighlightVerseKey(undefined);
+      return undefined;
+    }
+
+    const startingVerseNumber = Number(startingVerse);
+    const isValidStartingVerse =
+      Number.isInteger(startingVerseNumber) &&
+      isValidVerseId(chaptersData, chapterId, String(startingVerse));
+
+    if (!isValidStartingVerse) {
+      setStartingVerseHighlightVerseKey(undefined);
+      return undefined;
+    }
+
+    setStartingVerseHighlightVerseKey(`${chapterId}:${startingVerseNumber}`);
+
+    // After a few seconds, remove the highlight
+    const removeTimeoutId = setTimeout(() => {
+      setStartingVerseHighlightVerseKey(undefined);
+    }, STARTING_VERSE_HIGHLIGHT_DURATION_MS);
+
+    return () => {
+      clearTimeout(removeTimeoutId);
+    };
+  }, [chapterId, chaptersData, quranReaderDataType, readingPreference, startingVerse]);
+
   const { quranFont, mushafLines, quranTextFontScale } = quranReaderStyles;
   useQcfFont(quranFont, verses);
   const { pagesCount, hasError, pagesVersesRange, isLoading } = useFetchPagesLookup(
@@ -171,6 +228,14 @@ const ReadingView = ({
   useHotkeys('Up', onUpClicked, { enabled: allowKeyboardNavigation }, [scrollToPreviousPage]);
   useHotkeys('Down', onDownClicked, { enabled: allowKeyboardNavigation }, [scrollToNextPage]);
 
+  // This context is used to pass the starting verse highlight information to the PageContainer
+  const startingVerseHighlightContextValue = useMemo(
+    () => ({
+      verseKey: startingVerseHighlightVerseKey,
+    }),
+    [startingVerseHighlightVerseKey],
+  );
+
   const itemContentRenderer = (pageIndex: number) => {
     if (pageIndex === pagesCount) {
       const pageVerses = mushafPageToVersesMap[lastReadPageNumber];
@@ -224,7 +289,7 @@ const ReadingView = ({
   }
 
   return (
-    <>
+    <StartingVerseHighlightContext.Provider value={startingVerseHighlightContextValue}>
       {shouldShowQueryParamMessage && (
         <QueryParamMessage
           translationsQueryParamDifferent={false}
@@ -261,7 +326,7 @@ const ReadingView = ({
           scrollToPreviousPage={onPrevPageClicked}
         />
       )}
-    </>
+    </StartingVerseHighlightContext.Provider>
   );
 };
 
