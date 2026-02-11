@@ -17,14 +17,25 @@ $cards-grid-min-height: 321px;
   }
 }
 
-.header {
-  text-align: center;
+.ctaContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-xlarge-px);
   color: var(--color-grey-icons-new);
   margin: auto auto var(--spacing-xlarge-px);
 
   @include breakpoints.smallerThanTablet {
     margin: auto auto var(--spacing-medium2-px);
   }
+}
+
+.header {
+  text-align: center;
+}
+
+.cta {
+  text-decoration: underline;
 }
 
 .cardsGrid {

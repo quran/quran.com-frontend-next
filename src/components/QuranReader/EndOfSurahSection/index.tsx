@@ -11,6 +11,7 @@ import StreakGoalCard from './StreakGoalCard';
 
 import { getChapterMetadata } from '@/api';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import Link from '@/dls/Link/Link';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import useScrollToTop from '@/hooks/useScrollToTop';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
@@ -44,9 +45,18 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
 
   const chapterMetadata = metadataResponse?.chapterMetadata;
 
+  const showNextChapter = chapterNumber !== 114;
+
   return (
     <div className={styles.container} data-testid="end-of-surah-section">
-      <h2 className={styles.header}>{t('end-of-surah.header')}</h2>
+      <div className={styles.ctaContainer}>
+        <h2 className={styles.header}>{t('end-of-surah.header')}</h2>
+        {showNextChapter && (
+          <Link href={`/${chapterNumber + 1}`} className={styles.cta}>
+            {t('end-of-surah.cta')}
+          </Link>
+        )}
+      </div>
 
       <div className={styles.cardsGrid}>
         <ReadMoreCard
