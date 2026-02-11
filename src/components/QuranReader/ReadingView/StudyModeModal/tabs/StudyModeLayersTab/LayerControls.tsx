@@ -12,9 +12,10 @@ import ExpandArrowIcon from '@/icons/expand-arrow.svg';
 interface LayerControlsProps {
   layerMode: LayerMode;
   setLayerMode: Dispatch<SetStateAction<LayerMode>>;
+  isExpandable: boolean;
 }
 
-const LayerControls: React.FC<LayerControlsProps> = ({ layerMode, setLayerMode }) => {
+const LayerControls: React.FC<LayerControlsProps> = ({ layerMode, setLayerMode, isExpandable }) => {
   const { t } = useTranslation('quran-reader');
 
   return (
@@ -23,6 +24,7 @@ const LayerControls: React.FC<LayerControlsProps> = ({ layerMode, setLayerMode }
       <button
         type="button"
         className={styles.layerButton}
+        disabled={!isExpandable}
         onClick={() =>
           setLayerMode((prev) =>
             prev === LayerMode.Expanded ? LayerMode.Collapsed : LayerMode.Expanded,
