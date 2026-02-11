@@ -46,6 +46,7 @@
     "achieve-quran-goals-desktop": "Track Streaks, Create Custom Goals, Stay Consistent",
     "achieve-quran-goals-responsive": "Achieve Your Quran Goals",
     "beginning-of-surah": "Read again",
+    "cta": "Continue Reading",
     "day-streak": "Day streak",
     "days-streak": "Days streak",
     "explore": "Explore",
@@ -58,8 +59,7 @@
     "set-goal": "Set a Goal",
     "set-goal-mobile": "Set a Goal",
     "suggestions": "Suggestions:",
-    "track-your-journey": "Track your Journey!",
-    "cta": "Continue Reading"
+    "track-your-journey": "Track your Journey!"
   },
   "font": "Arabic font to copy",
   "font-placeholder": "Select a font",
