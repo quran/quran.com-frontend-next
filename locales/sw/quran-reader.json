@@ -13,7 +13,7 @@
     "next-verse": "Aya unaofuata",
     "next-word": "Neno linalofuata",
     "open-study-mode": "Fungua hali ya kujifunza",
-    "previous-related-verse": "Mstari uliotangulia unaohusiana",
+    "previous-related-verse": "Aya iliotangulia inaohusiana",
     "previous-verse": "Aya iliotangulia",
     "previous-word": "Neno lililotangulia",
     "read-ayah-refls": "Soma Tafakari za Aya",
@@ -25,6 +25,7 @@
   "bismillah": "Kwa Jina la Mwenyezi Mungu, Mwingi wa Rehema, Mwenye kurehemu",
   "change-translation": "Badilisha Tarjuma",
   "clear-pinned": "Futa Zote",
+  "collection-empty": "Mkusanyiko hauna kitu",
   "collections": "Mikusanyiko",
   "compare-verses": "Linganisha",
   "copy-arabic": "Maandishi ya Kiarabu (Nakala ya Uthmani)",
@@ -96,9 +97,9 @@
   "juz-beginning": "Mwanzo wa Juzuu",
   "languages": "Lugha",
   "layers": {
-    "alternative-translations": "Tafsiri Mbadala",
+    "alternative-translations": "Tarjuma Mbadala",
     "close-explanation": "Funga Maelezo",
-    "contract": "Tafsir ya Mkataba",
+    "contract": "Funga Tafsir",
     "expand": "Panua Tafsir",
     "read-explanation": "Soma Maelezo",
     "title": "Tabaka"
@@ -200,8 +201,8 @@
   "reflection-not-available": "Hakuna tafakari zilizokaguliwa kwa aya hii",
   "reflections": "Tafakari",
   "reflections-desc": "Soma na ushiriki tafakari za Qur'ani za Aya {{ayahNumber}} ya Sura {{surahName}}",
-  "related-verses": "Mistari inayohusiana",
-  "related-verses-desc": "Soma na ushiriki aya zinazohusiana na Quran za Ayah {{ayahNumber}} ya Sura {{surahName}}",
+  "related-verses": "Aya zinayohusiana",
+  "related-verses-desc": "Soma na ushiriki aya zinazohusiana na Qur'ani za Aya {{ayahNumber}} ya Sura {{surahName}}",
   "remove-bookmark": "Ondoa alamisho",
   "remove-my-reading-bookmark": "Ondoa Alamisho langu la Kusoma",
   "remove-pinned-verse": "Ondoa aya {{verseKey}} kutoka kwa zilizobandikwa",
@@ -209,7 +210,7 @@
   "revelation-order-notice": "Kumbuka: unachunguza Qur'ani kwa mpangilio ulioteremshwa. <link> Bofya hapa </link> ili kurejea kwa mpangilio chaguomsingi.",
   "rub-beginning": "Mwanzo wa Rub el Hizb",
   "save-bookmark-modal": {
-    "collections-hint": "Umehifadhi zaidi ya alamisho moja? Tumia mikusanyiko:"
+    "collections-hint": "Je, Unahifadhi zaidi ya alamisho moja? Tumia mikusanyiko:"
   },
   "save-page": "Hifadhi Ukurasa {{pageNumber}}",
   "save-pinned-to-collection": "Hifadhi kwenye Mkusanyiko",
