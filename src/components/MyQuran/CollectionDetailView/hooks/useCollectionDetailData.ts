@@ -1,9 +1,11 @@
-/* eslint-disable max-lines */
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useSWR, { mutate as globalMutate } from 'swr';
 
 import { getJuzNumberByVerse } from '../juzVerseMapping';
+
+import { filterCollectionBookmarks } from './collectionDetailFilterUtils';
+import { sortCollectionBookmarks } from './collectionDetailSortUtils';
 
 import BookmarkType from '@/types/BookmarkType';
 import { privateFetcher } from '@/utils/auth/api';
@@ -42,7 +44,8 @@ const useCollectionDetailData = ({
   invalidateAllBookmarkCaches,
   fetchAll = false,
 }: UseCollectionDetailDataParams) => {
-  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
+  // UI sort. We fetch with a stable API sort and order the results client-side.
+  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.DateDesc);
   const [currentCursor, setCurrentCursor] = useState<string | undefined>(undefined);
   const [allBookmarksPages, setAllBookmarksPages] = useState<CollectionBookmarksPage[]>([]);
   const numericCollectionId = slugifiedCollectionIdToCollectionId(collectionId);
@@ -56,20 +59,19 @@ const useCollectionDetailData = ({
     (newSortByVal: CollectionDetailSortOption) => {
       logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
       setSortBy(newSortByVal);
-      // Reset pagination to avoid requesting the new sort with the old cursor
-      resetPagination();
     },
-    [sortBy, resetPagination],
+    [sortBy],
   );
 
   const fetchUrl = useMemo(() => {
     return makeGetBookmarkByCollectionId(numericCollectionId, {
-      sortBy,
+      // Stable API sort prevents refetching pages when the user changes the UI sort.
+      sortBy: CollectionDetailSortOption.VerseKey,
       type: BookmarkType.Ayah,
       limit: COLLECTION_BOOKMARKS_PER_PAGE,
       ...(currentCursor && { cursor: currentCursor }),
     });
-  }, [numericCollectionId, sortBy, currentCursor]);
+  }, [numericCollectionId, currentCursor]);
 
   const { data, mutate, error } = useSWR<GetBookmarkCollectionsIdResponse>(
     fetchUrl,
@@ -84,7 +86,7 @@ const useCollectionDetailData = ({
     [allBookmarksPages],
   );
 
-  // Reset pagination when the collection, fetch mode, or sort order changes
+  // Reset pagination when the collection or fetch mode changes.
   useEffect(() => {
     resetPagination();
   }, [fetchAll, numericCollectionId, resetPagination]);
@@ -121,32 +123,23 @@ const useCollectionDetailData = ({
 
   const filteredBookmarks = useMemo(() => {
     const sourcedBookmarks = fetchAll ? allBookmarks : bookmarks;
-    const query = (searchQuery ?? '').trim().toLowerCase();
-
-    const hasChapterFilters = selectedChapterIds.length > 0;
-    const hasJuzFilters = selectedJuzNumbers.length > 0;
-    const shouldFilter = hasChapterFilters || hasJuzFilters;
-
-    const chapterIdSet = hasChapterFilters ? new Set(selectedChapterIds) : null;
-    const juzSet = hasJuzFilters ? new Set(selectedJuzNumbers) : null;
-
-    return sourcedBookmarks.filter((bookmark) => {
-      const verseKey = `${bookmark.key}:${bookmark.verseNumber ?? 1}`;
-      if (query && !verseKey.includes(query)) return false;
-      if (!shouldFilter) return true;
-
-      // When filtering, a filter group that isn't active should not "auto-match" everything.
-      // We OR the active filter groups together so results match *any* selected chapter/juz.
-      const matchesChapter = chapterIdSet ? chapterIdSet.has(String(bookmark.key)) : false;
-      // Juz lookup is skipped when no juz filter is active (juzSet is null).
-      const matchesJuz = juzSet
-        ? juzSet.has(
-            String(getJuzNumberByVerse(Number(bookmark.key), bookmark.verseNumber ?? 1) ?? ''),
-          )
-        : false;
-      return matchesChapter || matchesJuz;
+    const filtered = filterCollectionBookmarks({
+      bookmarks: sourcedBookmarks,
+      searchQuery,
+      selectedChapterIds,
+      selectedJuzNumbers,
+      getJuzNumberByVerse,
     });
-  }, [bookmarks, searchQuery, selectedChapterIds, selectedJuzNumbers, allBookmarks, fetchAll]);
+    return sortCollectionBookmarks(filtered, sortBy);
+  }, [
+    bookmarks,
+    searchQuery,
+    selectedChapterIds,
+    selectedJuzNumbers,
+    allBookmarks,
+    fetchAll,
+    sortBy,
+  ]);
 
   const goToNextPage = useCallback(() => {
     if (pagination?.hasNextPage && pagination?.endCursor) {
@@ -165,7 +158,7 @@ const useCollectionDetailData = ({
       // Revalidate the first page URL for the current sort order
       globalMutate(
         makeGetBookmarkByCollectionId(numericCollectionId, {
-          sortBy,
+          sortBy: CollectionDetailSortOption.VerseKey,
           type: BookmarkType.Ayah,
           limit: COLLECTION_BOOKMARKS_PER_PAGE,
         }),
@@ -174,11 +167,10 @@ const useCollectionDetailData = ({
     }
 
     mutate();
-  }, [fetchAll, invalidateAllBookmarkCaches, mutate, numericCollectionId, sortBy]);
+  }, [fetchAll, invalidateAllBookmarkCaches, mutate, numericCollectionId]);
 
-  const hasNextPage = pagination?.hasNextPage === true;
-  const hasValidEndCursor = Boolean(pagination?.endCursor);
-  const isFetchingAll = fetchAll && (!data || (hasNextPage && hasValidEndCursor));
+  const isFetchingAll =
+    fetchAll && (!data || (pagination?.hasNextPage === true && Boolean(pagination?.endCursor)));
 
   return {
     numericCollectionId,
