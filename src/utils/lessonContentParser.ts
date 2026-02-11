@@ -16,42 +16,43 @@ export type ContentChunk =
  * @returns {VerseReference | null} Parsed reference or null if invalid
  */
 export function parseQuranUrl(href: string): VerseReference | null {
+  let url: URL;
   try {
-    const url = new URL(href);
-    if (url.hostname !== 'quran.com' && !url.hostname.endsWith('.quran.com')) return null;
-
-    const path = url.pathname.replace(/^\//, '').replace(/\/$/, '');
-
-    // Pattern: chapter/verse or chapter/from-to
-    let match = path.match(/^(\d+)\/(\d+)(?:-(\d+))?$/);
-    if (match) {
-      return {
-        chapter: Number(match[1]),
-        from: Number(match[2]),
-        to: match[3] ? Number(match[3]) : undefined,
-      };
-    }
-
-    // Pattern: chapter-verse (single verse)
-    match = path.match(/^(\d+)-(\d+)$/);
-    if (match) {
-      return { chapter: Number(match[1]), from: Number(match[2]) };
-    }
-
-    // Pattern: chapter:verse or chapter:from-to
-    match = path.match(/^(\d+):(\d+)(?:-(\d+))?$/);
-    if (match) {
-      return {
-        chapter: Number(match[1]),
-        from: Number(match[2]),
-        to: match[3] ? Number(match[3]) : undefined,
-      };
-    }
-
-    return null;
+    url = new URL(href);
   } catch {
     return null;
   }
+  if (url.hostname !== 'quran.com' && !url.hostname.endsWith('.quran.com')) return null;
+
+  const path = url.pathname.replace(/^\//, '').replace(/\/$/, '');
+
+  // Pattern: chapter/verse or chapter/from-to
+  let match = path.match(/^(\d+)\/(\d+)(?:-(\d+))?$/);
+  if (match) {
+    return {
+      chapter: Number(match[1]),
+      from: Number(match[2]),
+      to: match[3] ? Number(match[3]) : undefined,
+    };
+  }
+
+  // Pattern: chapter-verse (single verse)
+  match = path.match(/^(\d+)-(\d+)$/);
+  if (match) {
+    return { chapter: Number(match[1]), from: Number(match[2]) };
+  }
+
+  // Pattern: chapter:verse or chapter:from-to
+  match = path.match(/^(\d+):(\d+)(?:-(\d+))?$/);
+  if (match) {
+    return {
+      chapter: Number(match[1]),
+      from: Number(match[2]),
+      to: match[3] ? Number(match[3]) : undefined,
+    };
+  }
+
+  return null;
 }
 
 const QURAN_LINK_REGEX = /href=["'](https?:\/\/(?:[a-z0-9-]+\.)*quran\.com\/[^"']+)["']/i;
