@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { renderHook } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -103,6 +104,7 @@ vi.mock('./useCollectionBulkActions', () => ({
     isDeletingBookmarks: false,
     pendingDeleteBookmarkIds: [],
     handleBulkCopyClick: vi.fn(),
+    handleCopyAllClick: vi.fn(),
     handleBulkDeleteClick: vi.fn(),
     handleBulkDeleteModalClose: vi.fn(),
     handleBulkDeleteConfirm: vi.fn(),
@@ -118,7 +120,12 @@ describe('useCollectionDetailViewController', () => {
     vi.mocked(deleteCollectionBookmarkById).mockResolvedValue(undefined as unknown as void);
 
     const { result } = renderHook(() =>
-      useCollectionDetailViewController({ collectionId: 'slug', collectionName: 'Name' }),
+      useCollectionDetailViewController({
+        collectionId: 'slug',
+        collectionName: 'Name',
+        searchQuery: '',
+        onSearchChange: vi.fn(),
+      }),
     );
 
     result.current.onItemDeleted('b1');
@@ -137,7 +144,12 @@ describe('useCollectionDetailViewController', () => {
     vi.mocked(deleteCollectionBookmarkById).mockRejectedValue(new Error('fail'));
 
     const { result } = renderHook(() =>
-      useCollectionDetailViewController({ collectionId: 'slug', collectionName: 'Name' }),
+      useCollectionDetailViewController({
+        collectionId: 'slug',
+        collectionName: 'Name',
+        searchQuery: '',
+        onSearchChange: vi.fn(),
+      }),
     );
 
     result.current.onItemDeleted('b1');

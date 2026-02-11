@@ -183,7 +183,14 @@ vi.mock('@/components/Collection/CollectionActionsPopover/CollectionBulkActionsP
 }));
 
 vi.mock('@/components/Collection/CollectionActionsPopover/CollectionHeaderActionsPopover', () => ({
-  default: ({ children, onEditClick, onDeleteClick, onPinVersesClick, onNoteClick }: any) => (
+  default: ({
+    children,
+    onEditClick,
+    onDeleteClick,
+    onCopyClick,
+    onPinVersesClick,
+    onNoteClick,
+  }: any) => (
     <div data-testid="header-actions">
       {children}
       {onEditClick && (
@@ -194,6 +201,11 @@ vi.mock('@/components/Collection/CollectionActionsPopover/CollectionHeaderAction
       {onDeleteClick && (
         <button type="button" onClick={onDeleteClick}>
           delete
+        </button>
+      )}
+      {onCopyClick && (
+        <button type="button" onClick={onCopyClick}>
+          header-copy
         </button>
       )}
       <button type="button" onClick={onPinVersesClick}>
@@ -555,6 +567,21 @@ describe('CollectionDetailView', () => {
     fireEvent.click(screen.getByRole('button', { name: 'toggle-b2' }));
 
     fireEvent.click(await screen.findByRole('button', { name: 'bulk-copy' }));
+
+    await waitFor(() => {
+      expect(copyText).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('triggers header copy and copies all bookmarks in the collection', async () => {
+    swrData = buildSWRData('123', 'My Collection', true, [
+      { id: 'b1', key: '1', verseNumber: 1 },
+      { id: 'b2', key: '1', verseNumber: 2 },
+    ]);
+
+    renderCollectionDetailView();
+
+    fireEvent.click(screen.getByRole('button', { name: 'header-copy' }));
 
     await waitFor(() => {
       expect(copyText).toHaveBeenCalledTimes(1);

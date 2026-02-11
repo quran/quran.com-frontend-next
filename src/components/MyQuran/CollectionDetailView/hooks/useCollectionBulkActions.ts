@@ -51,26 +51,37 @@ const useCollectionBulkActions = ({
   const handleShareVerse = useCallback((verseKey: string) => setShareVerseKey(verseKey), []);
   const handleShareModalClose = useCallback(() => setShareVerseKey(null), []);
 
+  const copyBookmarks = useCallback(
+    async (bookmarks: Bookmark[]) => {
+      if (!bookmarks.length) return;
+
+      // Invoke clipboard copy immediately to preserve user activation.
+      const copyPromise = copyText(
+        buildBulkCopyBlobPromise({
+          chaptersData,
+          lang,
+          selectedBookmarks: bookmarks,
+          selectedTranslations,
+        }),
+      );
+
+      try {
+        await copyPromise;
+        toast(`${t('common:copied')}!`, { status: ToastStatus.Success });
+      } catch {
+        toast(t('common:error.general'), { status: ToastStatus.Error });
+      }
+    },
+    [chaptersData, lang, selectedTranslations, t, toast],
+  );
+
   const handleBulkCopyClick = useCallback(async () => {
-    if (!selectedBookmarksList.length) return;
+    await copyBookmarks(selectedBookmarksList);
+  }, [copyBookmarks, selectedBookmarksList]);
 
-    // Invoke clipboard copy immediately to preserve user activation.
-    const copyPromise = copyText(
-      buildBulkCopyBlobPromise({
-        chaptersData,
-        lang,
-        selectedBookmarks: selectedBookmarksList,
-        selectedTranslations,
-      }),
-    );
-
-    try {
-      await copyPromise;
-      toast(`${t('common:copied')}!`, { status: ToastStatus.Success });
-    } catch {
-      toast(t('common:error.general'), { status: ToastStatus.Error });
-    }
-  }, [chaptersData, lang, selectedBookmarksList, selectedTranslations, t, toast]);
+  const handleCopyAllClick = useCallback(async () => {
+    await copyBookmarks(filteredBookmarks);
+  }, [copyBookmarks, filteredBookmarks]);
 
   const handleBulkDeleteClick = useCallback(() => {
     const ids = Array.from(selectedBookmarks);
@@ -140,6 +151,7 @@ const useCollectionBulkActions = ({
     isDeletingBookmarks,
     pendingDeleteBookmarkIds,
     handleBulkCopyClick,
+    handleCopyAllClick,
     handleBulkDeleteClick,
     handleBulkDeleteModalClose,
     handleBulkDeleteConfirm,
