@@ -2,8 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useSWRConfig } from 'swr';
-import useSWRImmutable from 'swr/immutable';
+import useSWR, { useSWRConfig } from 'swr';
 
 import loadCollectionVerses from './loadCollectionVerses';
 
@@ -17,8 +16,9 @@ import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logErrorToSentry } from '@/lib/sentry';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { CollectionListSortOption } from '@/types/CollectionSortOptions';
 import { getMushafId } from '@/utils/api';
-import { privateFetcher } from '@/utils/auth/api';
+import { getCollectionsList } from '@/utils/auth/api';
 import { makeCollectionsUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
@@ -39,9 +39,11 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { data: collectionsData, isValidating: isLoadingCollections } = useSWRImmutable<{
+  const { data: collectionsData, isValidating: isLoadingCollections } = useSWR<{
     data: Collection[];
-  }>(isOpen ? makeCollectionsUrl({ type: BookmarkType.Ayah }) : null, privateFetcher);
+  }>(isOpen ? makeCollectionsUrl({ type: BookmarkType.Ayah }) : null, () =>
+    getCollectionsList({ sortBy: CollectionListSortOption.Alphabetical }),
+  );
 
   const { sortedCollections } = useCollectionsState({
     isVerse: true,
