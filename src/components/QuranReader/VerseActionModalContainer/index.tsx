@@ -42,7 +42,6 @@ const VerseActionModalContainer: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const hasClosedStudyModeRef = useRef(false);
-  const hasCheckedPendingRestoreRef = useRef(false);
 
   const isOpen = useSelector(selectVerseActionModalIsOpen);
   const modalType = useSelector(selectVerseActionModalType);
@@ -59,12 +58,9 @@ const VerseActionModalContainer: React.FC = () => {
   const { data: notesCount } = useBatchedCountRangeNotes(isOpen && verseKey ? verseKey : null);
 
   useEffect(() => {
-    if (hasCheckedPendingRestoreRef.current) return;
     if (!router.isReady) return;
     if (isOpen) return;
     if (!isLoggedIn()) return;
-
-    hasCheckedPendingRestoreRef.current = true;
 
     const pendingRestore = consumePendingBookmarkModalRestore(router.asPath);
     if (!pendingRestore) return;

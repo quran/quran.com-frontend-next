@@ -1,4 +1,5 @@
 import Verse from '@/types/Verse';
+import QueryParam from 'types/QueryParam';
 
 const STORAGE_KEY = 'pending-bookmark-modal-restore';
 const MAX_PENDING_AGE_MS = 30 * 60 * 1000; // 30 minutes
@@ -52,10 +53,10 @@ const doesCurrentPathMatchRedirect = (currentPath: string, redirectUrl: string):
     return false;
   }
 
-  const expectedStartingVerse = redirect.searchParams.get('startingVerse');
+  const expectedStartingVerse = redirect.searchParams.get(QueryParam.STARTING_VERSE);
   if (!expectedStartingVerse) return true;
 
-  return current.searchParams.get('startingVerse') === expectedStartingVerse;
+  return current.searchParams.get(QueryParam.STARTING_VERSE) === expectedStartingVerse;
 };
 
 const hasValidVerseData = (verse: Partial<Verse> | null | undefined): verse is Verse => {

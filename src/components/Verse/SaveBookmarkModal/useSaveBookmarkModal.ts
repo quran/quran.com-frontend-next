@@ -278,9 +278,17 @@ const useSaveBookmarkModal = ({
   const handleGuestSignIn = useCallback((): void => {
     logButtonClick('save_bookmark_modal_guest_sign_in');
 
-    const redirectUrl = isVerse
-      ? getChapterWithStartingVerseUrl(`${verse.chapterId}:${verse.verseNumber}`)
-      : getPageNavigationUrl(pageNumber);
+    if (isVerse && !verse) {
+      router.push(getLoginNavigationUrl(router.asPath));
+      onClose();
+      return;
+    }
+
+    const redirectUrl =
+      isVerse && verse
+        ? getChapterWithStartingVerseUrl(`${verse.chapterId}:${verse.verseNumber}`)
+        : getPageNavigationUrl(pageNumber);
+
     if (isVerse && verse) {
       setPendingBookmarkModalRestore({
         verse,
