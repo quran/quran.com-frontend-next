@@ -175,7 +175,9 @@ const useCollectionDetailData = ({
     mutate();
   }, [fetchAll, invalidateAllBookmarkCaches, mutate, numericCollectionId, sortBy]);
 
-  const isFetchingAll = fetchAll && (!data || pagination?.hasNextPage === true);
+  const hasNextPage = pagination?.hasNextPage === true;
+  const hasValidEndCursor = Boolean(pagination?.endCursor);
+  const isFetchingAll = fetchAll && (!data || (hasNextPage && hasValidEndCursor));
 
   return {
     numericCollectionId,
