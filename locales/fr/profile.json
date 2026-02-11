@@ -25,13 +25,21 @@
   "max-file-size": "Max {{size}}",
   "my-profile": "Mon profil",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Un courriel vous sera envoyé pour vous rappeler votre objectif de lecture du Coran si vous n'avez pas progressé depuis un certain temps.",
+      "title": "Rappel d'objectif"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Sourate Al-Mulk Défi Ramadan 2026",
+      "title": "Défi quotidien du Ramadan"
+    },
     "quran-reading-program": {
       "description": "Un courriel vous sera envoyé avec des liens vers les lectures hebdomadaires, des suggestions de réflexion et d'autres ressources pour vous aider à progresser.",
-      "title": "Le Coran en un an"
+      "title": "Le Coran en un An"
     },
     "streaks-that-will-break": {
       "description": "Un courriel vous sera envoyé pour vous avertir qu'une série est sur le point de s'interrompre.",
-      "title": "Traces"
+      "title": "Séries"
     }
   },
   "personalization": "Personnalisation",
