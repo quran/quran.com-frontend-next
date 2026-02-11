@@ -46,6 +46,7 @@
     "achieve-quran-goals-desktop": "Ndiqni Seritë, Krijoni Objektiva të Personalizuara, Qëndroni të Qëndrueshëm",
     "achieve-quran-goals-responsive": "Arritni Qëllimet Tuaja Kur'anore",
     "beginning-of-surah": "Lexo përsëri",
+    "cta": "Vazhdoni Leximin",
     "day-streak": "Seri ditore",
     "days-streak": "Seri ditësh",
     "explore": "Eksploro",
@@ -86,7 +87,7 @@
     "title": "Ruaj progresin tënd"
   },
   "hadith": {
-    "notice": "Kjo listë nuk është shteruese. Përfshihen <0>Al-Buhari</0> dhe <1>Muslimi</1>, dhe së shpejti do të shfaqen edhe të tjera, inshAllah.",
+    "notice": "Përfshihen vetëm hadithet që i referohen në mënyrë të qartë vargjeve kuranore, dhe kjo përzgjedhje nuk është e plotë. Rrëfimet janë kuruar për t'u përputhur me vargjet e zgjedhura nga <0>Sahih al-Bukhari</0> dhe <1>Sahih Muslim</1>, të cituara nëpërmjet Sunnah.com.",
     "title": "Hadith"
   },
   "hizb-beginning": "Fillimi i Hizbit",

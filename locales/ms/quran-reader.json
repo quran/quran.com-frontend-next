@@ -46,6 +46,7 @@
     "achieve-quran-goals-desktop": "Jejaki Rentetan, Cipta Matlamat Tersuai, Kekal Konsisten",
     "achieve-quran-goals-responsive": "Capai Matlamat Al-Quran Anda",
     "beginning-of-surah": "Baca lagi",
+    "cta": "Teruskan Membaca",
     "day-streak": "Rentetan hari",
     "days-streak": "Rentetan hari",
     "explore": "Terokai",
@@ -86,7 +87,7 @@
     "title": "Simpan Kemajuan Anda"
   },
   "hadith": {
-    "notice": "Senarai ini tidak lengkap. <0>Al-Bukhari</0> dan <1>Muslim</1> disertakan, dan lebih banyak lagi akan menyusul tidak lama lagi, insya-Allah.",
+    "notice": "Hanya hadith yang merujuk secara eksplisit ayat-ayat al-Quran sahaja yang disertakan, dan pilihan ini tidak menyeluruh. Riwayat-riwayat disusun untuk dipadankan dengan ayat-ayat pilihan daripada <0>Sahih al-Bukhari</0> dan <1>Sahih Muslim</1>, yang dipetik melalui Sunnah.com.",
     "title": "Hadis"
   },
   "hizb-beginning": "Permulaan Hizb",

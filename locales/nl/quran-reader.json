@@ -46,6 +46,7 @@
     "achieve-quran-goals-desktop": "Houd reeksen bij, stel aangepaste doelen in en blijf consistent.",
     "achieve-quran-goals-responsive": "Bereik je Koran-doelen",
     "beginning-of-surah": "Lees het nog eens.",
+    "cta": "Lees verder",
     "day-streak": "Dag reeks",
     "days-streak": "Dagen achter elkaar",
     "explore": "Ontdekken",
@@ -86,7 +87,7 @@
     "title": "Sla je voortgang op"
   },
   "hadith": {
-    "notice": "Deze lijst is niet volledig. <0>Al-Bukhari</0> en <1>Muslim</1> zijn opgenomen, en er zullen er binnenkort meer volgen, in sha Allah.",
+    "notice": "Alleen hadith die expliciet naar koranverzen verwijzen, zijn opgenomen, en deze selectie is niet volledig. De overleveringen zijn samengesteld om overeen te komen met de gekozen verzen uit <0>Sahih al-Bukhari</0> en <1>Sahih Muslim</1>, zoals vermeld op Sunnah.com.",
     "title": "Hadith"
   },
   "hizb-beginning": "Begin van Hizb",

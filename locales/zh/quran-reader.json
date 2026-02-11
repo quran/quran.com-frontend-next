@@ -46,6 +46,7 @@
     "achieve-quran-goals-desktop": "追踪连胜纪录，创建自定义目标，保持稳定",
     "achieve-quran-goals-responsive": "实现你的古兰经目标",
     "beginning-of-surah": "重读",
+    "cta": "继续阅读",
     "day-streak": "连胜",
     "days-streak": "连续天数",
     "explore": "探索",
@@ -86,7 +87,7 @@
     "title": "保存进度"
   },
   "hadith": {
-    "notice": "此列表并不完整。《布哈里圣训集》和《穆斯林圣训集》已包含在内，愿真主保佑，未来还将收录更多圣训。",
+    "notice": "仅收录明确引用《古兰经》经文的圣训，且此选集并非详尽无遗。所有传述均经过筛选，以匹配《布哈里圣训实录》和《穆斯林圣训实录》中选定的经文，引自 Sunnah.com。",
     "title": "圣训"
   },
   "hizb-beginning": "Hizb的开始",

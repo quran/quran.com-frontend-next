@@ -46,6 +46,7 @@
     "achieve-quran-goals-desktop": "Suivez vos séries, créez des objectifs personnalisés, restez régulier.",
     "achieve-quran-goals-responsive": "Atteignez vos objectifs liés au Coran",
     "beginning-of-surah": "Relisez-le",
+    "cta": "Lire la suite",
     "day-streak": "Série d'un jour",
     "days-streak": "Série de jours",
     "explore": "Explorer",
@@ -86,7 +87,7 @@
     "title": "Sauvegardez votre progression"
   },
   "hadith": {
-    "notice": "Cette liste n'est pas exhaustive. <0>Al-Bukhari</0> et <1>Muslim</1> y figurent, et d'autres suivront bientôt, inshAllah.",
+    "notice": "Seuls les hadiths faisant explicitement référence à des versets coraniques sont inclus, et cette sélection n'est pas exhaustive. Les récits sont sélectionnés pour correspondre aux versets choisis dans <0>Sahih al-Bukhari</0> et <1>Sahih Muslim</1>, cités via Sunnah.com.",
     "title": "Hadith"
   },
   "hizb-beginning": "Début du Hizb",
