@@ -44,6 +44,16 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
   const { data, isLoading, error, hasData, refetch } = useLayeredTranslationData(verseKey);
   const scaleClass = styles[`layers-font-size-${quranReaderStyles.layersFontScale}`];
 
+  // Determine expandability based on actual rendered content differences.
+  const isExpandable = useMemo(() => {
+    if (!data?.groups?.length) return false;
+
+    // Check if any option has different collapsed vs expanded HTML
+    return data.groups.some((group) =>
+      group.options.some((option) => option.collapsedHtml.trim() !== option.expandedHtml.trim()),
+    );
+  }, [data?.groups]);
+
   const [layerMode, setLayerMode] = useState<LayerMode>(LayerMode.Collapsed);
   const [selectedOptionByGroup, setSelectedOptionByGroup] = useState<Record<string, string>>({});
   const [activeGroupKey, setActiveGroupKey] = useState<string | null>(null);
@@ -190,7 +200,11 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
 
   return (
     <div className={classNames(styles.container, scaleClass)}>
-      <LayerControls layerMode={layerMode} setLayerMode={setLayerMode} />
+      <LayerControls
+        layerMode={layerMode}
+        setLayerMode={setLayerMode}
+        isExpandable={isExpandable}
+      />
 
       {data.resource.description && (
         <div>

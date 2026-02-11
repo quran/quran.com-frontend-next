@@ -25,6 +25,7 @@
   "bismillah": "Dengan Nama Allah Yang Maha Pengasih dan Maha Penyayang",
   "change-translation": "Ubah Terjemahan",
   "clear-pinned": "Hapus Semua",
+  "collection-empty": "Koleksi kosong",
   "collections": "Koleksi",
   "compare-verses": "Membandingkan",
   "copy-arabic": "Teks Arab (teks Utsmani)",
@@ -46,6 +47,7 @@
     "achieve-quran-goals-desktop": "Lacak Rentetan Prestasi, Buat Sasaran Khusus, Pertahankan Konsistensi",
     "achieve-quran-goals-responsive": "Raih Tujuan Anda dalam Al-Quran",
     "beginning-of-surah": "Baca lagi",
+    "cta": "Lanjutkan Membaca",
     "day-streak": "Rentetan hari",
     "days-streak": "Rentetan hari",
     "explore": "Mengeksplorasi",
@@ -86,7 +88,7 @@
     "title": "Simpan Kemajuan Anda"
   },
   "hadith": {
-    "notice": "Daftar ini tidak lengkap. <0>Al-Bukhari</0> dan <1>Muslim</1> termasuk di dalamnya, dan akan ada lebih banyak lagi yang menyusul segera, insya Allah.",
+    "notice": "Hanya hadits yang secara eksplisit merujuk pada ayat-ayat Al-Quran yang disertakan, dan pilihan ini tidak lengkap. Riwayat-riwayat tersebut dikurasi agar sesuai dengan ayat-ayat yang dipilih dari <0>Sahih al-Bukhari</0> dan <1>Sahih Muslim</1>, yang dikutip melalui Sunnah.com.",
     "title": "Hadits"
   },
   "hizb-beginning": "Awal Hizb",

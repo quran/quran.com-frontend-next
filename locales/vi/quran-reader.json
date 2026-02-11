@@ -25,6 +25,7 @@
   "bismillah": "Nhân danh Allah - Đấng Rất Mực Độ Lượng, Đấng Rất Mực Khoan Dung",
   "change-translation": "Thay đổi bản dịch",
   "clear-pinned": "Xóa tất cả",
+  "collection-empty": "Bộ sưu tập trống",
   "collections": "Bộ sưu tập",
   "compare-verses": "So sánh",
   "copy-arabic": "Văn bản tiếng Ả Rập (Văn bản Uthmani)",
@@ -46,6 +47,7 @@
     "achieve-quran-goals-desktop": "Giữ chuỗi liên tục, Đặt mục tiêu riêng, Luyện tính kiên trì",
     "achieve-quran-goals-responsive": "Đạt mục tiêu với Kinh Qur'an",
     "beginning-of-surah": "Đọc lại",
+    "cta": "Tiếp tục đọc",
     "day-streak": "Chuỗi ngày",
     "days-streak": "Chuỗi ngày",
     "explore": "Khám phá",
@@ -86,7 +88,7 @@
     "title": "Lưu lại tiến trình của bạn"
   },
   "hadith": {
-    "notice": "Danh sách này chưa đầy đủ. <0>Al-Bukhari</0> và <1>Muslim</1> đã được bao gồm, và sẽ sớm có thêm nhiều tác phẩm khác nữa, InshAllah.",
+    "notice": "Chỉ những hadith đề cập rõ ràng đến các câu trong Kinh Qur'an mới được đưa vào, và sự lựa chọn này không phải là toàn diện. Các câu chuyện được chọn lọc để phù hợp với các câu đã chọn từ <0>Sahih al-Bukhari</0> và <1>Sahih Muslim</1>, được trích dẫn qua Sunnah.com.",
     "title": "Hadith"
   },
   "hizb-beginning": "Mở đầu Hizb",

@@ -25,6 +25,7 @@
   "bismillah": "In the Name of Allah—the Most Compassionate, Most Merciful",
   "change-translation": "Change Translation",
   "clear-pinned": "Clear All",
+  "collection-empty": "Collection is empty",
   "collections": "Collections",
   "compare-verses": "Compare",
   "copy-arabic": "Arabic text (Uthmani text)",
@@ -46,6 +47,7 @@
     "achieve-quran-goals-desktop": "Track Streaks, Create Custom Goals, Stay Consistent",
     "achieve-quran-goals-responsive": "Achieve Your Quran Goals",
     "beginning-of-surah": "Read again",
+    "cta": "Continue Reading",
     "day-streak": "Day streak",
     "days-streak": "Days streak",
     "explore": "Explore",
@@ -86,7 +88,7 @@
     "title": "Save Your Progress"
   },
   "hadith": {
-    "notice": "This list is not exhaustive. <0>Al-Bukhari</0> and <1>Muslim</1> are included, with more to come soon, insha'Allah.",
+    "notice": "Only hadith that explicitly reference Quranic verses are included, and this selection is not exhaustive. Narrations are curated to match the chosen verses from <0>Sahih al-Bukhari</0> and <1>Sahih Muslim</1>, cited via Sunnah.com.",
     "title": "Hadith"
   },
   "hizb-beginning": "Beginning of Hizb",

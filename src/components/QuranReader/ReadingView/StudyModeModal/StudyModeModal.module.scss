@@ -249,6 +249,10 @@ div.bottomSheetOverlay {
 
 // Bottom sheet content - full height from bottom (double div for higher specificity)
 div div.bottomSheetContent {
+  @include breakpoints.smallerThanTablet {
+    block-size: 95dvh;
+    max-block-size: 95dvh;
+  }
   @include breakpoints.tablet {
     border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
     block-size: 95vh;
@@ -263,6 +267,12 @@ div div.bottomSheetContent {
 
 // Inner content scrollable for bottom sheet mode
 div.bottomSheetInnerContent {
+  @include breakpoints.smallerThanTablet {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-block-size: 0;
+  }
   @include breakpoints.tablet {
     flex: 1;
     overflow-y: auto;

@@ -2,13 +2,13 @@ import React, { useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useSWRConfig } from 'swr';
-import useSWRImmutable from 'swr/immutable';
+import useSWR, { useSWRConfig } from 'swr';
 
 import loadCollectionVerses from './loadCollectionVerses';
 
 import CollectionsList from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsList';
 import { CollectionItem } from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsListItem';
+import { useCollectionsState } from '@/components/Verse/SaveBookmarkModal/Collections/hooks/useCollectionsState';
 import styles from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal.module.scss';
 import SaveBookmarkModalHeader from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModalHeader';
 import { ModalSize } from '@/dls/Modal/Content';
@@ -16,8 +16,9 @@ import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logErrorToSentry } from '@/lib/sentry';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { CollectionListSortOption } from '@/types/CollectionSortOptions';
 import { getMushafId } from '@/utils/api';
-import { privateFetcher } from '@/utils/auth/api';
+import { getCollectionsList } from '@/utils/auth/api';
 import { makeCollectionsUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
@@ -36,34 +37,25 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
-  const [selectedCollectionId, setSelectedCollectionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { data: collectionsData, isValidating: isLoadingCollections } = useSWRImmutable<{
+  const { data: collectionsData, isValidating: isLoadingCollections } = useSWR<{
     data: Collection[];
-  }>(isOpen ? makeCollectionsUrl({ type: BookmarkType.Ayah }) : null, privateFetcher);
+  }>(isOpen ? makeCollectionsUrl({ type: BookmarkType.Ayah }) : null, () =>
+    getCollectionsList({ sortBy: CollectionListSortOption.Alphabetical }),
+  );
 
-  const rawCollections = collectionsData?.data || [];
-
-  const collectionItems: CollectionItem[] = [...rawCollections]
-    .sort((a, b) => {
-      const aTime = new Date(a.updatedAt || 0).getTime();
-      const bTime = new Date(b.updatedAt || 0).getTime();
-      return bTime - aTime;
-    })
-    .map((c) => ({
-      id: c.id,
-      name: c.name,
-      checked: selectedCollectionId === c.id,
-      updatedAt: c.updatedAt,
-    }));
+  const { sortedCollections } = useCollectionsState({
+    isVerse: true,
+    collectionListData: collectionsData,
+    bookmarkCollectionIdsData: undefined,
+  });
 
   const handleCollectionToggle = useCallback(
     async (collection: CollectionItem) => {
       if (isLoading) return;
 
       logButtonClick('load_from_collection_confirm');
-      setSelectedCollectionId(collection.id);
       setIsLoading(true);
 
       try {
@@ -74,8 +66,7 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
           globalMutate,
         );
         if (verseKeys.length === 0) {
-          toast(t('collection:empty'), { status: ToastStatus.Warning });
-          setIsLoading(false);
+          toast(t('collection-empty'), { status: ToastStatus.Warning });
           return;
         }
         toast(t('verses-loaded-successfully'), { status: ToastStatus.Success });
@@ -93,29 +84,24 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
     [dispatch, isLoading, onClose, t, toast, mushafId, globalMutate],
   );
 
-  const handleClose = useCallback(() => {
-    setSelectedCollectionId(null);
-    onClose();
-  }, [onClose]);
-
   return (
     <Modal
       isOpen={isOpen}
-      onClickOutside={handleClose}
-      onEscapeKeyDown={handleClose}
+      onClickOutside={onClose}
+      onEscapeKeyDown={onClose}
       isBottomSheetOnMobile
       size={ModalSize.MEDIUM}
       contentClassName={styles.modal}
     >
       <Modal.Body>
         <div className={styles.container}>
-          <SaveBookmarkModalHeader title={t('load-from-collection')} onClose={handleClose} />
+          <SaveBookmarkModalHeader title={t('load-from-collection')} onClose={onClose} />
           <CollectionsList
-            collections={collectionItems}
+            collections={sortedCollections}
             isDataReady={!isLoadingCollections}
             isTogglingFavorites={false}
             onCollectionToggle={handleCollectionToggle}
-            onNewCollectionClick={() => {}}
+            hideNewCollection
           />
         </div>
       </Modal.Body>

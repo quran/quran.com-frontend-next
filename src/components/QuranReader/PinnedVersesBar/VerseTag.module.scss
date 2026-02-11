@@ -1,9 +1,9 @@
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-xxsmall2-px);
+  gap: var(--spacing-small2-px);
   padding-block: var(--spacing-xxsmall-px);
-  padding-inline: var(--spacing-medium-px);
+  padding-inline: var(--spacing-small2-px);
   background: transparent;
   border: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
   border-radius: var(--border-radius-pill);
@@ -57,8 +57,8 @@
 }
 
 .closeIcon {
-  inline-size: 11px;
-  block-size: 14px;
+  inline-size: calc(var(--spacing-small-px) + var(--spacing-micro2-px));
+  block-size: calc(var(--spacing-small2-px) + var(--spacing-micro-px));
   color: var(--color-text-link-new);
   fill: var(--color-text-link-new);
 }

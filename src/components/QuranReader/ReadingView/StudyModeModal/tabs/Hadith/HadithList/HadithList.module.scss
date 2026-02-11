@@ -15,8 +15,14 @@ $hadith-font-line-height: 1.6;
 }
 
 .notice {
+  position: relative;
+  padding: var(--spacing-medium);
+  margin-block-end: var(--spacing-xsmall);
+  background: var(--color-success-faded);
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-success-faint);
+  font-size: min(var(--hadith-dynamic-font-size), var(--font-size-normal));
   color: var(--color-text-default-new);
-  font-size: inherit;
 
   a {
     color: var(--color-text-link-new);

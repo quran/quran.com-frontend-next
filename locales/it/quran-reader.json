@@ -25,6 +25,7 @@
   "bismillah": "Nel nome di Allah, il Compassionevole, il Misericordioso",
   "change-translation": "Cambia traduzione",
   "clear-pinned": "Cancella tutto",
+  "collection-empty": "La raccolta è vuota",
   "collections": "Collezioni",
   "compare-verses": "Confrontare",
   "copy-arabic": "Testo arabo (testo Uthmani)",
@@ -46,6 +47,7 @@
     "achieve-quran-goals-desktop": "Tieni traccia delle serie, crea obiettivi personalizzati, mantieni la coerenza",
     "achieve-quran-goals-responsive": "Raggiungi i tuoi obiettivi coranici",
     "beginning-of-surah": "Leggi di nuovo",
+    "cta": "Continua a leggere",
     "day-streak": "Serie di giorni",
     "days-streak": "Serie di giorni",
     "explore": "Esplorare",
@@ -86,7 +88,7 @@
     "title": "Salva i tuoi progressi"
   },
   "hadith": {
-    "notice": "Questo elenco non è esaustivo. Sono inclusi <0>Al-Bukhari</0> e <1>Muslim</1>, e presto ne arriveranno altri, inshAllah.",
+    "notice": "Sono inclusi solo gli hadith che fanno esplicito riferimento ai versetti coranici, e questa selezione non è esaustiva. Le narrazioni sono curate in modo da corrispondere ai versetti scelti da <0>Sahih al-Bukhari</0> e <1>Sahih Muslim</1>, citati tramite Sunnah.com.",
     "title": "Hadith"
   },
   "hizb-beginning": "Inizio dell'Hizb",
