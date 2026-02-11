@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import loadCollectionVerses from './loadCollectionVerses';
 
 import CollectionsList from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsList';
 import { CollectionItem } from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsListItem';
+import { useCollectionsState } from '@/components/Verse/SaveBookmarkModal/Collections/hooks/useCollectionsState';
 import styles from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal.module.scss';
 import SaveBookmarkModalHeader from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModalHeader';
 import { ModalSize } from '@/dls/Modal/Content';
@@ -43,27 +44,31 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
     data: Collection[];
   }>(isOpen ? makeCollectionsUrl({ type: BookmarkType.Ayah }) : null, privateFetcher);
 
-  const rawCollections = collectionsData?.data || [];
+  const { sortedCollections } = useCollectionsState({
+    isVerse: true,
+    collectionListData: collectionsData,
+    bookmarkCollectionIdsData: undefined,
+  });
 
-  const collectionItems: CollectionItem[] = [...rawCollections]
-    .sort((a, b) => {
-      const aTime = new Date(a.updatedAt || 0).getTime();
-      const bTime = new Date(b.updatedAt || 0).getTime();
-      return bTime - aTime;
-    })
-    .map((c) => ({
-      id: c.id,
-      name: c.name,
-      checked: selectedCollectionId === c.id,
-      updatedAt: c.updatedAt,
-    }));
+  const collectionItems: CollectionItem[] = useMemo(
+    () =>
+      sortedCollections.map((c) => ({
+        ...c,
+        checked: selectedCollectionId === c.id,
+      })),
+    [sortedCollections, selectedCollectionId],
+  );
+
+  const handleClose = useCallback(() => {
+    setSelectedCollectionId(null);
+    onClose();
+  }, [onClose]);
 
   const handleCollectionToggle = useCallback(
     async (collection: CollectionItem) => {
       if (isLoading) return;
 
       logButtonClick('load_from_collection_confirm');
-      setSelectedCollectionId(collection.id);
       setIsLoading(true);
 
       try {
@@ -74,12 +79,11 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
           globalMutate,
         );
         if (verseKeys.length === 0) {
-          toast(t('collection:empty'), { status: ToastStatus.Warning });
-          setIsLoading(false);
+          toast(t('collection-empty'), { status: ToastStatus.Warning });
           return;
         }
         toast(t('verses-loaded-successfully'), { status: ToastStatus.Success });
-        onClose();
+        handleClose();
       } catch (error) {
         logErrorToSentry(error, { transactionName: 'loadFromCollection' });
         toast(t('common:error.general'), {
@@ -90,13 +94,8 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
         setIsLoading(false);
       }
     },
-    [dispatch, isLoading, onClose, t, toast, mushafId, globalMutate],
+    [dispatch, isLoading, handleClose, t, toast, mushafId, globalMutate],
   );
-
-  const handleClose = useCallback(() => {
-    setSelectedCollectionId(null);
-    onClose();
-  }, [onClose]);
 
   return (
     <Modal
@@ -116,6 +115,7 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
             isTogglingFavorites={false}
             onCollectionToggle={handleCollectionToggle}
             onNewCollectionClick={() => {}}
+            hideNewCollection
           />
         </div>
       </Modal.Body>

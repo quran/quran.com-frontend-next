@@ -15,6 +15,7 @@ interface CollectionsListProps {
   isTogglingFavorites: boolean;
   onCollectionToggle: (collection: CollectionItem, checked: boolean) => Promise<void>;
   onNewCollectionClick: () => void;
+  hideNewCollection?: boolean;
 }
 
 /**
@@ -28,6 +29,7 @@ const CollectionsList: React.FC<CollectionsListProps> = ({
   isTogglingFavorites,
   onCollectionToggle,
   onNewCollectionClick,
+  hideNewCollection = false,
 }) => {
   const { t } = useTranslation('quran-reader');
 
@@ -45,15 +47,17 @@ const CollectionsList: React.FC<CollectionsListProps> = ({
     <div className={styles.collectionsSection}>
       <div className={styles.collectionsHeader}>
         <span className={styles.collectionsTitle}>{t('collections')}</span>
-        <Button
-          variant={ButtonVariant.Ghost}
-          size={ButtonSize.Small}
-          onClick={onNewCollectionClick}
-          className={styles.newCollectionButton}
-        >
-          <PlusIcon className={styles.plusIcon} />
-          {t('new-collection')}
-        </Button>
+        {!hideNewCollection && (
+          <Button
+            variant={ButtonVariant.Ghost}
+            size={ButtonSize.Small}
+            onClick={onNewCollectionClick}
+            className={styles.newCollectionButton}
+          >
+            <PlusIcon className={styles.plusIcon} />
+            {t('new-collection')}
+          </Button>
+        )}
       </div>
 
       <div className={styles.collectionsList}>
