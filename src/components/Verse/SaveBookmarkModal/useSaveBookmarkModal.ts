@@ -117,6 +117,7 @@ const useSaveBookmarkModal = ({
     isVerse,
     collectionListData: bookmarkData.collectionListData,
     bookmarkCollectionIdsData: bookmarkData.bookmarkCollectionIdsData,
+    sortingMode: 'saveBookmark',
   });
 
   // Handler hooks

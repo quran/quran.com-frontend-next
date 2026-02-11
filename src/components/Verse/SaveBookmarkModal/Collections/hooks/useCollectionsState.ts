@@ -26,6 +26,7 @@ interface UseCollectionsStateParams {
   isVerse: boolean;
   collectionListData: CollectionListData | undefined;
   bookmarkCollectionIdsData: string[] | undefined;
+  sortingMode?: 'legacy' | 'saveBookmark';
 }
 
 interface UseCollectionsStateReturn {
@@ -43,6 +44,7 @@ export const useCollectionsState = ({
   isVerse,
   collectionListData,
   bookmarkCollectionIdsData,
+  sortingMode = 'legacy',
 }: UseCollectionsStateParams): UseCollectionsStateReturn => {
   const commonT = useTranslation('common').t;
 
@@ -94,8 +96,44 @@ export const useCollectionsState = ({
       }
     });
 
-    return collections;
-  }, [collectionListData, bookmarkCollectionIdsData, isInFavorites, commonT, isVerse]);
+    if (sortingMode !== 'saveBookmark') {
+      return collections;
+    }
+
+    const toUpdatedAtMs = (updatedAt?: string): number | null => {
+      if (!updatedAt) return null;
+      const parsed = Date.parse(updatedAt);
+      return Number.isFinite(parsed) ? parsed : null;
+    };
+
+    const compareByRecentUpdateThenName = (a: CollectionItem, b: CollectionItem): number => {
+      const aUpdatedAtMs = toUpdatedAtMs(a.updatedAt);
+      const bUpdatedAtMs = toUpdatedAtMs(b.updatedAt);
+
+      // Sort by newest updatedAt first; unknown dates go last.
+      if (aUpdatedAtMs === null && bUpdatedAtMs === null) {
+        return a.name.localeCompare(b.name);
+      }
+      if (aUpdatedAtMs === null) return 1;
+      if (bUpdatedAtMs === null) return -1;
+      if (aUpdatedAtMs !== bUpdatedAtMs) return bUpdatedAtMs - aUpdatedAtMs;
+      return a.name.localeCompare(b.name);
+    };
+
+    const selectedCollections = collections
+      .filter((collection) => collection.checked)
+      .sort(compareByRecentUpdateThenName);
+
+    const unselectedCollections = collections.filter((collection) => !collection.checked);
+    const favoritesCollection = unselectedCollections.find((collection) => collection.isDefault);
+    const remainingUnselectedCollections = unselectedCollections
+      .filter((collection) => !collection.isDefault)
+      .sort(compareByRecentUpdateThenName);
+
+    return favoritesCollection
+      ? [...selectedCollections, favoritesCollection, ...remainingUnselectedCollections]
+      : [...selectedCollections, ...remainingUnselectedCollections];
+  }, [collectionListData, bookmarkCollectionIdsData, isInFavorites, commonT, isVerse, sortingMode]);
 
   return {
     isInFavorites,
