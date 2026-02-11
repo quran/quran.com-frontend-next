@@ -61,8 +61,16 @@ const isValidVerse = (
   verse: Partial<PendingBookmarkModalVerse> | null | undefined,
 ): verse is PendingBookmarkModalVerse => {
   if (!verse) return false;
-  if (!verse.chapterId) return false;
-  if (!Number.isFinite(Number(verse.verseNumber))) return false;
+  // Validate chapterId: must be a finite integer between 1 and 114
+  const chapterIdNumber = Number(verse.chapterId);
+  if (!Number.isInteger(chapterIdNumber) || chapterIdNumber < 1 || chapterIdNumber > 114) {
+    return false;
+  }
+  // Validate verseNumber: must be a finite positive integer
+  const verseNumberNumber = Number(verse.verseNumber);
+  if (!Number.isInteger(verseNumberNumber) || verseNumberNumber < 1) {
+    return false;
+  }
   if (!verse.verseKey || typeof verse.verseKey !== 'string') return false;
 
   return true;
@@ -74,8 +82,10 @@ const isValidPayload = (
   if (!payload) return false;
   if (!isValidVerse(payload.verse)) return false;
   if (!payload.verseKey || typeof payload.verseKey !== 'string') return false;
+  if (payload.verse.verseKey !== payload.verseKey) return false;
   if (!payload.redirectUrl || typeof payload.redirectUrl !== 'string') return false;
   if (!Number.isFinite(payload.createdAt)) return false;
+  if (payload.createdAt > Date.now()) return false;
   if (Date.now() - payload.createdAt > MAX_PENDING_AGE_MS) return false;
   return true;
 };
