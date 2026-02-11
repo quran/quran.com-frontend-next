@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -37,7 +37,6 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
-  const [selectedCollectionId, setSelectedCollectionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const { data: collectionsData, isValidating: isLoadingCollections } = useSWRImmutable<{
@@ -49,20 +48,6 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
     collectionListData: collectionsData,
     bookmarkCollectionIdsData: undefined,
   });
-
-  const collectionItems: CollectionItem[] = useMemo(
-    () =>
-      sortedCollections.map((c) => ({
-        ...c,
-        checked: selectedCollectionId === c.id,
-      })),
-    [sortedCollections, selectedCollectionId],
-  );
-
-  const handleClose = useCallback(() => {
-    setSelectedCollectionId(null);
-    onClose();
-  }, [onClose]);
 
   const handleCollectionToggle = useCallback(
     async (collection: CollectionItem) => {
@@ -83,7 +68,7 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
           return;
         }
         toast(t('verses-loaded-successfully'), { status: ToastStatus.Success });
-        handleClose();
+        onClose();
       } catch (error) {
         logErrorToSentry(error, { transactionName: 'loadFromCollection' });
         toast(t('common:error.general'), {
@@ -94,27 +79,26 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
         setIsLoading(false);
       }
     },
-    [dispatch, isLoading, handleClose, t, toast, mushafId, globalMutate],
+    [dispatch, isLoading, onClose, t, toast, mushafId, globalMutate],
   );
 
   return (
     <Modal
       isOpen={isOpen}
-      onClickOutside={handleClose}
-      onEscapeKeyDown={handleClose}
+      onClickOutside={onClose}
+      onEscapeKeyDown={onClose}
       isBottomSheetOnMobile
       size={ModalSize.MEDIUM}
       contentClassName={styles.modal}
     >
       <Modal.Body>
         <div className={styles.container}>
-          <SaveBookmarkModalHeader title={t('load-from-collection')} onClose={handleClose} />
+          <SaveBookmarkModalHeader title={t('load-from-collection')} onClose={onClose} />
           <CollectionsList
-            collections={collectionItems}
+            collections={sortedCollections}
             isDataReady={!isLoadingCollections}
             isTogglingFavorites={false}
             onCollectionToggle={handleCollectionToggle}
-            onNewCollectionClick={() => {}}
             hideNewCollection
           />
         </div>

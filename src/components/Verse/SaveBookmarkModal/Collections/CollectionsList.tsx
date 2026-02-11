@@ -14,7 +14,7 @@ interface CollectionsListProps {
   isDataReady: boolean;
   isTogglingFavorites: boolean;
   onCollectionToggle: (collection: CollectionItem, checked: boolean) => Promise<void>;
-  onNewCollectionClick: () => void;
+  onNewCollectionClick?: () => void;
   hideNewCollection?: boolean;
 }
 
