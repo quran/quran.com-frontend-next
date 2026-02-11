@@ -7,7 +7,7 @@ import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes'
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
-const getNewCollectionNameRules = (t: any, fieldName: string) => [
+export const getNewCollectionNameRules = (t: any, fieldName: string) => [
   {
     type: RuleType.Required,
     value: true,

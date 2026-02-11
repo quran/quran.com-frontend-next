@@ -1,16 +1,14 @@
 /* eslint-disable i18next/no-literal-string */
 
+import { useCallback } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './RenameCollectionModal.module.scss';
 
-import {
-  COLLECTION_NAME_MAX_LENGTH,
-  COLLECTION_NAME_MIN_LENGTH,
-} from '@/components/Collection/collectionNameValidation';
+import { getNewCollectionNameRules } from '@/components/Collection/SaveToCollectionModal/getNewCollectionNameFormFields';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import Modal from '@/dls/Modal/Modal';
-import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
 export type Collection = {
@@ -33,6 +31,17 @@ const RenameCollectionModal = ({
   onClose,
 }: RenameCollectionModalProps) => {
   const { t } = useTranslation('profile');
+  const fieldName = t('collection:collection-name');
+  const handleSubmit = useCallback(
+    (data: { name: string }) => {
+      const trimmedName = data?.name?.trim();
+      if (!trimmedName) return;
+
+      onSubmit({ ...data, name: trimmedName });
+    },
+    [onSubmit],
+  );
+
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose} isBottomSheetOnMobile={false}>
       <Modal.Body>
@@ -44,36 +53,12 @@ const RenameCollectionModal = ({
                 field: 'name',
                 placeholder: t('quran-reader:new-collection-name'),
                 defaultValue,
-                rules: [
-                  {
-                    type: RuleType.Required,
-                    value: true,
-                    errorMessage: t('common:errors.required', {
-                      fieldName: t('collection:collection-name'),
-                    }),
-                  },
-                  {
-                    type: RuleType.MinimumLength,
-                    value: COLLECTION_NAME_MIN_LENGTH,
-                    errorMessage: t('common:errors.min', {
-                      fieldName: t('collection:collection-name'),
-                      min: COLLECTION_NAME_MIN_LENGTH,
-                    }),
-                  },
-                  {
-                    type: RuleType.MaximumLength,
-                    value: COLLECTION_NAME_MAX_LENGTH,
-                    errorMessage: t('common:errors.max', {
-                      fieldName: t('collection:collection-name'),
-                      max: COLLECTION_NAME_MAX_LENGTH,
-                    }),
-                  },
-                ],
+                rules: getNewCollectionNameRules(t, fieldName),
                 type: FormFieldType.Text,
               },
             ]}
             actionText={t('common:submit')}
-            onSubmit={onSubmit}
+            onSubmit={handleSubmit}
           />
         </div>
       </Modal.Body>

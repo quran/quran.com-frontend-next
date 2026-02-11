@@ -9,10 +9,12 @@ import RenameCollectionModal from './RenameCollectionModal';
 import { RuleType } from 'types/FieldRule';
 
 let capturedFormFields: Array<{ field: string; defaultValue?: string; rules?: unknown[] }> = [];
+let capturedOnSubmit: ((data: { name: string }) => void) | undefined;
 
 vi.mock('@/components/FormBuilder/FormBuilder', () => ({
-  default: ({ formFields }) => {
+  default: ({ formFields, onSubmit }) => {
     capturedFormFields = formFields;
+    capturedOnSubmit = onSubmit;
     return <div data-testid="form-builder" />;
   },
 }));
@@ -39,10 +41,11 @@ vi.mock('next-translate/useTranslation', () => ({
 afterEach(() => {
   cleanup();
   capturedFormFields = [];
+  capturedOnSubmit = undefined;
 });
 
 describe('RenameCollectionModal', () => {
-  it('applies required + min(1) + max(255) validation rules to name field', () => {
+  it('applies required + min(1) + max(255) + non-whitespace validation rules to name field', () => {
     render(
       <RenameCollectionModal
         isOpen
@@ -59,6 +62,46 @@ describe('RenameCollectionModal', () => {
       { type: RuleType.Required, value: true, errorMessage: 'REQUIRED_Collection name' },
       { type: RuleType.MinimumLength, value: 1, errorMessage: 'MIN_1' },
       { type: RuleType.MaximumLength, value: 255, errorMessage: 'MAX_255' },
+      {
+        name: 'hasNonWhitespace',
+        type: RuleType.Regex,
+        value: '\\S',
+        errorMessage: 'REQUIRED_Collection name',
+      },
     ]);
+  });
+
+  it('trims the submitted name before forwarding it', () => {
+    const onSubmit = vi.fn();
+    render(
+      <RenameCollectionModal
+        isOpen
+        defaultValue="My collection"
+        onSubmit={onSubmit}
+        onClose={vi.fn()}
+      />,
+    );
+
+    expect(capturedOnSubmit).toBeDefined();
+    capturedOnSubmit?.({ name: '  New name  ' });
+
+    expect(onSubmit).toHaveBeenCalledWith({ name: 'New name' });
+  });
+
+  it('does not submit whitespace-only names', () => {
+    const onSubmit = vi.fn();
+    render(
+      <RenameCollectionModal
+        isOpen
+        defaultValue="My collection"
+        onSubmit={onSubmit}
+        onClose={vi.fn()}
+      />,
+    );
+
+    expect(capturedOnSubmit).toBeDefined();
+    capturedOnSubmit?.({ name: '   ' });
+
+    expect(onSubmit).not.toHaveBeenCalled();
   });
 });
