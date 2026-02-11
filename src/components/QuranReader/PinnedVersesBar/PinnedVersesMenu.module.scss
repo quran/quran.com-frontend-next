@@ -5,10 +5,6 @@
   border-radius: var(--spacing-xxsmall-px);
   min-inline-size: auto;
   z-index: var(--z-index-modal);
-
-  [data-theme='dark'] & {
-    box-shadow: var(--shadow-pinned-item);
-  }
 }
 
 .menuItem {
