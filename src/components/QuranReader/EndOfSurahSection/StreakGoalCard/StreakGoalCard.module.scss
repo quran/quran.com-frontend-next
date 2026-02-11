@@ -28,6 +28,13 @@
   justify-content: center;
   overflow: hidden;
 
+  @include breakpoints.smallerThanMobileL {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    place-items: center;
+    min-block-size: fit-content;
+  }
+
   @include breakpoints.smallerThanTablet {
     flex-direction: row;
     align-items: center;
