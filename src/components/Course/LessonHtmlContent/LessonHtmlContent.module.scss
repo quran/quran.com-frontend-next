@@ -5,8 +5,15 @@
   border-radius: var(--border-radius-default);
 }
 
-.container {
-  :global(.quran-widget) {
-    margin-block: var(--spacing-medium);
+.container :global(.quran-widget) {
+  margin-block: var(--spacing-medium);
+
+  :global([class*='translation-font-size-']),
+  :global([class*='translation-font-size-']) p {
+    font-size: 18px !important;
+  }
+
+  :global([class*='translationName']) {
+    font-size: 14px !important;
   }
 }
