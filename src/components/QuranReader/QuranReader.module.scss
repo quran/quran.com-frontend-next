@@ -34,7 +34,7 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .container {
-  overflow-x: hidden;
+  overflow: hidden;
   @include breakpoints.smallerThanTablet {
     padding-block-start: $quran-reader-padding-mobile;
   }
