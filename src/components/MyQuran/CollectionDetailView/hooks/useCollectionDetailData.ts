@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useSWR, { mutate as globalMutate } from 'swr';
