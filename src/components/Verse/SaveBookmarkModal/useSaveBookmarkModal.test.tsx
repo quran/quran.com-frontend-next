@@ -1,15 +1,20 @@
 /* eslint-disable max-lines */
 import React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import useSaveBookmarkModal from './useSaveBookmarkModal';
 
+import { broadcastBookmarksUpdate } from '@/hooks/useBookmarksBroadcast';
 import { ReadingBookmarkType } from '@/types/Bookmark';
 import { toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
 
 let mockLang = 'en';
+const mockMutateAllData = vi.fn();
+const mockMutateCollectionListData = vi.fn();
+const mockAddCollection = vi.fn();
+const mockAddCollectionBookmark = vi.fn();
 
 vi.mock('@/dls/Toast/Toast', () => ({
   useToast: () => vi.fn(),
@@ -51,10 +56,11 @@ vi.mock('@/utils/api', async (importOriginal) => {
 vi.mock('./useSaveBookmarkData', () => ({
   useSaveBookmarkData: () => ({
     resourceBookmark: null,
-    collectionListData: [],
+    collectionListData: { data: [] },
     bookmarkCollectionIdsData: [],
     currentReadingBookmark: null,
-    mutateAllData: vi.fn(),
+    mutateAllData: mockMutateAllData,
+    mutateCollectionListData: mockMutateCollectionListData,
     mutateResourceBookmark: vi.fn(),
     mutateBookmarkCollectionIdsData: vi.fn(),
   }),
@@ -69,9 +75,15 @@ vi.mock('./Collections/hooks/useCollectionToggle', () => ({
   }),
 }));
 vi.mock('@/utils/auth/login', () => ({ isLoggedIn: () => false }));
+vi.mock('@/hooks/useBookmarksBroadcast', () => ({ broadcastBookmarksUpdate: vi.fn() }));
+vi.mock('@/utils/auth/api', () => ({
+  addCollection: (...args: unknown[]) => mockAddCollection(...args),
+  addCollectionBookmark: (...args: unknown[]) => mockAddCollectionBookmark(...args),
+}));
 
 beforeEach(() => {
   mockLang = 'en';
+  vi.clearAllMocks();
 });
 
 const HookProbe: React.FC<{
@@ -162,10 +174,6 @@ describe('useSaveBookmarkModal modal title localization', () => {
 });
 
 describe('useSaveBookmarkModal take note', () => {
-  beforeEach(() => {
-    mockDispatch.mockClear();
-  });
-
   it('dispatches openNotesModal action with correct payload for verse', () => {
     let capturedHooks: ReturnType<typeof useSaveBookmarkModal> | null = null;
     const verseKey = '2:255';
@@ -215,5 +223,54 @@ describe('useSaveBookmarkModal take note', () => {
     expect(dispatchedAction.payload.verseKey).toBe('3:15');
     expect(dispatchedAction.payload.modalType).toBe('addNote');
     expect(dispatchedAction.payload.previousModalType).toBe('saveBookmark');
+  });
+});
+
+describe('useSaveBookmarkModal create collection sync', () => {
+  it('broadcasts bookmark update after creating collection and adding verse', async () => {
+    mockAddCollection.mockResolvedValue({ id: 'col-1' });
+    mockAddCollectionBookmark.mockResolvedValue({});
+
+    let capturedHooks: ReturnType<typeof useSaveBookmarkModal> | null = null;
+    render(
+      <HookProbe
+        type={ReadingBookmarkType.AYAH}
+        verse={{ chapterId: 2, verseNumber: 255 }}
+        onTestHook={(hooks) => {
+          capturedHooks = hooks;
+        }}
+      />,
+    );
+
+    act(() => {
+      capturedHooks?.setNewCollectionName('My Collection');
+    });
+    await act(async () => {
+      await Promise.resolve();
+    });
+    await act(async () => {
+      await capturedHooks?.handleCreateCollection();
+    });
+
+    expect(mockAddCollection).toHaveBeenCalledWith('My Collection');
+    expect(mockAddCollectionBookmark).toHaveBeenCalledWith(
+      expect.objectContaining({
+        key: 2,
+        verseNumber: 255,
+        collectionId: 'col-1',
+      }),
+    );
+    expect(broadcastBookmarksUpdate).toHaveBeenCalledWith(
+      expect.objectContaining({
+        touchesCollectionsList: true,
+        touchesBookmarksList: true,
+        touchesBookmarkCollections: true,
+        touchesCollectionDetail: true,
+        affectedCollectionIds: ['col-1'],
+        affectedSurahNumbers: [2],
+        mushafId: 2,
+      }),
+    );
+    expect(mockMutateAllData).toHaveBeenCalledTimes(1);
   });
 });
