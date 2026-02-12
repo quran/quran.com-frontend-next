@@ -20,7 +20,7 @@ const NavigationDrawerBody = dynamic(() => import('./NavigationDrawerBody'), {
 });
 
 const NavigationDrawer = () => {
-  const { isNavigationDrawerOpen } = useSelector(selectNavbar, shallowEqual);
+  const { isNavigationDrawerOpen, isLanguageDrawerOpen } = useSelector(selectNavbar, shallowEqual);
   const isUserLoggedIn = isLoggedIn();
 
   return (
@@ -37,8 +37,11 @@ const NavigationDrawer = () => {
           </div>
         </div>
       }
+      canCloseDrawer={!isLanguageDrawerOpen}
     >
-      {isNavigationDrawerOpen && <NavigationDrawerBody />}
+      {isNavigationDrawerOpen && (
+        <NavigationDrawerBody isLanguageDrawerOpen={isLanguageDrawerOpen} />
+      )}
     </Drawer>
   );
 };

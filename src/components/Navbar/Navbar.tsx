@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useSelector, shallowEqual } from 'react-redux';
 
+import LanguageDrawer from './LanguageDrawer/LanguageDrawer';
 import MobileStickyItemsBar from './MobileStickyItemsBar';
 import styles from './Navbar.module.scss';
 import NavbarBody from './NavbarBody';
@@ -14,6 +15,7 @@ import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import useDebounceNavbarVisibility from '@/hooks/useDebounceNavbarVisibility';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
 import {
+  selectIsLanguageDrawerOpen,
   selectIsNavigationDrawerOpen,
   selectIsSettingsDrawerOpen,
   selectNavbar,
@@ -25,6 +27,7 @@ const Navbar = () => {
   const isBannerVisible = useSelector(selectIsBannerVisible);
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
+  const isLanguageDrawerOpen = useSelector(selectIsLanguageDrawerOpen);
   // Use the shared hook to debounce navbar visibility changes
   const showNavbar = useDebounceNavbarVisibility(isNavbarVisible, isActive);
 
@@ -35,7 +38,7 @@ const Navbar = () => {
       <nav
         className={classNames(styles.container, {
           [styles.hiddenNav]: !showNavbar,
-          [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen,
+          [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen,
         })}
         data-testid="navbar"
         data-isvisible={showNavbar}
@@ -46,6 +49,7 @@ const Navbar = () => {
       <SearchDrawer />
       <SettingsDrawer />
       <NavigationDrawer />
+      <LanguageDrawer />
     </>
   );
 };
