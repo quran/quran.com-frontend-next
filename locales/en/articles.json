@@ -1,6 +1,7 @@
 {
   "title": "Articles",
-  "description": "Explore essays and guides about the Quran and life around it.",
+  "description": "Explore pages about the Quran and life around it.",
+  "read_more": "View page \u2192",
   "items": {
     "about-the-quran": {
       "title": "About the Quran",

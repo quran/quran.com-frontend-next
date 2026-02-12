@@ -40,10 +40,10 @@ const MENUS: MenuItem[] = [
     eventName: 'navigation_drawer_about',
   },
   {
-    title: 'articles',
+    title: 'explore',
     icon: <IconArrowRight />,
-    href: '/articles',
-    eventName: 'navigation_drawer_articles',
+    href: '/explore',
+    eventName: 'navigation_drawer_explore',
   },
   {
     title: 'product-updates',
