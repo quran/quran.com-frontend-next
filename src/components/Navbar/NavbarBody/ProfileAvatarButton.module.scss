@@ -1,6 +1,9 @@
+.loginButtonContainer {
+  margin-inline-end: var(--spacing-small-px);
+}
+
 .loginButton {
   min-inline-size: max-content;
-  margin-inline-end: var(--spacing-medium2-px);
 }
 
 .bookmarkIcon > path {

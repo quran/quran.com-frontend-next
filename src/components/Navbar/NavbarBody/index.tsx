@@ -166,6 +166,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
         )}
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>
+            {!isLoggedIn && <ProfileAvatarButton />}
             <Button
               tooltip={t('languages')}
               variant={ButtonVariant.Ghost}
@@ -177,7 +178,6 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             >
               <IconGlobe />
             </Button>
-            {!isLoggedIn && <ProfileAvatarButton />}
             <Button
               tooltip={t('search.title')}
               variant={ButtonVariant.Ghost}
