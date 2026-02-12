@@ -28,7 +28,11 @@ const EVENT_NAMES = {
   NAV_DRAWER_DONATE: 'navigation_drawer_donate',
 } as const;
 
-const NavigationDrawerBody = (): JSX.Element => {
+interface NavigationDrawerBodyProps {
+  isLanguageDrawerOpen: boolean;
+}
+
+const NavigationDrawerBody = ({ isLanguageDrawerOpen }: NavigationDrawerBodyProps): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
 
@@ -43,7 +47,11 @@ const NavigationDrawerBody = (): JSX.Element => {
 
   return (
     <div className={styles.listItemsContainer} data-testid="navigation-drawer-body">
-      <div className={styles.mainListItems}>
+      <div
+        className={styles.mainListItems}
+        aria-hidden={isLanguageDrawerOpen}
+        inert={isLanguageDrawerOpen || undefined}
+      >
         <div className={styles.listItems}>
           <NavigationDrawerList
             accordionHeaderLeftClassName={styles.accordionHeaderLeft}

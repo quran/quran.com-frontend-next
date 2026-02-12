@@ -39,7 +39,9 @@ const NavigationDrawer = () => {
       }
       canCloseDrawer={!isLanguageDrawerOpen}
     >
-      {isNavigationDrawerOpen && <NavigationDrawerBody />}
+      {isNavigationDrawerOpen && (
+        <NavigationDrawerBody isLanguageDrawerOpen={isLanguageDrawerOpen} />
+      )}
     </Drawer>
   );
 };
