@@ -3,11 +3,10 @@ import React from 'react';
 
 import classNames from 'classnames';
 
+import { SWIPE_THRESHOLD } from './constants';
 import styles from './FlashCardDeck.module.scss';
 
 import { FlashCardData } from '@/components/Course/FlashCards/types';
-
-const SWIPE_THRESHOLD = 100;
 
 type ActiveCardProps = {
   card: FlashCardData;

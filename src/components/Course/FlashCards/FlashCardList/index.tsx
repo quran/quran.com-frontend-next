@@ -12,33 +12,24 @@ type FlashCardListProps = {
   className?: string;
 };
 
+const toggleInSet = <T,>(set: Set<T>, item: T) => {
+  const nextSet = new Set(set);
+  if (nextSet.has(item)) nextSet.delete(item);
+  else nextSet.add(item);
+  return nextSet;
+};
+
 const FlashCardList: React.FC<FlashCardListProps> = ({ cards, className }) => {
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [masteredCards, setMasteredCards] = useState<Set<string>>(new Set());
 
   const toggleExpand = (cardId: string) => {
-    setExpandedCards((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(cardId)) {
-        newSet.delete(cardId);
-      } else {
-        newSet.add(cardId);
-      }
-      return newSet;
-    });
+    setExpandedCards((prev) => toggleInSet(prev, cardId));
   };
 
   const toggleMastered = (cardId: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    setMasteredCards((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(cardId)) {
-        newSet.delete(cardId);
-      } else {
-        newSet.add(cardId);
-      }
-      return newSet;
-    });
+    setMasteredCards((prev) => toggleInSet(prev, cardId));
   };
 
   const expandAll = () => {
@@ -85,6 +76,7 @@ const FlashCardList: React.FC<FlashCardListProps> = ({ cards, className }) => {
               })}
               onClick={() => toggleExpand(card.id)}
               onKeyDown={(e) => {
+                if (e.target !== e.currentTarget) return;
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
                   toggleExpand(card.id);

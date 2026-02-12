@@ -68,7 +68,8 @@ function parseWordParagraph(html: string): Omit<FlashCardData, 'id'> | null {
   const transliterationMatch = html.match(/<em[^>]*>(.*?)<\/em>/i);
   const transliteration = transliterationMatch ? stripHtmlTags(transliterationMatch[1]).trim() : '';
 
-  const translationMatch = html.match(/\)\s*-\s*([\s\S]+?)$/);
+  const translationMatch =
+    html.match(/\)\s*[-–—]\s*([\s\S]+?)$/) || html.match(/\s[-–—]\s*([\s\S]+?)$/);
   let translation = '';
   if (translationMatch) {
     translation = stripHtmlTags(translationMatch[1])

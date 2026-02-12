@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import styles from './LessonHtmlContent.module.scss';
 import VerseChunkWidget from './VerseChunkWidget';
@@ -49,9 +49,11 @@ const renderHtml = (html: string, keyPrefix = '') =>
   renderChunks(parseContentChunks(html), keyPrefix);
 
 const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
+  const flashcardData = useMemo(
+    () => (language === 'en' ? parseFlashcardsFromHtml(content) : null),
+    [content, language],
+  );
   if (language !== 'en') return <HtmlContent html={content} />;
-
-  const flashcardData = parseFlashcardsFromHtml(content);
   if (flashcardData) {
     const {
       component: FlashCardComponent,
@@ -67,7 +69,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
             <h4 className={styles.flashcardTitle}>{title}</h4>
             <span className={styles.flashcardSubtitle}>{subtitle}</span>
           </div>
-          <FlashCardComponent cards={flashcardData.flashcards} />
+          <FlashCardComponent key={content} cards={flashcardData.flashcards} />
         </div>
         {flashcardData.afterHtml && renderHtml(flashcardData.afterHtml, 'after-')}
       </div>

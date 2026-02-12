@@ -185,20 +185,30 @@
 }
 
 .dot {
-  inline-size: 8px;
-  block-size: 8px;
-  border-radius: var(--border-radius-circle);
+  inline-size: 32px;
+  block-size: 32px;
   border: none;
-  background-color: var(--color-borders-hairline);
+  background-color: transparent;
   cursor: pointer;
   padding: 0;
-  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &:hover {
+  &::before {
+    content: '';
+    inline-size: 8px;
+    block-size: 8px;
+    border-radius: var(--border-radius-circle);
+    background-color: var(--color-borders-hairline);
+    transition: all 0.2s ease;
+  }
+
+  &:hover::before {
     background-color: var(--color-text-faded);
   }
 
-  &.activeDot {
+  &.activeDot::before {
     background-color: var(--color-primary-medium);
     transform: scale(1.2);
   }

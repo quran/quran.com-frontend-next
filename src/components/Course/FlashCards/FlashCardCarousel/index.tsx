@@ -1,5 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 
 import classNames from 'classnames';
 
@@ -42,30 +42,15 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
 
   const navigate = useCallback(
     (dir: -1 | 1) => {
-      setCurrentIndex((i) => {
-        const next = i + dir;
-        if (next >= 0 && next < cards.length) {
-          scrollToIndex(next);
-          return next;
-        }
-        return i;
-      });
+      if (!containerRef.current) return;
+      const current = Math.round(
+        containerRef.current.scrollLeft / containerRef.current.offsetWidth,
+      );
+      const next = current + dir;
+      if (next >= 0 && next < cards.length) scrollToIndex(next);
     },
     [cards.length, scrollToIndex],
   );
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') navigate(-1);
-      else if (e.key === 'ArrowRight') navigate(1);
-      else if (e.key === ' ' || e.key === 'Enter') {
-        e.preventDefault();
-        toggleFlip(currentIndex);
-      }
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [navigate, toggleFlip, currentIndex]);
 
   return (
     <div className={classNames(styles.container, className)}>
@@ -87,7 +72,13 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
                 className={classNames(styles.card, { [styles.flipped]: flippedCards.has(index) })}
                 onClick={() => toggleFlip(index)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                  if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    navigate(document.documentElement.dir === 'rtl' ? 1 : -1);
+                  } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    navigate(document.documentElement.dir === 'rtl' ? -1 : 1);
+                  } else if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     toggleFlip(index);
                   }

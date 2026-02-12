@@ -1,10 +1,12 @@
 import React, { useState, useRef, useCallback } from 'react';
 
+import { SWIPE_ANIMATION_MS, SWIPE_THRESHOLD } from './constants';
+
 import { FlashCardData } from '@/components/Course/FlashCards/types';
 
-type SwipeDirection = 'left' | 'right' | null;
+type SwipeDirection = 'left' | 'right';
+type DeckResults = { known: FlashCardData[]; unknown: FlashCardData[] };
 
-const SWIPE_THRESHOLD = 100;
 const DEFAULT_CARD = { isFlipped: false, isSwiping: false, offsetX: 0, offsetY: 0, rotation: 0 };
 
 const getClientPos = (e: React.TouchEvent | React.MouseEvent) => {
@@ -14,11 +16,15 @@ const getClientPos = (e: React.TouchEvent | React.MouseEvent) => {
 
 export default function useSwipeDeck(
   cards: FlashCardData[],
-  onComplete?: (r: { known: FlashCardData[]; unknown: FlashCardData[] }) => void,
+  onComplete?: (r: DeckResults) => void,
 ) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardState, setCardState] = useState(DEFAULT_CARD);
-  const [results, setResults] = useState<{ known: FlashCardData[]; unknown: FlashCardData[] }>({
+  const [results, setResults] = useState<DeckResults>({
+    known: [],
+    unknown: [],
+  });
+  const resultsRef = useRef<DeckResults>({
     known: [],
     unknown: [],
   });
@@ -33,20 +39,21 @@ export default function useSwipeDeck(
     (direction: SwipeDirection) => {
       if (!currentCard || isAnimating) return;
       setIsAnimating(true);
-      const nr = { known: [...results.known], unknown: [...results.unknown] };
-      if (direction === 'right') nr.known.push(currentCard);
-      else nr.unknown.push(currentCard);
-      setResults(nr);
+      const nextResults: DeckResults = { ...resultsRef.current };
+      if (direction === 'right') nextResults.known = [...nextResults.known, currentCard];
+      else nextResults.unknown = [...nextResults.unknown, currentCard];
+      resultsRef.current = nextResults;
+      setResults(nextResults);
       const sign = direction === 'right' ? 1 : -1;
       setCardState((prev) => ({ ...prev, offsetX: sign * 500, rotation: sign * 30 }));
       setTimeout(() => {
         setCurrentIndex((prev) => prev + 1);
         setCardState(DEFAULT_CARD);
         setIsAnimating(false);
-        if (currentIndex + 1 >= cards.length && onComplete) onComplete(nr);
-      }, 300);
+        if (currentIndex + 1 >= cards.length && onComplete) onComplete(nextResults);
+      }, SWIPE_ANIMATION_MS);
     },
-    [currentCard, currentIndex, cards.length, results, onComplete, isAnimating],
+    [currentCard, currentIndex, cards.length, onComplete, isAnimating],
   );
 
   const handleStart = useCallback(
@@ -92,7 +99,8 @@ export default function useSwipeDeck(
 
   const handleRestart = () => {
     setCurrentIndex(0);
-    setResults({ known: [], unknown: [] });
+    resultsRef.current = { known: [], unknown: [] };
+    setResults(resultsRef.current);
     setCardState(DEFAULT_CARD);
   };
 
