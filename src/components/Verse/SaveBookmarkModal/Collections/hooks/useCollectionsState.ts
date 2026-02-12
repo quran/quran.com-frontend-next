@@ -34,6 +34,10 @@ interface UseCollectionsStateReturn {
   sortedCollections: CollectionItem[];
 }
 
+interface CollectionItemWithUpdatedAtMs extends CollectionItem {
+  updatedAtMs: number | null;
+}
+
 /**
  * Custom hook to manage collections state and derived values
  * Computes isInFavorites and sortedCollections
@@ -106,25 +110,34 @@ export const useCollectionsState = ({
       return Number.isFinite(parsed) ? parsed : null;
     };
 
-    const compareByRecentUpdateThenName = (a: CollectionItem, b: CollectionItem): number => {
-      const aUpdatedAtMs = toUpdatedAtMs(a.updatedAt);
-      const bUpdatedAtMs = toUpdatedAtMs(b.updatedAt);
-
+    const compareByRecentUpdateThenName = (
+      a: CollectionItemWithUpdatedAtMs,
+      b: CollectionItemWithUpdatedAtMs,
+    ): number => {
       // Sort by newest updatedAt first; unknown dates go last.
-      if (aUpdatedAtMs === null && bUpdatedAtMs === null) {
+      if (a.updatedAtMs === null && b.updatedAtMs === null) {
         return a.name.localeCompare(b.name);
       }
-      if (aUpdatedAtMs === null) return 1;
-      if (bUpdatedAtMs === null) return -1;
-      if (aUpdatedAtMs !== bUpdatedAtMs) return bUpdatedAtMs - aUpdatedAtMs;
+      if (a.updatedAtMs === null) return 1;
+      if (b.updatedAtMs === null) return -1;
+      if (a.updatedAtMs !== b.updatedAtMs) return b.updatedAtMs - a.updatedAtMs;
       return a.name.localeCompare(b.name);
     };
 
-    const selectedCollections = collections
+    const collectionsWithUpdatedAtMs: CollectionItemWithUpdatedAtMs[] = collections.map(
+      (collection) => ({
+        ...collection,
+        updatedAtMs: toUpdatedAtMs(collection.updatedAt),
+      }),
+    );
+
+    const selectedCollections = collectionsWithUpdatedAtMs
       .filter((collection) => collection.checked)
       .sort(compareByRecentUpdateThenName);
 
-    const unselectedCollections = collections.filter((collection) => !collection.checked);
+    const unselectedCollections = collectionsWithUpdatedAtMs.filter(
+      (collection) => !collection.checked,
+    );
     const favoritesCollection = unselectedCollections.find((collection) => collection.isDefault);
     const remainingUnselectedCollections = unselectedCollections
       .filter((collection) => !collection.isDefault)
