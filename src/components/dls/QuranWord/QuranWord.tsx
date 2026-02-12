@@ -373,6 +373,7 @@ const QuranWord = ({
                 icon={<ArrowIcon />}
                 isOpen={isTooltipOpen ? true : undefined}
                 defaultStyling={false}
+                tooltipDelay={800}
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
                 tooltipType={tooltipType || TooltipType.SUCCESS}
