@@ -44,6 +44,13 @@ describe('flashcardParser', () => {
       expect(result?.afterHtml).toContain('<h3>Next section</h3>');
     });
 
+    it('does not match an earlier h3 before the word-by-word heading', () => {
+      const html = `<h3>Introduction</h3><p>Intro body</p>${makeSection()}<h3>Next section</h3><p>After</p>`;
+      const result = parseFlashcardsFromHtml(html);
+      expect(result?.beforeHtml).toBe('<h3>Introduction</h3><p>Intro body</p>');
+      expect(result?.afterHtml).toContain('<h3>Next section</h3>');
+    });
+
     it('parses arabic, transliteration and translation', () => {
       const result = parseFlashcardsFromHtml(makeSection());
       const card = result?.flashcards[0];

@@ -13,7 +13,8 @@ export default function parseFlashcardsFromHtml(html: string): {
   afterHtml: string;
   variant: FlashCardVariant;
 } | null {
-  const headingRegex = /<h3[^>]*>[\s\S]*?Word-by-word\s+breakdown[\s\S]*?<\/h3>/i;
+  const headingRegex =
+    /<h3[^>]*>(?:(?!<\/h3>)[\s\S])*?Word-by-word\s+breakdown(?:(?!<\/h3>)[\s\S])*?<\/h3>/i;
   const headingMatch = html.match(headingRegex);
 
   if (!headingMatch || headingMatch.index === undefined) return null;
