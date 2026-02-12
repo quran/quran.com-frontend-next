@@ -92,11 +92,20 @@ $line-height-relaxed: 1.6;
     font-style: italic;
   }
 
+  ul,
   ol {
     display: block;
-    list-style-type: decimal;
     margin-block-end: var(--spacing-medium);
-    padding-inline-start: calc(2 * var(--spacing-large));
+    // hard coded em to make it small and big relative to font size
+    padding-inline-start: 1.5em;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  ul {
+    list-style-type: disc;
   }
 
   li {
