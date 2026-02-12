@@ -1,0 +1,47 @@
+@use 'src/styles/breakpoints';
+
+.page {
+  max-inline-size: 70ch;
+  margin: 0 auto;
+}
+
+.backButtonWrapper {
+  max-inline-size: 70ch;
+  margin: 0 auto;
+  margin-block-end: var(--spacing-medium);
+
+  @include breakpoints.desktop {
+    inline-size: 65%;
+  }
+  @include breakpoints.smallerThanDesktop {
+    padding-block-start: var(--banner-height);
+    inline-size: 90%;
+  }
+}
+
+.backText {
+  padding-inline-start: var(--spacing-micro);
+}
+
+.hero {
+  margin-block: var(--spacing-medium2);
+  border-radius: var(--border-radius-medium-px);
+  overflow: hidden;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.pageBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+
+  p {
+    margin-block-end: var(--spacing-medium);
+  }
+}
