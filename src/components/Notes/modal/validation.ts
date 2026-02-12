@@ -7,20 +7,6 @@ import { toLocalizedNumber } from '@/utils/locale';
 export const MIN_NOTE_LENGTH = 6;
 export const MAX_NOTE_LENGTH = 10000;
 
-/**
- * Checks whether the provided response object contains the specified key with the given value.
- *
- * @param {unknown} response - The object to inspect.
- * @param {string} key - The key to check for in the object.
- * @param {unknown} value - The value to compare against the value at the specified key.
- * @returns {boolean} True if the key exists in the object and its value matches the provided value, false otherwise.
- */
-export const isKeyAndValuePresent = (response: unknown, key: string, value: unknown): boolean => {
-  if (response === null || typeof response !== 'object') return false;
-  const responseObj = response as Record<string, unknown>;
-  return key in responseObj && responseObj[key] === value;
-};
-
 export enum NoteFormErrorId {
   RequiredField = 'required-field',
   MinimumLength = 'minimum-length',

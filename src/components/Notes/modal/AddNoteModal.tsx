@@ -14,9 +14,10 @@ import {
   isNotePublishFailed,
   addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
-import { getNoteServerErrors, isKeyAndValuePresent } from '@/components/Notes/modal/validation';
+import { getNoteServerErrors } from '@/components/Notes/modal/validation';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { addNote } from '@/utils/auth/api';
+import { isValidationError } from '@/utils/error';
 import { verseKeysToRanges } from '@/utils/verseKeys';
 
 interface AddNoteModalProps {
@@ -60,33 +61,34 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
     try {
       const data = await addNote({ body: noteBody, ranges, saveToQR: isPublic });
 
-      const isNotSuccess = isKeyAndValuePresent(data, 'success', false);
-      const isFailedToPublish = isNotePublishFailed(data) && !isNotSuccess;
+      const hasValidationError = isValidationError(data);
+      const isFailedToPublish = isNotePublishFailed(data);
       const noteFromResponse = getNoteFromResponse(data);
+
+      if (hasValidationError) return getNoteServerErrors(data, t, lang);
 
       if (isFailedToPublish) {
         toast(t('notes:save-publish-failed'), { status: ToastStatus.Error });
-      } else if (!isNotSuccess && noteFromResponse?.id.toString() && noteFromResponse?.createdAt) {
+      } else if (noteFromResponse?.id && noteFromResponse?.createdAt) {
         toast(t('notes:save-success'), { status: ToastStatus.Success });
       } else {
-        return getNoteServerErrors(data, t, lang);
+        throw data;
       }
 
-      invalidateCache({
+      const isPrivate = isFailedToPublish || !isPublic;
+
+      return invalidateCache({
         mutate,
         cache,
         verseKeys,
-        note:
-          isFailedToPublish || !isPublic
-            ? noteFromResponse
-            : addReflectionEntityToNote(noteFromResponse, LOADING_POST_ID),
+        note: isPrivate
+          ? noteFromResponse
+          : addReflectionEntityToNote(noteFromResponse, LOADING_POST_ID),
         invalidateCount: true,
         invalidateReflections: isPublic,
         flushNotesList: true,
         action: CacheAction.CREATE,
       });
-
-      return null;
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
       throw error;

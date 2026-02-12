@@ -14,11 +14,12 @@ import {
   CacheAction,
   addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
-import { getNoteServerErrors, isKeyAndValuePresent } from '@/components/Notes/modal/validation';
+import { getNoteServerErrors } from '@/components/Notes/modal/validation';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { Note } from '@/types/auth/Note';
 import { updateNote } from '@/utils/auth/api';
+import { isValidationError } from '@/utils/error';
 import { verseRangesToVerseKeys } from '@/utils/verseKeys';
 
 interface EditNoteModalProps {
@@ -49,16 +50,18 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
     try {
       const data = await updateNote(note.id, noteBody, isPublic);
 
-      const isNotSuccess = isKeyAndValuePresent(data, 'success', false);
-      const isFailedToPublish = isNotePublishFailed(data) && !isNotSuccess;
+      const hasValidationError = isValidationError(data);
+      const isFailedToPublish = isNotePublishFailed(data);
       const noteFromResponse = getNoteFromResponse(data);
+
+      if (hasValidationError) return getNoteServerErrors(data, t, lang);
 
       if (isFailedToPublish) {
         toast(t('notes:update-publish-failed'), { status: ToastStatus.Error });
-      } else if (!isNotSuccess && noteFromResponse?.id.toString() && noteFromResponse?.updatedAt) {
+      } else if (noteFromResponse?.id && noteFromResponse?.updatedAt) {
         toast(t('notes:update-success'), { status: ToastStatus.Success });
       } else {
-        return getNoteServerErrors(data, t, lang);
+        throw data;
       }
 
       const noteToUpdate = { ...note, ...noteFromResponse };
