@@ -1,5 +1,3 @@
-@use 'src/styles/utility';
-
 .title {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
@@ -8,8 +6,4 @@
 
 .container {
   padding-block: var(--spacing-xsmall);
-}
-
-.description {
-  @include utility.kitabFontHtmlLang;
 }

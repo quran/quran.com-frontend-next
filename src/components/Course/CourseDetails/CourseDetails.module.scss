@@ -1,5 +1,4 @@
 @use 'src/styles/breakpoints';
-@use 'src/styles/utility';
 
 .backText {
   padding-inline-start: var(--spacing-micro);
@@ -40,7 +39,6 @@
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-jumbo);
   text-wrap: pretty;
-  @include utility.kitabFontHtmlLang;
 
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-large-px);
@@ -69,6 +67,7 @@
     margin-block-start: 0;
     margin-block-end: var(--spacing-medium2-px);
   }
+  padding-inline-end: var(--spacing-small);
 }
 
 .author {

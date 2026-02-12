@@ -19,7 +19,6 @@ interface Props {
   chapterName?: string;
   reference?: string;
   lang: string;
-  languageCode: string;
 }
 
 const TranslationAndReference: React.FC<Props> = ({
@@ -31,7 +30,6 @@ const TranslationAndReference: React.FC<Props> = ({
   chapterName,
   reference,
   lang,
-  languageCode,
 }) => {
   return (
     <div
@@ -41,7 +39,6 @@ const TranslationAndReference: React.FC<Props> = ({
         styles[direction],
         shouldShowReference && styles.textCenter,
       )}
-      lang={languageCode}
     >
       <div
         onClick={(event) => onTextClicked(event)}

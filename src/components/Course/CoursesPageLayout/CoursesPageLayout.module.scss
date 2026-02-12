@@ -1,5 +1,3 @@
-@use 'src/styles/utility';
-
 .container {
   display: flex;
   justify-content: center;
@@ -17,5 +15,4 @@
   text-align: center;
   padding-block-start: var(--spacing-small);
   padding-inline: var(--spacing-small);
-  @include utility.kitabFontHtmlLang;
 }

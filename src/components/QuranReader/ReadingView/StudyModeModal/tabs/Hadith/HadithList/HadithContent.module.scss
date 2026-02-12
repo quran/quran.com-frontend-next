@@ -26,7 +26,6 @@ $hadith-font-line-height: 1.6;
   flex-direction: column;
   gap: var(--spacing-medium-px);
   color: var(--color-text-default-new);
-  @include utility.kitabFontLang;
 
   p {
     margin: 0;

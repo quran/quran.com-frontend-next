@@ -138,7 +138,6 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
       {/* Safe: translationHtml comes from backend API and contains footnote markup */}
       <span
         className={styles.translationText}
-        lang={langData.code}
         dangerouslySetInnerHTML={{ __html: translationHtml }}
       />
       {!isLastVerse && !showFootnote && ' '}

@@ -915,21 +915,3 @@ $page-container-max-width: 80rem;
     display: none;
   }
 }
-
-@mixin kitabFontLang {
-  &[lang='ar'] {
-    font-family: 'Kitab';
-  }
-  &[lang='ar'] * {
-    font-family: inherit;
-  }
-}
-
-@mixin kitabFontHtmlLang {
-  :global(html[lang='ar']) & {
-    font-family: 'Kitab';
-  }
-  :global(html[lang='ar']) & * {
-    font-family: inherit;
-  }
-}

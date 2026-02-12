@@ -35,7 +35,6 @@ $translation-line-height: 1.5;
   direction: rtl;
   /* stylelint-disable-next-line csstools/use-logical */
   text-align: right;
-  @include utility.kitabFontLang;
 }
 
 .urdu {

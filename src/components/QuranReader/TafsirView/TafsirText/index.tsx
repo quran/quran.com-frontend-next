@@ -108,7 +108,7 @@ const TafsirText: React.FC<TafsirTextProps> = ({
         </div>
       )}
       <div
-        className={`${styles.text} ${FONT_SIZE_CLASS_MAP[tafsirFontScale]}`}
+        className={FONT_SIZE_CLASS_MAP[tafsirFontScale]}
         dir={direction}
         lang={languageCode}
         dangerouslySetInnerHTML={{ __html: text }}

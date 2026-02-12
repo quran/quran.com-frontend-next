@@ -1,15 +1,9 @@
-@use 'src/styles/utility';
-
 .counter {
   margin-block-end: var(--spacing-xsmall);
   font-size: initial;
   [dir='rtl'] & {
     direction: rtl;
   }
-}
-
-.text {
-  @include utility.kitabFontLang;
 }
 
 .xs {
