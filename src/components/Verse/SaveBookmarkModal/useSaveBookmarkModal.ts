@@ -6,7 +6,10 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 import { CollectionItem } from './Collections/CollectionsListItem';
-import { useCollectionsState } from './Collections/hooks/useCollectionsState';
+import {
+  COLLECTIONS_SORTING_MODE,
+  useCollectionsState,
+} from './Collections/hooks/useCollectionsState';
 import { useCollectionToggle } from './Collections/hooks/useCollectionToggle';
 import { useSaveBookmarkData } from './useSaveBookmarkData';
 
@@ -117,7 +120,7 @@ const useSaveBookmarkModal = ({
     isVerse,
     collectionListData: bookmarkData.collectionListData,
     bookmarkCollectionIdsData: bookmarkData.bookmarkCollectionIdsData,
-    sortingMode: 'saveBookmark',
+    sortingMode: COLLECTIONS_SORTING_MODE.SAVE_BOOKMARK,
   });
 
   // Handler hooks

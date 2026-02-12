@@ -5,6 +5,14 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { DEFAULT_COLLECTION_ID } from '@/utils/auth/constants';
 
+export const COLLECTIONS_SORTING_MODE = {
+  LEGACY: 'legacy',
+  SAVE_BOOKMARK: 'saveBookmark',
+} as const;
+
+export type CollectionsSortingMode =
+  (typeof COLLECTIONS_SORTING_MODE)[keyof typeof COLLECTIONS_SORTING_MODE];
+
 interface CollectionItem {
   id: string;
   name: string;
@@ -26,7 +34,7 @@ interface UseCollectionsStateParams {
   isVerse: boolean;
   collectionListData: CollectionListData | undefined;
   bookmarkCollectionIdsData: string[] | undefined;
-  sortingMode?: 'legacy' | 'saveBookmark';
+  sortingMode?: CollectionsSortingMode;
 }
 
 interface UseCollectionsStateReturn {
@@ -48,7 +56,7 @@ export const useCollectionsState = ({
   isVerse,
   collectionListData,
   bookmarkCollectionIdsData,
-  sortingMode = 'legacy',
+  sortingMode = COLLECTIONS_SORTING_MODE.LEGACY,
 }: UseCollectionsStateParams): UseCollectionsStateReturn => {
   const commonT = useTranslation('common').t;
 
@@ -100,7 +108,7 @@ export const useCollectionsState = ({
       }
     });
 
-    if (sortingMode !== 'saveBookmark') {
+    if (sortingMode !== COLLECTIONS_SORTING_MODE.SAVE_BOOKMARK) {
       return collections;
     }
 

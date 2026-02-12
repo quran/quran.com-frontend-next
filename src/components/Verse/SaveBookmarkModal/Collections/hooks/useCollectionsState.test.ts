@@ -2,7 +2,11 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import { useCollectionsState } from './useCollectionsState';
+import {
+  COLLECTIONS_SORTING_MODE,
+  type CollectionsSortingMode,
+  useCollectionsState,
+} from './useCollectionsState';
 
 import { DEFAULT_COLLECTION_ID } from '@/utils/auth/constants';
 
@@ -34,7 +38,7 @@ const getSortedCollectionIds = ({
     data?: Array<{ id: string; name: string; updatedAt?: string; isDefault?: boolean }>;
   };
   bookmarkCollectionIdsData?: string[];
-  sortingMode?: 'legacy' | 'saveBookmark';
+  sortingMode?: CollectionsSortingMode;
 }) => {
   const { result } = renderHook(() =>
     useCollectionsState({
@@ -56,7 +60,7 @@ describe('useCollectionsState', () => {
         { id: 'c1', name: 'Collection 1', updatedAt: '2026-01-01T00:00:00Z' },
       ]),
       bookmarkCollectionIdsData: ['c1'],
-      sortingMode: 'saveBookmark',
+      sortingMode: COLLECTIONS_SORTING_MODE.SAVE_BOOKMARK,
     });
 
     expect(ids).toEqual([]);
@@ -71,7 +75,7 @@ describe('useCollectionsState', () => {
         { id: 'c-unselected', name: 'Unselected', updatedAt: '2026-02-01T00:00:00Z' },
       ]),
       bookmarkCollectionIdsData: ['c-old', 'c-new'],
-      sortingMode: 'saveBookmark',
+      sortingMode: COLLECTIONS_SORTING_MODE.SAVE_BOOKMARK,
     });
 
     expect(ids).toEqual(['c-new', 'c-old', DEFAULT_COLLECTION_ID, 'c-unselected']);
@@ -85,7 +89,7 @@ describe('useCollectionsState', () => {
         { id: 'c2', name: 'Collection 2', updatedAt: '2026-02-09T00:00:00Z' },
       ]),
       bookmarkCollectionIdsData: [DEFAULT_COLLECTION_ID, 'c1'],
-      sortingMode: 'saveBookmark',
+      sortingMode: COLLECTIONS_SORTING_MODE.SAVE_BOOKMARK,
     });
 
     expect(ids).toEqual([DEFAULT_COLLECTION_ID, 'c1', 'c2']);
@@ -101,7 +105,7 @@ describe('useCollectionsState', () => {
         { id: 'c-unselected-old', name: 'Unselected Old', updatedAt: '2026-02-10T00:00:00Z' },
       ]),
       bookmarkCollectionIdsData: ['c-selected'],
-      sortingMode: 'saveBookmark',
+      sortingMode: COLLECTIONS_SORTING_MODE.SAVE_BOOKMARK,
     });
 
     expect(ids).toEqual([
@@ -121,7 +125,7 @@ describe('useCollectionsState', () => {
         { id: 'c-gamma', name: 'Gamma', updatedAt: 'invalid-date' },
       ]),
       bookmarkCollectionIdsData: [],
-      sortingMode: 'saveBookmark',
+      sortingMode: COLLECTIONS_SORTING_MODE.SAVE_BOOKMARK,
     });
 
     expect(ids).toEqual([DEFAULT_COLLECTION_ID, 'c-alpha', 'c-beta', 'c-gamma']);
@@ -133,7 +137,7 @@ describe('useCollectionsState', () => {
         { id: 'c2', name: 'Collection 2', updatedAt: '2026-02-12T00:00:00Z' },
       ]),
       bookmarkCollectionIdsData: [],
-      sortingMode: 'saveBookmark',
+      sortingMode: COLLECTIONS_SORTING_MODE.SAVE_BOOKMARK,
     });
 
     expect(ids[0]).toBe(DEFAULT_COLLECTION_ID);
