@@ -1,7 +1,8 @@
 {
   "about": "About Us",
   "allow": "Allow",
-  "articles": "Articles",
+  "pages": "Pages",
+  "explore": "Explore",
   "and": "and",
   "announcements": {
     "auth-onboarding": {

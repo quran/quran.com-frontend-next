@@ -29,7 +29,7 @@
 **Rendering Strategy**
 
 - SSG (`getStaticProps`) for static + SEO content (Surah pages, articles)
-- ISR (`revalidate`) for periodic updates + SEO (reflection feeds)
+- ISR (`revalidate`) for periodic updates + SEO (reflection feeds, explore pages)
 - SSR (`getServerSideProps`) for user-specific + SEO (public profiles)
 - CSR (`useSWR` only) for private, no-SEO data (dashboard, bookmarks)
 
