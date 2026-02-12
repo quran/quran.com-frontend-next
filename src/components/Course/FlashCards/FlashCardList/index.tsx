@@ -12,7 +12,7 @@ type FlashCardListProps = {
   className?: string;
 };
 
-const toggleInSet = <T,>(set: Set<T>, item: T) => {
+const toggleInSet = (set: Set<string>, item: string) => {
   const nextSet = new Set(set);
   if (nextSet.has(item)) nextSet.delete(item);
   else nextSet.add(item);
@@ -32,31 +32,28 @@ const FlashCardList: React.FC<FlashCardListProps> = ({ cards, className }) => {
     setMasteredCards((prev) => toggleInSet(prev, cardId));
   };
 
-  const expandAll = () => {
-    setExpandedCards(new Set(cards.map((c) => c.id)));
-  };
-
-  const collapseAll = () => {
-    setExpandedCards(new Set());
-  };
-
-  const masteredCount = masteredCards.size;
-  const totalCount = cards.length;
-
   return (
     <div className={classNames(styles.container, className)}>
       <div className={styles.header}>
         <div className={styles.progressInfo}>
           <span className={styles.masteredCount}>
-            {masteredCount} / {totalCount}
+            {masteredCards.size} / {cards.length}
           </span>
           <span className={styles.masteredLabel}>mastered</span>
         </div>
         <div className={styles.headerActions}>
-          <button type="button" className={styles.headerButton} onClick={expandAll}>
+          <button
+            type="button"
+            className={styles.headerButton}
+            onClick={() => setExpandedCards(new Set(cards.map((c) => c.id)))}
+          >
             Expand All
           </button>
-          <button type="button" className={styles.headerButton} onClick={collapseAll}>
+          <button
+            type="button"
+            className={styles.headerButton}
+            onClick={() => setExpandedCards(new Set())}
+          >
             Collapse All
           </button>
         </div>

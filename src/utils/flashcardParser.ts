@@ -24,17 +24,9 @@ export default function parseFlashcardsFromHtml(html: string): {
 
   const afterHeadingContent = html.slice(headingEndIndex);
   const nextSectionMatch = afterHeadingContent.match(/<h3[^>]*>|<hr\s*\/?>/i);
-
-  let wordByWordHtml: string;
-  let afterHtml: string;
-
-  if (nextSectionMatch && nextSectionMatch.index !== undefined) {
-    wordByWordHtml = afterHeadingContent.slice(0, nextSectionMatch.index);
-    afterHtml = afterHeadingContent.slice(nextSectionMatch.index);
-  } else {
-    wordByWordHtml = afterHeadingContent;
-    afterHtml = '';
-  }
+  const splitAt = nextSectionMatch?.index ?? afterHeadingContent.length;
+  const wordByWordHtml = afterHeadingContent.slice(0, splitAt);
+  const afterHtml = afterHeadingContent.slice(splitAt);
 
   const flashcards = extractFlashcardsFromSection(wordByWordHtml);
   if (flashcards.length === 0) return null;

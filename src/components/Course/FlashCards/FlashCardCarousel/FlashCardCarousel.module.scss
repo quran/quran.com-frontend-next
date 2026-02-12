@@ -1,11 +1,8 @@
 @use 'src/styles/breakpoints';
+@use '../shared' as shared;
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--spacing-medium);
-  inline-size: 100%;
+  @include shared.centeredContainer;
 }
 
 .carouselWrapper {
@@ -17,29 +14,41 @@
 }
 
 .carouselContainer {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
   flex: 1;
-  border-radius: var(--border-radius-rounded);
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.slideWrapper {
-  scroll-snap-align: center;
-  flex-shrink: 0;
-  inline-size: 100%;
   display: flex;
   justify-content: center;
   padding: var(--spacing-small);
+  overflow: hidden;
+}
+
+@keyframes slideFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slideNext {
+  animation: slideFromRight 0.25s ease-out;
+}
+
+.slidePrev {
+  animation: slideFromLeft 0.25s ease-out;
 }
 
 .card {
@@ -56,97 +65,7 @@
   }
 }
 
-.cardInner {
-  position: relative;
-  inline-size: 100%;
-  block-size: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease;
-
-  .flipped & {
-    transform: rotateY(180deg);
-  }
-}
-
-.cardFront,
-.cardBack {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-medium);
-  border-radius: var(--border-radius-rounded);
-  background-color: var(--color-background-elevated);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  border: 2px solid var(--color-borders-hairline);
-}
-
-.cardBack {
-  transform: rotateY(180deg);
-  background-color: var(--color-background-alternative-medium);
-  border-color: var(--color-primary-medium);
-}
-
-.arabicText {
-  font-family: var(--font-quran);
-  font-size: 1.75rem;
-  line-height: 1.6;
-  text-align: center;
-  color: var(--color-text-default);
-  direction: rtl;
-
-  @include breakpoints.tablet {
-    font-size: 2rem;
-  }
-}
-
-.arabicTextSmall {
-  font-family: var(--font-quran);
-  font-size: 1.125rem;
-  line-height: 1.4;
-  text-align: center;
-  color: var(--color-text-default);
-  direction: rtl;
-}
-
-.transliteration {
-  font-size: 0.875rem;
-  color: var(--color-text-faded);
-  margin-block-start: var(--spacing-xxsmall);
-  font-style: italic;
-}
-
-.transliterationSmall {
-  font-size: 0.75rem;
-  color: var(--color-text-faded);
-  font-style: italic;
-}
-
-.divider {
-  inline-size: 60%;
-  block-size: 1px;
-  background-color: var(--color-borders-hairline);
-  margin-block: var(--spacing-small);
-}
-
-.translation {
-  font-size: 1rem;
-  color: var(--color-text-default);
-  text-align: center;
-  font-weight: 500;
-}
-
-.hint {
-  position: absolute;
-  inset-block-end: var(--spacing-small);
-  font-size: 0.75rem;
-  color: var(--color-text-faded);
-  opacity: 0.7;
-}
+@include shared.cardContentStyles(0 4px 12px rgba(0, 0, 0, 0.1), 1.75rem, 2rem, 1.125rem, 1rem);
 
 .navButton {
   display: flex;
