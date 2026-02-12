@@ -11,7 +11,11 @@ import styles from './LanguageDrawer.module.scss';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useLanguageChange from '@/hooks/useLanguageChange';
 import IconArrowLeft from '@/icons/arrow-left.svg';
-import { selectIsNavigationDrawerOpen, setIsLanguageDrawerOpen } from '@/redux/slices/navbar';
+import {
+  selectIsNavigationDrawerOpen,
+  setIsLanguageDrawerOpen,
+  setIsNavigationDrawerOpen,
+} from '@/redux/slices/navbar';
 import { getLocaleName } from '@/utils/locale';
 import i18nConfig from 'i18n.json';
 
@@ -25,6 +29,7 @@ const LanguageDrawer = () => {
 
   const closeDrawer = useCallback(() => {
     dispatch(setIsLanguageDrawerOpen(false));
+    dispatch(setIsNavigationDrawerOpen(false));
   }, [dispatch]);
 
   const handleLanguageChange = useCallback(
