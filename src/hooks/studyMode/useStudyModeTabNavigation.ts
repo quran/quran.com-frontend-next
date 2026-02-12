@@ -14,6 +14,7 @@ import {
   getVerseAnswersNavigationUrl,
   getVerseQiraatNavigationUrl,
   getVerseLayersNavigationUrl,
+  getVerseHadithsNavigationUrl,
 } from '@/utils/navigation';
 
 interface UseStudyModeTabNavigationProps {
@@ -65,6 +66,9 @@ const useStudyModeTabNavigation = ({
       }
       if (tab === StudyModeTabId.QIRAAT) {
         return getVerseQiraatNavigationUrl(vk);
+      }
+      if (tab === StudyModeTabId.HADITH) {
+        return getVerseHadithsNavigationUrl(vk);
       }
       return null;
     },
