@@ -36,7 +36,7 @@ export default function parseFlashcardsFromHtml(html: string): {
 
 function extractFlashcardsFromSection(html: string): FlashCardData[] {
   const flashcards: FlashCardData[] = [];
-  const paragraphRegex = /<p[^>]*dir=["']rtl["'][^>]*>([\s\S]*?)<\/p>/gi;
+  const paragraphRegex = /<p[^>]*dir=["'](?:rtl|ltr)["'][^>]*>([\s\S]*?)<\/p>/gi;
   let match: RegExpExecArray | null;
 
   // eslint-disable-next-line no-cond-assign
