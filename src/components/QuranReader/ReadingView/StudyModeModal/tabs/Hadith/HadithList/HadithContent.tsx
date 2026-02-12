@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -20,7 +20,16 @@ const HadithContent: React.FC<HadithContentProps> = ({ enBody, arBody }) => {
   const isArabicLanguage = lang === Language.AR;
   const shouldShowToggle = !isArabicLanguage && arBody;
 
-  const handleToggle = () => setShowArabic((prev) => !prev);
+  const handleToggle = useCallback(() => setShowArabic((prev) => !prev), []);
+
+  const arTextContent = useMemo(
+    () => (arBody ? replaceBreaksWithSpans(arBody.toString()) : undefined),
+    [arBody],
+  );
+  const enTextContent = useMemo(
+    () => (enBody ? replaceBreaksWithSpans(enBody.toString()) : undefined),
+    [enBody],
+  );
 
   return (
     <div className={styles.container}>
@@ -30,22 +39,18 @@ const HadithContent: React.FC<HadithContentProps> = ({ enBody, arBody }) => {
             lang="en"
             className={styles.hadithBody}
             // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: replaceBreaksWithSpans(enBody.toString()),
-            }}
+            dangerouslySetInnerHTML={{ __html: enTextContent }}
           />
         )}
 
-        {arBody && (isArabicLanguage || showArabic) && (
+        {arTextContent && (isArabicLanguage || showArabic) && (
           <div
             data-lang="ar"
             lang="ar"
             dir="rtl"
             className={styles.hadithBody}
             // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: replaceBreaksWithSpans(arBody.toString()),
-            }}
+            dangerouslySetInnerHTML={{ __html: arTextContent }}
           />
         )}
       </div>
