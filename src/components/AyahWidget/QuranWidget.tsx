@@ -16,6 +16,7 @@ import WidgetContent from '@/components/AyahWidget/WidgetContent';
 import WidgetFooterActions from '@/components/AyahWidget/WidgetFooterActions';
 import WidgetHeader from '@/components/AyahWidget/WidgetHeader';
 import useQcfFont from '@/hooks/useQcfFont';
+import useWidgetInteractions from '@/hooks/widget/useWidgetInteractions';
 import { getQuranFontForMushaf } from '@/types/Embed';
 import type { WidgetOptions, WidgetColors, WidgetTrimOptions } from '@/types/Embed';
 import type Verse from 'types/Verse';
@@ -171,9 +172,11 @@ const QuranWidget = ({ verses, options, trim, children }: Props): JSX.Element =>
 
   // Convert widget mushaf option to QuranFont for VerseText component
   const quranFont = getQuranFontForMushaf(options.mushaf);
+  const widgetRef = React.useRef<HTMLDivElement | null>(null);
 
   // Use the existing font loading hook - this handles loading QCF fonts dynamically
-  useQcfFont(quranFont, trimmedVerses);
+  useQcfFont(quranFont, verses);
+  useWidgetInteractions(options, widgetRef);
 
   if (!trimmedVerses.length) {
     return <div />;
@@ -196,6 +199,7 @@ const QuranWidget = ({ verses, options, trim, children }: Props): JSX.Element =>
 
   return (
     <div
+      ref={widgetRef}
       className="quran-widget"
       data-theme={getThemeDataAttribute(options.theme)}
       data-copy-data={JSON.stringify(copyData)}
