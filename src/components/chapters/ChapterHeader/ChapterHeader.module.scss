@@ -223,6 +223,7 @@ $bismillahSvgInlineSizeMobile: 148px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  box-sizing: border-box;
 }
 
 .bismillahContainer {
@@ -247,12 +248,6 @@ $bismillahSvgInlineSizeMobile: 148px;
   @include breakpoints.smallerThanTablet {
     font-size: var(--spacing-small-px);
   }
-}
-
-.arabicSurahNameContainer {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .actionContainer {
@@ -289,52 +284,6 @@ $bismillahSvgInlineSizeMobile: 148px;
   align-items: center;
   // setting the value below to avoid the CLS issue when the surahnames font has not loaded yet
   min-block-size: calc(3.75 * var(--spacing-medium-plus-px));
-}
-
-.surahInfoTitle {
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-faded-new);
-  font-size: var(--font-size-large2);
-}
-
-// Need div to get higher specificity
-div {
-  &.surahInfoContent {
-    background-color: var(--color-background-elevated-new);
-
-    @include breakpoints.smallerThanTablet {
-      overflow-y: auto;
-    }
-  }
-
-  &.surahInfoHeader {
-    background-color: var(--color-background-elevated-new);
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    padding-block: 0;
-    border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
-
-    @include breakpoints.tablet {
-      min-block-size: var(--spacing-xxlarge-px);
-      align-items: flex-start;
-
-      .closeIconContainer {
-        inset-block-start: var(--spacing-small2-px);
-      }
-    }
-
-    @include breakpoints.smallerThanTablet {
-      min-block-size: calc(var(--spacing-medium-plus2-px) * 3);
-    }
-  }
-}
-
-.surahInfoHeader {
-  font-size: var(--font-size-large2);
-  font-weight: var(--font-weight-bold);
 }
 
 .chapterIconContainer {

@@ -45,7 +45,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
   } = useSurahInfo({ chapterId, initialResourceId });
 
   return (
-    <div className={styles.surahInfoModalContent} data-testid="surah-info-content">
+    <>
       <div className={styles.headerContainer}>
         <div className={styles.calligraphyContainer}>
           <ChapterIconContainer
@@ -135,7 +135,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
           }}
         />
       )}
-    </div>
+    </>
   );
 };
 

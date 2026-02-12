@@ -6,18 +6,112 @@ $calligraphy-offset: -0.875rem;
 $container-min-height: 200px;
 $line-height-relaxed: 1.6;
 
+div {
+  &.surahInfoOverlay {
+    --spacing-block: calc(1.5 * var(--spacing-mega));
+    --spacing-inline: var(--spacing-small);
+
+    @include breakpoints.tablet {
+      --spacing-inline: calc(1.5 * var(--spacing-mega));
+
+      overflow-y: hidden;
+      align-items: flex-end;
+      justify-items: center;
+      padding-block-start: 0;
+      padding-block-end: 0;
+    }
+  }
+
+  &.surahInfoHeader {
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding-block: 0;
+    background-color: var(--color-background-elevated-new);
+    min-block-size: calc(var(--spacing-medium-plus2-px) * 3);
+    border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-faded-new);
+    font-size: var(--font-size-large2);
+
+    .closeIconContainer {
+      inset-inline-end: 0;
+    }
+
+    @include breakpoints.tablet {
+      position: relative;
+      padding-inline: var(--spacing-inline);
+      min-block-size: var(--spacing-xxlarge-px);
+      align-items: flex-start;
+      border-block-end: 0;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset-block-end: 0;
+        inset-inline: var(--spacing-inline);
+        block-size: var(--spacing-hairline-px);
+        background-color: var(--color-separators-ayah-level);
+      }
+
+      .closeIconContainer {
+        inset-block-start: var(--spacing-small2-px);
+        inset-inline-end: calc(var(--spacing-inline) - var(--spacing-small-px));
+      }
+    }
+  }
+
+  &.surahInfoContent {
+    background-color: var(--color-background-elevated-new);
+    overflow-y: auto;
+
+    padding-inline: 0;
+
+    @include breakpoints.tablet {
+      padding-block: var(--spacing-block) 0;
+      overflow-y: unset;
+      border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+      block-size: 95vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding-block-end: 0;
+    }
+  }
+
+  &.surahInfoInnerContent {
+    overflow-y: auto;
+    padding-inline: 0;
+    padding-block-end: var(--spacing-block);
+  }
+}
+
 .headerContainer {
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: var(--spacing-xsmall);
   padding-block: var(--spacing-large-px);
-  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  padding-inline: var(--spacing-inline);
+  border-block-end: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline: var(--spacing-inline);
+    block-size: var(--spacing-hairline-px);
+    background-color: var(--color-separators-ayah-level);
+  }
 }
 
 .options {
   display: flex;
   gap: var(--spacing-medium2-px);
   margin-block: var(--spacing-medium2-px);
+  padding-inline-start: var(--spacing-inline);
 }
 
 .calligraphyContainer {
@@ -57,6 +151,7 @@ $line-height-relaxed: 1.6;
 
 .descriptionContainer {
   color: var(--color-text-default-new);
+  padding-inline: var(--spacing-inline);
 
   p,
   h2,
@@ -64,18 +159,6 @@ $line-height-relaxed: 1.6;
   li,
   em {
     line-height: $line-height-relaxed;
-  }
-
-  @include breakpoints.tablet {
-    /**
-    * Adds a small inline-end padding to create visual spacing
-    * between the content and the scrollbar.
-    */
-    padding-inline-end: var(--spacing-xxsmall);
-  }
-
-  @include breakpoints.smallerThanTablet {
-    margin-block-end: var(--spacing-max);
   }
 
   p {
@@ -92,11 +175,20 @@ $line-height-relaxed: 1.6;
     font-style: italic;
   }
 
+  ul,
   ol {
     display: block;
-    list-style-type: decimal;
     margin-block-end: var(--spacing-medium);
-    padding-inline-start: calc(2 * var(--spacing-large));
+    // hard coded em to make it small and big relative to font size
+    padding-inline-start: 1.5em;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  ul {
+    list-style-type: disc;
   }
 
   li {
@@ -122,59 +214,11 @@ $line-height-relaxed: 1.6;
   }
 }
 
-div {
-  &.bottomSheetOnDesktopOverlay {
-    @include breakpoints.tablet {
-      overflow-y: hidden;
-      align-items: flex-end;
-      justify-items: center;
-      padding-block-start: 0;
-      padding-block-end: 0;
-    }
-  }
-}
-
-div {
-  &.bottomSheetOnDesktopContent {
-    @include breakpoints.tablet {
-      border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
-      block-size: 95vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      margin-block-end: 0;
-      padding-block-end: 0;
-    }
-  }
-}
-
-div {
-  &.surahInfoModalContent {
-    @include breakpoints.tablet {
-      flex: 1;
-      min-block-size: 0;
-      overflow-y: auto;
-      padding-block-end: calc(1.5 * var(--spacing-mega));
-    }
-  }
-}
-
-.bottomSheetOnDesktopInnerContent {
-  @include breakpoints.tablet {
-    /**
-    * Acts as a non-scrollable flex container so that
-    * scrollability is delegated to its inner content.
-    */
-    min-block-size: 0;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
 .resourceTabs {
   display: flex;
   gap: var(--spacing-small2-px);
   overflow-x: auto;
+  padding-inline-end: var(--spacing-inline);
 
   &::-webkit-scrollbar {
     block-size: var(--spacing-xxsmall-px);
