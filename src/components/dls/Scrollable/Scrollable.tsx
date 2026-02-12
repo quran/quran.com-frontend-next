@@ -41,7 +41,12 @@ const Scrollable = ({
   const isRTL = isRTLLocale(lang);
 
   const { containerRef, leftButtonRef, rightButtonRef, onLeftButtonClick, onRightButtonClick } =
-    useScrollable(isRTL, styles.hiddenEdge, indicatorOnly);
+    useScrollable({
+      isRTL,
+      hiddenClassName: styles.hiddenEdge,
+      indicatorOnly,
+      childrenCount: React.Children.count(children),
+    });
 
   return (
     <div className={classNames(styles.container, containerClassName)}>

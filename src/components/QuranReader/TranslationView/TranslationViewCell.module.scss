@@ -170,8 +170,16 @@
   inline-size: 100%;
 }
 
+.tabContainerWrapper {
+  @include breakpoints.tablet {
+    margin-inline: var(--spacing-medium2-px);
+  }
+}
+
 .tabsContainer {
-  @include utility.edgeHorizontalPadding;
+  @include breakpoints.smallerThanTablet {
+    @include utility.edgeHorizontalPadding;
+  }
   box-sizing: border-box;
   gap: var(--spacing-medium);
 

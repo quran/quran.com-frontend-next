@@ -1,8 +1,20 @@
 import { useCallback, useRef, useEffect } from 'react';
 
+interface UseScrollableProps {
+  isRTL: boolean;
+  hiddenClassName: string;
+  indicatorOnly?: boolean;
+  childrenCount?: number;
+}
+
 const SCROLL_THRESHOLD = 2;
 
-const useScrollable = (isRTL: boolean, hiddenClassName: string, indicatorOnly: boolean = false) => {
+const useScrollable = ({
+  isRTL,
+  hiddenClassName,
+  indicatorOnly = false,
+  childrenCount = 0,
+}: UseScrollableProps) => {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const leftButtonRef = useRef<HTMLDivElement>(null);
   const rightButtonRef = useRef<HTMLDivElement>(null);
@@ -85,7 +97,7 @@ const useScrollable = (isRTL: boolean, hiddenClassName: string, indicatorOnly: b
     return () => {
       window.removeEventListener('resize', updateScrollButtons);
     };
-  }, [updateScrollButtons]);
+  }, [updateScrollButtons, childrenCount]);
 
   return { containerRef, leftButtonRef, rightButtonRef, onLeftButtonClick, onRightButtonClick };
 };

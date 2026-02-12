@@ -61,6 +61,7 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
 
   return (
     <Scrollable
+      containerClassName={styles.tabContainerWrapper}
       className={classNames(styles.tabsContainer, className, {
         [styles.center]: !isTranslationView,
         [styles.tabsContainerRTL]: isRTL && isTranslationView,
