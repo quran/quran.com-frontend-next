@@ -78,11 +78,29 @@ const VerseActionModalContainer: React.FC = () => {
     [router.locale],
   );
 
-  const dispatchRestoredBookmark = useCallback(
-    (pendingVerseKey: string, restoredVerse: typeof verse) => {
-      const consumedRestore = consumePendingBookmarkModalRestore(router.asPath);
+  useEffect(() => {
+    let isCancelled = false;
+    const cancelRestore = () => {
+      isCancelled = true;
+    };
+
+    if (!router.isReady || isOpen || !isLoggedIn()) {
+      return cancelRestore;
+    }
+
+    const restorePath = router.asPath;
+    const pendingRestore = getPendingBookmarkModalRestore(restorePath);
+    if (!pendingRestore) {
+      return cancelRestore;
+    }
+
+    const restoreBookmarkModal = async () => {
+      const restoredVerse = await getRestoredVerse(pendingRestore.verseKey);
+      if (!restoredVerse || isCancelled) return;
+      if (router.asPath !== restorePath) return;
+      const consumedRestore = consumePendingBookmarkModalRestore(restorePath);
       if (!consumedRestore) return;
-      if (consumedRestore.verseKey !== pendingVerseKey) return;
+      if (consumedRestore.verseKey !== pendingRestore.verseKey) return;
 
       dispatch(
         openBookmarkModal({
@@ -90,38 +108,11 @@ const VerseActionModalContainer: React.FC = () => {
           verse: restoredVerse,
         }),
       );
-    },
-    [dispatch, router.asPath],
-  );
-
-  useEffect(() => {
-    let isCancelled = false;
-
-    if (!router.isReady || isOpen || !isLoggedIn()) {
-      return () => {
-        isCancelled = true;
-      };
-    }
-
-    const restorePath = router.asPath;
-    const pendingRestore = getPendingBookmarkModalRestore(restorePath);
-    if (!pendingRestore) {
-      return () => {
-        isCancelled = true;
-      };
-    }
-
-    const restoreBookmarkModal = async () => {
-      const restoredVerse = await getRestoredVerse(pendingRestore.verseKey);
-      if (!restoredVerse || isCancelled) return;
-      dispatchRestoredBookmark(pendingRestore.verseKey, restoredVerse);
     };
 
     restoreBookmarkModal();
-    return () => {
-      isCancelled = true;
-    };
-  }, [dispatchRestoredBookmark, getRestoredVerse, isOpen, router.asPath, router.isReady]);
+    return cancelRestore;
+  }, [dispatch, getRestoredVerse, isOpen, router.asPath, router.isReady]);
 
   useEffect(() => {
     if (isOpen && wasOpenedFromStudyMode && !hasClosedStudyModeRef.current) {

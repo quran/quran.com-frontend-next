@@ -102,7 +102,9 @@ describe('VerseActionModalContainer bookmark restore', () => {
       createdAt: Date.now(),
     };
     mockIsLoggedIn.mockReturnValue(true);
-    mockGetPendingRestore.mockReturnValue(pendingRestore);
+    mockGetPendingRestore.mockImplementation((path: string) =>
+      path === '/2?startingVerse=255' ? pendingRestore : null,
+    );
     mockConsumePendingRestore.mockReturnValue(pendingRestore);
     mockGetChapterVerses.mockResolvedValue({
       verses: [
@@ -155,7 +157,9 @@ describe('VerseActionModalContainer bookmark restore', () => {
       createdAt: Date.now(),
     };
     mockIsLoggedIn.mockReturnValue(true);
-    mockGetPendingRestore.mockReturnValue(pendingRestore);
+    mockGetPendingRestore.mockImplementation((path: string) =>
+      path === '/2?startingVerse=255' ? pendingRestore : null,
+    );
 
     let resolveRequest: (value: unknown) => void = () => undefined;
     const inFlightRequest = new Promise((resolve) => {
@@ -183,7 +187,36 @@ describe('VerseActionModalContainer bookmark restore', () => {
     await inFlightRequest;
     await Promise.resolve();
 
-    expect(mockConsumePendingRestore).toHaveBeenCalledWith('/3?startingVerse=1');
+    expect(mockConsumePendingRestore).not.toHaveBeenCalled();
+    expect(mockDispatch).not.toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'verseActionModal/openBookmarkModal',
+      }),
+    );
+  });
+
+  it('does not consume pending restore when verse fetch fails', async () => {
+    const pendingRestore = {
+      verseKey: '2:255',
+      verse: {
+        chapterId: 2,
+        verseNumber: 255,
+        verseKey: '2:255',
+      },
+      redirectUrl: '/2?startingVerse=255',
+      createdAt: Date.now(),
+    };
+    mockIsLoggedIn.mockReturnValue(true);
+    mockGetPendingRestore.mockReturnValue(pendingRestore);
+    mockGetChapterVerses.mockRejectedValue(new Error('network error'));
+
+    render(<VerseActionModalContainer />);
+
+    await waitFor(() => {
+      expect(mockGetChapterVerses).toHaveBeenCalledWith('2', 'en', { page: '255', perPage: 1 });
+    });
+
+    expect(mockConsumePendingRestore).not.toHaveBeenCalled();
     expect(mockDispatch).not.toHaveBeenCalledWith(
       expect.objectContaining({
         type: 'verseActionModal/openBookmarkModal',
