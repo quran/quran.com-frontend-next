@@ -37,7 +37,7 @@ const NavigationDrawer = () => {
           </div>
         </div>
       }
-      closeOnOutsideClick={!isLanguageDrawerOpen}
+      canCloseDrawer={!isLanguageDrawerOpen}
     >
       {isNavigationDrawerOpen && <NavigationDrawerBody />}
     </Drawer>

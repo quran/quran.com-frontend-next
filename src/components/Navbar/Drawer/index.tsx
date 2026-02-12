@@ -49,7 +49,6 @@ interface Props {
   removeHeaderWrapper?: boolean;
   removeBodySpacing?: boolean;
   className?: string;
-  closeOnOutsideClick?: boolean;
 }
 
 /**
@@ -112,7 +111,6 @@ const Drawer: React.FC<Props> = ({
   removeHeaderWrapper = false,
   removeBodySpacing = false,
   className,
-  closeOnOutsideClick = true,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
@@ -172,9 +170,7 @@ const Drawer: React.FC<Props> = ({
   useOutsideClickDetector(
     drawerRef,
     () => {
-      if (closeOnOutsideClick) {
-        closeDrawer(ActionSource.OutsideClick);
-      }
+      closeDrawer(ActionSource.OutsideClick);
     },
     isOpen,
   );
