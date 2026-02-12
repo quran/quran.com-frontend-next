@@ -223,4 +223,36 @@ describe('VerseActionModalContainer bookmark restore', () => {
       }),
     );
   });
+
+  it.each([
+    { description: 'an empty verses array', response: { verses: [] } },
+    { description: 'a null verses payload', response: { verses: null } },
+  ])('does not open bookmark modal when verse fetch returns $description', async ({ response }) => {
+    const pendingRestore = {
+      verseKey: '2:255',
+      verse: {
+        chapterId: 2,
+        verseNumber: 255,
+        verseKey: '2:255',
+      },
+      redirectUrl: '/2?startingVerse=255',
+      createdAt: Date.now(),
+    };
+    mockIsLoggedIn.mockReturnValue(true);
+    mockGetPendingRestore.mockReturnValue(pendingRestore);
+    mockGetChapterVerses.mockResolvedValue(response as any);
+
+    render(<VerseActionModalContainer />);
+
+    await waitFor(() => {
+      expect(mockGetChapterVerses).toHaveBeenCalledWith('2', 'en', { page: '255', perPage: 1 });
+    });
+
+    expect(mockConsumePendingRestore).not.toHaveBeenCalled();
+    expect(mockDispatch).not.toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'verseActionModal/openBookmarkModal',
+      }),
+    );
+  });
 });
