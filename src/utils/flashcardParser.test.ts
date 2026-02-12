@@ -7,6 +7,7 @@ import { FlashCardVariant } from '@/components/Course/FlashCards/types';
 const WORD_HTML = `<p dir="rtl"><strong>ٱلَّذِى</strong>(<em>alladhī</em>) - The One Who</p>`;
 const WORD_HTML_NO_TRANSLITERATION = `<p dir="rtl"><strong>خَلَقَ</strong> - created</p>`;
 const WORD_HTML_EM_DASH = `<p dir="rtl"><strong>رَحْمَة</strong>(<em>raḥmah</em>) — mercy</p>`;
+const WORD_HTML_NBSP = `<p dir="rtl"><strong>ٱلَّذِى</strong>(<em>alladhī</em>)&nbsp;-&nbsp;The One Who</p>`;
 
 const makeSection = (headingAttrs = '', title = 'Word-by-word breakdown') =>
   `<h3${headingAttrs}>${title}</h3>${WORD_HTML}`;
@@ -14,6 +15,8 @@ const makeSectionWithoutTransliteration = (headingAttrs = '', title = 'Word-by-w
   `<h3${headingAttrs}>${title}</h3>${WORD_HTML_NO_TRANSLITERATION}`;
 const makeSectionWithEmDash = (headingAttrs = '', title = 'Word-by-word breakdown') =>
   `<h3${headingAttrs}>${title}</h3>${WORD_HTML_EM_DASH}`;
+const makeSectionWithNbsp = (headingAttrs = '', title = 'Word-by-word breakdown') =>
+  `<h3${headingAttrs}>${title}</h3>${WORD_HTML_NBSP}`;
 
 describe('flashcardParser', () => {
   describe('parseFlashcardsFromHtml', () => {
@@ -51,6 +54,12 @@ describe('flashcardParser', () => {
       expect(result?.afterHtml).toContain('<h3>Next section</h3>');
     });
 
+    it('splits at hr tags with attributes', () => {
+      const html = `<p>Before</p>${makeSection()}<hr class="divider" /><p>After</p>`;
+      const result = parseFlashcardsFromHtml(html);
+      expect(result?.afterHtml).toContain('<hr class="divider" />');
+    });
+
     it('parses arabic, transliteration and translation', () => {
       const result = parseFlashcardsFromHtml(makeSection());
       const card = result?.flashcards[0];
@@ -73,6 +82,12 @@ describe('flashcardParser', () => {
       expect(card?.arabic).toBe('رَحْمَة');
       expect(card?.transliteration).toBe('raḥmah');
       expect(card?.translation).toBe('mercy');
+    });
+
+    it('parses translation when separated by nbsp around dash', () => {
+      const result = parseFlashcardsFromHtml(makeSectionWithNbsp());
+      const card = result?.flashcards[0];
+      expect(card?.translation).toBe('The One Who');
     });
   });
 });

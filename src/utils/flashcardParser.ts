@@ -24,7 +24,7 @@ export default function parseFlashcardsFromHtml(html: string): {
   const beforeHtml = html.slice(0, headingMatch.index);
 
   const afterHeadingContent = html.slice(headingEndIndex);
-  const nextSectionMatch = afterHeadingContent.match(/<h3[^>]*>|<hr\s*\/?>/i);
+  const nextSectionMatch = afterHeadingContent.match(/<h3[^>]*>|<hr\b[^>]*\/?>/i);
   const splitAt = nextSectionMatch?.index ?? afterHeadingContent.length;
   const wordByWordHtml = afterHeadingContent.slice(0, splitAt);
   const afterHtml = afterHeadingContent.slice(splitAt);
@@ -52,17 +52,19 @@ function extractFlashcardsFromSection(html: string): FlashCardData[] {
 }
 
 function parseWordParagraph(html: string): Omit<FlashCardData, 'id'> | null {
+  const normalizedHtml = html.replace(/&nbsp;/g, ' ');
   const arabicMatch = html.match(/<strong[^>]*>(.*?)<\/strong>/i);
   if (!arabicMatch) return null;
 
   const arabic = stripHtmlTags(arabicMatch[1]).trim();
   if (!arabic) return null;
 
-  const transliterationMatch = html.match(/<em[^>]*>(.*?)<\/em>/i);
+  const transliterationMatch = normalizedHtml.match(/<em[^>]*>(.*?)<\/em>/i);
   const transliteration = transliterationMatch ? stripHtmlTags(transliterationMatch[1]).trim() : '';
 
   const translationMatch =
-    html.match(/\)\s*[-–—]\s*([\s\S]+?)$/) || html.match(/\s[-–—]\s*([\s\S]+?)$/);
+    normalizedHtml.match(/\)\s*[-–—]\s*([\s\S]+?)$/) ||
+    normalizedHtml.match(/\s[-–—]\s*([\s\S]+?)$/);
   let translation = '';
   if (translationMatch) {
     translation = stripHtmlTags(translationMatch[1])
