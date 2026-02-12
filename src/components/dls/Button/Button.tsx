@@ -12,6 +12,7 @@ import Tooltip, { ContentSide } from '@/dls/Tooltip';
 import useDirection from '@/hooks/useDirection';
 
 export enum ButtonSize {
+  XXSmall = 'xxsmall',
   XSmall = 'xsmall',
   Small = 'small',
   Medium = 'medium',
@@ -135,6 +136,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [styles.normal]: size === ButtonSize.Medium,
       [styles.small]: size === ButtonSize.Small,
       [styles.xsmall]: size === ButtonSize.XSmall,
+      [styles.xxsmall]: size === ButtonSize.XXSmall,
 
       // shape
       [styles.square]: shape === ButtonShape.Square,

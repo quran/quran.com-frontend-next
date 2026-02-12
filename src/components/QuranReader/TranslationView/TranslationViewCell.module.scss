@@ -170,16 +170,17 @@
   inline-size: 100%;
 }
 
+.tabContainerWrapper {
+  @include breakpoints.tablet {
+    margin-inline: var(--spacing-medium2-px);
+  }
+}
+
 .tabsContainer {
-  @include utility.scrollbar-none;
-  @include utility.edgeHorizontalPadding;
-  overflow-x: auto;
+  @include breakpoints.smallerThanTablet {
+    @include utility.edgeHorizontalPadding;
+  }
   box-sizing: border-box;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  align-items: center;
-  inline-size: 100%;
   gap: var(--spacing-medium);
 
   @media (min-width: 768px) {

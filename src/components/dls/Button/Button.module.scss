@@ -108,6 +108,10 @@
   font-size: var(--font-size-small);
   --button-size: 27px;
 }
+.xxsmall {
+  font-size: var(--font-size-xsmall);
+  --button-size: var(--spacing-medium2-px);
+}
 
 // shape
 .square {
