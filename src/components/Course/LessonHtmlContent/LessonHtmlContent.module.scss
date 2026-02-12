@@ -1,3 +1,34 @@
+.flashcardSection {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-default);
+  border-radius: var(--border-radius-rounded);
+  border: 1px solid var(--color-borders-hairline);
+  overflow: hidden;
+  margin-block: var(--spacing-medium);
+}
+
+.flashcardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-micro);
+  padding: var(--spacing-medium);
+  background-color: var(--color-background-elevated);
+  border-block-end: 1px solid var(--color-borders-hairline);
+}
+
+.flashcardTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-default);
+  margin: 0;
+}
+
+.flashcardSubtitle {
+  font-size: 0.8125rem;
+  color: var(--color-text-faded);
+}
+
 .widgetSkeleton {
   display: block;
   block-size: 200px;
