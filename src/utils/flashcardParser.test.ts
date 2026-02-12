@@ -26,6 +26,11 @@ describe('flashcardParser', () => {
       expect(result?.variant).toBe(FlashCardVariant.Carousel);
     });
 
+    it('extracts deck variant', () => {
+      const result = parseFlashcardsFromHtml(makeSection(` class="flashcard-deck"`));
+      expect(result?.variant).toBe(FlashCardVariant.Deck);
+    });
+
     it('splits before/after HTML correctly', () => {
       const html = `<p>Before</p>${makeSection()}<h3>Next section</h3><p>After</p>`;
       const result = parseFlashcardsFromHtml(html);

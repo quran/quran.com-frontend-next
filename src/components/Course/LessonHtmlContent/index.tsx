@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './LessonHtmlContent.module.scss';
 import VerseChunkWidget from './VerseChunkWidget';
 
-import { FlashCardCarousel, FlashCardList } from '@/components/Course/FlashCards';
+import { FlashCardCarousel, FlashCardDeck, FlashCardList } from '@/components/Course/FlashCards';
 import { FlashCardVariant } from '@/components/Course/FlashCards/types';
 import HtmlContent from '@/components/RichText/HtmlContent';
 import parseFlashcardsFromHtml from '@/utils/flashcardParser';
@@ -19,6 +19,11 @@ const VARIANT_CONFIG = {
     component: FlashCardCarousel,
     title: 'Carousel',
     subtitle: 'Swipe through cards, tap to flip',
+  },
+  [FlashCardVariant.Deck]: {
+    component: FlashCardDeck,
+    title: 'Swipe Cards',
+    subtitle: 'Swipe right if you know it, left to review',
   },
 };
 

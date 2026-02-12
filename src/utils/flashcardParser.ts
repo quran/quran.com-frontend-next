@@ -3,6 +3,7 @@ import { FlashCardData, FlashCardVariant } from '@/components/Course/FlashCards/
 function extractVariant(headingTag: string): FlashCardVariant {
   const classes = headingTag.match(/class=["']([^"']*)["']/)?.[1] || '';
   if (/\bflashcard-carousel\b/.test(classes)) return FlashCardVariant.Carousel;
+  if (/\bflashcard-deck\b/.test(classes)) return FlashCardVariant.Deck;
   return FlashCardVariant.List;
 }
 

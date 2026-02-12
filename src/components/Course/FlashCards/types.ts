@@ -7,5 +7,6 @@ export type FlashCardData = {
 
 export enum FlashCardVariant {
   Carousel = 'carousel',
+  Deck = 'deck',
   List = 'list',
 }
