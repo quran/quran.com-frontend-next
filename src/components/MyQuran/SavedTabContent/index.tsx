@@ -155,7 +155,6 @@ const SavedTabContent: React.FC = () => {
 
       <Modal
         isOpen={isNewCollectionModalOpen}
-        onClose={onCloseNewCollectionModal}
         onClickOutside={onCloseNewCollectionModal}
         onEscapeKeyDown={onCloseNewCollectionModal}
       >
