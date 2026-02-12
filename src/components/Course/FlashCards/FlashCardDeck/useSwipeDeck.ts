@@ -87,12 +87,12 @@ export default function useSwipeDeck(
     if (Math.abs(cardState.offsetX) > SWIPE_THRESHOLD) {
       handleSwipeComplete(cardState.offsetX > 0 ? 'right' : 'left');
     } else {
-      setCardState(DEFAULT_CARD);
+      setCardState((prev) => ({ ...DEFAULT_CARD, isFlipped: prev.isFlipped }));
     }
   }, [cardState.offsetX, handleSwipeComplete]);
 
   const handleCardClick = () => {
-    if (!cardState.isSwiping && Math.abs(cardState.offsetX) < 5) {
+    if (Math.abs(cardState.offsetX) < 5) {
       setCardState((prev) => ({ ...prev, isFlipped: !prev.isFlipped }));
     }
   };
