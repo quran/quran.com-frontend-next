@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useCallback, useMemo, useState } from 'react';
 
 import { ToastFn, TranslateFn } from '../types';
@@ -9,6 +10,7 @@ import {
 } from './bulkActionsUtils';
 
 import { ToastStatus } from '@/dls/Toast/Toast';
+import { broadcastBookmarksUpdate } from '@/hooks/useBookmarksBroadcast';
 import Bookmark from '@/types/Bookmark';
 import copyText from '@/utils/copyText';
 import ChaptersData from 'types/ChaptersData';
@@ -25,6 +27,26 @@ interface UseCollectionBulkActionsParams {
   onUpdated: () => void;
   removeBookmarkIdsFromState: (bookmarkIds: string[]) => void;
 }
+
+const getAffectedSurahNumbers = (bookmarks: Bookmark[], deletedIds: string[]) => {
+  return Array.from(
+    new Set(
+      bookmarks
+        .filter((bookmark) => deletedIds.includes(bookmark.id))
+        .map((bookmark) => bookmark.key),
+    ),
+  );
+};
+
+const broadcastBulkDeleteUpdate = (numericCollectionId: string, affectedSurahNumbers: number[]) => {
+  broadcastBookmarksUpdate({
+    touchesBookmarksList: true,
+    touchesBookmarkCollections: true,
+    touchesCollectionDetail: true,
+    affectedCollectionIds: [numericCollectionId],
+    affectedSurahNumbers,
+  });
+};
 
 const useCollectionBulkActions = ({
   chaptersData,
@@ -114,8 +136,11 @@ const useCollectionBulkActions = ({
       });
 
       if (deletedIds.length) {
+        const affectedSurahNumbers = getAffectedSurahNumbers(filteredBookmarks, deletedIds);
+
         removeBookmarkIdsFromState(deletedIds);
         onUpdated();
+        broadcastBulkDeleteUpdate(numericCollectionId, affectedSurahNumbers);
         showDeleteBookmarksSuccessToast({ toast, t, lang, count: deletedIds.length });
       }
 
@@ -133,6 +158,7 @@ const useCollectionBulkActions = ({
     }
   }, [
     closeDeleteBookmarksModal,
+    filteredBookmarks,
     handleBulkDeleteModalClose,
     lang,
     numericCollectionId,

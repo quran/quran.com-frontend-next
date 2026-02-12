@@ -25,6 +25,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import DataContext from '@/contexts/DataContext';
+import { broadcastBookmarksUpdate } from '@/hooks/useBookmarksBroadcast';
 import useMappedBookmark from '@/hooks/useMappedBookmark';
 import { selectGuestReadingBookmark, setGuestReadingBookmark } from '@/redux/slices/guestBookmark';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -45,6 +46,31 @@ import {
 
 /** Debounce delay to prevent flicker when state updates */
 const STATE_TRANSITION_DELAY_MS = 300;
+
+const mapToGuestBroadcastBookmark = (
+  bookmark: GuestReadingBookmark | Bookmark | null | undefined,
+  fallbackMushafId: Mushaf,
+): GuestReadingBookmark | null => {
+  if (!bookmark) return null;
+  if (![BookmarkType.Ayah, BookmarkType.Page].includes(bookmark.type)) return null;
+
+  const bookmarkMushafId =
+    'mushafId' in bookmark && typeof bookmark.mushafId === 'number'
+      ? bookmark.mushafId
+      : fallbackMushafId;
+  const bookmarkCreatedAt =
+    'createdAt' in bookmark && typeof bookmark.createdAt === 'string'
+      ? bookmark.createdAt
+      : new Date().toISOString();
+
+  return {
+    key: bookmark.key,
+    type: bookmark.type,
+    verseNumber: bookmark.type === BookmarkType.Ayah ? bookmark.verseNumber : undefined,
+    mushafId: bookmarkMushafId,
+    createdAt: bookmarkCreatedAt,
+  };
+};
 
 interface UseReadingBookmarkOptions {
   type: ReadingBookmarkType;
@@ -432,6 +458,15 @@ const useReadingBookmark = ({
         setOptimisticBookmarkOverride(savedBookmark);
       }
 
+      broadcastBookmarksUpdate({
+        touchesReadingBookmark: true,
+        mushafId: currentMushafId,
+        readingBookmark: isLoggedIn && savedBookmark ? savedBookmark : undefined,
+        guestReadingBookmark: !isLoggedIn
+          ? mapToGuestBroadcastBookmark(newBookmark, currentMushafId)
+          : undefined,
+      });
+
       logEvent('reading_bookmark_added');
 
       // Note: We intentionally DON'T call onBookmarkChanged() here for logged-in users
@@ -473,6 +508,8 @@ const useReadingBookmark = ({
     setOptimisticBookmarkOverride(previousBookmark);
 
     try {
+      let nextReadingBookmarkForBroadcast: Bookmark | null | undefined;
+
       // If previous was null, unset the bookmark; otherwise restore it
       if (previousBookmark === null) {
         // Need to get current bookmark to unset
@@ -483,13 +520,24 @@ const useReadingBookmark = ({
         if (isLoggedIn && mutateReadingBookmark) {
           await mutateReadingBookmark(null, { revalidate: false });
         }
+        nextReadingBookmarkForBroadcast = isLoggedIn ? null : undefined;
       } else {
         const restoredBookmark = await persistBookmark(previousBookmark);
         // For logged-in users, update the cache with the real bookmark ID
         if (isLoggedIn && mutateReadingBookmark && restoredBookmark) {
           await mutateReadingBookmark(restoredBookmark, { revalidate: false });
+          nextReadingBookmarkForBroadcast = restoredBookmark;
         }
       }
+
+      broadcastBookmarksUpdate({
+        touchesReadingBookmark: true,
+        mushafId: currentMushafId,
+        readingBookmark: nextReadingBookmarkForBroadcast,
+        guestReadingBookmark: !isLoggedIn
+          ? mapToGuestBroadcastBookmark(previousBookmark, currentMushafId)
+          : undefined,
+      });
 
       setPreviousBookmark(undefined);
 
@@ -524,6 +572,7 @@ const useReadingBookmark = ({
     persistBookmark,
     unsetBookmark,
     onBookmarkChanged,
+    currentMushafId,
     t,
   ]);
 
@@ -551,6 +600,13 @@ const useReadingBookmark = ({
       if (isLoggedIn && mutateReadingBookmark) {
         await mutateReadingBookmark(null, { revalidate: false });
       }
+
+      broadcastBookmarksUpdate({
+        touchesReadingBookmark: true,
+        mushafId: currentMushafId,
+        readingBookmark: isLoggedIn ? null : undefined,
+        guestReadingBookmark: !isLoggedIn ? null : undefined,
+      });
 
       logEvent('reading_bookmark_removed');
 
@@ -582,6 +638,7 @@ const useReadingBookmark = ({
     mutateReadingBookmark,
     unsetBookmark,
     onBookmarkChanged,
+    currentMushafId,
     t,
   ]);
 

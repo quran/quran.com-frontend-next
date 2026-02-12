@@ -14,6 +14,7 @@ import useCollectionSelection from './useCollectionSelection';
 import type { ActiveFilterChip } from '@/components/MyQuran/SavedTabContent/ActiveFiltersChips';
 import type { CollectionFiltersDropdownProps } from '@/components/MyQuran/SavedTabContent/CollectionFiltersDropdown';
 import { ToastStatus } from '@/dls/Toast/Toast';
+import { broadcastBookmarksUpdate } from '@/hooks/useBookmarksBroadcast';
 import { deleteCollectionBookmarkById } from '@/utils/auth/api';
 import { getChapterData } from '@/utils/chapter';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -254,9 +255,20 @@ const useCollectionDetailViewController = ({
 
   const onItemDeleted = useCallback(
     (bookmarkId: string) => {
+      const deletedBookmark = dataState.filteredBookmarks.find(
+        (bookmark) => bookmark.id === bookmarkId,
+      );
       deleteCollectionBookmarkById(numericCollectionId, bookmarkId)
         .then(() => {
           onUpdated();
+          broadcastBookmarksUpdate({
+            touchesBookmarksList: true,
+            touchesBookmarkCollections: true,
+            touchesCollectionDetail: true,
+            affectedCollectionIds: [numericCollectionId],
+            affectedSurahNumbers: deletedBookmark ? [deletedBookmark.key] : undefined,
+            mushafId,
+          });
           toast(
             t('collection:delete-bookmark.success', {
               count: toLocalizedNumber(SINGLE_ITEM_COUNT, lang),
@@ -268,7 +280,7 @@ const useCollectionDetailViewController = ({
           toast(t('common:error.general'), { status: ToastStatus.Error });
         });
     },
-    [lang, numericCollectionId, onUpdated, t, toast],
+    [dataState.filteredBookmarks, lang, mushafId, numericCollectionId, onUpdated, t, toast],
   );
 
   const isOwner = dataState.data?.data?.isOwner ?? false;

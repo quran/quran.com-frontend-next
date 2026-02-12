@@ -11,6 +11,7 @@ import { useCollectionToggle } from './Collections/hooks/useCollectionToggle';
 import { useSaveBookmarkData } from './useSaveBookmarkData';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { broadcastBookmarksUpdate } from '@/hooks/useBookmarksBroadcast';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { openNotesModal, VerseActionModalType } from '@/redux/slices/QuranReader/verseActionModal';
 import Bookmark, { ReadingBookmarkType } from '@/types/Bookmark';
@@ -240,6 +241,16 @@ const useSaveBookmarkModal = ({
       logEvent('collection_created_and_ayah_added', {
         verseKey,
         collectionName: trimmedName,
+      });
+
+      broadcastBookmarksUpdate({
+        touchesCollectionsList: true,
+        touchesBookmarksList: true,
+        touchesBookmarkCollections: true,
+        touchesCollectionDetail: true,
+        affectedCollectionIds: newCollection?.id ? [newCollection.id] : undefined,
+        affectedSurahNumbers: [Number(verse.chapterId)],
+        mushafId,
       });
 
       // Revalidate to replace temp collection with real one

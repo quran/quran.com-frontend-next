@@ -6,8 +6,11 @@ import GlobalPersistGateHydrationListener from './GlobalPersistGateHydrationList
 import GlobalKeyboardListeners from '@/components/GlobalKeyboardListeners';
 import GlobalScrollListener from '@/components/GlobalScrollListener';
 import GuestBookmarksMigrationModal from '@/components/GuestBookmarksMigrationModal';
+import useBookmarksBroadcastListener from '@/hooks/useBookmarksBroadcast';
 
 const GlobalListeners = () => {
+  useBookmarksBroadcastListener();
+
   return (
     <>
       <GlobalKeyboardListeners />

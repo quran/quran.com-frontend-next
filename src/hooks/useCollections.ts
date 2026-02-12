@@ -6,6 +6,7 @@ import useSWR from 'swr';
 
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import { broadcastBookmarksUpdate } from '@/hooks/useBookmarksBroadcast';
 import {
   addCollection as apiAddCollection,
   deleteCollection as apiDeleteCollection,
@@ -97,6 +98,32 @@ const useCollections = ({
     [toast, t],
   );
 
+  const broadcastCollectionCreated = useCallback((collectionId: string) => {
+    broadcastBookmarksUpdate({
+      touchesCollectionsList: true,
+      touchesCollectionDetail: true,
+      affectedCollectionIds: [collectionId],
+    });
+  }, []);
+
+  const broadcastCollectionUpdated = useCallback((collectionId: string) => {
+    broadcastBookmarksUpdate({
+      touchesCollectionsList: true,
+      touchesCollectionDetail: true,
+      affectedCollectionIds: [collectionId],
+    });
+  }, []);
+
+  const broadcastCollectionDeleted = useCallback((collectionId: string) => {
+    broadcastBookmarksUpdate({
+      touchesCollectionsList: true,
+      touchesCollectionDetail: true,
+      touchesBookmarksList: true,
+      touchesBookmarkCollections: true,
+      affectedCollectionIds: [collectionId],
+    });
+  }, []);
+
   const addCollection = useCallback(
     // eslint-disable-next-line react-func/max-lines-per-function
     async (name: string): Promise<Collection | null> => {
@@ -133,6 +160,9 @@ const useCollections = ({
 
         // Find the real collection from the result
         const realCollection = result?.data?.find((c) => c.name === name && c.id !== tempId);
+        if (realCollection) {
+          broadcastCollectionCreated(realCollection.id);
+        }
         return realCollection || null;
       } catch (err: unknown) {
         showErrorToast(err);
@@ -141,7 +171,13 @@ const useCollections = ({
         isPendingRef.current = false;
       }
     },
-    [collections, collectionsData, swrMutateCollections, showErrorToast],
+    [
+      broadcastCollectionCreated,
+      collections,
+      collectionsData,
+      swrMutateCollections,
+      showErrorToast,
+    ],
   );
 
   /**
@@ -171,6 +207,7 @@ const useCollections = ({
             revalidate: false,
           },
         );
+        broadcastCollectionUpdated(collectionId);
         return true;
       } catch (err: unknown) {
         showErrorToast(err);
@@ -179,7 +216,13 @@ const useCollections = ({
         isPendingRef.current = false;
       }
     },
-    [collections, collectionsData, swrMutateCollections, showErrorToast],
+    [
+      broadcastCollectionUpdated,
+      collections,
+      collectionsData,
+      swrMutateCollections,
+      showErrorToast,
+    ],
   );
 
   /**
@@ -209,6 +252,7 @@ const useCollections = ({
             revalidate: false,
           },
         );
+        broadcastCollectionDeleted(collectionId);
         return true;
       } catch (err: unknown) {
         showErrorToast(err);
@@ -217,7 +261,13 @@ const useCollections = ({
         isPendingRef.current = false;
       }
     },
-    [collections, collectionsData, swrMutateCollections, showErrorToast],
+    [
+      broadcastCollectionDeleted,
+      collections,
+      collectionsData,
+      swrMutateCollections,
+      showErrorToast,
+    ],
   );
 
   /**
