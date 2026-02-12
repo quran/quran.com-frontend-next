@@ -1,12 +1,5 @@
 @use 'src/styles/utility';
 
-.languageContainer {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-background-elevated);
-  z-index: var(--z-index-default);
-}
-
 .languageHeader {
   display: flex;
   align-items: center;
