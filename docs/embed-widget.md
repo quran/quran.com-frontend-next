@@ -168,6 +168,54 @@ If you are using a custom embed domain, load the script from the same origin as 
 | `reflections`         | Show reflections button                              | `true`        |
 | `answers`             | Show answers button                                  | `true`        |
 
+## Prop-only trimming
+
+The widget supports optional prop-based word trimming when rendering `QuranWidget` directly in
+React. This is **not supported** through `/embed/v1` query parameters.
+
+### Trim types
+
+```ts
+type WordTrimRange = {
+  startWordIndex?: number;
+  endWordIndex?: number;
+};
+
+type WidgetTrimOptions = {
+  arabic?: WordTrimRange;
+  translations?: Record<string, WordTrimRange>; // key = translation resource id
+};
+```
+
+### Example usage
+
+```tsx
+<QuranWidget
+  verses={verses}
+  options={options}
+  trim={{
+    arabic: { startWordIndex: 2, endWordIndex: 8 },
+    translations: {
+      '131': { startWordIndex: 1, endWordIndex: 6 },
+      '31': { startWordIndex: 0, endWordIndex: 4 },
+    },
+  }}
+/>
+```
+
+### Rules
+
+- Indexes are zero-based.
+- `endWordIndex` is inclusive.
+- If `startWordIndex` is missing, default is `0`.
+- If `endWordIndex` is missing, default is the last word index (`words.length - 1`).
+- Translation trimming is applied per selected translation ID.
+- For Arabic, indexes are based on Arabic words only (the verse-end number marker is excluded from
+  indexing). If the selected range includes the last Arabic word, the verse-end marker is kept.
+- In verse range mode:
+  - `startWordIndex` applies only to the first verse.
+  - `endWordIndex` applies only to the last verse.
+
 ## Widget interactions
 
 Client-side interactions are handled by `src/hooks/widget/useWidgetInteractions.ts`:

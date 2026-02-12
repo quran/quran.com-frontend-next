@@ -10,7 +10,6 @@ import {
   type SetStateAction,
 } from 'react';
 
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -32,11 +31,13 @@ import {
   makeVerseOptions,
   toTranslationIdsCsv,
 } from '@/components/AyahWidget/widget-config';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import useAyahWidgetPreview from '@/hooks/widget/useAyahWidgetPreview';
 import useAyahWidgetReciters from '@/hooks/widget/useAyahWidgetReciters';
 import useAyahWidgetSurahs from '@/hooks/widget/useAyahWidgetSurahs';
 import useAyahWidgetTranslations from '@/hooks/widget/useAyahWidgetTranslations';
+import { getEmbedOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
 import { selectAyahWidgetOverrides, updateAyahWidgetOverrides } from '@/redux/slices/ayahWidget';
 import { selectReadingPreferences } from '@/redux/slices/QuranReader/readingPreferences';
@@ -47,6 +48,8 @@ import styles from '@/styles/embed.module.scss';
 import { WordByWordDisplay, WordByWordType } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { logEvent } from '@/utils/eventLogger';
+import { getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import type AvailableTranslation from 'types/AvailableTranslation';
 
@@ -449,10 +452,15 @@ const AyahWidgetBuilderPage = () => {
 
   return (
     <>
-      <Head>
-        <title>{t('meta.title')}</title>
-        <meta name="description" content={t('meta.description')} />
-      </Head>
+      <NextSeoWrapper
+        title={t('meta.title')}
+        description={t('meta.description')}
+        canonical={getCanonicalUrl(lang, '/embed')}
+        languageAlternates={getLanguageAlternates('/embed')}
+        image={getEmbedOgImageUrl({ locale: lang })}
+        imageWidth={1200}
+        imageHeight={630}
+      />
 
       <div className={styles.page}>
         <div className={styles.inner}>
