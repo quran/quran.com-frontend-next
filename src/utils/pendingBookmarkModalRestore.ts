@@ -37,6 +37,20 @@ const stripLocalePrefix = (pathname: string): string => {
   return pathWithoutLocale || '/';
 };
 
+const normalizePathSegments = (pathname: string): string[] =>
+  normalizePathname(pathname).split('/').filter(Boolean);
+
+const doesPathMatchChapterAndVerse = (
+  pathname: string,
+  chapterFromRedirect: string,
+  verseFromRedirect: string,
+): boolean => {
+  const segments = normalizePathSegments(pathname);
+  return (
+    segments.length >= 2 && segments[0] === chapterFromRedirect && segments[1] === verseFromRedirect
+  );
+};
+
 const doesCurrentPathMatchRedirect = (currentPath: string, redirectUrl: string): boolean => {
   const current = parseUrl(currentPath);
   const redirect = parseUrl(redirectUrl);
@@ -47,12 +61,28 @@ const doesCurrentPathMatchRedirect = (currentPath: string, redirectUrl: string):
   const currentPathname = normalizePathname(current.pathname);
   const currentPathWithoutLocale = normalizePathname(stripLocalePrefix(currentPathname));
 
-  if (currentPathname !== expectedPath && currentPathWithoutLocale !== expectedPath) {
+  const expectedStartingVerse = redirect.searchParams.get(QueryParam.STARTING_VERSE);
+
+  const isPathMatch = currentPathname === expectedPath || currentPathWithoutLocale === expectedPath;
+  if (!expectedStartingVerse) return isPathMatch;
+
+  const chapterFromRedirect = normalizePathSegments(expectedPath)[0];
+  const isDirectVersePathMatch =
+    Boolean(chapterFromRedirect) &&
+    (doesPathMatchChapterAndVerse(currentPathname, chapterFromRedirect, expectedStartingVerse) ||
+      doesPathMatchChapterAndVerse(
+        currentPathWithoutLocale,
+        chapterFromRedirect,
+        expectedStartingVerse,
+      ));
+
+  if (!isPathMatch && !isDirectVersePathMatch) {
     return false;
   }
 
-  const expectedStartingVerse = redirect.searchParams.get(QueryParam.STARTING_VERSE);
-  if (!expectedStartingVerse) return true;
+  if (isDirectVersePathMatch) {
+    return true;
+  }
 
   return current.searchParams.get(QueryParam.STARTING_VERSE) === expectedStartingVerse;
 };
@@ -117,7 +147,7 @@ export const clearPendingBookmarkModalRestore = (): void => {
   }
 };
 
-export const consumePendingBookmarkModalRestore = (
+export const getPendingBookmarkModalRestore = (
   currentPath: string,
 ): PendingBookmarkModalRestorePayload | null => {
   if (!isBrowser()) return null;
@@ -136,10 +166,19 @@ export const consumePendingBookmarkModalRestore = (
       return null;
     }
 
-    clearPendingBookmarkModalRestore();
     return parsedPayload;
   } catch {
     clearPendingBookmarkModalRestore();
     return null;
   }
+};
+
+export const consumePendingBookmarkModalRestore = (
+  currentPath: string,
+): PendingBookmarkModalRestorePayload | null => {
+  const pendingPayload = getPendingBookmarkModalRestore(currentPath);
+  if (!pendingPayload) return null;
+
+  clearPendingBookmarkModalRestore();
+  return pendingPayload;
 };

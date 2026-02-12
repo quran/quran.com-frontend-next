@@ -37,7 +37,10 @@ import {
 import { Note } from '@/types/auth/Note';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
-import { consumePendingBookmarkModalRestore } from '@/utils/pendingBookmarkModalRestore';
+import {
+  consumePendingBookmarkModalRestore,
+  getPendingBookmarkModalRestore,
+} from '@/utils/pendingBookmarkModalRestore';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 const VerseActionModalContainer: React.FC = () => {
@@ -59,36 +62,66 @@ const VerseActionModalContainer: React.FC = () => {
 
   const { data: notesCount } = useBatchedCountRangeNotes(isOpen && verseKey ? verseKey : null);
 
-  useEffect(() => {
-    if (!router.isReady) return;
-    if (isOpen) return;
-    if (!isLoggedIn()) return;
-
-    const pendingRestore = consumePendingBookmarkModalRestore(router.asPath);
-    if (!pendingRestore) return;
-    const restoreBookmarkModal = async () => {
+  const getRestoredVerse = useCallback(
+    async (pendingVerseKey: string) => {
       try {
-        const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(pendingRestore.verseKey);
+        const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(pendingVerseKey);
         const response = await getChapterVerses(chapterId, router.locale || 'en', {
           page: verseNumber,
           perPage: 1,
         });
-        const restoredVerse = response?.verses?.[0];
-        if (!restoredVerse) return;
-
-        dispatch(
-          openBookmarkModal({
-            verseKey: pendingRestore.verseKey,
-            verse: restoredVerse,
-          }),
-        );
+        return response?.verses?.[0] || null;
       } catch {
-        // Ignore failures and avoid blocking reader interactions.
+        return null;
       }
+    },
+    [router.locale],
+  );
+
+  const dispatchRestoredBookmark = useCallback(
+    (pendingVerseKey: string, restoredVerse: typeof verse) => {
+      const consumedRestore = consumePendingBookmarkModalRestore(router.asPath);
+      if (!consumedRestore) return;
+      if (consumedRestore.verseKey !== pendingVerseKey) return;
+
+      dispatch(
+        openBookmarkModal({
+          verseKey: consumedRestore.verseKey,
+          verse: restoredVerse,
+        }),
+      );
+    },
+    [dispatch, router.asPath],
+  );
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    if (!router.isReady || isOpen || !isLoggedIn()) {
+      return () => {
+        isCancelled = true;
+      };
+    }
+
+    const restorePath = router.asPath;
+    const pendingRestore = getPendingBookmarkModalRestore(restorePath);
+    if (!pendingRestore) {
+      return () => {
+        isCancelled = true;
+      };
+    }
+
+    const restoreBookmarkModal = async () => {
+      const restoredVerse = await getRestoredVerse(pendingRestore.verseKey);
+      if (!restoredVerse || isCancelled) return;
+      dispatchRestoredBookmark(pendingRestore.verseKey, restoredVerse);
     };
 
     restoreBookmarkModal();
-  }, [dispatch, isOpen, router.asPath, router.isReady, router.locale]);
+    return () => {
+      isCancelled = true;
+    };
+  }, [dispatchRestoredBookmark, getRestoredVerse, isOpen, router.asPath, router.isReady]);
 
   useEffect(() => {
     if (isOpen && wasOpenedFromStudyMode && !hasClosedStudyModeRef.current) {

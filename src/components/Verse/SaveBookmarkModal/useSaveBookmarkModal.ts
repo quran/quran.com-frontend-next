@@ -294,7 +294,7 @@ const useSaveBookmarkModal = ({
         verse: {
           chapterId: verse.chapterId,
           verseNumber: verse.verseNumber,
-          verseKey: verse.verseKey,
+          verseKey: verse.verseKey || verseKey,
         },
         verseKey,
         redirectUrl,

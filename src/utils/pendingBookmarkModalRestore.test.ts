@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   clearPendingBookmarkModalRestore,
   consumePendingBookmarkModalRestore,
+  getPendingBookmarkModalRestore,
   setPendingBookmarkModalRestore,
 } from './pendingBookmarkModalRestore';
 
@@ -39,6 +40,20 @@ describe('pendingBookmarkModalRestore', () => {
     expect(consumedPayload?.verseKey).toBe('2:255');
     expect(consumedPayload?.redirectUrl).toBe('/2?startingVerse=255');
     expect(window.sessionStorage.getItem(STORAGE_KEY)).toBeNull();
+  });
+
+  it('reads pending payload without consuming it', () => {
+    setPendingBookmarkModalRestore({
+      verse: createVerse(),
+      verseKey: '2:255',
+      redirectUrl: '/2?startingVerse=255',
+    });
+
+    const pendingPayload = getPendingBookmarkModalRestore('/2?startingVerse=255');
+
+    expect(pendingPayload).toBeTruthy();
+    expect(pendingPayload?.verseKey).toBe('2:255');
+    expect(window.sessionStorage.getItem(STORAGE_KEY)).toBeTruthy();
   });
 
   it('matches localized paths when consuming payload', () => {
@@ -78,6 +93,34 @@ describe('pendingBookmarkModalRestore', () => {
 
     expect(consumedPayload).toBeNull();
     expect(window.sessionStorage.getItem(STORAGE_KEY)).toBeTruthy();
+  });
+
+  it('consumes when current path is the direct verse URL for matching startingVerse redirect', () => {
+    setPendingBookmarkModalRestore({
+      verse: createVerse(),
+      verseKey: '2:255',
+      redirectUrl: '/2?startingVerse=255',
+    });
+
+    const consumedPayload = consumePendingBookmarkModalRestore('/2/255');
+
+    expect(consumedPayload).toBeTruthy();
+    expect(consumedPayload?.verseKey).toBe('2:255');
+    expect(window.sessionStorage.getItem(STORAGE_KEY)).toBeNull();
+  });
+
+  it('consumes localized direct verse URL for matching startingVerse redirect', () => {
+    setPendingBookmarkModalRestore({
+      verse: createVerse(),
+      verseKey: '2:255',
+      redirectUrl: '/2?startingVerse=255',
+    });
+
+    const consumedPayload = consumePendingBookmarkModalRestore('/ar/2/255');
+
+    expect(consumedPayload).toBeTruthy();
+    expect(consumedPayload?.verseKey).toBe('2:255');
+    expect(window.sessionStorage.getItem(STORAGE_KEY)).toBeNull();
   });
 
   it('clears payload when it is older than max allowed age', () => {

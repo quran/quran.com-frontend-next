@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 
 import { render, waitFor } from '@testing-library/react';
@@ -12,6 +13,7 @@ let mockRouter = {
   asPath: '/2?startingVerse=255',
   locale: 'en',
 };
+const mockGetPendingRestore = vi.fn();
 const mockConsumePendingRestore = vi.fn();
 const mockIsLoggedIn = vi.fn();
 const mockGetChapterVerses = vi.fn();
@@ -38,6 +40,7 @@ vi.mock('@/utils/auth/login', () => ({
 }));
 
 vi.mock('@/utils/pendingBookmarkModalRestore', () => ({
+  getPendingBookmarkModalRestore: (...args: unknown[]) => mockGetPendingRestore(...args),
   consumePendingBookmarkModalRestore: (...args: unknown[]) => mockConsumePendingRestore(...args),
 }));
 
@@ -75,6 +78,7 @@ const createDefaultState = () => ({
 describe('VerseActionModalContainer bookmark restore', () => {
   beforeEach(() => {
     mockDispatch.mockReset();
+    mockGetPendingRestore.mockReset();
     mockConsumePendingRestore.mockReset();
     mockIsLoggedIn.mockReset();
     mockGetChapterVerses.mockReset();
@@ -87,8 +91,7 @@ describe('VerseActionModalContainer bookmark restore', () => {
   });
 
   it('opens bookmark modal from pending restore payload for logged in users', async () => {
-    mockIsLoggedIn.mockReturnValue(true);
-    mockConsumePendingRestore.mockReturnValue({
+    const pendingRestore = {
       verseKey: '2:255',
       verse: {
         chapterId: 2,
@@ -97,7 +100,10 @@ describe('VerseActionModalContainer bookmark restore', () => {
       },
       redirectUrl: '/2?startingVerse=255',
       createdAt: Date.now(),
-    });
+    };
+    mockIsLoggedIn.mockReturnValue(true);
+    mockGetPendingRestore.mockReturnValue(pendingRestore);
+    mockConsumePendingRestore.mockReturnValue(pendingRestore);
     mockGetChapterVerses.mockResolvedValue({
       verses: [
         {
@@ -111,6 +117,7 @@ describe('VerseActionModalContainer bookmark restore', () => {
     render(<VerseActionModalContainer />);
 
     await waitFor(() => {
+      expect(mockGetPendingRestore).toHaveBeenCalledWith('/2?startingVerse=255');
       expect(mockConsumePendingRestore).toHaveBeenCalledWith('/2?startingVerse=255');
       expect(mockGetChapterVerses).toHaveBeenCalledWith('2', 'en', { page: '255', perPage: 1 });
       expect(mockDispatch).toHaveBeenCalledWith(
@@ -130,8 +137,57 @@ describe('VerseActionModalContainer bookmark restore', () => {
     render(<VerseActionModalContainer />);
 
     await waitFor(() => {
+      expect(mockGetPendingRestore).not.toHaveBeenCalled();
       expect(mockConsumePendingRestore).not.toHaveBeenCalled();
       expect(mockDispatch).not.toHaveBeenCalled();
     });
+  });
+
+  it('does not open bookmark modal when route changes before restore resolves', async () => {
+    const pendingRestore = {
+      verseKey: '2:255',
+      verse: {
+        chapterId: 2,
+        verseNumber: 255,
+        verseKey: '2:255',
+      },
+      redirectUrl: '/2?startingVerse=255',
+      createdAt: Date.now(),
+    };
+    mockIsLoggedIn.mockReturnValue(true);
+    mockGetPendingRestore.mockReturnValue(pendingRestore);
+
+    let resolveRequest: (value: unknown) => void = () => undefined;
+    const inFlightRequest = new Promise((resolve) => {
+      resolveRequest = resolve;
+    });
+    mockGetChapterVerses.mockReturnValue(inFlightRequest);
+
+    const { rerender } = render(<VerseActionModalContainer />);
+
+    await waitFor(() => {
+      expect(mockGetChapterVerses).toHaveBeenCalledTimes(1);
+    });
+
+    mockRouter.asPath = '/3?startingVerse=1';
+    rerender(<VerseActionModalContainer />);
+    resolveRequest({
+      verses: [
+        {
+          chapterId: 2,
+          verseNumber: 255,
+          verseKey: '2:255',
+        },
+      ],
+    });
+    await inFlightRequest;
+    await Promise.resolve();
+
+    expect(mockConsumePendingRestore).toHaveBeenCalledWith('/3?startingVerse=1');
+    expect(mockDispatch).not.toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'verseActionModal/openBookmarkModal',
+      }),
+    );
   });
 });

@@ -114,6 +114,7 @@ describe('useSaveBookmarkModal guest sign-in', () => {
 
     const parsedPendingRestore = JSON.parse(pendingRestore as string);
     expect(parsedPendingRestore.verseKey).toBe('2:255');
+    expect(parsedPendingRestore.verse.verseKey).toBe('2:255');
     expect(parsedPendingRestore.redirectUrl).toBe('/2?startingVerse=255');
   });
 

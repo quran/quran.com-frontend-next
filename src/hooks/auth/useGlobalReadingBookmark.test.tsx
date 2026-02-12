@@ -56,6 +56,16 @@ describe('useGlobalReadingBookmark', () => {
     expect(mockGetReadingBookmark).not.toHaveBeenCalled();
   });
 
+  it('returns null bookmark when auth context is unavailable', () => {
+    mockUseAuthContext.mockReturnValue(undefined as unknown as ReturnType<typeof useAuthContext>);
+    mockIsLoggedIn.mockReturnValue(true);
+
+    const { result } = renderHook(() => useGlobalReadingBookmark(1));
+
+    expect(result.current.readingBookmark).toBeNull();
+    expect(mockGetReadingBookmark).not.toHaveBeenCalled();
+  });
+
   it('fetches reading bookmark when logged in', async () => {
     mockIsLoggedIn.mockReturnValue(true);
     mockGetReadingBookmark.mockResolvedValue({
