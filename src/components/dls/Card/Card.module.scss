@@ -24,12 +24,14 @@ $card-hover-background-color: rgba(
   overflow: hidden;
   background-color: var(--color-background-alternative-deep);
   cursor: pointer;
+  width: 100%;
+  flex: 0 0 auto;
 
   .medium & {
-    min-height: calc(9 * var(--spacing-medium));
+    block-size: calc(9 * var(--spacing-medium));
   }
   .large & {
-    min-height: calc(15 * var(--spacing-medium));
+    block-size: calc(15 * var(--spacing-medium));
   }
 }
 
@@ -38,11 +40,28 @@ $card-hover-background-color: rgba(
   justify-content: space-between;
   padding: var(--spacing-medium);
   background-color: var(--color-background-alternative-faded);
+  min-height: 0;
+}
+
+.hasFooter {
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 0;
 }
 
 .textsContainer {
   overflow: hidden;
   width: 100%;
+}
+
+.hasFooter .textsContainer {
+  flex: 1;
+  min-height: 0;
+}
+
+.footer {
+  margin-top: auto;
+  align-self: flex-end;
 }
 
 .title {

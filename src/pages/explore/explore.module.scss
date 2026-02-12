@@ -1,0 +1,91 @@
+@use 'src/styles/breakpoints';
+
+.listItem {
+  margin: 0;
+}
+
+.cardLink {
+  display: block;
+  text-decoration: none !important;
+  color: inherit;
+
+  &:hover,
+  &:focus {
+    text-decoration: none !important;
+  }
+
+  &:hover .readMore,
+  &:focus-visible .readMore {
+    color: var(--color-text-link);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.gridWrapper {
+  width: 100%;
+  max-inline-size: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--spacing-xsmall);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--spacing-xxsmall) !important;
+  justify-content: center;
+  @include breakpoints.tablet {
+    gap: var(--spacing-xxsmall) !important;
+  }
+}
+
+.cardContainer {
+  block-size: 420px;
+  inline-size: 100%;
+  min-inline-size: 0 !important;
+  max-inline-size: none !important;
+}
+
+.grid .cardContainer {
+  max-inline-size: none !important;
+  min-inline-size: 0 !important;
+}
+
+.cardContainer > div:first-child {
+  min-block-size: unset !important;
+  block-size: 300px;
+}
+
+.cardTitle {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-xlarge);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.cardDescription {
+  color: var(--color-text-faded);
+  line-height: var(--line-height-large);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  p {
+    margin: 0;
+    display: inline;
+  }
+}
+
+.readMore {
+  display: inline-block;
+  margin-block-start: var(--spacing-xxsmall);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  white-space: nowrap;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
