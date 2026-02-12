@@ -1,0 +1,69 @@
+@use 'src/styles/utility';
+
+.container {
+  position: relative;
+}
+
+.children {
+  @include utility.scrollbarNone;
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  inline-size: 100%;
+  gap: var(--spacing-medium-px);
+}
+
+.edge {
+  position: absolute;
+  opacity: 100;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  inset-block-start: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  block-size: 100%;
+  align-items: center;
+  inline-size: calc(1.5 * var(--spacing-medium2-px));
+}
+
+.edgeIndicatorOnly {
+  pointer-events: none;
+}
+
+.leftEdge {
+  inset-inline-start: 0;
+  background-image: linear-gradient(
+    to right,
+    var(--color-background-elevated-new) 50%,
+    transparent
+  );
+}
+
+.rightEdge {
+  inset-inline-end: 0;
+  background-image: linear-gradient(to left, var(--color-background-elevated-new) 50%, transparent);
+}
+
+.hiddenEdge {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.edgeButton {
+  color: var(--color-text-default-new);
+  &:hover {
+    opacity: 100;
+  }
+  svg {
+    inline-size: var(--spacing-medium-px) !important;
+    block-size: var(--spacing-medium-px) !important;
+    path {
+      stroke: var(--color-text-default-new);
+      stroke-width: 0.25;
+    }
+  }
+}

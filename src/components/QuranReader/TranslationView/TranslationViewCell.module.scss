@@ -171,15 +171,8 @@
 }
 
 .tabsContainer {
-  @include utility.scrollbar-none;
   @include utility.edgeHorizontalPadding;
-  overflow-x: auto;
   box-sizing: border-box;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  align-items: center;
-  inline-size: 100%;
   gap: var(--spacing-medium);
 
   @media (min-width: 768px) {
