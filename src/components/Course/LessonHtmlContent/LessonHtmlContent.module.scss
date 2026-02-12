@@ -1,0 +1,19 @@
+.widgetSkeleton {
+  display: block;
+  block-size: 200px;
+  margin-block: var(--spacing-medium);
+  border-radius: var(--border-radius-default);
+}
+
+.container :global(.quran-widget) {
+  margin-block: var(--spacing-medium);
+
+  :global([class*='translation-font-size-']),
+  :global([class*='translation-font-size-']) p {
+    font-size: 22px !important;
+  }
+
+  :global([class*='translationName']) {
+    font-size: 16px !important;
+  }
+}
