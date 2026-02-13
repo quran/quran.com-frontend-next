@@ -18,6 +18,25 @@ import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
 
+/**
+ * This hook listens to startingVerse query param and navigate to the
+ * location where the page of that verse is in the virtualized list if we
+ * already have the data of that verse; otherwise, we will call BE to fetch
+ * the page number of the verse we want to navigate to.
+ *
+ * [NOTE]: This is meant to be used by ReadingView only.
+ *
+ * @param {QuranReaderDataType} quranReaderDataType
+ * @param {React.MutableRefObject<VirtuosoHandle>} virtuosoRef
+ * @param {VersesResponse} initialData
+ * @param {QuranReaderStyles} quranReaderStyles
+ * @param {Verse[]} verses
+ * @param {Record<number, LookupRecord>} pagesVersesRange
+ * @param {boolean} isUsingDefaultFont
+ * @param {QuranFont} quranFont
+ * @param {MushafLines} mushafLines
+ * @param {boolean} isPagesLookupLoading
+ */
 const useScrollToVirtualizedReadingView = (
   quranReaderDataType: QuranReaderDataType,
   virtuosoRef: React.MutableRefObject<VirtuosoHandle>,
@@ -64,11 +83,23 @@ const useScrollToVirtualizedReadingView = (
     [startingVerse, chapterIdFromLoadedVerses, isChapterScopedRoute],
   );
 
+  /**
+   * We need to scroll again when we have just changed the font since the same
+   * verse might lie on another page/position. Same for when we change the
+   * verse.
+   */
   useEffect(() => {
     // Re-enable scroll when font, mushaf lines, or starting verse changes.
     shouldScroll.current = true;
   }, [quranFont, mushafLines, startingVerse]);
 
+  /**
+   * Helper: scroll to a verse target. This consolidates the logic used in
+   * both the initial startingVerse effect and the audio player subscription.
+   *
+   * @param {StartingVerseTarget} target
+   * @param {boolean} respectScrollGuard - when true, guard scrolling with shouldScroll ref
+   */
   const scrollToVerse = useCallback(
     async (target: StartingVerseTarget, respectScrollGuard = false) => {
       if (respectScrollGuard && shouldScroll.current === false) return;
@@ -98,7 +129,9 @@ const useScrollToVirtualizedReadingView = (
   );
 
   useEffect(() => {
+    // If we have the page lookup data and virtuoso is mounted.
     if (!isPagesLookupLoading && virtuosoRef.current && Object.keys(pagesVersesRange).length) {
+      // If startingVerse is present in the URL (chapter format or multi-surah format).
       if (!startingVerseTarget) return;
       if (
         quranReaderDataType === QuranReaderDataType.Chapter &&
