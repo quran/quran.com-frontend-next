@@ -99,8 +99,16 @@
   justify-content: center;
   gap: var(--spacing-xxsmall);
   margin-block-start: var(--spacing-medium);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   max-inline-size: 300px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .dot {

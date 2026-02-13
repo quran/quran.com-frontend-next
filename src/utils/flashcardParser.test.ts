@@ -60,6 +60,18 @@ describe('flashcardParser', () => {
       expect(result?.afterHtml).toContain('<hr class="divider" />');
     });
 
+    it('splits at non-h3 headings', () => {
+      const html = `<p>Before</p>${makeSection()}<h4>Notes</h4><p>After</p>`;
+      const result = parseFlashcardsFromHtml(html);
+      expect(result?.afterHtml).toContain('<h4>Notes</h4>');
+    });
+
+    it('preserves trailing plain paragraphs after flashcards', () => {
+      const html = `${makeSection()}<p>Practice this line slowly.</p>`;
+      const result = parseFlashcardsFromHtml(html);
+      expect(result?.afterHtml).toBe('<p>Practice this line slowly.</p>');
+    });
+
     it('parses arabic, transliteration and translation', () => {
       const result = parseFlashcardsFromHtml(makeSection());
       const card = result?.flashcards[0];

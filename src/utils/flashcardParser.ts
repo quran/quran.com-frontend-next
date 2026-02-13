@@ -24,7 +24,9 @@ export default function parseFlashcardsFromHtml(html: string): {
   const beforeHtml = html.slice(0, headingMatch.index);
 
   const afterHeadingContent = html.slice(headingEndIndex);
-  const nextSectionMatch = afterHeadingContent.match(/<h3[^>]*>|<hr\b[^>]*\/?>/i);
+  const nextSectionMatch = afterHeadingContent.match(
+    /<h[1-6][^>]*>|<hr\b[^>]*\/?>|<p(?![^>]*\bdir=["'](?:rtl|ltr)["'])[^>]*>/i,
+  );
   const splitAt = nextSectionMatch?.index ?? afterHeadingContent.length;
   const wordByWordHtml = afterHeadingContent.slice(0, splitAt);
   const afterHtml = afterHeadingContent.slice(splitAt);

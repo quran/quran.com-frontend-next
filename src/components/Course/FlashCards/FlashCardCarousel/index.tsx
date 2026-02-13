@@ -50,7 +50,22 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
           &#8249;
         </button>
 
-        <div className={styles.carouselContainer}>
+        <div
+          className={styles.carouselContainer}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+              e.preventDefault();
+              const dir = e.key === 'ArrowLeft' ? -1 : 1;
+              goTo(currentIndex + (document.documentElement.dir === 'rtl' ? -dir : dir));
+            } else if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              toggleFlip(currentIndex);
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label="Flashcard carousel"
+        >
           <div
             key={currentIndex}
             className={classNames(styles.card, {
@@ -60,17 +75,13 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
             })}
             onClick={() => toggleFlip(currentIndex)}
             onKeyDown={(e) => {
-              if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-                e.preventDefault();
-                const dir = e.key === 'ArrowLeft' ? -1 : 1;
-                goTo(currentIndex + (document.documentElement.dir === 'rtl' ? -dir : dir));
-              } else if (e.key === 'Enter' || e.key === ' ') {
+              if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 toggleFlip(currentIndex);
               }
             }}
             role="button"
-            tabIndex={0}
+            tabIndex={-1}
           >
             <div className={styles.cardInner}>
               <div className={styles.cardFront}>
