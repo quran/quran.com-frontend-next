@@ -106,7 +106,8 @@ const getPageFromLoadedVerses = (
   const match = verses.find(
     // Match by chapter + verse so multi-surah targets resolve correctly.
     (verse) =>
-      verse.chapterId === Number(target.chapterId) && verse.verseNumber === target.verseNumber,
+      Number(verse.chapterId) === Number(target.chapterId) &&
+      verse.verseNumber === target.verseNumber,
   );
   return match?.pageNumber;
 };
