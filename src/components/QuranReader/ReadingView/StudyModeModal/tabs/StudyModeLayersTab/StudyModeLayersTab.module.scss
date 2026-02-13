@@ -324,12 +324,16 @@ $font-scale-15: 0.9375; // 16px * 0.9375 = 15px
   @extend .markdown;
 }
 
+:is(.translationText, .groupPanel) span:has(sup[foot_note]) {
+  font-size: inherit !important;
+}
+
 .translationText :global(sup[foot_note]),
 .groupPanel :global(sup[foot_note]) {
   vertical-align: super;
   color: var(--color-text-link);
   font-weight: var(--font-weight-medium);
-  font-size: 0.75em;
+  font-size: calc(var(--layers-base-font-size) * 0.75);
   padding-inline: var(--spacing-micro2-px);
   cursor: pointer;
 
