@@ -78,6 +78,8 @@ const useStartingVerseScrollTarget = ({
     isChapterScopedRoute &&
     !!startingVerse &&
     !isStartingVerseKeyFormat &&
+    Number.isInteger(startingVerseNumber) &&
+    startingVerseNumber > 0 &&
     isValidVerseId(chaptersData, chapterId, startingVerseValue);
 
   const isValidLookupStartingVerseKey =
