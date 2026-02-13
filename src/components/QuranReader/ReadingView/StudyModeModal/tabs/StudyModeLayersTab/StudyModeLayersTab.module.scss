@@ -41,6 +41,23 @@ $layers-scales: (
   }
 }
 
+.markdown {
+  & p {
+    display: inline;
+  }
+
+  & strong,
+  & b {
+    font-weight: var(--font-weight-medium);
+  }
+
+  & em,
+  & i {
+    font-size: inherit;
+    font-style: italic;
+  }
+}
+
 // ------------------------------------------------------------
 // Font Size Scale Factors
 // These values represent proportional multipliers (ratios)
@@ -121,13 +138,7 @@ $font-scale-15: 0.9375; // 16px * 0.9375 = 15px
   font-weight: var(--font-weight-light);
   line-height: 1.8;
 
-  & b {
-    font-weight: var(--font-weight-medium);
-  }
-
-  & i {
-    font-style: italic;
-  }
+  @extend .markdown;
 }
 
 .groupToken {
@@ -241,13 +252,7 @@ $font-scale-15: 0.9375; // 16px * 0.9375 = 15px
   line-height: 1;
   cursor: pointer;
 
-  & b {
-    font-weight: var(--font-weight-medium);
-  }
-
-  & i {
-    font-style: italic;
-  }
+  @extend .markdown;
 }
 
 .optionText {
@@ -316,13 +321,7 @@ $font-scale-15: 0.9375; // 16px * 0.9375 = 15px
   font-weight: var(--font-weight-light);
   line-height: 1.5;
 
-  & i {
-    font-style: italic;
-  }
-
-  & b {
-    font-weight: var(--font-weight-medium);
-  }
+  @extend .markdown;
 }
 
 .translationText :global(sup[foot_note]),
@@ -345,8 +344,5 @@ $font-scale-15: 0.9375; // 16px * 0.9375 = 15px
   --font-size-xsmall: calc(var(--layers-base-font-size) * #{$font-scale-10}); // base 3 => 10px
   font-size: var(--font-size-normal);
 
-  i {
-    font-size: inherit;
-    font-style: italic;
-  }
+  @extend .markdown;
 }
