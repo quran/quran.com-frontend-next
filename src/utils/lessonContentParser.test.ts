@@ -79,5 +79,26 @@ describe('lessonContentParser', () => {
         reference: { chapter: 2, from: 1 },
       });
     });
+
+    it('parses trailing chapter:verse from all blockquotes and keeps trailing html', () => {
+      const html =
+        '<blockquote><p>“One.” (67:1)</p></blockquote><blockquote><p>“Two.” (67:2)</p></blockquote><blockquote><p>“Three.” (67:3)</p></blockquote><p>Tail</p>';
+      const chunks = parseContentChunks(html);
+
+      expect(chunks).toHaveLength(4);
+      expect(chunks[0]).toMatchObject({
+        type: 'verse',
+        reference: { chapter: 67, from: 1 },
+      });
+      expect(chunks[1]).toMatchObject({
+        type: 'verse',
+        reference: { chapter: 67, from: 2 },
+      });
+      expect(chunks[2]).toMatchObject({
+        type: 'verse',
+        reference: { chapter: 67, from: 3 },
+      });
+      expect(chunks[3]).toMatchObject({ type: 'html' });
+    });
   });
 });
