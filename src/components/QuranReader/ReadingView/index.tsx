@@ -113,11 +113,9 @@ const ReadingView = ({
     quranReaderDataType !== QuranReaderDataType.Chapter &&
     firstVerse.verseNumber !== 1;
 
-  // Get the chapterId and startingVerse from the query params
-  const chapterIdQueryParam = router.query.chapterId;
-  const chapterId = Array.isArray(chapterIdQueryParam)
-    ? chapterIdQueryParam[0]
-    : chapterIdQueryParam;
+  // Use chapterId from the loaded verses data instead of the route param.
+  // Route param can be a slug on chapter pages (e.g. /al-baqarah).
+  const chapterId = firstVerse?.chapterId ? String(firstVerse.chapterId) : undefined;
 
   // Get the startingVerse from the query params. Used to highlight the verse in mushaf mode.
   const startingVerseQueryParam = router.query[QueryParam.STARTING_VERSE];
