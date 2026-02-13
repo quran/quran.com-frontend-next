@@ -59,7 +59,7 @@ type ReadingViewProps = {
 };
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1200;
-const STARTING_VERSE_HIGHLIGHT_DURATION_MS = 10000;
+const STARTING_VERSE_HIGHLIGHT_DURATION_MS = 5000;
 
 const getInitialMushafMap = (initialData: VersesResponse): Record<number, Verse[]> => {
   const firstVerse = initialData?.verses?.[0];
