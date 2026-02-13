@@ -12,20 +12,18 @@ import { ContentChunk, parseContentChunks } from '@/utils/lessonContentParser';
 const VARIANT_CONFIG = {
   [FlashCardVariant.List]: {
     component: FlashCardList,
-    title: 'Quick Reference',
     subtitle: 'Tap to expand, mark words as mastered',
   },
   [FlashCardVariant.Carousel]: {
     component: FlashCardCarousel,
-    title: 'Carousel',
     subtitle: 'Swipe through cards, tap to flip',
   },
   [FlashCardVariant.Deck]: {
     component: FlashCardDeck,
-    title: 'Swipe Cards',
     subtitle: 'Swipe right if you know it, left to review',
   },
 };
+const FLASHCARD_TITLE = 'Word-by-word breakdown';
 
 type Props = {
   content: string;
@@ -55,18 +53,14 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
   );
   if (language !== 'en') return <HtmlContent html={content} />;
   if (flashcardData) {
-    const {
-      component: FlashCardComponent,
-      title,
-      subtitle,
-    } = VARIANT_CONFIG[flashcardData.variant];
+    const { component: FlashCardComponent, subtitle } = VARIANT_CONFIG[flashcardData.variant];
 
     return (
       <div className={styles.container}>
         {flashcardData.beforeHtml && renderHtml(flashcardData.beforeHtml, 'before-')}
         <div className={styles.flashcardSection}>
           <div className={styles.flashcardHeader}>
-            <h4 className={styles.flashcardTitle}>{title}</h4>
+            <h4 className={styles.flashcardTitle}>{FLASHCARD_TITLE}</h4>
             <span className={styles.flashcardSubtitle}>{subtitle}</span>
           </div>
           <FlashCardComponent key={content} cards={flashcardData.flashcards} />
