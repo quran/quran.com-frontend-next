@@ -72,6 +72,14 @@ describe('flashcardParser', () => {
       expect(result?.afterHtml).toBe('<p>Practice this line slowly.</p>');
     });
 
+    it('splits before trailing blockquote sections', () => {
+      const html = `${makeSection()}<blockquote><a href="https://quran.com/2/1">2:1</a><p>Verse widget</p></blockquote>`;
+      const result = parseFlashcardsFromHtml(html);
+      expect(result?.afterHtml).toBe(
+        '<blockquote><a href="https://quran.com/2/1">2:1</a><p>Verse widget</p></blockquote>',
+      );
+    });
+
     it('parses arabic, transliteration and translation', () => {
       const result = parseFlashcardsFromHtml(makeSection());
       const card = result?.flashcards[0];
