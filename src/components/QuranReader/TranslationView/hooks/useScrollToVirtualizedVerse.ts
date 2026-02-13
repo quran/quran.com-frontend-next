@@ -1,11 +1,12 @@
-/* eslint-disable max-lines */
-import { useCallback, useEffect, useState, useContext, useRef, useMemo } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 import { VirtuosoHandle } from 'react-virtuoso';
 
 import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
+
+import useStartingVerseScrollTarget from './useStartingVerseScrollTarget';
 
 import DataContext from '@/contexts/DataContext';
 import useAudioNavigationScroll from '@/hooks/useAudioNavigationScroll';
@@ -14,9 +15,6 @@ import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 import { getPageNumberFromIndexAndPerPage } from '@/utils/number';
-import { isValidVerseId, isValidVerseKey } from '@/utils/validator';
-import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
-import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import LookupRange from 'types/LookupRange';
 import ScrollAlign from 'types/ScrollAlign';
 
@@ -54,69 +52,14 @@ const useScrollToVirtualizedTranslationView = (
   const isNavbarVisibleRef = useRef(isNavbarVisible);
   isNavbarVisibleRef.current = isNavbarVisible;
 
-  const startingVerseQueryParam = router.query.startingVerse;
-  const startingVerse = Array.isArray(startingVerseQueryParam)
-    ? startingVerseQueryParam[0]
-    : startingVerseQueryParam;
-  const chapterIdQueryParam = router.query.chapterId; // The chapterId route param or undefined if we are on a /juz, /page or other multi-chapter route.
-  const chapterIdFromRoute = Array.isArray(chapterIdQueryParam)
-    ? chapterIdQueryParam[0]
-    : chapterIdQueryParam;
-
-  const isChapterScopedRoute = !!chapterIdFromRoute && !String(chapterIdFromRoute).includes(':'); // Chapter ids/slugs do not include ":" while verse-key/range params do.
-  const startingVerseValue = String(startingVerse || '');
-  const isStartingVerseKeyFormat = startingVerseValue.includes(':'); // Detect multi-surah format "SS:VV".
-  const startingVerseNumber = Number(startingVerseValue);
-
-  const verseKeysInLookupRange = useMemo(() => {
-    // Precompute ordered verse keys for the current reader range.
-    if (!lookupRange?.from || !lookupRange?.to) return [];
-    return generateVerseKeysBetweenTwoVerseKeys(chaptersData, lookupRange.from, lookupRange.to);
-  }, [chaptersData, lookupRange?.from, lookupRange?.to]);
-
-  const isValidChapterStartingVerse =
-    isChapterScopedRoute &&
-    !!startingVerse &&
-    !isStartingVerseKeyFormat &&
-    isValidVerseId(chaptersData, chapterId, startingVerseValue);
-
-  const isValidLookupStartingVerseKey =
-    !!startingVerse &&
-    isStartingVerseKeyFormat &&
-    isValidVerseKey(chaptersData, startingVerseValue) &&
-    verseKeysInLookupRange.includes(startingVerseValue);
-
-  const targetVerseIndex = useMemo(() => {
-    // Resolve the final absolute virtualized index for both formats.
-    if (isValidChapterStartingVerse) return startingVerseNumber - 1; // Chapter format maps directly to zero-based index.
-    if (isValidLookupStartingVerseKey) return verseKeysInLookupRange.indexOf(startingVerseValue); // Multi-surah format uses lookup-range key ordering.
-    return -1;
-  }, [
-    isValidChapterStartingVerse,
-    startingVerseNumber,
-    isValidLookupStartingVerseKey,
-    verseKeysInLookupRange,
-    startingVerseValue,
-  ]);
-
-  const shouldSkipInitialScroll = isValidChapterStartingVerse && startingVerseNumber <= 1; // Skip scroll when chapter target is the first verse already at top.
-
-  const targetVerseKey = useMemo(() => {
-    // Resolve a verse key for observer queue updates.
-    if (isValidLookupStartingVerseKey) {
-      const [targetChapterId, targetVerseNumber] =
-        getVerseAndChapterNumbersFromKey(startingVerseValue);
-      return makeVerseKey(Number(targetChapterId), Number(targetVerseNumber));
-    }
-    if (isValidChapterStartingVerse) return makeVerseKey(chapterId, startingVerseNumber); // Build verse key for numeric chapter format.
-    return undefined; // Keep undefined when there is no valid target.
-  }, [
-    isValidLookupStartingVerseKey,
-    startingVerseValue,
-    isValidChapterStartingVerse,
-    chapterId,
-    startingVerseNumber,
-  ]);
+  const { startingVerse, targetVerseIndex, targetVerseKey, shouldSkipInitialScroll } =
+    useStartingVerseScrollTarget({
+      startingVerseQueryParam: router.query.startingVerse,
+      chapterIdQueryParam: router.query.chapterId,
+      chapterId,
+      chaptersData,
+      lookupRange,
+    });
 
   const scrollToBeginningOfVerseCell = useCallback(
     (verseIndex: number) => {
