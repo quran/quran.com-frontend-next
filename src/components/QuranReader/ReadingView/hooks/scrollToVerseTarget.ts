@@ -6,7 +6,6 @@ import { StartingVerseTarget } from './startingVerseTarget';
 
 import { getVersePositionWithinAMushafPage } from '@/utils/verse';
 import LookupRecord from 'types/LookupRecord';
-import ScrollAlign from 'types/ScrollAlign';
 import Verse from 'types/Verse';
 
 const PINNED_VERSES_BAR_OFFSET = -90;
@@ -61,19 +60,6 @@ const getFirstPageOfCurrentChapter = (
 };
 
 /**
- * Choose exact verse align for chapter mode or center for multi-surah keys.
- * @returns {ScrollAlign}
- */
-const getAlign = (
-  target: StartingVerseTarget,
-  page: number,
-  pagesVersesRange: Record<number, LookupRecord>,
-): ScrollAlign => {
-  if (!target.isChapterNumericFormat) return ScrollAlign.Center;
-  return getVersePositionWithinAMushafPage(target.verseKey, pagesVersesRange[page]);
-};
-
-/**
  * Scroll the virtualized list to a page index when page lookup is available.
  * @returns {boolean}
  */
@@ -89,7 +75,7 @@ const scrollToPage = ({
   const scrollToPageIndex = page - firstPageOfCurrentChapter;
   virtuosoRef.current.scrollToIndex({
     index: scrollToPageIndex,
-    align: getAlign(target, page, pagesVersesRange),
+    align: getVersePositionWithinAMushafPage(target.verseKey, pagesVersesRange[page]),
     offset: pinnedOffset,
   });
   return true;
