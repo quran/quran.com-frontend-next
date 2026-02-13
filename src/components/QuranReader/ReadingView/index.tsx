@@ -38,7 +38,8 @@ import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
-import { isValidVerseId } from '@/utils/validator';
+import { isValidVerseId, isValidVerseKey } from '@/utils/validator';
+import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
 import { selectIsAudioPlaying } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';
@@ -141,28 +142,42 @@ const ReadingView = ({
   );
 
   useEffect(() => {
-    if (
-      quranReaderDataType !== QuranReaderDataType.Chapter ||
-      readingPreference !== ReadingPreference.Reading ||
-      isVerseAudioPlaying ||
-      !chapterId ||
-      !startingVerse
-    ) {
+    if (readingPreference !== ReadingPreference.Reading || isVerseAudioPlaying || !startingVerse) {
       setStartingVerseHighlightVerseKey(undefined);
       return undefined;
     }
 
-    const startingVerseNumber = Number(startingVerse);
-    const isValidStartingVerse =
-      Number.isInteger(startingVerseNumber) &&
-      isValidVerseId(chaptersData, chapterId, String(startingVerse));
+    const startingVerseValue = String(startingVerse);
+    const isStartingVerseKeyFormat = startingVerseValue.includes(':'); // Detect "SS:VV" format used on multi-surah pages.
+    let resolvedStartingVerseKey: string | undefined;
 
-    if (!isValidStartingVerse) {
+    if (isStartingVerseKeyFormat) {
+      if (isValidVerseKey(chaptersData, startingVerseValue)) {
+        const [targetChapterId, targetVerseNumber] =
+          getVerseAndChapterNumbersFromKey(startingVerseValue);
+        const normalizedChapterId = Number(targetChapterId);
+        const normalizedVerseNumber = Number(targetVerseNumber);
+        if (Number.isInteger(normalizedChapterId) && Number.isInteger(normalizedVerseNumber)) {
+          resolvedStartingVerseKey = makeVerseKey(normalizedChapterId, normalizedVerseNumber);
+        }
+      }
+    } else if (quranReaderDataType === QuranReaderDataType.Chapter && chapterId) {
+      const startingVerseNumber = Number(startingVerseValue); // Parse legacy chapter-only format "V".
+      const isValidStartingVerse =
+        Number.isInteger(startingVerseNumber) &&
+        // Validate numeric verse against the current chapter bounds.
+        isValidVerseId(chaptersData, chapterId, startingVerseValue);
+      if (isValidStartingVerse) {
+        resolvedStartingVerseKey = makeVerseKey(chapterId, startingVerseNumber);
+      }
+    }
+
+    if (!resolvedStartingVerseKey) {
       setStartingVerseHighlightVerseKey(undefined);
       return undefined;
     }
 
-    setStartingVerseHighlightVerseKey(`${chapterId}:${startingVerseNumber}`);
+    setStartingVerseHighlightVerseKey(resolvedStartingVerseKey);
 
     // After a few seconds, remove the highlight
     const removeTimeoutId = setTimeout(() => {

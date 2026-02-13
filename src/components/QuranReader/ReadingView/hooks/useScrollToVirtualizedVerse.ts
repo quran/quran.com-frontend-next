@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef } from 'react';
+/* eslint-disable max-lines */
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -11,13 +12,26 @@ import { selectNavbar } from '@/redux/slices/navbar';
 import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont, QuranReaderDataType } from '@/types/QuranReader';
-import { getVersePositionWithinAMushafPage } from '@/utils/verse';
+import {
+  getVerseAndChapterNumbersFromKey,
+  getVersePositionWithinAMushafPage,
+  makeVerseKey,
+} from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
+import ScrollAlign from 'types/ScrollAlign';
 import Verse from 'types/Verse';
 
 const PINNED_VERSES_BAR_OFFSET = -90;
 const NAVBAR_OFFSET = -54;
+
+type StartingVerseTarget = {
+  // Keep parsed starting-verse data in one object to reuse in initial scroll and fetch fallback paths.
+  chapterId: string;
+  verseNumber: number;
+  verseKey: string;
+  isChapterNumericFormat: boolean;
+};
 
 /**
  * This hook listens to startingVerse query param and navigate to the
@@ -51,7 +65,18 @@ const useScrollToVirtualizedReadingView = (
   isPagesLookupLoading: boolean,
 ) => {
   const router = useRouter();
-  const { startingVerse, chapterId } = router.query;
+  const startingVerseQueryParam = router.query.startingVerse;
+  const startingVerse = Array.isArray(startingVerseQueryParam)
+    ? startingVerseQueryParam[0]
+    : startingVerseQueryParam;
+  const chapterIdQueryParam = router.query.chapterId;
+  const chapterIdFromRoute = Array.isArray(chapterIdQueryParam)
+    ? chapterIdQueryParam[0]
+    : chapterIdQueryParam;
+  const isChapterScopedRoute = !!chapterIdFromRoute && !String(chapterIdFromRoute).includes(':');
+  const chapterIdFromLoadedVerses = initialData.verses[0]?.chapterId
+    ? String(initialData.verses[0].chapterId)
+    : undefined;
   const shouldScroll = useRef(true);
 
   const pinnedVerses = useSelector(selectPinnedVerses);
@@ -67,6 +92,37 @@ const useScrollToVirtualizedReadingView = (
     quranReaderStyles.quranFont,
     quranReaderStyles.mushafLines,
   );
+
+  const startingVerseTarget = useMemo<StartingVerseTarget | null>(() => {
+    // Parse startingVerse into a normalized target that supports both V and SS:VV formats.
+    if (!startingVerse) return null;
+    const startingVerseValue = String(startingVerse);
+    if (startingVerseValue.includes(':')) {
+      // Handle the  multi-surah key format (SS:VV).
+      const [targetChapterId, targetVerseNumber] =
+        getVerseAndChapterNumbersFromKey(startingVerseValue);
+      const parsedChapterId = Number(targetChapterId);
+      const parsedVerseNumber = Number(targetVerseNumber);
+      if (!Number.isInteger(parsedChapterId) || parsedChapterId <= 0) return null; // Reject invalid chapter ids.
+      if (!Number.isInteger(parsedVerseNumber) || parsedVerseNumber <= 0) return null; // Reject invalid verse numbers.
+      return {
+        chapterId: String(parsedChapterId),
+        verseNumber: parsedVerseNumber,
+        verseKey: makeVerseKey(parsedChapterId, parsedVerseNumber),
+        isChapterNumericFormat: false, // Mark as key format.
+      };
+    }
+    const parsedVerseNumber = Number(startingVerseValue); // Parse numeric chapter format (V).
+    if (!isChapterScopedRoute) return null; // Ignore numeric format on multi-surah routes because chapter context is ambiguous there.
+    if (!chapterIdFromLoadedVerses) return null;
+    if (!Number.isInteger(parsedVerseNumber) || parsedVerseNumber <= 0) return null; // Reject invalid verse numbers.
+    return {
+      chapterId: chapterIdFromLoadedVerses,
+      verseNumber: parsedVerseNumber,
+      verseKey: makeVerseKey(chapterIdFromLoadedVerses, parsedVerseNumber),
+      isChapterNumericFormat: true,
+    };
+  }, [startingVerse, chapterIdFromLoadedVerses, isChapterScopedRoute]);
 
   /**
    * We need to scroll again when we have just changed the font since the same
@@ -86,7 +142,7 @@ const useScrollToVirtualizedReadingView = (
    */
   const scrollToVerse = useCallback(
     // eslint-disable-next-line react-func/max-lines-per-function
-    async (verseNumber: number, respectScrollGuard = false) => {
+    async (target: StartingVerseTarget, respectScrollGuard = false) => {
       if (respectScrollGuard && shouldScroll.current === false) return;
       if (!virtuosoRef.current || !Object.keys(pagesVersesRange).length) return;
 
@@ -102,33 +158,39 @@ const useScrollToVirtualizedReadingView = (
           ? initialDataFirstPage
           : Number(Object.keys(pagesVersesRange)[0]);
 
-      const startFromVerseData = verses.find((verse) => verse.verseNumber === verseNumber);
+      const startFromVerseData = verses.find(
+        (verse) =>
+          verse.chapterId === Number(target.chapterId) && verse.verseNumber === target.verseNumber, // Match by chapter + verse so multi-surah targets resolve correctly.
+      );
       if (startFromVerseData && pagesVersesRange[startFromVerseData.pageNumber]) {
         const scrollToPageIndex = startFromVerseData.pageNumber - firstPageOfCurrentChapter;
+        const align = target.isChapterNumericFormat
+          ? getVersePositionWithinAMushafPage(
+              target.verseKey,
+              pagesVersesRange[startFromVerseData.pageNumber],
+            )
+          : ScrollAlign.Center;
         virtuosoRef.current.scrollToIndex({
           index: scrollToPageIndex,
-          align: getVersePositionWithinAMushafPage(
-            `${chapterId}:${verseNumber}`,
-            pagesVersesRange[startFromVerseData.pageNumber],
-          ),
+          align,
           offset: pinnedOffset,
         });
         if (respectScrollGuard) shouldScroll.current = false;
         return;
       }
 
-      const response = await fetchVersePageNumber(chapterId as string, verseNumber);
+      const response = await fetchVersePageNumber(target.chapterId, target.verseNumber);
       if (!response || !virtuosoRef.current) return;
       if (response.verses.length && (respectScrollGuard ? shouldScroll.current === true : true)) {
         const page = response.verses[0].pageNumber;
         const scrollToPageIndex = page - firstPageOfCurrentChapter;
         if (pagesVersesRange[page]) {
+          const align = target.isChapterNumericFormat
+            ? getVersePositionWithinAMushafPage(target.verseKey, pagesVersesRange[page])
+            : ScrollAlign.Center;
           virtuosoRef.current.scrollToIndex({
             index: scrollToPageIndex,
-            align: getVersePositionWithinAMushafPage(
-              `${chapterId}:${verseNumber}`,
-              pagesVersesRange[page],
-            ),
+            align,
             offset: pinnedOffset,
           });
 
@@ -142,7 +204,6 @@ const useScrollToVirtualizedReadingView = (
       isUsingDefaultFont,
       initialData.verses,
       verses,
-      chapterId,
       fetchVersePageNumber,
     ],
   );
@@ -150,26 +211,47 @@ const useScrollToVirtualizedReadingView = (
   useEffect(() => {
     // if we have the data of the page lookup
     if (!isPagesLookupLoading && virtuosoRef.current && Object.keys(pagesVersesRange).length) {
-      // if startingVerse is present in the url
-      if (quranReaderDataType === QuranReaderDataType.Chapter && startingVerse) {
-        const startingVerseNumber = Number(startingVerse);
-        // if the startingVerse is a valid integer and is above 1 (skip verse 1 since it's already at the top)
-        if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 1) {
-          scrollToVerse(startingVerseNumber, true);
-        }
+      if (!startingVerseTarget) return;
+      if (
+        quranReaderDataType === QuranReaderDataType.Chapter &&
+        startingVerseTarget.isChapterNumericFormat &&
+        startingVerseTarget.verseNumber <= 1 // skip if verse 1 is already visible at top in chapter mode.
+      ) {
+        return;
       }
+      scrollToVerse(startingVerseTarget, true); // Trigger initial scroll for both chapter and multi-surah target formats.
     }
   }, [
     isPagesLookupLoading,
     quranReaderDataType,
-    startingVerse,
+    startingVerseTarget,
     virtuosoRef,
     scrollToVerse,
     pagesVersesRange,
   ]);
 
+  const onAudioNavigationScroll = useCallback(
+    (ayahNumber: number) => {
+      if (!chapterIdFromLoadedVerses) return;
+      scrollToVerse(
+        {
+          chapterId: chapterIdFromLoadedVerses,
+          verseNumber: ayahNumber,
+          verseKey: makeVerseKey(chapterIdFromLoadedVerses, ayahNumber),
+          isChapterNumericFormat: true,
+        },
+        false,
+      );
+    },
+    [chapterIdFromLoadedVerses, scrollToVerse],
+  );
+
   // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user clicks buttons in audio player
-  useAudioNavigationScroll(quranReaderDataType, chapterId as string, scrollToVerse);
+  useAudioNavigationScroll(
+    quranReaderDataType,
+    chapterIdFromLoadedVerses || '',
+    onAudioNavigationScroll,
+  );
 };
 
 export default useScrollToVirtualizedReadingView;

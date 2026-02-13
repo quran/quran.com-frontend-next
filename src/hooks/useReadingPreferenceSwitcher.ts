@@ -52,18 +52,20 @@ const useReadingPreferenceSwitcher = ({
 }: UseReadingPreferenceSwitcherOptions): UseReadingPreferenceSwitcherResult => {
   const router = useRouter();
   const { readingPreference } = useSelector(selectReadingPreferences);
-  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  const lastReadVerseKeyState = useSelector(selectLastReadVerseKey);
 
   const {
     actions: { onSettingsChange },
     isLoading,
   } = usePersistPreferenceGroup();
 
-  const lastReadVerse = lastReadVerseKey.verseKey
-    ? getVerseNumberFromKey(lastReadVerseKey.verseKey).toString()
+  const lastReadVerseKey = lastReadVerseKeyState.verseKey;
+  const lastReadVerse = lastReadVerseKey
+    ? getVerseNumberFromKey(lastReadVerseKey).toString()
     : undefined;
 
   const switchReadingPreference = useCallback(
+    // eslint-disable-next-line react-func/max-lines-per-function
     (newPreference: ReadingPreference) => {
       if (newPreference === readingPreference) return;
 
@@ -77,10 +79,18 @@ const useReadingPreferenceSwitcher = ({
         // User is at the top of the page, so remove startingVerse to prevent scrolling
         delete newQueryParams.startingVerse;
       } else {
+        const chapterIdQueryParam = router.query.chapterId;
+        const chapterId = Array.isArray(chapterIdQueryParam)
+          ? chapterIdQueryParam[0]
+          : chapterIdQueryParam;
+        const isChapterScopedRoute = !!chapterId && !String(chapterId).includes(':'); // Treat chapter ids/slugs as chapter-scoped and only exclude verse-key/range route params that contain ":".
+
         // For ContextMenu and MobileTabs when not at top, set startingVerse to ensure
         // the virtualized scroll hooks navigate to the correct verse/page.
-        // Default to verse 1 if no verse has been tracked yet.
-        newQueryParams.startingVerse = lastReadVerse || '1';
+        // Default to verse 1/1:1 if no verse has been tracked yet.
+        newQueryParams.startingVerse = isChapterScopedRoute
+          ? lastReadVerse || '1'
+          : lastReadVerseKey || '1:1';
       }
 
       const newUrlObject = {
@@ -106,7 +116,7 @@ const useReadingPreferenceSwitcher = ({
         .then(updateReduxState)
         .catch(updateReduxState); // Still update Redux if router fails to keep UI in sync
     },
-    [context, lastReadVerse, onSettingsChange, readingPreference, router],
+    [context, lastReadVerse, lastReadVerseKey, onSettingsChange, readingPreference, router],
   );
 
   return {
