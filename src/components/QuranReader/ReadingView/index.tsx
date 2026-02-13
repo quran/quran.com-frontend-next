@@ -3,6 +3,7 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
+import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -38,6 +39,8 @@ import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import { isValidVerseId } from '@/utils/validator';
+import { selectIsAudioPlaying } from 'src/xstate/actors/audioPlayer/selectors';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import Verse from 'types/Verse';
@@ -80,12 +83,17 @@ const ReadingView = ({
 }: ReadingViewProps) => {
   const router = useRouter();
   const chaptersData = useContext(DataContext);
+  const audioService = useContext(AudioPlayerMachineContext);
   const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>(() =>
     getInitialMushafMap(initialData),
   );
   const [startingVerseHighlightVerseKey, setStartingVerseHighlightVerseKey] = useState<
     string | undefined
   >(undefined);
+  const isVerseAudioPlaying = useXstateSelector(
+    audioService,
+    (state) => selectIsAudioPlaying(state) && !state.context.radioActor,
+  );
 
   const { lang } = useTranslation('quran-reader');
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
@@ -138,6 +146,7 @@ const ReadingView = ({
     if (
       quranReaderDataType !== QuranReaderDataType.Chapter ||
       readingPreference !== ReadingPreference.Reading ||
+      isVerseAudioPlaying ||
       !chapterId ||
       !startingVerse
     ) {
@@ -165,7 +174,14 @@ const ReadingView = ({
     return () => {
       clearTimeout(removeTimeoutId);
     };
-  }, [chapterId, chaptersData, quranReaderDataType, readingPreference, startingVerse]);
+  }, [
+    chapterId,
+    chaptersData,
+    isVerseAudioPlaying,
+    quranReaderDataType,
+    readingPreference,
+    startingVerse,
+  ]);
 
   const { quranFont, mushafLines, quranTextFontScale } = quranReaderStyles;
   useQcfFont(quranFont, verses);
