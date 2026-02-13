@@ -56,6 +56,29 @@ export function parseQuranUrl(href: string): VerseReference | null {
 }
 
 const QURAN_LINK_REGEX = /href=["'](https?:\/\/(?:[a-z0-9-]+\.)*quran\.com\/[^"']+)["']/i;
+const ENDING_REFERENCE_REGEX =
+  /(?:\(|\[)?\s*(\d{1,3})\s*:\s*(\d{1,3})(?:\s*[-–—]\s*(\d{1,3}))?\s*(?:\)|\])?\s*["'”’.,!?]*\s*$/;
+
+const parseEndingReference = (blockquoteHtml: string): VerseReference | null => {
+  const text = blockquoteHtml
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const match = text.match(ENDING_REFERENCE_REGEX);
+  if (!match) return null;
+
+  const chapter = Number(match[1]);
+  const from = Number(match[2]);
+  const to = match[3] ? Number(match[3]) : undefined;
+
+  if (!Number.isInteger(chapter) || chapter < 1 || chapter > 114) return null;
+  if (!Number.isInteger(from) || from < 1) return null;
+  if (to !== undefined && (!Number.isInteger(to) || to < from)) return null;
+
+  return { chapter, from, to };
+};
 
 const processBlockquote = (
   blockquoteHtml: string,
@@ -65,9 +88,8 @@ const processBlockquote = (
   chunks: ContentChunk[],
 ): number => {
   const linkMatch = blockquoteHtml.match(QURAN_LINK_REGEX);
-  if (!linkMatch) return lastIndex;
-
-  const reference = parseQuranUrl(linkMatch[1]);
+  const reference =
+    (linkMatch ? parseQuranUrl(linkMatch[1]) : null) || parseEndingReference(blockquoteHtml);
   if (!reference) return lastIndex;
 
   if (startIndex > lastIndex) {
