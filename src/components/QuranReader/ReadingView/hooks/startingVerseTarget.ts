@@ -1,3 +1,4 @@
+import { isValidChapterId } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
 
 export type StartingVerseTarget = {
@@ -24,6 +25,7 @@ const getKeyFormatTarget = (startingVerse: string): StartingVerseTarget | null =
 
   if (!Number.isInteger(parsedChapterId) || parsedChapterId <= 0) return null; // Reject invalid chapter ids.
   if (!Number.isInteger(parsedVerseNumber) || parsedVerseNumber <= 0) return null; // Reject invalid verse numbers.
+  if (!isValidChapterId(String(parsedChapterId))) return null;
 
   return {
     chapterId: String(parsedChapterId),
