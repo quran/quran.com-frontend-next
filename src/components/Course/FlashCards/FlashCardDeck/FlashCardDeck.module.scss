@@ -1,0 +1,225 @@
+@use 'src/styles/breakpoints';
+@use '../shared' as shared;
+
+.container {
+  @include shared.centeredContainer;
+}
+
+.progressContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  inline-size: 100%;
+  max-inline-size: 320px;
+  margin-block-end: var(--spacing-large);
+}
+
+.progressBar {
+  flex: 1;
+  block-size: 6px;
+  background-color: var(--color-background-alternative-medium);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  block-size: 100%;
+  background-color: var(--color-primary-medium);
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: 0.875rem;
+  color: var(--color-text-faded);
+  min-inline-size: 50px;
+  text-align: end;
+}
+
+.deckContainer {
+  position: relative;
+  inline-size: 280px;
+  block-size: 200px;
+  margin-block-end: var(--spacing-large);
+
+  @include breakpoints.tablet {
+    inline-size: 320px;
+    block-size: 220px;
+  }
+}
+
+.backgroundCard {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-background-elevated);
+  border-radius: var(--border-radius-rounded);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-borders-hairline);
+}
+
+.card {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: none;
+  z-index: 20;
+  perspective: 1000px;
+  transition: transform 0.3s ease;
+  user-select: none;
+
+  &.swiping {
+    transition: none;
+    cursor: grabbing;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+@include shared.cardContentStyles(0 4px 16px rgba(0, 0, 0, 0.12), 2rem, 2.25rem, 1.25rem, 1.125rem);
+
+.swipeIndicator {
+  position: absolute;
+  inset-block-start: var(--spacing-medium);
+  padding: var(--spacing-xxsmall) var(--spacing-small);
+  border-radius: var(--border-radius-default);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.knowIndicator {
+  inset-inline-end: var(--spacing-medium);
+  background-color: var(--color-success-medium);
+  color: var(--color-text-inverse);
+}
+
+.reviewIndicator {
+  inset-inline-start: var(--spacing-medium);
+  background-color: var(--color-warning-medium);
+  color: var(--color-text-inverse);
+}
+
+.actionsContainer {
+  display: flex;
+  gap: var(--spacing-mega);
+  justify-content: center;
+}
+
+.actionButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xxsmall);
+  padding: var(--spacing-small) var(--spacing-large);
+  border: none;
+  border-radius: var(--border-radius-rounded);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--color-background-elevated);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.reviewButton {
+  color: var(--color-warning-medium);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-warning-faded);
+  }
+}
+
+.knowButton {
+  color: var(--color-success-medium);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-success-faded);
+  }
+}
+
+.buttonIcon {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.buttonText {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.completedContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-mega);
+  text-align: center;
+}
+
+.completedTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-default);
+  margin-block-end: var(--spacing-large);
+}
+
+.statsContainer {
+  display: flex;
+  gap: var(--spacing-mega);
+  margin-block-end: var(--spacing-large);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-medium);
+  background-color: var(--color-background-elevated);
+  border-radius: var(--border-radius-rounded);
+  min-inline-size: 80px;
+}
+
+.statNumber {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary-medium);
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--color-text-faded);
+}
+
+.restartButton {
+  padding: var(--spacing-small) var(--spacing-large);
+  background-color: var(--color-primary-medium);
+  color: var(--color-text-inverse);
+  border: none;
+  border-radius: var(--border-radius-pill);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-primary-faded);
+    color: var(--color-text-default);
+    transform: scale(1.02);
+  }
+}
