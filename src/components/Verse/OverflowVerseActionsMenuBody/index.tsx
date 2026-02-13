@@ -48,7 +48,11 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       )}
       {!isStudyModeOpen && (
-        <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+        <VerseActionRepeatAudio
+          isTranslationView={isTranslationView}
+          verseKey={verse.verseKey}
+          onActionTriggered={onActionTriggered}
+        />
       )}
       <TranslationFeedbackAction
         verse={verse}

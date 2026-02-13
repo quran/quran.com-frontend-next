@@ -14,8 +14,13 @@ import { getChapterNumberFromKey } from '@/utils/verse';
 type VerseActionRepeatAudioProps = {
   verseKey: string;
   isTranslationView: boolean;
+  onActionTriggered?: () => void;
 };
-const VerseActionRepeatAudio = ({ verseKey, isTranslationView }: VerseActionRepeatAudioProps) => {
+const VerseActionRepeatAudio = ({
+  verseKey,
+  isTranslationView,
+  onActionTriggered,
+}: VerseActionRepeatAudioProps) => {
   const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const chapterId = getChapterNumberFromKey(verseKey);
@@ -27,6 +32,7 @@ const VerseActionRepeatAudio = ({ verseKey, isTranslationView }: VerseActionRepe
       logButtonClick('reading_view_verse_actions_menu_repeat');
     }
     setIsModalOpen(true);
+    onActionTriggered?.();
   };
 
   return (

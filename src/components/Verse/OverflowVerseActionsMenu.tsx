@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
@@ -38,18 +38,29 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   isInsideStudyMode = false,
 }) => {
   const { t } = useTranslation('common');
+  const [isOpen, setIsOpen] = useState(false);
 
-  const onOpenModalChange = (open: boolean) => {
-    logEvent(
-      `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
-        open ? 'open' : 'close'
-      }`,
-    );
-  };
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      logEvent(
+        `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
+          open ? 'open' : 'close'
+        }`,
+      );
+      setIsOpen(open);
+    },
+    [isTranslationView],
+  );
+
+  const handleActionTriggered = useCallback(() => {
+    onOpenChange(false);
+    onActionTriggered?.();
+  }, [onOpenChange, onActionTriggered]);
 
   return (
     <div className={styles.container}>
       <PopoverMenu
+        isOpen={isOpen}
         contentClassName={classNames(cellStyles.menuOffset, cellStyles.overlayModal)}
         trigger={
           <Button
@@ -80,12 +91,12 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
         isModal
         isPortalled
         shouldUseModalZIndex={shouldUseModalZIndex}
-        onOpenChange={onOpenModalChange}
+        onOpenChange={onOpenChange}
       >
         <OverflowVerseActionsMenuBody
           verse={verse}
           isTranslationView={isTranslationView}
-          onActionTriggered={onActionTriggered}
+          onActionTriggered={handleActionTriggered}
           isInsideStudyMode={isInsideStudyMode}
         />
       </PopoverMenu>
