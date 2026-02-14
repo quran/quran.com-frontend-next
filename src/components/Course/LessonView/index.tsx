@@ -102,7 +102,11 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
                   <MarkdownEditor isEditable={false} defaultValue={content} />
                 </MilkdownProvider>
               ) : (
-                <LessonHtmlContent content={content} language={lesson.course.language} />
+                <LessonHtmlContent
+                  key={lesson.id}
+                  content={content}
+                  language={lesson.course.language}
+                />
               )}
             </div>
             <ActionButtons lesson={lesson} courseSlug={courseSlug} />
