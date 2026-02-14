@@ -12,6 +12,7 @@ export default function parseFlashcardsFromHtml(html: string): {
   flashcards: FlashCardData[];
   afterHtml: string;
   variant: FlashCardVariant;
+  headingText: string;
 } | null {
   const headingRegex =
     /<h3[^>]*>(?:(?!<\/h3>)[\s\S])*?Word-by-word\s+breakdown(?:(?!<\/h3>)[\s\S])*?<\/h3>/i;
@@ -20,6 +21,7 @@ export default function parseFlashcardsFromHtml(html: string): {
   if (!headingMatch || headingMatch.index === undefined) return null;
 
   const variant = extractVariant(headingMatch[0]);
+  const headingText = stripHtmlTags(headingMatch[0]).trim();
   const headingEndIndex = headingMatch.index + headingMatch[0].length;
   const beforeHtml = html.slice(0, headingMatch.index);
 
@@ -34,7 +36,7 @@ export default function parseFlashcardsFromHtml(html: string): {
   const flashcards = extractFlashcardsFromSection(wordByWordHtml);
   if (flashcards.length === 0) return null;
 
-  return { beforeHtml, flashcards, afterHtml, variant };
+  return { beforeHtml, flashcards, afterHtml, variant, headingText };
 }
 
 function extractFlashcardsFromSection(html: string): FlashCardData[] {

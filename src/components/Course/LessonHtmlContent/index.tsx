@@ -23,7 +23,6 @@ const VARIANT_CONFIG = {
     subtitle: 'Swipe right if you know it, left to review',
   },
 };
-const FLASHCARD_TITLE = 'Word-by-word breakdown';
 
 type Props = {
   content: string;
@@ -60,7 +59,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
         {flashcardData.beforeHtml && renderHtml(flashcardData.beforeHtml, 'before-')}
         <div className={styles.flashcardSection}>
           <div className={styles.flashcardHeader}>
-            <h4 className={styles.flashcardTitle}>{FLASHCARD_TITLE}</h4>
+            <h4 className={styles.flashcardTitle}>{flashcardData.headingText}</h4>
             <span className={styles.flashcardSubtitle}>{subtitle}</span>
           </div>
           <FlashCardComponent key={content} cards={flashcardData.flashcards} />
