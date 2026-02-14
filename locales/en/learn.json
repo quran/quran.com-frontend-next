@@ -1,8 +1,5 @@
 {
-  "about-author": {
-    "one": "About the author",
-    "other": "About the authors"
-  },
+  "about-author": "About the author",
   "add-reflection": "Add Reflection",
   "all-learning-plans": "All Learning Plans",
   "author": "Author",

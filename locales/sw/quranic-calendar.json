@@ -11,8 +11,8 @@
   "faq": "Maswali Yanayoulizwa Mara Kwa Mara",
   "faq-items": [
     {
-      "answer": "Quran in a year ni mpango rahisi  wa kusoma na uliopangwa ili kukusaidia kukamilisha Qur'ani nzima katika mwaka mmoja—kutoka mwisho wa Ramadhani moja hadi mwanzoni mwa ujao. Lengo ni kupata ufahamu wa kimsingi wa Qur'ani kuanzia mwanzo hadi mwisho bila kuhisi shinikizo au kulemewa.",
-      "question": "\"Quran in a Year\" ni nini?"
+      "answer": "Qur'ani kwa Mwaka ni mpango rahisi  wa kusoma na uliopangwa ili kukusaidia kukamilisha Qur'ani nzima katika mwaka mmoja—kutoka mwisho wa Ramadhani moja hadi mwanzoni mwa ujao. Lengo ni kupata ufahamu wa kimsingi wa Qur'ani kuanzia mwanzo hadi mwisho bila kuhisi shinikizo au kulemewa.",
+      "question": "\"Qur'ani kwa Mwaka\" ni nini?"
     },
     {
       "answer": "Unaalikwa kutenga muda kila wiki kusoma kurasa chache tu za Qur'ani katika lugha unayoelewa. Kuna masomo 46 kwa jumla, moja kwa kila wiki katika kalenda ya Kiislamu kutoka Shawwal hadi Sha'ban. Mgawanyiko huu wa Qur'ani unakamilisha migawanyiko mingine, kama vile sehemu 30 maarufu ambazo hurahisisha usomaji wa Qur'ani katika mwezi mmoja.",
@@ -51,7 +51,7 @@
       "question": "Je, kutakuwa na chaguzi za kina zaidi za kusoma baadaye?"
     },
     {
-      "answer": "Ndiyo. \"Quran in a Year\" haina malipo yoyote, na tunakuhimiza kuishiriki na wengine. Alika marafiki, anzisha klabu ya kusoma, na uwasaidie watu wengine kukamilisha usomaji wao wa kwanza wa Qur'ani kikamilifu.",
+      "answer": "Ndiyo. \"Qur'ani kwa Mwaka\" haina malipo yoyote, na tunakuhimiza kuishiriki na wengine. Alika marafiki, anzisha klabu ya kusoma, na uwasaidie watu wengine kukamilisha usomaji wao wa kwanza wa Qur'ani kikamilifu.",
       "question": "Je, hii ni bure? na ninaweza kuishiriki?"
     }
   ],
@@ -90,10 +90,10 @@
   "my-progress": "Maendeleo Yangu",
   "progress-subtitle": "Jisikie huru kurudi na kukamilisha wiki ambazo umekosa!",
   "quran-calendar-description": "Mpango wa usomaji uliopangwa wa kukamilisha Qur'ani katika mwaka mmoja. Jenga uthabiti, ongeza ufahamu wako, na uendelee kufuata mkondo—bila kuhisi kulemewa.",
-  "quran-calendar-title": "Quran in a Year—Mpango Rahisi wa Kusoma na Kuelewa Qur'ani Nzima",
+  "quran-calendar-title": "Qur'ani kwa Mwaka—Mpango Rahisi wa Kusoma na Kuelewa Qur'ani Nzima",
   "quran-reflect": "Quranreflect",
   "quran-reflect-description": "Shirikiana na wengine kuhusiana na Aya ulizosoma wiki hii.",
-  "quranic-calendar": "The Global Quranic Calendar",
+  "quranic-calendar": "Qur'ani kwa Mwaka",
   "ramadan": "Ramadhani",
   "read-online": "Soma Mtandaoni",
   "read-this-weeks-verses": "Soma Aya za Wiki hii",

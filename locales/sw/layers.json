@@ -1,4 +1,4 @@
 {
-  "description": "Chunguza tafsiri ya Ayah yenye tabaka {{ayahNumber}} ya Sura {{surahName}} zenye maana zinazoweza kupanuka na zilizounganishwa.",
-  "title": "Tabaka za Tafsiri {{surahName}} - {{ayahNumber}}"
+  "description": "Chunguza tarjuma yenye tabaka ya Aya {{ayahNumber}} ya Sura {{surahName}} zenye maana zinazoweza kupanuliwa na kufungwa.",
+  "title": "Tabaka za Tarjuma {{surahName}} - {{ayahNumber}}"
 }
