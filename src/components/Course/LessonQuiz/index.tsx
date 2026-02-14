@@ -31,15 +31,10 @@ const shuffleOptions = (options: LessonQuizOption[], seed: string) => {
 
 const LessonQuiz: React.FC<Props> = ({ lessonSlug, title, question }) => {
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
-  const hasAnswered = selectedOptionId !== null;
   const shuffledOptions = useMemo(
     () => shuffleOptions(question.options, `${lessonSlug}:${question.id}`),
     [lessonSlug, question.id, question.options],
   );
-
-  const handleOptionSelect = (optionId: string) => {
-    setSelectedOptionId(optionId);
-  };
 
   return (
     <div className={styles.quizContainer}>
@@ -55,9 +50,9 @@ const LessonQuiz: React.FC<Props> = ({ lessonSlug, title, question }) => {
               key={option.id}
               text={option.text}
               isSelected={selectedOptionId === option.id}
-              isShowingResult={hasAnswered}
+              isShowingResult={selectedOptionId !== null}
               isCorrectAnswer={option.id === question.correctOptionId}
-              onSelect={() => handleOptionSelect(option.id)}
+              onSelect={() => setSelectedOptionId(option.id)}
             />
           ))}
         </div>

@@ -29,14 +29,9 @@ const normalizeHtmlToLines = (html: string): string[] => {
     .replace(/<[^>]+>/g, '')
     .replace(/&nbsp;/gi, ' ')
     .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
     .replace(/\u00a0/g, ' ');
 
-  return text
-    .split('\n')
-    .map((line) => line.trim())
-    .filter(Boolean);
+  return text.split('\n').map((line) => line.trim());
 };
 
 const parseOptionLines = (lines: string[], firstOptionLineIndex: number) => {
@@ -45,19 +40,23 @@ const parseOptionLines = (lines: string[], firstOptionLineIndex: number) => {
 
   for (let i = firstOptionLineIndex; i < lines.length; i += 1) {
     const line = lines[i];
-    const optionMatch = line.match(OPTION_LINE_REGEX);
-
-    if (optionMatch) {
-      const label = optionMatch[1].toUpperCase();
-      const expectedLabel = String.fromCharCode(65 + optionTexts.length);
-      if (optionTexts.length >= 4) return null;
-      if (label !== expectedLabel) return null;
-
-      optionTexts.push(optionMatch[2].trim());
-      currentOptionIndex = optionTexts.length - 1;
+    if (!line) {
+      if (optionTexts.length === 4) break;
     } else {
-      if (currentOptionIndex === -1) return null;
-      optionTexts[currentOptionIndex] = `${optionTexts[currentOptionIndex]} ${line}`.trim();
+      const optionMatch = line.match(OPTION_LINE_REGEX);
+
+      if (optionMatch) {
+        const label = optionMatch[1].toUpperCase();
+        const expectedLabel = String.fromCharCode(65 + optionTexts.length);
+        if (optionTexts.length >= 4) return null;
+        if (label !== expectedLabel) return null;
+
+        optionTexts.push(optionMatch[2].trim());
+        currentOptionIndex = optionTexts.length - 1;
+      } else {
+        if (currentOptionIndex === -1) return null;
+        optionTexts[currentOptionIndex] = `${optionTexts[currentOptionIndex]} ${line}`.trim();
+      }
     }
   }
 
@@ -68,12 +67,17 @@ const parseOptionLines = (lines: string[], firstOptionLineIndex: number) => {
 
 const parseQuestionBlock = (blockHtml: string): LessonQuizQuestion | null => {
   const lines = normalizeHtmlToLines(blockHtml);
-  if (!lines.length) return null;
+  if (!lines.some(Boolean)) return null;
 
   const firstOptionLineIndex = lines.findIndex((line) => OPTION_LINE_REGEX.test(line));
   if (firstOptionLineIndex === -1) return null;
 
-  const question = lines.slice(0, firstOptionLineIndex).join(' ').replace(/\s+/g, ' ').trim();
+  const question = lines
+    .slice(0, firstOptionLineIndex)
+    .filter(Boolean)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
   if (!question) return null;
 
   const optionTexts = parseOptionLines(lines, firstOptionLineIndex);
@@ -90,6 +94,21 @@ const parseQuestionBlock = (blockHtml: string): LessonQuizQuestion | null => {
   };
 };
 
+const findQuestionBlock = (afterHeadingHtml: string) => {
+  const paragraphEndRegex = /<\/p>/gi;
+  let paragraphEndMatch = paragraphEndRegex.exec(afterHeadingHtml);
+  while (paragraphEndMatch) {
+    const candidateBlockLength = (paragraphEndMatch.index ?? 0) + paragraphEndMatch[0].length;
+    const question = parseQuestionBlock(afterHeadingHtml.slice(0, candidateBlockLength));
+    if (question) return { question, blockLength: candidateBlockLength };
+    paragraphEndMatch = paragraphEndRegex.exec(afterHeadingHtml);
+  }
+
+  const question = parseQuestionBlock(afterHeadingHtml);
+  if (!question) return null;
+  return { question, blockLength: afterHeadingHtml.length };
+};
+
 const parseLessonQuizFromHtml = (html: string): ParsedLessonQuiz | null => {
   const headingMatches = Array.from(html.matchAll(QUESTION_HEADING_REGEX));
   const lastHeading = headingMatches[headingMatches.length - 1];
@@ -98,13 +117,19 @@ const parseLessonQuizFromHtml = (html: string): ParsedLessonQuiz | null => {
   const headingHtml = lastHeading[0];
   const headingText = normalizeHtmlToLines(headingHtml).join(' ').replace(/\s+/g, ' ').trim();
   const startIndex = lastHeading.index ?? 0;
-  const question = parseQuestionBlock(html.slice(startIndex + headingHtml.length));
-  if (!question) return null;
+  const afterHeadingHtml = html.slice(startIndex + headingHtml.length);
+
+  const parsedQuestionBlock = findQuestionBlock(afterHeadingHtml);
+  if (!parsedQuestionBlock) return null;
+
+  const afterQuizHtml = afterHeadingHtml
+    .slice(parsedQuestionBlock.blockLength)
+    .replace(/^(\s*<p>\s*<\/p>\s*)+/i, '');
 
   return {
-    contentWithoutQuizSection: html.slice(0, startIndex).replace(/\s+$/g, ''),
+    contentWithoutQuizSection: `${html.slice(0, startIndex)}${afterQuizHtml}`.replace(/\s+$/g, ''),
     headingText,
-    question,
+    question: parsedQuestionBlock.question,
   };
 };
 

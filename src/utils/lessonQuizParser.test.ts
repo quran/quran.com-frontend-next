@@ -51,6 +51,17 @@ describe('lessonQuizParser', () => {
     expect(result?.question.options[3].text).toBe('Option D part 1 part 2');
   });
 
+  it('keeps content that appears after the quiz block', () => {
+    const html =
+      '<p>Lesson body</p><h3><strong>Question on Ayah 24</strong></h3><p><strong>Why?</strong><br>A) Because A<br>B) Because B<br>C) Because C<br>D) Because D</p><p>Closing note after quiz.</p>';
+
+    const result = parseLessonQuizFromHtml(html);
+    expect(result).not.toBeNull();
+    expect(result?.contentWithoutQuizSection).toBe(
+      '<p>Lesson body</p><p>Closing note after quiz.</p>',
+    );
+  });
+
   it('uses the final question heading when multiple headings exist', () => {
     const html =
       '<p>Lesson body</p><h3><strong>Question on Ayah 1</strong></h3><p><strong>Q1?</strong><br>A) A1<br>B) B1<br>C) C1<br>D) D1</p><p></p><h3><strong>Question on Ayah 2</strong></h3><p><strong>Q2?</strong><br>A) A2<br>B) B2<br>C) C2<br>D) D2</p><p></p>';
