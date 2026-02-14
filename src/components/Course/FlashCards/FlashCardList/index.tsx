@@ -22,6 +22,7 @@ const toggleInSet = (set: Set<string>, item: string) => {
 const FlashCardList: React.FC<FlashCardListProps> = ({ cards, className }) => {
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [masteredCards, setMasteredCards] = useState<Set<string>>(new Set());
+  const allExpanded = cards.length > 0 && expandedCards.size === cards.length;
 
   const toggleExpand = (cardId: string) => {
     setExpandedCards((prev) => toggleInSet(prev, cardId));
@@ -45,16 +46,11 @@ const FlashCardList: React.FC<FlashCardListProps> = ({ cards, className }) => {
           <button
             type="button"
             className={styles.headerButton}
-            onClick={() => setExpandedCards(new Set(cards.map((c) => c.id)))}
+            onClick={() =>
+              setExpandedCards(allExpanded ? new Set() : new Set(cards.map((c) => c.id)))
+            }
           >
-            Expand All
-          </button>
-          <button
-            type="button"
-            className={styles.headerButton}
-            onClick={() => setExpandedCards(new Set())}
-          >
-            Collapse All
+            {allExpanded ? 'Collapse All' : 'Expand All'}
           </button>
         </div>
       </div>
