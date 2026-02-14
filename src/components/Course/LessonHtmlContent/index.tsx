@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import styles from './LessonHtmlContent.module.scss';
 import VerseChunkWidget from './VerseChunkWidget';
@@ -45,24 +45,73 @@ const renderChunks = (chunks: ContentChunk[], keyPrefix = '') =>
 const renderHtml = (html: string, keyPrefix = '') =>
   renderChunks(parseContentChunks(html), keyPrefix);
 
+const toggleInSet = (set: Set<string>, item: string) => {
+  const nextSet = new Set(set);
+  if (nextSet.has(item)) nextSet.delete(item);
+  else nextSet.add(item);
+  return nextSet;
+};
+
 const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
+  const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
+  const [masteredCards, setMasteredCards] = useState<Set<string>>(new Set());
   const flashcardData = useMemo(
     () => (language === 'en' ? parseFlashcardsFromHtml(content) : null),
     [content, language],
   );
+
+  useEffect(() => {
+    setExpandedCards(new Set());
+    setMasteredCards(new Set());
+  }, [content]);
+
   if (language !== 'en') return <HtmlContent html={content} />;
   if (flashcardData) {
     const { component: FlashCardComponent, subtitle } = VARIANT_CONFIG[flashcardData.variant];
+    const isListVariant = flashcardData.variant === FlashCardVariant.List;
+    const allExpanded =
+      flashcardData.flashcards.length > 0 && expandedCards.size === flashcardData.flashcards.length;
 
     return (
       <div className={styles.container}>
         {flashcardData.beforeHtml && renderHtml(flashcardData.beforeHtml, 'before-')}
         <div className={styles.flashcardSection}>
           <div className={styles.flashcardHeader}>
-            <h4 className={styles.flashcardTitle}>{flashcardData.headingText}</h4>
-            <span className={styles.flashcardSubtitle}>{subtitle}</span>
+            <div className={styles.flashcardHeaderText}>
+              <h4 className={styles.flashcardTitle}>{flashcardData.headingText}</h4>
+              <span className={styles.flashcardSubtitle}>{subtitle}</span>
+            </div>
+            {isListVariant && (
+              <div className={styles.flashcardHeaderActions}>
+                <span className={styles.flashcardProgress}>
+                  {`${masteredCards.size} / ${flashcardData.flashcards.length} mastered`}
+                </span>
+                <button
+                  type="button"
+                  className={styles.flashcardHeaderButton}
+                  onClick={() =>
+                    setExpandedCards(
+                      allExpanded ? new Set() : new Set(flashcardData.flashcards.map((c) => c.id)),
+                    )
+                  }
+                >
+                  {allExpanded ? 'Collapse All' : 'Expand All'}
+                </button>
+              </div>
+            )}
           </div>
-          <FlashCardComponent key={content} cards={flashcardData.flashcards} />
+          {isListVariant ? (
+            <FlashCardList
+              key={content}
+              cards={flashcardData.flashcards}
+              expandedCards={expandedCards}
+              masteredCards={masteredCards}
+              onToggleExpand={(cardId) => setExpandedCards((prev) => toggleInSet(prev, cardId))}
+              onToggleMastered={(cardId) => setMasteredCards((prev) => toggleInSet(prev, cardId))}
+            />
+          ) : (
+            <FlashCardComponent key={content} cards={flashcardData.flashcards} />
+          )}
         </div>
         {flashcardData.afterHtml && renderHtml(flashcardData.afterHtml, 'after-')}
       </div>
