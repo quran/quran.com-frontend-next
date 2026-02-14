@@ -77,7 +77,9 @@ const FlashCardList: React.FC<FlashCardListProps> = ({
 
               {isExpanded && (
                 <div className={styles.cardBody}>
-                  <div className={styles.translation}>{`Translation: ${card.translation}`}</div>
+                  <div className={styles.translation}>
+                    <span className={styles.translationLabel}>Translation:</span> {card.translation}
+                  </div>
                 </div>
               )}
             </div>
