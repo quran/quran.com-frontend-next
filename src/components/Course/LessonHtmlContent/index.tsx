@@ -11,15 +11,12 @@ import { ContentChunk, parseContentChunks } from '@/utils/lessonContentParser';
 
 const VARIANT_CONFIG = {
   [FlashCardVariant.List]: {
-    component: FlashCardList,
     subtitle: 'Tap to expand, mark words as mastered',
   },
   [FlashCardVariant.Carousel]: {
-    component: FlashCardCarousel,
     subtitle: 'Swipe through cards, tap to flip',
   },
   [FlashCardVariant.Deck]: {
-    component: FlashCardDeck,
     subtitle: 'Swipe right if you know it, left to review',
   },
 };
@@ -62,10 +59,12 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
 
   if (language !== 'en') return <HtmlContent html={content} />;
   if (flashcardData) {
-    const { component: FlashCardComponent, subtitle } = VARIANT_CONFIG[flashcardData.variant];
+    const { subtitle } = VARIANT_CONFIG[flashcardData.variant];
     const isListVariant = flashcardData.variant === FlashCardVariant.List;
     const allExpanded =
       flashcardData.flashcards.length > 0 && expandedCards.size === flashcardData.flashcards.length;
+    const NonListFlashCardComponent =
+      flashcardData.variant === FlashCardVariant.Carousel ? FlashCardCarousel : FlashCardDeck;
 
     return (
       <div className={styles.container}>
@@ -105,7 +104,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
               onToggleMastered={(cardId) => setMasteredCards((prev) => toggleInSet(prev, cardId))}
             />
           ) : (
-            <FlashCardComponent key={content} cards={flashcardData.flashcards} />
+            <NonListFlashCardComponent key={content} cards={flashcardData.flashcards} />
           )}
         </div>
         {flashcardData.afterHtml && renderHtml(flashcardData.afterHtml, 'after-')}
