@@ -99,7 +99,7 @@ const FlashCardList: React.FC<FlashCardListProps> = ({ cards, className }) => {
                     onClick={(e) => toggleMastered(card.id, e)}
                     aria-label={isMastered ? 'Mark as not mastered' : 'Mark as mastered'}
                   >
-                    {isMastered ? '✓' : '○'}
+                    {isMastered ? '✓' : null}
                   </button>
                   <span className={styles.expandIcon}>{isExpanded ? '▲' : '▼'}</span>
                 </div>
