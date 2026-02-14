@@ -1,5 +1,8 @@
 {
-  "about-author": "About the author",
+  "about-author": {
+    "one": "About the author",
+    "other": "About the authors"
+  },
   "add-reflection": "Add Reflection",
   "all-learning-plans": "All Learning Plans",
   "author": "Author",
@@ -12,7 +15,7 @@
   "contributors": "Contributors",
   "day": "Day",
   "description": "Description",
-  "duration-daily": "Each short Lesson takes less than {{dailyMins}} minutes to complete {{days}} Lessons total",
+  "duration-daily": "Each short lesson takes less than {{dailyMins}} minutes to complete. {{days}} lessons total",
   "empty-learning-plans": "You are not enrolled in any <link>Learning Plans</link> yet.",
   "enroll": "Enroll",
   "enroll-success": "Congratulations, You added {{title}} to your list!",
