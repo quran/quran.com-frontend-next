@@ -1,4 +1,5 @@
-import { useContext, useRef } from 'react';
+/* eslint-disable react-func/max-lines-per-function */
+import { useContext, useEffect, useRef } from 'react';
 
 import setLanguage from 'next-translate/setLanguage';
 import { Provider } from 'react-redux';
@@ -7,6 +8,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import getStore from './store';
 
+import resetSettings from '@/redux/actions/reset-settings';
+import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -34,9 +37,25 @@ const ReduxProvider = ({ children, locale }) => {
    */
   const storeRef = useRef<ReturnType<typeof getStore> | null>(null);
   if (!storeRef.current) {
+    // Intentionally create the store once; locale-dependent defaults should be synced via actions,
+    // not by recreating the Redux store (which can race redux-persist rehydration/writes).
     storeRef.current = getStore(locale);
   }
   const store = storeRef.current;
+
+  // Browser back/forward can change the URL locale without going through our explicit
+  // language-switch handlers. For guests, keep locale-dependent "tabs" aligned with the URL
+  // locale unless the user customized them.
+  const prevLocaleRef = useRef(locale);
+  useEffect(() => {
+    const prevLocale = prevLocaleRef.current;
+    if (prevLocale === locale) return;
+    prevLocaleRef.current = locale;
+
+    if (isClient && !isLoggedIn()) {
+      store.dispatch(syncLocaleDependentSettings({ prevLocale, nextLocale: locale }));
+    }
+  }, [locale, store]);
 
   const persistorRef = useRef<ReturnType<typeof persistStore> | null>(null);
   if (!persistorRef.current) {
@@ -57,12 +76,30 @@ const ReduxProvider = ({ children, locale }) => {
       try {
         const userPreferences = await getUserPreferences();
         const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE];
-        if (remoteLocale) {
-          await setLanguage(remoteLocale[PreferenceGroup.LANGUAGE]);
-          setLocaleCookie(remoteLocale[PreferenceGroup.LANGUAGE]);
+        const remoteLang = remoteLocale?.[PreferenceGroup.LANGUAGE];
+        if (remoteLang) {
+          await setLanguage(remoteLang);
+          setLocaleCookie(remoteLang);
+
+          // If the logged-in user's saved language differs from the URL locale we first rendered,
+          // ensure locale-dependent defaults (translations/tafsir tabs, reflection/lesson languages, etc.)
+          // reflect the final language before applying remote preferences (which are often partial).
+          if (remoteLang !== initialLocaleRef.current) {
+            const { isUsingDefaultSettings } = store.getState().defaultSettings || {};
+            if (isUsingDefaultSettings) {
+              store.dispatch(resetSettings(remoteLang));
+            } else {
+              store.dispatch(
+                // This is intentionally granular (vs. resetSettings) to preserve customized settings.
+                syncLocaleDependentSettings({
+                  prevLocale: initialLocaleRef.current,
+                  nextLocale: remoteLang,
+                }),
+              );
+            }
+          }
         }
-        const localeForDefaults =
-          remoteLocale?.[PreferenceGroup.LANGUAGE] || initialLocaleRef.current;
+        const localeForDefaults = remoteLang || initialLocaleRef.current;
         store.dispatch(syncUserPreferences(userPreferences, localeForDefaults));
         const audioPlayerContext = audioService.getSnapshot().context;
         const playbackRate =
