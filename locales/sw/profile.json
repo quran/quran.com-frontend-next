@@ -1,5 +1,5 @@
 {
-  "allowed-formats": "Pekee {{formats}}",
+  "allowed-formats": "{{formats}} Pekee",
   "change-password": "Badilisha Nenosiri",
   "delete-account": "Futa Akaunti",
   "delete-account-warning-title": "Onyo",
@@ -19,10 +19,10 @@
   "edit-details": "Hariri Maelezo",
   "email-notification-settings": "Mipangilio ya Arifa za Barua Pepe",
   "errors": {
-    "remove-failed": "Imeshindwa kuondoa picha ya wasifu. Tafadhali jaribu tena.",
-    "upload-failed": "Imeshindwa kupakia picha ya wasifu. Tafadhali jaribu tena."
+    "remove-failed": "Imeshindikana kuondoa picha ya wasifu. Tafadhali jaribu tena.",
+    "upload-failed": "iMeshindikana kupakia picha ya wasifu. Tafadhali jaribu tena."
   },
-  "max-file-size": "Kiwango cha juu {{size}}",
+  "max-file-size": "Upeo wa {{size}}",
   "my-profile": "Wasifu Wangu",
   "notifications": {
     "abandoned-quran-goal": {

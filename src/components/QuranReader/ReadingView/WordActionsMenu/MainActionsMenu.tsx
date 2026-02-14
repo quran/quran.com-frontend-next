@@ -2,6 +2,7 @@ import React from 'react';
 
 import CopyMenuItem from './MenuItems/CopyMenuItem';
 import MoreMenuItem from './MenuItems/MoreMenuItem';
+import PinMenuItem from './MenuItems/PinMenuItem';
 import PlayAudioMenuItem from './MenuItems/PlayAudioMenuItem';
 import QuestionsMenuItem from './MenuItems/QuestionsMenuItem';
 import QuranReflectMenuItem from './MenuItems/QuranReflectMenuItem';
@@ -19,7 +20,6 @@ interface Props {
   onActionTriggered?: () => void;
   onMenuChange: (menu: VerseActionsMenuType) => void;
   openShareModal?: () => void;
-  bookmarksRangeUrl?: string | null;
 }
 
 const MainActionsMenu: React.FC<Props> = ({
@@ -27,7 +27,6 @@ const MainActionsMenu: React.FC<Props> = ({
   onActionTriggered,
   onMenuChange,
   openShareModal,
-  bookmarksRangeUrl,
 }) => {
   return (
     <>
@@ -51,9 +50,9 @@ const MainActionsMenu: React.FC<Props> = ({
         verse={verse}
         isTranslationView={false}
         onActionTriggered={onActionTriggered}
-        bookmarksRangeUrl={bookmarksRangeUrl}
       />
       <CopyMenuItem verse={verse} onActionTriggered={onActionTriggered} />
+      <PinMenuItem verse={verse} onActionTriggered={onActionTriggered} />
 
       <ReadingViewNoteAction verseKey={verse.verseKey} onActionTriggered={onActionTriggered} />
 

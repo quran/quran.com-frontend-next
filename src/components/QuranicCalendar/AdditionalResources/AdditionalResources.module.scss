@@ -1,113 +1,113 @@
-@use "src/styles/theme";
-@use "src/styles/breakpoints";
+@use 'src/styles/theme';
+@use 'src/styles/breakpoints';
 
 .container {
-    padding-block: var(--spacing-large-px);
-    @include breakpoints.smallerThanTablet {
-        padding-block: var(--spacing-medium2-px);
-    }
+  padding-block: var(--spacing-large-px);
+  @include breakpoints.smallerThanTablet {
+    padding-block: var(--spacing-medium2-px);
+  }
 }
 
 .title {
-    font-size: var(--font-size-xxlarge-px);
-    font-weight: var(--font-weight-bold);
-    margin-block-end: var(--spacing-small-px);
-    color: var(--color-text-default-new);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xlarge-px);
-    }
+  font-size: var(--font-size-xxlarge-px);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-small-px);
+  color: var(--color-text-default-new);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xlarge-px);
+  }
 }
 
 .subtitle {
-    font-size: var(--font-size-normal-px);
-    color: var(--color-text-faded-new);
-    margin-block-end: var(--spacing-large-px);
-    @include breakpoints.smallerThanTablet {
-        margin-block-end: var(--spacing-medium2-px);
-    }
+  font-size: var(--font-size-normal-px);
+  color: var(--color-text-faded-new);
+  margin-block-end: var(--spacing-large-px);
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: var(--spacing-medium2-px);
+  }
 }
 
 .resourcesGrid {
-    display: flex;
-    align-items: stretch;
-    gap: var(--spacing-small-px);
-    @include breakpoints.smallerThanTablet {
-        flex-direction: column;
-        gap: var(--spacing-medium2-px);
-    }
+  display: flex;
+  align-items: stretch;
+  gap: var(--spacing-small-px);
+  @include breakpoints.smallerThanTablet {
+    flex-direction: column;
+    gap: var(--spacing-medium2-px);
+  }
 }
 
 .resourceCard {
-    border: 1px solid var(--color-borders-hairline);
-    border-radius: var(--border-radius-default);
-    padding: var(--spacing-medium2-px);
-    background-color: var(--color-background-elevated-new);
-    display: flex;
-    gap: var(--spacing-medium2-px);
-    width: 50%;
-    @include theme.light {
-        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
-    }
-    @include theme.dark {
-        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
-    }
-    @include theme.sepia {
-        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
-    }
-    position: relative;
-    cursor: pointer;
-    @include breakpoints.smallerThanTablet {
-        width: 88%;
-    }
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  padding: var(--spacing-medium2-px);
+  background-color: var(--color-background-elevated-new);
+  display: flex;
+  gap: var(--spacing-medium2-px);
+  inline-size: 50%;
+  @include theme.light {
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+  }
+  @include theme.dark {
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
+  }
+  @include theme.sepia {
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+  }
+  position: relative;
+  cursor: pointer;
+  @include breakpoints.smallerThanTablet {
+    inline-size: 88%;
+  }
 }
 
 .cardLink {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  z-index: 1;
 }
 
 .resourceIcon {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: var(--spacing-small-px);
-    padding-block-end: var(--spacing-medium-px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--spacing-small-px);
+  padding-block-end: var(--spacing-medium-px);
 }
 
 .resourceContent {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
 }
 
 .resourceTitle {
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-bold);
-    margin-bottom: var(--spacing-xsmall);
-    color: var(--color-text-default-new);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-xsmall);
+  color: var(--color-text-default-new);
 }
 
 .resourceDescription {
-    font-size: var(--font-size-normal-px);
-    color: var(--color-text-faded-new);
-    margin-bottom: var(--spacing-small);
-    flex-grow: 1;
+  font-size: var(--font-size-normal-px);
+  color: var(--color-text-faded-new);
+  margin-block-end: var(--spacing-small);
+  flex-grow: 1;
 }
 
 .resourceButton {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: var(--spacing-xsmall-px);
-    margin-block-start: auto;
-    font-size: var(--font-size-medium-px);
-    color: var(--color-text-faded-new);
-    position: relative;
-    z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-xsmall-px);
+  margin-block-start: auto;
+  font-size: var(--font-size-medium-px);
+  color: var(--color-text-faded-new);
+  position: relative;
+  z-index: 2;
 }

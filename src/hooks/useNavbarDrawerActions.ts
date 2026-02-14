@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import {
   setDisableSearchDrawerTransition,
+  setIsLanguageDrawerOpen,
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
 } from '@/redux/slices/navbar';
@@ -32,7 +33,13 @@ const useNavbarDrawerActions = () => {
     dispatch(setIsNavigationDrawerOpen(true));
   }, [dispatch]);
 
-  return { openSearchDrawer, openNavigationDrawer };
+  const openLanguageDrawer = useCallback(() => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logEvent('drawer_language_open');
+    dispatch(setIsLanguageDrawerOpen(true));
+  }, [dispatch]);
+
+  return { openSearchDrawer, openNavigationDrawer, openLanguageDrawer };
 };
 
 export default useNavbarDrawerActions;

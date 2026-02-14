@@ -52,11 +52,15 @@ svg.caretIcon {
   inset-block-start: 0px;
   inset-inline-start: 0;
   z-index: var(--z-index-dropdown);
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-elevated-new);
   border: 1px solid var(--color-separators-ayah-level);
   border-radius: var(--border-radius-medium-px);
-  inline-size: 360px;
+  inline-size: calc(3 * var(--spacing-mega-px) + 2 * var(--spacing-large-px));
   box-shadow: var(--shadow-surah-search);
+
+  @include breakpoints.smallerThanMobileL {
+    inline-size: 92vw;
+  }
 }
 
 .header {
@@ -118,7 +122,7 @@ svg.caretIcon {
   border: none;
   outline: none;
   background: transparent;
-  font-size: var(--font-size-xsmall-px);
+  font-size: var(--font-size-small-px);
   color: var(--color-text-default);
   padding: 0;
 

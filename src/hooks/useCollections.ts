@@ -1,4 +1,5 @@
-import { useCallback } from 'react';
+/* eslint-disable max-lines */
+import { useCallback, useMemo, useRef } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
@@ -13,8 +14,24 @@ import {
 } from '@/utils/auth/api';
 import { makeCollectionsUrl } from '@/utils/auth/apiPaths';
 import { isBookmarkSyncError } from '@/utils/auth/errors';
+import mutatingFetcherConfig from '@/utils/swr';
 import BookmarkType from 'types/BookmarkType';
 import { Collection } from 'types/Collection';
+
+// Export types for My Quran page components
+export interface CollectionItem {
+  id: string;
+  name: string;
+  itemCount?: number;
+  updatedAt: string;
+  isDefault: boolean;
+}
+
+export enum CollectionSortOption {
+  RECENTLY_UPDATED = 'recentlyUpdated',
+  ALPHABETICAL_ASC = 'alphabeticalAsc',
+  ALPHABETICAL_DESC = 'alphabeticalDesc',
+}
 
 interface UseCollectionsProps {
   type?: BookmarkType;
@@ -26,12 +43,17 @@ interface UseCollectionsReturn {
   addCollection: (name: string) => Promise<Collection | null>;
   updateCollection: (collectionId: string, name: string) => Promise<boolean>;
   deleteCollection: (collectionId: string) => Promise<boolean>;
-  mutateCollections: () => void;
+  /** Revalidate collections or set optimistic data */
+  mutateCollections: (optimisticData?: Collection[]) => void;
 }
 
 /**
- * Custom hook for managing collections
- * Provides CRUD operations and reactive data fetching for collections
+ * Custom hook for managing collections with optimistic updates.
+ * Provides CRUD operations and reactive data fetching for collections.
+ *
+ * All operations use optimistic updates for instant UI feedback:
+ * - Changes appear immediately before the API call completes
+ * - On error, changes are automatically rolled back
  *
  * @param {UseCollectionsProps} props - Hook configuration
  * @returns {UseCollectionsReturn} Collections data and management functions
@@ -42,16 +64,29 @@ const useCollections = ({
   const { isLoggedIn } = useIsLoggedIn();
   const toast = useToast();
   const { t } = useTranslation('common');
+  const isPendingRef = useRef(false);
 
   const {
     data: collectionsData,
-    isValidating: isLoading,
-    mutate: mutateCollections,
-  } = useSWR<{ data: Collection[] }>(isLoggedIn ? makeCollectionsUrl({ type }) : null, () =>
-    getCollectionsList({ type }),
+    isValidating,
+    mutate: swrMutateCollections,
+  } = useSWR<{ data: Collection[] }>(
+    isLoggedIn ? makeCollectionsUrl({ type }) : null,
+    () => getCollectionsList({}), // No type filter to fetch empty collections
+    // revalidateOnFocus disabled: immediate focus revalidation races with token refresh,
+    // clearing the session cookie and permanently wiping cached data (see docs/SWR_IMMUTABLE_VS_SWR.md).
+    {
+      ...mutatingFetcherConfig,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: true,
+    },
   );
 
-  const collections = collectionsData?.data || [];
+  const collections = useMemo(() => collectionsData?.data || [], [collectionsData?.data]);
+  const isLoading = useMemo(
+    () => isValidating && !collectionsData,
+    [isValidating, collectionsData],
+  );
 
   const showErrorToast = useCallback(
     (err: unknown) => {
@@ -63,45 +98,140 @@ const useCollections = ({
   );
 
   const addCollection = useCallback(
+    // eslint-disable-next-line react-func/max-lines-per-function
     async (name: string): Promise<Collection | null> => {
+      if (isPendingRef.current) return null;
+      isPendingRef.current = true;
+
+      // Create optimistic collection with temporary ID
+      const tempId = `temp-${Date.now()}`;
+      const optimisticCollection: Collection = {
+        id: tempId,
+        name,
+        url: name.toLowerCase().replace(/\s+/g, '-'),
+        updatedAt: new Date().toISOString(),
+        bookmarksCount: 0,
+      };
+
       try {
-        const newCollection = await apiAddCollection(name);
-        mutateCollections();
-        return newCollection;
+        const result = await swrMutateCollections(
+          async (current) => {
+            const newCollection = await apiAddCollection(name);
+            // Replace optimistic collection with real one
+            const existingCollections = current?.data?.filter((c) => c.id !== tempId) || [];
+            return { ...current, data: [...existingCollections, newCollection] };
+          },
+          {
+            optimisticData: {
+              ...collectionsData,
+              data: [...collections, optimisticCollection],
+            },
+            rollbackOnError: true,
+            revalidate: false,
+          },
+        );
+
+        // Find the real collection from the result
+        const realCollection = result?.data?.find((c) => c.name === name && c.id !== tempId);
+        return realCollection || null;
       } catch (err: unknown) {
         showErrorToast(err);
         return null;
+      } finally {
+        isPendingRef.current = false;
       }
     },
-    [mutateCollections, showErrorToast],
+    [collections, collectionsData, swrMutateCollections, showErrorToast],
   );
 
+  /**
+   * Update collection with optimistic update.
+   * Updates the name immediately, then confirms with API.
+   */
   const updateCollection = useCallback(
     async (collectionId: string, name: string): Promise<boolean> => {
+      if (isPendingRef.current) return false;
+      isPendingRef.current = true;
+
       try {
-        await apiUpdateCollection(collectionId, { name });
-        mutateCollections();
+        await swrMutateCollections(
+          async (current) => {
+            await apiUpdateCollection(collectionId, { name });
+            return {
+              ...current,
+              data: current?.data?.map((c) => (c.id === collectionId ? { ...c, name } : c)),
+            };
+          },
+          {
+            optimisticData: {
+              ...collectionsData,
+              data: collections.map((c) => (c.id === collectionId ? { ...c, name } : c)),
+            },
+            rollbackOnError: true,
+            revalidate: false,
+          },
+        );
         return true;
       } catch (err: unknown) {
         showErrorToast(err);
         return false;
+      } finally {
+        isPendingRef.current = false;
       }
     },
-    [mutateCollections, showErrorToast],
+    [collections, collectionsData, swrMutateCollections, showErrorToast],
   );
 
+  /**
+   * Delete collection with optimistic update.
+   * Removes from list immediately, then confirms with API.
+   */
   const deleteCollection = useCallback(
     async (collectionId: string): Promise<boolean> => {
+      if (isPendingRef.current) return false;
+      isPendingRef.current = true;
+
       try {
-        await apiDeleteCollection(collectionId);
-        mutateCollections();
+        await swrMutateCollections(
+          async (current) => {
+            await apiDeleteCollection(collectionId);
+            return {
+              ...current,
+              data: current?.data?.filter((c) => c.id !== collectionId),
+            };
+          },
+          {
+            optimisticData: {
+              ...collectionsData,
+              data: collections.filter((c) => c.id !== collectionId),
+            },
+            rollbackOnError: true,
+            revalidate: false,
+          },
+        );
         return true;
       } catch (err: unknown) {
         showErrorToast(err);
         return false;
+      } finally {
+        isPendingRef.current = false;
       }
     },
-    [mutateCollections, showErrorToast],
+    [collections, collectionsData, swrMutateCollections, showErrorToast],
+  );
+
+  /**
+   * Wrapper to trigger revalidation or optimistic update
+   */
+  const mutateCollections = useCallback(
+    (optimisticData?: Collection[]) => {
+      if (optimisticData !== undefined) {
+        swrMutateCollections({ ...collectionsData, data: optimisticData }, { revalidate: false });
+      } else {
+        swrMutateCollections();
+      }
+    },
+    [collectionsData, swrMutateCollections],
   );
 
   return {

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 
 import styles from './AudioPlayerSlider.module.scss';
@@ -11,7 +12,11 @@ import { secondsFormatter } from '@/utils/datetime';
 import { logEvent } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const AudioPlayerSlider = (): JSX.Element => {
+interface AudioPlayerSliderProps {
+  isEmbedded?: boolean;
+}
+
+const AudioPlayerSlider = ({ isEmbedded }: AudioPlayerSliderProps): JSX.Element => {
   const router = useRouter();
   const { locale } = router;
   const direction = useDirection();
@@ -21,12 +26,16 @@ const AudioPlayerSlider = (): JSX.Element => {
   const downloadProgress = useSelector(audioService, (state) => state.context.downloadProgress);
   const duration = useSelector(audioService, (state) => state.context.duration);
 
+  const sliderContainerClass = classNames(styles.sliderContainer, {
+    [styles.embeddedSliderContainer]: isEmbedded,
+  });
+
   return (
     <div className={styles.container}>
       <span className={styles.currentTime} data-testid="audio-elapsed">
         {secondsFormatter(elapsed, locale)}
       </span>
-      <div className={styles.sliderContainer}>
+      <div className={sliderContainerClass}>
         <Slider
           showThumbs={false}
           variant={SliderVariant.Secondary}
@@ -41,7 +50,7 @@ const AudioPlayerSlider = (): JSX.Element => {
           withBackground
         />
       </div>
-      <div className={styles.sliderContainer}>
+      <div className={sliderContainerClass}>
         <Slider
           label="audio-player"
           value={[elapsed]}

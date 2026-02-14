@@ -8,7 +8,6 @@ import Line from './Line';
 import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
 import TranslationPage from './TranslationPage';
-import getTranslationNameString from './utils/translation';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
@@ -54,20 +53,12 @@ const Page = ({
   const firstVerse = verses?.[0];
   const shouldShowChapterHeader = firstVerse?.verseNumber === 1;
   const chapterId = firstVerse?.chapterId?.toString();
-  const verseTranslations = firstVerse?.translations;
-  const translationName = getTranslationNameString(verseTranslations);
-  const translationsCount = verseTranslations?.length ?? 0;
 
   const isReadingTranslation = readingPreference === ReadingPreference.ReadingTranslation;
 
   // Render the chapter header at page level to prevent re-mounting when switching modes
   const chapterHeader = shouldShowChapterHeader && chapterId && (
-    <ChapterHeader
-      translationName={translationName}
-      translationsCount={translationsCount}
-      chapterId={chapterId}
-      isTranslationView={false}
-    />
+    <ChapterHeader chapterId={chapterId} isTranslationView={false} />
   );
 
   // Render translation-only page for "Reading - Translation" mode
@@ -95,19 +86,21 @@ const Page = ({
       })}
     >
       {chapterHeader}
-      {Object.keys(lines).map((key, lineIndex) => (
-        <Line
-          pageIndex={pageIndex}
-          lineIndex={lineIndex}
-          lineKey={key}
-          words={lines[key]}
-          key={key}
-          isBigTextLayout={isBigTextLayout}
-          quranReaderStyles={quranReaderStyles}
-          bookmarksRangeUrl={bookmarksRangeUrl}
-          pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
-        />
-      ))}
+      <div className={styles.linesContainer}>
+        {Object.keys(lines).map((key, lineIndex) => (
+          <Line
+            pageIndex={pageIndex}
+            lineIndex={lineIndex}
+            lineKey={key}
+            words={lines[key]}
+            key={key}
+            isBigTextLayout={isBigTextLayout}
+            quranReaderStyles={quranReaderStyles}
+            bookmarksRangeUrl={bookmarksRangeUrl}
+            pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
+          />
+        ))}
+      </div>
       <PageFooter page={pageNumber} />
     </div>
   );

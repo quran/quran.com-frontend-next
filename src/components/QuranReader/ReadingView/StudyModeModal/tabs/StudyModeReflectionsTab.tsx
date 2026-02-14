@@ -13,7 +13,6 @@ import ContentType from '@/types/QuranReflect/ContentType';
 const ReflectionBodyContainer = dynamic(
   () => import('@/components/QuranReader/ReflectionView/ReflectionBodyContainer'),
   {
-    ssr: false,
     loading: TafsirSkeleton,
   },
 );

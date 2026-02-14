@@ -1,7 +1,7 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import styles from './EndOfSurahSection.module.scss';
@@ -11,11 +11,15 @@ import StreakGoalCard from './StreakGoalCard';
 
 import { getChapterMetadata } from '@/api';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import Link from '@/dls/Link/Link';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import useScrollToTop from '@/hooks/useScrollToTop';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
+import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { makeChapterMetadataUrl } from '@/utils/apiPaths';
+import { getNextChapterNumber } from '@/utils/chapter';
+import { getSurahNavigationUrl } from '@/utils/navigation';
 
 interface EndOfSurahSectionProps {
   chapterNumber: number;
@@ -25,6 +29,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
   const { t, lang } = useTranslation('quran-reader');
   const dispatch = useDispatch();
   const scrollToTop = useScrollToTop();
+  const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
 
   // For Tafsir, Reflections, Lessons, Answers - always use verse 1
   const verseKey = `${chapterNumber}:1`;
@@ -44,9 +49,18 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
 
   const chapterMetadata = metadataResponse?.chapterMetadata;
 
+  const nextChapterId = getNextChapterNumber(chapterNumber, isReadingByRevelationOrder);
+
   return (
     <div className={styles.container} data-testid="end-of-surah-section">
-      <h2 className={styles.header}>{t('end-of-surah.header')}</h2>
+      <div className={styles.ctaContainer}>
+        <h2 className={styles.header}>{t('end-of-surah.header')}</h2>
+        {nextChapterId && (
+          <Link href={getSurahNavigationUrl(nextChapterId)} className={styles.cta}>
+            {t('end-of-surah.cta')}
+          </Link>
+        )}
+      </div>
 
       <div className={styles.cardsGrid}>
         <ReadMoreCard

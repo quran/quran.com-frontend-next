@@ -10,8 +10,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useSelector } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
-import { getPageIndexByPageNumber } from '../utils/page';
-
+import usePageNavigation from './hooks/usePageNavigation';
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import PageContainer from './PageContainer';
 import PageNavigationButtons from './PageNavigationButtons';
@@ -87,6 +86,14 @@ const ReadingView = ({
   const hasTranslations = selectedTranslations && selectedTranslations.length > 0;
   const showEmptyState = isTranslationMode && !hasTranslations;
 
+  // Determine if ReaderTopActions would show mode actions (to avoid duplicate rendering)
+  // ReaderTopActions shows for: non-Chapter, non-Tafsir types that don't start at verse 1
+  const firstVerse = initialData?.verses?.[0];
+  const readerTopActionsWouldShow =
+    firstVerse &&
+    quranReaderDataType !== QuranReaderDataType.Chapter &&
+    firstVerse.verseNumber !== 1;
+
   const verses = useMemo(
     () => Object.values(mushafPageToVersesMap).flat(),
     [mushafPageToVersesMap],
@@ -112,11 +119,15 @@ const ReadingView = ({
     quranReaderStyles,
     isUsingDefaultFont,
   );
-  const currentPageIndex = useMemo(
-    () => getPageIndexByPageNumber(Number(lastReadPageNumber), pagesVersesRange),
-    [lastReadPageNumber, pagesVersesRange],
-  );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
+
+  const { scrollToPreviousPage, scrollToNextPage } = usePageNavigation({
+    pagesVersesRange,
+    lastReadPageNumber,
+    pagesCount,
+    virtuosoRef,
+  });
+
   useScrollToVirtualizedVerse(
     quranReaderDataType,
     virtuosoRef,
@@ -129,22 +140,6 @@ const ReadingView = ({
     mushafLines,
     isLoading,
   );
-
-  const scrollToPreviousPage = useCallback(() => {
-    virtuosoRef.current.scrollToIndex({
-      index: currentPageIndex - 1,
-      align: 'start',
-      offset: -35,
-    });
-  }, [currentPageIndex]);
-
-  const scrollToNextPage = useCallback(() => {
-    virtuosoRef.current.scrollToIndex({
-      index: currentPageIndex + 1,
-      align: 'start',
-      offset: 25,
-    });
-  }, [currentPageIndex]);
 
   const onPrevPageClicked = useCallback(() => {
     logButtonClick('reading_view_prev_page_button');
@@ -214,12 +209,15 @@ const ReadingView = ({
     reciterQueryParamDifferent || wordByWordLocaleQueryParamDifferent;
 
   // When in empty state, show mode actions and empty message
+  // Only show ReadingModeActions here if ReaderTopActions wouldn't show them (to avoid duplicate)
   if (showEmptyState) {
     return (
       <div className={styles.emptyStateContainer}>
-        <div className={styles.emptyStateActions}>
-          <ReadingModeActions />
-        </div>
+        {!readerTopActionsWouldShow && (
+          <div className={styles.emptyStateActions}>
+            <ReadingModeActions />
+          </div>
+        )}
         <EmptyTranslationMessage />
       </div>
     );

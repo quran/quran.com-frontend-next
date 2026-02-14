@@ -1,0 +1,73 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
+
+$gap-between-blocks: 1rem;
+$hadith-font-line-height: 1.6;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+
+  &,
+  & * {
+    line-height: $hadith-font-line-height;
+  }
+}
+
+.hadithBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+  color: var(--color-text-default-new);
+  @include utility.kitabFontLang;
+
+  unicode-bidi: isolate;
+
+  &,
+  & * {
+    unicode-bidi: isolate;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+
+    :global(.multiline) {
+      display: block;
+      block-size: $gap-between-blocks;
+    }
+
+    :global(.single) {
+      display: block;
+      block-size: $gap-between-blocks * 0.5;
+    }
+  }
+
+  &:not([data-lang='ar']) * {
+    font-weight: var(--font-weight-light);
+  }
+}
+
+.toggleButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-bold);
+  padding: 0;
+  margin: 0;
+  text-align: start;
+  max-inline-size: max-content;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: var(--spacing-micro2-px);
+  }
+}

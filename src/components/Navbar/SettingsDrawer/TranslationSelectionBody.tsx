@@ -27,7 +27,12 @@ import {
 } from '@/redux/slices/QuranReader/translations';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
-import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
+import {
+  logEvent,
+  logValueChange,
+  logItemSelectionChange,
+  logEmptySearchResults,
+} from '@/utils/eventLogger';
 import filterTranslations, { getTranslations } from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
@@ -82,6 +87,11 @@ const TranslationSelectionBody = () => {
           removeQueryParam(QueryParam.TRANSLATIONS);
         }
 
+        logEvent(
+          isChecked
+            ? `translation_selected_${selectedTranslationId}`
+            : `translation_unselected_${selectedTranslationId}`,
+        );
         logItemSelectionChange('translation', selectedTranslationId.toString(), isChecked);
         logValueChange('selected_translations', selectedTranslations, nextTranslations);
         onTranslationsSettingsChange(

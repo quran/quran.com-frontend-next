@@ -1,0 +1,73 @@
+@use '@/styles/breakpoints';
+@use '@/styles/utility';
+@use '@/styles/constants';
+
+$note_title_line_height: 1.5;
+
+.noteCard {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-alternative-faint-new);
+  border-radius: var(--border-radius-rounded);
+  padding: var(--spacing-medium-px);
+  gap: var(--spacing-medium-px);
+}
+
+.noteHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-small);
+}
+
+.noteInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall-px);
+}
+
+.noteTitle {
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  line-height: $note_title_line_height;
+}
+
+.noteDate {
+  font-size: var(--font-size-xsmall);
+  color: var(--color-text-faded-new);
+  line-height: 1;
+}
+
+.noteActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+  flex-shrink: 0;
+
+  // To make the note actions visually aligned with the note title
+  margin-block-start: calc(var(--spacing-xmicro) * -1);
+}
+
+.actionIcon {
+  color: var(--color-text-default-new);
+}
+
+.noteText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-bold);
+}
+
+.statsContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+
+  .stat {
+    svg {
+      inline-size: var(--spacing-medium3-px);
+      block-size: var(--spacing-medium3-px);
+    }
+  }
+}

@@ -324,5 +324,43 @@ export default {
       ...state.quranReaderStyles,
       qnaFontScale: initialState.quranReaderStyles.qnaFontScale,
     },
+    pinnedVerses: {
+      verses: [],
+    },
+  }),
+  41: (state) => ({
+    ...state,
+    pinnedVerses: {
+      ...state.pinnedVerses,
+      verses: (state.pinnedVerses?.verses || []).map((v) => ({ ...v, serverId: undefined })),
+    },
+  }),
+  42: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      showTajweedRules: state.quranReaderStyles.showTajweedRules ?? true,
+    },
+  }),
+  43: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      surahInfoFontScale: initialState.quranReaderStyles.surahInfoFontScale,
+    },
+  }),
+  44: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      hadithFontScale: initialState.quranReaderStyles.hadithFontScale,
+    },
+  }),
+  45: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      layersFontScale: initialState.quranReaderStyles.layersFontScale,
+    },
   }),
 };

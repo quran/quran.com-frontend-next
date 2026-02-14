@@ -1,0 +1,1 @@
+../../../../.agents/skills/agent-browser/templates/form-automation.sh

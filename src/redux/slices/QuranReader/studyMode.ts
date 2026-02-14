@@ -12,24 +12,29 @@ export type PreviousStudyModeState = {
 
 export type StudyModeState = {
   isOpen: boolean;
+  isSsrMode: boolean;
   verseKey: string | null;
   activeTab: StudyModeTabId | null;
   highlightedWordLocation: string | null;
   previousState: PreviousStudyModeState | null;
+  showPinnedSection: boolean;
 };
 
 export const initialState: StudyModeState = {
   isOpen: false,
+  isSsrMode: false,
   verseKey: null,
   activeTab: null,
   highlightedWordLocation: null,
   previousState: null,
+  showPinnedSection: false,
 };
 
 export type OpenStudyModePayload = {
   verseKey: string;
   activeTab?: StudyModeTabId | null;
   highlightedWordLocation?: string | null;
+  showPinnedSection?: boolean;
 };
 
 /**
@@ -45,10 +50,23 @@ const studyMode = createSlice({
     openStudyMode: (state, { payload }: PayloadAction<OpenStudyModePayload>) => {
       return {
         isOpen: true,
+        isSsrMode: false,
         verseKey: payload.verseKey,
         activeTab: payload.activeTab ?? null,
         highlightedWordLocation: payload.highlightedWordLocation ?? null,
         previousState: state.previousState,
+        showPinnedSection: payload.showPinnedSection ?? false,
+      };
+    },
+    openStudyModeSsr: (state, { payload }: PayloadAction<OpenStudyModePayload>) => {
+      return {
+        isOpen: true,
+        isSsrMode: true,
+        verseKey: payload.verseKey,
+        activeTab: payload.activeTab ?? null,
+        highlightedWordLocation: payload.highlightedWordLocation ?? null,
+        previousState: state.previousState,
+        showPinnedSection: payload.showPinnedSection ?? false,
       };
     },
     closeStudyMode: () => {
@@ -85,10 +103,12 @@ const studyMode = createSlice({
       }
       return {
         isOpen: true,
+        isSsrMode: false,
         verseKey: state.previousState.verseKey,
         activeTab: state.previousState.activeTab,
         highlightedWordLocation: state.previousState.highlightedWordLocation,
         previousState: null,
+        showPinnedSection: state.showPinnedSection,
       };
     },
     clearPreviousState: (state) => {
@@ -102,14 +122,18 @@ const studyMode = createSlice({
 
 // Selectors
 export const selectStudyModeIsOpen = (state: RootState) => state.studyMode.isOpen;
+export const selectStudyModeIsSsrMode = (state: RootState) => state.studyMode.isSsrMode;
 export const selectStudyModeVerseKey = (state: RootState) => state.studyMode.verseKey;
 export const selectStudyModeActiveTab = (state: RootState) => state.studyMode.activeTab;
 export const selectStudyModeHighlightedWordLocation = (state: RootState) =>
   state.studyMode.highlightedWordLocation;
 export const selectStudyModePreviousState = (state: RootState) => state.studyMode.previousState;
+export const selectStudyModeShowPinnedSection = (state: RootState) =>
+  state.studyMode.showPinnedSection;
 
 export const {
   openStudyMode,
+  openStudyModeSsr,
   closeStudyMode,
   resetStudyModeState,
   setActiveTab,

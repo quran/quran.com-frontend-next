@@ -1,10 +1,10 @@
-@use "src/styles/theme";
+@use 'src/styles/theme';
 $baseSize: var(--spacing-mega);
 $animationDuration: 8s;
 
 .baseSize {
-  height: $baseSize;
-  width: $baseSize;
+  block-size: $baseSize;
+  inline-size: $baseSize;
 }
 
 .skeleton {
@@ -25,7 +25,7 @@ $animationDuration: 8s;
 
   animation: 1.5s ease-in-out 0.5s infinite normal none running loading;
 
-  content: " ";
+  content: ' ';
   position: absolute;
 
   inset-block: 0;

@@ -1,0 +1,63 @@
+{
+  "bulk-actions": {
+    "actions": "Hành động",
+    "actions-count": "Hành động ({{count}})",
+    "cancel": "Hủy bỏ",
+    "collapse-all": "Thu gọn tất cả",
+    "expand-all": "Mở rộng tất cả",
+    "pin": "Ghim",
+    "pin-verses": "Ghim các câu thơ",
+    "select": "Lựa chọn"
+  },
+  "collections": {
+    "detail-empty": "Hãy bắt đầu đọc và bổ sung vào bộ sưu tập của bạn!",
+    "favorites": "Mục yêu thích",
+    "filters": {
+      "chapters": "Chương",
+      "clear-all": "Xóa tất cả",
+      "juz": "Juz",
+      "no-matches": "Không có câu thơ nào được lưu phù hợp với bộ lọc của bạn.",
+      "no-results": "Không có kết quả",
+      "title": "Lọc"
+    },
+    "guest-promo": {
+      "sign-in": "Đăng nhập",
+      "subtitle": "So sánh và đối chiếu các câu thơ",
+      "title": "Tạo bộ sưu tập tùy chỉnh"
+    },
+    "items": "{{count}} mục ",
+    "items_plural": "{{count}} mặt hàng",
+    "load-more": "Tải thêm",
+    "new-collection": "Bộ sưu tập mới",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Mới được cập nhật gần đây",
+      "z-a": "Z - A"
+    },
+    "title": "Bộ sưu tập"
+  },
+  "notes-and-reflections": "Ghi chú và suy ngẫm",
+  "page": "Trang",
+  "reading-bookmark": {
+    "empty": "Bắt đầu đọc và lưu lại dấu trang!",
+    "title": "Dấu trang đọc sách của tôi"
+  },
+  "recent": "Gần đây",
+  "recent-empty": "Bắt đầu đọc để xem những cuốn sách bạn vừa đọc gần đây.",
+  "recently-saved": {
+    "title": "Mới lưu"
+  },
+  "saved": "Đã lưu",
+  "search": {
+    "filter": "Lọc",
+    "placeholder": "Tìm kiếm đã lưu...",
+    "sort": "Loại"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Đính kèm ghi chú vào các câu thơ.",
+      "custom-collections": "Tạo bộ sưu tập tùy chỉnh"
+    },
+    "title": "Đăng nhập hoặc đăng ký miễn phí để truy cập nhiều tính năng hơn!"
+  }
+}

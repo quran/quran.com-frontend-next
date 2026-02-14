@@ -1,0 +1,1 @@
+../../../../skills/pdf/scripts/create_validation_image.py

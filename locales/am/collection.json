@@ -1,0 +1,38 @@
+{
+  "all-saved-verses": "ሁሉም የተቀመጡ ጥቅሶች(አንቀጾች)",
+  "alphabetical": "ከ A እስከ Z",
+  "back-to-collection-list": "ወደ ስብስብ ዝርዝር ተመለስ",
+  "collapse-all": "ሁሉንም አንቀጾች(አያቶች) ሰብስብ (ደብቅ)",
+  "collection-list-empty": "የስብስብ ዝርዝሩ ባዶ ነው። እስካሁን ምንም ስብስብ አልፈጠሩም",
+  "collection-name": "የስብስብ ስም",
+  "collections": "ስብስቦች",
+  "date-asc": "ቀን (በጣም ጥንታዊ)",
+  "date-desc": "ቀን (አዲሱ)",
+  "delete-bookmark": {
+    "confirmation-subtitle": "እርስዎ ይሰርዛሉ {{count}} ንጥል(ዎች) ከ {{collectionName}}፣ ኧረ፧",
+    "subtitle": "እርግጠኛ ነዎት {{bookmarkName}} ከ {{collectionName}} ስብስብ መሰረዝ ይፈልጋሉ?",
+    "success": "ተሰርዟል {{count}} እቃ(ዎች)።",
+    "title": "ዕልባት(ቡክማርክ) ሰርዝ"
+  },
+  "delete-collection-action": "ስብስብ ሰርዝ",
+  "delete-collection-success": "ስብስቡ በተሳካ ሁኔታ ተሰርዟል",
+  "delete-collection": {
+    "description": "በዚህ ስብስብ ውስጥ የተቀመጡትን ጥቅሶች በሙሉ ታጣለህ።",
+    "subtitle": "{{collectionName}} ስብስብ ለመሰረዝ በእርግጠኝነት ይፈልጋሉ?",
+    "subtitle-tagged": "እርግጠኛ ነህ መሰረዝ ትፈልጋለህ? <collectionName>{{collectionName}}</collectionName> ?",
+    "title": "ስብስብ ሰርዝ"
+  },
+  "edit-collection": "ስብስብን አርትዕ ያድርጉ",
+  "edit-collection-name-required": "ለማስቀመጥ የስብስብ ስም ያስገቡ።",
+  "edit-collection-success": "ስብስብ በተሳካ ሁኔታ ተዘምኗል",
+  "empty": "ስብስቡ ባዶ ነው",
+  "expand-all": "ሁሉንም ጥቅሶች ዘርጋ",
+  "go-to-ayah": "ወደ አያህ ሂድ",
+  "load-more": "ተጨማሪ አምጣ",
+  "no-collections": "እስካሁን ምንም ስብስቦች የሉዎትም",
+  "quranic-asc": "የቁርዓን ቅደም ተከተል (ወደ ላይ መውጣት)",
+  "quranic-desc": "የቁርዓን ቅደም ተከተል (ወደ ላይ የሚወርድ)",
+  "recently-added": "በቅርቡ የታከሉ",
+  "recently-updated": "በቅርብ ጊዜ የተዘመነው",
+  "verse-key": "የምዕራፍ እና የአንቀፅ ቁጥር"
+}

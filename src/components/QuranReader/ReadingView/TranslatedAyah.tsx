@@ -96,7 +96,6 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
     [footnote, resetFootnote],
   );
 
-  // Handle click - open the StudyModeModal
   const handleAyahClick = useCallback(
     (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -106,7 +105,7 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
         handleFootnoteClick(supElement as HTMLElement);
         return;
       }
-      logButtonClick('reading_translation_ayah_click', { verseKey: verse.verseKey });
+      logButtonClick('study_mode_open_translation_reading', { verseKey: verse.verseKey });
       dispatch(openStudyMode({ verseKey: verse.verseKey }));
     },
     [handleFootnoteClick, verse.verseKey, dispatch],
@@ -116,6 +115,7 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
     (event: React.KeyboardEvent) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
+        logButtonClick('study_mode_open_translation_reading', { verseKey: verse.verseKey });
         dispatch(openStudyMode({ verseKey: verse.verseKey }));
       }
     },
@@ -138,6 +138,7 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
       {/* Safe: translationHtml comes from backend API and contains footnote markup */}
       <span
         className={styles.translationText}
+        lang={langData.code}
         dangerouslySetInnerHTML={{ __html: translationHtml }}
       />
       {!isLastVerse && !showFootnote && ' '}

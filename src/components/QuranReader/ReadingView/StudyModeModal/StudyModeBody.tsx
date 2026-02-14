@@ -1,26 +1,20 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './StudyModeBody.module.scss';
+import StudyModeBodyContent from './StudyModeBodyContent';
 import { TAB_COMPONENTS, useStudyModeTabs } from './StudyModeBodyTabs';
 import StudyModeBottomActions, { StudyModeTabId } from './StudyModeBottomActions';
-import StudyModeVerseText from './StudyModeVerseText';
 import useStudyModeScroll from './useStudyModeScroll';
-import WordNavigationBox from './WordNavigationBox';
 
-import TopActions from '@/components/QuranReader/TranslationView/TopActions';
-import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { getVerseWords } from '@/utils/verse';
-import Translation from 'types/Translation';
+import { AyahHadithsResponse } from 'types/Hadith';
+import AyahQuestionsResponse from 'types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
 
 interface StudyModeBodyProps {
   verse: Verse;
-  bookmarksRangeUrl?: string;
   selectedWord?: Word;
   selectedWordLocation?: string;
   showWordBox: boolean;
@@ -34,11 +28,15 @@ interface StudyModeBodyProps {
   selectedVerseNumber: string;
   activeTab?: StudyModeTabId | null;
   onTabChange?: (tabId: StudyModeTabId | null) => void;
+  questionId?: string;
+  questionsInitialData?: AyahQuestionsResponse;
+  tafsirIdOrSlug?: string;
+  hadithsInitialData?: AyahHadithsResponse;
+  onGoToVerse?: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
 }
 
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   verse,
-  bookmarksRangeUrl = '',
   selectedWord,
   selectedWordLocation,
   showWordBox,
@@ -52,46 +50,38 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   selectedVerseNumber,
   activeTab,
   onTabChange,
+  questionId,
+  questionsInitialData,
+  tafsirIdOrSlug,
+  hadithsInitialData,
+  onGoToVerse,
 }) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-
   const { containerRef, bottomActionsRef, tabContentRef, hasScrolledDown, showScrollGradient } =
     useStudyModeScroll({ verseKey: verse.verseKey, activeTab });
+  const [relatedVersesCount, setRelatedVersesCount] = React.useState<number | null>(null);
 
-  const tabs = useStudyModeTabs(activeTab, verse.verseKey, onTabChange);
+  const tabs = useStudyModeTabs({
+    activeTab,
+    verseKey: verse.verseKey,
+    onTabChange,
+    hasRelatedVerses: verse.hasRelatedVerses,
+    relatedVersesCount,
+  });
 
   return (
     <div ref={containerRef} className={styles.container}>
-      <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} shouldUseModalZIndex />
-      <div className={styles.arabicVerseContainer}>
-        {showWordBox && selectedWord && (
-          <WordNavigationBox
-            word={selectedWord}
-            onPrevious={onNavigatePreviousWord}
-            onNext={onNavigateNextWord}
-            onClose={onWordBoxClose}
-            canNavigatePrev={canNavigateWordPrev}
-            canNavigateNext={canNavigateWordNext}
-          />
-        )}
-        <StudyModeVerseText
-          words={getVerseWords(verse)}
-          highlightedWordLocation={selectedWordLocation}
-          onWordClick={onWordClick}
-        />
-      </div>
-      <div className={styles.translationsContainer}>
-        {verse.translations?.map((translation: Translation) => (
-          <div key={translation.id} className={styles.translationContainer}>
-            <TranslationText
-              translationFontScale={quranReaderStyles.translationFontScale}
-              text={translation.text}
-              languageId={translation.languageId}
-              resourceName={verse.translations?.length > 1 ? translation.resourceName : null}
-            />
-          </div>
-        ))}
-      </div>
+      <StudyModeBodyContent
+        verse={verse}
+        selectedWord={selectedWord}
+        selectedWordLocation={selectedWordLocation}
+        showWordBox={showWordBox}
+        onWordClick={onWordClick}
+        onWordBoxClose={onWordBoxClose}
+        onNavigatePreviousWord={onNavigatePreviousWord}
+        onNavigateNextWord={onNavigateNextWord}
+        canNavigateWordPrev={canNavigateWordPrev}
+        canNavigateWordNext={canNavigateWordNext}
+      />
 
       <div
         ref={bottomActionsRef}
@@ -124,6 +114,12 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
                 chapterId={selectedChapterId}
                 verseNumber={selectedVerseNumber}
                 switchTab={onTabChange}
+                questionId={questionId}
+                questionsInitialData={questionsInitialData}
+                tafsirIdOrSlug={tafsirIdOrSlug}
+                hadithsInitialData={hadithsInitialData}
+                onGoToVerse={onGoToVerse}
+                setRelatedVersesCount={setRelatedVersesCount}
               />
             </div>
           );

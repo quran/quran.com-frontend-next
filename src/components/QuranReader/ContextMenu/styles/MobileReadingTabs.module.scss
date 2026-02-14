@@ -2,9 +2,11 @@
 
 $icon-size: var(--spacing-medium-px); // 15px - matches other mode icons
 $border-width: var(--spacing-hairline-px);
-$selected-border-width: 2px;
+$selected-border-width: var(--mobile-reading-tabs-border);
 
 .container {
+  block-size: var(--context-menu-mobile-reading-tabs-height);
+  max-block-size: var(--context-menu-mobile-reading-tabs-height);
   inline-size: 100%;
   display: none; // Hidden by default
 
@@ -31,7 +33,10 @@ $selected-border-width: 2px;
   text-align: center;
   font-size: var(--font-size-small);
   padding-inline: var(--spacing-medium-plus-px);
-  padding-block: var(--spacing-medium-plus-px) var(--spacing-medium2-px);
+  padding-block-start: var(--mobile-reading-tabs-padding-top);
+  padding-block-end: var(--mobile-reading-tabs-padding-bottom);
+  block-size: var(--mobile-reading-tabs-content-height);
+  box-sizing: content-box;
   font-weight: var(--font-weight-medium);
   color: var(--color-text-faded-new);
   inline-size: 50%;

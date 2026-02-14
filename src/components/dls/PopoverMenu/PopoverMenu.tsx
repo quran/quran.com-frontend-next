@@ -145,6 +145,7 @@ PopoverMenu.Item = ({
       disabled={isDisabled}
       id={id}
       data-testid={dataTestId}
+      data-selected={isSelected}
     >
       {icon && (
         <span

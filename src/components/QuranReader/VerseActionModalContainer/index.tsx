@@ -4,10 +4,10 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AdvancedCopyModal from './AdvancedCopyModal';
-import CollectionModal from './CollectionModal';
+import BookmarkModal from './BookmarkModal';
 import FeedbackModal from './FeedbackModal';
 import NotesModals from './NotesModals';
-import useCollectionHandlers from './useCollectionHandlers';
+import ReaderBioModal from './ReaderBioModal';
 
 import useBatchedCountRangeNotes from '@/hooks/auth/useBatchedCountRangeNotes';
 import {
@@ -17,10 +17,11 @@ import {
 } from '@/redux/slices/QuranReader/studyMode';
 import {
   closeVerseActionModal,
-  selectVerseActionModalBookmarksRangeUrl,
   selectVerseActionModalEditingNote,
   selectVerseActionModalIsOpen,
   selectVerseActionModalIsTranslationView,
+  selectVerseActionModalReaderBioReader,
+  selectVerseActionModalPreviousModalType,
   selectVerseActionModalStudyModeRestoreState,
   selectVerseActionModalType,
   selectVerseActionModalVerse,
@@ -43,28 +44,24 @@ const VerseActionModalContainer: React.FC = () => {
   const verse = useSelector(selectVerseActionModalVerse);
   const editingNote = useSelector(selectVerseActionModalEditingNote);
   const isTranslationView = useSelector(selectVerseActionModalIsTranslationView);
-  const bookmarksRangeUrl = useSelector(selectVerseActionModalBookmarksRangeUrl);
   const wasOpenedFromStudyMode = useSelector(selectVerseActionModalWasOpenedFromStudyMode);
   const studyModeRestoreState = useSelector(selectVerseActionModalStudyModeRestoreState);
+  const readerBioReader = useSelector(selectVerseActionModalReaderBioReader);
+  const previousModalType = useSelector(selectVerseActionModalPreviousModalType);
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
-
-  const chapterId = verse ? Number(verse.chapterId) : 0;
-  const verseNumber = verse?.verseNumber ?? 0;
 
   const { data: notesCount } = useBatchedCountRangeNotes(isOpen && verseKey ? verseKey : null);
 
-  const { modalCollections, onCollectionToggled, onNewCollectionCreated } = useCollectionHandlers({
-    chapterId,
-    verseNumber,
-    bookmarksRangeUrl,
-  });
-
   useEffect(() => {
-    if (isOpen && wasOpenedFromStudyMode && isStudyModeOpen && !hasClosedStudyModeRef.current) {
+    if (isOpen && wasOpenedFromStudyMode && !hasClosedStudyModeRef.current) {
       hasClosedStudyModeRef.current = true;
-      dispatch(closeStudyMode());
+      // For SSR mode, the modal hides itself via Redux state (no action needed)
+      // For regular mode, close the study mode modal
+      if (!studyModeRestoreState?.isSsrMode && isStudyModeOpen) {
+        dispatch(closeStudyMode());
+      }
     }
-  }, [isOpen, wasOpenedFromStudyMode, isStudyModeOpen, dispatch]);
+  }, [isOpen, wasOpenedFromStudyMode, isStudyModeOpen, studyModeRestoreState, dispatch]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -74,6 +71,13 @@ const VerseActionModalContainer: React.FC = () => {
 
   const handleBackToStudyMode = useCallback(() => {
     dispatch(closeVerseActionModal());
+
+    // For SSR mode, the modal auto-shows when verse action closes (via Redux state)
+    if (studyModeRestoreState?.isSsrMode) {
+      return;
+    }
+
+    // For regular mode, re-open study mode with saved state
     if (studyModeRestoreState) {
       dispatch(
         openStudyMode({
@@ -86,6 +90,11 @@ const VerseActionModalContainer: React.FC = () => {
       dispatch(openStudyMode({ verseKey }));
     }
   }, [dispatch, studyModeRestoreState, verseKey]);
+
+  const handleBackToBookmark = useCallback(() => {
+    if (!verse) return;
+    dispatch(setModalType(VerseActionModalType.SAVE_BOOKMARK));
+  }, [dispatch, verse]);
 
   const handleClose = useCallback(() => {
     if (wasOpenedFromStudyMode) {
@@ -120,13 +129,15 @@ const VerseActionModalContainer: React.FC = () => {
   if (isNotesModal) {
     return (
       <NotesModals
-        modalType={modalType as string}
+        modalType={modalType}
         verseKey={verseKey}
         notesCount={count}
         editingNote={editingNote}
         wasOpenedFromStudyMode={wasOpenedFromStudyMode}
+        previousModalType={previousModalType}
         onClose={handleClose}
         onBack={handleBackToStudyMode}
+        onBackToBookmark={handleBackToBookmark}
         onOpenMyNotes={() => dispatch(setModalType(VerseActionModalType.MY_NOTES))}
         onOpenAddNote={() => dispatch(setModalType(VerseActionModalType.ADD_NOTE))}
         onOpenEditNote={(note: Note) => {
@@ -148,16 +159,13 @@ const VerseActionModalContainer: React.FC = () => {
     );
   }
 
-  if (modalType === VerseActionModalType.SAVE_TO_COLLECTION) {
+  if (modalType === VerseActionModalType.SAVE_BOOKMARK && verse) {
     return (
-      <CollectionModal
-        verseKey={verseKey}
-        collections={modalCollections}
+      <BookmarkModal
+        verse={verse}
         wasOpenedFromStudyMode={wasOpenedFromStudyMode}
         onClose={handleClose}
         onBack={handleBackToStudyMode}
-        onCollectionToggled={onCollectionToggled}
-        onNewCollectionCreated={onNewCollectionCreated}
       />
     );
   }
@@ -169,6 +177,18 @@ const VerseActionModalContainer: React.FC = () => {
         wasOpenedFromStudyMode={wasOpenedFromStudyMode}
         onClose={handleAdvancedCopyClose}
         onBack={handleBackToStudyMode}
+      />
+    );
+  }
+
+  if (modalType === VerseActionModalType.READER_BIO && readerBioReader) {
+    return (
+      <ReaderBioModal
+        reader={readerBioReader}
+        isOpen={isOpen}
+        onClose={handleClose}
+        onBack={handleBackToStudyMode}
+        wasOpenedFromStudyMode={wasOpenedFromStudyMode}
       />
     );
   }

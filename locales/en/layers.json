@@ -1,0 +1,4 @@
+{
+  "description": "Explore layered translation for Ayah {{ayahNumber}} of Surah {{surahName}} with expandable and contracted meanings.",
+  "title": "Translation Layers {{surahName}} - {{ayahNumber}}"
+}

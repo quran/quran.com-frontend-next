@@ -342,7 +342,7 @@ $scales-map: (
     tablet: (
       1: 0.85rem,
       2: 1rem,
-      3: 1.18rem,
+      3: 1.25rem,
       4: 1.4rem,
       5: 2rem,
       6: 2.3rem,
@@ -887,5 +887,49 @@ $page-container-max-width: 80rem;
       opacity: var(--opacity-50);
       pointer-events: auto;
     }
+  }
+}
+
+@mixin edgePadding {
+  padding-inline: var(--spacing-medium2-px);
+  padding-block: var(--spacing-small-px);
+}
+
+@mixin edgePaddingEven {
+  padding-inline: var(--spacing-medium2-px);
+  padding-block: var(--spacing-medium2-px);
+}
+
+@mixin edgeHorizontalPadding {
+  padding-inline: var(--spacing-medium2-px);
+}
+
+@mixin edgeVerticalPadding {
+  padding-block: var(--spacing-small-px);
+}
+
+@mixin scrollbarNone {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin kitabFontLang {
+  &[lang='ar'] {
+    font-family: 'Kitab';
+  }
+  &[lang='ar'] * {
+    font-family: inherit;
+  }
+}
+
+@mixin kitabFontHtmlLang {
+  :global(html[lang='ar']) & {
+    font-family: 'Kitab';
+  }
+  :global(html[lang='ar']) & * {
+    font-family: inherit;
   }
 }

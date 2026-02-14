@@ -24,6 +24,7 @@ import useNavbarAutoHide from '@/hooks/useNavbarAutoHide';
 import useIntersectionObserver from '@/hooks/useObserveElement';
 import useScrollWithContextMenuOffset from '@/hooks/useScrollWithContextMenuOffset';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
+import { selectStudyModeIsOpen } from '@/redux/slices/QuranReader/studyMode';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
@@ -35,7 +36,6 @@ type TranslationViewCellProps = {
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
   verseIndex: number;
-  bookmarksRangeUrl: string;
   isFirstCellWithHeader?: boolean;
 };
 
@@ -43,7 +43,6 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   verse,
   quranReaderStyles,
   verseIndex,
-  bookmarksRangeUrl,
   isFirstCellWithHeader = false,
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
@@ -56,8 +55,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   });
 
   const { isActive } = useOnboarding();
-  // disable auto scrolling when the user is onboarding
-  const enableAutoScrolling = useSelector(selectEnableAutoScrolling) && !isActive;
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const enableAutoScrolling =
+    useSelector(selectEnableAutoScrolling) && !isActive && !isStudyModeOpen;
 
   // Use our custom hook that handles scrolling with context menu offset
   const [scrollToSelectedItem, selectedItemRef] = useScrollWithContextMenuOffset<HTMLDivElement>();
@@ -99,7 +99,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
           [styles.firstCellWithHeader]: isFirstCellWithHeader,
         })}
       >
-        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} />
+        <TopActions verse={verse} />
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
@@ -118,9 +118,11 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             ))}
           </div>
         </div>
-        <BottomActions verseKey={verse.verseKey} />
+        <BottomActions verseKey={verse.verseKey} hasRelatedVerses={verse.hasRelatedVerses} />
       </div>
-      <Separator className={styles.verseSeparator} />
+      <div className={styles.ayahSeparatorContainer}>
+        <Separator />
+      </div>
     </>
   );
 };
@@ -155,6 +157,5 @@ const areVersesEqual = (
     nextProps.verse.words,
   ) &&
   !verseTranslationChanged(prevProps.verse, nextProps.verse) &&
-  !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles) &&
-  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl;
+  !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles);
 export default memo(TranslationViewCell, areVersesEqual);

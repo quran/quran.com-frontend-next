@@ -13,8 +13,9 @@ div.contentModal {
   max-block-size: 95dvh;
   inline-size: 100%;
   max-inline-size: 100%;
-  overflow-x: hidden;
-  border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+  overflow: hidden;
+  background: var(--color-background-elevated-new);
+  border-radius: var(--border-radius-large-px) var(--border-radius-large-px) 0 0;
   @include breakpoints.tablet {
     padding-inline: var(--spacing-large-px);
     padding-block-start: var(--spacing-xlarge-px);
@@ -22,7 +23,7 @@ div.contentModal {
     max-block-size: 85vh;
     inline-size: 80%;
     max-inline-size: 80%;
-    border-radius: var(--border-radius-rounded);
+    border-radius: var(--border-radius-large-px);
   }
 }
 
@@ -36,21 +37,68 @@ div.mobileBottomSheetOverlay {
 }
 
 .innerContent {
+  min-block-size: 0;
+  flex: 1 1;
   padding: 0;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
 .header {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: 1fr auto;
+  column-gap: var(--spacing-small-px);
+  row-gap: var(--spacing-xxsmall-px);
+  inline-size: 100%;
+
+  @include breakpoints.tablet {
+    border-block-end: 1px solid var(--color-separators);
+    padding-block-end: var(--spacing-medium2-px);
+  }
+
+  // When left controls are hidden (no verse history), switch to 2-column layout
+  &.hideHeaderLeftControls {
+    grid-template-columns: 1fr auto;
+
+    .headerMiddleControls {
+      @include breakpoints.smallerThanTablet {
+        grid-column: 1;
+        grid-row: 1;
+      }
+    }
+
+    .headerRightControls {
+      @include breakpoints.smallerThanTablet {
+        grid-column: 2;
+        grid-row: 1;
+      }
+    }
+  }
+}
+
+.headerLeftControls {
+  @include breakpoints.smallerThanTablet {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+.headerMiddleControls {
   display: flex;
   align-items: center;
   gap: var(--spacing-small-px);
-  inline-size: 100%;
-  flex-shrink: 0;
-  border-bottom: 1px solid var(--color-separators);
+  @include breakpoints.smallerThanTablet {
+    grid-column: 1 / -1; /* span all columns */
+    grid-row: 2;
+  }
+}
 
-  @include breakpoints.tablet {
-    padding-block-end: var(--spacing-medium2-px);
+.headerRightControls {
+  @include breakpoints.smallerThanTablet {
+    grid-column: 3;
+    grid-row: 1;
   }
 }
 
@@ -95,6 +143,15 @@ button.navButton {
   }
 }
 
+button.previousRelatedVerseButton {
+  color: var(--color-text-faded-new);
+
+  svg {
+    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
+  }
+}
+
 // In LTR: prev arrow points left (flipped), next arrow points right (default)
 // In RTL: prev arrow points right (default), next arrow points left (flipped)
 button.prevButton {
@@ -115,6 +172,37 @@ button.nextButton {
   }
 }
 
+button.pinButton {
+  flex-shrink: 0;
+  border-radius: var(--border-radius-xsmall-px);
+  padding: var(--spacing-xsmall-px);
+  max-block-size: var(--spacing-large-px);
+  background: var(--color-background-alternative-faint);
+
+  svg {
+    inline-size: var(--spacing-small2-px);
+    block-size: var(--spacing-small2-px);
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: var(--color-background-alternative-faint);
+  }
+}
+
+.pinIcon {
+  inline-size: var(--spacing-small2-px);
+  block-size: var(--spacing-small2-px);
+  color: var(--color-text-faded-new);
+  fill: none;
+}
+
+.pinIconFilled {
+  color: var(--color-blue-buttons-and-icons);
+  fill: var(--color-blue-buttons-and-icons);
+}
+
 .closeButton {
   margin-inline-start: auto;
   flex-shrink: 0;
@@ -122,8 +210,11 @@ button.nextButton {
 
 .modalHeader {
   padding-inline-end: 0;
+  background-color: var(--color-background-elevated-new);
+  flex-shrink: 0;
+  z-index: 3;
   @include breakpoints.smallerThanTablet {
-    padding:0;
+    padding: 0;
     padding-block-end: var(--spacing-medium-px);
   }
 }
@@ -158,6 +249,10 @@ div.bottomSheetOverlay {
 
 // Bottom sheet content - full height from bottom (double div for higher specificity)
 div div.bottomSheetContent {
+  @include breakpoints.smallerThanTablet {
+    block-size: 95dvh;
+    max-block-size: 95dvh;
+  }
   @include breakpoints.tablet {
     border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
     block-size: 95vh;
@@ -172,6 +267,12 @@ div div.bottomSheetContent {
 
 // Inner content scrollable for bottom sheet mode
 div.bottomSheetInnerContent {
+  @include breakpoints.smallerThanTablet {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-block-size: 0;
+  }
   @include breakpoints.tablet {
     flex: 1;
     overflow-y: auto;
@@ -269,4 +370,20 @@ div.bottomSheetInnerContent {
   block-size: var(--spacing-medium2-px);
   inline-size: calc(var(--spacing-mega-px) * 1.2);
   border-radius: var(--border-radius-default);
+}
+
+.audioPlayerFooter {
+  position: relative;
+  background: var(--color-background-elevated-new);
+  border-block-start: 1px solid var(--color-borders-hairline);
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+// SSR modal hidden state - when verse action modal is open
+.ssrHidden {
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
 }

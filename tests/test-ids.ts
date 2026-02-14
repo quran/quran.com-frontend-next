@@ -61,6 +61,9 @@ export enum TestId {
   LOGOUT_BUTTON = 'profile-menu-item-logout',
   MODAL_CONTENT = 'modal-content',
   MORE_RESULTS = 'more-results',
+  MY_QURAN_RECENT_CONTENT_ITEM = 'my-quran-recent-content-item',
+  MY_QURAN_RECENT_CONTENT_EMPTY_STATE = 'my-quran-recent-content-empty-state',
+  MY_QURAN_RECENT_CONTENT_VERSE_METADATA = 'my-quran-recent-content-verse-metadata',
   NAVBAR = 'navbar',
   NAVIGATE_QURAN_BUTTON = 'navigate-quran-button',
   NAVIGATION_DRAWER = 'navigation-drawer',
@@ -84,6 +87,7 @@ export enum TestId {
   PROGRESS_BAR = 'progress-bar',
   QUICK_LINKS = 'quick-links',
   QURAN_IN_A_YEAR_SECTION = 'quran-in-a-year-section',
+  QURAN_READER_CHAPTER_EVENT = 'quran-reader-chapter-event',
   RAMADAN_CHALLENGE_GUEST_USER_BUTTON = 'ramadan-challenge-guest-user-button',
   RAMADAN_CHALLENGE_GUEST_USER_BUTTON_SPINNER = 'ramadan-challenge-guest-user-button-spinner',
   RAMADAN_CHALLENGE_ENROLL_BUTTON = 'ramadan-challenge-enroll-button',
@@ -122,6 +126,24 @@ export enum TestId {
   WBW_TRANSLATION = 'wbw-translation',
   WBW_TRANSLITERATION = 'wbw-transliteration',
   WORD_BY_WORD = 'wbw-language-select',
+
+  // Study Mode SSR Test IDs
+  STUDY_MODE_MODAL = 'study-mode-modal',
+  STUDY_MODE_HEADER = 'study-mode-header',
+  STUDY_MODE_CLOSE_BUTTON = 'study-mode-close-button',
+  STUDY_MODE_PREV_VERSE_BUTTON = 'study-mode-prev-verse-button',
+  STUDY_MODE_NEXT_VERSE_BUTTON = 'study-mode-next-verse-button',
+  STUDY_MODE_CHAPTER_SELECTOR = 'study-mode-chapter-selector',
+  STUDY_MODE_VERSE_SELECTOR = 'study-mode-verse-selector',
+  STUDY_MODE_TAB_TAFSIR = 'study-mode-tab-tafsir',
+  STUDY_MODE_TAB_REFLECTIONS = 'study-mode-tab-reflections',
+  STUDY_MODE_TAB_LESSONS = 'study-mode-tab-lessons',
+  STUDY_MODE_TAB_ANSWERS = 'study-mode-tab-answers',
+  STUDY_MODE_CONTENT = 'study-mode-content',
+  STUDY_MODE_SKELETON = 'study-mode-skeleton',
+  STUDY_MODE_ERROR = 'study-mode-error',
+  STUDY_MODE_RETRY_BUTTON = 'study-mode-retry-button',
+  STUDY_MODE_VERSE_TEXT = 'study-mode-verse-text',
 }
 
 export type SettingsQuranFont = QuranFont.IndoPak | QuranFont.Uthmani | QuranFont.Tajweed;

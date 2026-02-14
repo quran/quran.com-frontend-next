@@ -1,0 +1,4 @@
+{
+  "description": "Изучите различные кираты (варианты прочтения) аята. {{ayahNumber}} из суры {{surahName}}",
+  "title": "Кираат {{surahName}} - {{ayahNumber}}"
+}

@@ -2,9 +2,11 @@
 /* eslint-disable react/no-multi-comp */
 import { useCallback, useMemo, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
+import { BottomActionsExpandProvider } from '../contexts/BottomActionsExpandContext';
 import onCopyQuranWords from '../onCopyQuranWords';
 import QueryParamMessage from '../QueryParamMessage';
 
@@ -131,8 +133,10 @@ const TranslationView = ({
     reciterQueryParamDifferent ||
     wordByWordLocaleQueryParamDifferent;
 
+  const isSingleVerse = quranReaderDataType === QuranReaderDataType.Verse;
+
   return (
-    <>
+    <BottomActionsExpandProvider>
       {shouldShowQueryParamMessage && (
         <QueryParamMessage
           translationsQueryParamDifferent={translationsQueryParamDifferent}
@@ -142,7 +146,9 @@ const TranslationView = ({
       )}
 
       <div
-        className={styles.wrapper}
+        className={classNames(styles.wrapper, {
+          [styles.singleVerseWrapper]: isSingleVerse,
+        })}
         onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
       >
         <Virtuoso
@@ -154,7 +160,7 @@ const TranslationView = ({
           itemContent={itemContentRenderer}
         />
       </div>
-    </>
+    </BottomActionsExpandProvider>
   );
 };
 

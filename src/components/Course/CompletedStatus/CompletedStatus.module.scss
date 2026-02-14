@@ -1,5 +1,0 @@
-@use 'src/styles/mixins/flexbox';
-
-.container {
-    @include flexbox.col-center;
-}

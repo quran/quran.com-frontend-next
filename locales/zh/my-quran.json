@@ -1,0 +1,63 @@
+{
+  "bulk-actions": {
+    "actions": "行动",
+    "actions-count": "行动（{{count}}）",
+    "cancel": "取消",
+    "collapse-all": "全部收起",
+    "expand-all": "全部展开",
+    "pin": "别针",
+    "pin-verses": "别针诗句",
+    "select": "选择"
+  },
+  "collections": {
+    "detail-empty": "开始阅读，丰富你的收藏吧！",
+    "favorites": "收藏夹",
+    "filters": {
+      "chapters": "章",
+      "clear-all": "全部清除",
+      "juz": "Juz",
+      "no-matches": "没有已保存的诗句符合您的筛选条件。",
+      "no-results": "没有结果",
+      "title": "筛选"
+    },
+    "guest-promo": {
+      "sign-in": "登入",
+      "subtitle": "比较和对比诗句",
+      "title": "创建自定义收藏集"
+    },
+    "items": "{{count}} 物品",
+    "items_plural": "{{count}} 项目",
+    "load-more": "加载更多",
+    "new-collection": "新品系列",
+    "sort": {
+      "a-z": "A-Z",
+      "recently-updated": "最近更新",
+      "z-a": "Z - A"
+    },
+    "title": "收藏"
+  },
+  "notes-and-reflections": "笔记与反思",
+  "page": "页",
+  "reading-bookmark": {
+    "empty": "开始阅读并保存阅读书签！",
+    "title": "我的阅读书签"
+  },
+  "recent": "最近的",
+  "recent-empty": "开始阅读以查看您最近的阅读记录",
+  "recently-saved": {
+    "title": "最近保存"
+  },
+  "saved": "已保存",
+  "search": {
+    "filter": "筛选",
+    "placeholder": "搜索已保存...",
+    "sort": "种类"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "在诗句后附上注释",
+      "custom-collections": "创建自定义收藏集"
+    },
+    "title": "登录或免费注册即可解锁更多功能！"
+  }
+}

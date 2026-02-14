@@ -1,0 +1,63 @@
+{
+  "bulk-actions": {
+    "actions": "الإجراءات",
+    "actions-count": "الإجراءات ({{count}})",
+    "cancel": "إلغاء",
+    "collapse-all": "إخفاء الكل",
+    "expand-all": "عرض الكل",
+    "pin": "تثبيت",
+    "pin-verses": "تثبيت الآيات",
+    "select": "اختر"
+  },
+  "collections": {
+    "detail-empty": "ابدأ القراءة وأضف إلى مجموعتك!",
+    "favorites": "المفضلة",
+    "filters": {
+      "chapters": "الفصل",
+      "clear-all": "مسح الكل",
+      "juz": "جوز",
+      "no-matches": "لا توجد آيات محفوظة تطابق معايير البحث الخاصة بك.",
+      "no-results": "لا توجد نتائج",
+      "title": "فلتر"
+    },
+    "guest-promo": {
+      "sign-in": "تسجيل الدخول",
+      "subtitle": "قارن بين الآيات واذكر أوجه التشابه والاختلاف بينها",
+      "title": "إنشاء مجموعات مخصصة"
+    },
+    "items": "{{count}} عنصر",
+    "items_plural": "{{count}} عناصر",
+    "load-more": "تحميل المزيد",
+    "new-collection": "مجموعة جديدة",
+    "sort": {
+      "a-z": "ترتيب تصاعدي",
+      "recently-updated": "تم التحديث مؤخراً",
+      "z-a": "ترتيب تنازلي"
+    },
+    "title": "المجموعات"
+  },
+  "notes-and-reflections": "ملاحظات وتدبرات",
+  "page": "صفحة",
+  "reading-bookmark": {
+    "empty": "ابدأ القراءة واحفظ إشارة مرجعية للقراءة!",
+    "title": "إشارتي المرجعية للقراءة"
+  },
+  "recent": "حديثا",
+  "recent-empty": "ابدأ القراءة للاطلاع على ما قرأته حديثًا",
+  "recently-saved": {
+    "title": "المحفوظة مؤخراً"
+  },
+  "saved": "تم الحفظ",
+  "search": {
+    "filter": "تصفية",
+    "placeholder": "تم حفظ البحث...",
+    "sort": "نوع"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "أرفق ملاحظات بالآيات",
+      "custom-collections": "إنشاء مجموعات مخصصة"
+    },
+    "title": "تسجيل الدخول أو إنشاء حساب مجانًا للمزيد من الميزات!"
+  }
+}

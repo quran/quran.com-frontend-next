@@ -9,6 +9,7 @@ import {
   selectStudyModeActiveTab,
   selectStudyModeHighlightedWordLocation,
   selectStudyModeIsOpen,
+  selectStudyModeIsSsrMode,
   selectStudyModeVerseKey,
 } from '@/redux/slices/QuranReader/studyMode';
 
@@ -28,6 +29,7 @@ const StudyModeModal = dynamic(() => import('./ReadingView/StudyModeModal'), { s
 const StudyModeContainer: React.FC = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector(selectStudyModeIsOpen);
+  const isSsrMode = useSelector(selectStudyModeIsSsrMode);
   const verseKey = useSelector(selectStudyModeVerseKey);
   const activeTab = useSelector(selectStudyModeActiveTab);
   const highlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
@@ -37,7 +39,8 @@ const StudyModeContainer: React.FC = () => {
     dispatch(clearAllHighlights());
   }, [dispatch]);
 
-  if (!isOpen || !verseKey) {
+  // Don't render the client-side modal when in SSR mode (SSR container handles it)
+  if (!isOpen || !verseKey || isSsrMode) {
     return null;
   }
 

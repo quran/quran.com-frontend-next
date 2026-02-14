@@ -1,0 +1,69 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-small2-px);
+  padding-block: var(--spacing-xxsmall-px);
+  padding-inline: var(--spacing-small2-px);
+  background: transparent;
+  border: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
+  border-radius: var(--border-radius-pill);
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+  line-height: 1;
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.selected {
+  background: var(--color-blue-buttons-and-icons);
+  border-color: var(--color-blue-buttons-and-icons);
+}
+
+.verseKey {
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-link-new);
+  line-height: 1;
+}
+
+.verseKeySelected {
+  color: var(--color-text-white);
+}
+
+.removeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-text-link-new);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.removeButtonSelected {
+  color: var(--color-background-elevated);
+}
+
+.closeIcon {
+  inline-size: calc(var(--spacing-small-px) + var(--spacing-micro2-px));
+  block-size: calc(var(--spacing-small2-px) + var(--spacing-micro-px));
+  color: var(--color-text-link-new);
+  fill: var(--color-text-link-new);
+}
+
+.closeIconSelected {
+  color: var(--color-text-white);
+  fill: var(--color-text-white);
+}

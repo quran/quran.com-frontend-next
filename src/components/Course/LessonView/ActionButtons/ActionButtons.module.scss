@@ -1,70 +1,79 @@
-.buttonsContainer {
-    margin-block-start: var(--spacing-small);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
+@use 'src/styles/breakpoints';
 
-    & > button {
-        margin-inline: var(--spacing-xxsmall);
-        margin-block: var(--spacing-xxsmall);
-    }
+.buttonsContainer {
+  margin-block-start: var(--spacing-small);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  & > button {
+    margin-inline: var(--spacing-xxsmall);
+    margin-block: var(--spacing-xxsmall);
+  }
 }
 
-.addReflectionButton {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.secondaryButtonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-xxsmall);
+  margin-block-start: var(--spacing-small-px);
+
+  @include breakpoints.smallerThanTablet {
+    flex-direction: column-reverse;
+  }
 }
 
 .helpIconContainer {
-    margin-left: 8px;
+  margin-inline-start: 8px;
 }
 
 .helpIcon {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-medium);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-medium);
 
-    &:hover {
-        color: var(--color-primary-medium);
-    }
+  &:hover {
+    color: var(--color-primary-medium);
+  }
 }
 
 .reflectionButtonContainer {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
 }
 
 .helpIconInButton {
-    position: absolute;
-    right: -12px;
-    top: calc(-1 * var(--spacing-xsmall-px));
-    background: var(--color-background-default);
-    border: 1px solid var(--color-borders-hairline);
-    border-radius: 50%;
-    width: var(--spacing-medium2-px);
-    height: var(--spacing-medium2-px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    cursor: pointer;
-    color: var(--color-text-medium);
+  position: absolute;
+  inset-inline-end: -12px;
+  inset-block-start: calc(-1 * var(--spacing-xsmall-px));
+  background: var(--color-background-default);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: 50%;
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-text-medium);
 
-    &:hover {
-        color: var(--color-primary-medium);
-        border-color: var(--color-primary-medium);
-    }
+  &:hover {
+    color: var(--color-primary-medium);
+    border-color: var(--color-primary-medium);
+  }
 
-    svg {
-        width: 12px;
-        height: 12px;
-    }
+  svg {
+    inline-size: 12px;
+    block-size: 12px;
+  }
 }

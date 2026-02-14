@@ -4,18 +4,26 @@ import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { SWRConfig } from 'swr';
 
+import { fetcher, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import PageContainer from '@/components/PageContainer';
-import QuestionsList from '@/components/QuestionAndAnswer/QuestionsList';
-import QuestionsPageLayout from '@/components/QuestionAndAnswer/QuestionsPageLayout';
-import useQuestionsPagination from '@/hooks/useQuestionsPagination';
+import QuranReader from '@/components/QuranReader';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import StudyModeSsrContainer from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeSsrContainer';
 import { getChapterOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import {
+  getQuranReaderStylesInitialState,
+  getTranslationsInitialState,
+} from '@/redux/defaultSettings/util';
+import { ChapterResponse, VersesResponse, VerseResponse } from '@/types/ApiResponses';
+import ChaptersData from '@/types/ChaptersData';
 import Language from '@/types/Language';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
+import { QuranReaderDataType } from '@/types/QuranReader';
+import Verse from '@/types/Verse';
+import { getMushafId } from '@/utils/api';
 import { getAyahQuestions } from '@/utils/auth/api';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
@@ -25,15 +33,17 @@ import {
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
-import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
-import { ChapterResponse } from 'types/ApiResponses';
-import ChaptersData from 'types/ChaptersData';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import { buildVersesResponse, buildStudyModeVerseUrl } from '@/utils/verseKeys';
 
 type SelectedAyahQuestionsPageProps = {
   chapter?: ChapterResponse;
   verseNumber?: string;
   chapterId?: string;
   chaptersData: ChaptersData;
+  fallback?: Record<string, unknown>;
+  verse?: Verse;
+  versesResponse?: VersesResponse;
   initialData?: AyahQuestionsResponse;
 };
 
@@ -41,19 +51,14 @@ const SelectedAyahQuestionsPage: NextPage<SelectedAyahQuestionsPageProps> = ({
   chapter,
   verseNumber,
   chapterId,
+  fallback,
+  verse,
+  versesResponse,
   initialData,
 }) => {
   const { t, lang } = useTranslation('question');
-  const quranReaderStyles = useSelector(selectQuranReaderStyles);
 
   const navigationUrl = getVerseAnswersNavigationUrl(`${chapterId}:${verseNumber}`);
-  const verseKey = makeVerseKey(Number(chapterId), Number(verseNumber));
-
-  const { questions, hasMore, isLoadingMore, loadMore } = useQuestionsPagination({
-    verseKey,
-    initialData,
-    language: lang as Language,
-  });
 
   return (
     <>
@@ -73,21 +78,23 @@ const SelectedAyahQuestionsPage: NextPage<SelectedAyahQuestionsPageProps> = ({
         languageAlternates={getLanguageAlternates(navigationUrl)}
         description={t('questions-meta-desc')}
       />
-      <PageContainer>
-        <QuestionsPageLayout
+      {/* @ts-ignore */}
+      <SWRConfig value={{ fallback }}>
+        <StudyModeSsrContainer
+          initialTab={StudyModeTabId.ANSWERS}
           chapterId={chapterId}
           verseNumber={verseNumber}
-          fontScale={quranReaderStyles.qnaFontScale}
-        >
-          <QuestionsList
-            questions={questions}
-            hasMore={hasMore}
-            isLoadingMore={isLoadingMore}
-            onLoadMore={loadMore}
-            baseUrl={navigationUrl}
+          verse={verse}
+          questionsInitialData={initialData}
+        />
+        {chapter?.chapter?.id && versesResponse && (
+          <QuranReader
+            initialData={versesResponse}
+            id={chapter.chapter.id}
+            quranReaderDataType={QuranReaderDataType.Chapter}
           />
-        </QuestionsPageLayout>
-      </PageContainer>
+        )}
+      </SWRConfig>
     </>
   );
 };
@@ -96,21 +103,44 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { chapterId } = params;
   const verseKey = String(chapterId);
   const chaptersData = await getAllChaptersData(locale);
+
   if (!isValidVerseKey(chaptersData, verseKey)) {
     return { notFound: true };
   }
+
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
+  const translations = getTranslationsInitialState(locale).selectedTranslations;
 
   try {
-    const verseQuestionsData = await getAyahQuestions(verseKey, locale as Language);
+    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+    const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
+
+    const [verseQuestionsData, verseData, pagesLookupResponse] = await Promise.all([
+      getAyahQuestions(verseKey, locale as Language),
+      fetcher(verseUrl) as Promise<VerseResponse>,
+      getPagesLookup({
+        chapterNumber: Number(chapterNumber),
+        mushaf: mushafId,
+      }),
+    ]);
+
+    const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
+
+    const fallback = {
+      [verseUrl]: verseData,
+    };
 
     return {
       props: {
         chaptersData,
         chapterId: chapterNumber,
-        chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
+        chapter: { chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber } },
         verseNumber,
         initialData: verseQuestionsData,
+        fallback,
+        verse: verseData.verse,
+        versesResponse,
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
@@ -131,8 +161,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered chapters at build time.
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
+  paths: [],
+  fallback: 'blocking',
 });
 
 export default SelectedAyahQuestionsPage;

@@ -1,0 +1,100 @@
+@use 'src/styles/breakpoints';
+
+$hadith-font-line-height: 1.6;
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+}
+
+.container {
+  @extend .flex;
+  block-size: 100%;
+  font-size: inherit;
+}
+
+.notice {
+  position: relative;
+  padding: var(--spacing-medium);
+  margin-block-end: var(--spacing-xsmall);
+  background: var(--color-success-faded);
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-success-faint);
+  font-size: min(var(--hadith-dynamic-font-size), var(--font-size-normal));
+  color: var(--color-text-default-new);
+
+  a {
+    color: var(--color-text-link-new);
+    text-decoration: underline;
+    text-underline-offset: var(--spacing-micro2-px);
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &::selection {
+      color: var(--color-text-default-new);
+    }
+  }
+}
+
+.divider {
+  block-size: var(--spacing-hairline-px);
+  background-color: var(--color-separators-ayah-level);
+}
+
+.hadithCard {
+  @extend .flex;
+  &,
+  & * {
+    line-height: $hadith-font-line-height;
+  }
+}
+
+.hadithSource {
+  display: flex;
+  gap: var(--spacing-xsmall-px);
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-normal);
+  unicode-bidi: plaintext;
+  max-inline-size: max-content;
+
+  .number {
+    unicode-bidi: plaintext;
+  }
+
+  .link {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: calc(var(--spacing-micro-px) * 2);
+    }
+  }
+}
+
+.statusContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(3 * var(--spacing-max));
+  color: var(--color-text-faded-new);
+
+  &:where([data-status='empty'], [data-status='error']) {
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-faded-new);
+    text-align: center;
+    text-wrap: balance;
+
+    @include breakpoints.tablet {
+      font-size: var(--font-size-large2);
+    }
+  }
+}
+
+.infiniteScrollTrigger {
+  block-size: var(--spacing-hairline-px);
+}

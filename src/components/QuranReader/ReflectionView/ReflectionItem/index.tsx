@@ -11,7 +11,6 @@ import styles from './ReflectionItem.module.scss';
 import SocialInteraction from './SocialInteraction';
 
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
-import useReflectionBodyParser from '@/components/QuranReflect/hooks/useReflectionBodyParser';
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import DataContext from '@/contexts/DataContext';
 import useIntersectionObserver from '@/hooks/useObserveElement';
@@ -20,7 +19,8 @@ import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate, { getVisibleTextLength } from '@/utils/html-truncate';
 import { toLocalizedNumber } from '@/utils/locale';
-import { isRTLReflection } from '@/utils/quranReflect/locale';
+import { parseReflectionBody } from '@/utils/quranReflect/bodyParser';
+import { isRTLReflection, quranReflectLanguageIDToLocale } from '@/utils/quranReflect/locale';
 import { getReflectionGroupLink } from '@/utils/quranReflect/navigation';
 import {
   MAX_REFLECTION_LENGTH,
@@ -114,7 +114,11 @@ const ReflectionItem: React.FC<Props> = ({
     );
   }, [estimatedReadingTime, reflectionTextLength]);
 
-  const formattedText = useReflectionBodyParser(reflectionText, styles.hashtag);
+  const formattedText = useMemo(
+    () => parseReflectionBody(reflectionText, styles.hashtag),
+    [reflectionText],
+  );
+
   const visibleTextLength = getVisibleTextLength(formattedText);
 
   return (
@@ -163,6 +167,7 @@ const ReflectionItem: React.FC<Props> = ({
         <p className="debugger" />
         <span
           className={classNames(styles.body, FONT_SIZE_CLASS_MAP[fontScale])}
+          lang={quranReflectLanguageIDToLocale(reflection.languageId)}
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),

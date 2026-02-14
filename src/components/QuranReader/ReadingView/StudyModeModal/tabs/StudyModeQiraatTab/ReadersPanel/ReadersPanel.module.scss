@@ -1,0 +1,117 @@
+@use 'src/styles/breakpoints';
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+
+  @include breakpoints.desktop {
+    block-size: 100%;
+    max-inline-size: calc(var(--spacing-mega-px) * 4.1);
+  }
+
+  &.expanded {
+    padding-block-end: var(--spacing-medium2-px);
+
+    @include breakpoints.desktop {
+      padding-block-end: 0;
+    }
+  }
+}
+
+.mobile {
+  all: unset;
+  cursor: pointer;
+  justify-content: space-between;
+
+  &:hover {
+    opacity: var(--opacity-85);
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-small);
+  inline-size: 100%;
+  margin-block-end: var(--spacing-medium-px);
+  flex-shrink: 0;
+
+  &.desktop {
+    display: none;
+    @include breakpoints.desktop {
+      display: flex;
+    }
+  }
+
+  &.mobile {
+    @include breakpoints.desktop {
+      display: none;
+    }
+  }
+}
+
+.headerTitleContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+}
+
+.headerTitle {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default-new);
+}
+
+.readingColors {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+}
+
+.readingColor {
+  block-size: var(--spacing-small2-px);
+  inline-size: var(--spacing-small2-px);
+  border-radius: var(--border-radius-circle);
+  background-color: var(--background);
+  border: var(--spacing-hairline-px) solid var(--color-grey-icons-new);
+}
+
+.chevron {
+  inline-size: var(--spacing-medium-plus2-px);
+  block-size: var(--spacing-medium-plus2-px);
+  color: var(--color-text-faded-new);
+  transition: transform var(--transition-moderate) ease;
+}
+
+.chevronRotated {
+  transform: rotate(180deg);
+}
+
+.readersList {
+  overflow: hidden;
+  max-block-size: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--spacing-xxsmall-px);
+  margin-block-end: var(--spacing-micro-px);
+  transition: max-block-size var(--transition-moderate) ease-in-out;
+
+  &::-webkit-scrollbar {
+    inline-size: var(--spacing-xxsmall-px);
+  }
+
+  @include breakpoints.desktop {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-block-size: none;
+    padding-block-end: var(--spacing-xlarge-px);
+    padding-inline-end: var(--spacing-micro-px);
+  }
+}
+
+.readersListVisible {
+  max-block-size: 1000px;
+}

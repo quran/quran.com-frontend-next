@@ -1,0 +1,4 @@
+{
+  "description": "Temui Hadis dan riwayat yang sahih berkaitan dengan Ayah {{ayahNumber}} Surah {{surahName}}Akses hadis-hadis ilmiah yang berkaitan dengan ayat al-Quran ini.",
+  "title": "Hadis-hadis {{surahName}} - {{ayahNumber}}"
+}

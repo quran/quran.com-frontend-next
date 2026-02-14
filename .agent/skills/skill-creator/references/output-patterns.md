@@ -1,0 +1,1 @@
+../../../../.agents/quran/skills/skill-creator/references/output-patterns.md

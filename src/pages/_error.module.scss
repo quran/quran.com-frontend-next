@@ -3,7 +3,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  block-size: fit-content;
+  min-block-size: 50vh;
   padding-block-start: 0;
   padding-block-end: 0;
   padding-inline-start: var(--spacing-small);
@@ -12,7 +13,7 @@
 }
 
 .withFullWidth {
-  width: 100vw;
+  inline-size: 100%;
 }
 
 .title {

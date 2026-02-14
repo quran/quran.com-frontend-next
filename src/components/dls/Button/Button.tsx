@@ -12,6 +12,7 @@ import Tooltip, { ContentSide } from '@/dls/Tooltip';
 import useDirection from '@/hooks/useDirection';
 
 export enum ButtonSize {
+  XXSmall = 'xxsmall',
   XSmall = 'xsmall',
   Small = 'small',
   Medium = 'medium',
@@ -22,6 +23,7 @@ export enum ButtonShape {
   Square = 'square',
   Circle = 'circle',
   Pill = 'pill',
+  Rounded = 'rounded',
 }
 
 export enum ButtonType {
@@ -134,18 +136,20 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [styles.normal]: size === ButtonSize.Medium,
       [styles.small]: size === ButtonSize.Small,
       [styles.xsmall]: size === ButtonSize.XSmall,
+      [styles.xxsmall]: size === ButtonSize.XXSmall,
 
       // shape
       [styles.square]: shape === ButtonShape.Square,
       [styles.circle]: shape === ButtonShape.Circle,
       [styles.pill]: shape === ButtonShape.Pill,
+      [styles.rounded]: shape === ButtonShape.Rounded,
 
       // variant
       [styles.shadow]: variant === ButtonVariant.Shadow,
       [styles.ghost]: variant === ButtonVariant.Ghost,
       [styles.compact]: variant === ButtonVariant.Compact,
       [styles.outlined]: variant === ButtonVariant.Outlined,
-      [styles.rounded]: variant === ButtonVariant.Rounded,
+      [styles.roundedVariant]: variant === ButtonVariant.Rounded,
       [styles.simplified]: variant === ButtonVariant.Simplified,
       [styles.simplified_accent]: variant === ButtonVariant.SimplifiedAccent,
       [styles.accent]: variant === ButtonVariant.Accent,

@@ -17,6 +17,7 @@ import useIntersectionObserver from '@/hooks/useObserveElement';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectStudyModeIsOpen } from '@/redux/slices/QuranReader/studyMode';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from '@/utils/verse';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
@@ -73,8 +74,9 @@ const Line = ({
     [selectedItemRef],
   );
   const { isActive } = useOnboarding();
-  // disable auto scrolling when the user is onboarding
-  const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual) && !isActive;
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const enableAutoScrolling =
+    useSelector(selectEnableAutoScrolling, shallowEqual) && !isActive && !isStudyModeOpen;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectInlineDisplayWordByWordPreferences,
     shallowEqual,
@@ -89,8 +91,6 @@ const Line = ({
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
-  const translationName = words[0].verse?.translationsLabel || '';
-  const translationsCount = words[0].verse?.translationsCount || 0;
 
   // Get data from first word for page tracking
   const firstWord = words[0];
@@ -111,12 +111,7 @@ const Line = ({
       })}
     >
       {shouldShowChapterHeader && chapterId !== pageHeaderChapterId && (
-        <ChapterHeader
-          translationName={translationName}
-          translationsCount={translationsCount}
-          chapterId={firstWordData[0]}
-          isTranslationView={false}
-        />
+        <ChapterHeader chapterId={firstWordData[0]} isTranslationView={false} />
       )}
       <div
         className={classNames(styles.line, {

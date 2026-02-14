@@ -14,7 +14,7 @@ import useIsMobile from '@/hooks/useIsMobile';
 import ChevronDownIcon from '@/public/icons/chevron-down.svg';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { selectValidatedReadingTranslation } from '@/redux/slices/QuranReader/readingPreferences';
-import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 import AvailableTranslation from 'types/AvailableTranslation';
 import { ReadingPreference } from 'types/QuranReader';
 
@@ -57,7 +57,16 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
     switchReadingPreference(ReadingPreference.ReadingTranslation);
   }, [readingPreference, switchReadingPreference]);
 
-  const closeDropdown = useCallback(() => setIsDropdownOpen(false), []);
+  const handleDropdownOpenChange = useCallback((isOpen: boolean) => {
+    logEvent(isOpen ? 'translation_dropdown_opened' : 'translation_dropdown_closed');
+    setIsDropdownOpen(isOpen);
+  }, []);
+
+  const closeDropdown = useCallback(
+    () => handleDropdownOpenChange(false),
+    [handleDropdownOpenChange],
+  );
+
   useCloseOnScroll(isDropdownOpen, closeDropdown);
 
   const activeTranslation = translations?.find((tr) => tr.id === selectedReadingTranslation);
@@ -71,8 +80,12 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
         variant={ButtonVariant.ModeToggle}
         isSelected={isTranslationSelected}
         onClick={switchToTranslationMode}
+        className={styles.translationButton}
+        contentClassName={styles.translationButtonContent}
       >
-        {t('translation')}: {t('reading-preference.none-selected')}
+        <span className={styles.translationText}>
+          {t('translation')}: {t('reading-preference.none-selected')}
+        </span>
       </Button>
     );
   }
@@ -96,8 +109,8 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
 
   // Translation mode: PopoverMenu with dropdown
   // Only show "Translation: Name" if we found the translation, otherwise just "Translation"
-  const displayText = activeTranslation?.name
-    ? `${t('translation')}: ${activeTranslation.name}`
+  const displayText = activeTranslation?.translatedName?.name
+    ? `${t('translation')}: ${activeTranslation.translatedName.name}`
     : t('translation');
 
   return (
@@ -125,7 +138,7 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
       }
       isOpen={isDropdownOpen}
       isModal={false}
-      onOpenChange={setIsDropdownOpen}
+      onOpenChange={handleDropdownOpenChange}
       contentClassName={styles.dropdownContent}
       align={isMobile ? PopoverMenuAlign.END : PopoverMenuAlign.START}
       sideOffset={8}

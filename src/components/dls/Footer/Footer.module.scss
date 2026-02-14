@@ -1,6 +1,10 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
-@use "src/styles/constants";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
+@use 'src/styles/constants';
+
+.footer {
+  background-color: var(--color-background-elevated-new);
+}
 
 .flowItem {
   @include utility.pageContainer();
@@ -77,16 +81,16 @@
   justify-content: space-between;
   flex-wrap: wrap;
   flex: 1;
-  max-width: calc(15 * var(--spacing-mega));
+  max-inline-size: calc(15 * var(--spacing-mega));
 }
 
 .group {
   display: flex;
   flex-direction: column;
   margin-block-end: var(--spacing-medium);
-  width: 50%;
+  inline-size: 50%;
   @include breakpoints.tablet {
-    width: 26%;
+    inline-size: 26%;
   }
 }
 
@@ -97,7 +101,7 @@
 }
 
 .description {
-  max-width: calc(15 * var(--spacing-mega));
+  max-inline-size: calc(15 * var(--spacing-mega));
   opacity: var(--opacity-75);
   margin-block-start: var(--spacing-xxsmall);
   margin-block-end: var(--spacing-medium);
@@ -117,7 +121,7 @@
 }
 
 .titleAndDescriptionContainer {
-  max-width: calc(12.5 * var(--spacing-mega));
+  max-inline-size: calc(12.5 * var(--spacing-mega));
   margin-inline-end: var(--spacing-medium);
 }
 
@@ -165,7 +169,7 @@
 // our AudioPlayer is has "position: fixed", so its position is removed from the normal flow
 // we need to add an empty space placeholder, so the AudioPlayer doesn't cover the other elements in the page
 .emptySpacePlaceholder {
-  height: constants.$audio-player-default-height;
+  block-size: constants.$audio-player-default-height;
 }
 
 .donateButton {
@@ -183,5 +187,5 @@
   opacity: var(--opacity-75);
   color: var(--color-text-secondary);
   font-size: var(--font-size-small);
-  margin-top: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-xsmall);
 }

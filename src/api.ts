@@ -2,6 +2,14 @@
 import { camelizeKeys } from 'humps';
 import { NextApiRequest } from 'next';
 
+import {
+  AyahHadithsBackendResponse,
+  AyahHadithsResponse,
+  HadithCountResponse,
+} from '@/types/Hadith';
+import Language from '@/types/Language';
+import { LayeredTranslationApiResponse } from '@/types/LayeredTranslation';
+import { QiraatApiResponse } from '@/types/Qiraat';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import NewSearchResponse from '@/types/Search/SearchResponse';
@@ -31,7 +39,16 @@ import {
   makeWordByWordTranslationsUrl,
   makeChapterMetadataUrl,
   makeVersesFilterUrl,
+  makeQiraatMatrixUrl,
+  makeQiraatJuncturesCountUrl,
+  makeLayeredTranslationByVerseUrl,
+  makeLayeredTranslationCountWithinRangeUrl,
 } from '@/utils/apiPaths';
+import {
+  makeHadithsByAyahUrl,
+  makeHadithCountWithinRangeUrl,
+  transformHadithResponse,
+} from '@/utils/hadith';
 import { getAdditionalHeaders } from '@/utils/headers';
 import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
@@ -257,12 +274,16 @@ export const getTafsirs = async (language: string): Promise<TafsirsResponse> =>
  *
  * @param {string} chapterId
  * @param {string} language
+ * @param {object} options optional parameters.
+ * @param {string | number} options.resourceId filter by resource id or slug.
+ * @param {boolean} options.includeResources include resources array in response.
  * @returns {Promise<ChapterInfoResponse>}
  */
 export const getChapterInfo = async (
   chapterId: string,
   language: string,
-): Promise<ChapterInfoResponse> => fetcher(makeChapterInfoUrl(chapterId, language));
+  options?: { resourceId?: string | number; includeResources?: boolean },
+): Promise<ChapterInfoResponse> => fetcher(makeChapterInfoUrl(chapterId, language, options));
 
 /**
  * Get chapter metadata including suggestions and next/previous summaries.
@@ -436,3 +457,91 @@ export const getVersePageNumber = async (
     { signal },
   );
 };
+
+/**
+ * Get the Qiraat matrix for a specific verse.
+ *
+ * @param {string} verseKey - The verse key (e.g., "10:35")
+ * @param {Language} language - The language of the Qiraat
+ * @returns {Promise<QiraatApiResponse>}
+ */
+export const getQiraatMatrix = async (
+  verseKey: string,
+  language: Language,
+): Promise<QiraatApiResponse> => fetcher(makeQiraatMatrixUrl(verseKey, language));
+
+/**
+ * Get the Qiraat junctures count for a specific verse range.
+ *
+ * @param {{ from: string; to: string }} range - The verse range object with from and to keys
+ * @returns {Promise<Record<string, number>>}
+ */
+export const getQiraatJuncturesCount = async (range: {
+  from: string;
+  to: string;
+}): Promise<Record<string, number>> => fetcher(makeQiraatJuncturesCountUrl(range));
+
+/**
+ * Get hadiths for a specific ayah (paginated).
+ *
+ * @param {string} ayahKey - The ayah key (e.g., "96:1")
+ * @param {Language} language - The language of the hadiths
+ * @param {number} page - Page number for pagination
+ * @param {number} limit - Number of hadiths per page
+ * @returns {Promise<AyahHadithsResponse>}
+ */
+export const getAyahHadiths = async (
+  ayahKey: string,
+  language: Language,
+  page = 1,
+  limit = 4,
+): Promise<AyahHadithsResponse> => {
+  const backendResponse = await fetcher<AyahHadithsBackendResponse>(
+    makeHadithsByAyahUrl(ayahKey, language, page, limit),
+  );
+
+  return transformHadithResponse(backendResponse, language);
+};
+
+/**
+ * Get hadith count within a verse range.
+ *
+ * @param {{ from: string; to: string }} range - The verse range object with from and to keys
+ * @param {Language} language - The language of the hadiths
+ * @returns {Promise<HadithCountResponse>}
+ */
+export const getHadithCountWithinRange = async (
+  range: { from: string; to: string },
+  language: Language,
+): Promise<HadithCountResponse> =>
+  fetcher(makeHadithCountWithinRangeUrl(range.from, range.to, language));
+
+/**
+ * Get layered translation data for a specific verse.
+ *
+ * @param {string} verseKey - The verse key (e.g., "67:1")
+ * @param {Language} language - Preferred language
+ * @param {number} [resourceId] - Optional specific layered translation resource ID
+ * @returns {Promise<LayeredTranslationApiResponse>}
+ */
+export const getLayeredTranslationByVerse = async (
+  verseKey: string,
+  language: Language,
+  resourceId?: number,
+): Promise<LayeredTranslationApiResponse> =>
+  fetcher(makeLayeredTranslationByVerseUrl(verseKey, language, resourceId));
+
+/**
+ * Get layered translation count for a verse range.
+ *
+ * @param {{ from: string; to: string }} range - Verse range
+ * @param {Language} language - Preferred language
+ * @param {number} [resourceId] - Optional specific layered translation resource ID
+ * @returns {Promise<Record<string, number>>}
+ */
+export const getLayeredTranslationCountWithinRange = async (
+  range: { from: string; to: string },
+  language: Language,
+  resourceId?: number,
+): Promise<Record<string, number>> =>
+  fetcher(makeLayeredTranslationCountWithinRangeUrl(range, language, resourceId));

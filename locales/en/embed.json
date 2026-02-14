@@ -1,0 +1,85 @@
+{
+  "actions": {
+    "copied": "Copied!",
+    "copy": "Copy",
+    "copyEmbedSnippet": "Copy Embed Snippet"
+  },
+  "checkboxes": {
+    "answers": "Show Answers button (if available)",
+    "audio": "Enable audio playback",
+    "customSize": "Use custom width/height",
+    "lessons": "Show Lessons button",
+    "mergeVerses": "Merge verses (inline display)",
+    "reflections": "Show Reflections button",
+    "showArabic": "Show Arabic verse",
+    "tafsirs": "Show Tafsirs button",
+    "translator": "Show translator name",
+    "verseRange": "Enable verse range",
+    "wordByWord": "Enable word-by-word translation",
+    "wordByWordTransliteration": "Enable word-by-word transliteration"
+  },
+  "errors": {
+    "clipboardFallback": "Clipboard write failed, using fallback",
+    "clipboardUnavailable": "Clipboard API unavailable",
+    "loadChapters": "Unable to load chapters",
+    "loadReciters": "Unable to load reciters",
+    "loadTranslations": "Unable to load translations"
+  },
+  "fields": {
+    "ayah": "Ayah",
+    "clientId": "Client Id",
+    "height": "Height",
+    "language": "Language",
+    "mushaf": "Mushaf",
+    "reciter": "Reciter",
+    "surah": "Surah",
+    "theme": "Theme",
+    "translations": "Translations",
+    "width": "Width"
+  },
+  "header": {
+    "subtitle": "<bold>A higher-quality, customizable way to include Quran verses in your content.</bold><br />Create an embed you can easily customize, with <bold>accurate Arabic rendering, built-in recitation</bold> and more, so readers can listen as they engage with the verse.",
+    "title": "Ayah Embed Builder"
+  },
+  "meta": {
+    "description": "Configure and preview embed widgets for sharing Quran, then copy the ready-to-use script snippet.",
+    "title": "Ayah Embed Builder | Quran.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "King Fahad Complex v1",
+    "kfgqpc_v2": "King Fahad Complex v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tajweed"
+  },
+  "placeholders": {
+    "searchTranslations": "Search translations..."
+  },
+  "reciters": {
+    "select": "Select reciter"
+  },
+  "sections": {
+    "configuration": "Configuration",
+    "preview": "Live preview",
+    "snippet": "Embed snippet"
+  },
+  "states": {
+    "loadingChapters": "Loading chapters...",
+    "loadingPreview": "Loading preview...",
+    "loadingReciters": "Loading reciters...",
+    "loadingVerses": "Loading verses...",
+    "noTranslations": "No translations found"
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light",
+    "sepia": "Sepia"
+  },
+  "translations": {
+    "chipRemoveLabel": "Remove translation",
+    "otherLanguage": "Other"
+  },
+  "widget": {
+    "readOnQuran": "Read on Quran.com"
+  }
+}

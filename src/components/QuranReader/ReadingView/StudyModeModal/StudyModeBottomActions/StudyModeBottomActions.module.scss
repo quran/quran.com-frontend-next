@@ -1,11 +1,13 @@
 @use 'src/styles/breakpoints';
 
 .bottomActionsContainer {
+  overflow-x: auto;
+  scroll-behavior: smooth;
   inline-size: 100%;
   padding-block: var(--spacing-medium2-px);
   position: sticky;
   inset-block-end: 0;
-  background: var(--color-background-default);
+  background: var(--color-background-elevated-new);
   border-block-end: 1px solid var(--color-borders-hairline);
 
   &.noBorder {

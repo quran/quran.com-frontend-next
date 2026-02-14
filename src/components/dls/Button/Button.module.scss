@@ -108,6 +108,10 @@
   font-size: var(--font-size-small);
   --button-size: 27px;
 }
+.xxsmall {
+  font-size: var(--font-size-xsmall);
+  --button-size: var(--spacing-medium2-px);
+}
 
 // shape
 .square {
@@ -122,6 +126,9 @@
 }
 .pill {
   border-radius: var(--border-radius-pill);
+}
+.rounded {
+  border-radius: calc(var(--border-radius-default) * 3);
 }
 
 // variant
@@ -279,7 +286,7 @@
   }
 }
 
-.rounded {
+.roundedVariant {
   color: var(--color-text-white);
   background-color: var(--color-streaks-dark);
   border: none;
@@ -296,7 +303,7 @@
   background-color: var(--color-background-elevated-new);
   color: var(--color-text-faded-new);
   border: none;
-  box-shadow: var(--shadow-small-new);
+  box-shadow: var(--shadow-chapter-header-actions);
 
   // Disable the default button scale effect on click
   &:active {

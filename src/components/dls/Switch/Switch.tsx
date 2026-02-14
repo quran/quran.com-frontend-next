@@ -32,6 +32,7 @@ type SwitchProps = {
   variant?: SwitchVariant;
   className?: string;
   shouldHideSeparators?: boolean;
+  buttonClassName?: string;
 };
 
 const Switch = ({
@@ -41,6 +42,7 @@ const Switch = ({
   size = SwitchSize.Normal,
   variant = SwitchVariant.Default,
   className,
+  buttonClassName,
   shouldHideSeparators = false,
 }: SwitchProps) => {
   const selectedIndex = items.findIndex((item) => item.value === selected);
@@ -62,12 +64,17 @@ const Switch = ({
           type="button"
           data-testid={`${item.value}-button`}
           data-is-selected={selected === item.value}
-          className={classNames(styles.item, selected === item.value && styles.itemSelected, {
-            [styles.itemLarge]: size === SwitchSize.Large,
-            [styles.itemNormal]: size === SwitchSize.Normal,
-            [styles.itemSmall]: size === SwitchSize.Small,
-            [styles.itemXSmall]: size === SwitchSize.XSmall,
-          })}
+          className={classNames(
+            styles.item,
+            buttonClassName,
+            selected === item.value && styles.itemSelected,
+            {
+              [styles.itemLarge]: size === SwitchSize.Large,
+              [styles.itemNormal]: size === SwitchSize.Normal,
+              [styles.itemSmall]: size === SwitchSize.Small,
+              [styles.itemXSmall]: size === SwitchSize.XSmall,
+            },
+          )}
           key={item.value}
           onClick={() => onSelect(item.value)}
         >

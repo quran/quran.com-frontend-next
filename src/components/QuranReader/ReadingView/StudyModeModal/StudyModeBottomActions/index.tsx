@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 
+import { useSelector as useXStateSelector } from '@xstate/react';
 import classNames from 'classnames';
 
 import styles from './StudyModeBottomActions.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
+import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 export enum StudyModeTabId {
   TAFSIR = 'tafsir',
+  LAYERS = 'layers',
   LESSONS = 'lessons',
   REFLECTIONS = 'reflections',
   ANSWERS = 'answers',
+  QIRAAT = 'qiraat',
+  RELATED_VERSES = 'related_verses',
+  HADITH = 'hadith',
 }
 
 export interface StudyModeTabConfig {
@@ -27,17 +34,31 @@ interface StudyModeBottomActionsProps {
 }
 
 const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, activeTab }) => {
+  const tabRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isAudioVisible = useXStateSelector(audioService, selectIsAudioPlayerVisible);
+
+  useEffect(() => {
+    if (activeTab && tabRefs.current[activeTab]) {
+      tabRefs.current[activeTab]?.scrollIntoView({
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  }, [activeTab]);
+
   const handleTabClick = (onClick: () => void) => {
     onClick();
   };
 
   const handleTabKeyDown = (e: React.KeyboardEvent, onClick: () => void) => {
-    // Only trigger on Enter or Space key
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === 'Enter' || (e.key === ' ' && !isAudioVisible)) {
       e.preventDefault();
       onClick();
     }
   };
+
+  const filteredTabs = useMemo(() => tabs.filter((tab) => tab.condition !== false), [tabs]);
 
   return (
     <div
@@ -46,31 +67,32 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
       })}
     >
       <div className={styles.tabsContainer}>
-        {tabs
-          .filter((tab) => tab.condition !== false)
-          .map((tab, index, filteredTabs) => (
-            <React.Fragment key={tab.id}>
-              <div
-                className={classNames(styles.tabItem, {
-                  [styles.tabItemActive]: activeTab === tab.id,
-                })}
-                data-testid={`study-mode-tab-${tab.id}`}
-                onClick={() => handleTabClick(tab.onClick)}
-                onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
-                role="button"
-                tabIndex={0}
-                aria-label={tab.label}
-              >
-                <span className={styles.tabIcon}>{tab.icon}</span>
-                <span className={styles.tabLabel}>{tab.label}</span>
+        {filteredTabs.map((tab, index) => (
+          <React.Fragment key={tab.id}>
+            <div
+              ref={(el) => {
+                tabRefs.current[tab.id] = el;
+              }}
+              className={classNames(styles.tabItem, {
+                [styles.tabItemActive]: activeTab === tab.id,
+              })}
+              data-testid={`study-mode-tab-${tab.id}`}
+              onClick={() => handleTabClick(tab.onClick)}
+              onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
+              role="button"
+              tabIndex={0}
+              aria-label={tab.label}
+            >
+              <span className={styles.tabIcon}>{tab.icon}</span>
+              <span className={styles.tabLabel}>{tab.label}</span>
+            </div>
+            {index < filteredTabs.length - 1 && (
+              <div className={styles.separatorContainer}>
+                <Separator isVertical weight={SeparatorWeight.SemiBold} />
               </div>
-              {index < filteredTabs.length - 1 && (
-                <div className={styles.separatorContainer}>
-                  <Separator isVertical weight={SeparatorWeight.SemiBold} />
-                </div>
-              )}
-            </React.Fragment>
-          ))}
+            )}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );

@@ -19,10 +19,10 @@
   "edit-details": "تعديل التفاصيل",
   "email-notification-settings": "إعدادات إشعارات البريد الإلكتروني",
   "errors": {
-    "remove-failed": "فشلت عملية إزالة صورة الملف الشخصي. يرجى المحاولة مرة أخرى.",
-    "upload-failed": "فشل تحميل صورة الملف الشخصي. يرجى المحاولة مرة أخرى."
+    "remove-failed": "فشل في إزالة صورة الملف الشخصي. يرجى المحاولة مرة أخرى.",
+    "upload-failed": "فشل في إزالة صورة الملف الشخصي. يرجى المحاولة مرة أخرى."
   },
-  "max-file-size": "الأعلى {{size}}",
+  "max-file-size": "الحد الأقصى {{size}}",
   "my-profile": "ملفي الشخصي",
   "notifications": {
     "abandoned-quran-goal": {

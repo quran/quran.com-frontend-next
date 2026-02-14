@@ -1,0 +1,1 @@
+../../../../.agents/quran/skills/vercel-react-best-practices/rules/rerender-move-effect-to-event.md

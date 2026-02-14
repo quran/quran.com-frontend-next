@@ -80,6 +80,60 @@ const getAvailableReciters = async () => {
   return data;
 };
 
+const getVersesWithQiraat = async () => {
+  const qiraatURL = `${API_CONTENT_URL}${QDC_PREFIX}/qiraat/matrix/count_within_range?from=1:1&to=114:6`;
+  const { signature, timestamp } = generateSignature(qiraatURL);
+
+  const res = await fetch(qiraatURL, {
+    headers: {
+      'x-auth-signature': signature,
+      'x-timestamp': timestamp,
+      'x-internal-client': process.env.INTERNAL_CLIENT_ID,
+    },
+  });
+
+  const data = await res.json();
+  return Object.entries(data)
+    .filter(([, count]) => count > 0)
+    .map(([key]) => key);
+};
+
+const getVersesWithHadiths = async () => {
+  const hadithURL = `${API_CONTENT_URL}${QDC_PREFIX}/hadith_references/count_within_range?from=1:1&to=114:6&language=en`;
+  const { signature, timestamp } = generateSignature(hadithURL);
+
+  const res = await fetch(hadithURL, {
+    headers: {
+      'x-auth-signature': signature,
+      'x-timestamp': timestamp,
+      'x-internal-client': process.env.INTERNAL_CLIENT_ID,
+    },
+  });
+
+  const data = await res.json();
+  return Object.entries(data)
+    .filter(([, count]) => count > 0)
+    .map(([key]) => key);
+};
+
+const getVersesWithLayeredTranslations = async () => {
+  const layeredTranslationsURL = `${API_CONTENT_URL}${QDC_PREFIX}/layered_translations/count_within_range?from=1:1&to=114:6`;
+  const { signature, timestamp } = generateSignature(layeredTranslationsURL);
+
+  const res = await fetch(layeredTranslationsURL, {
+    headers: {
+      'x-auth-signature': signature,
+      'x-timestamp': timestamp,
+      'x-internal-client': process.env.INTERNAL_CLIENT_ID,
+    },
+  });
+
+  const data = await res.json();
+  return Object.entries(data)
+    .filter(([, count]) => count > 0)
+    .map(([key]) => key);
+};
+
 /**
  * Get the alternate ref objects for a path. We append "-remove-from-here" because
  * next-sitemap library appends the alternate ref to the beginning
@@ -245,6 +299,27 @@ module.exports = {
             loc: location,
             alternateRefs: getAlternateRefs('', false, '', location),
           });
+        });
+
+        // 13. /verseKey for verses that have Qiraat (recitation variations)
+        const versesWithQiraat = await getVersesWithQiraat();
+        versesWithQiraat.forEach((verseKey) => {
+          const location = `${verseKey}/qiraat`;
+          result.push({ loc: location, alternateRefs: getAlternateRefs('', false, '', location) });
+        });
+
+        // 14. /verseKey for verses that have Hadith references
+        const versesWithHadiths = await getVersesWithHadiths();
+        versesWithHadiths.forEach((verseKey) => {
+          const location = `${verseKey}/hadith`;
+          result.push({ loc: location, alternateRefs: getAlternateRefs('', false, '', location) });
+        });
+
+        // 15. /verseKey for verses that have Layered Translations
+        const versesWithLayeredTranslations = await getVersesWithLayeredTranslations();
+        versesWithLayeredTranslations.forEach((verseKey) => {
+          const location = `${verseKey}/layers`;
+          result.push({ loc: location, alternateRefs: getAlternateRefs('', false, '', location) });
         });
 
         return result;

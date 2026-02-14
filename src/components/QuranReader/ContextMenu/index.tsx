@@ -1,7 +1,9 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 
+import PinnedVersesBar from '../PinnedVersesBar';
 import ReadingModeToggle from '../ReadingPreferenceSwitcher/ReadingModeToggle';
 import TajweedColors from '../TajweedBar/TajweedBar';
 
@@ -15,6 +17,7 @@ import styles from './styles/ContextMenu.module.scss';
 
 import useIsMobile from '@/hooks/useIsMobile';
 import { SwitcherContext } from '@/hooks/useReadingPreferenceSwitcher';
+import { selectShowTajweedRules } from '@/redux/slices/QuranReader/styles';
 import { TestId } from '@/tests/test-ids';
 import { Mushaf } from '@/types/QuranReader';
 import { getChapterNumberFromKey } from '@/utils/verse';
@@ -30,7 +33,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     isSidebarNavigationVisible,
     showNavbar,
     isSideBarVisible,
-    isExpanded,
     mushaf,
     verseKey,
     isTranslationMode,
@@ -50,6 +52,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
   } = useContextMenuState();
 
   const isMobileView = useIsMobile();
+  const showTajweedRules = useSelector(selectShowTajweedRules);
 
   // Early return if no verse key (SSR or first render)
   if (!verseKey || !chapterData) {
@@ -66,7 +69,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       className={classNames(styles.container, {
         [styles.visibleContainer]: showNavbar,
         [styles.withVisibleBanner]: showNavbar,
-        [styles.expandedContainer]: isExpanded,
         [styles.withVisibleSideBar]: isSideBarVisible,
       })}
     >
@@ -86,7 +88,11 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
         </div>
       )}
 
-      <div className={styles.sectionsContainer}>
+      <div
+        className={classNames(styles.sectionsContainer, {
+          [styles.sectionsContainerMobileExpanded]: isMobileScrolledView,
+        })}
+      >
         {/* Chapter Navigation Section */}
         <div className={styles.section}>
           <div className={classNames(styles.row, { [styles.mobileNavRow]: showNavbar })}>
@@ -139,11 +145,11 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       Appears only on mobile breakpoints when the navbar is visible */}
       {showNavbar && <MobileReadingTabs t={t} />}
 
-      {/* Tajweed colors bar will only show when tajweed mushaf enabled and not in translation mode */}
-      {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && <TajweedColors />}
-
-      {/* Reading progress bar */}
       {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}
+      <PinnedVersesBar />
+      {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && showTajweedRules && (
+        <TajweedColors />
+      )}
     </div>
   );
 };

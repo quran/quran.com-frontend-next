@@ -1,12 +1,15 @@
 /* eslint-disable max-lines */
 import React, { useState, useCallback, useContext, useEffect, useMemo } from 'react';
 
+import { useSelector as useXStateSelector } from '@xstate/react';
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
+import PinnedVersesSection from './PinnedVersesSection';
 import SearchableVerseSelector from './SearchableVerseSelector';
 import StudyModeBody from './StudyModeBody';
 import { StudyModeTabId } from './StudyModeBottomActions';
@@ -18,9 +21,15 @@ import Error from '@/components/Error';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
+import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import CloseIcon from '@/icons/close.svg';
+import PinFilledIcon from '@/icons/pin-filled.svg';
+import PinIcon from '@/icons/pin.svg';
+import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import {
   setActiveTab,
   setHighlightedWordLocation,
@@ -29,21 +38,29 @@ import {
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import Language from '@/types/Language';
 import Verse from '@/types/Verse';
 import Word, { CharType } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
-import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { toLocalizedVerseKey, toLocalizedVerseKeyRTL, isRTLLocale } from '@/utils/locale';
 import {
   fakeNavigate,
   getVerseSelectedTafsirNavigationUrl,
   getVerseReflectionNavigationUrl,
   getVerseLessonNavigationUrl,
   getVerseAnswersNavigationUrl,
+  getVerseQiraatNavigationUrl,
+  getVerseLayersNavigationUrl,
+  getVerseHadithsNavigationUrl,
 } from '@/utils/navigation';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+
+const AudioPlayerBody = dynamic(() => import('@/components/AudioPlayer/AudioPlayerBody'), {
+  ssr: false,
+});
 
 interface Props {
   isOpen: boolean;
@@ -68,13 +85,18 @@ const StudyModeModal: React.FC<Props> = ({
   highlightedWordLocation,
   initialActiveTab,
 }) => {
-  const { t } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation('quran-reader');
   const router = useRouter();
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isAudioVisible = useXStateSelector(audioService, (state) => state.matches('VISIBLE'));
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
   const tafsirs = useSelector(selectSelectedTafsirs, shallowEqual);
+  const wordByWordLocale = useSelector(selectWordByWordLocale);
+  const pinnedVerseKeysSet = useSelector(selectPinnedVerseKeysSet);
+  const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
 
   const derivedVerseKey = word?.verseKey ?? verseKeyProp ?? '1:1';
   const initialChapterId = getChapterNumberFromKey(derivedVerseKey).toString();
@@ -89,6 +111,7 @@ const StudyModeModal: React.FC<Props> = ({
     highlightedWordLocation,
   );
   const [showWordBox, setShowWordBox] = useState<boolean>(!!highlightedWordLocation);
+  const [versesHistory, setVersesHistory] = useState<string[]>([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -127,12 +150,18 @@ const StudyModeModal: React.FC<Props> = ({
       if (tab === StudyModeTabId.TAFSIR && tafsirs.length > 0) {
         fakeNavigate(
           getVerseSelectedTafsirNavigationUrl(chapterId, Number(verseNumber), tafsirs[0]),
-          router.locale || 'en',
+          router.locale || Language.EN,
         );
       } else if (tab === StudyModeTabId.REFLECTIONS) {
-        fakeNavigate(getVerseReflectionNavigationUrl(newVerseKey), router.locale || 'en');
+        fakeNavigate(getVerseReflectionNavigationUrl(newVerseKey), router.locale || Language.EN);
       } else if (tab === StudyModeTabId.LESSONS) {
-        fakeNavigate(getVerseLessonNavigationUrl(newVerseKey), router.locale || 'en');
+        fakeNavigate(getVerseLessonNavigationUrl(newVerseKey), router.locale || Language.EN);
+      } else if (tab === StudyModeTabId.LAYERS) {
+        fakeNavigate(getVerseLayersNavigationUrl(newVerseKey), router.locale || Language.EN);
+      } else if (tab === StudyModeTabId.QIRAAT) {
+        fakeNavigate(getVerseQiraatNavigationUrl(newVerseKey), router.locale || Language.EN);
+      } else if (tab === StudyModeTabId.HADITH) {
+        fakeNavigate(getVerseHadithsNavigationUrl(newVerseKey), router.locale || Language.EN);
       }
     },
     [tafsirs, router.locale],
@@ -146,7 +175,7 @@ const StudyModeModal: React.FC<Props> = ({
         translations: selectedTranslations.join(','),
         ...getDefaultWordFields(quranReaderStyles.quranFont),
         ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-        wordTranslationLanguage: 'en',
+        wordTranslationLanguage: wordByWordLocale,
         wordTransliteration: 'true',
       })
     : null;
@@ -169,11 +198,6 @@ const StudyModeModal: React.FC<Props> = ({
       chapterId: rawVerse.chapterId ?? Number(selectedChapterId),
     };
   }, [rawVerse, selectedChapterId]);
-
-  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
-  const bookmarksRangeUrl = isLoggedIn()
-    ? makeBookmarksRangeUrl(mushafId, Number(selectedChapterId), Number(selectedVerseNumber), 1)
-    : '';
 
   const versesForFont = useMemo(() => (currentVerse ? [currentVerse] : []), [currentVerse]);
   useQcfFont(quranReaderStyles.quranFont, versesForFont);
@@ -216,6 +240,37 @@ const StudyModeModal: React.FC<Props> = ({
     dispatch(setVerseKey(newVerseKey));
     updateUrlForActiveTab(selectedChapterId, newVerseNumber, activeContentTab);
   }, [selectedVerseNumber, selectedChapterId, dispatch, activeContentTab, updateUrlForActiveTab]);
+
+  const handleGoToVerse = useCallback(
+    (newChapterId: string, newVerseNumber: string, previousVerseKey?: string) => {
+      const newVerseKey = `${newChapterId}:${newVerseNumber}`;
+      logButtonClick('study_mode_goto_verse', { verseKey: newVerseKey, previousVerseKey });
+      setSelectedChapterId(newChapterId);
+      setSelectedVerseNumber(newVerseNumber);
+      dispatch(setVerseKey(newVerseKey));
+      updateUrlForActiveTab(newChapterId, newVerseNumber, activeContentTab);
+
+      if (previousVerseKey) {
+        setVersesHistory((prev) => [...prev, previousVerseKey]);
+      }
+    },
+    [dispatch, activeContentTab, updateUrlForActiveTab],
+  );
+
+  const handleGoBack = useCallback(() => {
+    if (versesHistory.length === 0) return;
+
+    const previousVerseKey = versesHistory[versesHistory.length - 1];
+    logButtonClick('study_mode_go_back', { verseKey: previousVerseKey });
+
+    setVersesHistory((prev) => prev.slice(0, -1));
+
+    const [prevChapterId, prevVerseNumber] = previousVerseKey.split(':');
+    setSelectedChapterId(prevChapterId);
+    setSelectedVerseNumber(prevVerseNumber);
+    dispatch(setVerseKey(previousVerseKey));
+    updateUrlForActiveTab(prevChapterId, prevVerseNumber, activeContentTab);
+  }, [versesHistory, dispatch, activeContentTab, updateUrlForActiveTab]);
 
   const canNavigatePrev = Number(selectedVerseNumber) > 1;
   const currentChapter = chaptersData[Number(selectedChapterId)];
@@ -295,8 +350,14 @@ const StudyModeModal: React.FC<Props> = ({
         fakeNavigate(getVerseReflectionNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === StudyModeTabId.LESSONS) {
         fakeNavigate(getVerseLessonNavigationUrl(currentVerseKey), router.locale);
+      } else if (tabId === StudyModeTabId.LAYERS) {
+        fakeNavigate(getVerseLayersNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === StudyModeTabId.ANSWERS) {
         fakeNavigate(getVerseAnswersNavigationUrl(currentVerseKey), router.locale);
+      } else if (tabId === StudyModeTabId.QIRAAT) {
+        fakeNavigate(getVerseQiraatNavigationUrl(currentVerseKey), router.locale);
+      } else if (tabId === StudyModeTabId.HADITH) {
+        fakeNavigate(getVerseHadithsNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === null) {
         fakeNavigate(originalUrl, router.locale);
       }
@@ -322,56 +383,126 @@ const StudyModeModal: React.FC<Props> = ({
     onClose();
   }, [originalUrl, router.locale, onClose, selectedChapterId, selectedVerseNumber]);
 
+  const isPinned = useMemo(() => pinnedVerseKeysSet.has(verseKey), [pinnedVerseKeysSet, verseKey]);
+
+  const handlePinClick = useCallback(() => {
+    logButtonClick('study_mode_pin_verse', { verseKey, isPinned });
+    if (isPinned) {
+      unpinVerseWithSync(verseKey);
+    } else {
+      pinVerseWithSync(verseKey);
+    }
+  }, [isPinned, verseKey, pinVerseWithSync, unpinVerseWithSync]);
+
+  const verseHistory = useMemo(() => {
+    if (versesHistory.length === 0) return null;
+    const prevVerseKey = versesHistory[versesHistory.length - 1];
+    const chapter = chaptersData?.[getChapterNumberFromKey(prevVerseKey)];
+    const localizedVerseKey = isRTLLocale(lang)
+      ? toLocalizedVerseKeyRTL(prevVerseKey, lang)
+      : toLocalizedVerseKey(prevVerseKey, lang);
+    return {
+      localizedVerseKey,
+      chapterName: chapter?.transliteratedName || '',
+    };
+  }, [versesHistory, chaptersData, lang]);
+
+  const showHeaderLeftControls = versesHistory.length > 0;
+
   const isContentTabActive =
     activeContentTab &&
     [
       StudyModeTabId.TAFSIR,
+      StudyModeTabId.LAYERS,
       StudyModeTabId.REFLECTIONS,
       StudyModeTabId.LESSONS,
       StudyModeTabId.ANSWERS,
+      StudyModeTabId.QIRAAT,
+      StudyModeTabId.RELATED_VERSES,
+      StudyModeTabId.HADITH,
     ].includes(activeContentTab);
 
   const header = (
-    <div className={styles.header}>
-      <div className={styles.selectionWrapper}>
-        <SearchableVerseSelector
-          selectedChapterId={selectedChapterId}
-          selectedVerseNumber={selectedVerseNumber}
-          onChapterChange={handleChapterChange}
-          onVerseChange={handleVerseChange}
-        />
+    <div
+      className={classNames(styles.header, {
+        [styles.hideHeaderLeftControls]: !showHeaderLeftControls,
+      })}
+    >
+      {showHeaderLeftControls && (
+        <div className={styles.headerLeftControls}>
+          <Button
+            className={styles.previousRelatedVerseButton}
+            contentClassName={styles.previousRelatedVerseButtonContent}
+            size={ButtonSize.Small}
+            variant={ButtonVariant.Compact}
+            onClick={handleGoBack}
+            ariaLabel={t('aria.previous-related-verse')}
+          >
+            <ChevronLeftIcon />
+            <p>
+              {verseHistory?.chapterName} {verseHistory?.localizedVerseKey}
+            </p>
+          </Button>
+        </div>
+      )}
+      <div className={styles.headerMiddleControls}>
+        <div className={styles.selectionWrapper}>
+          <SearchableVerseSelector
+            selectedChapterId={selectedChapterId}
+            selectedVerseNumber={selectedVerseNumber}
+            onChapterChange={handleChapterChange}
+            onVerseChange={handleVerseChange}
+          />
+        </div>
+        <Button
+          size={ButtonSize.Small}
+          variant={ButtonVariant.Ghost}
+          onClick={handlePreviousVerse}
+          className={classNames(styles.navButton, styles.prevButton)}
+          ariaLabel={t('aria.previous-verse')}
+          isDisabled={!canNavigatePrev}
+          shouldFlipOnRTL={false}
+        >
+          <ArrowIcon />
+        </Button>
+        <Button
+          size={ButtonSize.Small}
+          variant={ButtonVariant.Ghost}
+          onClick={handleNextVerse}
+          className={classNames(styles.navButton, styles.nextButton)}
+          ariaLabel={t('aria.next-verse')}
+          isDisabled={!canNavigateNext}
+          shouldFlipOnRTL={false}
+        >
+          <ArrowIcon />
+        </Button>
+        <Button
+          size={ButtonSize.Small}
+          variant={ButtonVariant.Ghost}
+          shape={ButtonShape.Circle}
+          onClick={handlePinClick}
+          className={styles.pinButton}
+          ariaLabel={isPinned ? t('unpin-verse') : t('pin-verse')}
+          tooltip={isPinned ? t('unpin-verse') : t('pin-verse')}
+        >
+          {isPinned ? (
+            <PinFilledIcon className={classNames(styles.pinIcon, styles.pinIconFilled)} />
+          ) : (
+            <PinIcon className={styles.pinIcon} />
+          )}
+        </Button>
       </div>
-      <Button
-        size={ButtonSize.Small}
-        variant={ButtonVariant.Ghost}
-        onClick={handlePreviousVerse}
-        className={classNames(styles.navButton, styles.prevButton)}
-        ariaLabel={t('aria.previous-verse')}
-        isDisabled={!canNavigatePrev}
-        shouldFlipOnRTL={false}
-      >
-        <ArrowIcon />
-      </Button>
-      <Button
-        size={ButtonSize.Small}
-        variant={ButtonVariant.Ghost}
-        onClick={handleNextVerse}
-        className={classNames(styles.navButton, styles.nextButton)}
-        ariaLabel={t('aria.next-verse')}
-        isDisabled={!canNavigateNext}
-        shouldFlipOnRTL={false}
-      >
-        <ArrowIcon />
-      </Button>
-      <Button
-        variant={ButtonVariant.Ghost}
-        shape={ButtonShape.Circle}
-        onClick={handleClose}
-        className={styles.closeButton}
-        ariaLabel={t('aria.close')}
-      >
-        <CloseIcon />
-      </Button>
+      <div className={styles.headerRightControls}>
+        <Button
+          variant={ButtonVariant.Ghost}
+          shape={ButtonShape.Circle}
+          onClick={handleClose}
+          className={styles.closeButton}
+          ariaLabel={t('aria.close')}
+        >
+          <CloseIcon />
+        </Button>
+      </div>
     </div>
   );
 
@@ -397,7 +528,6 @@ const StudyModeModal: React.FC<Props> = ({
       return (
         <StudyModeBody
           verse={currentVerse}
-          bookmarksRangeUrl={bookmarksRangeUrl}
           selectedWord={selectedWord}
           selectedWordLocation={selectedWordLocation}
           showWordBox={showWordBox}
@@ -411,6 +541,7 @@ const StudyModeModal: React.FC<Props> = ({
           selectedVerseNumber={selectedVerseNumber}
           activeTab={activeContentTab}
           onTabChange={handleTabChange}
+          onGoToVerse={handleGoToVerse}
         />
       );
     }
@@ -434,7 +565,15 @@ const StudyModeModal: React.FC<Props> = ({
       innerContentClassName={classNames(styles.innerContent, {
         [styles.bottomSheetInnerContent]: isContentTabActive,
       })}
+      footer={
+        isAudioVisible ? (
+          <div className={styles.audioPlayerFooter}>
+            <AudioPlayerBody isEmbedded />
+          </div>
+        ) : undefined
+      }
     >
+      <PinnedVersesSection onGoToVerse={handleGoToVerse} />
       {renderContent()}
     </ContentModal>
   );

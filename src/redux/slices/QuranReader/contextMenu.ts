@@ -6,9 +6,14 @@ import SliceName from '@/redux/types/SliceName';
 export type ContextMenu = {
   isExpanded: boolean;
   showReadingPreferenceSwitcher: boolean;
+  isTajweedBarExpanded: boolean;
 };
 
-const initialState: ContextMenu = { isExpanded: true, showReadingPreferenceSwitcher: false };
+const initialState: ContextMenu = {
+  isExpanded: true,
+  showReadingPreferenceSwitcher: false,
+  isTajweedBarExpanded: false,
+};
 
 export const contextMenuSlice = createSlice({
   name: SliceName.CONTEXT_MENU,
@@ -22,12 +27,19 @@ export const contextMenuSlice = createSlice({
       ...state,
       showReadingPreferenceSwitcher: action.payload,
     }),
+    setIsTajweedBarExpanded: (state: ContextMenu, action: PayloadAction<boolean>) => ({
+      ...state,
+      isTajweedBarExpanded: action.payload,
+    }),
   },
 });
 
-export const { setIsExpanded, setShowReadingPreferenceSwitcher } = contextMenuSlice.actions;
+export const { setIsExpanded, setShowReadingPreferenceSwitcher, setIsTajweedBarExpanded } =
+  contextMenuSlice.actions;
 
 export const selectContextMenu = (state: RootState) => state.contextMenu;
 export const selectIsExpanded = (state: RootState) => state.contextMenu.isExpanded;
+export const selectIsTajweedBarExpanded = (state: RootState) =>
+  state.contextMenu.isTajweedBarExpanded;
 
 export default contextMenuSlice.reducer;

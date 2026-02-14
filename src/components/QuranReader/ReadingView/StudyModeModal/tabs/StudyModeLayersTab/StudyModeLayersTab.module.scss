@@ -1,0 +1,352 @@
+@use '@/styles/breakpoints';
+@use '@/styles/constants';
+
+$layers-scales: (
+  tablet: (
+    1: 0.8rem,
+    2: 0.9rem,
+    3: 1rem,
+    4: 1.3rem,
+    5: 1.7rem,
+    6: 2.1rem,
+    7: 2.5rem,
+    8: 2.9rem,
+    9: 3.3rem,
+    10: 3.7rem,
+  ),
+  mobile: (
+    1: 0.8rem,
+    2: 0.9rem,
+    3: 1rem,
+    4: 1.2rem,
+    5: 1.5rem,
+    6: 1.8rem,
+    7: 2.1rem,
+    8: 2.4rem,
+    9: 2.7rem,
+    10: 3rem,
+  ),
+);
+
+@for $i from 1 through 10 {
+  .layers-font-size-#{$i} {
+    --layers-base-font-size: #{map-get(map-get($layers-scales, mobile), $i)};
+    font-size: var(--layers-base-font-size);
+    line-height: 1.8;
+
+    @include breakpoints.tablet {
+      --layers-base-font-size: #{map-get(map-get($layers-scales, tablet), $i)};
+      font-size: var(--layers-base-font-size);
+    }
+  }
+}
+
+.markdown {
+  & p {
+    display: inline;
+  }
+
+  & strong,
+  & b {
+    font-weight: var(--font-weight-medium);
+  }
+
+  & em,
+  & i {
+    font-size: inherit;
+    font-style: italic;
+  }
+}
+
+// ------------------------------------------------------------
+// Font Size Scale Factors
+// These values represent proportional multipliers (ratios)
+// relative to the base font size of 16px.
+//
+// Usage example:
+// font-size: $font-base * $font-scale-10;
+// ------------------------------------------------------------
+$font-scale-10: 0.625; // 16px * 0.625 = 10px
+$font-scale-12: 0.75; // 16px * 0.75 = 12px
+$font-scale-14: 0.875; // 16px * 0.875 = 14px
+$font-scale-15: 0.9375; // 16px * 0.9375 = 15px
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2-px);
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-mega);
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(var(--spacing-mega-px) * 2);
+  padding: var(--spacing-large);
+}
+
+.controls {
+  display: flex;
+  gap: var(--spacing-medium2-px);
+  flex-wrap: wrap;
+}
+
+.layerButton {
+  display: flex;
+  gap: var(--spacing-small-px);
+  align-items: center;
+  border: none;
+  border-radius: var(--border-radius-xsmall-px);
+  padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
+  font-size: var(--font-size-xsmall-px);
+  background: var(--color-background-alternative-faint);
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+
+  .layerButtonIcon {
+    svg {
+      inline-size: var(--spacing-small);
+      block-size: var(--spacing-small);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.description {
+  padding: var(--spacing-xsmall-px) var(--spacing-small-px);
+  border-radius: var(--border-radius-xsmall-px);
+  background-color: var(--color-success-faded);
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-medium);
+
+  font-size: min(
+    calc(var(--layers-base-font-size) * #{$font-scale-14}),
+    var(--font-size-xsmall-px)
+  ); // base 3 => 14px
+}
+
+.translationText {
+  font-size: var(--layers-base-font-size);
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-light);
+  line-height: 1.8;
+
+  @extend .markdown;
+}
+
+.groupToken {
+  display: inline;
+  border-block-end: var(--spacing-hairline-px) dotted var(--color-text-faded-new);
+  color: var(--color-text-default-new);
+  font-size: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+
+.groupTokenText {
+  display: inline;
+}
+
+.groupTokenChevron {
+  display: inline-flex;
+  margin-inline-start: var(--spacing-xxsmall-px);
+  inline-size: 0.75em;
+  block-size: 0.75em;
+  flex-shrink: 0;
+}
+
+.groupTokenActive {
+  border-block-end-color: var(--color-success-medium);
+
+  .groupTokenChevron {
+    transform: rotate(180deg);
+  }
+}
+
+.groupPanel {
+  margin-block: var(--spacing-medium-px);
+  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  border-radius: var(--border-radius-small-px);
+  background: var(--color-background-elevated-new);
+  z-index: 9999;
+
+  --spacing-block: var(--spacing-medium-px) var(--spacing-medium2-px);
+  --spacing-inline: var(--spacing-medium-px);
+
+  padding-inline: 0;
+  padding-block: var(--spacing-block);
+}
+
+.groupTokenTrigger {
+  display: inline;
+}
+
+.groupPanelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  font-size: calc(var(--layers-base-font-size) * #{$font-scale-12}); // base 3 => 12px
+  color: var(--color-text-faded-new);
+  padding-block-end: var(--spacing-small-px);
+  margin-inline: var(--spacing-inline);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+
+  .closeGroupPanelButton {
+    all: unset;
+
+    cursor: pointer;
+    border: none;
+    border-radius: var(--border-radius-smallxx-px);
+    transition: transform var(--transition-fast) ease-in-out;
+
+    &:hover {
+      color: var(--color-text-default-new);
+    }
+
+    &:active {
+      transform: scale(constants.$button-active-scale);
+    }
+
+    &:focus-visible {
+      outline: var(--spacing-hairline-px) solid var(--color-text-default-new);
+    }
+  }
+
+  .closeIcon {
+    svg {
+      inline-size: calc(var(--layers-base-font-size) * #{$font-scale-12}); // base 3 => 12px
+      block-size: calc(var(--layers-base-font-size) * #{$font-scale-12}); // base 3 => 12px
+      color: var(--color-text-faded-new);
+    }
+  }
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--spacing-medium-px);
+  margin-inline: var(--spacing-inline);
+}
+
+.optionButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  padding: var(--spacing-xsmall-px) var(--spacing-xsmall-px);
+  text-align: start;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-radius: var(--border-radius-small-px);
+  color: var(--color-text-default-new);
+  font-size: var(--layers-base-font-size);
+  font-weight: var(--font-weight-light);
+  line-height: 1;
+  cursor: pointer;
+
+  @extend .markdown;
+}
+
+.optionText {
+  color: inherit;
+}
+
+.optionIndex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  block-size: var(--layers-base-font-size); // base 3 => 16px
+  inline-size: var(--layers-base-font-size); // base 3 => 16px
+  font-size: calc(var(--layers-base-font-size) * #{$font-scale-10}); // base 3 => 10px
+  border-radius: var(--border-radius-circle);
+  background: var(--color-background-alternative-faint);
+  color: var(--color-text-faded-new);
+}
+
+.optionButtonActive {
+  background: var(--color-background-alternative-faint);
+  color: var(--color-text-default-new);
+
+  .optionIndex {
+    background: var(--color-background-elevated-new);
+  }
+}
+
+.explanationWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+  padding-block-start: var(--spacing-medium-px);
+  margin-inline: var(--spacing-inline);
+  border-block-start: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+}
+
+.explanationToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0;
+  border: none;
+  background: transparent;
+  gap: var(--spacing-xxsmall-px);
+  font-size: calc(var(--layers-base-font-size) * #{$font-scale-12}); // base 3 => 12px
+  color: var(--color-text-default-new);
+  cursor: pointer;
+  text-align: end;
+}
+
+.explanationChevron {
+  inline-size: calc(var(--layers-base-font-size) * #{$font-scale-10}); // base 3 => 10px
+  block-size: calc(var(--layers-base-font-size) * #{$font-scale-10}); // base 3 => 10px
+  color: var(--color-text-default-new);
+  transition: transform var(--transition-fast) ease-in-out;
+}
+
+.explanationChevronOpen {
+  transform: rotate(180deg);
+}
+
+.explanationText {
+  font-size: calc(var(--layers-base-font-size) * #{$font-scale-15}); // base 3 => 15px
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-light);
+  line-height: 1.5;
+
+  @extend .markdown;
+}
+
+:is(.translationText, .groupPanel) span:has(sup[foot_note]) {
+  font-size: inherit !important;
+}
+
+.translationText :global(sup[foot_note]),
+.groupPanel :global(sup[foot_note]) {
+  vertical-align: super;
+  color: var(--color-text-link);
+  font-weight: var(--font-weight-medium);
+  font-size: calc(var(--layers-base-font-size) * 0.75);
+  padding-inline: var(--spacing-micro2-px);
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(var(--opacity-85));
+  }
+}
+
+.footnoteContainer {
+  --font-size-large: var(--layers-base-font-size); // base 3 => 16px
+  --font-size-normal: calc(var(--layers-base-font-size) * #{$font-scale-14}); // base 3 => 14px
+  --font-size-xsmall: calc(var(--layers-base-font-size) * #{$font-scale-10}); // base 3 => 10px
+  font-size: var(--font-size-normal);
+
+  @extend .markdown;
+}

@@ -7,7 +7,6 @@
   flex-direction: column;
   direction: ltr;
   padding-block: var(--spacing-medium2-px);
-  padding-inline: var(--spacing-small);
   --gap-size: calc(0.5 * var(--spacing-mega));
 
   @include breakpoints.tablet {
@@ -24,11 +23,13 @@
 }
 
 .contentContainer {
+  @include utility.edgeHorizontalPadding;
   flex: 1;
   position: relative;
 }
 
 .actionContainer {
+  @include utility.edgeHorizontalPadding;
   display: flex;
   direction: ltr;
   flex-direction: row;
@@ -91,13 +92,35 @@
       color: var(--color-success-medium);
       background-color: var(--color-success-medium);
       @include utility.lighten-background-color;
+    }
 
+    &:hover:not(.bookmarkAction) {
       .icon span {
         svg {
           color: var(--color-success-medium) !important;
         }
       }
     }
+  }
+}
+
+.bookmarkAction {
+  &:hover {
+    color: var(--color-bookmark-icon);
+
+    .icon svg,
+    .icon span svg {
+      color: var(--color-bookmark-icon) !important;
+      fill: var(--color-bookmark-icon);
+    }
+  }
+}
+
+.bookmarkActionActive {
+  .icon svg,
+  .icon span svg {
+    color: var(--color-bookmark-icon);
+    fill: var(--color-bookmark-icon);
   }
 }
 
@@ -115,13 +138,13 @@
   justify-content: center;
 
   svg {
-    inline-size: var(--spacing-medium2);
-    block-size: var(--spacing-medium2);
-  }
-
-  @include breakpoints.smallerThanTablet {
     inline-size: var(--spacing-medium);
     block-size: var(--spacing-medium);
+
+    @include breakpoints.tablet {
+      inline-size: var(--spacing-medium2);
+      block-size: var(--spacing-medium2);
+    }
   }
 }
 
@@ -141,44 +164,27 @@
 
 .actionContainerLeft .actionItem {
   display: inline-block;
-  margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
-
-  @include breakpoints.tablet {
-    margin-inline-end: 0;
-  }
 }
 
 .bottomActionsContainer {
   inline-size: 100%;
 }
 
-.tabsContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--spacing-medium);
-  overflow-x: auto;
-  inline-size: 100%;
-  -webkit-overflow-scrolling: touch;
-
-  @include breakpoints.smallerThanTablet {
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    &.fullWidthTabs {
-      @media (min-width: 360px) {
-        overflow-x: visible;
-        justify-content: space-between;
-      }
-    }
+.tabContainerWrapper {
+  @include breakpoints.tablet {
+    margin-inline: var(--spacing-medium2-px);
   }
+}
+
+.tabsContainer {
+  @include breakpoints.smallerThanTablet {
+    @include utility.edgeHorizontalPadding;
+  }
+  box-sizing: border-box;
+  gap: var(--spacing-medium);
 
   @media (min-width: 768px) {
     gap: var(--spacing-large);
-    overflow-x: visible;
   }
 }
 
@@ -209,15 +215,9 @@
   flex-shrink: 0;
 
   @include breakpoints.smallerThanTablet {
-    // this min-width is to prevent the tab from overlapping with the next tab
-    // (when this happens, we can scroll to see the next tab to access it)
-    .fullWidthTabs & {
-      @media (min-width: 360px) {
-        flex: 1 1 auto;
-        justify-content: center;
-        min-inline-size: 0;
-      }
-    }
+    flex-shrink: 0;
+    justify-content: center;
+    min-inline-size: 0;
   }
 
   &:hover {
@@ -259,7 +259,10 @@
   }
 }
 
-.verseSeparator {
-  inline-size: calc(100% - 2 * var(--spacing-small)) !important;
-  margin-inline: auto;
+.ayahSeparatorContainer {
+  @include utility.edgeHorizontalPadding;
+}
+
+.semibold {
+  font-weight: var(--font-weight-semibold);
 }

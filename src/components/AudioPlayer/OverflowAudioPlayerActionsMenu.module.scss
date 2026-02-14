@@ -6,6 +6,12 @@
   margin-block-end: var(--spacing-large);
 }
 
+.embeddedContent {
+  max-block-size: 40vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 // [dir="rtl"].overriddenPopoverMenuContentPositioning [data-radix-popper-content-wrapper] {
 //   transform: translate3d(100%, 0, 0) !important;
 //   @include breakpoints.tablet {

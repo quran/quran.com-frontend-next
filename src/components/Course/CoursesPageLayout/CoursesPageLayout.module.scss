@@ -1,18 +1,21 @@
+@use 'src/styles/utility';
+
 .container {
-    display: flex;
-    justify-content: center;
-    margin-block-start: var(--spacing-mega);
-    min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--spacing-mega);
+  min-block-size: 80vh;
 }
 
 .title {
-    text-align: center;
-    font-size: var(--font-size-jumbo);
-    font-weight: var(--font-weight-bold);
+  text-align: center;
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
 }
 
 .desc {
-    text-align: center;
-    padding-block-start: var(--spacing-small);
-    padding-inline: var(--spacing-small);
+  text-align: center;
+  padding-block-start: var(--spacing-small);
+  padding-inline: var(--spacing-small);
+  @include utility.kitabFontHtmlLang;
 }

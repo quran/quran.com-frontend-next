@@ -16,9 +16,14 @@ import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useNavbarDrawerActions from '@/hooks/useNavbarDrawerActions';
+import IconGlobe from '@/icons/globe.svg';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
-import { selectIsNavigationDrawerOpen, selectIsSettingsDrawerOpen } from '@/redux/slices/navbar';
+import {
+  selectIsLanguageDrawerOpen,
+  selectIsNavigationDrawerOpen,
+  selectIsSettingsDrawerOpen,
+} from '@/redux/slices/navbar';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import {
   selectIsSidebarNavigationVisible,
@@ -57,6 +62,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const dispatch = useDispatch();
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
+  const isLanguageDrawerOpen = useSelector(selectIsLanguageDrawerOpen);
   const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
   const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
@@ -124,11 +130,11 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
     dispatch(setIsSidebarNavigationVisible(false));
   }, [dispatch, isPersistHydrationComplete, isQuranReaderRoute]);
 
-  const { openSearchDrawer, openNavigationDrawer } = useNavbarDrawerActions();
+  const { openSearchDrawer, openNavigationDrawer, openLanguageDrawer } = useNavbarDrawerActions();
 
   const bannerProps = {
-    text: t('stay-on-track'),
-    ctaButtonText: t('create-my-goal'),
+    text: t('join-ramadan-challenge'),
+    ctaButtonText: t('learn-more'),
   };
 
   return (
@@ -136,7 +142,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
       {isBannerVisible && (
         <div
           className={classNames(styles.bannerContainerTop, {
-            [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen,
+            [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen,
           })}
         >
           <Banner {...bannerProps} />
@@ -144,9 +150,9 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
       )}
       <div
         className={classNames(styles.itemsContainer, {
-          [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen,
+          [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen,
         })}
-        inert={isNavigationDrawerOpen || isSettingsDrawerOpen || undefined}
+        inert={isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen || undefined}
       >
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>
@@ -161,6 +167,17 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>
             {!isLoggedIn && <ProfileAvatarButton />}
+            <Button
+              tooltip={t('languages')}
+              variant={ButtonVariant.Ghost}
+              onClick={openLanguageDrawer}
+              shape={ButtonShape.Circle}
+              shouldFlipOnRTL={false}
+              ariaLabel={t('languages')}
+              data-testid="open-language-drawer"
+            >
+              <IconGlobe />
+            </Button>
             <Button
               tooltip={t('search.title')}
               variant={ButtonVariant.Ghost}

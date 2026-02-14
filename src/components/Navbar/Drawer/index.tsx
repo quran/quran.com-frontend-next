@@ -16,6 +16,7 @@ import usePreventBodyScrolling from '@/hooks/usePreventBodyScrolling';
 import {
   Navbar,
   selectNavbar,
+  setIsLanguageDrawerOpen,
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
@@ -27,6 +28,7 @@ export enum DrawerType {
   Navigation = 'navigation',
   Search = 'search',
   Settings = 'settings',
+  Language = 'language',
 }
 
 export enum DrawerSide {
@@ -57,9 +59,13 @@ interface Props {
  * @returns {boolean}
  */
 const getIsOpen = (type: DrawerType, navbar: Navbar): boolean => {
-  const { isNavigationDrawerOpen, isSettingsDrawerOpen, isSearchDrawerOpen } = navbar;
+  const { isNavigationDrawerOpen, isSettingsDrawerOpen, isSearchDrawerOpen, isLanguageDrawerOpen } =
+    navbar;
   if (type === DrawerType.Navigation) {
     return isNavigationDrawerOpen;
+  }
+  if (type === DrawerType.Language) {
+    return isLanguageDrawerOpen;
   }
   if (type === DrawerType.Settings) {
     return isSettingsDrawerOpen;
@@ -73,6 +79,9 @@ const getActionCreator = (type: DrawerType) => {
   }
   if (type === DrawerType.Settings) {
     return setIsSettingsDrawerOpen.type;
+  }
+  if (type === DrawerType.Language) {
+    return setIsLanguageDrawerOpen.type;
   }
   return setIsSearchDrawerOpen.type;
 };

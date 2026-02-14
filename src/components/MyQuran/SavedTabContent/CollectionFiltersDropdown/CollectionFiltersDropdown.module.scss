@@ -1,0 +1,165 @@
+$panelBlockSize: 120px;
+$searchIconSize: 13px;
+
+.popoverContent {
+  // Override PopoverMenu defaults to match the Figma dropdown layout.
+  padding: 0;
+  min-inline-size: 0;
+  border-radius: var(--border-radius-medium-px);
+  overflow: hidden;
+}
+
+.panel {
+  display: flex;
+  min-inline-size: $panelBlockSize;
+  margin: var(--spacing-xxsmall-px);
+  gap: var(--spacing-small-px);
+  flex-direction: column;
+  padding: var(--spacing-small-px) 0;
+  :not(:last-child):not(svg):not(button) {
+    margin-block-end: var(--spacing-xxsmall-px);
+  }
+}
+
+.rootRow {
+  all: unset;
+  padding: 0 var(--spacing-small-px);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-default-new);
+
+  &:hover {
+    background: transparent;
+    color: var(--color-text-link-new);
+
+    .chevron {
+      color: var(--color-text-link-new);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-medium);
+    outline-offset: -2px;
+  }
+}
+
+.rootRowText {
+  white-space: nowrap;
+}
+
+.chevron {
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+  color: var(--color-text-default-new);
+}
+
+.backRow {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: start;
+  padding: 0 var(--spacing-xxsmall-px);
+  padding-block-end: var(--spacing-small-px);
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default-new);
+  border-block-end: 1px solid var(--color-separators-ayah-level);
+
+  &:hover {
+    background: transparent;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-medium);
+    outline-offset: -2px;
+  }
+}
+
+.backChevron {
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+}
+
+.backText {
+  white-space: nowrap;
+}
+
+.searchBox {
+  display: flex;
+  align-items: start;
+  margin: 0 var(--spacing-micro-px);
+  font-size: var(--font-size-normal);
+}
+
+.searchIcon {
+  inline-size: $searchIconSize;
+  block-size: $searchIconSize;
+  margin-inline-end: var(--spacing-xxsmall-px);
+  color: var(--color-text-faded-new);
+}
+
+.searchInner {
+  padding: var(--spacing-xxsmall-px);
+  inline-size: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius-xsmall2-px);
+  background: var(--color-search-background);
+}
+
+.searchInput {
+  all: unset;
+  flex: 1;
+  font-size: var(--font-size-xsmall-px);
+  color: var(--color-text-default-new);
+}
+
+.options {
+  max-block-size: 320px;
+  overflow: auto;
+  padding: 0 var(--spacing-xxsmall-px);
+  gap: var(--spacing-medium-px);
+  display: flex;
+  flex-direction: column;
+}
+
+.optionRow {
+  all: unset;
+  cursor: pointer;
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-default-new);
+
+  &:hover {
+    background: transparent;
+    color: var(--color-text-link-new);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-medium);
+    outline-offset: -2px;
+  }
+}
+
+.optionRowSelected {
+  color: var(--color-text-link-new);
+}
+
+.optionLabel {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  font-size: var(--font-size-normal);
+}
+
+.emptyRow {
+  padding: var(--spacing-small-px) var(--spacing-medium-px);
+  color: var(--color-text-faded);
+  font-size: var(--font-size-small);
+}

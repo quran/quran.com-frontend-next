@@ -1,0 +1,292 @@
+@use 'src/styles/breakpoints';
+@import './shared.module.scss';
+
+$outline-size: 2px;
+$guestCollectionAddButtonBlockSize: 22px;
+$guestSignInButtonHeight: 33px;
+
+.modal {
+  background-color: var(--color-background-elevated-new);
+  > div {
+    padding: $modal-padding !important;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    > div {
+      padding: var(--spacing-medium-px) !important;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  padding: 0px;
+  margin: 0px;
+  flex-direction: column;
+  gap: var(--spacing-medium2-px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: var(--font-size-normal-px);
+  font-style: normal;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-size-large-px);
+  display: flex;
+  align-items: center;
+  color: var(--color-text-faded-new);
+}
+
+.backButton {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  color: var(--color-text-faded-new);
+  cursor: pointer;
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-bold);
+  transition: color var(--transition-normal) ease;
+
+  &:focus-visible {
+    border-radius: var(--border-radius-default);
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
+  }
+}
+
+.arrowIcon {
+  transform: rotate(180deg);
+  margin-block-start: calc(var(--spacing-xmicro) * -1);
+
+  svg {
+    block-size: var(--spacing-small);
+    inline-size: var(--spacing-small);
+    color: var(--color-text-faded-new);
+  }
+}
+
+.helpIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--spacing-medium);
+  block-size: var(--spacing-medium);
+  border-radius: 50%;
+  background-color: var(--color-background-alternative);
+  color: var(--color-text-faded);
+  font-size: var(--font-size-xsmall);
+  cursor: help;
+}
+
+// Footer
+.footer {
+  display: flex;
+  gap: var(--spacing-small);
+  padding-block-start: var(--spacing-small);
+  border-block-start: var(--border-width-default) solid var(--color-borders-hairline);
+}
+
+.noteButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xxsmall);
+  border-radius: var(--border-radius-medium-px);
+  color: var(--color-text-link-new);
+  border-color: var(--color-text-link-new);
+  justify-self: center;
+  cursor: pointer;
+  transition: background-color var(--transition-normal) ease;
+  font-size: var(--font-size-normal-px);
+  svg {
+    margin-inline-end: var(--spacing-small-px);
+    block-size: $icon-size !important;
+    inline-size: $icon-size !important;
+    align-self: center;
+    color: currentColor;
+  }
+}
+
+.guestSignInSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  margin-block-start: var(--spacing-small-px);
+  gap: var(--spacing-small);
+
+  inline-size: 100%;
+}
+
+.collectionsHint {
+  margin: var(--spacing-small-px);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  font-size: var(--font-size-small-px);
+  color: var(--color-text-faded-new);
+}
+
+.guestSectionTitle {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+  margin: 0;
+}
+
+.guestMessageBox {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--spacing-medium);
+  gap: var(--spacing-medium);
+
+  inline-size: 100%;
+
+  border: $border-width-default solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-large-px);
+}
+
+.guestSignInMessage {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+  margin: 0;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.guestFeaturesList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: var(--spacing-medium-px);
+
+  inline-size: 100%;
+}
+
+.guestFeatureItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  gap: var(--spacing-small);
+}
+
+.guestCheckmark {
+  inline-size: $icon-size;
+  block-size: $icon-size;
+
+  color: var(--color-success-medium);
+  flex-shrink: 0;
+
+  path {
+    fill: var(--color-success-medium);
+  }
+}
+
+.guestFeatureText {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-default);
+  line-height: var(--line-height-normal);
+}
+
+.guestSignInButton {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xsmall-px) var(--spacing-small-px);
+  background-color: var(--color-success-medium);
+  border-radius: var(--border-radius-small-px);
+  border: none;
+
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-white);
+  block-size: $guestSignInButtonHeight;
+  cursor: pointer;
+}
+
+$newCollectionSectionHeight: 64px;
+
+.newCollectionButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: var(--spacing-medium2-px);
+  margin-block-end: var(--spacing-medium-px);
+  text-align: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: $newCollectionSectionHeight;
+
+  border: $border-width-default solid var(--color-separators-ayah-level);
+  border-radius: var(--border-radius-large-px);
+
+  background-color: transparent;
+
+  // Ensure proper contrast in dark theme
+  color: var(--color-text-default);
+  background-color: var(--color-background-alternative);
+  border: $border-width-default solid var(--color-borders-hairline);
+
+  &:hover {
+    background-color: var(--color-background-elevated);
+  }
+
+  &:focus-visible {
+    outline: $outline-size solid var(--color-primary);
+    outline-offset: $outline-size;
+  }
+}
+
+.newCollectionButtonIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.newCollectionButtonIconSvg {
+  display: block;
+  flex-shrink: 0;
+  overflow: visible;
+  margin-inline-end: var(--spacing-xxsmall-px);
+  // SVGs should follow currentColor so they remain visible in dark mode.
+  // If the SVG uses fills/strokes, enforce them.
+  &,
+  * {
+    fill: currentColor;
+  }
+  inline-size: $guestCollectionAddButtonBlockSize;
+  block-size: $guestCollectionAddButtonBlockSize;
+}
+
+.newCollectionButtonLabel {
+  color: inherit;
+}
+
+.plusIcon {
+  padding: 0;
+  margin-inline-end: var(--spacing-xxsmall-px);
+  display: flex;
+  justify-content: center;
+  justify-self: start;
+  svg {
+    block-size: $close-icon-h;
+    inline-size: $close-icon-w;
+  }
+}

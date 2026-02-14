@@ -5,7 +5,8 @@ $playChapterAudioButtonMinInlineSize: 95px;
 @mixin customButton {
   border: 1px solid transparent;
   background-color: var(--color-background-elevated-new);
-  box-shadow: var(--shadow-small-new);
+  box-shadow: var(--shadow-chapter-header-actions);
+  color: var(--color-text-faded-new);
 
   svg {
     color: var(--color-success-medium);
@@ -35,5 +36,13 @@ $playChapterAudioButtonMinInlineSize: 95px;
     font-weight: var(--font-weight-medium);
     padding-inline: var(--spacing-small2-px);
     white-space: nowrap;
+
+    &[class*='selected'] {
+      color: var(--color-background-elevated);
+
+      svg {
+        color: var(--color-background-elevated);
+      }
+    }
   }
 }

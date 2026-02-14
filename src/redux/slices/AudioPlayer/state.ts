@@ -5,7 +5,7 @@ import resetSettings from '@/redux/actions/reset-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import { getAudioPlayerStateInitialState } from '@/redux/defaultSettings/util';
 import { RootState } from '@/redux/RootState';
-import AudioState from '@/redux/types/AudioState';
+import AudioState, { RepeatSettings } from '@/redux/types/AudioState';
 import SliceName from '@/redux/types/SliceName';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -16,6 +16,7 @@ export const selectIsDownloadingAudio = (state: RootState) =>
   state.audioPlayerState.isDownloadingAudio;
 export const selectShowTooltipWhenPlayingAudio = (state: RootState) =>
   state.audioPlayerState.showTooltipWhenPlayingAudio;
+export const selectRepeatSettings = (state: RootState) => state.audioPlayerState.repeatSettings;
 
 export const audioPlayerStateSlice = createSlice({
   name: SliceName.AUDIO_PLAYER_STATE,
@@ -32,6 +33,11 @@ export const audioPlayerStateSlice = createSlice({
     setShowTooltipWhenPlayingAudio: (state, action: PayloadAction<boolean>) => ({
       ...state,
       showTooltipWhenPlayingAudio: action.payload,
+    }),
+    // Save repeat audio modal settings (from, to, repeatRange, etc.)
+    setRepeatSettings: (state, action: PayloadAction<RepeatSettings | undefined>) => ({
+      ...state,
+      repeatSettings: action.payload,
     }),
   },
   // reset reciter to the default based on the locale
@@ -75,7 +81,11 @@ export const audioPlayerStateSlice = createSlice({
   },
 });
 
-export const { setEnableAutoScrolling, setIsDownloadingAudio, setShowTooltipWhenPlayingAudio } =
-  audioPlayerStateSlice.actions;
+export const {
+  setEnableAutoScrolling,
+  setIsDownloadingAudio,
+  setShowTooltipWhenPlayingAudio,
+  setRepeatSettings,
+} = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

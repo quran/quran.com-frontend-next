@@ -1,0 +1,4 @@
+{
+  "description": "Explore os diferentes Qiraat (leituras variantes) de Ayah {{ayahNumber}} da Surata {{surahName}}",
+  "title": "Qiraat {{surahName}} - {{ayahNumber}}"
+}

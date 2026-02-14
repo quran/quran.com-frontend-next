@@ -13,6 +13,9 @@ export const getAboutTheQuranImageUrl = ({ locale }: BaseOgOptions) =>
 export const getLearningPlansImageUrl = ({ locale }: BaseOgOptions) =>
   `${BASE_OG_URL}/api/og/learning-plans?lang=${locale}`;
 
+export const getEmbedOgImageUrl = ({ locale }: BaseOgOptions) =>
+  `${BASE_OG_URL}/api/og/embed?lang=${locale}`;
+
 export const getMediaGeneratorOgImageUrl = ({ locale }: BaseOgOptions) =>
   `${BASE_OG_URL}/api/og/media?lang=${locale}`;
 

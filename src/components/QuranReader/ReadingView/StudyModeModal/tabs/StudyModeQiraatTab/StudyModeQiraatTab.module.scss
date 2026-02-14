@@ -1,0 +1,78 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-mega);
+}
+
+.loadingContainer,
+.errorContainer,
+.emptyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(var(--spacing-mega-px) * 2);
+  padding: var(--spacing-large);
+}
+
+.errorText,
+.emptyText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-faded-new);
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  column-gap: var(--spacing-large);
+  row-gap: var(--spacing-micro);
+  flex-direction: column;
+
+  padding-block-start: var(--spacing-medium3-px);
+  border-block-start: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+
+  @include breakpoints.desktop {
+    flex-direction: row;
+  }
+}
+
+.mainContent {
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.readingsHeader {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default-new);
+  margin-block-end: var(--spacing-medium-px);
+}
+
+.readersContainer {
+  inline-size: 100%;
+
+  @include breakpoints.desktop {
+    flex: 1;
+    max-inline-size: calc(var(--spacing-mega-px) * 4.1);
+  }
+}
+
+.commentarySection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+  padding-block-start: var(--spacing-medium2);
+}
+
+.commentaryTitle {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default-new);
+  line-height: 1.5;
+}
+
+.commentaryText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
+  line-height: 1.6;
+}

@@ -1,0 +1,11 @@
+.repeatButton {
+  background-color: var(--color-background-alternative-faint-new);
+  color: var(--color-text-default-new);
+  border-color: var(--color-background-alternative-faint-new);
+
+  &:hover {
+    background-color: var(--color-background-alternative-faint-new);
+    color: var(--color-text-default-new);
+    opacity: var(--opacity-85);
+  }
+}

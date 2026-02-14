@@ -100,6 +100,13 @@
   "beyond-ramadan": "Ramazan'dan sonra da gelişin!",
   "bookmark": "Yer imi",
   "bookmarked": "İşaretli",
+  "bookmarks-migration": {
+    "body-1": "Yer işaretleriniz artık şu şekilde görünecek: <strong>Kaydedilen Ayetler</strong> içinde <strong>Koleksiyonlar</strong>Mevcut yer işaretlerinizi korumak için lütfen oturum açın veya bir hesap oluşturun.",
+    "body-2": "Ayrıca, kaldığınız yerden devam etmenize yardımcı olmak için yeni bir Okuma Yer İşareti de ekledik.",
+    "checkbox": "Bu mesajı bir daha gösterme (Uyarı: Mevcut tüm yer işaretlerinizi kaybedeceksiniz)",
+    "sign-in": "Giriş Yap / Kayıt Ol",
+    "title": "Uyarı: Yer işaretleri değişiyor."
+  },
   "both": "Her ikisi de",
   "cancel": "İptal",
   "change-theme": "Temayı Değiştir",
@@ -137,11 +144,13 @@
   "copied": "kopyalandı",
   "copied-to-clipboard": "Panoya kopyalandı",
   "copy": "Kopyala",
+  "copy-embed": "Kopyala Göm",
   "copylink": "Linki Kopyala",
   "counter": {
     "decrease": "Azalt",
     "increase": "Arttır"
   },
+  "create": "Yaratmak",
   "create-my-goal": "Hedefimi Oluştur",
   "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
   "delete": "Sil",
@@ -151,6 +160,7 @@
   "donate-now": "Şimdi bağış yapın",
   "donate_monthly": "Aylık bağış yapın",
   "donate_once": "Bir kez bağış yapın",
+  "done": "Tamamlamak",
   "edit": "Düzenlemek",
   "email-verification": {
     "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
@@ -160,6 +170,8 @@
     "resend-email-in": "Doğrulama e-postasını {{remainingTime}} saniye içinde yeniden gönderin...",
     "verify-code": "Doğrulama kodu"
   },
+  "embed-copied": "Kopyalanan Gömme",
+  "embed-widget": "Widget'ı yerleştir",
   "end-year-donate": "2024'ü sadaka ile bitirin ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Bir seferde en fazla {{limit}} ayet seçebilirsiniz. Lütfen daha küçük bir aralık seçin.",
@@ -171,7 +183,10 @@
     "pref-persist-fail": "Ayarlarınız bulutla eşitlenemedi.",
     "ranges-no-value": "Aralık başlangıcı ve bitişi bir değere sahip olmalıdır",
     "ranges-too-many-verses": "*Maksimum {{maxNumberOfVerses}} Ayet",
-    "ranges-wrong-order": "Başlangıç ayeti bitiş ayetinden önce olmalıdır."
+    "ranges-wrong-order": "Başlangıç ayeti bitiş ayetinden önce olmalıdır.",
+    "reading-bookmark-remove": "Okuma yer imini kaldırma işlemi başarısız oldu.",
+    "reading-bookmark-set": "Okuma yer imi ayarlanamadı.",
+    "reading-bookmark-undo": "Okuma yer imini geri alma işlemi başarısız oldu."
   },
   "errors": {
     "account-banned": "Maalesef, hesabınız engellendi. Quran.Foundation ile irtibata geçin",
@@ -208,9 +223,11 @@
     "verification-code-invalid": "Bu doğrulama kodu geçersizdir",
     "verification-code-length": "Doğrulama kodu {{length}} basamaklı olmalıdır",
     "verification-failed": "Doğrulama başarısız oldu. Lütfen tekrar deneyin.",
-    "verification-resend-failed": "Doğrulama kodunu yeniden gönderme başarısız oldu"
+    "verification-resend-failed": "Doğrulama kodunu yeniden gönderme başarısız oldu",
+    "verse-metadata-failed": "Ayet meta verileri yüklenemedi."
   },
   "exciting-updates": "Heyecan Verici Güncellemeler",
+  "favorites": "Favoriler",
   "feedback": "Geri Bildirim",
   "fonts": {
     "15_lines": "15 satır",
@@ -267,8 +284,10 @@
     "title": "Aylık Bağışçımız Olun"
   },
   "get-started": "Başla",
+  "go-to-verse": "Ayette Git",
   "hear-it-pronounced": "Kuran kelimelerini tıklayın, telaffuzunu dinleyin",
   "help": "Yardım",
+  "hide-arabic": "Arapçayı gizle",
   "hizb": "Hizb",
   "home": "Anasayfa",
   "hours": "Saat",
@@ -276,6 +295,7 @@
   "input": {
     "clear": "Açık"
   },
+  "join-ramadan-challenge": "🚀 Ramazan Meydan Okumamıza Katılın!",
   "juz": "Cüz",
   "language": "Dil",
   "languages": "Diller",
@@ -350,6 +370,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radyo",
   "read": "Okumak",
+  "read-more": "Devamını oku",
   "reading-history": "tarih okuma",
   "reading-preference": {
     "arabic": "Arapça",
@@ -370,6 +391,7 @@
   "reflect": "Yansıt",
   "reflections": "Yansımalar",
   "reflections-and-lessons": "Düşünceler ve Dersler",
+  "related-verses": "İlgili Ayetler",
   "remove": "Kaldırmak",
   "rename": "Yeniden Adlandır",
   "retry": "Yeniden dene",
@@ -395,6 +417,7 @@
     "title": "Ara"
   },
   "seconds": "Saniye",
+  "see-less": "Daha az göster",
   "see-new": "Yenilikleri görün",
   "select-language": "Dil Seçin",
   "settings": {
@@ -424,6 +447,7 @@
   "share-quran-description-line-3": "(Sahih-i Buhari 3461)",
   "share-quran-title": "Kuran'ı paylaşın!",
   "shared": "Bağlantı panoya kopyalandı!",
+  "show-arabic": "Arapça'yı göster",
   "show-more": "Daha fazla göster",
   "sidebar": {
     "search-hizb": "Hizb'de Ara",
@@ -438,7 +462,8 @@
   "sort": {
     "ascending": "Artan",
     "by": "Sırala",
-    "descending": "Azalan"
+    "descending": "Azalan",
+    "sort": "Düzenlemek"
   },
   "stay-on-track": "🎯 Yolda kalın!",
   "style": "Stil",
@@ -446,6 +471,8 @@
   "subscribe": "Abone ol",
   "subscribed": "Abone olundu",
   "surah": "Sure",
+  "tab-see-less": "Daha az göster...",
+  "tab-see-more": "Daha fazlasını görün...",
   "tafsir": {
     "font-size": "tefsir yazı tipi boyutu",
     "group-message": "{{from}} ile {{to}} arasındaki ayetler grubu için bir tefsir okuyorsunuz",

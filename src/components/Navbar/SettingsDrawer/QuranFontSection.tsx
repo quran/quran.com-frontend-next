@@ -10,6 +10,7 @@ import ReciterSection from './ReciterSection';
 import Section from './Section';
 
 import Counter from '@/dls/Counter/Counter';
+import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select from '@/dls/Forms/Select';
 import Switch from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
@@ -22,11 +23,12 @@ import {
   selectQuranReaderStyles,
   setQuranFont,
   setMushafLines,
+  setShowTajweedRules,
   MAXIMUM_QURAN_FONT_STEP,
 } from '@/redux/slices/QuranReader/styles';
 import { TestId } from '@/tests/test-ids';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
-import { logValueChange } from '@/utils/eventLogger';
+import { logEvent, logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const QuranFontSection = () => {
@@ -36,7 +38,7 @@ const QuranFontSection = () => {
   const {
     actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
-  const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
+  const { quranFont, quranTextFontScale, mushafLines, showTajweedRules } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use
   // eslint-disable-next-line react-func/max-lines-per-function
   const fonts = useMemo(() => {
@@ -140,6 +142,7 @@ const QuranFontSection = () => {
   };
 
   const onFontChange = (value: QuranFont) => {
+    logEvent(`font_family_changed_to_${value}`);
     logValueChange('font_family', selectedType, value);
     const fontValue = getDefaultFont(value);
     onFontSettingsChange(
@@ -151,6 +154,7 @@ const QuranFontSection = () => {
   };
 
   const onFontStyleChange = (value: QuranFont) => {
+    logEvent(`font_style_changed_to_${value}`);
     logValueChange('font_style', quranFont, value);
     onFontSettingsChange(
       'quranFont',
@@ -161,6 +165,7 @@ const QuranFontSection = () => {
   };
 
   const onMushafLinesChange = (value: MushafLines) => {
+    logEvent(`mushaf_lines_changed_to_${value}`);
     logValueChange('mushaf_lines', mushafLines, value);
     onFontSettingsChange(
       'mushafLines',
@@ -172,6 +177,7 @@ const QuranFontSection = () => {
 
   const onFontScaleDecreaseClicked = () => {
     const value = quranTextFontScale - 1;
+    logEvent('quran_font_size_decreased');
     logValueChange('font_scale', quranTextFontScale, value);
     onFontSettingsChange(
       'quranTextFontScale',
@@ -183,12 +189,25 @@ const QuranFontSection = () => {
 
   const onFontScaleIncreaseClicked = () => {
     const value = quranTextFontScale + 1;
+    logEvent('quran_font_size_increased');
     logValueChange('font_scale', quranTextFontScale, value);
     onFontSettingsChange(
       'quranTextFontScale',
       value,
       increaseQuranTextFontScale(),
       decreaseQuranTextFontScale(),
+    );
+  };
+
+  const onShowTajweedRulesChange = (checked: boolean) => {
+    logEvent(`show_tajweed_rules_changed_to_${checked}`);
+    logValueChange('show_tajweed_rules', showTajweedRules, checked);
+    onSettingsChange(
+      'showTajweedRules',
+      checked,
+      setShowTajweedRules(checked),
+      setShowTajweedRules(!checked),
+      PreferenceGroup.QURAN_READER_STYLES,
     );
   };
 
@@ -233,6 +252,20 @@ const QuranFontSection = () => {
             onChange={onMushafLinesChange}
             className={styles.select}
             arrowClassName={styles.selectArrow}
+          />
+        </Section.Row>
+      )}
+      {selectedType === QuranFont.Tajweed && (
+        <Section.Row className={styles.tajweedRulesSection}>
+          <Checkbox
+            keepIndicatorOnUnchecked
+            containerClassName={styles.tajweedCheckboxContainer}
+            checkboxClassName={styles.tajweedCheckbox}
+            indicatorClassName={styles.tajweedIndicator}
+            id="show-tajweed-rules"
+            label={t('quran-reader:show-tajweed-rules')}
+            checked={showTajweedRules}
+            onChange={onShowTajweedRulesChange}
           />
         </Section.Row>
       )}

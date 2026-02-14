@@ -1,230 +1,159 @@
-/* eslint-disable max-lines */
-import { useContext, useState } from 'react';
-
+import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { Virtuoso } from 'react-virtuoso';
 
-import CollectionSorter from '../CollectionSorter/CollectionSorter';
+import { getMyQuranNavigationUrl } from '../../../utils/navigation';
 
 import styles from './CollectionDetail.module.scss';
+import CollectionVerseCell from './CollectionVerseCell';
 
-import EmbeddableVerseCell from '@/components/QuranReader/TranslationView/EmbeddableVerseCell';
+import MyQuranTab from '@/components/MyQuran/tabs';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
-import { useConfirm } from '@/dls/ConfirmationModal/hooks';
-import ChevronDownIcon from '@/icons/chevron-down.svg';
-import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
-import { getChapterData } from '@/utils/chapter';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { toLocalizedVerseKey } from '@/utils/locale';
-import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
-import { navigateToExternalUrl } from '@/utils/url';
-import { makeVerseKey } from '@/utils/verse';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import Collapsible from 'src/components/dls/Collapsible/Collapsible';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import DataContext from 'src/contexts/DataContext';
+import { logButtonClick } from '@/utils/eventLogger';
+import Button from 'src/components/dls/Button/Button';
 import Bookmark from 'types/Bookmark';
-import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
+
+// Largest collection size that will be rendered without virtualization.
+// Virtualization is enabled when the bookmark count is strictly greater than
+// MAX_NON_VIRTUALIZED_BOOKMARKS (i.e., > 12). Smaller lists are rendered
+// normally as they do not significantly benefit from virtualization and keep
+// the DOM simpler for better UX at low counts.
+const MAX_NON_VIRTUALIZED_BOOKMARKS = 12;
+const VIRTUALIZED_LIST_HEIGHT_CSS = 'calc(var(--spacing-mega-px) * 6)';
 
 type CollectionDetailProps = {
   id: string;
   title: string;
   isOwner: boolean;
   bookmarks: Bookmark[];
-  sortBy: string;
-  onSortByChange: (sortBy: string) => void;
-  onItemDeleted: (bookmarkId: string) => void;
+  emptyMessage?: string;
+
+  onItemDeleted?: (bookmarkId: string) => void;
+  onShareVerse?: (verseKey: string) => void;
+  onBack?: () => void;
+
+  isSelectMode?: boolean;
+  shouldUseBodyScroll?: boolean;
+  onEndReached?: () => void;
+  hasMore?: boolean;
+  isVirtualizeForced?: boolean;
+  onToggleBookmarkSelection?: (bookmarkId: string) => void;
+  onToggleCardExpansion?: (bookmarkId: string) => void;
+  isCardExpanded?: (bookmarkId: string) => boolean;
+  isBookmarkSelected?: (bookmarkId: string) => boolean;
 };
 
 const CollectionDetail = ({
   id,
   title,
   bookmarks,
-  sortBy,
-  onSortByChange,
   onItemDeleted,
+  onShareVerse,
   isOwner,
+  onBack,
+  emptyMessage,
+  isSelectMode = false,
+  shouldUseBodyScroll = false,
+  onEndReached,
+  hasMore = false,
+  isVirtualizeForced = false,
+  onToggleBookmarkSelection,
+  onToggleCardExpansion,
+  isCardExpanded,
+  isBookmarkSelected,
 }: CollectionDetailProps) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const { t, lang } = useTranslation();
-  const confirm = useConfirm();
-
-  const sortOptions = [
-    {
-      id: CollectionDetailSortOption.RecentlyAdded,
-      label: t('collection:recently-added'),
-    },
-    {
-      id: CollectionDetailSortOption.VerseKey,
-      label: t('collection:verse-key'),
-    },
-  ];
-
-  const chaptersData = useContext(DataContext);
+  const { t } = useTranslation();
+  const router = useRouter();
 
   const isCollectionEmpty = bookmarks.length === 0;
-
-  const handleDeleteMenuClicked = (bookmark: Bookmark) => async () => {
-    logButtonClick('collection_detail_delete_menu');
-    const bookmarkName = getBookmarkName(bookmark);
-
-    const isConfirmed = await confirm({
-      confirmText: t('common:delete'),
-      cancelText: t('common:cancel'),
-      title: t('collection:delete-bookmark.title'),
-      subtitle: t('collection:delete-bookmark.subtitle', {
-        bookmarkName,
-        collectionName: title,
-      }),
-    });
-
-    const eventData = {
-      verseKey: makeVerseKey(bookmark.key, bookmark.verseNumber),
-      collectionId: id,
-    };
-    if (isConfirmed) {
-      logButtonClick('bookmark_delete_confirm', eventData);
-      onItemDeleted(bookmark.id);
-    } else {
-      logButtonClick('bookmark_delete_confirm_cancel', eventData);
-    }
-  };
-
-  const handleGoToAyah = (bookmark: Bookmark) => () => {
-    const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
-    logButtonClick('collection_detail_go_to_ayah_menu', {
-      verseKey: makeVerseKey(bookmark.key, bookmark.verseNumber),
-      collectionId: id,
-    });
-    navigateToExternalUrl(getVerseNavigationUrlByVerseKey(verseKey));
-  };
-
-  const getBookmarkName = (bookmark) => {
-    const chapterData = getChapterData(chaptersData, bookmark.key.toString());
-    const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
-    return `${chapterData.transliteratedName} ${toLocalizedVerseKey(verseKey, lang)}`;
-  };
-
-  const onToggleAllClicked = () => {
-    setIsOpen((currentIsOpen) => {
-      if (currentIsOpen) {
-        logButtonClick('collection_collapse_all', { collectionId: id });
-      } else {
-        logButtonClick('collection_expand_all', { collectionId: id });
-      }
-      return !currentIsOpen;
-    });
-  };
 
   const onBackToCollectionsClicked = () => {
     logButtonClick('back_to_collections_button', {
       collectionId: id,
     });
-  };
-
-  const onBookmarkMenuOpenChange = (isMenuOpen: boolean, bookmark: Bookmark) => {
-    const eventData = {
-      verseKey: makeVerseKey(bookmark.key, bookmark.verseNumber),
-      collectionId: id,
-    };
-    if (isMenuOpen) {
-      logEvent('collection_bookmark_popover_menu_opened', eventData);
+    if (onBack) {
+      onBack();
     } else {
-      logEvent('collection_bookmark_popover_menu_closed', eventData);
+      router.push(getMyQuranNavigationUrl(MyQuranTab.SAVED));
     }
   };
 
-  const onCollapseOpenChange = (isCollapseOpen: boolean, verseKey: string) => {
-    const eventData = {
-      verseKey,
-      collectionId: id,
-    };
-    if (isCollapseOpen) {
-      logEvent('collection_bookmark_collapse_opened', eventData);
-    } else {
-      logEvent('collection_bookmark_collapse_closed', eventData);
+  const shouldVirtualize =
+    isVirtualizeForced ||
+    !!(onEndReached && hasMore) ||
+    bookmarks.length > MAX_NON_VIRTUALIZED_BOOKMARKS;
+
+  const renderBookmarkCell = (bookmark: Bookmark) => (
+    <CollectionVerseCell
+      key={bookmark.id}
+      bookmarkId={bookmark.id}
+      chapterId={bookmark.key}
+      verseNumber={bookmark.verseNumber}
+      collectionId={id}
+      collectionName={title}
+      isOwner={isOwner}
+      onDelete={onItemDeleted}
+      onShare={onShareVerse}
+      createdAt={bookmark.createdAt}
+      isSelectMode={isSelectMode}
+      isSelected={isBookmarkSelected?.(bookmark.id)}
+      onToggleSelection={onToggleBookmarkSelection}
+      isExpanded={isCardExpanded?.(bookmark.id)}
+      onToggleExpansion={onToggleCardExpansion}
+    />
+  );
+
+  const listContent = (() => {
+    if (shouldUseBodyScroll) {
+      return (
+        <Virtuoso
+          data={bookmarks}
+          overscan={10}
+          increaseViewportBy={100}
+          useWindowScroll
+          {...(onEndReached && hasMore && { endReached: onEndReached })}
+          itemContent={(index, bookmark) => renderBookmarkCell(bookmark)}
+        />
+      );
     }
-  };
+
+    if (shouldVirtualize) {
+      return (
+        <Virtuoso
+          className={styles.virtualizedList}
+          style={{ height: VIRTUALIZED_LIST_HEIGHT_CSS }}
+          data={bookmarks}
+          overscan={10}
+          increaseViewportBy={100}
+          {...(onEndReached && hasMore && { endReached: onEndReached })}
+          itemContent={(index, bookmark) => renderBookmarkCell(bookmark)}
+        />
+      );
+    }
+
+    return bookmarks.map(renderBookmarkCell);
+  })();
 
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.header}>
-          <div className={styles.title}>{title}</div>
-          {isOwner && (
-            <CollectionSorter
-              selectedOptionId={sortBy}
-              onChange={onSortByChange}
-              options={sortOptions}
-              isSingleCollection
-              collectionId={id}
-            />
-          )}
-        </div>
-        <Button variant={ButtonVariant.Ghost} onClick={onToggleAllClicked}>
-          {isOpen ? t('collection:collapse-all') : t('collection:expand-all')}
-        </Button>
-        <div className={styles.collectionItemsContainer}>
+        <div
+          className={classNames(styles.collectionItemsContainer, {
+            [styles.bodyScroll]: shouldUseBodyScroll,
+          })}
+        >
           {isCollectionEmpty ? (
             <div className={styles.emptyCollectionContainer}>
-              <span>{t('collection:empty')}</span>
+              <span>{emptyMessage || t('collection:empty')}</span>
               <div className={styles.backToCollectionButtonContainer}>
-                <Button onClick={onBackToCollectionsClicked} href="/profile">
+                <Button onClick={onBackToCollectionsClicked}>
                   {t('collection:back-to-collection-list')}
                 </Button>
               </div>
             </div>
           ) : (
-            bookmarks.map((bookmark) => {
-              const bookmarkName = getBookmarkName(bookmark);
-              return (
-                <Collapsible
-                  onOpenChange={(isCollapseOpen) =>
-                    onCollapseOpenChange(
-                      isCollapseOpen,
-                      makeVerseKey(bookmark.key, bookmark.verseNumber),
-                    )
-                  }
-                  shouldOpen={isOpen}
-                  title={bookmarkName}
-                  key={bookmark.id}
-                  prefix={<ChevronDownIcon />}
-                  shouldRotatePrefixOnToggle
-                  suffix={
-                    <PopoverMenu
-                      trigger={
-                        <Button variant={ButtonVariant.Ghost}>
-                          <OverflowMenuIcon />
-                        </Button>
-                      }
-                      onOpenChange={(isMenuOpen) => onBookmarkMenuOpenChange(isMenuOpen, bookmark)}
-                    >
-                      {isOwner && (
-                        <PopoverMenu.Item onClick={handleDeleteMenuClicked(bookmark)}>
-                          {t('common:delete')}
-                        </PopoverMenu.Item>
-                      )}
-                      <PopoverMenu.Item
-                        onClick={handleGoToAyah(bookmark)}
-                        shouldCloseMenuAfterClick
-                      >
-                        {t('collection:go-to-ayah')}
-                      </PopoverMenu.Item>
-                    </PopoverMenu>
-                  }
-                >
-                  {({ isOpen: isOpenRenderProp }) => {
-                    if (!isOpenRenderProp) return null;
-                    const chapterId = bookmark.key;
-                    return (
-                      <EmbeddableVerseCell
-                        chapterId={chapterId}
-                        verseNumber={bookmark.verseNumber}
-                      />
-                    );
-                  }}
-                </Collapsible>
-              );
-            })
+            listContent
           )}
         </div>
       </div>
