@@ -103,6 +103,10 @@ const isValidVerse = (
   }
   if (!verse.verseKey || typeof verse.verseKey !== 'string') return false;
 
+  // Ensure verseKey matches the canonical format derived from chapterId and verseNumber
+  const canonicalVerseKey = `${chapterIdNumber}:${verseNumberNumber}`;
+  if (verse.verseKey !== canonicalVerseKey) return false;
+
   return true;
 };
 
