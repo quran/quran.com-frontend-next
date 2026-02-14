@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import styles from './LessonHtmlContent.module.scss';
 import VerseChunkWidget from './VerseChunkWidget';
@@ -59,11 +59,6 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
     () => (language === 'en' ? parseFlashcardsFromHtml(content) : null),
     [content, language],
   );
-
-  useEffect(() => {
-    setExpandedCards(new Set());
-    setMasteredCards(new Set());
-  }, [content]);
 
   if (language !== 'en') return <HtmlContent html={content} />;
   if (flashcardData) {
