@@ -27,6 +27,7 @@ describe('flashcardParser', () => {
     it('defaults to list variant when no class on h3', () => {
       const result = parseFlashcardsFromHtml(makeSection());
       expect(result?.variant).toBe(FlashCardVariant.List);
+      expect(result?.headingText).toBe('Word-by-word breakdown');
       expect(result?.flashcards).toHaveLength(1);
     });
 
