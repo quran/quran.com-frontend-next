@@ -5,9 +5,11 @@ import VerseChunkWidget from './VerseChunkWidget';
 
 import { FlashCardCarousel, FlashCardDeck, FlashCardList } from '@/components/Course/FlashCards';
 import { FlashCardVariant } from '@/components/Course/FlashCards/types';
+import LessonQuiz from '@/components/Course/LessonQuiz';
 import HtmlContent from '@/components/RichText/HtmlContent';
 import parseFlashcardsFromHtml from '@/utils/flashcardParser';
 import { ContentChunk, parseContentChunks } from '@/utils/lessonContentParser';
+import parseLessonQuizFromHtml from '@/utils/lessonQuizParser';
 
 const VARIANT_CONFIG = {
   [FlashCardVariant.List]: {
@@ -24,6 +26,7 @@ const VARIANT_CONFIG = {
 type Props = {
   content: string;
   language: string;
+  lessonSlug: string;
 };
 
 const renderChunks = (chunks: ContentChunk[], keyPrefix = '') =>
@@ -49,12 +52,24 @@ const toggleInSet = (set: Set<string>, item: string) => {
   return nextSet;
 };
 
-const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
+const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug }) => {
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [masteredCards, setMasteredCards] = useState<Set<string>>(new Set());
-  const flashcardData = useMemo(
-    () => (language === 'en' ? parseFlashcardsFromHtml(content) : null),
+  const parsedLessonQuiz = useMemo(
+    () => (language === 'en' ? parseLessonQuizFromHtml(content) : null),
     [content, language],
+  );
+  const contentToRender = parsedLessonQuiz?.contentWithoutQuizSection ?? content;
+  const quizNode = parsedLessonQuiz ? (
+    <LessonQuiz
+      lessonSlug={lessonSlug}
+      title={parsedLessonQuiz.headingText}
+      question={parsedLessonQuiz.question}
+    />
+  ) : null;
+  const flashcardData = useMemo(
+    () => (language === 'en' ? parseFlashcardsFromHtml(contentToRender) : null),
+    [contentToRender, language],
   );
 
   if (language !== 'en') return <HtmlContent html={content} />;
@@ -96,7 +111,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
           </div>
           {isListVariant ? (
             <FlashCardList
-              key={content}
+              key={contentToRender}
               cards={flashcardData.flashcards}
               expandedCards={expandedCards}
               masteredCards={masteredCards}
@@ -104,19 +119,31 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language }) => {
               onToggleMastered={(cardId) => setMasteredCards((prev) => toggleInSet(prev, cardId))}
             />
           ) : (
-            <NonListFlashCardComponent key={content} cards={flashcardData.flashcards} />
+            <NonListFlashCardComponent key={contentToRender} cards={flashcardData.flashcards} />
           )}
         </div>
         {flashcardData.afterHtml && renderHtml(flashcardData.afterHtml, 'after-')}
+        {quizNode}
       </div>
     );
   }
 
-  const chunks = parseContentChunks(content);
-  return chunks.every((chunk) => chunk.type === 'html') ? (
-    <HtmlContent html={content} />
-  ) : (
-    <div className={styles.container}>{renderChunks(chunks)}</div>
+  const chunks = parseContentChunks(contentToRender);
+  if (chunks.every((chunk) => chunk.type === 'html')) {
+    if (!quizNode) return <HtmlContent html={contentToRender} />;
+    return (
+      <div className={styles.container}>
+        <HtmlContent html={contentToRender} />
+        {quizNode}
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.container}>
+      {renderChunks(chunks)}
+      {quizNode}
+    </div>
   );
 };
 
