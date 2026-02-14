@@ -12,6 +12,7 @@ import ReaderBioModal from './ReaderBioModal';
 
 import { getChapterVerses } from '@/api';
 import useBatchedCountRangeNotes from '@/hooks/auth/useBatchedCountRangeNotes';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import {
   closeStudyMode,
   openStudyMode,
@@ -35,7 +36,6 @@ import {
   VerseActionModalType,
 } from '@/redux/slices/QuranReader/verseActionModal';
 import { Note } from '@/types/auth/Note';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import {
   consumePendingBookmarkModalRestore,
@@ -47,6 +47,8 @@ const VerseActionModalContainer: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const hasClosedStudyModeRef = useRef(false);
+  // Use a reactive source of truth so restores can happen even if auth state flips after mount.
+  const { isLoggedIn: isUserLoggedIn } = useIsLoggedIn();
 
   const isOpen = useSelector(selectVerseActionModalIsOpen);
   const modalType = useSelector(selectVerseActionModalType);
@@ -84,7 +86,7 @@ const VerseActionModalContainer: React.FC = () => {
       isCancelled = true;
     };
 
-    if (!router.isReady || isOpen || !isLoggedIn()) {
+    if (!router.isReady || isOpen || !isUserLoggedIn) {
       return cancelRestore;
     }
 
@@ -112,7 +114,7 @@ const VerseActionModalContainer: React.FC = () => {
 
     restoreBookmarkModal();
     return cancelRestore;
-  }, [dispatch, getRestoredVerse, isOpen, router.asPath, router.isReady]);
+  }, [dispatch, getRestoredVerse, isOpen, isUserLoggedIn, router.asPath, router.isReady]);
 
   useEffect(() => {
     if (isOpen && wasOpenedFromStudyMode && !hasClosedStudyModeRef.current) {

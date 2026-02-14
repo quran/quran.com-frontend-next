@@ -35,8 +35,8 @@ vi.mock('@/api', () => ({
   getChapterVerses: (...args: unknown[]) => mockGetChapterVerses(...args),
 }));
 
-vi.mock('@/utils/auth/login', () => ({
-  isLoggedIn: () => mockIsLoggedIn(),
+vi.mock('@/hooks/auth/useIsLoggedIn', () => ({
+  default: () => ({ isLoggedIn: mockIsLoggedIn() }),
 }));
 
 vi.mock('@/utils/pendingBookmarkModalRestore', () => ({
