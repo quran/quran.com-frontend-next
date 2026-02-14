@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useRef } from 'react';
 
 import setLanguage from 'next-translate/setLanguage';
 import { Provider } from 'react-redux';
@@ -25,8 +25,27 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
  * @returns {Provider}
  */
 const ReduxProvider = ({ children, locale }) => {
-  const store = useMemo(() => getStore(locale), [locale]);
-  const persistor = useMemo(() => persistStore(store), [store]);
+  /**
+   * Keep a single Redux store instance for the lifetime of the app.
+   *
+   * We previously recreated the store on every locale change, which made locale switching
+   * depend on redux-persist timing (rehydration vs. pending writes) and could cause
+   * "stuck" locale-dependent settings in production after multiple flips.
+   */
+  const storeRef = useRef<ReturnType<typeof getStore> | null>(null);
+  if (!storeRef.current) {
+    storeRef.current = getStore(locale);
+  }
+  const store = storeRef.current;
+
+  const persistorRef = useRef<ReturnType<typeof persistStore> | null>(null);
+  if (!persistorRef.current) {
+    persistorRef.current = persistStore(store);
+  }
+  const persistor = persistorRef.current;
+
+  // Keep the initial locale around for preference sync semantics.
+  const initialLocaleRef = useRef(locale);
   const audioService = useContext(AudioPlayerMachineContext);
 
   /**
@@ -42,7 +61,9 @@ const ReduxProvider = ({ children, locale }) => {
           await setLanguage(remoteLocale[PreferenceGroup.LANGUAGE]);
           setLocaleCookie(remoteLocale[PreferenceGroup.LANGUAGE]);
         }
-        store.dispatch(syncUserPreferences(userPreferences, locale));
+        const localeForDefaults =
+          remoteLocale?.[PreferenceGroup.LANGUAGE] || initialLocaleRef.current;
+        store.dispatch(syncUserPreferences(userPreferences, localeForDefaults));
         const audioPlayerContext = audioService.getSnapshot().context;
         const playbackRate =
           userPreferences[PreferenceGroup.AUDIO]?.playbackRate || audioPlayerContext.playbackRate;
