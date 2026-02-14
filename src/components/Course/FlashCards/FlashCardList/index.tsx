@@ -35,7 +35,6 @@ const FlashCardList: React.FC<FlashCardListProps> = ({
             <div
               key={card.id}
               className={classNames(styles.cardItem, {
-                [styles.expanded]: isExpanded,
                 [styles.mastered]: isMastered,
               })}
               onClick={() => onToggleExpand(card.id)}
