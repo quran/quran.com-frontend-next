@@ -106,6 +106,7 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
                   key={lesson.id}
                   content={content}
                   language={lesson.course.language}
+                  lessonSlug={lesson.slug}
                 />
               )}
             </div>
