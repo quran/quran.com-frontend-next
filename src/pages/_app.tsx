@@ -34,8 +34,27 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   const languageDirection = getDir(resolvedLocale);
 
   useEffect(() => {
-    document.documentElement.dir = languageDirection;
+    const root = document.documentElement;
+
+    // When switching between LTR/RTL locales, many off-canvas components use `[dir='rtl']`
+    // transform overrides. If we flip `dir` while transitions are enabled, hidden drawers can
+    // animate across the viewport (appearing to "open"). Disable transitions for 1 frame.
+    const shouldDisableTransitions = root.dir !== languageDirection;
+    if (shouldDisableTransitions) {
+      root.dataset.disableTransitions = 'true';
+    }
+
+    root.dir = languageDirection;
     logAndRedirectUnsupportedLogicalCSS();
+
+    if (shouldDisableTransitions) {
+      const raf = requestAnimationFrame(() => {
+        delete root.dataset.disableTransitions;
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+
+    return undefined;
   }, [languageDirection]);
 
   useEffect(() => {
