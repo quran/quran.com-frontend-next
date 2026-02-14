@@ -131,26 +131,25 @@ const getFeaturedApps = (t: (key: string) => string): FeaturedApp[] => [
     androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qariah.app',
   },
   {
-    id: 'quran-kareem',
-    name: t('featured.apps.quran-kareem.name'),
-    tagline: t('featured.apps.quran-kareem.tagline'),
-    description: t('featured.apps.quran-kareem.headline'),
-    iconSrc: '/images/app-portal/featured/quran_kareem-icon.png',
-    iconAlt: 'Quran Kareem app',
-    iosHref:
-      'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
+    id: 'quran-space',
+    name: t('featured.apps.quran-space.name'),
+    tagline: t('featured.apps.quran-space.tagline'),
+    description: t('featured.apps.quran-space.headline'),
+    iconSrc: '/images/app-portal/featured/quran-space-icon.svg',
+    iconAlt: 'Quran Space',
+    webHref: 'https://spaces.labs.quran.com/',
   },
   {
-    id: 'quran-link',
-    name: t('featured.apps.quran-link.name'),
-    tagline: t('featured.apps.quran-link.tagline'),
-    description: t('featured.apps.quran-link.headline'),
-    iconSrc: '/images/app-portal/featured/QuranLink-icon.png',
-    iconAlt: 'Quran Link app',
-    iosHref:
-      'https://apps.apple.com/us/app/quran-link-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1425763263',
-    androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qortoba.quran.link',
-    webHref: 'https://quran.link/',
+    id: 'quranreflect',
+    name: t('browse.apps.quranreflect.title'),
+    tagline: t('browse.apps.quranreflect.tagline'),
+    description: t('browse.apps.quranreflect.description'),
+    iconSrc: '/images/app-portal/icon_web_optimized.png',
+    iconAlt: 'QuranReflect',
+    webHref: 'https://quranreflect.com',
+    androidHref:
+      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
+    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
   },
 ];
 
@@ -187,17 +186,28 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     categories: ['quran-reader', 'community', 'popular', 'study-tools'],
   },
   {
-    id: 'quranreflect',
-    title: t('browse.apps.quranreflect.title'),
-    description: t('browse.apps.quranreflect.description'),
-    tagline: t('browse.apps.quranreflect.tagline'),
-    iconSrc: '/images/app-portal/icon_web_optimized.png',
-    iconAlt: 'QuranReflect',
-    webHref: 'https://quranreflect.com',
-    androidHref:
-      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
-    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
-    categories: ['reflections', 'community'],
+    id: 'quran-kareem',
+    title: t('featured.apps.quran-kareem.name'),
+    description: t('featured.apps.quran-kareem.headline'),
+    tagline: t('featured.apps.quran-kareem.tagline'),
+    iconSrc: '/images/app-portal/featured/quran_kareem-icon.png',
+    iconAlt: 'Quran Kareem app',
+    iosHref:
+      'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
+    categories: ['quran-reader', 'popular'],
+  },
+  {
+    id: 'quran-link',
+    title: t('featured.apps.quran-link.name'),
+    description: t('featured.apps.quran-link.headline'),
+    tagline: t('featured.apps.quran-link.tagline'),
+    iconSrc: '/images/app-portal/featured/QuranLink-icon.png',
+    iconAlt: 'Quran Link app',
+    iosHref:
+      'https://apps.apple.com/us/app/quran-link-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1425763263',
+    androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qortoba.quran.link',
+    webHref: 'https://quran.link/',
+    categories: ['study-tools', 'quran-reader', 'popular'],
   },
   {
     id: 'sunnah',
@@ -579,19 +589,8 @@ const BrowseApps: FC<BrowseAppsProps> = ({
 };
 
 const AppPortalPage: NextPage = () => {
-  const { t: tApps, lang } = useTranslation('apps');
-  const { t: tAppPortal } = useTranslation('app-portal');
+  const { t, lang } = useTranslation('app-portal');
   const { t: tCommon } = useTranslation('common');
-
-  // Prefer apps namespace; fallback to app-portal because most strings still live there across locales.
-  // Keep both namespaces mapped for /apps in i18n.json until Lokalise migration completes.
-  const t = useCallback(
-    (key: string) => {
-      const value = tApps(key);
-      return value === key ? tAppPortal(key) : value;
-    },
-    [tApps, tAppPortal],
-  );
 
   const featuredApps = useMemo(() => getFeaturedApps(t), [t]);
   const appTiles = useMemo(() => getAppTiles(t), [t]);

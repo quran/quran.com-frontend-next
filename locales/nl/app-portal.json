@@ -82,6 +82,11 @@
         "headline": "Ontdek meer dan 25 tafsirs en meer dan 100 vertalingen op één plek.",
         "name": "Koranlink",
         "tagline": "Tafsir en studiegids"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "Leer meer",
@@ -92,5 +97,8 @@
     "description": "Ontdek een zorgvuldig samengestelde collectie islamitische apps, ontwikkeld met Quran.foundation. Van studietools tot gebedshulpmiddelen: vind apps die je spirituele reis verrijken.",
     "title": "Ontdek ons ecosysteem van apps"
   },
-  "quran-apps-portal": "Koran Apps Portaal"
+  "quran-apps-portal": "Koran Apps Portaal",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

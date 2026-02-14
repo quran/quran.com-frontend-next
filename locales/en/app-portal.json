@@ -27,7 +27,7 @@
       },
       "quranreflect": {
         "caption": "Share reflections",
-        "description": "A social platform for encouraging and facilitating Quranic reflections - share reflections, explore topics, and engage with the community.",
+        "description": "A social platform to cultivate a culture of reflection upon the Holy Quran",
         "tagline": "Share reflections and grow together",
         "title": "QuranReflect"
       },
@@ -73,6 +73,11 @@
         "name": "Qariah",
         "tagline": "Women Quran reciters"
       },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
+      },
       "quran-kareem": {
         "headline": "Your new gateway to connect with the Book of Allah",
         "name": "Quran Kareem",
@@ -88,9 +93,12 @@
     "title": "Featured Apps",
     "view-all": "View all"
   },
-  "hero": {
-    "description": "Explore a curated collection of Islamic applications built with Quran.foundation. From study tools to prayer utilities, find apps that enhance your spiritual journey.",
-    "title": "Discover our Ecosystem of Apps"
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
   },
-  "quran-apps-portal": "Quran Apps Portal"
+  "hero": {
+    "description": "Explore unique apps powered by Quran Foundation\u2019s verified content and user features, while your account, progress, and journey stay connected.",
+    "title": "Connected Quran Apps"
+  },
+  "quran-apps-portal": "Connected Quran Apps"
 }

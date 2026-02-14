@@ -82,6 +82,11 @@
         "headline": "25'ten fazla tefsir ve 100'den fazla tercümeyi tek bir yerde keşfedin.",
         "name": "Kuran Bağlantısı",
         "tagline": "Tefsir ve çalışma arkadaşı"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "Daha fazla bilgi edin",
@@ -92,5 +97,8 @@
     "description": "Quran.foundation ile geliştirilmiş, özenle seçilmiş İslami uygulamalar koleksiyonunu keşfedin. Çalışma araçlarından dua yardımcılarına kadar, manevi yolculuğunuzu zenginleştirecek uygulamaları bulun.",
     "title": "Uygulama Ekosistemimizi Keşfedin"
   },
-  "quran-apps-portal": "Kuran Uygulamaları Portalı"
+  "quran-apps-portal": "Kuran Uygulamaları Portalı",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

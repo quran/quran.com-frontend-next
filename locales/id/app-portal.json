@@ -82,6 +82,11 @@
         "headline": "Jelajahi 25+ tafsir dan 100+ terjemahan di satu tempat.",
         "name": "Tautan Al-Quran",
         "tagline": "Tafsir & pendamping belajar"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "Pelajari selengkapnya",
@@ -92,5 +97,8 @@
     "description": "Jelajahi koleksi aplikasi Islami pilihan yang dibangun dengan Quran.foundation. Dari alat bantu belajar hingga perlengkapan sholat, temukan aplikasi yang meningkatkan perjalanan spiritual Anda.",
     "title": "Temukan Ekosistem Aplikasi Kami"
   },
-  "quran-apps-portal": "Portal Aplikasi Al-Quran"
+  "quran-apps-portal": "Portal Aplikasi Al-Quran",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

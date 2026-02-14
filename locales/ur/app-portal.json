@@ -82,6 +82,11 @@
         "headline": "Explore 25+ tafsirs and 100+ translations in one place",
         "name": "Quran Link",
         "tagline": "Tafsir & study companion"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "مزید جانیں",
@@ -92,5 +97,8 @@
     "description": "Quran.foundation کے ساتھ بنائی گئی اسلامی ایپس کے منتخب مجموعے کو دریافت کریں۔ مطالعہ کے ٹولز سے لے کر نماز کی یوٹیلیٹیز تک، ایسی ایپس تلاش کریں جو آپ کے روحانی سفر کو بہتر بنائیں۔",
     "title": "ہماری ایپ کے ایکو سسٹم کو دریافت کریں"
   },
-  "quran-apps-portal": "قرآن ایپس پورٹل"
+  "quran-apps-portal": "قرآن ایپس پورٹل",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

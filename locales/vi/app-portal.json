@@ -82,6 +82,11 @@
         "headline": "Khám phá hơn 25 tafsir và 100 bản dịch tại một nơi.",
         "name": "Quran Link",
         "tagline": "Tafsir & tài liệu học"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "Tìm hiểu thêm",
@@ -92,5 +97,8 @@
     "description": "Khám phá bộ ứng dụng Hồi giáo chọn lọc, xây dựng với Quran.foundation, từ công cụ học tập đến tiện ích cầu nguyện, đồng hành cùng hành trình tâm linh của bạn.",
     "title": "Khám phá hệ sinh thái ứng dụng của chúng tôi."
   },
-  "quran-apps-portal": "Cổng ứng dụng Kinh Qur'an"
+  "quran-apps-portal": "Cổng ứng dụng Kinh Qur'an",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

@@ -82,6 +82,11 @@
         "headline": "Terokai 25+ tafsir dan 100+ terjemahan di satu tempat",
         "name": "Pautan Al-Quran",
         "tagline": "Tafsir & teman belajar"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "Ketahui lebih lanjut",
@@ -92,5 +97,8 @@
     "description": "Terokai koleksi susun atur aplikasi Islam yang dibina dengan Quran.foundation. Daripada alat belajar kepada utiliti solat, cari apl yang meningkatkan perjalanan rohani anda.",
     "title": "Temui Ekosistem Apl kami"
   },
-  "quran-apps-portal": "Portal Aplikasi Al-Quran"
+  "quran-apps-portal": "Portal Aplikasi Al-Quran",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

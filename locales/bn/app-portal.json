@@ -82,6 +82,11 @@
         "headline": "এক জায়গায় ২৫+ তাফসির এবং ১০০+ অনুবাদ অন্বেষণ করুন",
         "name": "কুরআন লিংক",
         "tagline": "তাফসির ও অধ্যয়নের সঙ্গী"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "আরও জানুন",
@@ -92,5 +97,8 @@
     "description": "Quran.foundation দিয়ে তৈরি ইসলামিক অ্যাপ্লিকেশনের একটি কিউরেটেড সংগ্রহ অন্বেষণ করুন। অধ্যয়নের সরঞ্জাম থেকে শুরু করে প্রার্থনার সরঞ্জাম পর্যন্ত, এমন অ্যাপ খুঁজুন যা আপনার আধ্যাত্মিক যাত্রাকে উন্নত করে।",
     "title": "আমাদের অ্যাপের ইকোসিস্টেম আবিষ্কার করুন"
   },
-  "quran-apps-portal": "কুরআন অ্যাপস পোর্টাল"
+  "quran-apps-portal": "কুরআন অ্যাপস পোর্টাল",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

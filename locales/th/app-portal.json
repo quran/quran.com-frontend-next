@@ -82,6 +82,11 @@
         "headline": "สำรวจตัฟซีร์กว่า 25 เล่มและคำแปลกว่า 100 บทได้ในที่เดียว",
         "name": "ลิงก์อัลกุรอาน",
         "tagline": "ตัฟซีรและคู่มือการศึกษา"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "เรียนรู้เพิ่มเติม",
@@ -92,5 +97,8 @@
     "description": "สำรวจคอลเลกชันแอปพลิเคชันอิสลามที่คัดสรรมาอย่างดี ซึ่งสร้างขึ้นโดย Quran.foundation ตั้งแต่เครื่องมือสำหรับการศึกษาไปจนถึงเครื่องมือสำหรับการละหมาด ค้นหาแอปที่จะช่วยเสริมสร้างการเดินทางทางจิตวิญญาณของคุณ",
     "title": "มาค้นพบระบบนิเวศของแอปพลิเคชันของเรากันเถอะ"
   },
-  "quran-apps-portal": "พอร์ทัลแอปอัลกุรอาน"
+  "quran-apps-portal": "พอร์ทัลแอปอัลกุรอาน",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

@@ -82,6 +82,11 @@
         "headline": "25+ ተፍሲሮችን እና 100+ ትርጉሞችን በአንድ ቦታ ያስሱ",
         "name": "የቁርዓን አገናኝ",
         "tagline": "ተፍሲር እና ጥናት ጓደኛ"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "የበለጠ ተማር",
@@ -92,5 +97,8 @@
     "description": "በ Quran.foundation የተገነቡ ኢስላማዊ መተግበሪያዎች ስብስብ ያስሱ። ከመማሪያ መሳሪያዎች እስከ ዱዓ ወይም ጸሎት መገልገያዎች፣ መንፈሳዊ ጉዞዎን የሚያሻሽሉ መተግበሪያዎችን ያግኙ።",
     "title": "የእኛን የመተግበሪያዎች ስነ-ምህዳር ያግኙ"
   },
-  "quran-apps-portal": "የቁርዓን መተግበሪያዎች ፖርታል"
+  "quran-apps-portal": "የቁርዓን መተግበሪያዎች ፖርታል",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

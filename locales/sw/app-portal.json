@@ -82,6 +82,11 @@
         "headline": "Gundua zaidi ya tafsir 25 na zaidi ya tarjuma 100 katika sehemu moja",
         "name": "Quran Link",
         "tagline": "Tafsir & mwenzi wa masomo"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "Jifunze zaidi",
@@ -92,5 +97,8 @@
     "description": "Gundua mkusanyiko khasa wa programu za Kiislamu zilizoundwa na Quran.Foundation. Kuanzia zana za kujifunzia hadi huduma za maombi, pata programu zinazoboresha safari yako ya kiroho.",
     "title": "Gundua Mfumo wetu wa Ikolojia wa Programu"
   },
-  "quran-apps-portal": "Tovuti ya Programu za Qur'ani"
+  "quran-apps-portal": "Tovuti ya Programu za Qur'ani",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

@@ -82,6 +82,11 @@
         "headline": "استكشف أكثر من 25 تفسيراً وأكثر من 100 ترجمة في مكان واحد",
         "name": "Quran Link",
         "tagline": "رفيق التفسير والدراسة"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "تعرف على المزيد",
@@ -92,5 +97,8 @@
     "description": "استكشف مجموعة مختارة من التطبيقات الإسلامية المبنية باستخدام Quran.Foundation. من أدوات الدراسة إلى تطبيقات الصلاة، اكتشف التطبيقات التي تعزز رحلتك الروحية.",
     "title": "اكتشف منظومتنا المتكاملة من التطبيقات"
   },
-  "quran-apps-portal": "بوابة تطبيقات القرآن الكريم"
+  "quran-apps-portal": "بوابة تطبيقات القرآن الكريم",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

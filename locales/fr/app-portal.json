@@ -82,6 +82,11 @@
         "headline": "Explorez plus de 25 tafsirs et plus de 100 traductions en un seul endroit",
         "name": "Lien vers le Coran",
         "tagline": "Tafsir et guide d'étude"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "Apprendre encore plus",
@@ -92,5 +97,8 @@
     "description": "Découvrez une sélection d'applications islamiques conçues avec Quran.foundation. Des outils d'étude aux applications de prière, trouvez celles qui enrichiront votre cheminement spirituel.",
     "title": "Découvrez notre écosystème d'applications"
   },
-  "quran-apps-portal": "Portail d'applications coraniques"
+  "quran-apps-portal": "Portail d'applications coraniques",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

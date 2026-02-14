@@ -82,6 +82,11 @@
         "headline": "在一个地方浏览 25 部以上的经注和 100 多篇译文",
         "name": "古兰经链接",
         "tagline": "经注与学习伴侣"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "了解更多",
@@ -92,5 +97,8 @@
     "description": "探索一系列由 Quran.foundation 开发的精选伊斯兰应用程序。从学习工具到祈祷辅助工具，找到能够提升您灵性之旅的应用程序。",
     "title": "探索我们的应用生态系统"
   },
-  "quran-apps-portal": "古兰经应用程序门户"
+  "quran-apps-portal": "古兰经应用程序门户",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }

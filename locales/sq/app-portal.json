@@ -82,6 +82,11 @@
         "headline": "Eksploroni mbi 25 tefsirë dhe mbi 100 përkthime në një vend",
         "name": "Lidhja e Kuranit",
         "tagline": "Tefsir dhe shoqërues studimi"
+      },
+      "quran-space": {
+        "name": "Quran Space",
+        "tagline": "Transform Your Quran Journey",
+        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
       }
     },
     "learn-more": "Mëso më shumë",
@@ -92,5 +97,8 @@
     "description": "Eksploroni një koleksion të kuruar aplikacionesh islamike të ndërtuara me Quran.foundation. Nga mjetet e studimit deri te shërbimet e lutjes, gjeni aplikacione që përmirësojnë udhëtimin tuaj shpirtëror.",
     "title": "Zbuloni Ekosistemin tonë të Aplikacioneve"
   },
-  "quran-apps-portal": "Portali i Aplikacioneve të Kuranit"
+  "quran-apps-portal": "Portali i Aplikacioneve të Kuranit",
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+  }
 }
