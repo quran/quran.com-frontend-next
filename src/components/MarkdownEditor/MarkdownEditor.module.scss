@@ -35,9 +35,9 @@
   }
 
   hr {
-    margin: var(--spacing-medium) 0;
+    margin: var(--spacing-xlarge) 0;
     border: none;
-    border-block-start: 2px solid var(--color-background-inverse);
+    border-block-start: 1px solid var(--color-borders-hairline);
   }
   blockquote {
     background-color: var(--color-success-faint);
