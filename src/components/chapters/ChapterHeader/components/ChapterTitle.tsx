@@ -4,10 +4,9 @@ import classNames from 'classnames';
 
 import styles from '../ChapterHeader.module.scss';
 
-import ChapterIcon from './ChapterIcon';
 import SurahInfoButton from './SurahInfoButton';
 
-import { ChapterIconsSize } from '@/components/chapters/ChapterIcon/ChapterIconContainer';
+import { SurahName } from '@/components/SurahName';
 import useIsMobile from '@/hooks/useIsMobile';
 import { Direction } from '@/utils/locale';
 
@@ -57,9 +56,12 @@ const ChapterTitle: React.FC<ChapterTitleProps> = ({
         )}
 
         <div className={styles.arabicSurahNameContainer}>
-          <ChapterIcon
-            chapterId={chapterId}
-            size={isMobile ? ChapterIconsSize.XMega : ChapterIconsSize.Massive}
+          <SurahName
+            chapterId={Number(chapterId)}
+            style={{
+              fontSize: isMobile ? '4rem' : '6rem',
+              display: 'block',
+            }}
           />
         </div>
       </h1>
