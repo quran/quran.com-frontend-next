@@ -15,6 +15,7 @@ export type ContentChunk =
  * @param {string} href - The URL to parse
  * @returns {VerseReference | null} Parsed reference or null if invalid
  */
+// eslint-disable-next-line react-func/max-lines-per-function
 export function parseQuranUrl(href: string): VerseReference | null {
   let url: URL;
   try {
@@ -24,7 +25,10 @@ export function parseQuranUrl(href: string): VerseReference | null {
   }
   if (url.hostname !== 'quran.com' && !url.hostname.endsWith('.quran.com')) return null;
 
-  const path = url.pathname.replace(/^\//, '').replace(/\/$/, '');
+  const path = url.pathname
+    .replace(/^\//, '')
+    .replace(/\/$/, '')
+    .replace(/^[a-z]{2}\//i, '');
 
   // Pattern: chapter/verse or chapter/from-to
   let match = path.match(/^(\d+)\/(\d+)(?:-(\d+))?$/);
