@@ -89,12 +89,20 @@ const useStartingVerseScrollTarget = ({
     verseKeysInLookupRange.includes(startingVerseValue);
 
   const targetVerseIndex = useMemo(() => {
-    // Resolve absolute virtualized index for both supported formats.
-    if (isValidChapterStartingVerse) return startingVerseNumber - 1; // Chapter format maps directly to zero-based index.
+    // Resolve virtualized index for both supported formats.
+    if (isValidChapterStartingVerse) {
+      const chapterFormatTargetVerseKey = makeVerseKey(chapterId, startingVerseNumber);
+      if (verseKeysInLookupRange.length > 0) {
+        // When list is sliced (e.g. /2/255), index must be relative to lookupRange.
+        return verseKeysInLookupRange.indexOf(chapterFormatTargetVerseKey);
+      }
+      return startingVerseNumber - 1; // Fallback for full chapter lists without lookup range.
+    }
     if (isValidLookupStartingVerseKey) return verseKeysInLookupRange.indexOf(startingVerseValue); // Multi-surah format uses lookup key ordering.
     return -1;
   }, [
     isValidChapterStartingVerse,
+    chapterId,
     startingVerseNumber,
     isValidLookupStartingVerseKey,
     verseKeysInLookupRange,
@@ -123,7 +131,7 @@ const useStartingVerseScrollTarget = ({
     startingVerse,
     targetVerseIndex,
     targetVerseKey,
-    shouldSkipInitialScroll: isValidChapterStartingVerse && startingVerseNumber <= 1, // Skip verse 1 in chapter mode because it is already at top.
+    shouldSkipInitialScroll: isValidChapterStartingVerse && targetVerseIndex === 0, // Skip when requested verse is already the first rendered item.
   };
 };
 
