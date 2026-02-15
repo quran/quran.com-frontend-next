@@ -9,6 +9,7 @@ import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
 
 import useReadingBookmark from './useReadingBookmark';
 
+import { broadcastBookmarksUpdate } from '@/hooks/useBookmarksBroadcast';
 import useMappedBookmark from '@/hooks/useMappedBookmark';
 import { ReadingBookmarkType } from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
@@ -63,6 +64,10 @@ vi.mock('@/hooks/useMappedBookmark', () => ({
     effectiveAyahVerseKey: null,
     isLoading: false,
   })),
+}));
+
+vi.mock('@/hooks/useBookmarksBroadcast', () => ({
+  broadcastBookmarksUpdate: vi.fn(),
 }));
 
 vi.mock('@/utils/api', () => ({
@@ -217,6 +222,18 @@ describe('useReadingBookmark - Logged-in User', () => {
         verseNumber: 255,
         isReading: true,
       });
+      expect(broadcastBookmarksUpdate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          touchesReadingBookmark: true,
+          mushafId: 1,
+          readingBookmark: expect.objectContaining({
+            id: 'bookmark-123',
+            key: 1,
+            verseNumber: 1,
+            type: BookmarkType.Ayah,
+          }),
+        }),
+      );
       // Note: onBookmarkChanged is NOT called for logged-in users (optimistic updates instead)
       expect(mockOnBookmarkChanged).not.toHaveBeenCalled();
     });
@@ -380,6 +397,13 @@ describe('useReadingBookmark - Logged-in User', () => {
       });
 
       expect(mockDeleteBookmarkById).toHaveBeenCalledWith('bm-1');
+      expect(broadcastBookmarksUpdate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          touchesReadingBookmark: true,
+          mushafId: 1,
+          readingBookmark: null,
+        }),
+      );
       // Note: onBookmarkChanged is NOT called for logged-in users (optimistic updates instead)
       expect(mockOnBookmarkChanged).not.toHaveBeenCalled();
     });
@@ -556,5 +580,33 @@ describe('useReadingBookmark - Guest User', () => {
     const lastCall = mockUseMappedBookmark.mock.calls[mockUseMappedBookmark.mock.calls.length - 1];
     const lastBookmark = lastCall?.[0]?.bookmark;
     expect(lastBookmark?.mushafId).toBe(2);
+  });
+
+  it('broadcasts guest reading bookmark payload when setting bookmark', async () => {
+    const { result } = renderHook(() =>
+      useReadingBookmark({
+        type: ReadingBookmarkType.AYAH,
+        verseKey: '1:2',
+        lang: 'en',
+        isLoggedIn: false,
+      }),
+    );
+
+    await act(async () => {
+      await result.current.handleSetReadingBookmark();
+    });
+
+    expect(broadcastBookmarksUpdate).toHaveBeenCalledWith(
+      expect.objectContaining({
+        touchesReadingBookmark: true,
+        mushafId: 1,
+        guestReadingBookmark: expect.objectContaining({
+          key: 1,
+          verseNumber: 2,
+          type: BookmarkType.Ayah,
+          mushafId: 1,
+        }),
+      }),
+    );
   });
 });

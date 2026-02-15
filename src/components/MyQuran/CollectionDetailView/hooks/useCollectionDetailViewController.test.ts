@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { renderHook } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -5,6 +6,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import useCollectionDetailViewController from './useCollectionDetailViewController';
 
 import { ToastStatus } from '@/dls/Toast/Toast';
+import { broadcastBookmarksUpdate } from '@/hooks/useBookmarksBroadcast';
 import { deleteCollectionBookmarkById } from '@/utils/auth/api';
 
 vi.mock('@/dls/Toast/Toast', () => ({
@@ -13,6 +15,9 @@ vi.mock('@/dls/Toast/Toast', () => ({
 
 vi.mock('@/utils/auth/api', () => ({
   deleteCollectionBookmarkById: vi.fn(),
+}));
+vi.mock('@/hooks/useBookmarksBroadcast', () => ({
+  broadcastBookmarksUpdate: vi.fn(),
 }));
 
 const toast = vi.fn();
@@ -44,7 +49,10 @@ vi.mock('./useCollectionDetailData', () => ({
     mutate: vi.fn(),
     error: undefined,
     bookmarks: [{ id: 'b1' }, { id: 'b2' }],
-    filteredBookmarks: [{ id: 'b1' }, { id: 'b2' }],
+    filteredBookmarks: [
+      { id: 'b1', key: 1, verseNumber: 1 },
+      { id: 'b2', key: 2, verseNumber: 255 },
+    ],
     onUpdated,
   }),
 }));
@@ -135,6 +143,16 @@ describe('useCollectionDetailViewController', () => {
 
     expect(deleteCollectionBookmarkById).toHaveBeenCalledWith('123', 'b1');
     expect(onUpdated).toHaveBeenCalledTimes(1);
+    expect(broadcastBookmarksUpdate).toHaveBeenCalledWith(
+      expect.objectContaining({
+        touchesBookmarksList: true,
+        touchesBookmarkCollections: true,
+        touchesCollectionDetail: true,
+        affectedCollectionIds: ['123'],
+        affectedSurahNumbers: [1],
+        mushafId: 7,
+      }),
+    );
     expect(toast).toHaveBeenCalledWith('collection:delete-bookmark.success:1', {
       status: ToastStatus.Success,
     });
@@ -157,6 +175,7 @@ describe('useCollectionDetailViewController', () => {
       setTimeout(r, 0);
     });
 
+    expect(broadcastBookmarksUpdate).not.toHaveBeenCalled();
     expect(toast).toHaveBeenCalledWith('common:error.general:', { status: ToastStatus.Error });
   });
 });

@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useSurahBookmarks from '@/hooks/auth/useSurahBookmarks';
+import { broadcastBookmarksUpdate } from '@/hooks/useBookmarksBroadcast';
 import Bookmark from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
 import Verse from '@/types/Verse';
@@ -144,6 +145,16 @@ export const useCollectionToggle = ({
           toast(t('saved-to', { collectionName }), { status: ToastStatus.Success });
         }
 
+        broadcastBookmarksUpdate({
+          touchesCollectionsList: true,
+          touchesBookmarksList: true,
+          touchesBookmarkCollections: true,
+          touchesCollectionDetail: true,
+          affectedCollectionIds: [collectionId],
+          affectedSurahNumbers: [key],
+          mushafId,
+        });
+
         onMutate?.();
 
         // Use bookmark from API response to update local state, enriched with current collections
@@ -240,6 +251,16 @@ export const useCollectionToggle = ({
           toast(t('removed-from', { collectionName }), { status: ToastStatus.Success });
           logEvent('ayah_removed_from_collection', { verseKey, collectionId });
         }
+
+        broadcastBookmarksUpdate({
+          touchesCollectionsList: true,
+          touchesBookmarksList: true,
+          touchesBookmarkCollections: true,
+          touchesCollectionDetail: true,
+          affectedCollectionIds: [collectionId],
+          affectedSurahNumbers: [key],
+          mushafId,
+        });
 
         onMutate?.();
       } catch (err: unknown) {

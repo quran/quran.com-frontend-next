@@ -7,6 +7,7 @@ import { buildBulkCopyBlobPromise, deleteBookmarks } from './bulkActionsUtils';
 import useCollectionBulkActions from './useCollectionBulkActions';
 
 import { ToastStatus } from '@/dls/Toast/Toast';
+import { broadcastBookmarksUpdate } from '@/hooks/useBookmarksBroadcast';
 import copyText from '@/utils/copyText';
 
 vi.mock('@/dls/Toast/Toast', () => ({
@@ -15,6 +16,9 @@ vi.mock('@/dls/Toast/Toast', () => ({
 
 vi.mock('@/utils/copyText', () => ({
   default: vi.fn(),
+}));
+vi.mock('@/hooks/useBookmarksBroadcast', () => ({
+  broadcastBookmarksUpdate: vi.fn(),
 }));
 
 vi.mock('./bulkActionsUtils', async () => {
@@ -244,6 +248,15 @@ describe('useCollectionBulkActions', () => {
 
     expect(removeBookmarkIdsFromState).toHaveBeenCalledWith(['b1']);
     expect(onUpdated).toHaveBeenCalledTimes(1);
+    expect(broadcastBookmarksUpdate).toHaveBeenCalledWith(
+      expect.objectContaining({
+        touchesBookmarksList: true,
+        touchesBookmarkCollections: true,
+        touchesCollectionDetail: true,
+        affectedCollectionIds: ['123'],
+        affectedSurahNumbers: ['1'],
+      }),
+    );
     expect(result.current.pendingDeleteBookmarkIds).toEqual(['b2']);
     expect(result.current.isDeleteBookmarksModalOpen).toBe(true);
     expect(toast).toHaveBeenCalledWith('common:error.general', { status: ToastStatus.Error });
