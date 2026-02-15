@@ -1,38 +1,38 @@
 {
   "actions": {
-    "copied": "کاپی کیا گیا!",
+    "copied": "کاپی ہو چکا!",
     "copy": "کاپی",
-    "copyEmbedSnippet": "ایمبیڈ اسنیپٹ کاپی کریں۔"
+    "copyEmbedSnippet": "ایمبیڈ اسنیپٹ کاپی کریں"
   },
   "checkboxes": {
     "answers": "جوابات کا بٹن دکھائیں (اگر دستیاب ہو)",
-    "audio": "آڈیو پلے بیک کو فعال کریں۔",
-    "customSize": "اپنی مرضی کے مطابق چوڑائی/اونچائی کا استعمال کریں۔",
-    "lessons": "اسباق کا بٹن دکھائیں۔",
+    "audio": "آڈیو پلے بیک کو فعال کریں",
+    "customSize": "اپنی مرضی کے مطابق چوڑائی/اونچائی کا استعمال کریں",
+    "lessons": "اسباق کا بٹن دکھائیں",
     "mergeVerses": "آیات کو ضم کریں (ان لائن ڈسپلے)",
-    "reflections": "عکاسی بٹن دکھائیں۔",
-    "showArabic": "عربی آیت دکھائیں۔",
-    "tafsirs": "تفسیر کا بٹن دکھائیں۔",
-    "translator": "مترجم کا نام دکھائیں۔",
+    "reflections": "\"ریفلیکشنز\" بٹن دکھائیں",
+    "showArabic": "عربی آیت دکھائیں",
+    "tafsirs": "تفسیر کا بٹن دکھائیں",
+    "translator": "مترجم کا نام دکھائیں",
     "verseRange": "آیت کی حد کو فعال کریں۔",
-    "wordByWord": "لفظ بہ لفظ ترجمہ فعال کریں۔",
-    "wordByWordTransliteration": "لفظ بہ لفظ نقل حرفی کو فعال کریں۔"
+    "wordByWord": "لفظ بہ لفظ ترجمہ فعال کریں",
+    "wordByWordTransliteration": "لفظ بہ لفظ نقل حرفی کو فعال کریں"
   },
   "errors": {
-    "clipboardFallback": "فال بیک کا استعمال کرتے ہوئے کلپ بورڈ لکھنا ناکام ہو گیا۔",
-    "clipboardUnavailable": "کلپ بورڈ API دستیاب نہیں ہے۔",
+    "clipboardFallback": "فال بیک کا استعمال کرتے ہوئے کلپ بورڈ لکھنا ناکام ہو گیا",
+    "clipboardUnavailable": "کلپ بورڈ API دستیاب نہیں ہے",
     "loadChapters": "ابواب لوڈ کرنے سے قاصر",
-    "loadReciters": "تلاوت کرنے والوں کو لوڈ کرنے سے قاصر",
+    "loadReciters": "قارئین کو لوڈ نہیں کیا جا سکا",
     "loadTranslations": "ترجمے لوڈ کرنے سے قاصر"
   },
   "fields": {
-    "ayah": "آیہ",
+    "ayah": "آیت",
     "clientId": "کلائنٹ کی شناخت",
     "height": "اونچائی",
     "language": "زبان",
     "mushaf": "مصحف",
-    "reciter": "تلاوت کرنے والا",
-    "surah": "سورہ",
+    "reciter": "قاری",
+    "surah": "سورۃ",
     "theme": "تھیم",
     "translations": "ترجمے",
     "width": "چوڑائی"
@@ -42,7 +42,7 @@
     "title": "آیا ایمبیڈ بلڈر"
   },
   "meta": {
-    "description": "قرآن کو شیئر کرنے کے لیے ایمبیڈ ویجٹس کو ترتیب دیں اور پیش نظارہ کریں، پھر استعمال کے لیے تیار اسکرپٹ کا ٹکڑا کاپی کریں۔",
+    "description": "قرآن شیئر کرنے کے لیے ایمبیڈ ویجٹس کو سیٹ اپ اور پریویو کریں، پھر تیار شدہ اسکرپٹ کا سنپٹ کاپی کریں۔",
     "title": "آیاہ ایمبیڈ بلڈر | Quran.com"
   },
   "mushaf": {
@@ -56,17 +56,17 @@
     "searchTranslations": "ترجمے تلاش کریں..."
   },
   "reciters": {
-    "select": "تلاوت کرنے والا منتخب کریں۔"
+    "select": "قاری کا انتخاب کریں"
   },
   "sections": {
     "configuration": "کنفیگریشن",
-    "preview": "لائیو پیش نظارہ",
+    "preview": "لائیو پری ویو",
     "snippet": "ایمبیڈ کا ٹکڑا"
   },
   "states": {
-    "loadingChapters": "ابواب لوڈ ہو رہے ہیں...",
-    "loadingPreview": "پیش منظر لوڈ ہو رہا ہے...",
-    "loadingReciters": "تلاوت کرنے والوں کو لوڈ کیا جا رہا ہے...",
+    "loadingChapters": "باب لوڈ ہو رہے ہیں...",
+    "loadingPreview": "پریویو لوڈ ہو رہا ہے...",
+    "loadingReciters": "قراء کو لوڈ کیا جا رہا ہے...",
     "loadingVerses": "آیات لوڈ ہو رہی ہیں...",
     "noTranslations": "کوئی ترجمہ نہیں ملا"
   },
@@ -76,7 +76,7 @@
     "sepia": "سیپیا"
   },
   "translations": {
-    "chipRemoveLabel": "ترجمہ ہٹا دیں۔",
+    "chipRemoveLabel": "ترجمہ ہٹا دیں",
     "otherLanguage": "دیگر"
   },
   "widget": {

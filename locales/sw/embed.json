@@ -5,45 +5,45 @@
     "copyEmbedSnippet": "Nakili Kijisehemu Kilichopachikwa"
   },
   "checkboxes": {
-    "answers": "Kitufe cha Onyesha Majibu (ikiwa kinapatikana)",
-    "audio": "Washa uchezaji wa sauti",
+    "answers": "Onyesha Kitufe cha Majibu (ikiwa kinapatikana)",
+    "audio": "Wezesha uchezaji wa sauti",
     "customSize": "Tumia upana/urefu maalum",
-    "lessons": "Kitufe cha Onyesha Masomo",
-    "mergeVerses": "Unganisha mistari (onyesho la ndani)",
-    "reflections": "Kitufe cha Onyesha Tafakari",
-    "showArabic": "Onyesha mstari wa Kiarabu",
-    "tafsirs": "Onyesha kitufe cha Tafsirs",
+    "lessons": "Onyesha Kitufe cha Masomo",
+    "mergeVerses": "Unganisha aya (onyesho la ndani)",
+    "reflections": "Onyesha Kitufe cha Tafakari",
+    "showArabic": "Onyesha aya kwa Kiarabu",
+    "tafsirs": "Onyesha kitufe cha Tafsir",
     "translator": "Onyesha jina la mtafsiri",
-    "verseRange": "Washa safu ya mistari",
-    "wordByWord": "Wezesha tafsiri ya neno kwa neno",
-    "wordByWordTransliteration": "Washa unukuzi wa neno kwa neno"
+    "verseRange": "Wezesha safu ya aya",
+    "wordByWord": "Wezesha tarjuma ya neno kwa neno",
+    "wordByWordTransliteration": "Wezesha unukuzi wa neno kwa neno"
   },
   "errors": {
-    "clipboardFallback": "Uandishi wa ubao wa kunakili umeshindwa, kwa kutumia njia mbadala",
+    "clipboardFallback": "Uandishi wa ubao wa kunakili umepata hitilafu, njia mbadala inatumika",
     "clipboardUnavailable": "API ya Ubao wa Kunakili haipatikani",
-    "loadChapters": "Haiwezi kupakia sura",
-    "loadReciters": "Haiwezi kupakia visomaji",
-    "loadTranslations": "Haiwezi kupakia tafsiri"
+    "loadChapters": "Imeshindikana kupakia sura",
+    "loadReciters": "Imeshindikana kupakia wasomaji",
+    "loadTranslations": "Imeshindikana kupakia tarjuma"
   },
   "fields": {
-    "ayah": "Ayah",
+    "ayah": "Aya",
     "clientId": "Kitambulisho cha Mteja",
     "height": "Urefu",
     "language": "Lugha",
-    "mushaf": "Mushaf",
+    "mushaf": "Msahafu",
     "reciter": "Msomaji",
-    "surah": "Surah",
+    "surah": "Sura",
     "theme": "Mandhari",
-    "translations": "Tafsiri",
+    "translations": "Tarjuma",
     "width": "Upana"
   },
   "header": {
-    "subtitle": "<bold>Njia ya ubora wa juu na inayoweza kubadilishwa ili kujumuisha aya za Quran katika maudhui yako.</bold><br />Unda kipachiko ambacho unaweza kukibadilisha kwa urahisi, nacho <bold>Uandishi sahihi wa Kiarabu, usomaji uliojengewa ndani</bold> na zaidi, ili wasomaji waweze kusikiliza wanapojishughulisha na mstari huo.",
-    "title": "Mjenzi wa Kiambatisho cha Ayah"
+    "subtitle": "<bold>Njia ya ubora wa juu na inayoweza kubadilishwa ili kujumuisha aya za Qur'ani katika maudhui yako.</bold><br />Unda kipachiko ambacho unaweza kukibadilisha kwa urahisi, ikiwa na <bold>Uandishi sahihi wa Kiarabu, usomaji uliojengewa kwa ndani</bold> na zaidi, ili wasomaji waweze kusikiliza wanapojishughulisha na aya hio.",
+    "title": "Mjenzi wa Kiambatisho cha Aya"
   },
   "meta": {
-    "description": "Sanidi na hakiki wijeti za kupachika kwa ajili ya kushiriki Quran, kisha nakili kipande cha hati kilicho tayari kutumika.",
-    "title": "Mjenzi wa Kiambatisho cha Ayah | Quran.com"
+    "description": "Sanidi na hakiki wijeti za kupachika kwa ajili ya kushiriki Qur'ani, kisha nakili kipande cha hati kilicho tayari kutumika.",
+    "title": "Mjenzi wa Kiambatisho cha Aya | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -53,7 +53,7 @@
     "tajweed": "Tajweed"
   },
   "placeholders": {
-    "searchTranslations": "Tafuta tafsiri..."
+    "searchTranslations": "Tafuta tarjuma..."
   },
   "reciters": {
     "select": "Chagua msomaji"
@@ -65,10 +65,10 @@
   },
   "states": {
     "loadingChapters": "Inapakia sura...",
-    "loadingPreview": "Inapakia onyesho la kuchungulia...",
+    "loadingPreview": "Inapakia onyesho la kuhakikisha...",
     "loadingReciters": "Inapakia wasomaji...",
-    "loadingVerses": "Inapakia mistari...",
-    "noTranslations": "Hakuna tafsiri zilizopatikana"
+    "loadingVerses": "Inapakia aya...",
+    "noTranslations": "Hakuna tarjuma zilizopatikana"
   },
   "theme": {
     "dark": "Nyeusi",
@@ -76,7 +76,7 @@
     "sepia": "Sepia"
   },
   "translations": {
-    "chipRemoveLabel": "Ondoa tafsiri",
+    "chipRemoveLabel": "Ondoa tarjuma",
     "otherLanguage": "Nyingine"
   },
   "widget": {

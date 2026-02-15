@@ -3,50 +3,50 @@
     "apps": {
       "muhaffidh": {
         "caption": "Kariri na Hakiki Qur'ani kwa ufanisi",
-        "description": "Programu ya Quran iliyoundwa ili kukusaidia kukariri na kupitia Quran kwa njia bunifu.",
-        "tagline": "Msaidizi bunifu wa kuhifadhi na kuhakiki Quran",
+        "description": "Programu ya Qur'ani iliyoundwa ili kukusaidia kukariri na kupitia Qur'ani kwa njia bunifu.",
+        "tagline": "Msaidizi bunifu wa kuhifadhi na kuhakiki Qur'ani",
         "title": "Muhafidh"
       },
       "quran_android": {
         "caption": "Soma, alamisha na usikilize Qur'ani kwenye vifaa vya Android",
-        "description": "Vipengele ni pamoja na kurasa za mtindo wa Madani, sauti isiyo na nafasi, kuweka alama/kuweka lebo/kushiriki, utafutaji, hali ya usiku, kurudia sauti, na tafsiri/tafsir katika lugha nyingi.",
-        "tagline": "Programu ya Quran ya bure na huria kwa Android",
+        "description": "Vipengele ni pamoja na kurasa za mtindo wa Madani, sauti isiyo na nafasi, kuweka alama/kuweka lebo/kushiriki, utafutaji, hali ya usiku, kurudia sauti, na tarjuma/tafsir katika lugha nyingi.",
+        "tagline": "Programu ya Qur'ani ya bure na huria ya Android",
         "title": "Qur'ani kwa Android"
       },
       "quran_ios": {
         "caption": "Programu nzuri ya kusoma na kusikiliza Qur'ani bila matangazo kwa iPhone na iPad",
-        "description": "Kutoka kwa watengenezaji wa Quran.com: soma Quran popote ulipo, kariri, na usikilize wasomaji wako uwapendao katika hali safi na isiyo na matangazo.",
-        "tagline": "Programu nzuri ya Mushaf isiyo na matangazo",
+        "description": "Kutoka kwa watengenezaji wa Quran.com: soma Qur'ani popote ulipo, kariri, na usikilize wasomaji wako uwapendao katika hali safi na isiyo na matangazo.",
+        "tagline": "Programu nzuri ya Msahafu isiyo na matangazo",
         "title": "Qur'ani kwa iOS (iliyoundwa na quran.com)"
       },
       "quranmeet": {
         "caption": "Vipindi vya moja kwa moja vya masomo ya Qur'ani",
-        "description": "Jukwaa linalowaunganisha wanafunzi na walimu na vikundi vya masomo kwa ajili ya vipindi vya kujifunza Quran vya mtu mmoja mmoja na vikundi vidogo.",
-        "tagline": "Vipindi vya Quran vya kikundi kimoja hadi kimoja na vikundi vidogo",
+        "description": "Jukwaa linalowaunganisha wanafunzi, walimu au hata vikundi vya masomo kwa ajili ya vipindi vya kujifunza Qur'ani  ana kwa ana au katika vikundi vidogo.",
+        "tagline": "Vipindi vya Qur'ani vya vikundi vidogo au ana kwa ana",
         "title": "QuranMeet"
       },
       "quranreflect": {
         "caption": "Shiriki tafakari",
-        "description": "Jukwaa la kijamii la kuhimiza na kuwezesha tafakari za Quran - shiriki tafakari, chunguza mada, na shiriki na jamii.",
-        "tagline": "Shiriki tafakari na ukue pamoja",
+        "description": "Jukwaa la kijamii la kuhimiza na kuwezesha tafakari za Qur'ani - shiriki tafakari, chunguza mada, na wasiliana na jamii.",
+        "tagline": "Shiriki tafakari ili tukue pamoja",
         "title": "QuranReflect"
       },
       "readtafsir": {
         "caption": "Tafuta na ulinganishe tafsir za awali",
-        "description": "Soma na usikilize vyanzo vingi vya tafsir vya kitambo katika sehemu moja, na kurahisisha kuvinjari, kutafuta, na kulinganisha tafsiri.",
-        "tagline": "Usomaji na kusikiliza tafsir shirikishi",
+        "description": "Soma na usikilize vyanzo vingi vya tafsir vya kitambo katika sehemu moja, ambayo hurahisisha kuvinjari, kutafuta mada, na kulinganisha ufafanuzi.",
+        "tagline": "Usomaji na usikilizaji wa tafsir shirikishi",
         "title": "ReadTafsir"
       },
       "sunnah": {
         "caption": "Mkusanyiko wa Hadith",
-        "description": "Maktaba ya hadithi yenye makusanyo makubwa yanayopatikana mtandaoni, ikiwa ni pamoja na tafsiri katika lugha nyingi na zana za utafutaji.",
+        "description": "Maktaba ya hadithi yenye makusanyo makubwa yanayopatikana mtandaoni, ikiwa ni pamoja na zana za utafutaji na tarjuma katika lugha tofauti.",
         "tagline": "Hadithi karibu nawe",
         "title": "Sunnah.com"
       },
       "tafsirapp": {
         "caption": "Tafsiri shirikishi yenye vyanzo vingi",
-        "description": "Tovuti ya utafiti wa Kurani ambayo huleta pamoja tafsir, qira'at, mushafs, i'rab, sayansi ya Qur'ani, asbab al-nuzul, hukumu na kamusi.",
-        "tagline": "Kitovu cha utafiti wa Quran",
+        "description": "Tovuti ya utafiti wa Qur'ani ambayo huleta pamoja tafsir, qira'at, misahafu, i'rab, sayansi ya Qur'ani, asbab al-nuzul, hukumu na kamusi.",
+        "tagline": "Kitovu cha utafiti wa Qur'ani",
         "title": "Tafsir App"
       }
     },
@@ -55,14 +55,14 @@
       "community": "Jumuiya",
       "hadith-sunnah": "Hadith na Sunnah",
       "popular": "Maarufu",
-      "quran-reader": "Quran Reader",
+      "quran-reader": "Visomi vya Qur'ani",
       "reflections": "Tafakari",
       "study-tools": "Zana za kujifunzia"
     },
     "title": "Vinjari Programu Zote"
   },
   "cta": {
-    "app-store": "Pakua kwenye Duka la Programu",
+    "app-store": "Pakua kutoka kwa App Store",
     "google-play": "Ipate kwenye Google Play",
     "visit": "Tembelea"
   },

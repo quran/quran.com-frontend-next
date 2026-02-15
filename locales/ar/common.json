@@ -144,13 +144,13 @@
   "copied": "تم النسخ",
   "copied-to-clipboard": "تم النسخ إلى الحافظة",
   "copy": "نسخ",
-  "copy-embed": "نسخ تضمين",
+  "copy-embed": "نسخ التضمين",
   "copylink": "نسخ الرابط",
   "counter": {
     "decrease": "تصغير",
     "increase": "تكبير"
   },
-  "create": "أنشئ",
+  "create": "إنشاء",
   "create-my-goal": "حدد هدفك",
   "default-description": "القرآن الكريم مترجم إلى العديد من اللغات في واجهة بسيطة وسهلة",
   "delete": "حذف",
@@ -160,7 +160,7 @@
   "donate-now": "تبرع الآن",
   "donate_monthly": "تبرع شهريا",
   "donate_once": "تبرع مرة واحدة",
-  "done": "منتهي",
+  "done": "تم",
   "edit": "تعديل",
   "email-verification": {
     "check-spam": "لم تستلم رسالة التحقق؟ تحقق من مجلد الرسائل غير المرغوب فيها",
@@ -184,9 +184,9 @@
     "ranges-no-value": "يجب تحديد قيمة لكل من البداية والنهاية",
     "ranges-too-many-verses": "بحد أقصى {{maxNumberOfVerses}} آيات",
     "ranges-wrong-order": "الآية الافتتاحية يجب أن تكون قبل الآية الختامية.",
-    "reading-bookmark-remove": "فشل في إزالة إشارة القراءة المرجعية",
-    "reading-bookmark-set": "فشل في تعيين إشارة مرجعية للقراءة",
-    "reading-bookmark-undo": "فشل التراجع عن قراءة الإشارة المرجعية"
+    "reading-bookmark-remove": "فشل إزالة الإشارة المرجعية للقراءة",
+    "reading-bookmark-set": "فشل تعيين إشارة مرجعية للقراءة",
+    "reading-bookmark-undo": "فشل التراجع عن الإشارة المرجعية للقراءة"
   },
   "errors": {
     "account-banned": "عذرًا، تم حظر حسابك. يُرجى التواصل مع  Quran.Foundation",
@@ -224,7 +224,7 @@
     "verification-code-length": "يجب أن يكون رمز التحقق مكونًا {{length}} رقمًا",
     "verification-failed": "تعذر التحقق. يرجى المحاولة مرة أخرى.",
     "verification-resend-failed": "تعذر إعادة إرسال رمز التحقق",
-    "verse-metadata-failed": "فشل تحميل بيانات تعريف الآية"
+    "verse-metadata-failed": "فشل تحميل بيانات الآية"
   },
   "exciting-updates": "تحديثات رائعة",
   "favorites": "المفضلة",
@@ -471,8 +471,8 @@
   "subscribe": "اشترك",
   "subscribed": "مشترك",
   "surah": "سورة",
-  "tab-see-less": "...عرض أقل",
-  "tab-see-more": "...عرض المزيد",
+  "tab-see-less": "عرض أقل...",
+  "tab-see-more": "عرض المزيد...",
   "tafsir": {
     "font-size": "حجم خط التفسير",
     "group-message": "أنت تقرأ تفسيرًا لمجموعة الآيات {{from}}إلى {{to}}",

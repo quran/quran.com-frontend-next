@@ -16,7 +16,11 @@ import Footer from '@/dls/Footer/Footer';
 import useAuthData from '@/hooks/auth/useAuthData';
 import useShowNavbar from '@/hooks/useShowNavbar';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
-import { selectIsNavigationDrawerOpen, selectIsSettingsDrawerOpen } from '@/redux/slices/navbar';
+import {
+  selectIsLanguageDrawerOpen,
+  selectIsNavigationDrawerOpen,
+  selectIsSettingsDrawerOpen,
+} from '@/redux/slices/navbar';
 import { isAuthPage } from '@/utils/routes';
 import { createSEOConfig } from '@/utils/seo';
 
@@ -34,6 +38,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
   const showNavbar = useShowNavbar();
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
+  const isLanguageDrawerOpen = useSelector(selectIsLanguageDrawerOpen);
   const isBannerVisible = useSelector(selectIsBannerVisible);
   const isEmbedPage = router.pathname === '/embed/v1';
 
@@ -57,9 +62,9 @@ function AppContent({ Component, pageProps }: AppContentProps) {
       <DeveloperUtility />
       <div
         className={classNames(styles.contentContainer, {
-          [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen,
+          [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen,
         })}
-        {...((isNavigationDrawerOpen || isSettingsDrawerOpen) && {
+        {...((isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen) && {
           inert: true,
           'aria-hidden': true, // eslint-disable-line @typescript-eslint/naming-convention
         })}

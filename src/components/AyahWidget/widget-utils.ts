@@ -1,7 +1,10 @@
+/* eslint-disable max-lines */
 import ThemeType from '@/redux/types/ThemeType';
-import type { WidgetOptions, WidgetColors } from '@/types/Embed';
+import type { WidgetOptions, WidgetColors, WidgetTrimOptions, WordTrimRange } from '@/types/Embed';
+import { stripHtml } from '@/utils/string';
 import { getVerseWords } from '@/utils/verse';
 import type Verse from 'types/Verse';
+import type Word from 'types/Word';
 
 /** Default font scale for widget (medium size). */
 export const WIDGET_FONT_SCALE = 3;
@@ -98,6 +101,197 @@ export const getVerseMarginTop = (index: number, showArabic: boolean): number =>
     return 20;
   }
   return 0;
+};
+
+type NormalizedWordRange = {
+  startWordIndex: number;
+  endWordIndex: number;
+};
+
+/**
+ * Normalize and clamp a word range into [0..length-1].
+ *
+ * @param {number} length - Number of words.
+ * @param {number | undefined} startWordIndex - Requested start index.
+ * @param {number | undefined} endWordIndex - Requested end index.
+ * @returns {NormalizedWordRange | undefined} Normalized range or undefined when empty.
+ */
+export const normalizeWordRange = (
+  length: number,
+  startWordIndex?: number,
+  endWordIndex?: number,
+): NormalizedWordRange | undefined => {
+  if (!length) return undefined;
+
+  const lastWordIndex = length - 1;
+  const start = Math.max(0, Math.min(startWordIndex ?? 0, lastWordIndex));
+  const end = Math.max(0, Math.min(endWordIndex ?? lastWordIndex, lastWordIndex));
+
+  if (start > end) return undefined;
+
+  return { startWordIndex: start, endWordIndex: end };
+};
+
+/**
+ * Trim Arabic words using an inclusive start / inclusive end range.
+ * The verse-end number token is preserved when the selected range includes
+ * the last Arabic word of the verse.
+ *
+ * @param {Word[]} words - Verse words.
+ * @param {WordTrimRange | undefined} trimRange - Optional trim range.
+ * @returns {Word[]} Trimmed words.
+ */
+export const trimArabicWords = (words: Word[], trimRange?: WordTrimRange): Word[] => {
+  if (!trimRange) return words;
+
+  const arabicWords = words.filter((word) => word.charTypeName !== 'end');
+  const verseEndWords = words.filter((word) => word.charTypeName === 'end');
+
+  const normalized = normalizeWordRange(
+    arabicWords.length,
+    trimRange.startWordIndex,
+    trimRange.endWordIndex,
+  );
+
+  if (!normalized) return [];
+
+  const trimmed = arabicWords.slice(normalized.startWordIndex, normalized.endWordIndex + 1);
+
+  // Preserve verse-end marker if last Arabic word is included
+  if (normalized.endWordIndex === arabicWords.length - 1 && verseEndWords.length) {
+    return [...trimmed, ...verseEndWords];
+  }
+
+  return trimmed;
+};
+
+/**
+ * Trim translation text by words in plain-text mode
+ *
+ * @param {string} text - Translation text.
+ * @param {WordTrimRange} trimRange - Trim range.
+ * @returns {string} Trimmed plain text.
+ */
+export const trimTranslationTextPlain = (text: string, trimRange: WordTrimRange): string => {
+  const plainText = stripHtml(text);
+  const words = plainText.split(/\s+/).filter(Boolean);
+
+  const normalized = normalizeWordRange(
+    words.length,
+    trimRange.startWordIndex,
+    trimRange.endWordIndex,
+  );
+
+  if (!normalized) return '';
+
+  return words.slice(normalized.startWordIndex, normalized.endWordIndex + 1).join(' ');
+};
+
+/**
+ * Resolve the effective trim range for a verse based on its position and the overall range settings.
+ *
+ * @returns {WordTrimRange | undefined} The resolved trim range for the verse, or undefined if no trimming should be applied.
+ */
+const resolveVerseTrimRange = (
+  trimRange: WordTrimRange | undefined,
+  isRangeEnabled: boolean,
+  isFirstVerse: boolean,
+  isLastVerse: boolean,
+): WordTrimRange | undefined => {
+  if (!trimRange) return undefined;
+  if (!isRangeEnabled) return trimRange;
+
+  const scopedRange: WordTrimRange = {};
+  if (isFirstVerse) scopedRange.startWordIndex = trimRange.startWordIndex;
+  if (isLastVerse) scopedRange.endWordIndex = trimRange.endWordIndex;
+
+  if (scopedRange.startWordIndex === undefined && scopedRange.endWordIndex === undefined) {
+    return undefined;
+  }
+
+  return scopedRange;
+};
+
+type VerseTrimPosition = {
+  isFirstVerse: boolean;
+  isLastVerse: boolean;
+};
+
+const trimVerseTranslations = (
+  verse: Verse,
+  translationRanges: WidgetTrimOptions['translations'],
+  isRangeEnabled: boolean,
+  position: VerseTrimPosition,
+): Verse['translations'] => {
+  if (!translationRanges || !verse.translations?.length) return verse.translations;
+
+  return verse.translations.map((translation) => {
+    const translationId = translation.resourceId ?? translation.id;
+    if (!translationId) return translation;
+
+    const scopedTrim = resolveVerseTrimRange(
+      translationRanges[String(translationId)],
+      isRangeEnabled,
+      position.isFirstVerse,
+      position.isLastVerse,
+    );
+    if (!scopedTrim) return translation;
+
+    return {
+      ...translation,
+      text: trimTranslationTextPlain(translation.text, scopedTrim),
+    };
+  });
+};
+
+const applyTrimToVerse = (
+  verse: Verse,
+  trim: WidgetTrimOptions,
+  isRangeEnabled: boolean,
+  position: VerseTrimPosition,
+): Verse => {
+  const scopedArabicTrim = resolveVerseTrimRange(
+    trim.arabic,
+    isRangeEnabled,
+    position.isFirstVerse,
+    position.isLastVerse,
+  );
+  const nextWords = scopedArabicTrim ? trimArabicWords(verse.words, scopedArabicTrim) : verse.words;
+  const nextTranslations = trimVerseTranslations(
+    verse,
+    trim.translations,
+    isRangeEnabled,
+    position,
+  );
+
+  if (nextWords === verse.words && nextTranslations === verse.translations) return verse;
+  return { ...verse, words: nextWords, translations: nextTranslations };
+};
+
+/**
+ * Apply prop-based trimming to Arabic and translation words across verses.
+ *
+ * @param {Verse[]} verses - Raw verses.
+ * @param {WidgetTrimOptions | undefined} trim - Trim config.
+ * @param {boolean} isRangeEnabled - Whether widget is rendering a verse range.
+ * @returns {Verse[]} Trimmed verses.
+ */
+export const applyWidgetTrimToVerses = (
+  verses: Verse[],
+  trim: WidgetTrimOptions | undefined,
+  isRangeEnabled: boolean,
+): Verse[] => {
+  if (!verses.length || !trim) return verses;
+  if (!trim.arabic && !trim.translations) return verses;
+
+  return verses.map((verse, index) => {
+    // Determine if this verse is the first or last in the range for trimming purposes
+    const position = {
+      isFirstVerse: index === 0,
+      isLastVerse: index === verses.length - 1,
+    };
+    return applyTrimToVerse(verse, trim, isRangeEnabled, position);
+  });
 };
 
 /**

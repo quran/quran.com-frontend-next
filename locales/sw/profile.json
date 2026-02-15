@@ -26,16 +26,16 @@
   "my-profile": "Wasifu Wangu",
   "notifications": {
     "abandoned-quran-goal": {
-      "description": "Barua pepe itatumwa kukukumbusha lengo lako la Quran ikiwa hujapiga hatua kwa muda.",
+      "description": "Barua pepe itatumwa kukukumbusha lengo lako la Qur'ani ikiwa hujapiga hatua kwa muda.",
       "title": "Kikumbusho cha Lengo"
     },
     "daily-ramadan-challenge": {
-      "description": "Surah Al-Mulk 2026 Ramadan Challenge",
-      "title": "Changamoto ya Ramadhani ya Kila Siku"
+      "description": "Surah Al-Mulk: Mashindano ya Kukariri kwa Maana",
+      "title": "Mashindano ya Kila Siku ya Ramadhani"
     },
     "quran-reading-program": {
-      "description": "Barua pepe itatumwa ikiwa na viungo vya mgawo wa kusoma wa kila wiki, vidokezo vya kutafakari, na nyenzo zaidi ili kukuweka sawa.",
-      "title": "Qur'ani katika Mwaka"
+      "description": "Barua pepe itatumwa ikiwa na viungo vya mgawo wa kusoma wa kila wiki, vidokezo vya kutafakari, na nyenzo zaidi ili kudumisha masomo yako kwa njia sawa.",
+      "title": "Qur'ani kwa Mwaka"
     },
     "streaks-that-will-break": {
       "description": "Barua pepe itatumwa ili kukujulisha kuhusu mfululizo ambao uko karibu kuvunjika.",

@@ -28,6 +28,13 @@ $hadith-font-line-height: 1.6;
   color: var(--color-text-default-new);
   @include utility.kitabFontLang;
 
+  unicode-bidi: isolate;
+
+  &,
+  & * {
+    unicode-bidi: isolate;
+  }
+
   p {
     margin: 0;
     padding: 0;

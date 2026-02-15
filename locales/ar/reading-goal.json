@@ -1,6 +1,6 @@
 {
-  "achieve-quran-goals": "حقق أهدافك في القرآن",
-  "continue-reading": "تابع القراءة",
+  "achieve-quran-goals": "حقق أهدافك القرآنية",
+  "continue-reading": "تابـع القراءة",
   "continuous": {
     "description": "سيتم حساب تقدمك بناءً على عدد الأيام",
     "title": "خلال فترة"
@@ -13,7 +13,7 @@
     "description": "سيتم إعادة تحديد هدفك كل يوم",
     "title": "الهدف اليومي"
   },
-  "day-streak": "خط النهار",
+  "day-streak": "سلسلة الأيام",
   "day-x": "اليوم {{day}}",
   "days": "أيام",
   "days-remaining": "الأيام المتبقية",

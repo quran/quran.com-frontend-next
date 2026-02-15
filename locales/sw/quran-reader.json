@@ -77,7 +77,7 @@
   "guest-prompt": {
     "attach-notes": "Ambatisha maelezo kwenye aya",
     "compare-verses": "Linganisha na utofautishe aya",
-    "compare-verses-desc": "Jifunze aya kando ili kuongeza uelewa wako",
+    "compare-verses-desc": "Jifunze aya hizo pamoja ili kuongeza uelewa wako",
     "create-collections": "Unda mikusanyiko maalum",
     "create-collections-desc": "Panga aya zako uzipendazo katika mikusanyiko iliyobinafsishwa",
     "description": "Ingia ili uhifadhi alamisho na mikusanyiko yako kwenye vifaa vyote",
@@ -88,7 +88,7 @@
     "title": "Hifadhi Maendeleo Yako"
   },
   "hadith": {
-    "notice": "Ni hadithi pekee zinazorejelea aya za Quran kwa uwazi ndizo zilizojumuishwa, na uteuzi huu si kamili. Simulizi zimepangwa ili zilingane na aya zilizochaguliwa kutoka <0>Sahih al-Bukhari</0> na <1>Sahih Muslim</1>, zilizonukuliwa kupitia Sunnah.com.",
+    "notice": "Ni hadithi za mtume zinazorejelea aya za Qur'ani  kwa uwazi ndizo zilizojumuishwa pekee, na uteuzi huu si kamili. Riwaya zimepangwa ili zilingane na aya zilizochaguliwa kutoka <0>Sahih al-Bukhari</0> na <1>Sahih Muslim</1>, zilizonukuliwa kupitia Sunnah.com.",
     "title": "Hadithi"
   },
   "hizb-beginning": "Mwanzo wa Hizb",

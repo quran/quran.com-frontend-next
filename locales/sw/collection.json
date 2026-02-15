@@ -9,9 +9,9 @@
   "date-asc": "Tarehe (Ya Kale Zaidi)",
   "date-desc": "Tarehe (Mpya Zaidi)",
   "delete-bookmark": {
-    "confirmation-subtitle": "Utafuta {{count}} bidhaa(vipengee) kutoka {{collectionName}}Una uhakika?",
+    "confirmation-subtitle": "Utafuta kipengee {{count}} kutoka {{collectionName}}, Una uhakika?",
     "subtitle": "Je, una uhakika unataka kufuta {{bookmarkName}} kutoka kwenye mkusanyiko wa {{collectionName}}?",
-    "success": "Imefutwa {{count}} kipengee(vipengee).",
+    "success": "Kipengee {{count}} kimefutwa",
     "title": "Futa alamisho"
   },
   "delete-collection-action": "Futa Mkusanyiko",
@@ -30,8 +30,8 @@
   "go-to-ayah": "Nenda kwa aya",
   "load-more": "Pakia Zaidi",
   "no-collections": "Huna mikusanyiko yoyote kwa sasa",
-  "quranic-asc": "Utaratibu wa Quran (Kupanda)",
-  "quranic-desc": "Utaratibu wa Quran (Kushuka)",
+  "quranic-asc": "Utaratibu wa Qur'ani (Kwa Kupanda)",
+  "quranic-desc": "Utaratibu wa Qur'ani (Kwa Kushuka)",
   "recently-added": "Iliyoongezwa hivi karibuni",
   "recently-updated": "Imesasishwa hivi karibuni",
   "verse-key": "Sura na Nambari ya Aya"

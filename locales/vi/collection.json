@@ -9,17 +9,17 @@
   "date-asc": "Ngày (Cũ nhất)",
   "date-desc": "Ngày (Mới nhất)",
   "delete-bookmark": {
-    "confirmation-subtitle": "Bạn sẽ xóa {{count}} mục(s) từ {{collectionName}}Bạn có chắc không?",
+    "confirmation-subtitle": "Bạn sẽ xóa {{count}} mục từ {{collectionName}}. Bạn có chắc không?",
     "subtitle": "Bạn có chắc chắn muốn xóa không? {{bookmarkName}} từ bộ sưu tập {{collectionName}}?",
-    "success": "Đã xóa {{count}} mặt hàng).",
+    "success": "Đã xóa {{count}} mục.",
     "title": "Xóa đánh dấu trang"
   },
   "delete-collection-action": "Xóa bộ sưu tập",
-  "delete-collection-success": "Bộ sưu tập đã được xóa thành công.",
+  "delete-collection-success": "Đã xóa bộ sưu tập thành công.",
   "delete-collection": {
-    "description": "Bạn sẽ mất tất cả các câu thơ đã lưu trong bộ sưu tập này.",
+    "description": "Bạn sẽ mất mọi câu kinh đã lưu trong bộ sưu tập này.",
     "subtitle": "Bạn có chắc chắn muốn xóa không? Bộ sưu tập {{collectionName}}?",
-    "subtitle-tagged": "Bạn có chắc chắn muốn xóa không? <collectionName>{{collectionName}}</collectionName> ?",
+    "subtitle-tagged": "Bạn có chắc chắn muốn xóa <collectionName>{{collectionName}}</collectionName> không?",
     "title": "Xóa bộ sưu tập"
   },
   "edit-collection": "Chỉnh sửa bộ sưu tập",
@@ -30,8 +30,8 @@
   "go-to-ayah": "Đi đến Ayah",
   "load-more": "Tải thêm",
   "no-collections": "Bạn chưa có bộ sưu tập nào cả.",
-  "quranic-asc": "Thứ tự các câu trong kinh Qur'an (tăng dần)",
-  "quranic-desc": "Thứ tự trong kinh Qur'an (giảm dần)",
+  "quranic-asc": "Thứ tự trong Kinh Qur'an (tăng dần)",
+  "quranic-desc": "Thứ tự trong Kinh Qur'an (giảm dần)",
   "recently-added": "Mới thêm",
   "recently-updated": "Mới cập nhật",
   "verse-key": "Số chương và câu"

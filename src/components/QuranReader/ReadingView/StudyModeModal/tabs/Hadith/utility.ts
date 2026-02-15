@@ -19,7 +19,8 @@ export const replaceBreaksWithSpans = (html: string): string => {
   const singlePattern = /<br\s*\/?>/gi;
   const finalResult = result.replace(singlePattern, '<span class="single"></span>');
 
-  return finalResult;
+  // Remove &rlm; char from content
+  return finalResult.replaceAll('\u200f', '');
 };
 
 export interface ParsedHadithNumber {

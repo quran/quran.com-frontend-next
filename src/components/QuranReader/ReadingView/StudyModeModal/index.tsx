@@ -53,6 +53,7 @@ import {
   getVerseAnswersNavigationUrl,
   getVerseQiraatNavigationUrl,
   getVerseLayersNavigationUrl,
+  getVerseHadithsNavigationUrl,
 } from '@/utils/navigation';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -149,16 +150,18 @@ const StudyModeModal: React.FC<Props> = ({
       if (tab === StudyModeTabId.TAFSIR && tafsirs.length > 0) {
         fakeNavigate(
           getVerseSelectedTafsirNavigationUrl(chapterId, Number(verseNumber), tafsirs[0]),
-          router.locale || 'en',
+          router.locale || Language.EN,
         );
       } else if (tab === StudyModeTabId.REFLECTIONS) {
-        fakeNavigate(getVerseReflectionNavigationUrl(newVerseKey), router.locale || 'en');
+        fakeNavigate(getVerseReflectionNavigationUrl(newVerseKey), router.locale || Language.EN);
       } else if (tab === StudyModeTabId.LESSONS) {
-        fakeNavigate(getVerseLessonNavigationUrl(newVerseKey), router.locale || 'en');
+        fakeNavigate(getVerseLessonNavigationUrl(newVerseKey), router.locale || Language.EN);
       } else if (tab === StudyModeTabId.LAYERS) {
-        fakeNavigate(getVerseLayersNavigationUrl(newVerseKey), router.locale || 'en');
+        fakeNavigate(getVerseLayersNavigationUrl(newVerseKey), router.locale || Language.EN);
       } else if (tab === StudyModeTabId.QIRAAT) {
         fakeNavigate(getVerseQiraatNavigationUrl(newVerseKey), router.locale || Language.EN);
+      } else if (tab === StudyModeTabId.HADITH) {
+        fakeNavigate(getVerseHadithsNavigationUrl(newVerseKey), router.locale || Language.EN);
       }
     },
     [tafsirs, router.locale],
@@ -353,6 +356,8 @@ const StudyModeModal: React.FC<Props> = ({
         fakeNavigate(getVerseAnswersNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === StudyModeTabId.QIRAAT) {
         fakeNavigate(getVerseQiraatNavigationUrl(currentVerseKey), router.locale);
+      } else if (tabId === StudyModeTabId.HADITH) {
+        fakeNavigate(getVerseHadithsNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === null) {
         fakeNavigate(originalUrl, router.locale);
       }

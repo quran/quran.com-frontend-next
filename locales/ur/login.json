@@ -59,7 +59,7 @@
   "forgot-password-description": "اپنا ای میل درج کریں، ہم آپ کو پاس ورڈ ری سیٹ کرنے کی ہدایات بھیجیں گے۔",
   "forgot-password-success": "پاس ورڈ ری سیٹ کرنے کی ای میل بھیج دی گئی ہے۔ براہ کرم اپنا ای میل ان باکس چیک کریں۔",
   "forgot-password-title": "پاس ورڈ بھول گئے ہیں؟",
-  "hide-password": "پاس ورڈ چھپائیں۔",
+  "hide-password": "پاس ورڈ چھپائیں",
   "last-name-placeholder": "خاندانی نام",
   "login-cta": "ابھی لاگ ان یا سائن اپ کریں:",
   "login-error": {
@@ -91,7 +91,7 @@
   "reset-password": "پاس ورڈ ری سیٹ کریں۔",
   "reset-password-success": "پاس ورڈ کامیابی سے ری سیٹ کر دیا گیا ہے!",
   "set-new-password": "نیا پاس ورڈ سیٹ کریں۔",
-  "show-password": "پاس ورڈ دکھائیں۔",
+  "show-password": "پاس ورڈ دکھائیں",
   "sign-in": "سائن ان کریں۔",
   "sign-in-or-sign-up": "جاری رکھنے کے لیے نیچے سائن اِن یا سائن اَپ کریں۔",
   "sign-up": "نیا اکاؤنٹ بنائیں",

@@ -133,18 +133,20 @@ const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPort
   }
 
   return (
-    <Button
-      tooltip={t('sign-in')}
-      ariaLabel={t('sign-in')}
-      variant={ButtonVariant.SimplifiedAccent}
-      size={ButtonSize.Small}
-      href={getLoginNavigationUrl(router.asPath)}
-      onClick={onLoginButtonClicked}
-      id="login-button"
-      className={styles.loginButton}
-    >
-      {t('sign-in')}
-    </Button>
+    <div className={styles.loginButtonContainer}>
+      <Button
+        tooltip={t('sign-in')}
+        ariaLabel={t('sign-in')}
+        variant={ButtonVariant.SimplifiedAccent}
+        size={ButtonSize.Small}
+        href={getLoginNavigationUrl(router.asPath)}
+        onClick={onLoginButtonClicked}
+        id="login-button"
+        className={styles.loginButton}
+      >
+        {t('sign-in')}
+      </Button>
+    </div>
   );
 };
 

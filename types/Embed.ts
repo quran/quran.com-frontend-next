@@ -36,6 +36,16 @@ export const getQuranFontForMushaf = (mushaf: MushafType): QuranFont => {
   }
 };
 
+export type WordTrimRange = {
+  startWordIndex?: number;
+  endWordIndex?: number;
+};
+
+export type WidgetTrimOptions = {
+  arabic?: WordTrimRange;
+  translations?: Record<string, WordTrimRange>;
+};
+
 /**
  * Options for configuring the Ayah Widget.
  */

@@ -2,6 +2,7 @@
 import React from 'react';
 
 import {
+  applyWidgetTrimToVerses,
   buildWidgetCopyData,
   getColors,
   getContentPadding,
@@ -16,12 +17,13 @@ import WidgetFooterActions from '@/components/AyahWidget/WidgetFooterActions';
 import WidgetHeader from '@/components/AyahWidget/WidgetHeader';
 import useQcfFont from '@/hooks/useQcfFont';
 import { getQuranFontForMushaf } from '@/types/Embed';
-import type { WidgetOptions, WidgetColors } from '@/types/Embed';
+import type { WidgetOptions, WidgetColors, WidgetTrimOptions } from '@/types/Embed';
 import type Verse from 'types/Verse';
 
 type Props = {
   verses: Verse[];
   options: WidgetOptions;
+  trim?: WidgetTrimOptions;
   children?: React.ReactNode;
 };
 
@@ -160,31 +162,37 @@ const getWidgetFontStyles = (): string => `
  * @param {Props} props - Component props.
  * @returns {JSX.Element} QuranWidget JSX Element
  */
-const QuranWidget = ({ verses, options, children }: Props): JSX.Element => {
+const QuranWidget = ({ verses, options, trim, children }: Props): JSX.Element => {
+  const isRangeEnabled = Boolean(options.rangeEnd);
+  const trimmedVerses = React.useMemo(
+    () => applyWidgetTrimToVerses(verses, trim, isRangeEnabled),
+    [isRangeEnabled, trim, verses],
+  );
+
   // Convert widget mushaf option to QuranFont for VerseText component
   const quranFont = getQuranFontForMushaf(options.mushaf);
 
   // Use the existing font loading hook - this handles loading QCF fonts dynamically
-  useQcfFont(quranFont, verses);
+  useQcfFont(quranFont, trimmedVerses);
 
-  if (!verses.length) {
+  if (!trimmedVerses.length) {
     return <div />;
   }
 
   // Derive verse label and caption for data attributes
   const chapterNumber =
-    verses[0]?.chapterId ?? (Number(options.ayah.split(':')[0] || 0) || undefined);
-  const startVerse = verses[0]?.verseNumber ?? Number(options.ayah.split(':')[1] || 0);
+    trimmedVerses[0]?.chapterId ?? (Number(options.ayah.split(':')[0] || 0) || undefined);
+  const startVerse = trimmedVerses[0]?.verseNumber ?? Number(options.ayah.split(':')[1] || 0);
   const verseLabel = options.rangeEnd ? `${startVerse}-${options.rangeEnd}` : `${startVerse}`;
   const rangeCaption = chapterNumber ? `${chapterNumber}:${verseLabel}` : options.ayah;
 
   // Get widget colors and compute derived values
   const colors = getColors(options.theme);
   const audioUrl = options.audioUrl || null;
-  const firstVerse = verses[0];
-  const hasTranslations = verses.some((v) => (v.translations?.length ?? 0) > 0);
+  const firstVerse = trimmedVerses[0];
+  const hasTranslations = trimmedVerses.some((v) => (v.translations?.length ?? 0) > 0);
   const contentPadding = getContentPadding(options.showArabic, hasTranslations);
-  const copyData = buildWidgetCopyData(verses, options);
+  const copyData = buildWidgetCopyData(trimmedVerses, options);
 
   return (
     <div
@@ -210,7 +218,7 @@ const QuranWidget = ({ verses, options, children }: Props): JSX.Element => {
         data-range-caption={options.rangeEnd ? rangeCaption : options.ayah}
       >
         <div style={{ margin: 'auto 0' }}>
-          <WidgetContent verses={verses} options={options} quranFont={quranFont} />
+          <WidgetContent verses={trimmedVerses} options={options} quranFont={quranFont} />
         </div>
       </div>
 

@@ -104,3 +104,11 @@ select option {
     --top-bar-height: var(--top-bar-height-collapsed);
   }
 }
+
+.prevent-scrolling {
+  overflow: hidden;
+}
+
+html[data-disable-transitions='true'] * {
+  transition: all 0s !important;
+}
