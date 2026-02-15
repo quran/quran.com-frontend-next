@@ -4,6 +4,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './EditCollectionModal.module.scss';
 
+import {
+  COLLECTION_NAME_MAX_LENGTH,
+  COLLECTION_NAME_MIN_LENGTH,
+} from '@/components/Collection/collectionNameValidation';
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Modal from '@/dls/Modal/Modal';
 import { ContentSide } from '@/dls/Tooltip';
@@ -25,8 +29,11 @@ const EditCollectionModal: React.FC<EditCollectionModalProps> = ({
   const { t } = useTranslation('collection');
   const { t: commonT } = useTranslation('common');
   const [name, setName] = useState(defaultValue);
+  const trimmedName = name.trim();
 
-  const isSaveDisabled = !name.trim();
+  const isSaveDisabled =
+    trimmedName.length < COLLECTION_NAME_MIN_LENGTH ||
+    trimmedName.length > COLLECTION_NAME_MAX_LENGTH;
 
   useEffect(() => {
     if (isOpen) {
@@ -35,10 +42,10 @@ const EditCollectionModal: React.FC<EditCollectionModalProps> = ({
   }, [defaultValue, isOpen]);
 
   const handleSubmit = useCallback(() => {
-    const trimmedName = name.trim();
     if (!trimmedName) return;
+    if (trimmedName.length > COLLECTION_NAME_MAX_LENGTH) return;
     onSubmit({ name: trimmedName });
-  }, [name, onSubmit]);
+  }, [onSubmit, trimmedName]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -76,6 +83,7 @@ const EditCollectionModal: React.FC<EditCollectionModalProps> = ({
             onKeyDown={handleKeyDown}
             placeholder={t('collection-name')}
             aria-describedby={isSaveDisabled ? 'edit-collection-name-help' : undefined}
+            maxLength={COLLECTION_NAME_MAX_LENGTH}
           />
         </div>
 

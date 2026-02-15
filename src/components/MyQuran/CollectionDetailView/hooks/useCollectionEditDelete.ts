@@ -42,7 +42,8 @@ const useCollectionEditDelete = ({
         toast(t('collection:edit-collection-success'), { status: ToastStatus.Success });
         logButtonClick('collection_edit_success', { collectionId: numericCollectionId });
       } else {
-        toast(t('common:error.general'), { status: ToastStatus.Error });
+        // Error toast is expected to be handled by the caller (e.g. useCollections),
+        // so we avoid showing a potentially misleading generic message here.
         logButtonClick('collection_edit_failed', { collectionId: numericCollectionId });
       }
     },

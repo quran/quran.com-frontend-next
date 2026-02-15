@@ -467,6 +467,61 @@ export const isBookmarkSyncError = (err: unknown): boolean => {
   return true;
 };
 
+type CommonErrorToastDescriptor = {
+  /**
+   * Examples: `error.general`, `error.bookmark-sync`, `errors.max`
+   */
+  key: string;
+  /**
+   * i18n interpolation params for the key.
+   */
+  params?: Record<string, unknown>;
+};
+
+const getApiResponseFromUnknownError = (err: unknown): unknown | undefined => {
+  if (!err || typeof err !== 'object') return undefined;
+  if ('apiResponse' in err) return (err as any).apiResponse;
+  return undefined;
+};
+
+const getApiErrorDetailsMapFromUnknownError = (
+  err: unknown,
+): Record<string, string> | undefined => {
+  const apiResponse = getApiResponseFromUnknownError(err);
+  const responseLike = (apiResponse && typeof apiResponse === 'object' ? apiResponse : err) as any;
+  const error = responseLike?.details?.error || responseLike?.error;
+  const details = error?.details;
+  if (!details || typeof details !== 'object') return undefined;
+  return details as Record<string, string>;
+};
+
+export const getCommonErrorToastDescriptor = (
+  err: unknown,
+  options?: { fieldName?: string; defaultMax?: number },
+): CommonErrorToastDescriptor => {
+  if (isBookmarkSyncError(err)) return { key: 'error.bookmark-sync' };
+
+  // Detect server-side validation errors by inspecting the `details` object values
+  // (e.g. `{ name: "MAX_LENGTH" }`), consistent with other parts of the app.
+  const details = getApiErrorDetailsMapFromUnknownError(err);
+  if (details && Object.values(details).some((v) => v === AuthErrorCodes.MaxLength)) {
+    return {
+      key: 'errors.max',
+      params: {
+        fieldName: options?.fieldName || 'Name',
+        max: options?.defaultMax ?? 255,
+      },
+    };
+  }
+
+  return { key: 'error.general' };
+};
+
+export const getCommonErrorKey = (
+  err: unknown,
+  options?: { fieldName?: string; defaultMax?: number },
+): string => getCommonErrorToastDescriptor(err, options).key;
+
 export const classifyError = (error: unknown, context?: Record<string, any>): AuthError => {
   if (!error) return createNullError(error, context);
 
