@@ -54,7 +54,7 @@ interface UseGlobalReadingBookmarkReturn {
  */
 const useGlobalReadingBookmark = (mushafId: number): UseGlobalReadingBookmarkReturn => {
   const { state } = useAuthContext();
-  const userId = state.user?.id;
+  const userId = state?.user?.id;
 
   // Generate cache key with user ID to isolate data between users.
   // If userId is undefined (e.g., during auth state transitions),
