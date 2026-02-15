@@ -242,12 +242,12 @@ describe('useBookmarksBroadcast', () => {
       },
     };
 
-    window.dispatchEvent(
-      new StorageEvent('storage', {
-        key: 'qdc:bookmarks-sync',
-        newValue: JSON.stringify(storageMessage),
-      }),
-    );
+    const storageEvent = new StorageEvent('storage');
+    Object.assign(storageEvent, {
+      key: 'qdc:bookmarks-sync',
+      newValue: JSON.stringify(storageMessage),
+    } as StorageEvent);
+    window.dispatchEvent(storageEvent);
 
     expect(mutateMock.mock.calls.length).toBeGreaterThan(0);
     expect(mutateMock).toHaveBeenCalledWith('/api/proxy/bookmarks?mushafId=4', undefined, {
