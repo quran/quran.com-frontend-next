@@ -910,6 +910,7 @@ $page-container-max-width: 80rem;
 
 @mixin scrollbarNone {
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;

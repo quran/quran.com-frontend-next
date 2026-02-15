@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import styles from './StudyModeBottomActions.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
+import Scrollable from '@/dls/Scrollable/Scrollable';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -24,7 +25,7 @@ export interface StudyModeTabConfig {
   id: StudyModeTabId;
   label: string;
   icon: React.ReactNode;
-  onClick: () => void;
+  handleClick: () => void;
   condition: boolean;
 }
 
@@ -47,14 +48,10 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
     }
   }, [activeTab]);
 
-  const handleTabClick = (onClick: () => void) => {
-    onClick();
-  };
-
-  const handleTabKeyDown = (e: React.KeyboardEvent, onClick: () => void) => {
+  const handleTabKeyDown = (e: React.KeyboardEvent, handleClick: () => void) => {
     if (e.key === 'Enter' || (e.key === ' ' && !isAudioVisible)) {
       e.preventDefault();
-      onClick();
+      handleClick();
     }
   };
 
@@ -66,7 +63,7 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
         [styles.noBorder]: !activeTab,
       })}
     >
-      <div className={styles.tabsContainer}>
+      <Scrollable className={styles.tabsContainer}>
         {filteredTabs.map((tab, index) => (
           <React.Fragment key={tab.id}>
             <div
@@ -77,8 +74,8 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
                 [styles.tabItemActive]: activeTab === tab.id,
               })}
               data-testid={`study-mode-tab-${tab.id}`}
-              onClick={() => handleTabClick(tab.onClick)}
-              onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
+              onClick={tab.handleClick}
+              onKeyDown={(e) => handleTabKeyDown(e, tab.handleClick)}
               role="button"
               tabIndex={0}
               aria-label={tab.label}
@@ -93,7 +90,7 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
             )}
           </React.Fragment>
         ))}
-      </div>
+      </Scrollable>
     </div>
   );
 };

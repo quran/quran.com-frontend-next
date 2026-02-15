@@ -82,7 +82,7 @@ export type TabConfig = {
   id: StudyModeTabId;
   label: string;
   icon: React.ReactNode;
-  onClick: () => void;
+  handleClick: () => void;
   condition: boolean;
 };
 
@@ -143,49 +143,49 @@ export const useStudyModeTabs = ({
       id: StudyModeTabId.TAFSIR,
       label: t('quran-reader:tafsirs'),
       icon: <BookIcon color="var(--color-blue-buttons-and-icons)" />,
-      onClick: () => handleTabClick(StudyModeTabId.TAFSIR),
+      handleClick: () => handleTabClick(StudyModeTabId.TAFSIR),
       condition: true,
     },
     {
       id: StudyModeTabId.LAYERS,
       label: t('quran-reader:layers.title'),
       icon: <LayerIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.LAYERS),
+      handleClick: () => handleTabClick(StudyModeTabId.LAYERS),
       condition: hasLayers,
     },
     {
       id: StudyModeTabId.LESSONS,
       label: t('lessons'),
       icon: <GraduationCapIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.LESSONS),
+      handleClick: () => handleTabClick(StudyModeTabId.LESSONS),
       condition: true,
     },
     {
       id: StudyModeTabId.REFLECTIONS,
       label: t('reflections'),
       icon: <LightbulbIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.REFLECTIONS),
+      handleClick: () => handleTabClick(StudyModeTabId.REFLECTIONS),
       condition: true,
     },
     {
       id: StudyModeTabId.ANSWERS,
       label: t('answers'),
       icon: isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.ANSWERS),
+      handleClick: () => handleTabClick(StudyModeTabId.ANSWERS),
       condition: hasQuestions,
     },
     {
       id: StudyModeTabId.QIRAAT,
       label: t('quran-reader:qiraat.title'),
       icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
-      onClick: () => handleTabClick(StudyModeTabId.QIRAAT),
+      handleClick: () => handleTabClick(StudyModeTabId.QIRAAT),
       condition: hasQiraat,
     },
     {
       id: StudyModeTabId.HADITH,
       label: t('quran-reader:hadith.title'),
       icon: <HadithIcon color="var(--color-blue-buttons-and-icons)" />,
-      onClick: () => handleTabClick(StudyModeTabId.HADITH),
+      handleClick: () => handleTabClick(StudyModeTabId.HADITH),
       condition: hasHadiths,
     },
     {
@@ -194,7 +194,7 @@ export const useStudyModeTabs = ({
         ? `${t('related-verses')} (${toLocalizedNumber(relatedVersesCount, lang)})`
         : t('related-verses'),
       icon: <RelatedVerseIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.RELATED_VERSES),
+      handleClick: () => handleTabClick(StudyModeTabId.RELATED_VERSES),
       condition: hasRelatedVerses,
     },
   ];
