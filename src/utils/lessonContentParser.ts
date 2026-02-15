@@ -8,6 +8,14 @@ export type ContentChunk =
   | { type: 'html'; key: string; content: string }
   | { type: 'verse'; key: string; reference: VerseReference; originalHtml: string };
 
+function createVerseRef(match: RegExpMatchArray): VerseReference {
+  return {
+    chapter: Number(match[1]),
+    from: Number(match[2]),
+    to: match[3] ? Number(match[3]) : undefined,
+  };
+}
+
 /**
  * Parse a quran.com URL into a verse reference.
  * Supports: /18/1-2, /37-98, /24:30
@@ -15,7 +23,6 @@ export type ContentChunk =
  * @param {string} href - The URL to parse
  * @returns {VerseReference | null} Parsed reference or null if invalid
  */
-// eslint-disable-next-line react-func/max-lines-per-function
 export function parseQuranUrl(href: string): VerseReference | null {
   let url: URL;
   try {
@@ -30,31 +37,14 @@ export function parseQuranUrl(href: string): VerseReference | null {
     .replace(/\/$/, '')
     .replace(/^[a-z]{2}\//i, '');
 
-  // Pattern: chapter/verse or chapter/from-to
   let match = path.match(/^(\d+)\/(\d+)(?:-(\d+))?$/);
-  if (match) {
-    return {
-      chapter: Number(match[1]),
-      from: Number(match[2]),
-      to: match[3] ? Number(match[3]) : undefined,
-    };
-  }
+  if (match) return createVerseRef(match);
 
-  // Pattern: chapter-verse (single verse)
   match = path.match(/^(\d+)-(\d+)$/);
-  if (match) {
-    return { chapter: Number(match[1]), from: Number(match[2]) };
-  }
+  if (match) return createVerseRef(match);
 
-  // Pattern: chapter:verse or chapter:from-to
   match = path.match(/^(\d+):(\d+)(?:-(\d+))?$/);
-  if (match) {
-    return {
-      chapter: Number(match[1]),
-      from: Number(match[2]),
-      to: match[3] ? Number(match[3]) : undefined,
-    };
-  }
+  if (match) return createVerseRef(match);
 
   return null;
 }
