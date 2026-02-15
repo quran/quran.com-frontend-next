@@ -42,7 +42,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       theme: parseTheme(theme),
       locale: 'en',
       lp: true,
-      showArabic: false,
       mergeVerses: true,
       showTafsirs: false,
       showReflections: false,
