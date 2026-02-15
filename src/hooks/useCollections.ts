@@ -98,15 +98,7 @@ const useCollections = ({
     [toast, t],
   );
 
-  const broadcastCollectionCreated = useCallback((collectionId: string) => {
-    broadcastBookmarksUpdate({
-      touchesCollectionsList: true,
-      touchesCollectionDetail: true,
-      affectedCollectionIds: [collectionId],
-    });
-  }, []);
-
-  const broadcastCollectionUpdated = useCallback((collectionId: string) => {
+  const broadcastCollectionUpserted = useCallback((collectionId: string) => {
     broadcastBookmarksUpdate({
       touchesCollectionsList: true,
       touchesCollectionDetail: true,
@@ -161,7 +153,7 @@ const useCollections = ({
         // Find the real collection from the result
         const realCollection = result?.data?.find((c) => c.name === name && c.id !== tempId);
         if (realCollection) {
-          broadcastCollectionCreated(realCollection.id);
+          broadcastCollectionUpserted(realCollection.id);
         }
         return realCollection || null;
       } catch (err: unknown) {
@@ -172,7 +164,7 @@ const useCollections = ({
       }
     },
     [
-      broadcastCollectionCreated,
+      broadcastCollectionUpserted,
       collections,
       collectionsData,
       swrMutateCollections,
@@ -207,7 +199,7 @@ const useCollections = ({
             revalidate: false,
           },
         );
-        broadcastCollectionUpdated(collectionId);
+        broadcastCollectionUpserted(collectionId);
         return true;
       } catch (err: unknown) {
         showErrorToast(err);
@@ -217,7 +209,7 @@ const useCollections = ({
       }
     },
     [
-      broadcastCollectionUpdated,
+      broadcastCollectionUpserted,
       collections,
       collectionsData,
       swrMutateCollections,

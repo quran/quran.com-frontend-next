@@ -124,47 +124,46 @@ const getStringCacheKeys = (cache: Cache): string[] => {
 };
 
 const mutateMatchingKeys = <T = unknown>(
-  cache: Cache,
+  keys: string[],
   globalMutate: ScopedMutator,
   matcher: (key: string) => boolean,
   data?: T | ((currentData: T | undefined) => T),
   options: { revalidate?: boolean } = { revalidate: true },
 ) => {
-  const keys = getStringCacheKeys(cache);
   const matchedKeys = keys.filter(matcher);
   matchedKeys.forEach((key) => {
     globalMutate(key, data as any, options);
   });
 };
 
-const revalidateCollectionsListCaches = (cache: Cache, globalMutate: ScopedMutator) =>
+const revalidateCollectionsListCaches = (keys: string[], globalMutate: ScopedMutator) =>
   mutateMatchingKeys(
-    cache,
+    keys,
     globalMutate,
     (key) => key.includes(BOOKMARK_CACHE_PATHS.COLLECTIONS),
     undefined,
     { revalidate: true },
   );
 
-const revalidateBookmarksListCaches = (cache: Cache, globalMutate: ScopedMutator) =>
+const revalidateBookmarksListCaches = (keys: string[], globalMutate: ScopedMutator) =>
   mutateMatchingKeys(
-    cache,
+    keys,
     globalMutate,
     (key) => key.includes(BOOKMARK_CACHE_PATHS.BOOKMARKS_LIST),
     undefined,
     { revalidate: true },
   );
 
-const revalidateBookmarkCollectionsCaches = (cache: Cache, globalMutate: ScopedMutator) => {
+const revalidateBookmarkCollectionsCaches = (keys: string[], globalMutate: ScopedMutator) => {
   mutateMatchingKeys(
-    cache,
+    keys,
     globalMutate,
     (key) => key.includes(BOOKMARK_CACHE_PATHS.BOOKMARK_COLLECTIONS),
     undefined,
     { revalidate: true },
   );
   mutateMatchingKeys(
-    cache,
+    keys,
     globalMutate,
     (key) => key.includes(BOOKMARK_CACHE_PATHS.BOOKMARK),
     undefined,
@@ -173,12 +172,12 @@ const revalidateBookmarkCollectionsCaches = (cache: Cache, globalMutate: ScopedM
 };
 
 const revalidateCollectionDetailCaches = (
-  cache: Cache,
+  keys: string[],
   globalMutate: ScopedMutator,
   collectionIds?: string[],
 ) =>
   mutateMatchingKeys(
-    cache,
+    keys,
     globalMutate,
     (key: string) => {
       if (!isCollectionDetailKey(key)) return false;
@@ -190,12 +189,12 @@ const revalidateCollectionDetailCaches = (
   );
 
 const revalidateReadingBookmarkCaches = (
-  cache: Cache,
+  keys: string[],
   globalMutate: ScopedMutator,
   mushafId?: number,
 ) =>
   mutateMatchingKeys(
-    cache,
+    keys,
     globalMutate,
     (key: string) => {
       if (!key.startsWith(READING_BOOKMARK_PREFIX)) return false;
@@ -207,13 +206,13 @@ const revalidateReadingBookmarkCaches = (
   );
 
 const updateReadingBookmarkCaches = (
-  cache: Cache,
+  keys: string[],
   globalMutate: ScopedMutator,
   readingBookmark: Bookmark | null,
   mushafId?: number,
 ) =>
   mutateMatchingKeys(
-    cache,
+    keys,
     globalMutate,
     (key: string) => {
       if (!key.startsWith(READING_BOOKMARK_PREFIX)) return false;
@@ -225,7 +224,7 @@ const updateReadingBookmarkCaches = (
   );
 
 const revalidateSurahCaches = (
-  cache: Cache,
+  keys: string[],
   globalMutate: ScopedMutator,
   mushafId?: number,
   surahNumbers?: number[],
@@ -240,7 +239,7 @@ const revalidateSurahCaches = (
   }
 
   mutateMatchingKeys(
-    cache,
+    keys,
     globalMutate,
     (key: string) => {
       const surah = extractSurahFromSurahCacheKey(key);
@@ -253,12 +252,14 @@ const revalidateSurahCaches = (
 
 const applySurahBookmarkUpdates = (
   cache: Cache,
+  keys: string[],
   globalMutate: ScopedMutator,
   updates: NonNullable<BookmarksBroadcastPayload['surahBookmarkUpdates']>,
 ) => {
+  const existingKeys = new Set(keys);
+
   updates.forEach(({ mushafId, surahNumber, verseKey, bookmark }) => {
     const targetKey = SURAH_BOOKMARKS_KEY(mushafId, surahNumber);
-    const existingKeys = new Set(getStringCacheKeys(cache));
     if (!existingKeys.has(targetKey)) return;
 
     globalMutate(
@@ -286,34 +287,36 @@ const applyPayloadSync = ({
   globalMutate: ScopedMutator;
   payload: BookmarksBroadcastMessage['payload'];
 }) => {
+  const keys = getStringCacheKeys(cache);
+
   if (payload.touchesReadingBookmark) {
     if (payload.readingBookmark !== undefined) {
-      updateReadingBookmarkCaches(cache, globalMutate, payload.readingBookmark, payload.mushafId);
+      updateReadingBookmarkCaches(keys, globalMutate, payload.readingBookmark, payload.mushafId);
     } else {
-      revalidateReadingBookmarkCaches(cache, globalMutate, payload.mushafId);
+      revalidateReadingBookmarkCaches(keys, globalMutate, payload.mushafId);
     }
   }
 
   if (payload.touchesCollectionsList) {
-    revalidateCollectionsListCaches(cache, globalMutate);
+    revalidateCollectionsListCaches(keys, globalMutate);
   }
 
   if (payload.touchesBookmarksList) {
-    revalidateBookmarksListCaches(cache, globalMutate);
+    revalidateBookmarksListCaches(keys, globalMutate);
   }
 
   if (payload.touchesBookmarkCollections) {
-    revalidateBookmarkCollectionsCaches(cache, globalMutate);
+    revalidateBookmarkCollectionsCaches(keys, globalMutate);
   }
 
   if (payload.touchesCollectionDetail) {
-    revalidateCollectionDetailCaches(cache, globalMutate, payload.affectedCollectionIds);
+    revalidateCollectionDetailCaches(keys, globalMutate, payload.affectedCollectionIds);
   }
 
   if (payload.surahBookmarkUpdates?.length) {
-    applySurahBookmarkUpdates(cache, globalMutate, payload.surahBookmarkUpdates);
+    applySurahBookmarkUpdates(cache, keys, globalMutate, payload.surahBookmarkUpdates);
   } else {
-    revalidateSurahCaches(cache, globalMutate, payload.mushafId, payload.affectedSurahNumbers);
+    revalidateSurahCaches(keys, globalMutate, payload.mushafId, payload.affectedSurahNumbers);
   }
 };
 
@@ -321,15 +324,21 @@ const postWithStorageFallback = (message: BookmarksBroadcastMessage): void => {
   if (typeof window === 'undefined') return;
 
   if (typeof BroadcastChannel !== 'undefined') {
-    const channel = new BroadcastChannel(CHANNEL_NAME);
-    channel.postMessage(message);
-    channel.close();
+    try {
+      const channel = new BroadcastChannel(CHANNEL_NAME);
+      channel.postMessage(message);
+      channel.close();
+      return;
+    } catch {
+      // Fall through to localStorage if BroadcastChannel fails
+    }
   }
 
+  // Use localStorage as fallback when BroadcastChannel is unavailable or failed
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(message));
   } catch {
-    // Swallow localStorage exceptions (quota/private mode) and keep BroadcastChannel path.
+    // Swallow localStorage exceptions (quota/private mode)
   }
 };
 

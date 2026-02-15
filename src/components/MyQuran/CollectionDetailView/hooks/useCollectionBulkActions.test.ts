@@ -228,8 +228,8 @@ describe('useCollectionBulkActions', () => {
         toast: toast as any,
         numericCollectionId: '123',
         filteredBookmarks: [
-          { id: 'b1', key: '1', verseNumber: 1 },
-          { id: 'b2', key: '1', verseNumber: 2 },
+          { id: 'b1', key: 1, verseNumber: 1 },
+          { id: 'b2', key: 1, verseNumber: 2 },
         ] as any,
         selectedBookmarks: new Set(['b1', 'b2']),
         selectedTranslations,
@@ -254,7 +254,7 @@ describe('useCollectionBulkActions', () => {
         touchesBookmarkCollections: true,
         touchesCollectionDetail: true,
         affectedCollectionIds: ['123'],
-        affectedSurahNumbers: ['1'],
+        affectedSurahNumbers: [1],
       }),
     );
     expect(result.current.pendingDeleteBookmarkIds).toEqual(['b2']);
