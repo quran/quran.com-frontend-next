@@ -73,7 +73,7 @@ describe('useCollectionEditDelete', () => {
       await result.current.handleEditSubmit({ name: 'New Name' });
     });
 
-    expect(toast).toHaveBeenCalledWith('common:error.general', { status: ToastStatus.Error });
+    expect(toast).not.toHaveBeenCalled();
     expect(logButtonClick).toHaveBeenCalledWith('collection_edit_failed', { collectionId: '123' });
   });
 
