@@ -124,6 +124,7 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
                   onClick={(e) => e.stopPropagation()}
                   checkboxClassName={styles.checkbox}
                   containerClassName={styles.checkboxContainer}
+                  indicatorClassName={styles.indicator}
                 />
               ) : (
                 <CollectionVerseCellMenu
