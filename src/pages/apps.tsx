@@ -210,6 +210,19 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     categories: ['study-tools', 'quran-reader', 'popular'],
   },
   {
+    id: 'quranreflect',
+    title: t('browse.apps.quranreflect.title'),
+    description: t('browse.apps.quranreflect.description'),
+    tagline: t('browse.apps.quranreflect.tagline'),
+    iconSrc: '/images/app-portal/icon_web_optimized.png',
+    iconAlt: 'QuranReflect',
+    webHref: 'https://quranreflect.com',
+    androidHref:
+      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
+    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
+    categories: ['reflections', 'community'],
+  },
+  {
     id: 'sunnah',
     title: t('browse.apps.sunnah.title'),
     description: t('browse.apps.sunnah.description'),

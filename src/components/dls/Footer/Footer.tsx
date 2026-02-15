@@ -8,7 +8,7 @@ import TitleAndDescription from './TitleAndDescription';
 
 const Footer = () => {
   const router = useRouter();
-  const { t: tAppPortal } = useTranslation('app-portal');
+  const { t } = useTranslation('common');
 
   // Don't render the footer on login pages
   if (router.pathname.includes('/login')) {
@@ -23,7 +23,7 @@ const Footer = () => {
           <Links />
         </div>
         {router.pathname === '/apps' && (
-          <p className={styles.description}>{tAppPortal('footer.disclaimer')}</p>
+          <p className={styles.description}>{t('footer.apps-disclaimer')}</p>
         )}
         <BottomSection />
       </div>
