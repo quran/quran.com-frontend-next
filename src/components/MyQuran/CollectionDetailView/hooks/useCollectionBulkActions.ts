@@ -29,10 +29,12 @@ interface UseCollectionBulkActionsParams {
 }
 
 const getAffectedSurahNumbers = (bookmarks: Bookmark[], deletedIds: string[]) => {
+  const deletedIdsSet = new Set(deletedIds);
+
   return Array.from(
     new Set(
       bookmarks
-        .filter((bookmark) => deletedIds.includes(bookmark.id))
+        .filter((bookmark) => deletedIdsSet.has(bookmark.id))
         .map((bookmark) => bookmark.key),
     ),
   );
