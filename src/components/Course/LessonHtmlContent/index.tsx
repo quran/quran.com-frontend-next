@@ -27,6 +27,7 @@ type Props = {
   content: string;
   language: string;
   lessonSlug: string;
+  courseSlug: string;
 };
 
 const renderChunks = (chunks: ContentChunk[], keyPrefix = '') =>
@@ -52,12 +53,17 @@ const toggleInSet = (set: Set<string>, item: string) => {
   return nextSet;
 };
 
-const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug }) => {
+const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, courseSlug }) => {
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [masteredCards, setMasteredCards] = useState<Set<string>>(new Set());
+
+  const isInteractiveLearningPlan =
+    courseSlug === '30-transformative-days-with-surah-al-mulk-learn-reflect-memorize';
+  const shouldUseInteractiveFeatures = language === 'en' && isInteractiveLearningPlan;
+
   const parsedLessonQuiz = useMemo(
-    () => (language === 'en' ? parseLessonQuizFromHtml(content) : null),
-    [content, language],
+    () => (shouldUseInteractiveFeatures ? parseLessonQuizFromHtml(content) : null),
+    [content, shouldUseInteractiveFeatures],
   );
   const contentToRender = parsedLessonQuiz?.contentWithoutQuizSection ?? content;
   const quizNode = parsedLessonQuiz ? (
@@ -68,11 +74,14 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug }) =
     />
   ) : null;
   const flashcardData = useMemo(
-    () => (language === 'en' ? parseFlashcardsFromHtml(contentToRender) : null),
-    [contentToRender, language],
+    () => (shouldUseInteractiveFeatures ? parseFlashcardsFromHtml(contentToRender) : null),
+    [contentToRender, shouldUseInteractiveFeatures],
   );
 
-  if (language !== 'en') return <HtmlContent html={content} />;
+  if (!shouldUseInteractiveFeatures) {
+    return <HtmlContent html={content} />;
+  }
+
   if (flashcardData) {
     const { subtitle } = VARIANT_CONFIG[flashcardData.variant];
     const isListVariant = flashcardData.variant === FlashCardVariant.List;
