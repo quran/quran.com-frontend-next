@@ -324,15 +324,21 @@ const postWithStorageFallback = (message: BookmarksBroadcastMessage): void => {
   if (typeof window === 'undefined') return;
 
   if (typeof BroadcastChannel !== 'undefined') {
-    const channel = new BroadcastChannel(CHANNEL_NAME);
-    channel.postMessage(message);
-    channel.close();
+    try {
+      const channel = new BroadcastChannel(CHANNEL_NAME);
+      channel.postMessage(message);
+      channel.close();
+      return;
+    } catch {
+      // Fall through to localStorage if BroadcastChannel fails
+    }
   }
 
+  // Use localStorage as fallback when BroadcastChannel is unavailable or failed
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(message));
   } catch {
-    // Swallow localStorage exceptions (quota/private mode) and keep BroadcastChannel path.
+    // Swallow localStorage exceptions (quota/private mode)
   }
 };
 
