@@ -108,3 +108,7 @@ select option {
 .prevent-scrolling {
   overflow: hidden;
 }
+
+html[data-disable-transitions='true'] * {
+  transition: all 0s !important;
+}
