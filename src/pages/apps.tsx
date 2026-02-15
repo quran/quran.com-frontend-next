@@ -194,7 +194,7 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     iconAlt: 'Quran Kareem app',
     iosHref:
       'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
-    categories: ['quran-reader', 'popular'],
+    categories: ['quran-reader', 'popular', 'reflections'],
   },
   {
     id: 'quran-link',
@@ -208,19 +208,6 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qortoba.quran.link',
     webHref: 'https://quran.link/',
     categories: ['study-tools', 'quran-reader', 'popular'],
-  },
-  {
-    id: 'quranreflect',
-    title: t('browse.apps.quranreflect.title'),
-    description: t('browse.apps.quranreflect.description'),
-    tagline: t('browse.apps.quranreflect.tagline'),
-    iconSrc: '/images/app-portal/icon_web_optimized.png',
-    iconAlt: 'QuranReflect',
-    webHref: 'https://quranreflect.com',
-    androidHref:
-      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
-    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
-    categories: ['reflections', 'community'],
   },
   {
     id: 'sunnah',
