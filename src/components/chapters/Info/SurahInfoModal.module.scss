@@ -171,10 +171,6 @@ div {
     margin-block-end: var(--spacing-medium3-px);
   }
 
-  em {
-    font-style: italic;
-  }
-
   ul,
   ol {
     display: block;
@@ -198,6 +194,16 @@ div {
 
   & > *:last-child {
     margin-block-end: 0;
+  }
+
+  strong,
+  b {
+    font-weight: var(--font-weight-bold);
+  }
+
+  em,
+  i {
+    font-style: italic;
   }
 }
 
