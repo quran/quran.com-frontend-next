@@ -85,8 +85,8 @@
       },
       "quran-space": {
         "name": "Quran Space",
-        "tagline": "Transform Your Quran Journey",
-        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
+        "tagline": "حوّل رحلتك القرآنية",
+        "headline": "تطبيق هلاقة القرآن للتدبر والقراءة والحفظ مع معلمك أو أقرانك"
       }
     },
     "learn-more": "تعرف على المزيد",
@@ -99,6 +99,6 @@
   },
   "quran-apps-portal": "بوابة تطبيقات القرآن الكريم",
   "footer": {
-    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
+    "disclaimer": "كل تطبيق يتمتعه ويُدار بشكل مستقل من قبل مطوره. للحصول على الدعم أو الإبلاغ عن الأخطاء أو طلب ميزات جديدة، يرجى التواصل مباشرة مع مطور التطبيق."
   }
 }
