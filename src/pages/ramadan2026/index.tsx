@@ -55,20 +55,19 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               A Transformational Ramadan <span className={pageStyles.h1Subtext}>2026/1447AH</span>
             </h1>
             <h2>Ramadan Mubarak!</h2>
-            <div>
+            <div className={styles.paragraph}>
               To reach another Ramadan is a great mercy from Allah (SWT) and a precious opportunity
               for true transformation.
             </div>
-            <div>
+            <div className={styles.paragraph}>
               Ramadan is the month of the Quran - the greatest miracle and the most powerful source
               of guidance and change. Its words awaken hearts, bring clarity, and draw us closer to
               Allah.
             </div>
-            <div>
+            <div className={styles.paragraph}>
               We are grateful and excited to share these Ramadan offerings with you to support your
               journey with the Quran during this blessed time.
             </div>
-            <br />
             <h2>We invite you to join the following activities:</h2>
             <ul className={pageStyles.list}>
               <li>
@@ -182,13 +181,12 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           <hr />
           <div className={styles.subSection} id="preparing-our-hearts">
             <h1>♥️ Preparing Our Hearts for Ramadan</h1>
-            <div>
+            <div className={styles.paragraph}>
               Enhance your spiritual and mental readiness with our Learning Plan, Preparing Our
               Hearts for Ramadan. Start today and make the most of the blessed days ahead. This
               revised program is based on last year's highly-rated course, enriched with additional
               insights and reflections to help you approach Ramadan with a rejuvenated focus.
             </div>
-            <br />
             <div>What You'll Gain:</div>
             <ul className={pageStyles.list}>
               <li>Self-development tips.</li>
@@ -249,7 +247,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           <hr />
           <div className={styles.subSection} id="mindful-fasting">
             <h1>☕ Mindful Fasting: A Ramadan Learning Plan</h1>
-            <div>
+            <div className={styles.paragraph}>
               Discover the beauty of fasting beyond abstention with Mindful Fasting, a unique
               Learning Plan designed to help you:
             </div>
@@ -333,12 +331,12 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           <hr />
           <div className={styles.subSection} id="join-the-global-quran-reflection-community">
             <h1>📝 Join the Global Quran Reflection Community</h1>
-            <div>
+            <div className={styles.paragraph}>
               Reflect on the Quran with a global community in a safe, moderated environment where
               the focus is on the Quran. Read and share reflections, learn from others around the
               world, and grow through a journey built for deep connection.
             </div>
-            <div>
+            <div className={styles.paragraph}>
               Follow the Surah Al-Mulk Challenge, with{' '}
               <Link href="https://quran.foundation/shaykh-hammad-fahim" isNewTab>
                 Shaykh Hammad Fahim
@@ -372,19 +370,19 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
                 <Image src="/images/qr_appstore.png" alt="App Store" width={160} height={100} />
               </Link>
             </div>
-            <br />
           </div>
+          <br />
           <hr />
           <div className={styles.subSection} id="quranic-leadership-series">
             <h1>🌿 Quranic Leadership Series with Dr. Suleiman Hani</h1>
-            <div>
+            <div className={styles.paragraph}>
               Most people misunderstand leadership and reduce it to charisma, titles, or control,
               when in reality, leadership is the daily practice of influence, responsibility, and
               moral clarity. This Ramadan series brings together the highest-level leadership
               theories, simplified and synthesized into clear, actionable insights, and grounds them
               in deep Qur'anic guidance and Prophetic wisdom.
             </div>
-            <div>
+            <div className={styles.paragraph}>
               Each short episode offers one verse, one reflection, and one leadership principle that
               trains the inner leader first. If you want a Ramadan journey that is spiritually
               transformative and intellectually rigorous, designed to reshape how you lead at home,
@@ -398,7 +396,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           <hr />
           <div className={styles.subSection} id="share-the-month-of-the-quran">
             <h1>⭐ Share the Month of the Quran! Visit 'What Is Ramadan?'</h1>
-            <div>
+            <div className={styles.paragraph}>
               For those unfamiliar with Ramadan, we've created a page to explore the question “What
               is Ramadan?” in a simple and inspiring way. This page highlights the significance of
               Ramadan and its profound connection to the Quran. Share it with your friends and loved
@@ -414,17 +412,19 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           <hr />
           <div className={styles.subSection} id="explore-additional-beneficial-features">
             <h1>📱 Explore Additional Beneficial Features!</h1>
-            <div>
+            <div className={styles.paragraph}>
               Discover additional features on Quran.com to make your Ramadan journey more enriching.
               You can take personalized notes at the ayah level to capture your reflections and
               thoughts, read tafsir (commentary) to deepen your understanding of the Quran, and
               explore reflections shared by others for inspiration.
             </div>
-            <div className={pageStyles.newFeature}>
-              <Image src={newFeatureImage} height={490} width={300} alt="New Feature Image" />
+            <div className={classNames(pageStyles.newFeature, styles.paragraph)}>
+              <Image src={newFeatureImage} height={200} width={300} alt="New Feature Image" />
             </div>
-            <div>Check at the ayah-level for these additional features.</div>
-            <div>
+            <div className={styles.paragraph}>
+              Check at the ayah-level for these additional features.
+            </div>
+            <div className={styles.paragraph}>
               With more features like bookmarking, audio recitations, and a powerful search tool, we
               hope Quran.com can help you deeply connect with the Quran in Ramadan and beyond,
               insha'Allah!
