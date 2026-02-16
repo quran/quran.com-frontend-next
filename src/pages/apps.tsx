@@ -13,13 +13,13 @@ import styles from './apps-portal.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import useDebounce from '@/hooks/useDebounce';
+import GlobeIcon from '@/icons/globe.svg';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick, logTextSearchQuery, logValueChange } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { getBasePath } from '@/utils/url';
-import GlobeIcon from '@/icons/globe.svg';
 
 interface AppLinks {
   androidHref?: string;
@@ -426,15 +426,15 @@ const FeaturedCard: FC<{
         </div>
       </div>
       <p className={styles.appDescription}>{app.description}</p>
-        <AppCtaRow
-          appId={app.id}
-          appName={app.name}
-          androidHref={app.androidHref}
-          iosHref={app.iosHref}
-          webHref={app.webHref}
-          ctaLabels={ctaLabels}
-          eventName="app_portal_featured_app_cta"
-        />
+      <AppCtaRow
+        appId={app.id}
+        appName={app.name}
+        androidHref={app.androidHref}
+        iosHref={app.iosHref}
+        webHref={app.webHref}
+        ctaLabels={ctaLabels}
+        eventName="app_portal_featured_app_cta"
+      />
     </div>
   </article>
 );
@@ -446,12 +446,7 @@ interface FeaturedAppsProps {
   ctaLabels: AppCtaLabels;
 }
 
-const FeaturedApps: FC<FeaturedAppsProps> = ({
-  title,
-  viewAllText,
-  apps,
-  ctaLabels,
-}) => (
+const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps, ctaLabels }) => (
   <section className={styles.section}>
     <div className={styles.sectionHeader}>
       <h2 className={styles.sectionTitle}>{title}</h2>
@@ -462,11 +457,7 @@ const FeaturedApps: FC<FeaturedAppsProps> = ({
     </div>
     <div className={styles.featuredGrid}>
       {apps.map((app) => (
-        <FeaturedCard
-          key={app.id}
-          app={app}
-          ctaLabels={ctaLabels}
-        />
+        <FeaturedCard key={app.id} app={app} ctaLabels={ctaLabels} />
       ))}
     </div>
   </section>
@@ -555,11 +546,7 @@ const AppGrid: FC<AppGridProps> = ({ apps, emptyText, ctaLabels }) => {
   return (
     <div className={styles.appGrid}>
       {apps.map((app) => (
-        <AppTileCard
-          key={app.id}
-          app={app}
-          ctaLabels={ctaLabels}
-        />
+        <AppTileCard key={app.id} app={app} ctaLabels={ctaLabels} />
       ))}
     </div>
   );
@@ -621,11 +608,7 @@ const BrowseApps: FC<BrowseAppsProps> = ({
           searchQuery={searchQuery}
           filters={filters}
         />
-        <AppGrid
-          apps={filteredApps}
-          emptyText={noResultsText}
-          ctaLabels={ctaLabels}
-        />
+        <AppGrid apps={filteredApps} emptyText={noResultsText} ctaLabels={ctaLabels} />
       </div>
     </section>
   );
