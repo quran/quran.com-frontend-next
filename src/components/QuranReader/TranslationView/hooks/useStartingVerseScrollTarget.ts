@@ -1,12 +1,11 @@
 import { useMemo } from 'react';
 
+import { normalizeQueryParam, type QueryParamValue } from '@/utils/url';
 import { isValidVerseId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import ChaptersData from 'types/ChaptersData';
 import LookupRange from 'types/LookupRange';
-
-type QueryParamValue = string | string[] | undefined;
 
 type UseStartingVerseScrollTargetParams = {
   startingVerseQueryParam: QueryParamValue;
@@ -22,13 +21,6 @@ type StartingVerseScrollTarget = {
   targetVerseKey?: string;
   shouldSkipInitialScroll: boolean;
 };
-
-/**
- * Normalize a query parameter to a single value.
- * @returns {string | undefined}
- */
-const normalizeQueryParam = (param: QueryParamValue): string | undefined =>
-  Array.isArray(param) ? param[0] : param;
 
 /**
  * Build a verseKey used by observer queues for valid targets only.

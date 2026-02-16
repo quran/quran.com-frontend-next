@@ -39,6 +39,7 @@ import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
+import { normalizeQueryParam } from '@/utils/url';
 import { isValidVerseId, isValidVerseKey } from '@/utils/validator';
 import { selectIsAudioPlaying } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -121,16 +122,10 @@ const ReadingView = ({
   const chapterId = firstVerse?.chapterId ? String(firstVerse.chapterId) : undefined;
 
   // Get the startingVerse from the query params. Used to highlight the verse in mushaf mode.
-  const startingVerseQueryParam = router.query[QueryParam.STARTING_VERSE];
-  const startingVerse = Array.isArray(startingVerseQueryParam)
-    ? startingVerseQueryParam[0]
-    : startingVerseQueryParam;
+  const startingVerse = normalizeQueryParam(router.query[QueryParam.STARTING_VERSE]);
 
   // Get the chapterId from the query params to determine if it's a chapter-scoped route. Used to determine if we should consider the chapterId when validating the startingVerse.
-  const chapterIdQueryParam = router.query.chapterId;
-  const chapterIdFromRoute = Array.isArray(chapterIdQueryParam)
-    ? chapterIdQueryParam[0]
-    : chapterIdQueryParam;
+  const chapterIdFromRoute = normalizeQueryParam(router.query.chapterId);
   const isChapterScopedRoute = !!chapterIdFromRoute && !String(chapterIdFromRoute).includes(':');
 
   const verses = useMemo(

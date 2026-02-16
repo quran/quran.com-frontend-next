@@ -13,6 +13,7 @@ import { selectNavbar } from '@/redux/slices/navbar';
 import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont, QuranReaderDataType } from '@/types/QuranReader';
+import { normalizeQueryParam } from '@/utils/url';
 import { makeVerseKey } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
@@ -50,14 +51,8 @@ const useScrollToVirtualizedReadingView = (
   isPagesLookupLoading: boolean,
 ) => {
   const router = useRouter();
-  const startingVerseQueryParam = router.query.startingVerse;
-  const startingVerse = Array.isArray(startingVerseQueryParam)
-    ? startingVerseQueryParam[0]
-    : startingVerseQueryParam;
-  const chapterIdQueryParam = router.query.chapterId;
-  const chapterIdFromRoute = Array.isArray(chapterIdQueryParam)
-    ? chapterIdQueryParam[0]
-    : chapterIdQueryParam;
+  const startingVerse = normalizeQueryParam(router.query.startingVerse);
+  const chapterIdFromRoute = normalizeQueryParam(router.query.chapterId);
   const isChapterScopedRoute = !!chapterIdFromRoute && !String(chapterIdFromRoute).includes(':');
   const chapterIdFromLoadedVerses = initialData.verses[0]?.chapterId
     ? String(initialData.verses[0].chapterId)
@@ -171,11 +166,7 @@ const useScrollToVirtualizedReadingView = (
   );
 
   // Subscribe to NEXT_AYAH and PREV_AYAH events to keep audio navigation behavior unchanged.
-  useAudioNavigationScroll(
-    quranReaderDataType,
-    chapterIdFromLoadedVerses || '',
-    onAudioNavigationScroll,
-  );
+  useAudioNavigationScroll(quranReaderDataType, onAudioNavigationScroll, chapterIdFromLoadedVerses);
 };
 
 export default useScrollToVirtualizedReadingView;

@@ -9,6 +9,7 @@ import {
   setReadingPreference,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
+import { normalizeQueryParam } from '@/utils/url';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
@@ -79,10 +80,7 @@ const useReadingPreferenceSwitcher = ({
         // User is at the top of the page, so remove startingVerse to prevent scrolling
         delete newQueryParams.startingVerse;
       } else {
-        const chapterIdQueryParam = router.query.chapterId;
-        const chapterId = Array.isArray(chapterIdQueryParam)
-          ? chapterIdQueryParam[0]
-          : chapterIdQueryParam;
+        const chapterId = normalizeQueryParam(router.query.chapterId);
         const isChapterScopedRoute = !!chapterId && !String(chapterId).includes(':'); // Treat chapter ids/slugs as chapter-scoped and only exclude verse-key/range route params that contain ":".
 
         // For ContextMenu and MobileTabs when not at top, set startingVerse to ensure

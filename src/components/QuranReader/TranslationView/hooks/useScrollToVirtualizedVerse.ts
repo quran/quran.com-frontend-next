@@ -128,7 +128,7 @@ const useScrollToVirtualizedTranslationView = (
     [scrollToBeginningOfVerseCell],
   );
 
-  useAudioNavigationScroll(quranReaderDataType, chapterId, onAudioNavigation);
+  useAudioNavigationScroll(quranReaderDataType, onAudioNavigation, chapterId);
 
   useEffect(() => {
     return () => {
