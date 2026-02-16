@@ -72,7 +72,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
           <div className={styles.subSection} id="join-surah-mulk-challenge">
             <h1>Take the Meaningful Memorization Challenge This Ramadan</h1>
             <h2>30 days with Surah Al-Mulk. One ayah a day. A lifetime of impact.</h2>
-            <div>
+            <div className={styles.paragraph}>
               Join the challenge and end this Ramadan with a deep connection with Surah Al-Mulk.
               Through one ayah a day, you're guided to focus on just one verse at a time - receiving
               the word-by-word breakdown, tafsir insights you need to understand it, reflect on it,
@@ -123,11 +123,11 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
           <hr />
           <div className={styles.subSection} id="how-the-challenge-works">
             <h1>How the Challenge Works</h1>
-            <div>
+            <div className={styles.paragraph}>
               Each day of Ramadan, you'll receive an email with a short, focused lesson built around{' '}
               <span className={pageStyles.bold}>one ayah</span> from Surah Al-Mulk.
             </div>
-            <ul className={pageStyles.list}>
+            <ul className={classNames(pageStyles.list, styles.paragraph)}>
               <li>
                 <span className={pageStyles.bold}>Word-by-word</span> breakdown to understand the
                 meaning of the words
@@ -178,11 +178,11 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
           <hr />
           <div className={styles.subSection}>
             <h1>Don't Miss This Opportunity</h1>
-            <div>
+            <div className={styles.paragraph}>
               Ramadan arrives quickly and passes even faster. Many of us intend to slow down with
               the Quran, but without a clear path, the days slip by.
             </div>
-            <div>
+            <div className={styles.paragraph}>
               This challenge gives you a simple, meaningful way to stay connected to Surah Al-Mulk
               every day of Ramadan. One ayah. One focus. A connection that builds quietly and lasts
               beyond the month.
