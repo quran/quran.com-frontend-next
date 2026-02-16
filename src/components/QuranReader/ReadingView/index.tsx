@@ -12,6 +12,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useSelector } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
+import { getStartingVerseTarget } from './hooks/startingVerseTarget';
 import usePageNavigation from './hooks/usePageNavigation';
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import PageContainer from './PageContainer';
@@ -39,7 +40,6 @@ import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import { isValidVerseId, isValidVerseKey } from '@/utils/validator';
-import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
 import { selectIsAudioPlaying } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';
@@ -126,6 +126,13 @@ const ReadingView = ({
     ? startingVerseQueryParam[0]
     : startingVerseQueryParam;
 
+  // Get the chapterId from the query params to determine if it's a chapter-scoped route. Used to determine if we should consider the chapterId when validating the startingVerse.
+  const chapterIdQueryParam = router.query.chapterId;
+  const chapterIdFromRoute = Array.isArray(chapterIdQueryParam)
+    ? chapterIdQueryParam[0]
+    : chapterIdQueryParam;
+  const isChapterScopedRoute = !!chapterIdFromRoute && !String(chapterIdFromRoute).includes(':');
+
   const verses = useMemo(
     () => Object.values(mushafPageToVersesMap).flat(),
     [mushafPageToVersesMap],
@@ -157,45 +164,41 @@ const ReadingView = ({
       return undefined;
     }
 
-    const startingVerseValue = String(startingVerse);
-    const isStartingVerseKeyFormat = startingVerseValue.includes(':'); // Detect "SS:VV" format used on multi-surah pages.
-    let resolvedStartingVerseKey: string | undefined;
-
-    if (isStartingVerseKeyFormat) {
-      if (isValidVerseKey(chaptersData, startingVerseValue)) {
-        const [targetChapterId, targetVerseNumber] =
-          getVerseAndChapterNumbersFromKey(startingVerseValue);
-        const normalizedChapterId = Number(targetChapterId);
-        const normalizedVerseNumber = Number(targetVerseNumber);
-        if (Number.isInteger(normalizedChapterId) && Number.isInteger(normalizedVerseNumber)) {
-          resolvedStartingVerseKey = makeVerseKey(normalizedChapterId, normalizedVerseNumber);
-        }
-      }
-    } else if (quranReaderDataType === QuranReaderDataType.Chapter && chapterId) {
-      const startingVerseNumber = Number(startingVerseValue); // Parse legacy chapter-only format "V".
-      const isValidStartingVerse =
-        Number.isInteger(startingVerseNumber) &&
-        // Validate numeric verse against the current chapter bounds.
-        isValidVerseId(chaptersData, chapterId, startingVerseValue);
-      if (isValidStartingVerse) {
-        resolvedStartingVerseKey = makeVerseKey(chapterId, startingVerseNumber);
-      }
-    }
-
-    if (!resolvedStartingVerseKey) {
+    const startingVerseTarget = getStartingVerseTarget({
+      startingVerse: String(startingVerse),
+      chapterIdFromLoadedVerses: chapterId,
+      isChapterScopedRoute:
+        quranReaderDataType === QuranReaderDataType.Chapter && isChapterScopedRoute,
+    });
+    // If the startingVerse query param is invalid or missing, we don't highlight any verse and we exit early.
+    if (!startingVerseTarget) {
       setStartingVerseHighlightVerseKey(undefined);
       return undefined;
     }
 
-    if (lastShownStartingVerseKeyRef.current === resolvedStartingVerseKey) {
+    // Validate that the starting verse exists in the loaded chapters data.
+    const isValidStartingVerse = startingVerseTarget.isChapterNumericFormat
+      ? isValidVerseId(
+          chaptersData,
+          startingVerseTarget.chapterId,
+          String(startingVerseTarget.verseNumber),
+        )
+      : isValidVerseKey(chaptersData, startingVerseTarget.verseKey);
+    if (!isValidStartingVerse) {
+      setStartingVerseHighlightVerseKey(undefined);
       return undefined;
     }
 
-    lastShownStartingVerseKeyRef.current = resolvedStartingVerseKey;
-    setStartingVerseHighlightVerseKey(resolvedStartingVerseKey);
+    if (lastShownStartingVerseKeyRef.current === startingVerseTarget.verseKey) {
+      return undefined;
+    }
+
+    lastShownStartingVerseKeyRef.current = startingVerseTarget.verseKey;
+    setStartingVerseHighlightVerseKey(startingVerseTarget.verseKey);
     return undefined;
   }, [
     chapterId,
+    isChapterScopedRoute,
     chaptersData,
     isVerseAudioPlaying,
     quranReaderDataType,
