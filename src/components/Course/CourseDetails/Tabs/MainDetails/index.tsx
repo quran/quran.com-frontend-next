@@ -5,7 +5,6 @@ import { MilkdownProvider } from '@milkdown/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import DetailSection from './DetailSection';
-import styles from './MainDetails.module.scss';
 
 import MarkdownEditor from '@/components/MarkdownEditor';
 import HtmlContent from '@/components/RichText/HtmlContent';
@@ -44,14 +43,7 @@ const MainDetails: React.FC<Props> = ({ course }) => {
           />
         </MilkdownProvider>
       ) : (
-        <DetailSection
-          title={t('description')}
-          description={
-            <div className={styles.htmlDescription}>
-              <HtmlContent html={description} />
-            </div>
-          }
-        />
+        <DetailSection title={t('description')} description={<HtmlContent html={description} />} />
       )}
     </>
   );

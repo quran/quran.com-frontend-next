@@ -1,4 +1,4 @@
 {
-  "description": "آیت کی مختلف قیراط (مختلف ریڈنگز) کو دریافت کریں۔ {{ayahNumber}} سورہ کا {{surahName}}",
-  "title": "قیراط {{surahName}} - {{ayahNumber}}"
+  "description": "آیت کی مختلف قرأت (مختلف ریڈنگز) کو دریافت کریں۔ {{ayahNumber}} سورہ کا {{surahName}}",
+  "title": "قرأت {{surahName}} - {{ayahNumber}}"
 }

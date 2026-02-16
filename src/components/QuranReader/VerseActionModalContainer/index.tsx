@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import React, { useCallback, useEffect, useRef } from 'react';
 
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AdvancedCopyModal from './AdvancedCopyModal';
@@ -9,7 +10,9 @@ import FeedbackModal from './FeedbackModal';
 import NotesModals from './NotesModals';
 import ReaderBioModal from './ReaderBioModal';
 
+import { getChapterVerses } from '@/api';
 import useBatchedCountRangeNotes from '@/hooks/auth/useBatchedCountRangeNotes';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import {
   closeStudyMode,
   openStudyMode,
@@ -17,6 +20,7 @@ import {
 } from '@/redux/slices/QuranReader/studyMode';
 import {
   closeVerseActionModal,
+  openBookmarkModal,
   selectVerseActionModalEditingNote,
   selectVerseActionModalIsOpen,
   selectVerseActionModalIsTranslationView,
@@ -33,10 +37,18 @@ import {
 } from '@/redux/slices/QuranReader/verseActionModal';
 import { Note } from '@/types/auth/Note';
 import { logEvent } from '@/utils/eventLogger';
+import {
+  consumePendingBookmarkModalRestore,
+  getPendingBookmarkModalRestore,
+} from '@/utils/pendingBookmarkModalRestore';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 const VerseActionModalContainer: React.FC = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const hasClosedStudyModeRef = useRef(false);
+  // Use a reactive source of truth so restores can happen even if auth state flips after mount.
+  const { isLoggedIn: isUserLoggedIn } = useIsLoggedIn();
 
   const isOpen = useSelector(selectVerseActionModalIsOpen);
   const modalType = useSelector(selectVerseActionModalType);
@@ -51,6 +63,58 @@ const VerseActionModalContainer: React.FC = () => {
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
 
   const { data: notesCount } = useBatchedCountRangeNotes(isOpen && verseKey ? verseKey : null);
+
+  const getRestoredVerse = useCallback(
+    async (pendingVerseKey: string) => {
+      try {
+        const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(pendingVerseKey);
+        const response = await getChapterVerses(chapterId, router.locale || 'en', {
+          page: verseNumber,
+          perPage: 1,
+        });
+        return response?.verses?.[0] || null;
+      } catch {
+        return null;
+      }
+    },
+    [router.locale],
+  );
+
+  useEffect(() => {
+    let isCancelled = false;
+    const cancelRestore = () => {
+      isCancelled = true;
+    };
+
+    if (!router.isReady || isOpen || !isUserLoggedIn) {
+      return cancelRestore;
+    }
+
+    const restorePath = router.asPath;
+    const pendingRestore = getPendingBookmarkModalRestore(restorePath);
+    if (!pendingRestore) {
+      return cancelRestore;
+    }
+
+    const restoreBookmarkModal = async () => {
+      const restoredVerse = await getRestoredVerse(pendingRestore.verseKey);
+      if (!restoredVerse || isCancelled) return;
+      if (router.asPath !== restorePath) return;
+      const consumedRestore = consumePendingBookmarkModalRestore(restorePath);
+      if (!consumedRestore) return;
+      if (consumedRestore.verseKey !== pendingRestore.verseKey) return;
+
+      dispatch(
+        openBookmarkModal({
+          verseKey: consumedRestore.verseKey,
+          verse: restoredVerse,
+        }),
+      );
+    };
+
+    restoreBookmarkModal();
+    return cancelRestore;
+  }, [dispatch, getRestoredVerse, isOpen, isUserLoggedIn, router.asPath, router.isReady]);
 
   useEffect(() => {
     if (isOpen && wasOpenedFromStudyMode && !hasClosedStudyModeRef.current) {

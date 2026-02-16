@@ -6,15 +6,15 @@
   },
   "checkboxes": {
     "answers": "Nút \"Hiển thị đáp án\" (nếu có)",
-    "audio": "Bật phát lại âm thanh",
+    "audio": "Bật phát âm thanh",
     "customSize": "Sử dụng chiều rộng/chiều cao tùy chỉnh",
     "lessons": "Nút Hiển thị Bài học",
-    "mergeVerses": "Ghép các câu thơ (hiển thị nội tuyến)",
+    "mergeVerses": "Ghép các câu kinh (hiển thị nội tuyến)",
     "reflections": "Nút Hiển thị Phản chiếu",
-    "showArabic": "Hiển thị câu thơ tiếng Ả Rập",
+    "showArabic": "Hiển thị câu kinh tiếng Ả Rập",
     "tafsirs": "Nút Hiển thị Tafsir",
     "translator": "Hiển thị tên người dịch",
-    "verseRange": "Kích hoạt phạm vi câu thơ",
+    "verseRange": "Kích hoạt phạm vi câu kinh",
     "wordByWord": "Cho phép dịch từng từ một",
     "wordByWordTransliteration": "Cho phép phiên âm từng từ"
   },
@@ -28,14 +28,14 @@
   "fields": {
     "ayah": "Ayah",
     "clientId": "Mã khách hàng",
-    "height": "Chiều cao",
+    "height": "Cao",
     "language": "Ngôn ngữ",
     "mushaf": "Mushaf",
-    "reciter": "Người đọc thuộc lòng",
+    "reciter": "Người đọc kinh",
     "surah": "Surah",
     "theme": "Chủ đề",
     "translations": "Bản dịch",
-    "width": "Chiều rộng"
+    "width": "Rộng"
   },
   "header": {
     "subtitle": "<bold>Một cách thức chất lượng cao hơn, có thể tùy chỉnh để đưa các câu kinh Qur'an vào nội dung của bạn.</bold><br />Tạo một đoạn mã nhúng mà bạn có thể dễ dàng tùy chỉnh, với <bold>Hiển thị tiếng Ả Rập chính xác, tích hợp chức năng đọc thuộc lòng.</bold> và hơn thế nữa, để người đọc có thể vừa nghe vừa tương tác với câu thơ.",
@@ -46,9 +46,9 @@
     "title": "Công cụ tạo mã nhúng Ayah | Quran.com"
   },
   "mushaf": {
-    "indopak": "Ấn Độ-Pak",
-    "kfgqpc_v1": "Khu phức hợp King Fahad v1",
-    "kfgqpc_v2": "Khu phức hợp King Fahad v2",
+    "indopak": "Indopak",
+    "kfgqpc_v1": "King Fahad Complex v1",
+    "kfgqpc_v2": "King Fahad Complex v2",
     "qpc": "QPC Uthmani Hafs",
     "tajweed": "Tajweed"
   },
@@ -56,7 +56,7 @@
     "searchTranslations": "Tìm kiếm bản dịch..."
   },
   "reciters": {
-    "select": "Chọn người đọc thuộc lòng"
+    "select": "Chọn người đọc kinh"
   },
   "sections": {
     "configuration": "Cấu hình",
@@ -67,13 +67,13 @@
     "loadingChapters": "Đang tải các chương...",
     "loadingPreview": "Đang tải bản xem trước...",
     "loadingReciters": "Đang tải danh sách người đọc...",
-    "loadingVerses": "Đang tải các câu thơ...",
+    "loadingVerses": "Đang tải các câu kinh...",
     "noTranslations": "Không tìm thấy bản dịch nào."
   },
   "theme": {
-    "dark": "Tối tăm",
-    "light": "Ánh sáng",
-    "sepia": "Màu nâu đỏ"
+    "dark": "Tối",
+    "light": "Sáng",
+    "sepia": "Sepia"
   },
   "translations": {
     "chipRemoveLabel": "Xóa bản dịch",

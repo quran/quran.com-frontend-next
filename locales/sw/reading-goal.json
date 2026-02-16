@@ -1,5 +1,5 @@
 {
-  "achieve-quran-goals": "Fikia Malengo Yako ya Quran",
+  "achieve-quran-goals": "Fikia Malengo Yako ya Qur'ani",
   "continue-reading": "Endelea Kusoma",
   "continuous": {
     "description": "Lengo lako litahesabu maendeleo yako kwa muda wa siku kadhaa",
@@ -13,7 +13,7 @@
     "description": "Lengo lako litawekwa upya kila siku",
     "title": "Lengo la kila siku"
   },
-  "day-streak": "Mfululizo wa mchana",
+  "day-streak": "Mfululizo wa Siku",
   "day-x": "Siku {{day}}",
   "days": "Siku",
   "days-remaining": "siku zilizobaki",
@@ -104,8 +104,8 @@
   "start-reading": "Anza Kusoma",
   "starting-chapter": "Sura ya kuanzia",
   "starting-verse": "Aya ya kuanzia",
-  "streak": "Streak",
-  "streak-definition": "Streak ni idadi ya siku ulizosoma Qur'ani kwa mfululizo bila kukosa.",
+  "streak": "Mfululizo",
+  "streak-definition": "Mfululizo ni idadi ya siku ulizosoma Qur'ani kwa mfululizo bila kukosa.",
   "timeline-meaning": "Je, kalenda yako ya matukio inamaanisha nini?",
   "timeline-states": {
     "checked": "Umekamilisha lengo lako",
@@ -114,14 +114,14 @@
     "stroked": "Hujasoma chochote leo"
   },
   "todays-goal": "Lengo la Leo",
-  "track-your-streak": "Fuatilia Mistari, Unda Malengo Maalum, Endelea Kuendelea",
+  "track-your-streak": "Kaa thabiti, Fuatilia Mifululizo, Unda Malengo Maalum",
   "view-progress": "Tazama Maendeleo",
   "week-progress": "Maendeleo ya wiki hii",
   "x-days": {
     "one": "",
     "other": ""
   },
-  "x-days-streak": "Streak ya siku {{days}}",
+  "x-days-streak": "Siku {{days}} Mfululizo",
   "x-hours": {
     "one": "",
     "other": ""

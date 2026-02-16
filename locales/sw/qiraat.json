@@ -1,4 +1,4 @@
 {
-  "description": "Chunguza Qiraat (visomo tofauti) vya Ayah {{ayahNumber}} ya Sura {{surahName}}",
+  "description": "Chunguza Qiraat (visomo tofauti) vya Aya {{ayahNumber}} ya Sura {{surahName}}",
   "title": "Qiraat {{surahName}} - {{ayahNumber}}"
 }

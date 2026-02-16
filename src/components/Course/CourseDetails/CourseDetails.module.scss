@@ -39,6 +39,7 @@
 .title {
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-jumbo);
+  line-height: var(--line-height-jumbo);
   text-wrap: pretty;
   @include utility.kitabFontHtmlLang;
 
@@ -48,7 +49,12 @@
   }
 }
 
-.title .completedPill {
+.titleRow {
+  display: flex;
+  align-items: center;
+}
+
+.titleRow .completedPill {
   vertical-align: middle;
   margin-inline-start: var(--spacing-small-px);
   font-size: var(--font-size-small-px);

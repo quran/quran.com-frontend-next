@@ -9,9 +9,9 @@
   "date-asc": "التاريخ (الأقدم)",
   "date-desc": "التاريخ (الأحدث)",
   "delete-bookmark": {
-    "confirmation-subtitle": "ستقوم بالحذف {{count}} عنصر (عناصر) من {{collectionName}}، هل أنت متأكد؟",
+    "confirmation-subtitle": "ستقوم بالحذف {{count}} عنصر من {{collectionName}}، هل أنت متأكد؟",
     "subtitle": "هل أنت متأكد أنك تريد حذف {{bookmarkName}} من مجموعة {{collectionName}} ؟",
-    "success": "تم الحذف {{count}} أغراض).",
+    "success": "تم الحذف {{count}} عنصر).",
     "title": "حذف ما تم حفظه"
   },
   "delete-collection-action": "حذف المجموعة",
@@ -30,8 +30,8 @@
   "go-to-ayah": "اذهب إلى الآية",
   "load-more": "تحميل المزيد",
   "no-collections": "ليس لديك أي مجموعات حتى الآن",
-  "quranic-asc": "الترتيب القرآني (تصاعدي)",
-  "quranic-desc": "الترتيب القرآني (تنازلي)",
+  "quranic-asc": "ترتيب سور القرآن (تصاعدي)",
+  "quranic-desc": "ترتيب سور القرآن (تنازلي)",
   "recently-added": "أضيفت حديثًا.",
   "recently-updated": "تم تحديثه مؤخرا",
   "verse-key": "رقم السورة والآية"

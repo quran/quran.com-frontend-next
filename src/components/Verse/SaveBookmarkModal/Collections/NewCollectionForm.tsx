@@ -4,6 +4,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './collections.module.scss';
 
+import {
+  COLLECTION_NAME_MAX_LENGTH,
+  COLLECTION_NAME_MIN_LENGTH,
+} from '@/components/Collection/collectionNameValidation';
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import CloseIcon from '@/icons/close.svg';
@@ -34,6 +38,11 @@ const NewCollectionForm: React.FC<NewCollectionFormProps> = ({
 }) => {
   const { t } = useTranslation('quran-reader');
   const commonT = useTranslation('common').t;
+  const trimmedCollectionName = newCollectionName.trim();
+  const isCollectionNameValid =
+    trimmedCollectionName.length >= COLLECTION_NAME_MIN_LENGTH &&
+    trimmedCollectionName.length <= COLLECTION_NAME_MAX_LENGTH;
+  const isCreateDisabled = !isCollectionNameValid || isSubmittingCollection;
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -44,11 +53,11 @@ const NewCollectionForm: React.FC<NewCollectionFormProps> = ({
       e.preventDefault();
       e.stopPropagation();
 
-      if (!newCollectionName.trim() || isSubmittingCollection) return;
+      if (!isCollectionNameValid || isSubmittingCollection) return;
 
       onCreate();
     },
-    [newCollectionName, isSubmittingCollection, onCreate],
+    [isCollectionNameValid, isSubmittingCollection, onCreate],
   );
 
   return (
@@ -86,6 +95,7 @@ const NewCollectionForm: React.FC<NewCollectionFormProps> = ({
           onChange={(e) => onNameChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder=""
+          maxLength={COLLECTION_NAME_MAX_LENGTH}
         />
       </div>
 
@@ -103,7 +113,7 @@ const NewCollectionForm: React.FC<NewCollectionFormProps> = ({
           size={ButtonSize.Medium}
           onClick={onCreate}
           className={styles.createButton}
-          isDisabled={!newCollectionName.trim() || isSubmittingCollection}
+          isDisabled={isCreateDisabled}
           isLoading={isSubmittingCollection}
         >
           {commonT('create')}
