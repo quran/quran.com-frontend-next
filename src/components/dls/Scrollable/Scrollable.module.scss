@@ -13,6 +13,9 @@
   align-items: center;
   inline-size: 100%;
   gap: var(--spacing-medium-px);
+  [dir='rtl'] & {
+    flex-direction: row-reverse;
+  }
 }
 
 .edge {
