@@ -55,16 +55,16 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               A Transformational Ramadan <span className={pageStyles.h1Subtext}>2026/1447AH</span>
             </h1>
             <h2>Ramadan Mubarak!</h2>
-            <div>
+            <div className={styles.paragraph}>
               To reach another Ramadan is a great mercy from Allah (SWT) and a precious opportunity
               for true transformation.
             </div>
-            <div>
+            <div className={styles.paragraph}>
               Ramadan is the month of the Quran - the greatest miracle and the most powerful source
               of guidance and change. Its words awaken hearts, bring clarity, and draw us closer to
               Allah.
             </div>
-            <div>
+            <div className={styles.paragraph}>
               We are grateful and excited to share these Ramadan offerings with you to support your
               journey with the Quran during this blessed time.
             </div>
@@ -333,12 +333,12 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           <hr />
           <div className={styles.subSection} id="join-the-global-quran-reflection-community">
             <h1>📝 Join the Global Quran Reflection Community</h1>
-            <div>
+            <div className={styles.paragraph}>
               Reflect on the Quran with a global community in a safe, moderated environment where
               the focus is on the Quran. Read and share reflections, learn from others around the
               world, and grow through a journey built for deep connection.
             </div>
-            <div>
+            <div className={styles.paragraph}>
               Follow the Surah Al-Mulk Challenge, with{' '}
               <Link href="https://quran.foundation/shaykh-hammad-fahim" isNewTab>
                 Shaykh Hammad Fahim
@@ -377,14 +377,14 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           <hr />
           <div className={styles.subSection} id="quranic-leadership-series">
             <h1>🌿 Quranic Leadership Series with Dr. Suleiman Hani</h1>
-            <div>
+            <div className={styles.paragraph}>
               Most people misunderstand leadership and reduce it to charisma, titles, or control,
               when in reality, leadership is the daily practice of influence, responsibility, and
               moral clarity. This Ramadan series brings together the highest-level leadership
               theories, simplified and synthesized into clear, actionable insights, and grounds them
               in deep Qur'anic guidance and Prophetic wisdom.
             </div>
-            <div>
+            <div className={styles.paragraph}>
               Each short episode offers one verse, one reflection, and one leadership principle that
               trains the inner leader first. If you want a Ramadan journey that is spiritually
               transformative and intellectually rigorous, designed to reshape how you lead at home,
