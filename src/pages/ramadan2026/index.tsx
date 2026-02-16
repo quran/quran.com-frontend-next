@@ -421,7 +421,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               explore reflections shared by others for inspiration.
             </div>
             <div className={pageStyles.newFeature}>
-              <Image src={newFeatureImage} height={490} width={300} alt="New Feature Image" />
+              <Image src={newFeatureImage} height={200} width={300} alt="New Feature Image" />
             </div>
             <div>Check at the ayah-level for these additional features.</div>
             <div>
