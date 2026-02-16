@@ -40,14 +40,20 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   const { t } = useTranslation('common');
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const onOpenModalChange = (open: boolean) => {
-    logEvent(
-      `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
-        open ? 'open' : 'close'
-      }`,
-    );
-    setIsMenuOpen(open);
-  };
+  const setMenuOpen = React.useCallback(
+    (open: boolean) => {
+      setIsMenuOpen((prevIsMenuOpen) => {
+        if (prevIsMenuOpen === open) return prevIsMenuOpen;
+        logEvent(
+          `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
+            open ? 'open' : 'close'
+          }`,
+        );
+        return open;
+      });
+    },
+    [isTranslationView],
+  );
 
   return (
     <div className={styles.container}>
@@ -70,7 +76,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
               shouldFlipOnRTL={false}
               ariaLabel={t('more')}
               data-testid="verse-actions-more"
-              onClick={() => setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen)}
+              onClick={() => setMenuOpen(!isMenuOpen)}
             >
               <span className={cellStyles.icon}>
                 <IconContainer
@@ -86,7 +92,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
         isModal
         isPortalled
         shouldUseModalZIndex={shouldUseModalZIndex}
-        onOpenChange={onOpenModalChange}
+        onOpenChange={setMenuOpen}
       >
         <OverflowVerseActionsMenuBody
           verse={verse}
