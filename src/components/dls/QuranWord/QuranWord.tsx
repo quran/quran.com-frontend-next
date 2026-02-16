@@ -69,6 +69,7 @@ export type QuranWordProps = {
   word: Word;
   font?: QuranFont;
   isHighlighted?: boolean;
+  isStartingVerseHighlighted?: boolean;
   isWordByWordAllowed?: boolean;
   isAudioHighlightingAllowed?: boolean;
   isFontLoaded?: boolean;
@@ -88,6 +89,7 @@ const QuranWord = ({
   isWordByWordAllowed = true,
   isAudioHighlightingAllowed = true,
   isHighlighted,
+  isStartingVerseHighlighted = false,
   isFontLoaded = true,
   tooltipType,
   isWordInteractionDisabled = false,
@@ -342,6 +344,7 @@ const QuranWord = ({
          * top of the normal/black glyph.
          */
         [styles.highlighted]: shouldBeHighLighted && font !== QuranFont.TajweedV4,
+        [styles.startingVerseHighlighted]: isStartingVerseHighlighted,
         [styles.wbwContainer]: isWordByWordLayout,
         [styles.additionalWordGap]: isTranslationMode,
         [styles.additionalStopSignGap]: isTranslationMode && hasIndoPakStopSign,

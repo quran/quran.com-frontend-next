@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 import { VirtuosoHandle } from 'react-virtuoso';
 
+import scrollToVerseTarget from './scrollToVerseTarget';
+import { getStartingVerseTarget, type StartingVerseTarget } from './startingVerseTarget';
 import useFetchVersePageNumber from './useFetchVersePageNumber';
 
 import useAudioNavigationScroll from '@/hooks/useAudioNavigationScroll';
@@ -11,13 +13,11 @@ import { selectNavbar } from '@/redux/slices/navbar';
 import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont, QuranReaderDataType } from '@/types/QuranReader';
-import { getVersePositionWithinAMushafPage } from '@/utils/verse';
+import { normalizeQueryParam } from '@/utils/url';
+import { makeVerseKey } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
-
-const PINNED_VERSES_BAR_OFFSET = -90;
-const NAVBAR_OFFSET = -54;
 
 /**
  * This hook listens to startingVerse query param and navigate to the
@@ -51,13 +51,17 @@ const useScrollToVirtualizedReadingView = (
   isPagesLookupLoading: boolean,
 ) => {
   const router = useRouter();
-  const { startingVerse, chapterId } = router.query;
+  const startingVerse = normalizeQueryParam(router.query.startingVerse);
+  const chapterIdFromRoute = normalizeQueryParam(router.query.chapterId);
+  const isChapterScopedRoute = !!chapterIdFromRoute && !String(chapterIdFromRoute).includes(':');
+  const chapterIdFromLoadedVerses = initialData.verses[0]?.chapterId
+    ? String(initialData.verses[0].chapterId)
+    : undefined;
   const shouldScroll = useRef(true);
 
   const pinnedVerses = useSelector(selectPinnedVerses);
   const hasPinnedVerses = pinnedVerses.length > 0;
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
-
   const hasPinnedVersesRef = useRef(hasPinnedVerses);
   hasPinnedVersesRef.current = hasPinnedVerses;
   const isNavbarVisibleRef = useRef(isNavbarVisible);
@@ -68,108 +72,101 @@ const useScrollToVirtualizedReadingView = (
     quranReaderStyles.mushafLines,
   );
 
+  const startingVerseTarget = useMemo(
+    () =>
+      getStartingVerseTarget({
+        startingVerse,
+        chapterIdFromLoadedVerses,
+        isChapterScopedRoute,
+      }),
+    [startingVerse, chapterIdFromLoadedVerses, isChapterScopedRoute],
+  );
+
   /**
    * We need to scroll again when we have just changed the font since the same
    * verse might lie on another page/position. Same for when we change the
    * verse.
    */
   useEffect(() => {
+    // Re-enable scroll when font, mushaf lines, or starting verse changes.
     shouldScroll.current = true;
   }, [quranFont, mushafLines, startingVerse]);
 
   /**
-   * Helper: scroll to a verse number. This consolidates the logic used in
+   * Helper: scroll to a verse target. This consolidates the logic used in
    * both the initial startingVerse effect and the audio player subscription.
    *
-   * @param {number} verseNumber
+   * @param {StartingVerseTarget} target
    * @param {boolean} respectScrollGuard - when true, guard scrolling with shouldScroll ref
    */
   const scrollToVerse = useCallback(
-    // eslint-disable-next-line react-func/max-lines-per-function
-    async (verseNumber: number, respectScrollGuard = false) => {
+    async (target: StartingVerseTarget, respectScrollGuard = false) => {
       if (respectScrollGuard && shouldScroll.current === false) return;
-      if (!virtuosoRef.current || !Object.keys(pagesVersesRange).length) return;
-
-      let pinnedOffset = 0;
-      if (hasPinnedVersesRef.current) {
-        pinnedOffset += PINNED_VERSES_BAR_OFFSET;
-        if (isNavbarVisibleRef.current) pinnedOffset += NAVBAR_OFFSET;
-      }
-
-      const initialDataFirstPage = initialData.verses[0]?.pageNumber;
-      const firstPageOfCurrentChapter =
-        isUsingDefaultFont && initialDataFirstPage
-          ? initialDataFirstPage
-          : Number(Object.keys(pagesVersesRange)[0]);
-
-      const startFromVerseData = verses.find((verse) => verse.verseNumber === verseNumber);
-      if (startFromVerseData && pagesVersesRange[startFromVerseData.pageNumber]) {
-        const scrollToPageIndex = startFromVerseData.pageNumber - firstPageOfCurrentChapter;
-        virtuosoRef.current.scrollToIndex({
-          index: scrollToPageIndex,
-          align: getVersePositionWithinAMushafPage(
-            `${chapterId}:${verseNumber}`,
-            pagesVersesRange[startFromVerseData.pageNumber],
-          ),
-          offset: pinnedOffset,
-        });
-        if (respectScrollGuard) shouldScroll.current = false;
-        return;
-      }
-
-      const response = await fetchVersePageNumber(chapterId as string, verseNumber);
-      if (!response || !virtuosoRef.current) return;
-      if (response.verses.length && (respectScrollGuard ? shouldScroll.current === true : true)) {
-        const page = response.verses[0].pageNumber;
-        const scrollToPageIndex = page - firstPageOfCurrentChapter;
-        if (pagesVersesRange[page]) {
-          virtuosoRef.current.scrollToIndex({
-            index: scrollToPageIndex,
-            align: getVersePositionWithinAMushafPage(
-              `${chapterId}:${verseNumber}`,
-              pagesVersesRange[page],
-            ),
-            offset: pinnedOffset,
-          });
-
-          if (respectScrollGuard) shouldScroll.current = false;
-        }
-      }
+      const didScroll = await scrollToVerseTarget({
+        target,
+        virtuosoRef,
+        pagesVersesRange,
+        verses,
+        isUsingDefaultFont,
+        initialDataFirstPage: initialData.verses[0]?.pageNumber,
+        hasPinnedVerses: hasPinnedVersesRef.current,
+        isNavbarVisible: isNavbarVisibleRef.current,
+        fetchVersePageNumber,
+      });
+      if (respectScrollGuard && didScroll) shouldScroll.current = false;
     },
     [
       virtuosoRef,
       pagesVersesRange,
+      verses,
       isUsingDefaultFont,
       initialData.verses,
-      verses,
-      chapterId,
       fetchVersePageNumber,
     ],
   );
 
   useEffect(() => {
-    // if we have the data of the page lookup
+    // If we have the page lookup data and virtuoso is mounted.
     if (!isPagesLookupLoading && virtuosoRef.current && Object.keys(pagesVersesRange).length) {
-      // if startingVerse is present in the url
-      if (quranReaderDataType === QuranReaderDataType.Chapter && startingVerse) {
-        const startingVerseNumber = Number(startingVerse);
-        // if the startingVerse is a valid integer and is above 1 (skip verse 1 since it's already at the top)
-        if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 1) {
-          scrollToVerse(startingVerseNumber, true);
-        }
+      // If startingVerse is present in the URL (chapter format or multi-surah format).
+      if (!startingVerseTarget) return;
+      if (
+        quranReaderDataType === QuranReaderDataType.Chapter &&
+        startingVerseTarget.isChapterNumericFormat &&
+        startingVerseTarget.verseNumber <= 1 // Skip if verse 1 is already visible at the top in chapter mode.
+      ) {
+        return;
       }
+      // Trigger initial scroll for both chapter and multi-surah target formats.
+      scrollToVerse(startingVerseTarget, true);
     }
   }, [
     isPagesLookupLoading,
     quranReaderDataType,
-    startingVerse,
+    startingVerseTarget,
     virtuosoRef,
     scrollToVerse,
     pagesVersesRange,
   ]);
 
-  // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user clicks buttons in audio player
-  useAudioNavigationScroll(quranReaderDataType, chapterId as string, scrollToVerse);
+  const onAudioNavigationScroll = useCallback(
+    (ayahNumber: number) => {
+      if (!chapterIdFromLoadedVerses) return;
+      scrollToVerse(
+        {
+          chapterId: chapterIdFromLoadedVerses,
+          verseNumber: ayahNumber,
+          verseKey: makeVerseKey(chapterIdFromLoadedVerses, ayahNumber),
+          isChapterNumericFormat: true,
+        },
+        false,
+      );
+    },
+    [chapterIdFromLoadedVerses, scrollToVerse],
+  );
+
+  // Subscribe to NEXT_AYAH and PREV_AYAH events to keep audio navigation behavior unchanged.
+  useAudioNavigationScroll(quranReaderDataType, onAudioNavigationScroll, chapterIdFromLoadedVerses);
 };
 
 export default useScrollToVirtualizedReadingView;

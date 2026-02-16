@@ -21,13 +21,13 @@ enum AudioNavigationEvent {
  */
 const useAudioNavigationScroll = (
   quranReaderDataType: QuranReaderDataType,
-  chapterId: string,
   onNavigate: AudioNavigationHandler,
+  chapterId?: string,
 ) => {
   const audioService = useContext(AudioPlayerMachineContext);
 
   useEffect(() => {
-    if (!audioService || quranReaderDataType !== QuranReaderDataType.Chapter) {
+    if (!audioService || quranReaderDataType !== QuranReaderDataType.Chapter || !chapterId) {
       return undefined;
     }
 
