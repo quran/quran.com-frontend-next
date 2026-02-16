@@ -47,6 +47,7 @@ const FlashCardList: React.FC<FlashCardListProps> = ({
               }}
               role="button"
               tabIndex={0}
+              aria-expanded={isExpanded}
             >
               <div className={styles.cardHeader}>
                 <div className={styles.cardNumber}>{index + 1}</div>
