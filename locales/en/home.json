@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Achieve Your Quran Goals",
+  "apps": {
+    "description": "Connected apps to further your growth with the Quran.",
+    "featured-apps": "Featured Apps",
+    "qariah": {
+      "description": "Women Quran Reciters",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com for Android",
+      "name": "Quran Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com for iPhone",
+      "name": "Quran iOS"
+    },
+    "quran-space": {
+      "description": "Live Study Circle",
+      "name": "Quran Space"
+    },
+    "quranreflect": {
+      "description": "Read & Share Reflections",
+      "name": "QuranReflect"
+    },
+    "see-more": "See more",
+    "title": "Quran Apps"
+  },
   "begin": "Begin",
   "calendar-cta": "Calendar",
   "chapters-and-verses": "Chapters and Verses",
@@ -72,31 +98,5 @@
   },
   "welcome": {
     "title": "It's the Month of the Quran! Help millions of users get access to the guidance of the Quran."
-  },
-  "apps": {
-    "title": "Quran Apps",
-    "description": "Connected apps to further your growth with the Quran.",
-    "featured-apps": "Featured Apps",
-    "see-more": "See more",
-    "quranreflect": {
-      "name": "QuranReflect",
-      "description": "Read & Share Reflections"
-    },
-    "qariah": {
-      "name": "Qariah",
-      "description": "Women Quran Reciters"
-    },
-    "quran-space": {
-      "name": "Quran Space",
-      "description": "Live Study Circle"
-    },
-    "quran-ios": {
-      "name": "Quran iOS",
-      "description": "Quran.com for iPhone"
-    },
-    "quran-android": {
-      "name": "Quran Android",
-      "description": "Quran.com for Android"
-    }
   }
 }
