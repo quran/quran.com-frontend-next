@@ -17,7 +17,7 @@ import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick, logTextSearchQuery, logValueChange } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl } from '@/utils/navigation';
+import { getCanonicalUrl, QURAN_URL } from '@/utils/navigation';
 
 interface AppLinks {
   androidHref?: string;
@@ -285,6 +285,7 @@ interface BrowseAppsProps {
 }
 
 const path = '/apps';
+const OG_IMAGE_URL = `${QURAN_URL}/images/app-portal/connected-quran-apps.png`;
 
 interface HeroProps {
   title: string;
@@ -610,6 +611,8 @@ const AppPortalPage: NextPage = () => {
       <NextSeoWrapper
         title={t('quran-apps-portal')}
         description={t('hero.description')}
+        image={OG_IMAGE_URL}
+        imageAlt={t('quran-apps-portal')}
         url={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
       />
