@@ -20,10 +20,20 @@ const hashString = (value: string) => {
   return hash;
 };
 
+const createSeededRandom = (seed: number) => {
+  let state = seed % 2147483647;
+  if (state <= 0) state += 2147483646;
+  return () => {
+    state = (state * 48271) % 2147483647;
+    return (state - 1) / 2147483646;
+  };
+};
+
 const shuffleOptions = (options: LessonQuizOption[], seed: string) => {
   const shuffled = [...options];
+  const rng = createSeededRandom(hashString(seed));
   for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const j = hashString(`${seed}:${i}`) % (i + 1);
+    const j = Math.floor(rng() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return shuffled;
