@@ -112,6 +112,13 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
               Don't miss this great opportunity to transform your relationship with this powerful
               Surah.
             </h2>
+            <div>This Challenge is based on the content contained in our new Learning Plan:</div>
+            <Link
+              href="/learning-plans/30-transformative-days-with-surah-al-mulk-learn-reflect-memorize"
+              isNewTab
+            >
+              🌍 30 Transformative Days with Surah Al-Mulk: Learn, Reflect, Memorize
+            </Link>
           </div>
           <hr />
           <div className={styles.subSection} id="how-the-challenge-works">
