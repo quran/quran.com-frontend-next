@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "Shiriki tafakari",
-        "description": "Jukwaa la kijamii la kuhimiza na kuwezesha tafakari za Qur'ani - shiriki tafakari, chunguza mada, na wasiliana na jamii.",
-        "tagline": "Shiriki tafakari ili tukue pamoja",
+        "description": "Jukwaa la kijamii la kukuza utamaduni wa kutafakari Quran Tukufu",
+        "tagline": "Soma na Shiriki Tafakari",
         "title": "QuranReflect"
       },
       "readtafsir": {
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Hatimaye, programu ya Qur'ani kwa kina dada",
+        "headline": "Sikiliza wanawake zaidi ya 60 kutoka kote ulimwenguni wakisoma Quran katika visomo tofauti!",
         "name": "Qariah",
         "tagline": "Wasomaji wanawake wa Qur'ani"
       },
@@ -84,21 +84,21 @@
         "tagline": "Tafsir & mwenzi wa masomo"
       },
       "quran-space": {
-        "name": "Quran Space",
-        "tagline": "Transform Your Quran Journey",
-        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
+        "headline": "Ungana na walimu, wanafunzi, au wenzako katika sauti na video za muda halisi ili kusoma, kutafakari, na kujifunza Quran pamoja.",
+        "name": "Nafasi ya Quran",
+        "tagline": "Nafasi ya Mkutano wa Kurani Moja kwa Moja"
       }
     },
     "learn-more": "Jifunze zaidi",
     "title": "Programu Zilizoangaziwa",
     "view-all": "Tazama yote"
   },
+  "footer": {
+    "disclaimer": "Kila programu inamilikiwa na kutunzwa kwa kujitegemea na msanidi programu wake. Kwa usaidizi, ripoti za hitilafu, au maombi ya vipengele, tafadhali wasiliana na muundaji wa programu moja kwa moja."
+  },
   "hero": {
-    "description": "Gundua mkusanyiko khasa wa programu za Kiislamu zilizoundwa na Quran.Foundation. Kuanzia zana za kujifunzia hadi huduma za maombi, pata programu zinazoboresha safari yako ya kiroho.",
+    "description": "Gundua programu za kipekee zinazoendeshwa na maudhui na vipengele vya mtumiaji vilivyothibitishwa na Wakfu wa Quran, huku akaunti yako, maendeleo, na safari yako zikiendelea kuunganishwa.",
     "title": "Gundua Mfumo wetu wa Ikolojia wa Programu"
   },
-  "quran-apps-portal": "Tovuti ya Programu za Qur'ani",
-  "footer": {
-    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
-  }
+  "quran-apps-portal": "Programu za Quran Zilizounganishwa"
 }

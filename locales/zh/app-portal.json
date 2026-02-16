@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "分享感想",
-        "description": "一个鼓励和促进古兰经反思的社交平台——分享反思、探索话题、与社区互动。",
-        "tagline": "分享感悟，共同成长",
+        "description": "一个旨在培养反思《古兰经》文化的社交平台",
+        "tagline": "阅读并分享感想",
         "title": "古兰经反思"
       },
       "readtafsir": {
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "终于，我们为女儿们准备了一款古兰经应用程序。",
+        "headline": "聆听来自世界各地的 60 多位女性用不同的方式诵读《古兰经》！",
         "name": "卡里亚",
         "tagline": "女性古兰经诵读者"
       },
@@ -84,21 +84,21 @@
         "tagline": "经注与学习伴侣"
       },
       "quran-space": {
-        "name": "Quran Space",
-        "tagline": "Transform Your Quran Journey",
-        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
+        "headline": "通过实时音频和视频与老师、学生或同伴联系，一起阅读、思考和学习《古兰经》。",
+        "name": "古兰经空间",
+        "tagline": "现场古兰经聚会空间"
       }
     },
     "learn-more": "了解更多",
     "title": "精选应用",
     "view-all": "查看全部"
   },
+  "footer": {
+    "disclaimer": "每个应用程序均由其开发者独立拥有和维护。如需支持、提交错误报告或提出功能请求，请直接联系应用程序创建者。"
+  },
   "hero": {
-    "description": "探索一系列由 Quran.foundation 开发的精选伊斯兰应用程序。从学习工具到祈祷辅助工具，找到能够提升您灵性之旅的应用程序。",
+    "description": "探索由古兰经基金会认证的内容和用户功能提供支持的独特应用程序，同时您的帐户、进度和旅程保持连接。",
     "title": "探索我们的应用生态系统"
   },
-  "quran-apps-portal": "古兰经应用程序门户",
-  "footer": {
-    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
-  }
+  "quran-apps-portal": "联网古兰经应用程序"
 }

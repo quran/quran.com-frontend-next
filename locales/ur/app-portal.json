@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "تدبرات شیئر کریں۔",
-        "description": "ایک ایسا سوشل پلیٹ فارم جو قرآنی تدبر کی حوصلہ افزائی اور اسے آسان بنانے کے لیے ہے- جہاں آپ اپنے مشاہدات شیئر، مختلف موضوعات پر تحقیق اور کمیونٹی کے ساتھ مل کر سیکھ سکتے ہیں۔",
-        "tagline": "تدبرات شیئر کریں اور مل کر بڑھیں",
+        "description": "قرآن پاک پر غور و فکر کی ثقافت کو فروغ دینے کا ایک سماجی پلیٹ فارم",
+        "tagline": "مظاہر پڑھیں اور شیئر کریں۔",
         "title": "قرآن ریفلیکٹ"
       },
       "readtafsir": {
@@ -69,9 +69,9 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Listen to 60+ women from all over the world reciting the Quran in varying recitations!",
+        "headline": "دنیا بھر سے 60+ خواتین کو مختلف تلاوتوں میں قرآن کی تلاوت سنیں!",
         "name": "Qariah",
-        "tagline": "The Women Quran Reciters App"
+        "tagline": "Women Quran reciters"
       },
       "quran-kareem": {
         "headline": "Your new gateway to connect with the Book of Allah",
@@ -84,21 +84,21 @@
         "tagline": "Tafsir & study companion"
       },
       "quran-space": {
-        "name": "Quran Space",
-        "tagline": "Transform Your Quran Journey",
-        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
+        "headline": "ایک ساتھ قرآن پڑھنے، اس پر غور کرنے اور اس کا مطالعہ کرنے کے لیے اساتذہ، طلبہ یا ساتھیوں کے ساتھ حقیقی وقت میں آڈیو اور ویڈیو میں جڑیں۔",
+        "name": "قرآن کی جگہ",
+        "tagline": "لائیو قرآن میٹنگ اسپیس"
       }
     },
     "learn-more": "مزید جانیں",
     "title": "منتخب ایپس",
     "view-all": "سب دیکھیں"
   },
+  "footer": {
+    "disclaimer": "ہر ایپلیکیشن آزادانہ طور پر اس کے ڈویلپر کی ملکیت اور دیکھ بھال کرتی ہے۔ سپورٹ، بگ رپورٹس، یا فیچر کی درخواستوں کے لیے، براہ کرم ایپ بنانے والے سے براہ راست رابطہ کریں۔"
+  },
   "hero": {
-    "description": "Quran.foundation کے ساتھ بنائی گئی اسلامی ایپس کے منتخب مجموعے کو دریافت کریں۔ مطالعہ کے ٹولز سے لے کر نماز کی یوٹیلیٹیز تک، ایسی ایپس تلاش کریں جو آپ کے روحانی سفر کو بہتر بنائیں۔",
+    "description": "قرآن فاؤنڈیشن کے تصدیق شدہ مواد اور صارف کی خصوصیات سے چلنے والی منفرد ایپس کو دریافت کریں، جب کہ آپ کا اکاؤنٹ، پیشرفت اور سفر جڑے رہیں۔",
     "title": "ہماری ایپ کے ایکو سسٹم کو دریافت کریں"
   },
-  "quran-apps-portal": "قرآن ایپس پورٹل",
-  "footer": {
-    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
-  }
+  "quran-apps-portal": "منسلک قرآن ایپس"
 }

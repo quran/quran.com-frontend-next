@@ -6,11 +6,11 @@
     "title": "API-documentatie"
   },
   "app-portal": {
-    "cta-explore": "Bezoek het Quran Apps-portaal",
-    "cta-oauth": "Zie de OAuth2-handleiding.",
-    "description": "Ontdek de nieuwste door de community ontwikkelde ervaringen en zie wat er allemaal mogelijk is met ons platform.",
-    "heading": "Koran Apps Portaal",
-    "oauth-pitch": "Ontwikkel Quran Foundation OAuth2 voor een probleemloze aanmelding en dien uw app in om te worden uitgelicht op het Quran Apps Portal.",
+    "cta-explore": "Ontdek apps",
+    "cta-oauth": "Zie de OAuth2 handleiding.",
+    "description": "Ontdek transformatieve apps die inspelen op unieke behoeften en verschillende segmenten van de samenleving.",
+    "heading": "Verbonden Koran-apps",
+    "oauth-pitch": "Gebruik van Quran.Foundation OAuth2.0 geeft gebruikers toegang tot hun gegevens en de mogelijkheid om verder te gaan waar ze gebleven waren op Quran.com en de bijbehorende apps.",
     "tagline": "Presenteer je Koran-apps"
   },
   "careers": {
@@ -26,16 +26,16 @@
   },
   "issues-cta": "Als je vragen hebt of contact wilt opnemen met de beheerders, geef aan waar je tegenaan loopt! We zullen proberen zo snel mogelijk te reageren, in sha Allah.",
   "issues-guide": "Meestal gebruiken we <0> Github-projecten </0> als bron voor waar we als volgende aan moeten werken, wat er aan komt en welke bugs er zijn die opgelost moeten worden.  <1> deze url </1>bevat bijvoorbeeld een lijst met bugs, waarbij we hulp nodig hebben en aankomende functies.",
-  "labs": "Lab",
+  "labs": "Koran Laboratoria",
   "labs-cta": "Ontdek Lab",
-  "labs-description": "Ontdek experimentele functies en aankomende vernieuwingen. Deel uw ideeën.",
-  "labs-pitch": "Deel je ideeën en draag bij aan de toekomst van de betrokkenheid bij en ervaringen met de Koran.",
-  "main-desc": "Assalamu Alaykom, allereerst hartelijk dank voor je interesse om ons te helpen Quran.com en zijn projecten te ontwikkelen. We werken graag met je samen!",
+  "labs-description": "Ontdek door de community gedreven experimentele functies en aankomende vernieuwingen.",
+  "labs-pitch": "Deel je ideeën en draag bij aan de toekomst van betrokkenheid en ervaringen met de Koran.",
+  "main-desc": "Ontdek de programma's, tools en documentatie die zijn ontworpen om u te helpen het Quran.com-ecosysteem uit te breiden.",
   "projects": {
     "all": "We hebben een aantal projecten die allemaal op Github worden gehost. Je vindt ze allemaal <0> hier </0> . Maar om ze te schetsen:",
     "items": {
       "q-android": {
-        "description": "Een native Android Mushaf- en audiospelerervaring voor telefoons en tablets.",
+        "description": "In je eigentaal  Android Mushaf- en audiospeler ervaring voor telefoons en tablets.",
         "name": "Koran Android",
         "stack": "Kotlin en Java"
       },
@@ -45,7 +45,7 @@
         "stack": "Rails, PostgreSQL"
       },
       "q-audio": {
-        "description": "Audiostreamingplatform en bijbehorende mobiele apps voor voordrachten.",
+        "description": "Audio streaming platform en bijbehorende mobiele apps voor voordrachten.",
         "name": "Koranische audio",
         "stack": "Web- en mobiele apps"
       },
@@ -56,11 +56,11 @@
       },
       "q-next": {
         "description": "Next.js-webapplicatie voor het lezen, zoeken en beluisteren van de Koran.",
-        "name": "Quran.com Frontend",
+        "name": "Gepresenteerd door Quran.com.",
         "stack": "Ontwikkeld met TypeScript en Next.js"
       }
     },
-    "lead": "Open-source projecten die worden onderhouden door het Quran.com-team en de community.",
+    "lead": "Open source projecten die worden onderhouden door het Quran.com-team en de community.",
     "q-android": "<0>Koran Android</0> geschreven in Kotlin en Java.",
     "q-api": "<0> Quran.com API </0> - geschreven in Ruby on Rails.",
     "q-api-docs": "<0> Quran.com API Docs </0> - Ons API docs portaal.",

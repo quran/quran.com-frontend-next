@@ -32,7 +32,7 @@
     "collections-announcement": {
       "slide-1": {
         "description": "Nous sommes très heureux de vous annoncer que vous pouvez désormais regrouper les favoris dans \"collections\" ! <br/> <br/> <li> Ajoutez autant de collections que vous le souhaitez</li><li>Ajoutez un favoris à une ou plusieurs collections</li><li>Et plus encore !</li>",
-        "title": "Les collections de marque-pages sont là !"
+        "title": "Les collections de favoris sont là !"
       }
     }
   },
@@ -101,11 +101,11 @@
   "bookmark": "Favori",
   "bookmarked": "Favori ajouté",
   "bookmarks-migration": {
-    "body-1": "Vos favoris vont maintenant devenir <strong>Versets sauvés</strong> dans <strong>Collections</strong>Pour conserver vos favoris actuels, veuillez vous connecter ou créer un compte.",
-    "body-2": "Nous avons également ajouté un nouveau signet de lecture pour vous permettre de reprendre votre lecture là où vous l'aviez laissée.",
+    "body-1": "Vos favoris vont maintenant devenir des <strong>Ayahs enregistrées</strong> dans des <strong>Collections</strong>. Pour conserver vos favoris actuels, veuillez vous connecter ou créer un compte.",
+    "body-2": "Nous avons également ajouté un nouveau favori de lecture pour vous permettre de reprendre votre lecture là où vous l'aviez laissée.",
     "checkbox": "Ne plus afficher ce message (Attention : vous perdrez tous vos favoris actuels)",
     "sign-in": "Se connecter / S'inscrire",
-    "title": "Avis : Les signets sont en cours de modification"
+    "title": "Note : Les favoris sont en cours de modification"
   },
   "both": "Tous",
   "cancel": "Annuler",
@@ -184,9 +184,9 @@
     "ranges-no-value": "Le début et la fin de la plage doivent avoir une valeur",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
     "ranges-wrong-order": "L'Ayah de départ doit être avant l'Ayah de fin.",
-    "reading-bookmark-remove": "Impossible de supprimer le signet de lecture",
-    "reading-bookmark-set": "Impossible de définir le signet de lecture",
-    "reading-bookmark-undo": "Impossible d'annuler le signet de lecture"
+    "reading-bookmark-remove": "Impossible de supprimer le favori de lecture",
+    "reading-bookmark-set": "Impossible de définir le favori de lecture",
+    "reading-bookmark-undo": "Impossible d'annuler le favori de lecture"
   },
   "errors": {
     "account-banned": "Désolé, votre compte est banni. Veuillez contacter Quran.Foundation",
@@ -224,7 +224,7 @@
     "verification-code-length": "Le code de vérification doit contenir {{length}} chiffres",
     "verification-failed": "La vérification a échoué. Veuillez réessayer.",
     "verification-resend-failed": "Le renvoi du code de vérification a échoué",
-    "verse-metadata-failed": "Impossible de charger les métadonnées du verset"
+    "verse-metadata-failed": "Impossible de charger les métadonnées de l'Ayah"
   },
   "exciting-updates": "Mises à jour importantes",
   "favorites": "Favoris",
@@ -249,10 +249,10 @@
     "translation-font-size": "Taille de police de la traduction"
   },
   "footer": {
+    "apps-disclaimer": "Chaque application est la propriété de son développeur et est maintenue par celui-ci. Pour toute assistance, signalement de bug ou demande de fonctionnalité, veuillez contacter directement le créateur de l'application.",
     "description": "Quran.com est une plateforme fiable utilisée par des millions de personnes dans le monde pour lire, rechercher, écouter et méditer sur le Coran en plusieurs langues. Elle propose des traductions, des tafsirs, des récitations, des traductions mot à mot et des outils pour une étude plus approfondie, rendant le Coran accessible à tous. <br/> <br/> En tant que Sadaqah Jariyah, Quran.com se consacre à aider les gens à se connecter profondément au Coran. Soutenu par <link> Quran.Foundation </link>, une organisation à but non lucratif 501(c)(3), Quran.com continue de se développer en tant que ressource gratuite et précieuse pour tous, Alhamdulillah.",
     "hiring": "Nous recrutons ! Rejoignez l'équipe de QuranFoundation et contribuez à notre mission. <link> Postulez maintenant ! </link>",
     "rights": "Tous droits réservés",
-    "apps-disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly.",
     "title": "Lire, Écouter, Rechercher et Méditer sur le Coran"
   },
   "form": {
@@ -288,7 +288,7 @@
   "go-to-verse": "Aller à l'Ayah",
   "hear-it-pronounced": "Cliquez sur les mots du Coran, écoutez la prononciation",
   "help": "Aider",
-  "hide-arabic": "Masquer l'arabe",
+  "hide-arabic": "Masquer l'Arabe",
   "hizb": "Hizb",
   "home": "Accueil",
   "hours": "Heures",
@@ -326,7 +326,7 @@
   "next-ayah": "Ayah Suivante",
   "no": "Non",
   "no-notifications": "Aucune notification pour l'instant",
-  "no-verses-available": "Aucun verset disponible",
+  "no-verses-available": "Aucune Ayah disponible",
   "none": "Aucun",
   "not-now": "Pas maintenant",
   "notes": {
@@ -383,7 +383,7 @@
     "select-translation-message": "Aucune traduction n'est sélectionnée. Veuillez en sélectionner une dans les paramètres.",
     "select-translations": "Sélectionner les traductions",
     "translation": "Traduction",
-    "verse-by-verse": "Verset par verset"
+    "verse-by-verse": "Ayah par Ayah"
   },
   "ready-for-ramadan": "Prêt pour le Ramadan ?",
   "recitation": "Récitation",
@@ -444,11 +444,11 @@
   },
   "share": "Partager",
   "share-quran-description-line-1": "Le Prophète ﷺ a dit :",
-  "share-quran-description-line-2": "« Transmettez-moi, même si ce n'est qu'un seul verset. »",
+  "share-quran-description-line-2": "« Transmettez de moi, ne serait-ce qu'une Ayah. »",
   "share-quran-description-line-3": "(Boukhari 3461)",
   "share-quran-title": "Partagez le Coran !",
   "shared": "Le lien a été copié dans le presse-papiers !",
-  "show-arabic": "Afficher l'arabe",
+  "show-arabic": "Afficher l'Arabe",
   "show-more": "Afficher plus",
   "sidebar": {
     "search-hizb": "Rechercher Hizb",
@@ -511,8 +511,8 @@
     "required-field": "{{field}} est requis"
   },
   "verse": "Ayah",
-  "verse-bookmark-removed": "Favori de l'Ayah supprimé !",
-  "verse-bookmarked": "Ayah mise en favori !",
+  "verse-bookmark-removed": "Ayah supprimée des favoris !",
+  "verse-bookmarked": "Ayah ajoutée aux favoris !",
   "verse-copied": "L'Ayah a été copiée dans le presse-papiers !",
   "verses": "Ayahs",
   "view": "Vue",

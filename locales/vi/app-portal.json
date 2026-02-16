@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "Chia sẻ suy ngẫm",
-        "description": "Một nền tảng xã hội nhằm khuyến khích và tạo điều kiện cho việc suy ngẫm về Kinh Qur'an - chia sẻ suy ngẫm, khám phá các chủ đề và tương tác với cộng đồng.",
-        "tagline": "Chia sẻ suy nghĩ và cùng nhau phát triển",
+        "description": "Một nền tảng xã hội nhằm nuôi dưỡng văn hóa suy ngẫm về Kinh Qur'an.",
+        "tagline": "Đọc và chia sẻ những suy ngẫm",
         "title": "QuranReflect"
       },
       "readtafsir": {
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Cuối cùng cũng có app Qur'an dành cho con gái chúng ta.",
+        "headline": "Hãy lắng nghe hơn 60 phụ nữ đến từ khắp nơi trên thế giới đọc kinh Quran với nhiều giọng điệu khác nhau!",
         "name": "Qariah",
         "tagline": "Giọng đọc Kinh Qur'an nữ"
       },
@@ -84,21 +84,21 @@
         "tagline": "Tafsir & tài liệu học"
       },
       "quran-space": {
-        "name": "Quran Space",
-        "tagline": "Transform Your Quran Journey",
-        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
+        "headline": "Kết nối với giáo viên, học sinh hoặc bạn bè trực tiếp qua âm thanh và video để cùng nhau đọc, suy ngẫm và nghiên cứu Kinh Qur'an.",
+        "name": "Không gian Kinh Qur'an",
+        "tagline": "Không gian họp trực tuyến Kinh Quran"
       }
     },
     "learn-more": "Tìm hiểu thêm",
     "title": "Ứng dụng nổi bật",
     "view-all": "Xem tất cả"
   },
+  "footer": {
+    "disclaimer": "Mỗi ứng dụng đều thuộc sở hữu và được duy trì độc lập bởi nhà phát triển của nó. Để được hỗ trợ, báo cáo lỗi hoặc yêu cầu tính năng, vui lòng liên hệ trực tiếp với nhà phát triển ứng dụng."
+  },
   "hero": {
-    "description": "Khám phá bộ ứng dụng Hồi giáo chọn lọc, xây dựng với Quran.foundation, từ công cụ học tập đến tiện ích cầu nguyện, đồng hành cùng hành trình tâm linh của bạn.",
+    "description": "Khám phá các ứng dụng độc đáo được cung cấp bởi nội dung đã được kiểm chứng và các tính năng người dùng của Tổ chức Quran Foundation, đồng thời tài khoản, tiến trình và hành trình của bạn luôn được kết nối.",
     "title": "Khám phá hệ sinh thái ứng dụng của chúng tôi."
   },
-  "quran-apps-portal": "Cổng ứng dụng Kinh Qur'an",
-  "footer": {
-    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
-  }
+  "quran-apps-portal": "Ứng dụng Kinh Qur'an kết nối"
 }

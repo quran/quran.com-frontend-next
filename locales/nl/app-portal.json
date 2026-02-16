@@ -3,13 +3,13 @@
     "apps": {
       "muhaffidh": {
         "caption": "Leer de Koran efficiënt uit je hoofd en bestudeer hem regelmatig.",
-        "description": "Een Koran-app die is ontworpen om je te helpen de Koran op een innovatieve manier te memoriseren en te herhalen.",
-        "tagline": "Een innovatieve begeleider voor het memoriseren en herhalen van de Koran.",
+        "description": "Een Koran-app die is ontworpen om je te helpen de Koran op een vernieuwende manier te memoriseren en te herhalen.",
+        "tagline": "Een vernieuwende begeleider voor het memoriseren en herhalen van de Koran.",
         "title": "Muhaffidh"
       },
       "quran_android": {
         "caption": "Lees, voeg bladwijzers aan toe en luister naar de Koran op Android-apparaten.",
-        "description": "De functies omvatten pagina's in Madani-stijl, audio zonder onderbrekingen, bladwijzers/tags/delen, zoeken, nachtmodus, audioherhaling en vertalingen/tafsir in vele talen.",
+        "description": "De functies omvatten pagina's in Madani-stijl, audio zonder onderbrekingen, bladwijzers/tags/delen, zoeken, nachtmodus, audioherhaling en vertalingen/tafseer in vele talen.",
         "tagline": "Gratis, open-source Koran-app voor Android",
         "title": "Koran voor Android"
       },
@@ -20,34 +20,34 @@
         "title": "Koran voor iOS (van quran.com)"
       },
       "quranmeet": {
-        "caption": "Live koranstudiesessies",
+        "caption": "Live koran studie sessies",
         "description": "Een platform dat studenten verbindt met docenten en studiegroepen voor individuele en kleine groepslessen in de Koran.",
-        "tagline": "Individuele en kleine groepslessen Koran",
-        "title": "Koranontmoeting"
+        "tagline": "individuele en kleine groepslessen Koran",
+        "title": "Koran-ontmoeting"
       },
       "quranreflect": {
-        "caption": "Deel je gedachten",
-        "description": "Een sociaal platform om reflecties over de Koran aan te moedigen en te faciliteren - deel reflecties, verken onderwerpen en ga in gesprek met de gemeenschap.",
-        "tagline": "Deel je gedachten en groei samen.",
-        "title": "KoranReflectie"
+        "caption": "Deel je reflecties",
+        "description": "Een sociaal platform om een ​​cultuur van reflectie op de Heilige Koran te bevorderen.",
+        "tagline": "Lees en deel je reflecties",
+        "title": "Koran Reflectie"
       },
       "readtafsir": {
-        "caption": "Zoek en vergelijk klassieke tafsirs.",
-        "description": "Lees en beluister meerdere klassieke tafsir-bronnen op één plek, waardoor je gemakkelijk kunt bladeren, zoeken en interpretaties vergelijken.",
-        "tagline": "Interactief tafsir lezen en luisteren",
-        "title": "Lees de Tafsir"
+        "caption": "Zoek en vergelijk klassieke tafseers.",
+        "description": "Lees en beluister meerdere klassieke tafseer-bronnen op één plek, waardoor je gemakkelijk kunt bladeren, zoeken en interpretaties vergelijken.",
+        "tagline": "Interactief tafseer lezen en luisteren",
+        "title": "Lees de Tafseer"
       },
       "sunnah": {
-        "caption": "Hadith-collectie",
-        "description": "Een hadithbibliotheek met belangrijke online collecties, inclusief vertalingen in meerdere talen en zoekfuncties.",
+        "caption": "Hadith collectie",
+        "description": "Een hadith-bibliotheek met belangrijke online collecties, inclusief vertalingen in meerdere talen en zoekfuncties.",
         "tagline": "Hadith binnen handbereik",
         "title": "Sunnah.com"
       },
       "tafsirapp": {
-        "caption": "Interactieve tafsir met meerdere bronnen.",
-        "description": "Een koranonderzoeksportaal dat tafsir, qira'at, mushafs, i'rab, koranwetenschappen, asbab al-nuzul, uitspraken en woordenboeken samenbrengt.",
-        "tagline": "Een onderzoekscentrum voor de Koran",
-        "title": "Tafsir-app"
+        "caption": "Interactieve tafseer met meerdere bronnen.",
+        "description": "Een koran onderzoek portaal dat tafseer, qira'at, mushafs, i'rab, koranwetenschappen, asbab al-nuzul, uitspraken en woordenboeken samenbrengt.",
+        "tagline": "Een onderzoek centrum voor de Koran",
+        "title": "Tafseer-app"
       }
     },
     "filters": {
@@ -55,9 +55,9 @@
       "community": "Gemeenschap",
       "hadith-sunnah": "Hadith en Sunnah",
       "popular": "Populair",
-      "quran-reader": "Koranlezer",
+      "quran-reader": "Koran lezer",
       "reflections": "Reflecties",
-      "study-tools": "Studiehulpmiddelen"
+      "study-tools": "Studie hulpmiddelen"
     },
     "title": "Bekijk alle apps"
   },
@@ -69,9 +69,9 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Eindelijk een Koran-app voor onze dochters!",
+        "headline": "Luister naar meer dan 60 vrouwen van over de hele wereld die de Koran reciteren in verschillende stijlen!",
         "name": "Qariah",
-        "tagline": "Vrouwelijke koranreciteerders"
+        "tagline": "Vrouwelijke koran reciteerders"
       },
       "quran-kareem": {
         "headline": "Uw nieuwe toegangspoort tot het Boek van Allah.",
@@ -79,26 +79,26 @@
         "tagline": "Lees, luister en reflecteer."
       },
       "quran-link": {
-        "headline": "Ontdek meer dan 25 tafsirs en meer dan 100 vertalingen op één plek.",
-        "name": "Koranlink",
-        "tagline": "Tafsir en studiegids"
+        "headline": "Ontdek meer dan 25 tafseers en meer dan 100 vertalingen op één plek.",
+        "name": "Koran link",
+        "tagline": "Tafseer en studiegids"
       },
       "quran-space": {
-        "name": "Quran Space",
-        "tagline": "Transform Your Quran Journey",
-        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
+        "headline": "Kom in realtime via audio en video in contact met docenten, studenten of medestudenten om samen de Koran te lezen, erover na te denken en deze te bestuderen.",
+        "name": "Koranruimte",
+        "tagline": "Live Koran-bijeenkomstruimte"
       }
     },
     "learn-more": "Leer meer",
     "title": "Aanbevolen apps",
     "view-all": "Alles bekijken"
   },
+  "footer": {
+    "disclaimer": "Elke applicatie is onafhankelijk eigendom van en wordt onderhouden door de ontwikkelaar. Voor ondersteuning, bugrapporten of functieverzoeken kunt u rechtstreeks contact opnemen met de maker van de app."
+  },
   "hero": {
-    "description": "Ontdek een zorgvuldig samengestelde collectie islamitische apps, ontwikkeld met Quran.foundation. Van studietools tot gebedshulpmiddelen: vind apps die je spirituele reis verrijken.",
+    "description": "Ontdek unieke apps die gebruikmaken van de geverifieerde inhoud en gebruikersfuncties van de Quran Foundation, terwijl uw account, voortgang en leerproces met elkaar verbonden blijven.",
     "title": "Ontdek ons ecosysteem van apps"
   },
-  "quran-apps-portal": "Koran Apps Portaal",
-  "footer": {
-    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
-  }
+  "quran-apps-portal": "Verbonden Koran-apps"
 }

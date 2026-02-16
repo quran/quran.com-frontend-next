@@ -73,11 +73,6 @@
         "name": "Qariah",
         "tagline": "The Women Quran Reciters App"
       },
-      "quran-space": {
-        "name": "Quran Space",
-        "tagline": "Live Quran Meeting Space",
-        "headline": "Connect with teachers, students, or peers in real time audio and video to read, reflect, and study the Quran together."
-      },
       "quran-kareem": {
         "headline": "Your new gateway to connect with the Book of Allah",
         "name": "Quran Kareem",
@@ -87,6 +82,11 @@
         "headline": "Explore 25+ tafsirs and 100+ translations in one place",
         "name": "Quran Link",
         "tagline": "Tafsir & study companion"
+      },
+      "quran-space": {
+        "headline": "Connect with teachers, students, or peers in real time audio and video to read, reflect, and study the Quran together.",
+        "name": "Quran Space",
+        "tagline": "Live Quran Meeting Space"
       }
     },
     "learn-more": "Learn more",
@@ -97,7 +97,7 @@
     "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
   },
   "hero": {
-    "description": "Explore unique apps powered by Quran Foundation\u2019s verified content and user features, while your account, progress, and journey stay connected.",
+    "description": "Explore unique apps powered by Quran Foundation’s verified content and user features, while your account, progress, and journey stay connected.",
     "title": "Connected Quran Apps"
   },
   "quran-apps-portal": "Connected Quran Apps"

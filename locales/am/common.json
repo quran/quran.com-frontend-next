@@ -249,10 +249,10 @@
     "translation-font-size": "የትርጉም ቅርጸ-ቁምፊ (የፅሁፍ) መጠን"
   },
   "footer": {
+    "apps-disclaimer": "እያንዳንዱ መተግበሪያ በገንቢው በራሱ ባለቤትነት የተያዘ እና የሚጠበቅ ነው። ለድጋፍ፣ የሳንካ ሪፖርቶች ወይም የባህሪ ጥያቄዎች፣ እባክዎ የመተግበሪያ ፈጣሪውን በቀጥታ ያነጋግሩ።",
     "description": "Quran.com በዓለም ዙሪያ በሚሊዮኖች የሚቆጠሩ ቁርኣንን ለማንበብ፣ ለመፈለግ፣ ለማዳመጥ እና በተለያዩ ቋንቋዎች ለማሰላሰል የሚጠቀሙበት የታመነ መድረክ ነው። ትርጉሞችን፣ ተፍሲርን፣ ንባቦችን፣ የቃላት በቃል ትርጉም እና የጥልቅ ጥናት መሳሪያዎችን ያቀርባል፣ ይህም ቁርኣንን ለሁሉም ሰው ተደራሽ ያደርገዋል።<br/><br/>እንደ ሰደቃ ጃሪያህ (የማይቋረጥ ሰደቃ) በመሆኑ፣ Quran.com ሰዎች ከቁርኣን ጋር በጥልቅ እንዲገናኙ ለመርዳት የተሰራ ነው። Quran.com በ<link>Quran.Foundation</link>የተደገፈ በ 501(c)(3) መሰረት ለትርፍ ያልተቋቋመ ድርጅት ሲሆን  ለሁሉም ነፃ እና ጠቃሚ ምንጭ ሆኖ ማደጉን ቀጥሏል፣ አልሃምዱሊላህ።",
     "hiring": "እየቀጠርን ነው! የቁርዓን ፋውንዴሽን ቡድንን ይቀላቀሉ እና ለተልዕኮአችን አስተዋጽኦ ያድርጉ። <link>አሁኑኑ ያመልክቱ!</link>",
     "rights": "መብቱ በህግ የተጠበቀ ነው",
-    "apps-disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly.",
     "title": "ቁርአንን ያንብቡ ፣ ያዳምጡ ፣ ይፈልጉ እና ያሰላስሉ"
   },
   "form": {

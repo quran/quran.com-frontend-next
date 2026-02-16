@@ -249,10 +249,10 @@
     "translation-font-size": "Translation font size"
   },
   "footer": {
+    "apps-disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly.",
     "description": "Quran.com is a trusted platform used by millions worldwide to read, search, listen to, and reflect on the Quran in multiple languages. It provides translations, tafsir, recitations, word-by-word translation, and tools for deeper study, making the Quran accessible to everyone. <br/> <br/> As a Sadaqah Jariyah, Quran.com is dedicated to helping people connect deeply with the Quran. Supported by <link>Quran.Foundation</link>, a 501(c)(3) non-profit organization, Quran.com continues to grow as a free and valuable resource for all, Alhamdulillah.",
     "hiring": "We're hiring! Join the QuranFoundation team and contribute to our mission. <link>Apply now!</link>",
     "rights": "All Rights Reserved",
-    "apps-disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly.",
     "title": "Read, Listen, Search, and Reflect on the Quran"
   },
   "form": {

@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "Kongsikan refleksi",
-        "description": "Platform sosial untuk menggalakkan dan memudahkan refleksi al-Quran - berkongsi refleksi, meneroka topik dan berinteraksi dengan komuniti.",
-        "tagline": "Kongsikan refleksi dan berkembang bersama",
+        "description": "Sebuah platform sosial untuk memupuk budaya renungan terhadap Al-Quran",
+        "tagline": "Baca & Kongsi Refleksi",
         "title": "QuranReflect"
       },
       "readtafsir": {
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Akhirnya, aplikasi Al-Quran untuk anak perempuan kami",
+        "headline": "Dengarkan lebih 60 wanita dari seluruh dunia membaca al-Quran dalam pelbagai bacaan!",
         "name": "Qariah",
         "tagline": "Wanita qari Al-Quran"
       },
@@ -84,21 +84,21 @@
         "tagline": "Tafsir & teman belajar"
       },
       "quran-space": {
-        "name": "Quran Space",
-        "tagline": "Transform Your Quran Journey",
-        "headline": "Quran Halaqa for reflecting, reading, and memorization with your teacher or peers"
+        "headline": "Berhubung dengan guru, pelajar atau rakan sebaya dalam audio dan video masa nyata untuk membaca, merenung dan mempelajari al-Quran bersama-sama.",
+        "name": "Ruang Al-Quran",
+        "tagline": "Ruang Mesyuarat Al-Quran Secara Langsung"
       }
     },
     "learn-more": "Ketahui lebih lanjut",
     "title": "Aplikasi Pilihan",
     "view-all": "Lihat semua"
   },
+  "footer": {
+    "disclaimer": "Setiap aplikasi dimiliki dan diselenggara secara bebas oleh pembangunnya. Untuk sokongan, laporan pepijat atau permintaan ciri, sila hubungi pencipta aplikasi secara langsung."
+  },
   "hero": {
-    "description": "Terokai koleksi susun atur aplikasi Islam yang dibina dengan Quran.foundation. Daripada alat belajar kepada utiliti solat, cari apl yang meningkatkan perjalanan rohani anda.",
+    "description": "Terokai aplikasi unik yang dikuasakan oleh kandungan dan ciri pengguna Yayasan Al-Quran yang disahkan, sementara akaun, kemajuan dan perjalanan anda kekal terhubung.",
     "title": "Temui Ekosistem Apl kami"
   },
-  "quran-apps-portal": "Portal Aplikasi Al-Quran",
-  "footer": {
-    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
-  }
+  "quran-apps-portal": "Aplikasi Al-Quran Terhubung"
 }
