@@ -1,0 +1,151 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-medium);
+}
+
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+}
+
+.cardItem {
+  background-color: var(--color-background-elevated);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-rounded);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+
+  &:hover {
+    border-color: var(--color-primary-faded);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  &.mastered {
+    background-color: var(--color-success-faded);
+    border-color: var(--color-success-medium);
+
+    .arabicText {
+      color: var(--color-success-medium);
+    }
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-small) var(--spacing-medium);
+  gap: var(--spacing-small);
+}
+
+.cardNumber {
+  inline-size: 24px;
+  block-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-background-alternative-medium);
+  border-radius: var(--border-radius-circle);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-faded);
+  flex-shrink: 0;
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-small);
+  flex-wrap: wrap;
+}
+
+.arabicText {
+  font-family: 'Kitab', var(--font-quran);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--color-text-default);
+  direction: rtl;
+  transition: color 0.2s ease;
+
+  @include breakpoints.tablet {
+    font-size: 1.5rem;
+  }
+}
+
+.transliteration {
+  font-size: 0.875rem;
+  color: var(--color-text-faded);
+  font-style: italic;
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+}
+
+.masteredButton {
+  inline-size: 28px;
+  block-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 2px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-circle);
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--color-text-faded);
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-success-medium);
+    color: var(--color-success-medium);
+  }
+
+  &.masteredActive {
+    background-color: var(--color-success-medium);
+    border-color: var(--color-success-medium);
+    color: var(--color-text-inverse);
+  }
+}
+
+.expandIcon {
+  font-size: 0.625rem;
+  color: var(--color-text-faded);
+}
+
+.cardBody {
+  padding: var(--spacing-small) var(--spacing-medium);
+  padding-block-start: 0;
+  padding-inline-start: calc(24px + var(--spacing-medium) + var(--spacing-small));
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.translation {
+  font-size: 1rem;
+  color: var(--color-text-default);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.translationLabel {
+  color: var(--color-text-faded);
+}

@@ -1,0 +1,148 @@
+@use 'src/styles/breakpoints';
+@use '../shared' as shared;
+
+.container {
+  @include shared.centeredContainer;
+}
+
+.carouselWrapper {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  max-inline-size: 400px;
+  gap: var(--spacing-small);
+}
+
+.carouselContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-small);
+  overflow: hidden;
+}
+
+@keyframes slideFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slideNext {
+  animation: slideFromRight 0.25s ease-out;
+}
+
+.slidePrev {
+  animation: slideFromLeft 0.25s ease-out;
+}
+
+.card {
+  inline-size: 100%;
+  max-inline-size: 280px;
+  block-size: 180px;
+  cursor: pointer;
+  perspective: 1000px;
+  user-select: none;
+
+  @include breakpoints.tablet {
+    max-inline-size: 320px;
+    block-size: 200px;
+  }
+}
+
+@include shared.cardContentStyles(0 4px 12px rgba(0, 0, 0, 0.1), 1.75rem, 2rem, 1.125rem, 1rem);
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 36px;
+  block-size: 36px;
+  border: none;
+  border-radius: var(--border-radius-circle);
+  background-color: var(--color-background-elevated);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--color-text-default);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-background-alternative-medium);
+    transform: scale(1.05);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.dotsContainer {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xxsmall);
+  margin-block-start: var(--spacing-medium);
+  flex-wrap: nowrap;
+  max-inline-size: 300px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.dot {
+  inline-size: 32px;
+  block-size: 32px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: '';
+    inline-size: 8px;
+    block-size: 8px;
+    border-radius: var(--border-radius-circle);
+    background-color: var(--color-borders-hairline);
+    transition: all 0.2s ease;
+  }
+
+  &:hover::before {
+    background-color: var(--color-text-faded);
+  }
+
+  &.activeDot::before {
+    background-color: var(--color-primary-medium);
+    transform: scale(1.2);
+  }
+}
+
+.counter {
+  margin-block-start: var(--spacing-small);
+  font-size: 0.875rem;
+  color: var(--color-text-faded);
+}

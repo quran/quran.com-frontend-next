@@ -8,9 +8,9 @@ import CourseMaterial from './CourseMaterial';
 import styles from './Lesson.module.scss';
 
 import ContentContainer from '@/components/Course/ContentContainer';
+import LessonHtmlContent from '@/components/Course/LessonHtmlContent';
 import MarkdownEditor from '@/components/MarkdownEditor';
 import PageContainer from '@/components/PageContainer';
-import HtmlContent from '@/components/RichText/HtmlContent';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import ArrowLeft from '@/icons/west.svg';
@@ -102,7 +102,13 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
                   <MarkdownEditor isEditable={false} defaultValue={content} />
                 </MilkdownProvider>
               ) : (
-                <HtmlContent html={content} />
+                <LessonHtmlContent
+                  key={lesson.id}
+                  content={content}
+                  language={lesson.course.language}
+                  lessonSlug={lesson.slug}
+                  courseSlug={courseSlug}
+                />
               )}
             </div>
             <ActionButtons lesson={lesson} courseSlug={courseSlug} />
