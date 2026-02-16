@@ -40,16 +40,17 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   const { t } = useTranslation('common');
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const setMenuOpen = React.useCallback(
-    (open: boolean) => {
+  const updateMenuOpen = React.useCallback(
+    (open?: boolean) => {
       setIsMenuOpen((prevIsMenuOpen) => {
-        if (prevIsMenuOpen === open) return prevIsMenuOpen;
+        const nextIsMenuOpen = open ?? !prevIsMenuOpen;
+        if (prevIsMenuOpen === nextIsMenuOpen) return prevIsMenuOpen;
         logEvent(
           `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
-            open ? 'open' : 'close'
+            nextIsMenuOpen ? 'open' : 'close'
           }`,
         );
-        return open;
+        return nextIsMenuOpen;
       });
     },
     [isTranslationView],
@@ -61,38 +62,37 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
         contentClassName={classNames(cellStyles.menuOffset, cellStyles.overlayModal)}
         isOpen={isMenuOpen}
         trigger={
-          <span onPointerDown={(event) => event.stopPropagation()}>
-            <Button
-              size={ButtonSize.Small}
-              tooltip={t('more')}
-              variant={ButtonVariant.Ghost}
-              shape={ButtonShape.Circle}
-              className={classNames(
-                cellStyles.iconContainer,
-                cellStyles.verseAction,
-                { [styles.moreMenuTrigger]: isTranslationView },
-                'overflow-verse-actions-menu-trigger', // for onboarding
-              )}
-              shouldFlipOnRTL={false}
-              ariaLabel={t('more')}
-              data-testid="verse-actions-more"
-              onClick={() => setMenuOpen(!isMenuOpen)}
-            >
-              <span className={cellStyles.icon}>
-                <IconContainer
-                  icon={<OverflowMenuIcon />}
-                  color={IconColor.tertiary}
-                  size={IconSize.Custom}
-                  shouldFlipOnRTL={false}
-                />
-              </span>
-            </Button>
-          </span>
+          <Button
+            size={ButtonSize.Small}
+            tooltip={t('more')}
+            variant={ButtonVariant.Ghost}
+            shape={ButtonShape.Circle}
+            className={classNames(
+              cellStyles.iconContainer,
+              cellStyles.verseAction,
+              { [styles.moreMenuTrigger]: isTranslationView },
+              'overflow-verse-actions-menu-trigger', // for onboarding
+            )}
+            shouldFlipOnRTL={false}
+            ariaLabel={t('more')}
+            data-testid="verse-actions-more"
+            onClick={() => updateMenuOpen()}
+            onPointerDown={(event) => event.stopPropagation()}
+          >
+            <span className={cellStyles.icon}>
+              <IconContainer
+                icon={<OverflowMenuIcon />}
+                color={IconColor.tertiary}
+                size={IconSize.Custom}
+                shouldFlipOnRTL={false}
+              />
+            </span>
+          </Button>
         }
         isModal
         isPortalled
         shouldUseModalZIndex={shouldUseModalZIndex}
-        onOpenChange={setMenuOpen}
+        onOpenChange={updateMenuOpen}
       >
         <OverflowVerseActionsMenuBody
           verse={verse}
