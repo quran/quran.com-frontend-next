@@ -2,6 +2,8 @@
 /* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
+import styles from './WidgetHeader.module.scss';
+
 import ExternalLinkIcon from '@/icons/bx-link-external.svg';
 import CopyIcon from '@/icons/copy.svg';
 import PlayIcon from '@/icons/play-outline.svg';
@@ -27,7 +29,7 @@ const ICON_BUTTON_STYLE = (colors: WidgetColors): React.CSSProperties => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  transition: 'background-color 0.2s, border-color 0.2s',
+  transition: 'background-color 0.2s, border-color 0.2s, transform 0.1s',
 });
 
 /**
@@ -173,6 +175,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
       <button
         type="button"
         data-copy-verse
+        className={styles.actionButton}
         style={ICON_BUTTON_STYLE(colors)}
         aria-label="Copy verse text"
       >
@@ -181,6 +184,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
       <button
         type="button"
         data-share-verse
+        className={styles.actionButton}
         style={ICON_BUTTON_STYLE(colors)}
         aria-label="Copy verse link"
       >
