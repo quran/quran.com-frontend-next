@@ -4,6 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './HomePageApps.module.scss';
 
+import { logButtonClick } from '@/utils/eventLogger';
+
 interface App {
   id: string;
   name: string;
@@ -15,6 +17,10 @@ interface App {
 
 const HomePageApps: React.FC = () => {
   const { t } = useTranslation('home');
+
+  const handleAppClick = (appId: string) => {
+    logButtonClick(`home_apps_${appId.replaceAll('-', '_')}`);
+  };
 
   const apps: App[] = [
     {
@@ -68,13 +74,22 @@ const HomePageApps: React.FC = () => {
       <div className={styles.appsContainer}>
         <div className={styles.appsHeader}>
           <div className={styles.featured}>{t('apps.featured-apps')}</div>
-          <Link href="/apps" className={styles.seeMoreLink}>
+          <Link
+            href="/apps"
+            className={styles.seeMoreLink}
+            onClick={() => logButtonClick('home_apps_see_more')}
+          >
             {t('apps.see-more')}
           </Link>
         </div>
         <div className={styles.apps}>
           {apps.map((app) => (
-            <Link key={app.id} href="/apps" className={classNames(styles.appCard, styles[app.id])}>
+            <Link
+              key={app.id}
+              href="/apps"
+              className={classNames(styles.appCard, styles[app.id])}
+              onClick={() => handleAppClick(app.id)}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={app.iconSrc} alt={app.iconAlt} className={styles.appIconImage} />
 
