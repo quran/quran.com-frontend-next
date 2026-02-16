@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "Compartilhe suas reflexões",
-        "description": "Uma plataforma social para incentivar e facilitar reflexões sobre o Alcorão - compartilhe reflexões, explore tópicos e interaja com a comunidade.",
-        "tagline": "Compartilhem reflexões e cresçam juntos.",
+        "description": "Uma plataforma social para cultivar uma cultura de reflexão sobre o Sagrado Alcorão.",
+        "tagline": "Leia e compartilhe suas reflexões.",
         "title": "Refletir sobre o Alcorão"
       },
       "readtafsir": {
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Finalmente, um aplicativo do Alcorão para nossas filhas!",
+        "headline": "Ouça mais de 60 mulheres de todo o mundo recitando o Alcorão em diferentes estilos!",
         "name": "Qariah",
         "tagline": "Mulheres recitadoras do Alcorão"
       },
@@ -82,15 +82,23 @@
         "headline": "Explore mais de 25 tafsirs e mais de 100 traduções em um só lugar.",
         "name": "Link do Alcorão",
         "tagline": "Tafsir e guia de estudo"
+      },
+      "quran-space": {
+        "headline": "Conecte-se com professores, alunos ou colegas em áudio e vídeo em tempo real para ler, refletir e estudar o Alcorão juntos.",
+        "name": "Espaço do Alcorão",
+        "tagline": "Espaço para Encontros ao Vivo do Alcorão"
       }
     },
     "learn-more": "Saber mais",
     "title": "Aplicativos em destaque",
     "view-all": "Ver tudo"
   },
+  "footer": {
+    "disclaimer": "Cada aplicativo é de propriedade e mantido de forma independente por seu desenvolvedor. Para suporte, relatórios de erros ou solicitações de recursos, entre em contato diretamente com o criador do aplicativo."
+  },
   "hero": {
-    "description": "Explore uma coleção selecionada de aplicativos islâmicos desenvolvidos com a plataforma Quran.foundation. De ferramentas de estudo a recursos para oração, encontre aplicativos que aprimorem sua jornada espiritual.",
+    "description": "Explore aplicativos exclusivos com conteúdo verificado e recursos para usuários da Fundação Alcorão, enquanto sua conta, seu progresso e sua jornada permanecem conectados.",
     "title": "Descubra nosso ecossistema de aplicativos"
   },
-  "quran-apps-portal": "Portal de Aplicativos do Alcorão"
+  "quran-apps-portal": "Aplicativos do Alcorão Conectados"
 }

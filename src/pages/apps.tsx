@@ -13,11 +13,13 @@ import styles from './apps-portal.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import useDebounce from '@/hooks/useDebounce';
+import GlobeIcon from '@/icons/globe.svg';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick, logTextSearchQuery, logValueChange } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import { getBasePath } from '@/utils/url';
 
 interface AppLinks {
   androidHref?: string;
@@ -67,54 +69,71 @@ interface AppCtaLabels {
   webCtaText: string;
 }
 
-const VisitBadge: FC<{ label: string }> = ({ label }) => (
-  <svg
-    className={styles.storeBadgeImage}
-    width={96}
-    height={32}
-    viewBox="0 0 135 40"
-    aria-hidden="true"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect width="135" height="40" rx="5" fill="#000" />
-    <g transform="translate(8 7)">
-      <g transform="scale(1.1)">
-        <path
-          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-          stroke="#FFF"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M2 12H22"
-          stroke="#FFF"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z"
-          stroke="#FFF"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
-    </g>
-    <text
-      x="46"
-      y="20"
-      fill="#FFF"
-      fontSize="15"
-      fontFamily="inherit"
-      fontWeight="600"
-      dominantBaseline="middle"
-    >
-      {label}
-    </text>
-  </svg>
-);
+const VisitBadge: FC<{ label: string }> = ({ label }) => {
+  const { lang } = useTranslation('app-portal');
+
+  if (!lang.startsWith('ar')) {
+    return (
+      <svg
+        className={styles.storeBadgeImage}
+        width={96}
+        height={32}
+        viewBox="0 0 135 40"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect width="135" height="40" rx="5" fill="#000" />
+        <g transform="translate(8 7)">
+          <g transform="scale(1.1)">
+            <path
+              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+              stroke="#FFF"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M2 12H22"
+              stroke="#FFF"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z"
+              stroke="#FFF"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </g>
+        </g>
+        <text
+          x="46"
+          y="20"
+          fill="#FFF"
+          fontSize="15"
+          fontFamily="inherit"
+          fontWeight="600"
+          dominantBaseline="middle"
+        >
+          {label}
+        </text>
+      </svg>
+    );
+  }
+
+  return (
+    <span className={styles.visitBadge}>
+      <span className={styles.visitBadgeIcon} aria-hidden="true">
+        <GlobeIcon />
+      </span>
+      <span className={styles.visitBadgeText} dir="auto">
+        {label}
+      </span>
+    </span>
+  );
+};
 
 const DEBOUNCE_DELAY = 1000;
 
@@ -131,26 +150,25 @@ const getFeaturedApps = (t: (key: string) => string): FeaturedApp[] => [
     androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qariah.app',
   },
   {
-    id: 'quran-kareem',
-    name: t('featured.apps.quran-kareem.name'),
-    tagline: t('featured.apps.quran-kareem.tagline'),
-    description: t('featured.apps.quran-kareem.headline'),
-    iconSrc: '/images/app-portal/featured/quran_kareem-icon.png',
-    iconAlt: 'Quran Kareem app',
-    iosHref:
-      'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
+    id: 'quran-space',
+    name: t('featured.apps.quran-space.name'),
+    tagline: t('featured.apps.quran-space.tagline'),
+    description: t('featured.apps.quran-space.headline'),
+    iconSrc: '/images/app-portal/featured/quran-space-icon.png',
+    iconAlt: 'Quran Space',
+    webHref: 'https://spaces.labs.quran.com/',
   },
   {
-    id: 'quran-link',
-    name: t('featured.apps.quran-link.name'),
-    tagline: t('featured.apps.quran-link.tagline'),
-    description: t('featured.apps.quran-link.headline'),
-    iconSrc: '/images/app-portal/featured/QuranLink-icon.png',
-    iconAlt: 'Quran Link app',
-    iosHref:
-      'https://apps.apple.com/us/app/quran-link-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1425763263',
-    androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qortoba.quran.link',
-    webHref: 'https://quran.link/',
+    id: 'quranreflect',
+    name: t('browse.apps.quranreflect.title'),
+    tagline: t('browse.apps.quranreflect.tagline'),
+    description: t('browse.apps.quranreflect.description'),
+    iconSrc: '/images/app-portal/icon_web_optimized.png',
+    iconAlt: 'QuranReflect',
+    webHref: 'https://quranreflect.com',
+    androidHref:
+      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
+    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
   },
 ];
 
@@ -187,17 +205,28 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     categories: ['quran-reader', 'community', 'popular', 'study-tools'],
   },
   {
-    id: 'quranreflect',
-    title: t('browse.apps.quranreflect.title'),
-    description: t('browse.apps.quranreflect.description'),
-    tagline: t('browse.apps.quranreflect.tagline'),
-    iconSrc: '/images/app-portal/icon_web_optimized.png',
-    iconAlt: 'QuranReflect',
-    webHref: 'https://quranreflect.com',
-    androidHref:
-      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
-    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
-    categories: ['reflections', 'community'],
+    id: 'quran-kareem',
+    title: t('featured.apps.quran-kareem.name'),
+    description: t('featured.apps.quran-kareem.headline'),
+    tagline: t('featured.apps.quran-kareem.tagline'),
+    iconSrc: '/images/app-portal/featured/quran_kareem-icon.png',
+    iconAlt: 'Quran Kareem app',
+    iosHref:
+      'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
+    categories: ['quran-reader', 'popular', 'reflections'],
+  },
+  {
+    id: 'quran-link',
+    title: t('featured.apps.quran-link.name'),
+    description: t('featured.apps.quran-link.headline'),
+    tagline: t('featured.apps.quran-link.tagline'),
+    iconSrc: '/images/app-portal/featured/QuranLink-icon.png',
+    iconAlt: 'Quran Link app',
+    iosHref:
+      'https://apps.apple.com/us/app/quran-link-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1425763263',
+    androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qortoba.quran.link',
+    webHref: 'https://quran.link/',
+    categories: ['study-tools', 'quran-reader', 'popular'],
   },
   {
     id: 'sunnah',
@@ -275,6 +304,7 @@ interface BrowseAppsProps {
 }
 
 const path = '/apps';
+const OG_IMAGE_URL = `${getBasePath()}/images/app-portal/connected-quran-apps.png`;
 
 interface HeroProps {
   title: string;
@@ -374,7 +404,10 @@ const AppCtaRow: FC<AppCtaRowProps> = ({
   );
 };
 
-const FeaturedCard: FC<{ app: FeaturedApp; ctaLabels: AppCtaLabels }> = ({ app, ctaLabels }) => (
+const FeaturedCard: FC<{
+  app: FeaturedApp;
+  ctaLabels: AppCtaLabels;
+}> = ({ app, ctaLabels }) => (
   <article className={styles.featuredCard}>
     <div className={styles.cardBody}>
       <div className={styles.appMeta}>
@@ -430,7 +463,10 @@ const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps, ctaLabe
   </section>
 );
 
-const AppTileCard: FC<{ app: AppTile; ctaLabels: AppCtaLabels }> = ({ app, ctaLabels }) => (
+const AppTileCard: FC<{
+  app: AppTile;
+  ctaLabels: AppCtaLabels;
+}> = ({ app, ctaLabels }) => (
   <article className={styles.appCard}>
     <div className={styles.cardBody}>
       <div className={styles.appMeta}>
@@ -579,19 +615,8 @@ const BrowseApps: FC<BrowseAppsProps> = ({
 };
 
 const AppPortalPage: NextPage = () => {
-  const { t: tApps, lang } = useTranslation('apps');
-  const { t: tAppPortal } = useTranslation('app-portal');
+  const { t, lang } = useTranslation('app-portal');
   const { t: tCommon } = useTranslation('common');
-
-  // Prefer apps namespace; fallback to app-portal because most strings still live there across locales.
-  // Keep both namespaces mapped for /apps in i18n.json until Lokalise migration completes.
-  const t = useCallback(
-    (key: string) => {
-      const value = tApps(key);
-      return value === key ? tAppPortal(key) : value;
-    },
-    [tApps, tAppPortal],
-  );
 
   const featuredApps = useMemo(() => getFeaturedApps(t), [t]);
   const appTiles = useMemo(() => getAppTiles(t), [t]);
@@ -611,6 +636,8 @@ const AppPortalPage: NextPage = () => {
       <NextSeoWrapper
         title={t('quran-apps-portal')}
         description={t('hero.description')}
+        image={OG_IMAGE_URL}
+        imageAlt={t('quran-apps-portal')}
         url={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
       />

@@ -6,10 +6,10 @@
     "title": "Tài liệu API"
   },
   "app-portal": {
-    "cta-explore": "Truy cập Cổng ứng dụng Kinh Qur'an",
+    "cta-explore": "Khám phá các ứng dụng",
     "cta-oauth": "Xem hướng dẫn OAuth2.",
     "description": "Khám phá các ứng dụng đột phá cho nhiều nhóm người dùng khác nhau.",
-    "heading": "Cổng ứng dụng Kinh Qur'an",
+    "heading": "Ứng dụng Kinh Qur'an kết nối",
     "oauth-pitch": "Sử dụng OAuth2.0 do Quran.Foundation cung cấp để người dùng truy cập lại dữ liệu của họ và tiếp tục những phần còn dang dở trên Quran.com và các ứng dụng tích hợp.",
     "tagline": "Giới thiệu ứng dụng Qur'an của bạn"
   },

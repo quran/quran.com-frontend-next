@@ -6,10 +6,10 @@
     "title": "Documentação da API"
   },
   "app-portal": {
-    "cta-explore": "Visite o Portal de Aplicativos do Alcorão",
+    "cta-explore": "Explore os aplicativos",
     "cta-oauth": "Consulte o guia do OAuth2.",
     "description": "Explore as experiências mais recentes criadas pela comunidade e veja o que é possível fazer com a nossa plataforma.",
-    "heading": "Portal de Aplicativos do Alcorão",
+    "heading": "Aplicativos do Alcorão Conectados",
     "oauth-pitch": "Integre o sistema com o OAuth2 da Fundação Alcorão para um login simplificado e envie seu aplicativo para ser apresentado no Portal de Aplicativos do Alcorão.",
     "tagline": "Mostre seus aplicativos do Alcorão"
   },

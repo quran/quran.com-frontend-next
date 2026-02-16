@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "Düşüncelerinizi paylaşın",
-        "description": "Kur'an üzerine tefekkürleri teşvik eden ve kolaylaştıran bir sosyal platform - tefekkürlerinizi paylaşın, konuları keşfedin ve toplulukla etkileşim kurun.",
-        "tagline": "Düşüncelerimizi paylaşalım ve birlikte gelişelim.",
+        "description": "Kuran-ı Kerim üzerine tefekkür kültürünü geliştirmeyi amaçlayan bir sosyal platform.",
+        "tagline": "Düşünceleri Okuyun ve Paylaşın",
         "title": "Kur'anDüşün"
       },
       "readtafsir": {
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Sonunda kızlarımız için bir Kur'an uygulaması!",
+        "headline": "Dünyanın dört bir yanından 60'tan fazla kadının Kur'an'ı çeşitli okuyuşlarla seslendirmesini dinleyin!",
         "name": "Kariah",
         "tagline": "Kur'an okuyan kadınlar"
       },
@@ -82,15 +82,23 @@
         "headline": "25'ten fazla tefsir ve 100'den fazla tercümeyi tek bir yerde keşfedin.",
         "name": "Kuran Bağlantısı",
         "tagline": "Tefsir ve çalışma arkadaşı"
+      },
+      "quran-space": {
+        "headline": "Öğretmenler, öğrenciler veya akranlarınızla gerçek zamanlı sesli ve görüntülü bağlantı kurarak Kur'an'ı birlikte okuyun, üzerinde düşünün ve inceleyin.",
+        "name": "Kuran Mekânı",
+        "tagline": "Canlı Kur'an Toplantı Alanı"
       }
     },
     "learn-more": "Daha fazla bilgi edin",
     "title": "Öne Çıkan Uygulamalar",
     "view-all": "Tümünü görüntüle"
   },
+  "footer": {
+    "disclaimer": "Her uygulama, geliştiricisi tarafından bağımsız olarak sahiplenilir ve bakımı yapılır. Destek, hata bildirimleri veya özellik istekleri için lütfen doğrudan uygulama geliştiricisiyle iletişime geçin."
+  },
   "hero": {
-    "description": "Quran.foundation ile geliştirilmiş, özenle seçilmiş İslami uygulamalar koleksiyonunu keşfedin. Çalışma araçlarından dua yardımcılarına kadar, manevi yolculuğunuzu zenginleştirecek uygulamaları bulun.",
+    "description": "Hesabınız, ilerlemeniz ve yolculuğunuz bağlantıda kalırken, Kuran Vakfı'nın doğrulanmış içeriği ve kullanıcı özellikleriyle desteklenen benzersiz uygulamaları keşfedin.",
     "title": "Uygulama Ekosistemimizi Keşfedin"
   },
-  "quran-apps-portal": "Kuran Uygulamaları Portalı"
+  "quran-apps-portal": "Bağlantılı Kur'an Uygulamaları"
 }

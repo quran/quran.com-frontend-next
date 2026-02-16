@@ -6,10 +6,10 @@
     "title": "API Belgeleri"
   },
   "app-portal": {
-    "cta-explore": "Kuran Uygulamaları Portalı'nı ziyaret edin.",
+    "cta-explore": "Uygulamaları Keşfedin",
     "cta-oauth": "OAuth2 kılavuzuna bakın.",
     "description": "Topluluk tarafından geliştirilen en yeni deneyimleri keşfedin ve platformumuzla nelerin mümkün olduğunu görün.",
-    "heading": "Kuran Uygulamaları Portalı",
+    "heading": "Bağlantılı Kur'an Uygulamaları",
     "oauth-pitch": "Sorunsuz giriş için Kuran Vakfı OAuth2 ile uygulamanızı gönderin ve Kuran Uygulamaları Portalı'nda öne çıkarılması için başvurunuzu yapın.",
     "tagline": "Kuran uygulamalarınızı sergileyin."
   },

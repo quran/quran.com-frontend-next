@@ -249,6 +249,7 @@
     "translation-font-size": "Cỡ chữ dịch"
   },
   "footer": {
+    "apps-disclaimer": "Mỗi ứng dụng đều thuộc sở hữu và được duy trì độc lập bởi nhà phát triển của nó. Để được hỗ trợ, báo cáo lỗi hoặc yêu cầu tính năng, vui lòng liên hệ trực tiếp với nhà phát triển ứng dụng.",
     "description": "Quran.com là nền tảng đáng tin cậy, được hàng triệu người dùng trên thế giới để đọc, tra cứu, lắng nghe và suy ngẫm Kinh Qur'an bằng nhiều ngôn ngữ, với bản dịch, tafsir, tụng đọc, dịch từng từ và các công cụ học sâu, giúp ai cũng có thể tiếp cận Kinh Qur'an. <br/> <br/> Là một Sadaqah Jariyah, Quran.com tận tâm giúp mọi người gắn bó sâu sắc hơn với Kinh Qur'an. Được hậu thuẫn bởi tổ chức phi lợi nhuận 501(c)(3) <link>Quran.Foundation</link>, Quran.com không ngừng phát triển như một nguồn tài nguyên miễn phí và hữu ích cho tất cả, Alhamdulillah.",
     "hiring": "Chúng tôi đang tuyển dụng! Hãy gia nhập đội ngũ của QuranFoundation và đóng góp vào sứ mệnh của chúng tôi. <link>Ứng tuyển ngay!</link>",
     "rights": "Bản quyền đã được bảo lưu.",

@@ -249,6 +249,7 @@
     "translation-font-size": "翻译字体大小"
   },
   "footer": {
+    "apps-disclaimer": "每个应用程序均由其开发者独立拥有和维护。如需支持、提交错误报告或提出功能请求，请直接联系应用程序创建者。",
     "description": "Quran.com 是一个值得信赖的平台，全球数百万人使用它来阅读、搜索、聆听和思考多种语言的《古兰经》。它提供翻译、注释、诵读、逐字翻译以及深入研究的工具，让每个人都能接触到《古兰经》。 <br/> <br/>作为一家名为“施舍之家”（Sadaqah Jariyah）的机构，Quran.com 致力于帮助人们与《古兰经》建立更深层次的联系。在 501(c)(3) 非营利组织<link> Quran.Foundation </link>的支持下，Quran.com 不断发展壮大，成为所有人的免费宝贵资源。Alhamdulillah（真主安拉）",
     "hiring": "我们正在招聘！加入古兰经基金会团队并为我们的使命做出贡献。 <link>立即申请！ </link>",
     "rights": "版权所有",

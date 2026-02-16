@@ -6,10 +6,10 @@
     "title": "Documentation de l'API"
   },
   "app-portal": {
-    "cta-explore": "Visitez le portail des applications coraniques",
+    "cta-explore": "Explorer les applications",
     "cta-oauth": "Consultez le guide OAuth2",
     "description": "Explorez les dernières expériences créées par la communauté et découvrez les possibilités offertes par notre plateforme.",
-    "heading": "Portail d'applications coraniques",
+    "heading": "Applications Coran connectées",
     "oauth-pitch": "Utilisez le système OAuth2 de la Fondation Coran pour une connexion simplifiée et soumettez votre application pour qu'elle soit présentée sur le portail des applications coraniques.",
     "tagline": "Mettez en valeur vos applications coraniques"
   },
@@ -26,9 +26,9 @@
   },
   "issues-cta": "Si vous avez des questions ou si vous souhaitez contacter les responsables, écrivez simplement un problème ! Nous vous répondrons dans les plus brefs délais, inch Allah.",
   "issues-guide": "Typiquement, nous nous inspirons de <0>projets Github</0> pour bâtir de nouvelles fonctionnalités, et corriger les bugs. Par exemple, <1>cette URL</1> contient une liste de bugs, des choses pour lesquelles nous avons besoin d'aide et des fonctionnalités à venir.",
-  "labs": "Laboratoires",
+  "labs": "Labs du Coran",
   "labs-cta": "Explorer les laboratoires",
-  "labs-description": "Découvrez des fonctionnalités expérimentales et des innovations à venir. Partagez vos idées.",
+  "labs-description": "Découvrez des fonctionnalités expérimentales et des nouveautés à venir.",
   "labs-pitch": "Partagez vos idées et participez à l'avenir de l'engagement et des expériences coraniques.",
   "main-desc": "Merci pour votre contribution au développement de Quran.com et ses projets. Nous sommes ravis de travailler avec vous !",
   "projects": {
@@ -50,7 +50,7 @@
         "stack": "Applications Web et mobiles"
       },
       "q-ios": {
-        "description": "Lecteur de Coran basé sur Swift avec signets, récitations et prise en charge hors ligne.",
+        "description": "Lecteur de Coran basé sur Swift avec des favoris, des récitations et une prise en charge hors ligne.",
         "name": "Coran iOS",
         "stack": "Rapide"
       },
@@ -70,5 +70,5 @@
     "q-next": "<0>Quran.com Frontend</0> - écrit en Next.js.",
     "q-v2": "<0>Quran.com</0> - écrit en Ruby on Rails."
   },
-  "thanks": "Nous attendons avec impatience votre contribution !"
+  "thanks": "Nous attendons votre contribution avec impatience !"
 }

@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "Ndani reflektimet",
-        "description": "Një platformë sociale për inkurajimin dhe lehtësimin e reflektimeve kuranore - ndani reflektime, eksploroni tema dhe angazhohuni me komunitetin.",
-        "tagline": "Ndani reflektimet dhe rrituni së bashku",
+        "description": "Një platformë sociale për të kultivuar një kulturë reflektimi mbi Kuranin e Shenjtë",
+        "tagline": "Lexo dhe Ndani Reflektimet",
         "title": "Reflektimi i Kuranit"
       },
       "readtafsir": {
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Më në fund, një aplikacion Kurani për vajzat tona",
+        "headline": "Dëgjoni mbi 60 gra nga e gjithë bota duke recituar Kuranin në recitime të ndryshme!",
         "name": "Qariah",
         "tagline": "Gratë që recitojnë Kuranin"
       },
@@ -82,15 +82,23 @@
         "headline": "Eksploroni mbi 25 tefsirë dhe mbi 100 përkthime në një vend",
         "name": "Lidhja e Kuranit",
         "tagline": "Tefsir dhe shoqërues studimi"
+      },
+      "quran-space": {
+        "headline": "Lidhu me mësues, nxënës ose bashkëmoshatarë në kohë reale me audio dhe video për të lexuar, reflektuar dhe studiuar Kuranin së bashku.",
+        "name": "Hapësira e Kuranit",
+        "tagline": "Hapësirë ​​takimi live për Kuranin"
       }
     },
     "learn-more": "Mëso më shumë",
     "title": "Aplikacione të veçuara",
     "view-all": "Shiko të gjitha"
   },
+  "footer": {
+    "disclaimer": "Çdo aplikacion është në pronësi dhe mirëmbahet në mënyrë të pavarur nga zhvilluesi i tij. Për mbështetje, raportime gabimesh ose kërkesa për veçori, ju lutemi kontaktoni drejtpërdrejt krijuesin e aplikacionit."
+  },
   "hero": {
-    "description": "Eksploroni një koleksion të kuruar aplikacionesh islamike të ndërtuara me Quran.foundation. Nga mjetet e studimit deri te shërbimet e lutjes, gjeni aplikacione që përmirësojnë udhëtimin tuaj shpirtëror.",
+    "description": "Eksploroni aplikacione unike të mundësuara nga përmbajtja e verifikuar dhe veçoritë e përdoruesit të Fondacionit Kur'an, ndërsa llogaria, progresi dhe udhëtimi juaj mbeten të lidhura.",
     "title": "Zbuloni Ekosistemin tonë të Aplikacioneve"
   },
-  "quran-apps-portal": "Portali i Aplikacioneve të Kuranit"
+  "quran-apps-portal": "Aplikacione të lidhura të Kuranit"
 }

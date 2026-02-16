@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "Share reflections",
-        "description": "A social platform for encouraging and facilitating Quranic reflections - share reflections, explore topics, and engage with the community.",
-        "tagline": "Share reflections and grow together",
+        "description": "A social platform to cultivate a culture of reflection upon the Holy Quran",
+        "tagline": "Read & Share Reflections",
         "title": "QuranReflect"
       },
       "readtafsir": {
@@ -69,9 +69,9 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Finally, a Quran app for our daughters",
+        "headline": "Listen to 60+ women from all over the world reciting the Quran in varying recitations!",
         "name": "Qariah",
-        "tagline": "Women Quran reciters"
+        "tagline": "The Women Quran Reciters App"
       },
       "quran-kareem": {
         "headline": "Your new gateway to connect with the Book of Allah",
@@ -82,15 +82,23 @@
         "headline": "Explore 25+ tafsirs and 100+ translations in one place",
         "name": "Quran Link",
         "tagline": "Tafsir & study companion"
+      },
+      "quran-space": {
+        "headline": "Connect with teachers, students, or peers in real time audio and video to read, reflect, and study the Quran together.",
+        "name": "Quran Space",
+        "tagline": "Live Quran Meeting Space"
       }
     },
     "learn-more": "Learn more",
     "title": "Featured Apps",
     "view-all": "View all"
   },
-  "hero": {
-    "description": "Explore a curated collection of Islamic applications built with Quran.foundation. From study tools to prayer utilities, find apps that enhance your spiritual journey.",
-    "title": "Discover our Ecosystem of Apps"
+  "footer": {
+    "disclaimer": "Each application is independently owned and maintained by its developer. For support, bug reports, or feature requests, please contact the app creator directly."
   },
-  "quran-apps-portal": "Quran Apps Portal"
+  "hero": {
+    "description": "Explore unique apps powered by Quran Foundation’s verified content and user features, while your account, progress, and journey stay connected.",
+    "title": "Connected Quran Apps"
+  },
+  "quran-apps-portal": "Connected Quran Apps"
 }

@@ -9,7 +9,7 @@
       },
       "quran_android": {
         "caption": "Lisez, ajoutez à vos favoris et écoutez le Coran sur vos appareils Android.",
-        "description": "Ses fonctionnalités incluent des pages de style Madani, un son sans interruption, la possibilité de mettre en signet/d'étiqueter/de partager des éléments, la recherche, le mode nuit, la répétition audio et des traductions/tafsir dans de nombreuses langues.",
+        "description": "Les fonctionnalités incluent des pages de style Madani, un son sans interruption, la possibilité de mettre en favori/d'étiqueter/de partager des éléments, la recherche, le mode nuit, la répétition audio et des traductions/tafsir dans de nombreuses langues.",
         "tagline": "Application Coran gratuite et open source pour Android",
         "title": "Coran pour Android"
       },
@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "Partager ses réflexions",
-        "description": "Une plateforme sociale pour encourager et faciliter les réflexions coraniques : partagez vos réflexions, explorez des sujets et interagissez avec la communauté.",
-        "tagline": "Partagez vos réflexions et progressez ensemble.",
+        "description": "Une plateforme sociale pour cultiver une culture de réflexion sur le Saint Coran",
+        "tagline": "Lire et partager les réflexions",
         "title": "QuranReflect"
       },
       "readtafsir": {
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Enfin, une application Coran pour nos filles !",
+        "headline": "Écoutez plus de 60 femmes du monde entier réciter le Coran selon différentes manières !",
         "name": "Qariah",
         "tagline": "femmes récitant le Coran"
       },
@@ -82,15 +82,23 @@
         "headline": "Explorez plus de 25 tafsirs et plus de 100 traductions en un seul endroit",
         "name": "Lien vers le Coran",
         "tagline": "Tafsir et guide d'étude"
+      },
+      "quran-space": {
+        "headline": "Connectez-vous en temps réel avec des enseignants, des élèves ou des pairs par audio et vidéo pour lire, réfléchir et étudier le Coran ensemble.",
+        "name": "Espace Coran",
+        "tagline": "Espace de réunion en direct pour la lecture du Coran"
       }
     },
     "learn-more": "Apprendre encore plus",
     "title": "Applications vedettes",
     "view-all": "Afficher tout"
   },
+  "footer": {
+    "disclaimer": "Chaque application est la propriété de son développeur et est maintenue par celui-ci. Pour toute assistance, signalement de bug ou demande de fonctionnalité, veuillez contacter directement le créateur de l'application."
+  },
   "hero": {
-    "description": "Découvrez une sélection d'applications islamiques conçues avec Quran.foundation. Des outils d'étude aux applications de prière, trouvez celles qui enrichiront votre cheminement spirituel.",
+    "description": "Découvrez des applications uniques, optimisées par le contenu vérifié et les fonctionnalités utilisateur de la Fondation Coran, tout en conservant la connexion entre votre compte, votre progression et votre parcours.",
     "title": "Découvrez notre écosystème d'applications"
   },
-  "quran-apps-portal": "Portail d'applications coraniques"
+  "quran-apps-portal": "Applications Coran connectées"
 }
