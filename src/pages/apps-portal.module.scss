@@ -235,6 +235,46 @@
   object-fit: contain;
 }
 
+.visitBadge {
+  inline-size: 100%;
+  block-size: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: var(--color-text-inverse);
+  line-height: 1;
+  font-size: 0.74rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.005em;
+  gap: 6px;
+  padding-inline: 8px;
+  font-family: inherit;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.visitBadgeIcon {
+  inline-size: 14px;
+  block-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.visitBadgeIcon > svg {
+  inline-size: 100%;
+  block-size: 100%;
+  stroke: currentColor;
+}
+
+.visitBadgeText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .storeBadge:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow-medium);
@@ -301,6 +341,15 @@
     block-size: var(--cta-badge-height);
     min-block-size: var(--cta-badge-height);
     max-block-size: var(--cta-badge-height);
+  }
+
+  .visitBadge {
+    font-size: 0.72rem;
+  }
+
+  .visitBadgeIcon {
+    inline-size: 13px;
+    block-size: 13px;
   }
 }
 

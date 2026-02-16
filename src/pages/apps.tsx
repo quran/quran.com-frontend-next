@@ -19,6 +19,7 @@ import { logButtonClick, logTextSearchQuery, logValueChange } from '@/utils/even
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { getBasePath } from '@/utils/url';
+import GlobeIcon from '@/icons/globe.svg';
 
 interface AppLinks {
   androidHref?: string;
@@ -68,54 +69,71 @@ interface AppCtaLabels {
   webCtaText: string;
 }
 
-const VisitBadge: FC<{ label: string }> = ({ label }) => (
-  <svg
-    className={styles.storeBadgeImage}
-    width={96}
-    height={32}
-    viewBox="0 0 135 40"
-    aria-hidden="true"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect width="135" height="40" rx="5" fill="#000" />
-    <g transform="translate(8 7)">
-      <g transform="scale(1.1)">
-        <path
-          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-          stroke="#FFF"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M2 12H22"
-          stroke="#FFF"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z"
-          stroke="#FFF"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
-    </g>
-    <text
-      x="46"
-      y="20"
-      fill="#FFF"
-      fontSize="15"
-      fontFamily="inherit"
-      fontWeight="600"
-      dominantBaseline="middle"
-    >
-      {label}
-    </text>
-  </svg>
-);
+const VisitBadge: FC<{ label: string }> = ({ label }) => {
+  const { lang } = useTranslation('app-portal');
+
+  if (!lang.startsWith('ar')) {
+    return (
+      <svg
+        className={styles.storeBadgeImage}
+        width={96}
+        height={32}
+        viewBox="0 0 135 40"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect width="135" height="40" rx="5" fill="#000" />
+        <g transform="translate(8 7)">
+          <g transform="scale(1.1)">
+            <path
+              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+              stroke="#FFF"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M2 12H22"
+              stroke="#FFF"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z"
+              stroke="#FFF"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </g>
+        </g>
+        <text
+          x="46"
+          y="20"
+          fill="#FFF"
+          fontSize="15"
+          fontFamily="inherit"
+          fontWeight="600"
+          dominantBaseline="middle"
+        >
+          {label}
+        </text>
+      </svg>
+    );
+  }
+
+  return (
+    <span className={styles.visitBadge}>
+      <span className={styles.visitBadgeIcon} aria-hidden="true">
+        <GlobeIcon />
+      </span>
+      <span className={styles.visitBadgeText} dir="auto">
+        {label}
+      </span>
+    </span>
+  );
+};
 
 const DEBOUNCE_DELAY = 1000;
 
@@ -386,7 +404,10 @@ const AppCtaRow: FC<AppCtaRowProps> = ({
   );
 };
 
-const FeaturedCard: FC<{ app: FeaturedApp; ctaLabels: AppCtaLabels }> = ({ app, ctaLabels }) => (
+const FeaturedCard: FC<{
+  app: FeaturedApp;
+  ctaLabels: AppCtaLabels;
+}> = ({ app, ctaLabels }) => (
   <article className={styles.featuredCard}>
     <div className={styles.cardBody}>
       <div className={styles.appMeta}>
@@ -405,15 +426,15 @@ const FeaturedCard: FC<{ app: FeaturedApp; ctaLabels: AppCtaLabels }> = ({ app, 
         </div>
       </div>
       <p className={styles.appDescription}>{app.description}</p>
-      <AppCtaRow
-        appId={app.id}
-        appName={app.name}
-        androidHref={app.androidHref}
-        iosHref={app.iosHref}
-        webHref={app.webHref}
-        ctaLabels={ctaLabels}
-        eventName="app_portal_featured_app_cta"
-      />
+        <AppCtaRow
+          appId={app.id}
+          appName={app.name}
+          androidHref={app.androidHref}
+          iosHref={app.iosHref}
+          webHref={app.webHref}
+          ctaLabels={ctaLabels}
+          eventName="app_portal_featured_app_cta"
+        />
     </div>
   </article>
 );
@@ -425,7 +446,12 @@ interface FeaturedAppsProps {
   ctaLabels: AppCtaLabels;
 }
 
-const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps, ctaLabels }) => (
+const FeaturedApps: FC<FeaturedAppsProps> = ({
+  title,
+  viewAllText,
+  apps,
+  ctaLabels,
+}) => (
   <section className={styles.section}>
     <div className={styles.sectionHeader}>
       <h2 className={styles.sectionTitle}>{title}</h2>
@@ -436,13 +462,20 @@ const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps, ctaLabe
     </div>
     <div className={styles.featuredGrid}>
       {apps.map((app) => (
-        <FeaturedCard key={app.id} app={app} ctaLabels={ctaLabels} />
+        <FeaturedCard
+          key={app.id}
+          app={app}
+          ctaLabels={ctaLabels}
+        />
       ))}
     </div>
   </section>
 );
 
-const AppTileCard: FC<{ app: AppTile; ctaLabels: AppCtaLabels }> = ({ app, ctaLabels }) => (
+const AppTileCard: FC<{
+  app: AppTile;
+  ctaLabels: AppCtaLabels;
+}> = ({ app, ctaLabels }) => (
   <article className={styles.appCard}>
     <div className={styles.cardBody}>
       <div className={styles.appMeta}>
@@ -522,7 +555,11 @@ const AppGrid: FC<AppGridProps> = ({ apps, emptyText, ctaLabels }) => {
   return (
     <div className={styles.appGrid}>
       {apps.map((app) => (
-        <AppTileCard key={app.id} app={app} ctaLabels={ctaLabels} />
+        <AppTileCard
+          key={app.id}
+          app={app}
+          ctaLabels={ctaLabels}
+        />
       ))}
     </div>
   );
@@ -584,7 +621,11 @@ const BrowseApps: FC<BrowseAppsProps> = ({
           searchQuery={searchQuery}
           filters={filters}
         />
-        <AppGrid apps={filteredApps} emptyText={noResultsText} ctaLabels={ctaLabels} />
+        <AppGrid
+          apps={filteredApps}
+          emptyText={noResultsText}
+          ctaLabels={ctaLabels}
+        />
       </div>
     </section>
   );
