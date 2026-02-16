@@ -40,7 +40,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
   return (
     <>
       <NextSeoWrapper
-        title="Prepare for a Transformative Ramadan 2026 1447AH"
+        title="A Transformational Ramadan 2026 1447AH"
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
         description="Prepare your heart for Ramadan with Quran-centered challenges, learning plans, goal-setting, and more. Join us today!"
@@ -52,24 +52,24 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
         <div className={classNames(pageStyles.container, styles.contentPage)} dir="ltr">
           <div className={styles.subSection}>
             <h1>
-              Prepare for a Transformative Ramadan{' '}
-              <span className={pageStyles.h1Subtext}>2026/1447AH</span>
+              A Transformational Ramadan <span className={pageStyles.h1Subtext}>2026/1447AH</span>
             </h1>
+            <h2>Ramadan Mubarak!</h2>
             <div>
-              How you prepare for Ramadan and the intentions you carry into it, have a big impact on
-              how much you benefit from this blessed month. Ramadan is unlike any other time: the
-              month in which the Quran was revealed to awaken hearts and guide lives. Preparation
-              begins before the month enters, so that when Ramadan departs, it leaves you renewed -
-              carrying greater clarity, discipline, and closeness to Allah beyond its days.
+              To reach another Ramadan is a great mercy from Allah (SWT) and a precious opportunity
+              for true transformation.
+            </div>
+            <div>
+              Ramadan is the month of the Quran - the greatest miracle and the most powerful source
+              of guidance and change. Its words awaken hearts, bring clarity, and draw us closer to
+              Allah.
+            </div>
+            <div>
+              We are grateful and excited to share these Ramadan offerings with you to support your
+              journey with the Quran during this blessed time.
             </div>
             <br />
-            <div>
-              <Link href="https://quran.com" isNewTab>
-                Quran.com
-              </Link>{' '}
-              invites you to begin preparing for the month with us!
-            </div>
-            <div>Join the following activities:</div>
+            <h2>We invite you to join the following activities:</h2>
             <ul className={pageStyles.list}>
               <li>
                 <InlineLink
@@ -101,8 +101,15 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               </li>
               <li>
                 <InlineLink
-                  text="QuranReflect Ramadan Ready Challenge"
-                  href="#quranreflect-ramadan-challenge"
+                  text="Join the Global Quran Reflection Community"
+                  href="#join-the-global-quran-reflection-community"
+                  isNewTab={false}
+                />
+              </li>
+              <li>
+                <InlineLink
+                  text="Quranic Leadership Series with Dr. Suleiman Hani"
+                  href="#quranic-leadership-series"
                   isNewTab={false}
                 />
               </li>
@@ -124,7 +131,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             <hr />
           </div>
           <div className={styles.subSection} id="join-surah-mulk-challenge">
-            <h1>Meaningful Memorization Challenge: Surah Al-Mulk</h1>
+            <h1>🌎 Meaningful Memorization Challenge: Surah Al-Mulk</h1>
             <div>
               A guided Ramadan challenge focused on memorizing Surah Al-Mulk one ayah at a time,
               rooted in understanding and reflection, so participants finish Ramadan with a lasting,
@@ -142,10 +149,17 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
                 Learn More
               </Button>
             </div>
+            <div>This Challenge is based on the content contained in our new Learning Plan:</div>
+            <Link
+              href="/learning-plans/30-transformative-days-with-surah-al-mulk-learn-reflect-memorize"
+              isNewTab
+            >
+              ➡️ 30 Transformative Days with Surah Al-Mulk: Learn, Reflect, Memorize
+            </Link>
           </div>
           <hr />
           <div className={styles.subSection} id="goal-setting">
-            <h1>Goal-setting to stay on track</h1>
+            <h1>🎯 Goal-setting to stay on track</h1>
             <div>
               Set custom Quranic goals tailored to your Ramadan journey. Decide how much Quran you
               want to read over a specific time period and track your progress with ease. Stay
@@ -167,7 +181,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           </div>
           <hr />
           <div className={styles.subSection} id="preparing-our-hearts">
-            <h1>Preparing Our Hearts for Ramadan</h1>
+            <h1>♥️ Preparing Our Hearts for Ramadan</h1>
             <div>
               Enhance your spiritual and mental readiness with our Learning Plan, Preparing Our
               Hearts for Ramadan. Start today and make the most of the blessed days ahead. This
@@ -234,7 +248,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           </div>
           <hr />
           <div className={styles.subSection} id="mindful-fasting">
-            <h1>Mindful Fasting: A Ramadan Learning Plan</h1>
+            <h1>☕ Mindful Fasting: A Ramadan Learning Plan</h1>
             <div>
               Discover the beauty of fasting beyond abstention with Mindful Fasting, a unique
               Learning Plan designed to help you:
@@ -317,50 +331,25 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             </div>
           </div>
           <hr />
-          <div className={styles.subSection} id="quranreflect-ramadan-challenge">
-            <h1>Ramadan Ready Challenge on QuranReflect</h1>
+          <div className={styles.subSection} id="join-the-global-quran-reflection-community">
+            <h1>📝 Join the Global Quran Reflection Community</h1>
             <div>
-              Preparing for Ramadan does not begin with the only gearing up for the first fast, it
-              begins with readiness of the heart.
+              Reflect on the Quran with a global community in a safe, moderated environment where
+              the focus is on the Quran. Read and share reflections, learn from others around the
+              world, and grow through a journey built for deep connection.
             </div>
             <div>
-              The <span className={pageStyles.bold}>Ramadan Ready Challenge</span> invites you to
-              share your{' '}
-              <span className={pageStyles.bold}>best advice, insight, or reflection</span> on how to
-              truly prepare for Ramadan, spiritually, mentally, and practically.
-            </div>
-            <div>
-              This reflection challenge is <span className={pageStyles.bold}>led by Shaykh</span>{' '}
+              Follow the Surah Al-Mulk Challenge, with{' '}
               <Link href="https://quran.foundation/shaykh-hammad-fahim" isNewTab>
-                Hammad Fahim
-              </Link>
-              , guiding us toward intentional, Quran-centered preparation for the blessed month.
-            </div>
-            <br />
-            <h2>✏️ How to participate</h2>
-            <ul className={pageStyles.list}>
-              <li>
-                Post your reflection on{' '}
-                <Link href={EXTERNAL_ROUTES.QURAN_REFLECT} isNewTab>
-                  QuranReflect
-                </Link>
-              </li>
-              <li>Share sincere, practical guidance on getting Ramadan ready</li>
-              <li>Reflect on what helps the heart receive the Quran more fully</li>
-            </ul>
-            <br />
-            <h2 className={pageStyles.italic}>🏆 Featured Reflections</h2>
-            <div>
-              The most impactful reflections will be{' '}
-              <span className={pageStyles.bold}>featured and shared</span> during the{' '}
-              <span className={pageStyles.bold}>Reflection Retreat Live Podoct</span> on February
-              14th 2026, insha'Allah.
+                Shaykh Hammad Fahim
+              </Link>{' '}
+              accompanying this months Meaningful Memorization Challenge and share insights along
+              the way.
             </div>
             <div>
-              Your reflection may help hearts enter Ramadan with clarity, intention, and hope.
-            </div>
-            <div>
-              (Already have a Quran.com account? Sign in with the same email to link your accounts.)
+              Shaykh Fahim and the review team will also be hosting 🔴 LIVE webinars and podcast
+              throughout the month, so don't miss this great opportunity to grow closer to the
+              Quran, insha'Allah!
             </div>
             <br />
             <div className={pageStyles.subtext}>
@@ -386,8 +375,29 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             <br />
           </div>
           <hr />
+          <div className={styles.subSection} id="quranic-leadership-series">
+            <h1>🌿 Quranic Leadership Series with Dr. Suleiman Hani</h1>
+            <div>
+              Most people misunderstand leadership and reduce it to charisma, titles, or control,
+              when in reality, leadership is the daily practice of influence, responsibility, and
+              moral clarity. This Ramadan series brings together the highest-level leadership
+              theories, simplified and synthesized into clear, actionable insights, and grounds them
+              in deep Qur'anic guidance and Prophetic wisdom.
+            </div>
+            <div>
+              Each short episode offers one verse, one reflection, and one leadership principle that
+              trains the inner leader first. If you want a Ramadan journey that is spiritually
+              transformative and intellectually rigorous, designed to reshape how you lead at home,
+              at work, and in your community, follow the series and let the Qur'an rebuild your
+              definition of leadership from the inside out.{' '}
+              <Link href="https://quranreflect.com/SuleimanHani" isNewTab>
+                Follow Dr. Suleiman Hani for daily posts on QuranReflect.
+              </Link>
+            </div>
+          </div>
+          <hr />
           <div className={styles.subSection} id="share-the-month-of-the-quran">
-            <h1>Share the Month of the Quran! Visit 'What Is Ramadan?'</h1>
+            <h1>⭐ Share the Month of the Quran! Visit 'What Is Ramadan?'</h1>
             <div>
               For those unfamiliar with Ramadan, we've created a page to explore the question “What
               is Ramadan?” in a simple and inspiring way. This page highlights the significance of
@@ -403,7 +413,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           </div>
           <hr />
           <div className={styles.subSection} id="explore-additional-beneficial-features">
-            <h1>Explore Additional Beneficial Features!</h1>
+            <h1>📱 Explore Additional Beneficial Features!</h1>
             <div>
               Discover additional features on Quran.com to make your Ramadan journey more enriching.
               You can take personalized notes at the ayah level to capture your reflections and
@@ -422,11 +432,10 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
           </div>
           <hr />
           <div className={styles.subSection}>
-            <h1>May You Build a Deep and Profound Connection with the Quran This Ramadan</h1>
+            <h1>🕌 May You Build a Deep and Profound Connection with the Quran This Ramadan</h1>
             <div>
               May Allah make this Ramadan a time of profound growth, deep reflection, and meaningful
-              connection with the Quran. Start preparing today and join us on this transformative
-              journey.
+              connection with the Quran.
             </div>
           </div>
           <hr />
