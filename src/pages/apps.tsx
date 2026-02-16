@@ -17,7 +17,8 @@ import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick, logTextSearchQuery, logValueChange } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, QURAN_URL } from '@/utils/navigation';
+import { getCanonicalUrl } from '@/utils/navigation';
+import { getBasePath } from '@/utils/url';
 
 interface AppLinks {
   androidHref?: string;
@@ -285,7 +286,7 @@ interface BrowseAppsProps {
 }
 
 const path = '/apps';
-const OG_IMAGE_URL = `${QURAN_URL}/images/app-portal/connected-quran-apps.png`;
+const OG_IMAGE_URL = `${getBasePath()}/images/app-portal/connected-quran-apps.png`;
 
 interface HeroProps {
   title: string;
