@@ -12,6 +12,7 @@ import styles from './index.module.scss';
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
+import HomePageApps from '@/components/HomePage/HomePageApps';
 import HomePageHero from '@/components/HomePage/HomePageHero';
 import LearningPlansSection from '@/components/HomePage/LearningPlansSection';
 import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections';
@@ -126,6 +127,17 @@ const Index: NextPage<IndexProps> = ({
                 )}
               </>
             )}
+
+            <div
+              className={classNames(
+                styles.flowItem,
+                styles.fullWidth,
+                styles.homepageCard,
+                styles.borderEndNone,
+              )}
+            >
+              <HomePageApps />
+            </div>
 
             <div className={styles.flowItem}>
               <ChapterAndJuzListWrapper chapters={chapters} />
