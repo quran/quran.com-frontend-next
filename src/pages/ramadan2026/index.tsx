@@ -127,9 +127,8 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
                 />
               </li>
             </ul>
+            <hr />
           </div>
-          <br />
-          <hr />
           <div className={styles.subSection} id="join-surah-mulk-challenge">
             <h1>🌎 Meaningful Memorization Challenge: Surah Al-Mulk</h1>
             <div>
@@ -157,7 +156,6 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               ➡️ 30 Transformative Days with Surah Al-Mulk: Learn, Reflect, Memorize
             </Link>
           </div>
-          <br />
           <hr />
           <div className={styles.subSection} id="goal-setting">
             <h1>🎯 Goal-setting to stay on track</h1>
@@ -180,7 +178,6 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <br />
           <hr />
           <div className={styles.subSection} id="preparing-our-hearts">
             <h1>♥️ Preparing Our Hearts for Ramadan</h1>
@@ -396,7 +393,6 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               </Link>
             </div>
           </div>
-          <br />
           <hr />
           <div className={styles.subSection} id="share-the-month-of-the-quran">
             <h1>⭐ Share the Month of the Quran! Visit 'What Is Ramadan?'</h1>
@@ -413,7 +409,6 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               </Link>
             </div>
           </div>
-          <br />
           <hr />
           <div className={styles.subSection} id="explore-additional-beneficial-features">
             <h1>📱 Explore Additional Beneficial Features!</h1>
@@ -435,7 +430,6 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               insha'Allah!
             </div>
           </div>
-          <br />
           <hr />
           <div className={styles.subSection}>
             <h1>🕌 May You Build a Deep and Profound Connection with the Quran This Ramadan</h1>
@@ -444,7 +438,6 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               connection with the Quran.
             </div>
           </div>
-          <br />
           <hr />
           <div className={styles.subSection}>
             <h1>Support Quran.Foundation ❤️</h1>
