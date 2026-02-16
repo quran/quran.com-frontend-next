@@ -75,6 +75,8 @@ const scrollToPage = ({
   const scrollToPageIndex = page - firstPageOfCurrentChapter;
   virtuosoRef.current.scrollToIndex({
     index: scrollToPageIndex,
+    // Known limitation: this helper assumes page ranges are within one surah.
+    // On cross-surah pages (e.g. 105:3 -> 106:1), align may be approximate.
     align: getVersePositionWithinAMushafPage(target.verseKey, pagesVersesRange[page]),
     offset: pinnedOffset,
   });
