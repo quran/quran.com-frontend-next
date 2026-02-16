@@ -51,7 +51,7 @@
   }
 
   .arabicText {
-    font-family: 'Kitab', var(--font-quran);
+    font-family: 'Kitab', 'UthmanicHafs', 'Figtree', sans-serif;
     font-size: $arabicFont;
     line-height: 1.6;
     text-align: center;
@@ -64,7 +64,7 @@
   }
 
   .arabicTextSmall {
-    font-family: 'Kitab', var(--font-quran);
+    font-family: 'Kitab', 'UthmanicHafs', 'Figtree', sans-serif;
     font-size: $smallArabicFont;
     line-height: 1.4;
     text-align: center;
