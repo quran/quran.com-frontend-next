@@ -41,6 +41,7 @@
 .appsContainer {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   gap: var(--spacing-xxsmall-px);
   background-color: var(--color-background-elevated-new);
   padding: var(--spacing-medium2-px);
