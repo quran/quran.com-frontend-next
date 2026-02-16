@@ -38,6 +38,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   isInsideStudyMode = false,
 }) => {
   const { t } = useTranslation('common');
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const onOpenModalChange = (open: boolean) => {
     logEvent(
@@ -45,37 +46,42 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
         open ? 'open' : 'close'
       }`,
     );
+    setIsMenuOpen(open);
   };
 
   return (
     <div className={styles.container}>
       <PopoverMenu
         contentClassName={classNames(cellStyles.menuOffset, cellStyles.overlayModal)}
+        isOpen={isMenuOpen}
         trigger={
-          <Button
-            size={ButtonSize.Small}
-            tooltip={t('more')}
-            variant={ButtonVariant.Ghost}
-            shape={ButtonShape.Circle}
-            className={classNames(
-              cellStyles.iconContainer,
-              cellStyles.verseAction,
-              { [styles.moreMenuTrigger]: isTranslationView },
-              'overflow-verse-actions-menu-trigger', // for onboarding
-            )}
-            shouldFlipOnRTL={false}
-            ariaLabel={t('more')}
-            data-testid="verse-actions-more"
-          >
-            <span className={cellStyles.icon}>
-              <IconContainer
-                icon={<OverflowMenuIcon />}
-                color={IconColor.tertiary}
-                size={IconSize.Custom}
-                shouldFlipOnRTL={false}
-              />
-            </span>
-          </Button>
+          <span onPointerDown={(event) => event.stopPropagation()}>
+            <Button
+              size={ButtonSize.Small}
+              tooltip={t('more')}
+              variant={ButtonVariant.Ghost}
+              shape={ButtonShape.Circle}
+              className={classNames(
+                cellStyles.iconContainer,
+                cellStyles.verseAction,
+                { [styles.moreMenuTrigger]: isTranslationView },
+                'overflow-verse-actions-menu-trigger', // for onboarding
+              )}
+              shouldFlipOnRTL={false}
+              ariaLabel={t('more')}
+              data-testid="verse-actions-more"
+              onClick={() => setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen)}
+            >
+              <span className={cellStyles.icon}>
+                <IconContainer
+                  icon={<OverflowMenuIcon />}
+                  color={IconColor.tertiary}
+                  size={IconSize.Custom}
+                  shouldFlipOnRTL={false}
+                />
+              </span>
+            </Button>
+          </span>
         }
         isModal
         isPortalled
