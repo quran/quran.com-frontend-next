@@ -91,6 +91,8 @@ const ReadingView = ({
   const [startingVerseHighlightVerseKey, setStartingVerseHighlightVerseKey] = useState<
     string | undefined
   >(undefined);
+  const lastShownStartingVerseKeyRef = useRef<string | undefined>(undefined);
+  const lastStartingVerseValueRef = useRef<string | undefined>(undefined);
   const isVerseAudioPlaying = useXstateSelector(
     audioService,
     (state) => selectIsAudioPlaying(state) && !state.context.radioActor,
@@ -142,6 +144,14 @@ const ReadingView = ({
   );
 
   useEffect(() => {
+    const normalizedStartingVerse = startingVerse ? String(startingVerse) : undefined;
+
+    // Reset "already shown" marker only when navigation target changes.
+    if (lastStartingVerseValueRef.current !== normalizedStartingVerse) {
+      lastStartingVerseValueRef.current = normalizedStartingVerse;
+      lastShownStartingVerseKeyRef.current = undefined;
+    }
+
     if (readingPreference !== ReadingPreference.Reading || isVerseAudioPlaying || !startingVerse) {
       setStartingVerseHighlightVerseKey(undefined);
       return undefined;
@@ -177,16 +187,13 @@ const ReadingView = ({
       return undefined;
     }
 
+    if (lastShownStartingVerseKeyRef.current === resolvedStartingVerseKey) {
+      return undefined;
+    }
+
+    lastShownStartingVerseKeyRef.current = resolvedStartingVerseKey;
     setStartingVerseHighlightVerseKey(resolvedStartingVerseKey);
-
-    // After a few seconds, remove the highlight
-    const removeTimeoutId = setTimeout(() => {
-      setStartingVerseHighlightVerseKey(undefined);
-    }, STARTING_VERSE_HIGHLIGHT_DURATION_MS);
-
-    return () => {
-      clearTimeout(removeTimeoutId);
-    };
+    return undefined;
   }, [
     chapterId,
     chaptersData,
@@ -195,6 +202,18 @@ const ReadingView = ({
     readingPreference,
     startingVerse,
   ]);
+
+  useEffect(() => {
+    if (!startingVerseHighlightVerseKey) return undefined;
+
+    const removeTimeoutId = setTimeout(() => {
+      setStartingVerseHighlightVerseKey(undefined);
+    }, STARTING_VERSE_HIGHLIGHT_DURATION_MS);
+
+    return () => {
+      clearTimeout(removeTimeoutId);
+    };
+  }, [startingVerseHighlightVerseKey]);
 
   const { quranFont, mushafLines, quranTextFontScale } = quranReaderStyles;
   useQcfFont(quranFont, verses);
