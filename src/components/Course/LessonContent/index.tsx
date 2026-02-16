@@ -14,8 +14,12 @@ interface Props {
 }
 
 const LessonContent: React.FC<Props> = ({ lesson, lessonSlugOrId, courseSlug }) => {
-  const { lang } = useTranslation('learn');
-  const description = `Lesson ${lesson.day} of "${lesson.course.title}"`;
+  const { lang, t } = useTranslation('learn');
+  const description = t(
+    'lesson-meta-description',
+    { day: lesson.day, courseTitle: lesson.course.title },
+    { default: 'Lesson {{day}} of "{{courseTitle}}"' },
+  );
 
   return (
     <>
