@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './HomePageApps.module.scss';
 
 import { logButtonClick } from '@/utils/eventLogger';
+import { APPS_URL } from '@/utils/navigation';
 
 interface App {
   id: string;
@@ -75,7 +76,7 @@ const HomePageApps: React.FC = () => {
         <div className={styles.appsHeader}>
           <div className={styles.featured}>{t('apps.featured-apps')}</div>
           <Link
-            href="/apps"
+            href={APPS_URL}
             className={styles.seeMoreLink}
             onClick={() => logButtonClick('home_apps_see_more')}
           >
@@ -86,7 +87,7 @@ const HomePageApps: React.FC = () => {
           {apps.map((app) => (
             <Link
               key={app.id}
-              href="/apps"
+              href={APPS_URL}
               className={classNames(styles.appCard, styles[app.id])}
               onClick={() => handleAppClick(app.id)}
             >
