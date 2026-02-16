@@ -93,15 +93,13 @@
 
 .apps {
   display: flex;
-  justify-content: center;
-  gap: var(--spacing-xxlarge-px);
+  gap: var(--spacing-small-px);
+  justify-content: space-between;
 
-  @include breakpoints.tablet {
-    gap: var(--spacing-mega-px);
+  @include breakpoints.mobileL {
+    justify-content: space-evenly;
   }
 }
-
-$appCardInlineSize: 108px;
 
 .appCard {
   display: flex;
@@ -110,7 +108,6 @@ $appCardInlineSize: 108px;
   text-align: center;
   text-decoration: none;
 
-  inline-size: $appCardInlineSize;
   padding-block: calc(var(--spacing-small-plus-px) * 2);
 }
 
