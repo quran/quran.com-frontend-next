@@ -1,0 +1,6 @@
+enum EventNames {
+  QURAN_READER_BOTTOM_ACTION_SCROLLABLE = 'quran_reader_bottom_action_scrollable',
+  QURAN_READER_END_OF_SURAH_CTA = 'quran_reader_end_of_surah_cta',
+}
+
+export default EventNames;
