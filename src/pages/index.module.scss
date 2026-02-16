@@ -80,8 +80,12 @@ $list-max-width: 80rem;
   border-block-end: 1px solid var(--color-separators-ayah-level);
 }
 
-.borderEndNone {
-  border-block-end: none;
+.appsSection {
+  padding-block-end: var(--spacing-medium3-px);
+  margin-block-end: var(--spacing-medium2-px);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-large-px);
+  }
 }
 
 .mobileOnly {

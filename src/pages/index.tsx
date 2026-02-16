@@ -133,7 +133,7 @@ const Index: NextPage<IndexProps> = ({
                 styles.flowItem,
                 styles.fullWidth,
                 styles.homepageCard,
-                styles.borderEndNone,
+                styles.appsSection,
               )}
             >
               <HomePageApps />
