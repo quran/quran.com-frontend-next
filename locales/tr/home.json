@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Kuran Hedeflerinize Ulaşın",
+  "apps": {
+    "description": "Kur'an ile ilgili gelişiminizi daha da ilerletecek bağlantılı uygulamalar.",
+    "featured-apps": "Öne Çıkan Uygulamalar",
+    "qariah": {
+      "description": "Kadın Kur'an Okuyucuları",
+      "name": "Kariah"
+    },
+    "quran-android": {
+      "description": "Quran.com Android için",
+      "name": "Kuran Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com iPhone için",
+      "name": "Kuran iOS"
+    },
+    "quran-space": {
+      "description": "Canlı Çalışma Grubu",
+      "name": "Kuran Mekânı"
+    },
+    "quranreflect": {
+      "description": "Düşünceleri Okuyun ve Paylaşın",
+      "name": "Kur'anDüşün"
+    },
+    "see-more": "Daha fazlasını görün",
+    "title": "Kuran Uygulamaları"
+  },
   "begin": "Başla",
   "calendar-cta": "Takvim",
   "chapters-and-verses": "Bölümler ve Ayetler",
