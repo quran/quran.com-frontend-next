@@ -136,7 +136,7 @@ const getFeaturedApps = (t: (key: string) => string): FeaturedApp[] => [
     tagline: t('featured.apps.quran-space.tagline'),
     description: t('featured.apps.quran-space.headline'),
     iconSrc: '/images/app-portal/featured/quran-space-icon.png',
-    iconAlt: 'Quran Spaces',
+    iconAlt: 'Quran Space',
     webHref: 'https://spaces.labs.quran.com/',
   },
   {
