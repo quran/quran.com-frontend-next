@@ -37,7 +37,9 @@ const TranslationFeedbackDisclaimer: React.FC = () => {
           data-testid="tfd-content"
         >
           <div className={styles.sectionContainer}>
-            <p className={styles.content}>{t('translation-feedback.disclaimer.content')}</p>
+            <p className={styles.content}>
+              {t('translation-feedback.disclaimer.content')?.replaceAll('\\n', '\n')}
+            </p>
           </div>
           <button
             type="button"
