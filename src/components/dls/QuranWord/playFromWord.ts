@@ -25,6 +25,13 @@ const playAndSeekAfterLoad = (word: Word, audioService: AudioService): (() => vo
   audioService.send({ type: 'PLAY_AYAH', surah: wordSurah, ayahNumber: verseNumber });
 
   let unsubscribed = false;
+  const cleanup = () => {
+    if (!unsubscribed) {
+      subscription.unsubscribe();
+      unsubscribed = true;
+      activeCleanup = null;
+    }
+  };
   const subscription = audioService.subscribe((state) => {
     if (unsubscribed) return;
     if (
@@ -32,19 +39,13 @@ const playAndSeekAfterLoad = (word: Word, audioService: AudioService): (() => vo
       state.context.audioData?.verseTimings
     ) {
       seekToWord(word, audioService, state.context.audioData.verseTimings);
-      subscription.unsubscribe();
-      unsubscribed = true;
-      activeCleanup = null;
+      cleanup();
+    } else if (state.matches('IDLE') || state.done) {
+      cleanup();
     }
   });
 
-  return () => {
-    if (!unsubscribed) {
-      subscription.unsubscribe();
-      unsubscribed = true;
-      activeCleanup = null;
-    }
-  };
+  return cleanup;
 };
 
 const playFromWord = (word: Word, audioService: AudioService): void => {
@@ -58,7 +59,9 @@ const playFromWord = (word: Word, audioService: AudioService): void => {
   const isSameSurah = currentState.context.surah === wordSurah;
 
   if ((isPlaying || isPaused) && isSameSurah) {
-    seekToWord(word, audioService, currentState.context.audioData.verseTimings);
+    const timings = currentState.context.audioData?.verseTimings;
+    if (!timings) return;
+    seekToWord(word, audioService, timings);
     if (isPaused) {
       audioService.send({ type: 'TOGGLE' });
     }
