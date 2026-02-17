@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,26 +9,19 @@ import SettingTabs from './SettingTabs';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import { selectNavbar, setLastSettingsTab, SettingsTab, SettingsView } from '@/redux/slices/navbar';
-import { logValueChange } from '@/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 
 const SettingsBody = () => {
   const dispatch = useDispatch();
   const { isActive, nextStep, activeStepIndex } = useOnboarding();
   const { lastSettingsView, lastSettingsTab } = useSelector(selectNavbar);
-  // Use ref to track previous tab for logging without causing handleTabChange to change
-  const lastSettingsTabRef = useRef(lastSettingsTab);
-
-  // Keep ref in sync with state
-  useEffect(() => {
-    lastSettingsTabRef.current = lastSettingsTab;
-  }, [lastSettingsTab]);
 
   const getTabFromSettingsView = (view: SettingsView): SettingsTab => {
     switch (view) {
       case SettingsView.Translation:
         return SettingsTab.Translation;
       case SettingsView.Tafsir:
-        return SettingsTab.More;
+        return SettingsTab.WBW;
       case SettingsView.Reciter:
       case SettingsView.Body:
       default:
@@ -39,7 +32,7 @@ const SettingsBody = () => {
   const handleTabChange = useCallback(
     (tab: SettingsTab, shouldLog = true) => {
       if (shouldLog) {
-        logValueChange('settings_tab', lastSettingsTabRef.current, tab);
+        logEvent(`settings_tab_${tab}`);
       }
       dispatch(setLastSettingsTab(tab));
     },

@@ -14,7 +14,7 @@ export enum SettingsView {
 export enum SettingsTab {
   Arabic = 'arabic',
   Translation = 'translation',
-  More = 'more',
+  WBW = 'wbw',
 }
 
 export type Navbar = {
