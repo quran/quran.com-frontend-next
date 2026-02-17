@@ -44,5 +44,29 @@
     "main": "Основные детали",
     "syllabus": "Учебный план"
   },
-  "what-happens-when-you-click-add-reflection": "Что происходит, когда вы нажимаете «Добавить отражение»?"
+  "what-happens-when-you-click-add-reflection": "Что происходит, когда вы нажимаете «Добавить отражение»?",
+  "flashcards": {
+    "all-done": "Всё готово!",
+    "carousel-aria-label": "Карусель флеш-карточек",
+    "carousel-subtitle": "Проводите по карточкам и нажимайте, чтобы перевернуть",
+    "collapse-all": "Свернуть всё",
+    "deck-subtitle": "Свайпните вправо, если знаете, влево — для повторения",
+    "expand-all": "Развернуть всё",
+    "go-to-card": "Перейти к карточке {{index}}",
+    "know": "Знаю",
+    "known": "Знаю",
+    "list-subtitle": "Нажмите, чтобы раскрыть, и отмечайте слова как освоенные",
+    "mark-as-known": "Отметить как знаю",
+    "mark-as-mastered": "Отметить как освоенное",
+    "mark-as-need-review": "Отметить для повторения",
+    "mark-as-not-mastered": "Отметить как не освоено",
+    "mastered-progress": "{{mastered}} / {{total}} освоено",
+    "next-card": "Следующая карточка",
+    "previous-card": "Предыдущая карточка",
+    "review": "Повторить",
+    "start-over": "Начать заново",
+    "tap-to-flip-swipe-to-answer": "Нажмите, чтобы перевернуть, и свайпните для ответа",
+    "tap-to-reveal": "Нажмите, чтобы показать",
+    "translation-label": "Перевод:"
+  }
 }

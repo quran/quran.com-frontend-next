@@ -44,5 +44,29 @@
     "main": "Belangrijkste details",
     "syllabus": "Syllabus"
   },
-  "what-happens-when-you-click-add-reflection": "Wat gebeurt er als je op 'Reflectie toevoegen' klikt?"
+  "what-happens-when-you-click-add-reflection": "Wat gebeurt er als je op 'Reflectie toevoegen' klikt?",
+  "flashcards": {
+    "all-done": "Alles klaar!",
+    "carousel-aria-label": "Flashcard-carrousel",
+    "carousel-subtitle": "Veeg door kaarten en tik om om te draaien",
+    "collapse-all": "Alles inklappen",
+    "deck-subtitle": "Veeg naar rechts als je het weet, naar links om te herhalen",
+    "expand-all": "Alles uitklappen",
+    "go-to-card": "Ga naar kaart {{index}}",
+    "know": "Ken ik",
+    "known": "Bekend",
+    "list-subtitle": "Tik om uit te klappen en markeer woorden als beheerst",
+    "mark-as-known": "Markeren als bekend",
+    "mark-as-mastered": "Markeren als beheerst",
+    "mark-as-need-review": "Markeren voor herhaling",
+    "mark-as-not-mastered": "Markeren als niet beheerst",
+    "mastered-progress": "{{mastered}} / {{total}} beheerst",
+    "next-card": "Volgende kaart",
+    "previous-card": "Vorige kaart",
+    "review": "Herhalen",
+    "start-over": "Opnieuw beginnen",
+    "tap-to-flip-swipe-to-answer": "Tik om om te draaien, veeg om te antwoorden",
+    "tap-to-reveal": "Tik om te tonen",
+    "translation-label": "Vertaling:"
+  }
 }

@@ -44,5 +44,29 @@
     "main": "Detalhes principais",
     "syllabus": "Programa de Estudos"
   },
-  "what-happens-when-you-click-add-reflection": "O que acontece quando você clica em \"Adicionar reflexão\"?"
+  "what-happens-when-you-click-add-reflection": "O que acontece quando você clica em \"Adicionar reflexão\"?",
+  "flashcards": {
+    "all-done": "Tudo concluído!",
+    "carousel-aria-label": "Carrossel de flashcards",
+    "carousel-subtitle": "Deslize pelos cartões e toque para virar",
+    "collapse-all": "Recolher tudo",
+    "deck-subtitle": "Deslize para a direita se souber, para a esquerda para revisar",
+    "expand-all": "Expandir tudo",
+    "go-to-card": "Ir para o cartão {{index}}",
+    "know": "Sei",
+    "known": "Conhecidas",
+    "list-subtitle": "Toque para expandir e marque as palavras como dominadas",
+    "mark-as-known": "Marcar como conhecida",
+    "mark-as-mastered": "Marcar como dominada",
+    "mark-as-need-review": "Marcar para revisão",
+    "mark-as-not-mastered": "Marcar como não dominada",
+    "mastered-progress": "{{mastered}} / {{total}} dominadas",
+    "next-card": "Próximo cartão",
+    "previous-card": "Cartão anterior",
+    "review": "Revisar",
+    "start-over": "Começar de novo",
+    "tap-to-flip-swipe-to-answer": "Toque para virar e deslize para responder",
+    "tap-to-reveal": "Toque para revelar",
+    "translation-label": "Tradução:"
+  }
 }

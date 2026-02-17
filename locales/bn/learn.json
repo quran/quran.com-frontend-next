@@ -44,5 +44,29 @@
     "main": "প্রধান বিবরণ",
     "syllabus": "পাঠ্যক্রম"
   },
-  "what-happens-when-you-click-add-reflection": "\"প্রতিফলন যোগ করুন\" এ ক্লিক করলে কী হবে?"
+  "what-happens-when-you-click-add-reflection": "\"প্রতিফলন যোগ করুন\" এ ক্লিক করলে কী হবে?",
+  "flashcards": {
+    "all-done": "সব শেষ!",
+    "carousel-aria-label": "ফ্ল্যাশকার্ড ক্যারোসেল",
+    "carousel-subtitle": "কার্ডগুলোতে সোয়াইপ করুন, উল্টাতে ট্যাপ করুন",
+    "collapse-all": "সব সংকুচিত করুন",
+    "deck-subtitle": "জানলে ডানে সোয়াইপ করুন, রিভিউয়ের জন্য বামে",
+    "expand-all": "সব প্রসারিত করুন",
+    "go-to-card": "কার্ড {{index}}-এ যান",
+    "know": "জানি",
+    "known": "জানা",
+    "list-subtitle": "প্রসারিত করতে ট্যাপ করুন, শব্দগুলোকে আয়ত্ত হিসেবে চিহ্নিত করুন",
+    "mark-as-known": "জানা হিসেবে চিহ্নিত করুন",
+    "mark-as-mastered": "আয়ত্ত হিসেবে চিহ্নিত করুন",
+    "mark-as-need-review": "রিভিউ প্রয়োজন হিসেবে চিহ্নিত করুন",
+    "mark-as-not-mastered": "আয়ত্ত নয় হিসেবে চিহ্নিত করুন",
+    "mastered-progress": "{{mastered}} / {{total}} আয়ত্ত",
+    "next-card": "পরের কার্ড",
+    "previous-card": "আগের কার্ড",
+    "review": "রিভিউ",
+    "start-over": "আবার শুরু করুন",
+    "tap-to-flip-swipe-to-answer": "উল্টাতে ট্যাপ করুন, উত্তর দিতে সোয়াইপ করুন",
+    "tap-to-reveal": "দেখতে ট্যাপ করুন",
+    "translation-label": "অনুবাদ:"
+  }
 }

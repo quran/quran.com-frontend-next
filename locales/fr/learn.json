@@ -44,5 +44,29 @@
     "main": "Détails principaux",
     "syllabus": "Programme"
   },
-  "what-happens-when-you-click-add-reflection": "Que se passe-t-il lorsque vous cliquez sur « Ajouter une Réflexion » ?"
+  "what-happens-when-you-click-add-reflection": "Que se passe-t-il lorsque vous cliquez sur « Ajouter une Réflexion » ?",
+  "flashcards": {
+    "all-done": "Tout est terminé !",
+    "carousel-aria-label": "Carrousel de cartes mémoire",
+    "carousel-subtitle": "Balayez les cartes et touchez pour les retourner",
+    "collapse-all": "Tout réduire",
+    "deck-subtitle": "Balayez à droite si vous savez, à gauche pour réviser",
+    "expand-all": "Tout développer",
+    "go-to-card": "Aller à la carte {{index}}",
+    "know": "Je sais",
+    "known": "Connues",
+    "list-subtitle": "Touchez pour développer et marquez les mots comme maîtrisés",
+    "mark-as-known": "Marquer comme connue",
+    "mark-as-mastered": "Marquer comme maîtrisée",
+    "mark-as-need-review": "Marquer pour révision",
+    "mark-as-not-mastered": "Marquer comme non maîtrisée",
+    "mastered-progress": "{{mastered}} / {{total}} maîtrisées",
+    "next-card": "Carte suivante",
+    "previous-card": "Carte précédente",
+    "review": "Réviser",
+    "start-over": "Recommencer",
+    "tap-to-flip-swipe-to-answer": "Touchez pour retourner, balayez pour répondre",
+    "tap-to-reveal": "Touchez pour afficher",
+    "translation-label": "Traduction :"
+  }
 }

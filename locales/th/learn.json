@@ -44,5 +44,29 @@
     "main": "รายละเอียดหลัก",
     "syllabus": "หลักสูตร"
   },
-  "what-happens-when-you-click-add-reflection": "จะเกิดอะไรขึ้นเมื่อคุณคลิก \"เพิ่มการสะท้อน\"?"
+  "what-happens-when-you-click-add-reflection": "จะเกิดอะไรขึ้นเมื่อคุณคลิก \"เพิ่มการสะท้อน\"?",
+  "flashcards": {
+    "all-done": "เสร็จแล้วทั้งหมด!",
+    "carousel-aria-label": "แครูเซลแฟลชการ์ด",
+    "carousel-subtitle": "ปัดดูการ์ด แล้วแตะเพื่อพลิก",
+    "collapse-all": "ย่อทั้งหมด",
+    "deck-subtitle": "ถ้ารู้ให้ปัดขวา ถ้าจะทบทวนให้ปัดซ้าย",
+    "expand-all": "ขยายทั้งหมด",
+    "go-to-card": "ไปที่การ์ด {{index}}",
+    "know": "รู้แล้ว",
+    "known": "รู้แล้ว",
+    "list-subtitle": "แตะเพื่อขยาย และทำเครื่องหมายคำที่จำได้แล้ว",
+    "mark-as-known": "ทำเครื่องหมายว่ารู้แล้ว",
+    "mark-as-mastered": "ทำเครื่องหมายว่าเชี่ยวชาญแล้ว",
+    "mark-as-need-review": "ทำเครื่องหมายว่าต้องทบทวน",
+    "mark-as-not-mastered": "ทำเครื่องหมายว่ายังไม่เชี่ยวชาญ",
+    "mastered-progress": "เชี่ยวชาญแล้ว {{mastered}} / {{total}}",
+    "next-card": "การ์ดถัดไป",
+    "previous-card": "การ์ดก่อนหน้า",
+    "review": "ทบทวน",
+    "start-over": "เริ่มใหม่",
+    "tap-to-flip-swipe-to-answer": "แตะเพื่อพลิก แล้วปัดเพื่อตอบ",
+    "tap-to-reveal": "แตะเพื่อแสดง",
+    "translation-label": "คำแปล:"
+  }
 }

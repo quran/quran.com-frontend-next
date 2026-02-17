@@ -44,5 +44,29 @@
     "main": "Ana Detaylar",
     "syllabus": "Müfredat"
   },
-  "what-happens-when-you-click-add-reflection": "\"Tefekkur yansıma Ekle\"ye tıkladığınızda ne olur?"
+  "what-happens-when-you-click-add-reflection": "\"Tefekkur yansıma Ekle\"ye tıkladığınızda ne olur?",
+  "flashcards": {
+    "all-done": "Hepsi tamam!",
+    "carousel-aria-label": "Bilgi kartı döngüsü",
+    "carousel-subtitle": "Kartlar arasında kaydırın, çevirmek için dokunun",
+    "collapse-all": "Tümünü daralt",
+    "deck-subtitle": "Biliyorsan sağa, gözden geçirmek için sola kaydır",
+    "expand-all": "Tümünü genişlet",
+    "go-to-card": "Kart {{index}}’e git",
+    "know": "Biliyorum",
+    "known": "Bilinen",
+    "list-subtitle": "Genişletmek için dokun, kelimeleri öğrenildi olarak işaretle",
+    "mark-as-known": "Biliniyor olarak işaretle",
+    "mark-as-mastered": "Öğrenildi olarak işaretle",
+    "mark-as-need-review": "Gözden geçirilecek olarak işaretle",
+    "mark-as-not-mastered": "Henüz öğrenilmedi olarak işaretle",
+    "mastered-progress": "{{mastered}} / {{total}} öğrenildi",
+    "next-card": "Sonraki kart",
+    "previous-card": "Önceki kart",
+    "review": "Gözden geçir",
+    "start-over": "Baştan başla",
+    "tap-to-flip-swipe-to-answer": "Çevirmek için dokun, cevaplamak için kaydır",
+    "tap-to-reveal": "Göstermek için dokun",
+    "translation-label": "Çeviri:"
+  }
 }

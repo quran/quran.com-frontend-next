@@ -44,5 +44,29 @@
     "main": "اہم تفصیلات",
     "syllabus": "نصاب"
   },
-  "what-happens-when-you-click-add-reflection": "جب آپ \"تدبر شامل کریں\" پر کلک کرتے ہیں تو کیا ہوتا ہے؟"
+  "what-happens-when-you-click-add-reflection": "جب آپ \"تدبر شامل کریں\" پر کلک کرتے ہیں تو کیا ہوتا ہے؟",
+  "flashcards": {
+    "all-done": "سب مکمل ہوگیا!",
+    "carousel-aria-label": "فلیش کارڈ کیروسل",
+    "carousel-subtitle": "کارڈز کے درمیان سوائپ کریں، پلٹنے کے لیے ٹیپ کریں",
+    "collapse-all": "سب سکیڑیں",
+    "deck-subtitle": "اگر معلوم ہو تو دائیں سوائپ کریں، دہرانے کے لیے بائیں",
+    "expand-all": "سب پھیلائیں",
+    "go-to-card": "کارڈ {{index}} پر جائیں",
+    "know": "معلوم ہے",
+    "known": "یاد",
+    "list-subtitle": "پھیلانے کے لیے ٹیپ کریں، الفاظ کو یاد شدہ نشان لگائیں",
+    "mark-as-known": "معلوم کے طور پر نشان زد کریں",
+    "mark-as-mastered": "یاد شدہ کے طور پر نشان زد کریں",
+    "mark-as-need-review": "دہرانے کے لیے نشان زد کریں",
+    "mark-as-not-mastered": "غیر یاد شدہ کے طور پر نشان زد کریں",
+    "mastered-progress": "{{mastered}} / {{total}} یاد شدہ",
+    "next-card": "اگلا کارڈ",
+    "previous-card": "پچھلا کارڈ",
+    "review": "دہرائیں",
+    "start-over": "دوبارہ شروع کریں",
+    "tap-to-flip-swipe-to-answer": "پلٹنے کے لیے ٹیپ کریں، جواب دینے کے لیے سوائپ کریں",
+    "tap-to-reveal": "دکھانے کے لیے ٹیپ کریں",
+    "translation-label": "ترجمہ:"
+  }
 }

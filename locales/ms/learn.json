@@ -44,5 +44,29 @@
     "main": "Butiran Utama",
     "syllabus": "Silibus"
   },
-  "what-happens-when-you-click-add-reflection": "Apakah yang berlaku apabila anda mengklik \"Tambah Refleksi\"?"
+  "what-happens-when-you-click-add-reflection": "Apakah yang berlaku apabila anda mengklik \"Tambah Refleksi\"?",
+  "flashcards": {
+    "all-done": "Semua selesai!",
+    "carousel-aria-label": "Karusel kad imbas",
+    "carousel-subtitle": "Leret antara kad, ketik untuk terbalikkan",
+    "collapse-all": "Lipat semua",
+    "deck-subtitle": "Leret ke kanan jika tahu, ke kiri untuk semakan",
+    "expand-all": "Kembangkan semua",
+    "go-to-card": "Pergi ke kad {{index}}",
+    "know": "Tahu",
+    "known": "Diketahui",
+    "list-subtitle": "Ketik untuk kembangkan, tandakan perkataan sebagai dikuasai",
+    "mark-as-known": "Tandakan sebagai tahu",
+    "mark-as-mastered": "Tandakan sebagai dikuasai",
+    "mark-as-need-review": "Tandakan perlu semakan",
+    "mark-as-not-mastered": "Tandakan sebagai belum dikuasai",
+    "mastered-progress": "{{mastered}} / {{total}} dikuasai",
+    "next-card": "Kad seterusnya",
+    "previous-card": "Kad sebelumnya",
+    "review": "Semak",
+    "start-over": "Mula semula",
+    "tap-to-flip-swipe-to-answer": "Ketik untuk terbalikkan, leret untuk jawab",
+    "tap-to-reveal": "Ketik untuk paparkan",
+    "translation-label": "Terjemahan:"
+  }
 }

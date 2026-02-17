@@ -44,5 +44,29 @@
     "main": "جزئیات اصلی",
     "syllabus": "سرفصل دروس"
   },
-  "what-happens-when-you-click-add-reflection": "وقتی روی \"افزودن بازتاب\" کلیک می کنید چه اتفاقی می افتد؟"
+  "what-happens-when-you-click-add-reflection": "وقتی روی \"افزودن بازتاب\" کلیک می کنید چه اتفاقی می افتد؟",
+  "flashcards": {
+    "all-done": "همه تمام شد!",
+    "carousel-aria-label": "گردونهٔ فلش‌کارت‌ها",
+    "carousel-subtitle": "بین کارت‌ها بکشید و برای برگرداندن ضربه بزنید",
+    "collapse-all": "جمع‌کردن همه",
+    "deck-subtitle": "اگر بلد هستید به راست بکشید، برای مرور به چپ",
+    "expand-all": "باز کردن همه",
+    "go-to-card": "رفتن به کارت {{index}}",
+    "know": "بلدم",
+    "known": "بلد",
+    "list-subtitle": "برای باز کردن ضربه بزنید و واژه‌ها را به‌عنوان مسلط‌شده علامت بزنید",
+    "mark-as-known": "به‌عنوان بلد هستم علامت بزن",
+    "mark-as-mastered": "به‌عنوان مسلط‌شده علامت بزن",
+    "mark-as-need-review": "برای مرور علامت بزن",
+    "mark-as-not-mastered": "به‌عنوان مسلط‌نشده علامت بزن",
+    "mastered-progress": "{{mastered}} از {{total}} مسلط‌شده",
+    "next-card": "کارت بعدی",
+    "previous-card": "کارت قبلی",
+    "review": "مرور",
+    "start-over": "از نو شروع کنید",
+    "tap-to-flip-swipe-to-answer": "برای برگرداندن ضربه بزنید و برای پاسخ بکشید",
+    "tap-to-reveal": "برای نمایش ضربه بزنید",
+    "translation-label": "ترجمه:"
+  }
 }

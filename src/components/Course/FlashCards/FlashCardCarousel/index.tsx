@@ -1,7 +1,7 @@
-/* eslint-disable i18next/no-literal-string */
 import React, { useState, useCallback } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './FlashCardCarousel.module.scss';
 
@@ -13,6 +13,7 @@ type FlashCardCarouselProps = {
 };
 
 const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className }) => {
+  const { t } = useTranslation('learn');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slideDir, setSlideDir] = useState<'next' | 'prev' | null>(null);
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
@@ -45,7 +46,7 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
           className={styles.navButton}
           onClick={() => goTo(currentIndex - 1)}
           disabled={currentIndex === 0}
-          aria-label="Previous card"
+          aria-label={t('flashcards.previous-card')}
         >
           &#8249;
         </button>
@@ -64,7 +65,7 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
           }}
           role="button"
           tabIndex={0}
-          aria-label="Flashcard carousel"
+          aria-label={t('flashcards.carousel-aria-label')}
         >
           <div
             key={currentIndex}
@@ -89,7 +90,7 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
                 {card.transliteration && (
                   <div className={styles.transliteration}>({card.transliteration})</div>
                 )}
-                <div className={styles.hint}>Tap to reveal</div>
+                <div className={styles.hint}>{t('flashcards.tap-to-reveal')}</div>
               </div>
               <div className={styles.cardBack}>
                 <div className={styles.arabicTextSmall}>{card.arabic}</div>
@@ -108,7 +109,7 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
           className={styles.navButton}
           onClick={() => goTo(currentIndex + 1)}
           disabled={currentIndex === cards.length - 1}
-          aria-label="Next card"
+          aria-label={t('flashcards.next-card')}
         >
           &#8250;
         </button>
@@ -121,7 +122,7 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
             type="button"
             className={classNames(styles.dot, { [styles.activeDot]: index === currentIndex })}
             onClick={() => goTo(index)}
-            aria-label={`Go to card ${index + 1}`}
+            aria-label={t('flashcards.go-to-card', { index: index + 1 })}
           />
         ))}
       </div>

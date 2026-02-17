@@ -44,5 +44,29 @@
     "main": "Detajet kryesore",
     "syllabus": "Programi mësimor"
   },
-  "what-happens-when-you-click-add-reflection": "Çfarë ndodh kur klikoni \"Shto reflektim\"?"
+  "what-happens-when-you-click-add-reflection": "Çfarë ndodh kur klikoni \"Shto reflektim\"?",
+  "flashcards": {
+    "all-done": "Gjithçka u krye!",
+    "carousel-aria-label": "Karuseli i flashkartave",
+    "carousel-subtitle": "Rrëshqit nëpër kartela dhe prek për t’i kthyer",
+    "collapse-all": "Mbylli të gjitha",
+    "deck-subtitle": "Rrëshqit djathtas nëse e di, majtas për rishikim",
+    "expand-all": "Zgjero të gjitha",
+    "go-to-card": "Shko te kartela {{index}}",
+    "know": "E di",
+    "known": "Të njohura",
+    "list-subtitle": "Prek për ta zgjeruar dhe shëno fjalët si të përvetësuara",
+    "mark-as-known": "Shënoje si të njohur",
+    "mark-as-mastered": "Shënoje si të përvetësuar",
+    "mark-as-need-review": "Shënoje për rishikim",
+    "mark-as-not-mastered": "Shënoje si jo e përvetësuar",
+    "mastered-progress": "{{mastered}} / {{total}} të përvetësuara",
+    "next-card": "Kartela tjetër",
+    "previous-card": "Kartela e mëparshme",
+    "review": "Rishiko",
+    "start-over": "Fillo nga e para",
+    "tap-to-flip-swipe-to-answer": "Prek për ta kthyer, rrëshqit për t’u përgjigjur",
+    "tap-to-reveal": "Prek për ta shfaqur",
+    "translation-label": "Përkthimi:"
+  }
 }

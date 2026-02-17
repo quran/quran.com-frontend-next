@@ -7,6 +7,33 @@ import { SWIPE_ANIMATION_MS } from './constants';
 
 import FlashCardDeck from '.';
 
+vi.mock('next-translate/useTranslation', () => ({
+  default: () => ({
+    t: (key: string) => {
+      switch (key) {
+        case 'flashcards.know':
+          return 'Know';
+        case 'flashcards.review':
+          return 'Review';
+        case 'flashcards.mark-as-need-review':
+          return 'Mark as need review';
+        case 'flashcards.mark-as-known':
+          return 'Mark as known';
+        case 'flashcards.tap-to-flip-swipe-to-answer':
+          return 'Tap to flip and swipe to answer';
+        case 'flashcards.all-done':
+          return 'All done!';
+        case 'flashcards.known':
+          return 'Known';
+        case 'flashcards.start-over':
+          return 'Start Over';
+        default:
+          return key;
+      }
+    },
+  }),
+}));
+
 const cards = [
   {
     id: 'card-1',
