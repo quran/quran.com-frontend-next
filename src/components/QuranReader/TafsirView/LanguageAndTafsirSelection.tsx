@@ -18,6 +18,7 @@ type LanguageAndTafsirSelectionProps = {
   data: TafsirsResponse;
   isLoading: boolean;
   hasSeparateLayout?: boolean;
+  sortByTafsirIdOrSlug?: number | string;
 };
 const LanguageAndTafsirSelection = ({
   selectedTafsirIdOrSlug,
@@ -28,6 +29,7 @@ const LanguageAndTafsirSelection = ({
   data,
   isLoading,
   hasSeparateLayout = false,
+  sortByTafsirIdOrSlug,
 }: LanguageAndTafsirSelectionProps) => {
   if (!data) {
     return (
@@ -46,23 +48,21 @@ const LanguageAndTafsirSelection = ({
     }
   };
 
-  const filteredTafsirs = data.tafsirs
-    .filter(
-      (tafsir) =>
-        tafsir.languageName === selectedLanguage ||
-        selectedTafsirIdOrSlug === tafsir.slug ||
-        Number(selectedTafsirIdOrSlug) === tafsir.id,
-    )
-    .sort((a, b) => {
-      // Move selected tafsir to the beginning
-      const aSelected =
-        selectedTafsirIdOrSlug === a.slug || Number(selectedTafsirIdOrSlug) === a.id;
-      const bSelected =
-        selectedTafsirIdOrSlug === b.slug || Number(selectedTafsirIdOrSlug) === b.id;
-      if (aSelected && !bSelected) return -1;
-      if (!aSelected && bSelected) return 1;
-      return 0;
-    });
+  const filteredTafsirs = data.tafsirs.filter(
+    (tafsir) =>
+      tafsir.languageName === selectedLanguage ||
+      selectedTafsirIdOrSlug === tafsir.slug ||
+      Number(selectedTafsirIdOrSlug) === tafsir.id,
+  );
+
+  const sortAnchor = sortByTafsirIdOrSlug ?? selectedTafsirIdOrSlug;
+  filteredTafsirs.sort((a, b) => {
+    const aAnchored = sortAnchor === a.slug || Number(sortAnchor) === a.id;
+    const bAnchored = sortAnchor === b.slug || Number(sortAnchor) === b.id;
+    if (aAnchored && !bAnchored) return -1;
+    if (!aAnchored && bAnchored) return 1;
+    return 0;
+  });
 
   const languageSelector = (
     <CompactSelector
