@@ -65,7 +65,7 @@
 }
 
 .arabicText {
-  font-family: 'Kitab', 'UthmanicHafs', 'Figtree', sans-serif;
+  font-family: var(--font-family-kitab);
   font-size: 1.25rem;
   line-height: 1.4;
   color: var(--color-text-default);
