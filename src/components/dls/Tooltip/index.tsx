@@ -126,29 +126,34 @@ const Tooltip: React.FC<Props> = ({
       <RadixTooltip.Trigger aria-label="Open tooltip" asChild>
         <span className={styles.trigger}>{children}</span>
       </RadixTooltip.Trigger>
-      <RadixTooltip.Portal>
+      {suffixContent ? (
+        <RadixTooltip.Portal>
+          <RadixTooltip.Content
+            sideOffset={2}
+            side={contentSide}
+            align={contentAlign}
+            avoidCollisions={avoidCollisions}
+            className={styles.contentWithPrefix}
+          >
+            {suffixContent}
+            {text && (
+              <div className={classNames(styles.content, typeClassNames)}>{innerContent}</div>
+            )}
+            {tip && <RadixTooltip.Arrow />}
+          </RadixTooltip.Content>
+        </RadixTooltip.Portal>
+      ) : (
         <RadixTooltip.Content
           sideOffset={2}
           side={contentSide}
           align={contentAlign}
           avoidCollisions={avoidCollisions}
-          className={
-            suffixContent ? styles.contentWithPrefix : classNames(styles.content, typeClassNames)
-          }
+          className={classNames(styles.content, typeClassNames)}
         >
-          {suffixContent ? (
-            <>
-              {suffixContent}
-              {text && (
-                <div className={classNames(styles.content, typeClassNames)}>{innerContent}</div>
-              )}
-            </>
-          ) : (
-            innerContent
-          )}
+          {innerContent}
           {tip && <RadixTooltip.Arrow />}
         </RadixTooltip.Content>
-      </RadixTooltip.Portal>
+      )}
     </RadixTooltip.Root>
   );
 };
