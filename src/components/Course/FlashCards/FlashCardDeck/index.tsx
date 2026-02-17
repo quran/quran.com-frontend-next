@@ -88,20 +88,26 @@ const FlashCardDeck: React.FC<FlashCardDeckProps> = ({ cards, onComplete, classN
           className={classNames(styles.actionButton, styles.reviewButton)}
           onClick={() => handleSwipeComplete('left')}
           disabled={isAnimating}
-          aria-label={t('flashcards.mark-as-need-review')}
+          aria-label={t('flashcards.mark-as-need-review', undefined, {
+            default: 'Mark as need review',
+          })}
         >
           <span className={styles.buttonIcon}>{REVIEW_ICON}</span>
-          <span className={styles.buttonText}>{t('flashcards.review')}</span>
+          <span className={styles.buttonText}>
+            {t('flashcards.review', undefined, { default: 'Review' })}
+          </span>
         </button>
         <button
           type="button"
           className={classNames(styles.actionButton, styles.knowButton)}
           onClick={() => handleSwipeComplete('right')}
           disabled={isAnimating}
-          aria-label={t('flashcards.mark-as-known')}
+          aria-label={t('flashcards.mark-as-known', undefined, { default: 'Mark as known' })}
         >
           <span className={styles.buttonIcon}>{KNOW_ICON}</span>
-          <span className={styles.buttonText}>{t('flashcards.know')}</span>
+          <span className={styles.buttonText}>
+            {t('flashcards.know', undefined, { default: 'Know' })}
+          </span>
         </button>
       </div>
     </div>

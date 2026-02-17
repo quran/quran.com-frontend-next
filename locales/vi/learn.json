@@ -44,29 +44,5 @@
     "main": "Thông tin chính",
     "syllabus": "Chương trình học"
   },
-  "what-happens-when-you-click-add-reflection": "Khi bạn nhấp \"Thêm suy ngẫm\" thì điều gì xảy ra?",
-  "flashcards": {
-    "all-done": "Hoàn tất!",
-    "carousel-aria-label": "Băng chuyền thẻ ghi nhớ",
-    "carousel-subtitle": "Vuốt qua các thẻ, chạm để lật",
-    "collapse-all": "Thu gọn tất cả",
-    "deck-subtitle": "Vuốt sang phải nếu bạn biết, sang trái để ôn lại",
-    "expand-all": "Mở rộng tất cả",
-    "go-to-card": "Đi đến thẻ {{index}}",
-    "know": "Biết",
-    "known": "Đã biết",
-    "list-subtitle": "Chạm để mở rộng, đánh dấu từ đã thành thạo",
-    "mark-as-known": "Đánh dấu là đã biết",
-    "mark-as-mastered": "Đánh dấu là đã thành thạo",
-    "mark-as-need-review": "Đánh dấu cần ôn lại",
-    "mark-as-not-mastered": "Đánh dấu là chưa thành thạo",
-    "mastered-progress": "{{mastered}} / {{total}} đã thành thạo",
-    "next-card": "Thẻ tiếp theo",
-    "previous-card": "Thẻ trước",
-    "review": "Ôn lại",
-    "start-over": "Bắt đầu lại",
-    "tap-to-flip-swipe-to-answer": "Chạm để lật, vuốt để trả lời",
-    "tap-to-reveal": "Chạm để hiển thị",
-    "translation-label": "Bản dịch:"
-  }
+  "what-happens-when-you-click-add-reflection": "Khi bạn nhấp \"Thêm suy ngẫm\" thì điều gì xảy ra?"
 }

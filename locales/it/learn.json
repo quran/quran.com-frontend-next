@@ -44,29 +44,5 @@
     "main": "Dettagli principali",
     "syllabus": "Programma"
   },
-  "what-happens-when-you-click-add-reflection": "Cosa succede quando clicchi su \"Aggiungi riflessione\"?",
-  "flashcards": {
-    "all-done": "Tutto fatto!",
-    "carousel-aria-label": "Carosello di flashcard",
-    "carousel-subtitle": "Scorri tra le carte e tocca per girarle",
-    "collapse-all": "Comprimi tutto",
-    "deck-subtitle": "Scorri a destra se la conosci, a sinistra per ripassare",
-    "expand-all": "Espandi tutto",
-    "go-to-card": "Vai alla carta {{index}}",
-    "know": "Lo so",
-    "known": "Conosciute",
-    "list-subtitle": "Tocca per espandere e segna le parole come acquisite",
-    "mark-as-known": "Segna come conosciuta",
-    "mark-as-mastered": "Segna come acquisita",
-    "mark-as-need-review": "Segna da ripassare",
-    "mark-as-not-mastered": "Segna come non acquisita",
-    "mastered-progress": "{{mastered}} / {{total}} acquisite",
-    "next-card": "Scheda successiva",
-    "previous-card": "Scheda precedente",
-    "review": "Ripassa",
-    "start-over": "Ricomincia",
-    "tap-to-flip-swipe-to-answer": "Tocca per girare, scorri per rispondere",
-    "tap-to-reveal": "Tocca per mostrare",
-    "translation-label": "Traduzione:"
-  }
+  "what-happens-when-you-click-add-reflection": "Cosa succede quando clicchi su \"Aggiungi riflessione\"?"
 }

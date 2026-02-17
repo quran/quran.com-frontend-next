@@ -44,29 +44,5 @@
     "main": "အဓိကအသေးစိတ်အချက်အလက်များ",
     "syllabus": "သင်ရိုးမာတိကာ"
   },
-  "what-happens-when-you-click-add-reflection": "\"Add Reflection\" ကို နှိပ်လိုက်တဲ့အခါ ဘာဖြစ်မလဲ။",
-  "flashcards": {
-    "all-done": "အားလုံးပြီးပါပြီ!",
-    "carousel-aria-label": "ဖလက်ရှ်ကတ် ကာရူဇယ်",
-    "carousel-subtitle": "ကတ်များကို ဆွဲ၍ကြည့်ပါ၊ ပြန်လှန်ရန် တို့ပါ",
-    "collapse-all": "အားလုံးခေါက်သိမ်းရန်",
-    "deck-subtitle": "သိထားလျှင် ညာဘက်သို့ ဆွဲပါ၊ ပြန်လည်သုံးသပ်ရန် ဘယ်ဘက်သို့",
-    "expand-all": "အားလုံးချဲ့ထွင်ရန်",
-    "go-to-card": "ကတ် {{index}} သို့ သွားရန်",
-    "know": "သိတယ်",
-    "known": "သိထားသည်",
-    "list-subtitle": "ချဲ့ရန် တို့ပါ၊ စကားလုံးများကို ကျွမ်းကျင်ပြီးဟု မှတ်သားပါ",
-    "mark-as-known": "သိသည်ဟု မှတ်သားပါ",
-    "mark-as-mastered": "ကျွမ်းကျင်ပြီးဟု မှတ်သားပါ",
-    "mark-as-need-review": "ပြန်လည်သုံးသပ်ရန် မှတ်သားပါ",
-    "mark-as-not-mastered": "မကျွမ်းကျင်သေးဟု မှတ်သားပါ",
-    "mastered-progress": "{{mastered}} / {{total}} ကျွမ်းကျင်ပြီး",
-    "next-card": "နောက်ကတ်",
-    "previous-card": "ရှေ့ကတ်",
-    "review": "ပြန်လည်သုံးသပ်",
-    "start-over": "အစမှ ပြန်စပါ",
-    "tap-to-flip-swipe-to-answer": "ပြန်လှန်ရန် တို့ပါ၊ ဖြေရန် ဆွဲပါ",
-    "tap-to-reveal": "ဖော်ပြရန် တို့ပါ",
-    "translation-label": "ဘာသာပြန်ချက်:"
-  }
+  "what-happens-when-you-click-add-reflection": "\"Add Reflection\" ကို နှိပ်လိုက်တဲ့အခါ ဘာဖြစ်မလဲ။"
 }

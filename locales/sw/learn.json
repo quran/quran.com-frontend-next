@@ -44,29 +44,5 @@
     "main": "Maelezo kuu",
     "syllabus": "Muhtasari wa masomo"
   },
-  "what-happens-when-you-click-add-reflection": "Nini kitafanyika unapobofya \"Andika Tafakari\"?",
-  "flashcards": {
-    "all-done": "Yote yamekamilika!",
-    "carousel-aria-label": "Mzunguko wa flashcard",
-    "carousel-subtitle": "Telezesha kwenye kadi, gusa ili kugeuza",
-    "collapse-all": "Kunja zote",
-    "deck-subtitle": "Telezesha kulia ukiijua, kushoto kwa marudio",
-    "expand-all": "Panua zote",
-    "go-to-card": "Nenda kwenye kadi {{index}}",
-    "know": "Najua",
-    "known": "Ninazozijua",
-    "list-subtitle": "Gusa kupanua, weka alama maneno kuwa umeyamudu",
-    "mark-as-known": "Weka alama kuwa najua",
-    "mark-as-mastered": "Weka alama kuwa umelijua",
-    "mark-as-need-review": "Weka alama kwa marudio",
-    "mark-as-not-mastered": "Weka alama kuwa hujamudu",
-    "mastered-progress": "{{mastered}} / {{total}} umeyamudu",
-    "next-card": "Kadi inayofuata",
-    "previous-card": "Kadi iliyotangulia",
-    "review": "Rudia",
-    "start-over": "Anza upya",
-    "tap-to-flip-swipe-to-answer": "Gusa kugeuza, telezesha kujibu",
-    "tap-to-reveal": "Gusa kuonyesha",
-    "translation-label": "Tafsiri:"
-  }
+  "what-happens-when-you-click-add-reflection": "Nini kitafanyika unapobofya \"Andika Tafakari\"?"
 }

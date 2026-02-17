@@ -73,13 +73,13 @@ const ActiveCard: React.FC<ActiveCardProps> = ({
         className={classNames(styles.swipeIndicator, styles.knowIndicator)}
         style={{ opacity: Math.min(offsetX / SWIPE_THRESHOLD, 1) }}
       >
-        {t('flashcards.know')}
+        {t('flashcards.know', undefined, { default: 'Know' })}
       </div>
       <div
         className={classNames(styles.swipeIndicator, styles.reviewIndicator)}
         style={{ opacity: Math.min(-offsetX / SWIPE_THRESHOLD, 1) }}
       >
-        {t('flashcards.review')}
+        {t('flashcards.review', undefined, { default: 'Review' })}
       </div>
       <div className={styles.cardInner}>
         <div className={styles.cardFront}>
@@ -87,7 +87,11 @@ const ActiveCard: React.FC<ActiveCardProps> = ({
           {card.transliteration && (
             <div className={styles.transliteration}>({card.transliteration})</div>
           )}
-          <div className={styles.hint}>{t('flashcards.tap-to-flip-swipe-to-answer')}</div>
+          <div className={styles.hint}>
+            {t('flashcards.tap-to-flip-swipe-to-answer', undefined, {
+              default: 'Tap to flip and swipe to answer',
+            })}
+          </div>
         </div>
         <div className={styles.cardBack}>
           <div className={styles.arabicTextSmall}>{card.arabic}</div>

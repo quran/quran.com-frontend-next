@@ -44,29 +44,5 @@
     "main": "Detail Utama",
     "syllabus": "Silabus"
   },
-  "what-happens-when-you-click-add-reflection": "Apa yang terjadi ketika Anda mengeklik \"Tambahkan Refleksi\"?",
-  "flashcards": {
-    "all-done": "Semua selesai!",
-    "carousel-aria-label": "Karusel kartu flash",
-    "carousel-subtitle": "Geser antar kartu, ketuk untuk membalik",
-    "collapse-all": "Ciutkan semua",
-    "deck-subtitle": "Geser ke kanan jika tahu, ke kiri untuk meninjau",
-    "expand-all": "Perluas semua",
-    "go-to-card": "Buka kartu {{index}}",
-    "know": "Tahu",
-    "known": "Diketahui",
-    "list-subtitle": "Ketuk untuk membuka, tandai kata sebagai dikuasai",
-    "mark-as-known": "Tandai sebagai tahu",
-    "mark-as-mastered": "Tandai sebagai dikuasai",
-    "mark-as-need-review": "Tandai perlu ditinjau",
-    "mark-as-not-mastered": "Tandai sebagai belum dikuasai",
-    "mastered-progress": "{{mastered}} / {{total}} dikuasai",
-    "next-card": "Kartu berikutnya",
-    "previous-card": "Kartu sebelumnya",
-    "review": "Tinjau",
-    "start-over": "Mulai lagi",
-    "tap-to-flip-swipe-to-answer": "Ketuk untuk membalik, geser untuk menjawab",
-    "tap-to-reveal": "Ketuk untuk menampilkan",
-    "translation-label": "Terjemahan:"
-  }
+  "what-happens-when-you-click-add-reflection": "Apa yang terjadi ketika Anda mengeklik \"Tambahkan Refleksi\"?"
 }

@@ -46,7 +46,7 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
           className={styles.navButton}
           onClick={() => goTo(currentIndex - 1)}
           disabled={currentIndex === 0}
-          aria-label={t('flashcards.previous-card')}
+          aria-label={t('flashcards.previous-card', undefined, { default: 'Previous card' })}
         >
           &#8249;
         </button>
@@ -65,7 +65,9 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
           }}
           role="button"
           tabIndex={0}
-          aria-label={t('flashcards.carousel-aria-label')}
+          aria-label={t('flashcards.carousel-aria-label', undefined, {
+            default: 'Flashcard carousel',
+          })}
         >
           <div
             key={currentIndex}
@@ -90,7 +92,9 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
                 {card.transliteration && (
                   <div className={styles.transliteration}>({card.transliteration})</div>
                 )}
-                <div className={styles.hint}>{t('flashcards.tap-to-reveal')}</div>
+                <div className={styles.hint}>
+                  {t('flashcards.tap-to-reveal', undefined, { default: 'Tap to reveal' })}
+                </div>
               </div>
               <div className={styles.cardBack}>
                 <div className={styles.arabicTextSmall}>{card.arabic}</div>
@@ -109,7 +113,7 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
           className={styles.navButton}
           onClick={() => goTo(currentIndex + 1)}
           disabled={currentIndex === cards.length - 1}
-          aria-label={t('flashcards.next-card')}
+          aria-label={t('flashcards.next-card', undefined, { default: 'Next card' })}
         >
           &#8250;
         </button>
@@ -122,7 +126,13 @@ const FlashCardCarousel: React.FC<FlashCardCarouselProps> = ({ cards, className 
             type="button"
             className={classNames(styles.dot, { [styles.activeDot]: index === currentIndex })}
             onClick={() => goTo(index)}
-            aria-label={t('flashcards.go-to-card', { index: index + 1 })}
+            aria-label={t(
+              'flashcards.go-to-card',
+              { index: index + 1 },
+              {
+                default: 'Go to card {{index}}',
+              },
+            )}
           />
         ))}
       </div>

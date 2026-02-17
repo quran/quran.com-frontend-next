@@ -44,29 +44,5 @@
     "main": "التفاصيل الرئيسة",
     "syllabus": "المنهج"
   },
-  "what-happens-when-you-click-add-reflection": "ماذا يحدث عند الضغط على \"إضافة تدبر\"؟",
-  "flashcards": {
-    "all-done": "أحسنت! اكتملت جميعها!",
-    "carousel-aria-label": "دوّار البطاقات التعليمية",
-    "carousel-subtitle": "مرّر بين البطاقات واضغط لقلبها",
-    "collapse-all": "طيّ الكل",
-    "deck-subtitle": "مرّر يمينًا إذا كنت تعرفها، ويسارًا للمراجعة",
-    "expand-all": "توسيع الكل",
-    "go-to-card": "الانتقال إلى البطاقة {{index}}",
-    "know": "أعرفها",
-    "known": "المعروف",
-    "list-subtitle": "اضغط للتوسيع، وعلّم الكلمات كمُتقنة",
-    "mark-as-known": "علّمها كمعروفة",
-    "mark-as-mastered": "علّمها كمتقنة",
-    "mark-as-need-review": "علّمها كمحتاجة للمراجعة",
-    "mark-as-not-mastered": "أزل علامة الإتقان",
-    "mastered-progress": "{{mastered}} / {{total}} مُتقنة",
-    "next-card": "البطاقة التالية",
-    "previous-card": "البطاقة السابقة",
-    "review": "مراجعة",
-    "start-over": "ابدأ من جديد",
-    "tap-to-flip-swipe-to-answer": "اضغط للقلب واسحب للإجابة",
-    "tap-to-reveal": "اضغط للإظهار",
-    "translation-label": "الترجمة:"
-  }
+  "what-happens-when-you-click-add-reflection": "ماذا يحدث عند الضغط على \"إضافة تدبر\"؟"
 }

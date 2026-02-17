@@ -44,29 +44,5 @@
     "main": "主要细节",
     "syllabus": "教学大纲"
   },
-  "what-happens-when-you-click-add-reflection": "当您点击“添加反射”时会发生什么？",
-  "flashcards": {
-    "all-done": "全部完成！",
-    "carousel-aria-label": "抽认卡轮播",
-    "carousel-subtitle": "滑动浏览卡片，点击翻面",
-    "collapse-all": "全部收起",
-    "deck-subtitle": "会的向右滑，不会的向左滑复习",
-    "expand-all": "全部展开",
-    "go-to-card": "前往第 {{index}} 张卡片",
-    "know": "会",
-    "known": "已掌握",
-    "list-subtitle": "点击展开，并将单词标记为已掌握",
-    "mark-as-known": "标记为会",
-    "mark-as-mastered": "标记为已掌握",
-    "mark-as-need-review": "标记为需复习",
-    "mark-as-not-mastered": "标记为未掌握",
-    "mastered-progress": "已掌握 {{mastered}} / {{total}}",
-    "next-card": "下一张卡片",
-    "previous-card": "上一张卡片",
-    "review": "复习",
-    "start-over": "重新开始",
-    "tap-to-flip-swipe-to-answer": "点击翻面，滑动作答",
-    "tap-to-reveal": "点击显示",
-    "translation-label": "翻译："
-  }
+  "what-happens-when-you-click-add-reflection": "当您点击“添加反射”时会发生什么？"
 }

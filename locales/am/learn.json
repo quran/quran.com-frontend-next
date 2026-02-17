@@ -44,29 +44,5 @@
     "main": "ዋና ዝርዝሮች",
     "syllabus": "የትምህርት መርሃ ግብር"
   },
-  "what-happens-when-you-click-add-reflection": "\"እይታዎን ያክሉ\" የሚለውን ጠቅ ሲያደርጉ ምን ይከሰታል?",
-  "flashcards": {
-    "all-done": "ሁሉም ተጠናቋል!",
-    "carousel-aria-label": "የፍላሽ ካርድ ካሩዘል",
-    "carousel-subtitle": "ካርዶቹን በመገለብጥ ይመልከቱ፣ ለመመለስ ይንኩ",
-    "collapse-all": "ሁሉን ሰብስብ",
-    "deck-subtitle": "ካወቁት ወደ ቀኝ ያስተላልፉ፣ ለመድገም ወደ ግራ",
-    "expand-all": "ሁሉን አስፋፋ",
-    "go-to-card": "ወደ ካርድ {{index}} ይሂዱ",
-    "know": "አውቃለሁ",
-    "known": "የታወቀ",
-    "list-subtitle": "ለማስፋት ይንኩ፣ ቃላትን እንደተማሩ ምልክት ያድርጉ",
-    "mark-as-known": "እንደማውቀው ምልክት አድርግ",
-    "mark-as-mastered": "እንደተቆጣጠረ ምልክት አድርግ",
-    "mark-as-need-review": "ለመድገም ምልክት አድርግ",
-    "mark-as-not-mastered": "እንዳልተቆጣጠረ ምልክት አድርግ",
-    "mastered-progress": "{{mastered}} / {{total}} ተቆጣጠረ",
-    "next-card": "ቀጣይ ካርድ",
-    "previous-card": "ቀዳሚ ካርድ",
-    "review": "እንደገና አስታውስ",
-    "start-over": "እንደገና ጀምር",
-    "tap-to-flip-swipe-to-answer": "ለመገልበጥ ይንኩ፣ ለመመለስ ያንሸራትቱ",
-    "tap-to-reveal": "ለማሳየት ይንኩ",
-    "translation-label": "ትርጉም:"
-  }
+  "what-happens-when-you-click-add-reflection": "\"እይታዎን ያክሉ\" የሚለውን ጠቅ ሲያደርጉ ምን ይከሰታል?"
 }
