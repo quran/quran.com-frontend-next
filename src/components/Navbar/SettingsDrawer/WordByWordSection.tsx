@@ -19,7 +19,6 @@ import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
-import useIsMobile from '@/hooks/useIsMobile';
 import {
   selectReadingPreferences,
   setSelectedWordByWordLocale,
@@ -53,7 +52,6 @@ const WordByWordSection = () => {
   } = usePersistPreferenceGroup();
   const router = useRouter();
   const dispatch = useDispatch();
-  const isMobile = useIsMobile();
   const readingPreferences = useSelector(selectReadingPreferences, shallowEqual);
   const {
     selectedWordByWordLocale: wordByWordLocale,
@@ -320,11 +318,25 @@ const WordByWordSection = () => {
       <Section.Footer className={styles.footerWithBorder}>
         <Trans components={{ span: <span /> }} i18nKey="quran-reader:reciter-summary" />
       </Section.Footer>
-      <Section.Row>
+      <Section.Row className={styles.onClickRow}>
         <div>
-          <p className={styles.sectionLabel}>
-            {isMobile ? t('quran-reader:on-click') : t('quran-reader:on-hover')}
-          </p>
+          <p className={styles.sectionLabel}>{t('quran-reader:on-click')}</p>
+          <div className={styles.checkboxContainer}>
+            <div id="wbw-recitation-section">
+              <CheckboxChip
+                checked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
+                id="wbw-recitation"
+                name="wbw-recitation"
+                label={t('recitation')}
+                onChange={onRecitationChange}
+              />
+            </div>
+          </div>
+        </div>
+      </Section.Row>
+      <Section.Row className={styles.onHoldHoverRow}>
+        <div>
+          <p className={styles.sectionLabel}>{t('quran-reader:on-hold-hover')}</p>
           <div className={styles.checkboxContainer}>
             <div id="wbw-translation-section">
               <CheckboxChip
@@ -335,7 +347,6 @@ const WordByWordSection = () => {
                 onChange={(isChecked) => onContentTypeChange(true, isChecked)}
               />
             </div>
-
             <div id="wbw-transliteration-section">
               <CheckboxChip
                 checked={wordByWordTooltipContentType.includes(WordByWordType.Transliteration)}
@@ -343,16 +354,6 @@ const WordByWordSection = () => {
                 name="wbw-transliteration"
                 label={t('transliteration')}
                 onChange={(isChecked) => onContentTypeChange(false, isChecked)}
-              />
-            </div>
-
-            <div id="wbw-recitation-section">
-              <CheckboxChip
-                checked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
-                id="wbw-recitation"
-                name="wbw-recitation"
-                label={t('recitation')}
-                onChange={onRecitationChange}
               />
             </div>
           </div>
