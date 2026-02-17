@@ -46,10 +46,21 @@
   background-color: var(--color-background-elevated-new);
   padding: var(--spacing-medium2-px);
   border-radius: var(--border-radius-rounded);
-  box-shadow: 0px 4px 30px 0px #0000001a;
 
   @include breakpoints.tablet {
     gap: var(--spacing-small-px);
+  }
+
+  @include theme.light {
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  @include theme.dark {
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  @include theme.sepia {
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
   }
 }
 
