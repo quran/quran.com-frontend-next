@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import useRamadanChallengeStatus from './useGetRamadanChallengeStatus';
+import useHasMounted from './useHasMounted';
 
 import Language from '@/types/Language';
 import { ROUTES } from '@/utils/navigation';
@@ -26,9 +27,16 @@ const CHAPTER_ID_TO_SHOW = '67';
 const useChapterEvent = (chapterId: string): ChapterEvent => {
   const { lang } = useTranslation('quran-reader');
   const { isEnrolled, isLoading } = useRamadanChallengeStatus();
+  const hasMounted = useHasMounted();
 
   const eventData = useMemo(() => {
-    if (!isLoading && chapterId === CHAPTER_ID_TO_SHOW && !isEnrolled && lang === Language.EN) {
+    if (
+      hasMounted &&
+      !isLoading &&
+      chapterId === CHAPTER_ID_TO_SHOW &&
+      !isEnrolled &&
+      lang === Language.EN
+    ) {
       return {
         showEvent: true,
         title: 'Take the Surah Mulk Challenge this Ramadan! 🚀',
@@ -45,7 +53,7 @@ const useChapterEvent = (chapterId: string): ChapterEvent => {
       ctaText: '',
       ctaLink: '',
     };
-  }, [chapterId, isEnrolled, isLoading, lang]);
+  }, [chapterId, isEnrolled, isLoading, hasMounted, lang]);
 
   return eventData;
 };

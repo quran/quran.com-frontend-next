@@ -1,13 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
-import {
-  compareDateWithToday,
-  formatDateRelatively,
-  getEarliestDate,
-  getShortDayName,
-} from './datetime';
+import { formatDateRelatively, getEarliestDate, getShortDayName } from './datetime';
 
 it('getEarliestDate returns earliest date', () => {
   const result = getEarliestDate([
@@ -96,73 +91,5 @@ describe('getShortDayName', () => {
       // The function uses 'narrow' format which is the shortest available, not guaranteed to be 1 char
       expect(result.length).toBeLessThanOrEqual(2);
     });
-  });
-});
-
-describe('compareDateWithToday', () => {
-  const mockToday = new Date('2024-01-15T12:30:45.000Z');
-
-  beforeEach(() => {
-    vi.useFakeTimers();
-    vi.setSystemTime(mockToday);
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
-  });
-
-  it('returns isToday as true when date is today', () => {
-    const result = compareDateWithToday('2024-01-15');
-    expect(result.isToday).toBe(true);
-    expect(result.normalizedDate.getTime()).toBe(result.today.getTime());
-  });
-
-  it('returns isToday as false for past and future dates', () => {
-    const pastResult = compareDateWithToday('2024-01-14');
-    const futureResult = compareDateWithToday('2024-01-16');
-
-    expect(pastResult.isToday).toBe(false);
-    expect(pastResult.normalizedDate.getTime()).toBeLessThan(pastResult.today.getTime());
-    expect(futureResult.isToday).toBe(false);
-    expect(futureResult.normalizedDate.getTime()).toBeGreaterThan(futureResult.today.getTime());
-  });
-
-  it('normalizes both dates to midnight', () => {
-    const result = compareDateWithToday('2024-01-15T18:20:10.500Z');
-
-    expect(result.today.getHours()).toBe(0);
-    expect(result.today.getMinutes()).toBe(0);
-    expect(result.today.getSeconds()).toBe(0);
-    expect(result.today.getMilliseconds()).toBe(0);
-    expect(result.normalizedDate.getHours()).toBe(0);
-    expect(result.normalizedDate.getMinutes()).toBe(0);
-    expect(result.normalizedDate.getSeconds()).toBe(0);
-    expect(result.normalizedDate.getMilliseconds()).toBe(0);
-  });
-
-  it('works with Date object input for today, past, and future', () => {
-    const todayDate = new Date(2024, 0, 15, 18, 20, 10);
-    const pastDate = new Date(2024, 0, 14, 18, 20, 10);
-    const futureDate = new Date(2024, 0, 16, 18, 20, 10);
-
-    const todayResult = compareDateWithToday(todayDate);
-    const pastResult = compareDateWithToday(pastDate);
-    const futureResult = compareDateWithToday(futureDate);
-
-    expect(todayResult.isToday).toBe(true);
-    expect(todayResult.normalizedDate.getHours()).toBe(0);
-    expect(pastResult.isToday).toBe(false);
-    expect(futureResult.isToday).toBe(false);
-  });
-
-  it('returns correct structure with all required properties', () => {
-    const result = compareDateWithToday('2024-01-15');
-
-    expect(result).toHaveProperty('today');
-    expect(result).toHaveProperty('normalizedDate');
-    expect(result).toHaveProperty('isToday');
-    expect(result.today).toBeInstanceOf(Date);
-    expect(result.normalizedDate).toBeInstanceOf(Date);
-    expect(typeof result.isToday).toBe('boolean');
   });
 });

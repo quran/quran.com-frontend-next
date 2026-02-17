@@ -7,7 +7,7 @@ import styles from './ReadingStreak.module.scss';
 import { ContentSide } from '@/dls/Popover';
 import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
-import { compareDateWithToday, dateToReadableFormat } from '@/utils/datetime';
+import { dateToReadableFormat } from '@/utils/datetime';
 import { convertFractionToPercent } from '@/utils/number';
 
 interface Props {
@@ -19,9 +19,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal }) => {
   const { lang, t } = useTranslation();
   const { days, readingDaysMap } = weekData;
 
-  const getDayState = (day: (typeof days)[number]): [DayState, boolean] => {
-    const { today, normalizedDate, isToday } = compareDateWithToday(day.date);
-
+  const getDayState = (day: (typeof days)[number]): DayState => {
     const readingDay = readingDaysMap[day.dateString];
     const hasRead = readingDay?.hasRead;
 
@@ -29,11 +27,11 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal }) => {
     // otherwise, we want to show a checked circle if the user has read at all for the day
     const isGoalDone = goal ? convertFractionToPercent(readingDay?.progress || 0) >= 100 : hasRead;
 
-    if (isGoalDone) return [DayState.Checked, isToday];
+    if (isGoalDone) return DayState.Checked;
 
-    if (normalizedDate > today) return [DayState.Future, isToday];
+    if (day.date > new Date()) return DayState.Future;
 
-    return [DayState.None, isToday];
+    return DayState.None;
   };
 
   return (
@@ -41,7 +39,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal }) => {
       <p className={styles.weekProgressLabel}>{t('reading-goal:week-progress')}:</p>
       <div className={styles.week}>
         {days.map((day) => {
-          const [dayState, isToday] = getDayState(day);
+          const dayState = getDayState(day);
 
           return (
             <div key={day.info.localizedNumber} className={styles.day}>
@@ -54,7 +52,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal }) => {
               >
                 <span
                   className={classNames(styles.shortName, {
-                    [styles.textBold]: isToday,
+                    [styles.textBold]: day.current,
                   })}
                 >
                   {dayState === DayState.Future ? day.info.localizedNumber : day.info.shortName}
