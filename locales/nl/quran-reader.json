@@ -238,6 +238,12 @@
   "trans-change": "Wijziging",
   "translation-by": "Vertaling door",
   "translation-feedback": {
+    "disclaimer": {
+      "content": "We stellen uw hulp bij het verbeteren \\n de duidelijkheid van de Koranvertalingen zeer op prijs. Alle vertalingen zijn menselijke inspanningen om de betekenis \\n de Koran over te brengen, terwijl het oorspronkelijke Arabisch de onveranderde en perfecte Woorden van Allah (SWT) blijft. Sommige problemen kunnen snel door ons team worden aangepakt en we zullen die wijzigingen zo snel mogelijk doorvoeren, insha'Allah. Andere problemen moeten worden doorgestuurd naar de vertalers of verantwoordelijke organisaties, wat meer tijd in beslag kan nemen. We \\n en bewaren elke inzending en uw input helpt ons de ervaring voor iedereen te blijven verbeteren. Moge Allah ( \\n ) u belonen voor uw bijdrage en uw intentie om de Koran te ondersteunen.",
+      "learn-more": "Leer meer",
+      "see-less": "Minder weergeven",
+      "title": "Wat gebeurt er nadat ik feedback heb gegeven?"
+    },
     "feedback": "Terugkoppeling",
     "no-translations-in-preferences": "Geen vertalingen in uw voorkeuren",
     "placeholder": "Gebruik deze ruimte om een probleem te melden met betrekking tot de geselecteerde vertaling van deze Ayah.",

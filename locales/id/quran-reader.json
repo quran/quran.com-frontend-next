@@ -238,6 +238,12 @@
   "trans-change": "Ubah",
   "translation-by": "Diterjemahkan oleh",
   "translation-feedback": {
+    "disclaimer": {
+      "content": "Kami menghargai bantuan Anda dalam meningkatkan kejelasan terjemahan Al \\n Quran. Semua terjemahan adalah upaya manusia untuk menyampaikan makna Al-Quran - sementara teks asli bahasa Arab tetap merupakan Firman Allah (SWT) yang tidak berubah dan sempurna. Beberapa masalah dapat segera ditangani oleh tim kami, dan kami akan melakukan perubahan tersebut sesegera mungkin, \\n Allah. Masalah lainnya perlu diteruskan kepada penerjemah \\n organisasi yang bertanggung jawab, yang mungkin membutuhkan waktu lebih lama. Kami meninjau dan menyimpan setiap kiriman, dan masukan Anda membantu kami terus meningkatkan pengalaman bagi semua orang. Semoga Allah ( \\n ) membalas Anda atas kontribusi dan niat Anda untuk mendukung Al-Quran.",
+      "learn-more": "Pelajari selengkapnya",
+      "see-less": "Lihat lebih sedikit",
+      "title": "Apa yang terjadi setelah saya mengirimkan umpan balik?"
+    },
     "feedback": "Masukan",
     "no-translations-in-preferences": "Tidak ada terjemahan di preferensi Anda",
     "placeholder": "Gunakan ruang ini untuk melaporkan masalah yang berkaitan dengan terjemahan ayat yang dipilih ini.",
