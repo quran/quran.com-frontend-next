@@ -2,7 +2,6 @@
 
 .container {
   position: relative;
-  --scrollable-gradient: var(--color-background-elevated-new);
 }
 
 .children {
@@ -36,7 +35,7 @@
 
 .leftEdge {
   inset-inline-start: 0;
-  background-image: linear-gradient(to right, var(--scrollable-gradient) 50%, transparent);
+  background-image: linear-gradient(to right, var(--color-background-gradient) 50%, transparent);
   [dir='rtl'] & {
     inset-inline-start: auto;
     inset-inline-end: 0;
@@ -45,7 +44,7 @@
 
 .rightEdge {
   inset-inline-end: 0;
-  background-image: linear-gradient(to left, var(--scrollable-gradient) 50%, transparent);
+  background-image: linear-gradient(to left, var(--color-background-gradient) 50%, transparent);
   [dir='rtl'] & {
     inset-inline-start: 0;
     inset-inline-end: auto;
