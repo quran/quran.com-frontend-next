@@ -249,6 +249,7 @@
     "translation-font-size": "Tamaño de fuente de la traducción"
   },
   "footer": {
+    "apps-disclaimer": "Cada aplicación es propiedad de su desarrollador y está bajo su propio mantenimiento. Para obtener soporte, informar errores o solicitar funciones, contacte directamente con el creador de la aplicación.",
     "description": "Quran.com es una plataforma confiable utilizada por millones de personas en todo el mundo para leer, buscar, escuchar y reflexionar sobre el Corán en varios idiomas. Ofrece traducciones, tafsir, recitaciones, traducción palabra por palabra y herramientas para un estudio más profundo, haciendo que el Corán sea accesible para todos. <br/> <br/> Como Sadaqah Jariyah, Quran.com se dedica a ayudar a las personas a conectar profundamente con el Corán. Con el apoyo de <link> Quran.Foundation </link>, una organización sin fines de lucro 501(c)(3), Quran.com continúa creciendo como un recurso gratuito y valioso para todos, Alhamdulillah.",
     "hiring": "¡Estamos contratando! Únete al equipo de QuranFoundation y contribuye a nuestra misión. <link> Postúlate ahora </link>",
     "rights": "Reservados todos los derechos",
@@ -367,6 +368,7 @@
   "profile": "Perfil",
   "projects-desc": "Proyectos sin fines de lucro adquiridos, administrados o patrocinados por <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
+  "quran-apps": "Aplicaciones del Corán",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Coránica",
   "read": "Leer",

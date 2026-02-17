@@ -249,6 +249,7 @@
     "translation-font-size": "Çeviri yazı tipi boyutu"
   },
   "footer": {
+    "apps-disclaimer": "Her uygulama, geliştiricisi tarafından bağımsız olarak sahiplenilir ve bakımı yapılır. Destek, hata bildirimleri veya özellik istekleri için lütfen doğrudan uygulama geliştiricisiyle iletişime geçin.",
     "description": "Quran.com, dünya çapında milyonlarca kişinin Kur'an'ı birden fazla dilde okumak, aramak, dinlemek ve üzerinde düşünmek için kullandığı güvenilir bir platformdur. Çeviriler, tefsirler, kıraatler, kelime kelime çeviriler ve derinlemesine inceleme araçları sunarak Kur'an'ı herkes için erişilebilir hale getirir. <br/> <br/> Bir Sadaka-i Cariye olarak Quran.com, insanların Kur'an ile derin bir bağ kurmasına yardımcı olmaya kendini adamıştır. 501(c)(3) kar amacı gütmeyen bir kuruluş olan <link> Kur'an Vakfı </link> tarafından desteklenen Quran.com, Elhamdülillah herkes için ücretsiz ve değerli bir kaynak olarak büyümeye devam ediyor.",
     "hiring": "İşe alıyoruz! Kuran Vakfı ekibine katılın ve misyonumuza katkıda bulunun. <link> Şimdi başvurun! </link>",
     "rights": "Her hakkı saklıdır",
@@ -367,6 +368,7 @@
   "profile": "Profil",
   "projects-desc": "<link>Quran.Foundation</link> tarafından sahip olunan, yönetilen veya desteklenen kar amacı gütmeyen projeler",
   "q-reflect": "KuranYansıtmak",
+  "quran-apps": "Kuran Uygulamaları",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radyo",
   "read": "Okumak",
