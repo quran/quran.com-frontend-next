@@ -2,7 +2,6 @@ import React, { useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import FLASHCARD_VARIANT_CONFIG from './flashcardVariantConfig';
 import styles from './LessonHtmlContent.module.scss';
 import VerseChunkWidget from './VerseChunkWidget';
 
@@ -19,6 +18,18 @@ type Props = {
   language: string;
   lessonSlug: string;
   courseSlug: string;
+};
+
+const FLASHCARD_VARIANT_CONFIG: Record<FlashCardVariant, { subtitleKey: string }> = {
+  [FlashCardVariant.List]: {
+    subtitleKey: 'flashcards.list-subtitle',
+  },
+  [FlashCardVariant.Carousel]: {
+    subtitleKey: 'flashcards.carousel-subtitle',
+  },
+  [FlashCardVariant.Deck]: {
+    subtitleKey: 'flashcards.deck-subtitle',
+  },
 };
 
 const renderChunks = (chunks: ContentChunk[], keyPrefix = '') =>
