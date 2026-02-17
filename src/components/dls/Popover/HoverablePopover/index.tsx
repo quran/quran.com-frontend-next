@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useCallback, useState } from 'react';
 
 import Popover, { ContentSide } from '@/dls/Popover';
 import Tooltip, { TooltipType } from '@/dls/Tooltip';
@@ -12,6 +12,7 @@ interface Props {
   onOpenChange?: (open: boolean) => void;
   defaultStyling?: boolean;
   isOpen?: boolean;
+  isTooltipOpen?: boolean;
   triggerStyles?: string;
   contentStyles?: string;
   isContainerSpan?: boolean;
@@ -21,6 +22,7 @@ interface Props {
   iconAriaLabel?: string;
   shouldContentBeClickable?: boolean;
   useTooltipStyles?: boolean;
+  suffixContent?: ReactNode;
 }
 
 /**
@@ -41,6 +43,7 @@ const HoverablePopover: React.FC<Props> = ({
   tooltipDelay = 0,
   defaultStyling = true,
   isOpen,
+  isTooltipOpen,
   triggerStyles,
   contentStyles,
   isContainerSpan = false,
@@ -50,42 +53,63 @@ const HoverablePopover: React.FC<Props> = ({
   iconAriaLabel,
   shouldContentBeClickable,
   useTooltipStyles = true,
-}: Props): JSX.Element => (
-  <Popover
-    open={isOpen}
-    triggerStyles={triggerStyles}
-    contentStyles={contentStyles}
-    contentSide={contentSide}
-    useTooltipStyles={useTooltipStyles}
-    {...(onOpenChange && { onOpenChange })}
-    defaultStyling={defaultStyling}
-    isContainerSpan={isContainerSpan}
-    {...(tooltipType && { tooltipType })}
-    {...(icon && { icon })}
-    {...(onIconClick && { onIconClick })}
-    {...(iconAriaLabel && { iconAriaLabel })}
-    {...(shouldContentBeClickable && { shouldContentBeClickable })}
-    trigger={
-      <Tooltip
-        open={isOpen}
-        tip={tip}
-        text={content}
-        contentSide={contentSide}
-        delay={tooltipDelay}
-        type={tooltipType}
-        {...(onOpenChange && { onOpenChange })}
-        {...(icon && { icon })}
-        {...(onIconClick && { onIconClick })}
-        {...(iconAriaLabel && { iconAriaLabel })}
-        {...(shouldContentBeClickable && { shouldContentBeClickable })}
-      >
-        {children}
-      </Tooltip>
-    }
-    tip={tip}
-  >
-    {content}
-  </Popover>
-);
+  suffixContent,
+}: Props): JSX.Element => {
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  const handlePopoverOpenChange = useCallback(
+    (open: boolean) => {
+      setIsPopoverOpen(open);
+      onOpenChange?.(open);
+    },
+    [onOpenChange],
+  );
+
+  // When suffixContent is present (e.g. reading mode 3-dots) and the Popover is active
+  // (opened via click/tap), suppress the Tooltip to avoid duplicate overlays.
+  // Without suffixContent (e.g. translation mode), preserve the original behavior
+  // where isOpen can force both Tooltip and Popover open simultaneously.
+  const effectiveTooltipOpen = suffixContent && isPopoverOpen ? undefined : isTooltipOpen ?? isOpen;
+
+  return (
+    <Popover
+      open={isOpen}
+      triggerStyles={triggerStyles}
+      contentStyles={contentStyles}
+      contentSide={contentSide}
+      useTooltipStyles={useTooltipStyles}
+      onOpenChange={handlePopoverOpenChange}
+      defaultStyling={defaultStyling}
+      isContainerSpan={isContainerSpan}
+      {...(tooltipType && { tooltipType })}
+      {...(icon && { icon })}
+      {...(onIconClick && { onIconClick })}
+      {...(iconAriaLabel && { iconAriaLabel })}
+      {...(shouldContentBeClickable && { shouldContentBeClickable })}
+      {...(suffixContent && { suffixContent })}
+      trigger={
+        <Tooltip
+          open={effectiveTooltipOpen}
+          tip={tip}
+          text={content}
+          contentSide={contentSide}
+          delay={tooltipDelay}
+          type={tooltipType}
+          {...(onOpenChange && { onOpenChange })}
+          {...(icon && { icon })}
+          {...(onIconClick && { onIconClick })}
+          {...(iconAriaLabel && { iconAriaLabel })}
+          {...(shouldContentBeClickable && { shouldContentBeClickable })}
+          {...(suffixContent && { suffixContent })}
+        >
+          {children}
+        </Tooltip>
+      }
+      tip={tip}
+    >
+      {content}
+    </Popover>
+  );
+};
 
 export default HoverablePopover;

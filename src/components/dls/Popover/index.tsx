@@ -44,6 +44,7 @@ interface Props {
   onIconClick?: () => void;
   iconAriaLabel?: string;
   shouldContentBeClickable?: boolean;
+  suffixContent?: ReactNode;
 }
 
 const Popover: React.FC<Props> = ({
@@ -69,19 +70,24 @@ const Popover: React.FC<Props> = ({
   onIconClick,
   iconAriaLabel,
   shouldContentBeClickable = false,
+  suffixContent,
 }) => {
+  const hasSuffixContent = !!suffixContent;
+
+  const contentClassNames = classNames(styles.content, {
+    [styles.tooltipContent]: useTooltipStyles,
+    [styles.info]: tooltipType === TooltipType.INFO,
+    [styles.success]: tooltipType === TooltipType.SUCCESS,
+    [contentStyles]: contentStyles,
+  });
+
   const content = (
     <RadixPopover.Content
       sideOffset={contentSideOffset}
       side={contentSide}
       align={contentAlign}
       avoidCollisions={avoidCollisions}
-      className={classNames(styles.content, {
-        [styles.tooltipContent]: useTooltipStyles,
-        [styles.info]: tooltipType === TooltipType.INFO,
-        [styles.success]: tooltipType === TooltipType.SUCCESS,
-        [contentStyles]: contentStyles,
-      })}
+      className={hasSuffixContent ? styles.contentWithPrefix : contentClassNames}
       {...(stopPropagation && {
         onClick: (e) => e.stopPropagation(),
         onKeyDown: (e) => {
@@ -89,14 +95,32 @@ const Popover: React.FC<Props> = ({
         },
       })}
     >
-      <PopoverContentBody
-        icon={icon}
-        onIconClick={onIconClick}
-        iconAriaLabel={iconAriaLabel}
-        shouldContentBeClickable={shouldContentBeClickable}
-      >
-        {children}
-      </PopoverContentBody>
+      {hasSuffixContent ? (
+        <>
+          {suffixContent}
+          {children && (
+            <div className={contentClassNames}>
+              <PopoverContentBody
+                icon={icon}
+                onIconClick={onIconClick}
+                iconAriaLabel={iconAriaLabel}
+                shouldContentBeClickable={shouldContentBeClickable}
+              >
+                {children}
+              </PopoverContentBody>
+            </div>
+          )}
+        </>
+      ) : (
+        <PopoverContentBody
+          icon={icon}
+          onIconClick={onIconClick}
+          iconAriaLabel={iconAriaLabel}
+          shouldContentBeClickable={shouldContentBeClickable}
+        >
+          {children}
+        </PopoverContentBody>
+      )}
       {tip && <RadixPopover.Arrow />}
     </RadixPopover.Content>
   );
