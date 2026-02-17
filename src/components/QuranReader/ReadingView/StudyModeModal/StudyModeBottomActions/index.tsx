@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import styles from './StudyModeBottomActions.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
+import Scrollable from '@/dls/Scrollable/Scrollable';
+import EventNames from '@/utils/event-names';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -47,14 +49,10 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
     }
   }, [activeTab]);
 
-  const handleTabClick = (onClick: () => void) => {
-    onClick();
-  };
-
-  const handleTabKeyDown = (e: React.KeyboardEvent, onClick: () => void) => {
+  const handleTabKeyDown = (e: React.KeyboardEvent, handleClick: () => void) => {
     if (e.key === 'Enter' || (e.key === ' ' && !isAudioVisible)) {
       e.preventDefault();
-      onClick();
+      handleClick();
     }
   };
 
@@ -66,7 +64,10 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
         [styles.noBorder]: !activeTab,
       })}
     >
-      <div className={styles.tabsContainer}>
+      <Scrollable
+        className={styles.tabsContainer}
+        eventName={EventNames.QURAN_READER_STUDY_MODE_BOTTOM_ACTION_SCROLLABLE}
+      >
         {filteredTabs.map((tab, index) => (
           <React.Fragment key={tab.id}>
             <div
@@ -77,7 +78,8 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
                 [styles.tabItemActive]: activeTab === tab.id,
               })}
               data-testid={`study-mode-tab-${tab.id}`}
-              onClick={() => handleTabClick(tab.onClick)}
+              // eslint-disable-next-line react/jsx-handler-names
+              onClick={tab.onClick}
               onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
               role="button"
               tabIndex={0}
@@ -93,7 +95,7 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
             )}
           </React.Fragment>
         ))}
-      </div>
+      </Scrollable>
     </div>
   );
 };

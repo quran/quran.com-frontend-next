@@ -1,10 +1,7 @@
 @use 'src/styles/breakpoints';
 
 .bottomActionsContainer {
-  overflow-x: auto;
-  scroll-behavior: smooth;
   inline-size: 100%;
-  padding-block: var(--spacing-medium2-px);
   position: sticky;
   inset-block-end: 0;
   background: var(--color-background-elevated-new);
@@ -16,8 +13,6 @@
 }
 
 .tabsContainer {
-  display: flex;
-  flex-direction: row;
   align-items: center;
   gap: var(--spacing-medium);
 
@@ -40,8 +35,7 @@
   cursor: pointer;
   color: var(--color-grey-icons-new);
   transition: color var(--transition-moderate) ease;
-  padding-block-end: calc(var(--spacing-medium2-px) - var(--spacing-micro-px));
-  margin-block-end: calc(-1 * var(--spacing-medium2-px));
+  padding-block: var(--spacing-medium2-px);
   border-block-end: var(--spacing-micro-px) solid transparent;
 
   &:hover {
