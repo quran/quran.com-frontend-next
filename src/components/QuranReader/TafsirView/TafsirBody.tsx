@@ -91,7 +91,7 @@ const TafsirBody = ({
   const [selectedTafsirIdOrSlug, setSelectedTafsirIdOrSlug] = useState<number | string>(
     initialTafsirIdOrSlug || userPreferredTafsirIds?.[0],
   );
-  const [sortByTafsirIdOrSlug, setSortByTafsirIdOrSlug] = useState<number | string>(
+  const [sortByTafsirIdOrSlug, setSortByTafsirIdOrSlug] = useState<number | string | undefined>(
     initialTafsirIdOrSlug || userPreferredTafsirIds?.[0],
   );
 
