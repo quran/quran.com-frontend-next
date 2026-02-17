@@ -31,13 +31,13 @@ div.container {
   }
 }
 
-$minTextAreaHeightOnMobile: 260px;
+$minTextAreaHeight: 260px;
 
 .textAreaInputGroup {
   @extend .inputGroup;
 
   flex: 1;
-  min-block-size: $minTextAreaHeightOnMobile;
+  min-block-size: $minTextAreaHeight;
 }
 
 // tag is used to increase specificity to override the default styles.
