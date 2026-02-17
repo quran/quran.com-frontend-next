@@ -81,6 +81,10 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
     [contentToRender, shouldUseInteractiveFeatures],
   );
 
+  if (!shouldUseInteractiveFeatures) {
+    return <HtmlContent html={content} />;
+  }
+
   if (flashcardData) {
     const { subtitleKey } = FLASHCARD_VARIANT_CONFIG[flashcardData.variant];
     const isListVariant = flashcardData.variant === FlashCardVariant.List;
