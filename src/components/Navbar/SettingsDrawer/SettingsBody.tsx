@@ -20,8 +20,6 @@ const SettingsBody = () => {
     switch (view) {
       case SettingsView.Translation:
         return SettingsTab.Translation;
-      case SettingsView.Tafsir:
-        return SettingsTab.WBW;
       case SettingsView.Reciter:
       case SettingsView.Body:
       default:
@@ -51,7 +49,7 @@ const SettingsBody = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStepIndex, isActive]);
 
-  // Update active tab when returning from a sub-view (e.g., Translation or Tafsir detail view)
+  // Update active tab when returning from a sub-view (e.g., Translation selection)
   // Don't log since this is auto-navigation, not user-initiated
   useEffect(() => {
     if (lastSettingsView !== SettingsView.Body) {
