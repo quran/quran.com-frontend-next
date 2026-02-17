@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Raggiungi i tuoi obiettivi del Corano",
+  "apps": {
+    "description": "App connesse per approfondire la tua conoscenza del Corano.",
+    "featured-apps": "App in evidenza",
+    "qariah": {
+      "description": "Donne recitatrici del Corano",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com per Android",
+      "name": "Corano Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com per iPhone",
+      "name": "Corano iOS"
+    },
+    "quran-space": {
+      "description": "Circolo di studio dal vivo",
+      "name": "Spazio Corano"
+    },
+    "quranreflect": {
+      "description": "Leggi e condividi le riflessioni",
+      "name": "CoranoRiflettere"
+    },
+    "see-more": "Vedi altro",
+    "title": "App del Corano"
+  },
   "begin": "Inizio",
   "calendar-cta": "Calendario",
   "chapters-and-verses": "Capitoli e versetti",

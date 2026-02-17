@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "บรรลุเป้าหมายการอ่านอัลกุรอานของคุณ",
+  "apps": {
+    "description": "แอปพลิเคชันที่เชื่อมต่อเพื่อส่งเสริมการพัฒนาความเข้าใจในคัมภีร์อัลกุรอานของคุณให้ดียิ่งขึ้น",
+    "featured-apps": "แอปแนะนำ",
+    "qariah": {
+      "description": "ผู้หญิงที่อ่านอัลกุรอาน",
+      "name": "กอเรียห์"
+    },
+    "quran-android": {
+      "description": "Quran.com สำหรับ Android",
+      "name": "คัมภีร์อัลกุรอาน แอนดรอยด์"
+    },
+    "quran-ios": {
+      "description": "Quran.com สำหรับ iPhone",
+      "name": "อัลกุรอาน iOS"
+    },
+    "quran-space": {
+      "description": "กลุ่มศึกษาแบบสด",
+      "name": "พื้นที่อัลกุรอาน"
+    },
+    "quranreflect": {
+      "description": "อ่านและแบ่งปันข้อคิด",
+      "name": "การสะท้อนของอัลกุรอาน"
+    },
+    "see-more": "ดูเพิ่มเติม",
+    "title": "แอปอัลกุรอาน"
+  },
   "begin": "เริ่ม",
   "calendar-cta": "ปฏิทิน",
   "chapters-and-verses": "บทและข้อพระคัมภีร์",

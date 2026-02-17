@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Bereik uw Koran doelen",
+  "apps": {
+    "description": "Verbonden apps om je groei met de Koran te bevorderen.",
+    "featured-apps": "Aanbevolen apps",
+    "qariah": {
+      "description": "Vrouwelijke Koranreciteerders",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com voor Android",
+      "name": "Koran Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com voor iPhone",
+      "name": "Koran iOS"
+    },
+    "quran-space": {
+      "description": "Live studiekring",
+      "name": "Koranruimte"
+    },
+    "quranreflect": {
+      "description": "Lees en deel je reflecties",
+      "name": "KoranReflectie"
+    },
+    "see-more": "Meer bekijken",
+    "title": "Koran-apps"
+  },
   "begin": "Beginnen",
   "calendar-cta": "Kalender",
   "chapters-and-verses": "Hoofdstukken en verzen",

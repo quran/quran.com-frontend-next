@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "اپنے قرآنی اہداف حاصل کریں۔",
+  "apps": {
+    "description": "قرآن کے ساتھ آپ کی ترقی کو آگے بڑھانے کے لیے مربوط ایپس۔",
+    "featured-apps": "نمایاں ایپس",
+    "qariah": {
+      "description": "خواتین تلاوت قرآن",
+      "name": "قریہ"
+    },
+    "quran-android": {
+      "description": "Quran.com برائے اینڈرائیڈ",
+      "name": "قرآن اینڈرائیڈ"
+    },
+    "quran-ios": {
+      "description": "قرآن ڈاٹ کام برائے آئی فون",
+      "name": "قرآن iOS"
+    },
+    "quran-space": {
+      "description": "لائیو اسٹڈی سرکل",
+      "name": "قرآن کی جگہ"
+    },
+    "quranreflect": {
+      "description": "مظاہر پڑھیں اور شیئر کریں۔",
+      "name": "قرآن کی عکاسی"
+    },
+    "see-more": "مزید دیکھیں",
+    "title": "قرآن ایپس"
+  },
   "begin": "شروع کریں",
   "calendar-cta": "کیلنڈر",
   "chapters-and-verses": "سورتیں اور آیات",

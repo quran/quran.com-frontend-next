@@ -1,9 +1,35 @@
 {
   "achieve-quran-goals": "Atteignez Vos Objectifs Coraniques",
+  "apps": {
+    "description": "Applications connectées pour approfondir votre connaissance du Coran.",
+    "featured-apps": "Applications vedettes",
+    "qariah": {
+      "description": "Femmes récitant le Coran",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com pour Android",
+      "name": "Coran Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com pour iPhone",
+      "name": "Coran iOS"
+    },
+    "quran-space": {
+      "description": "Cercle d'étude en direct",
+      "name": "Espace Coran"
+    },
+    "quranreflect": {
+      "description": "Lire et partager les réflexions",
+      "name": "QuranReflect"
+    },
+    "see-more": "Voir plus",
+    "title": "Applications du Coran"
+  },
   "begin": "Commencer",
   "calendar-cta": "Calendrier",
   "chapters-and-verses": "Sourates et Ayahs",
-  "continue-learning-plan": "Continuez à apprendre",
+  "continue-learning-plan": "Continuer à apprendre",
   "continue-read": "Continuer la lecture",
   "explore-topics": "Explorer les Sujets",
   "first-time-reading": "Vous débutez avec le Coran ? <link>Commencez ici</link>",
@@ -14,7 +40,7 @@
   "my-quran": "Mon Coran",
   "navigate-quran": "Naviguer dans le Coran",
   "no-bookmarks": "Vous n'avez pas encore de favoris",
-  "no-page-bookmarks": "Vous n'avez pas encore de signets.",
+  "no-page-bookmarks": "Vous n'avez pas encore de favoris.",
   "no-recently-read": "Vous n'avez pas encore de séance de lecture",
   "noble-quran": "Le Noble Coran",
   "popular": "Populaire",
@@ -42,7 +68,7 @@
   "qr-community": "Lisez les Ayahs et les réflexions du jour",
   "quran-in-year": "Le Coran en un an",
   "quran-in-year-cta": "Lecture de la semaine",
-  "quran-in-year-verse-title": "Un verset de la lecture de cette semaine",
+  "quran-in-year-verse-title": "Une Ayah issue de la lecture hebdomadaire",
   "ramadan-activities-cta": "<link> Suivez le <b> Calendrier Coranique mondial </b> pour des lectures hebdomadaires, des podcasts inspirants et un appel à la réflexion ! </link>",
   "ramadan": {
     "header": "Des outils pour Approfondir Votre Connexion avec le Coran",
@@ -57,7 +83,7 @@
     "description": "Aidez à diffuser le Coran aux nouveaux étudiants",
     "title": "Partagez le Coran !"
   },
-  "start-learning-plan": "Commencez à apprendre",
+  "start-learning-plan": "Commencer à apprendre",
   "start-read": "Commencer la lecture",
   "stay-consistent": "Suivez vos Séries, Créez des Objectifs Personnalisés, Restez Consistant(e)",
   "tab": {
@@ -66,7 +92,7 @@
     "popular": "Populaire"
   },
   "take-notes": "Avez-vous manqué des <modalLink> Notes ? </modalLink>",
-  "view-all-bookmarks": "Afficher tous les marque-pages",
+  "view-all-bookmarks": "Afficher tous les favoris",
   "voice": {
     "trigger": "Accès rapide à tout"
   },

@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Capai Tujuan berQuran Anda",
+  "apps": {
+    "description": "Aplikasi yang terhubung untuk lebih memajukan pertumbuhan Anda dalam mempelajari Al-Quran.",
+    "featured-apps": "Aplikasi Unggulan",
+    "qariah": {
+      "description": "Pembaca Al-Quran Wanita",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com untuk Android",
+      "name": "Quran Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com untuk iPhone",
+      "name": "Quran iOS"
+    },
+    "quran-space": {
+      "description": "Lingkaran Studi Langsung",
+      "name": "Ruang Al-Quran"
+    },
+    "quranreflect": {
+      "description": "Baca & Bagikan Refleksi",
+      "name": "QuranReflect"
+    },
+    "see-more": "Lihat selengkapnya",
+    "title": "Aplikasi Al-Quran"
+  },
   "begin": "Mulai",
   "calendar-cta": "Kalender",
   "chapters-and-verses": "Surah dan Ayat",

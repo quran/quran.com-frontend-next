@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "তোমার কুরআনের লক্ষ্য অর্জন করো",
+  "apps": {
+    "description": "কুরআনের সাথে আপনার বিকাশকে আরও এগিয়ে নিতে সংযুক্ত অ্যাপস।",
+    "featured-apps": "বৈশিষ্ট্যযুক্ত অ্যাপস",
+    "qariah": {
+      "description": "মহিলা কুরআন তিলাওয়াতকারীরা",
+      "name": "কারিয়াহ"
+    },
+    "quran-android": {
+      "description": "অ্যান্ড্রয়েডের জন্য কুরআন.কম",
+      "name": "কুরআন অ্যান্ড্রয়েড"
+    },
+    "quran-ios": {
+      "description": "আইফোনের জন্য Quran.com",
+      "name": "কুরআন iOS"
+    },
+    "quran-space": {
+      "description": "লাইভ স্টাডি সার্কেল",
+      "name": "কুরআন স্পেস"
+    },
+    "quranreflect": {
+      "description": "প্রতিফলন পড়ুন এবং শেয়ার করুন",
+      "name": "কুরআন প্রতিফলন"
+    },
+    "see-more": "আরও দেখুন",
+    "title": "কুরআন অ্যাপস"
+  },
   "begin": "শুরু করুন",
   "calendar-cta": "ক্যালেন্ডার",
   "chapters-and-verses": "অধ্যায় এবং পদ",
