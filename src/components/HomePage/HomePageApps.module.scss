@@ -30,7 +30,7 @@
 
 .subtitle {
   font-size: var(--font-size-small-px);
-  color: var(--color-primary-medium);
+  color: var(--color-text-faded-new);
   line-height: 1;
 
   @include breakpoints.tablet {
@@ -73,7 +73,7 @@
   .featured {
     font-size: var(--font-size-small-px);
     font-weight: var(--font-weight-medium);
-    color: var(--color-primary-medium);
+    color: var(--color-text-default-new);
     line-height: 1;
 
     @include breakpoints.tablet {
@@ -134,7 +134,7 @@
 .appName {
   font-size: var(--font-size-xsmall-px);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-primary-medium);
+  color: var(--color-text-default-new);
   margin-block-end: var(--spacing-xxsmall-px);
 
   @include breakpoints.tablet {
