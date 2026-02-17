@@ -70,12 +70,8 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
     [contentToRender, shouldUseInteractiveFeatures],
   );
 
-  if (!shouldUseInteractiveFeatures) {
-    return <HtmlContent html={content} />;
-  }
-
   if (flashcardData) {
-    const { subtitleKey, subtitleDefault } = FLASHCARD_VARIANT_CONFIG[flashcardData.variant];
+    const { subtitleKey } = FLASHCARD_VARIANT_CONFIG[flashcardData.variant];
     const isListVariant = flashcardData.variant === FlashCardVariant.List;
     const allExpanded =
       flashcardData.flashcards.length > 0 && expandedCards.size === flashcardData.flashcards.length;
@@ -89,23 +85,15 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
           <div className={styles.flashcardHeader}>
             <div className={styles.flashcardHeaderText}>
               <h4 className={styles.flashcardTitle}>{flashcardData.headingText}</h4>
-              <span className={styles.flashcardSubtitle}>
-                {t(subtitleKey, undefined, { default: subtitleDefault })}
-              </span>
+              <span className={styles.flashcardSubtitle}>{t(subtitleKey)}</span>
             </div>
             {isListVariant && (
               <div className={styles.flashcardHeaderActions}>
                 <span className={styles.flashcardProgress}>
-                  {t(
-                    'flashcards.mastered-progress',
-                    {
-                      mastered: masteredCards.size,
-                      total: flashcardData.flashcards.length,
-                    },
-                    {
-                      default: '{{mastered}} / {{total}} mastered',
-                    },
-                  )}
+                  {t('flashcards.mastered-progress', {
+                    mastered: masteredCards.size,
+                    total: flashcardData.flashcards.length,
+                  })}
                 </span>
                 <button
                   type="button"
@@ -116,9 +104,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
                     )
                   }
                 >
-                  {allExpanded
-                    ? t('flashcards.collapse-all', undefined, { default: 'Collapse All' })
-                    : t('flashcards.expand-all', undefined, { default: 'Expand All' })}
+                  {allExpanded ? t('flashcards.collapse-all') : t('flashcards.expand-all')}
                 </button>
               </div>
             )}

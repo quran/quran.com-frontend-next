@@ -75,12 +75,8 @@ const FlashCardList: React.FC<FlashCardListProps> = ({
                     }}
                     aria-label={
                       isMastered
-                        ? t('flashcards.mark-as-not-mastered', undefined, {
-                            default: 'Mark as not mastered',
-                          })
-                        : t('flashcards.mark-as-mastered', undefined, {
-                            default: 'Mark as mastered',
-                          })
+                        ? t('flashcards.mark-as-not-mastered')
+                        : t('flashcards.mark-as-mastered')
                     }
                   >
                     {isMastered ? MASTERED_ICON : null}
@@ -95,7 +91,7 @@ const FlashCardList: React.FC<FlashCardListProps> = ({
                 <div className={styles.cardBody}>
                   <div className={styles.translation}>
                     <span className={styles.translationLabel}>
-                      {t('flashcards.translation-label', undefined, { default: 'Translation:' })}
+                      {t('flashcards.translation-label')}
                     </span>{' '}
                     {card.translation}
                   </div>

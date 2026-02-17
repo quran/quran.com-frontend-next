@@ -23,25 +23,19 @@ const CompletedView: React.FC<CompletedViewProps> = ({
   return (
     <div className={classNames(styles.container, className)}>
       <div className={styles.completedContainer}>
-        <div className={styles.completedTitle}>
-          {t('flashcards.all-done', undefined, { default: 'All done!' })}
-        </div>
+        <div className={styles.completedTitle}>{t('flashcards.all-done')}</div>
         <div className={styles.statsContainer}>
           <div className={styles.statItem}>
             <span className={styles.statNumber}>{knownCount}</span>
-            <span className={styles.statLabel}>
-              {t('flashcards.known', undefined, { default: 'Known' })}
-            </span>
+            <span className={styles.statLabel}>{t('flashcards.known')}</span>
           </div>
           <div className={styles.statItem}>
             <span className={styles.statNumber}>{unknownCount}</span>
-            <span className={styles.statLabel}>
-              {t('flashcards.review', undefined, { default: 'Review' })}
-            </span>
+            <span className={styles.statLabel}>{t('flashcards.review')}</span>
           </div>
         </div>
         <button type="button" className={styles.restartButton} onClick={onRestart}>
-          {t('flashcards.start-over', undefined, { default: 'Start Over' })}
+          {t('flashcards.start-over')}
         </button>
       </div>
     </div>
