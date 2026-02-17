@@ -134,7 +134,7 @@
 .appName {
   font-size: var(--font-size-xsmall-px);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-medium);
+  color: var(--color-primary-medium);
   margin-block-end: var(--spacing-xxsmall-px);
 
   @include breakpoints.tablet {
