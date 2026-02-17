@@ -238,6 +238,12 @@
   "trans-change": "Mudar",
   "translation-by": "Tradução por",
   "translation-feedback": {
+    "disclaimer": {
+      "content": "Agradecemos sua ajuda para melhorar a clareza das traduções do Alcorão. Todas as traduções são esforços humanos para transmitir o significado do \\n, enquanto o árabe original permanece como a Palavra de Allah (SWT) \\n inalterada e perfeita. Algumas questões podem ser resolvidas rapidamente por nossa equipe, e faremos essas alterações o mais breve possível, insha'Allah. Outras precisarão ser encaminhadas aos \\n ou organizações responsáveis, o que pode levar mais tempo. Analisamos e salvamos todas as contribuições, e seu feedback nos ajuda a continuar aprimorando a experiência para todos. Que Allah ( \\n ) o recompense por sua contribuição e intenção de apoiar o Alcorão.",
+      "learn-more": "Saber mais",
+      "see-less": "Ver menos",
+      "title": "O que acontece depois que eu envio o feedback?"
+    },
     "feedback": "Opinião",
     "no-translations-in-preferences": "Não há traduções nas suas preferências.",
     "placeholder": "Utilize este espaço para reportar um problema relacionado à tradução selecionada deste versículo.",

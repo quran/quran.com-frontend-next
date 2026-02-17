@@ -238,6 +238,12 @@
   "trans-change": "Thay đổi",
   "translation-by": "Bản dịch bởi",
   "translation-feedback": {
+    "disclaimer": {
+      "content": "Chúng tôi đánh giá cao sự giúp đỡ của bạn trong việc cải thiện tính rõ ràng của các bản dịch Kinh Qur'an. Tất cả các bản dịch đều là nỗ lực của con người nhằm truyền tải ý nghĩa của Kinh Qur'an - trong khi bản gốc tiếng \\n \\n vẫn là Lời hoàn hảo và không bị thay đổi của Allah (SWT). Một số vấn đề có thể được nhóm của chúng tôi giải quyết nhanh chóng và chúng tôi sẽ thực hiện những thay \\n đó sớm nhất có thể, Insha'Allah. Những vấn đề khác sẽ cần được chuyển tiếp đến các dịch giả hoặc tổ chức chịu trách nhiệm, điều này có thể mất nhiều thời gian hơn. Chúng tôi xem xét và lưu trữ mọi bài gửi, và ý kiến ​​đóng góp của bạn giúp chúng tôi tiếp tục cải thiện trải nghiệm cho mọi người. \\n mong Allah (SWT) ban thưởng cho sự đóng góp và ý định hỗ trợ Kinh Qur'an của bạn.",
+      "learn-more": "Tìm hiểu thêm",
+      "see-less": "Xem ít hơn",
+      "title": "Điều gì sẽ xảy ra sau khi tôi gửi phản hồi?"
+    },
     "feedback": "Nhận xét",
     "no-translations-in-preferences": "Không có bản dịch nào trong tùy chọn của bạn",
     "placeholder": "Hãy sử dụng phần này để báo cáo sự cố liên quan đến bản dịch đã chọn của câu kinh này.",
