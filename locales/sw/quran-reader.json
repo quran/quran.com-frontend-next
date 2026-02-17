@@ -237,6 +237,12 @@
   "trans-change": "Badilisha",
   "translation-by": "Tarjuma ya",
   "translation-feedback": {
+    "disclaimer": {
+      "content": "Tunashukuru msaada wako katika kuboresha uwazi wa tafsiri za Quran. Tafsiri zote ni juhudi za kibinadamu za kuwasilisha maana ya Quran - huku Kiarabu cha asili kikibaki kuwa Maneno ya Allah (SWT) ambayo hayajabadilishwa na kamili. \\n \\n Baadhi ya masuala yanaweza kushughulikiwa haraka na timu yetu, na tutafanya mabadiliko hayo haraka iwezekanavyo, insha'Allah. Mengine yatahitaji kutumwa kwa watafsiri au mashirika yanayohusika, ambayo yanaweza kuchukua muda zaidi. \\n \\n Tunapitia na kuhifadhi kila uwasilishaji, na mchango wako unatusaidia kuendelea kuboresha uzoefu kwa kila mtu. Allah (SWT) akupe thawabu kwa mchango wako na nia yako ya kuunga mkono Quran.",
+      "learn-more": "Pata maelezo zaidi",
+      "see-less": "Tazama kidogo",
+      "title": "Nini kitatokea baada ya mimi kuwasilisha maoni?"
+    },
     "feedback": "Maoni",
     "no-translations-in-preferences": "Hakuna tarjuma katika mapendeleo yako",
     "placeholder": "Tumia nafasi hii kuripoti suala linalohusiana na tarjuma ya Ayah hii.",
