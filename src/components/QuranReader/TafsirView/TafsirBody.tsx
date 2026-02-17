@@ -91,6 +91,9 @@ const TafsirBody = ({
   const [selectedTafsirIdOrSlug, setSelectedTafsirIdOrSlug] = useState<number | string>(
     initialTafsirIdOrSlug || userPreferredTafsirIds?.[0],
   );
+  const [sortByTafsirIdOrSlug, setSortByTafsirIdOrSlug] = useState<number | string>(
+    initialTafsirIdOrSlug || userPreferredTafsirIds?.[0],
+  );
 
   // Sync local state when initial props change (e.g., when navigating verses in Study Mode)
   useEffect(() => {
@@ -104,6 +107,7 @@ const TafsirBody = ({
   useEffect(() => {
     if (initialTafsirIdOrSlug) {
       setSelectedTafsirIdOrSlug(initialTafsirIdOrSlug);
+      setSortByTafsirIdOrSlug(initialTafsirIdOrSlug);
     }
   }, [initialTafsirIdOrSlug]);
 
@@ -178,6 +182,7 @@ const TafsirBody = ({
       const firstTafsirOfLanguage = getFirstTafsirOfLanguage(tafsirSelectionList, newLang);
       if (firstTafsirOfLanguage) {
         const { id, slug } = firstTafsirOfLanguage;
+        setSortByTafsirIdOrSlug(slug);
         onTafsirSelected(id, slug);
       }
     }
@@ -325,6 +330,7 @@ const TafsirBody = ({
       data={tafsirSelectionList}
       isLoading={isLoading}
       hasSeparateLayout={hasSeparateTafsirLayout}
+      sortByTafsirIdOrSlug={sortByTafsirIdOrSlug}
     />
   );
 
