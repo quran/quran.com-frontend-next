@@ -237,6 +237,12 @@
   "trans-change": "Change",
   "translation-by": "Translation by",
   "translation-feedback": {
+    "disclaimer": {
+      "content": "We appreciate your help in improving the clarity of Quran translations. All translations are human efforts to convey the meaning of the Quran - while the original Arabic remains the unaltered and perfect Words of Allah (SWT). \\n\\nSome issues can be addressed quickly by our team, and we will make those changes as soon as possible, insha'Allah. Others will need to be forwarded to the translators or organizations responsible, which may take more time. \\n\\nWe review and save every submission, and your input helps us continue improving the experience for everyone. May Allah (SWT) reward you for your contribution and intention to support the Quran.",
+      "learn-more": "Learn more",
+      "see-less": "See less",
+      "title": "What happens after I submit feedback?"
+    },
     "feedback": "Feedback",
     "no-translations-in-preferences": "No translations in your preferences",
     "placeholder": "Use this space to report an issue relating to the selected translation of this Ayah.",

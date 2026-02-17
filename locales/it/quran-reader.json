@@ -237,6 +237,12 @@
   "trans-change": "Modificare",
   "translation-by": "Traduzione di",
   "translation-feedback": {
+    "disclaimer": {
+      "content": "Apprezziamo il vostro aiuto nel migliorare la chiarezza delle traduzioni del Corano. Tutte le traduzioni sono frutto di sforzi umani volti a trasmettere il significato del Corano, mentre l'arabo originale rimane la Parola inalterata e perfetta di Allah (SWT). \\n \\n Alcuni problemi possono essere risolti rapidamente dal nostro team e apporteremo le modifiche il prima possibile, insha'Allah. Altri dovranno essere inoltrati ai traduttori o alle organizzazioni responsabili, il che potrebbe richiedere più tempo. \\n \\n Esaminiamo e salviamo ogni invio e il vostro contributo ci aiuta a continuare a migliorare l'esperienza per tutti. Che Allah (SWT) vi ricompensi per il vostro contributo e la vostra intenzione di sostenere il Corano.",
+      "learn-more": "Saperne di più",
+      "see-less": "Vedi meno",
+      "title": "Cosa succede dopo aver inviato il feedback?"
+    },
     "feedback": "Feedback",
     "no-translations-in-preferences": "Nessuna traduzione nelle tue preferenze",
     "placeholder": "Utilizza questo spazio per segnalare un problema relativo alla traduzione selezionata di questo Ayah.",

@@ -237,6 +237,12 @@
   "trans-change": "Ndryshimi",
   "translation-by": "Përkthim nga",
   "translation-feedback": {
+    "disclaimer": {
+      "content": "Ne e vlerësojmë ndihmën tuaj në përmirësimin e qartësisë së përkthimeve të Kuranit. Të gjitha përkthimet janë përpjekje njerëzore për të përcjellë kuptimin e Kuranit - ndërsa arabishtja origjinale mbetet Fjala e pandryshuar dhe e përsosur e Allahut (SWT). \\n \\n Disa çështje mund të adresohen shpejt nga ekipi ynë, dhe ne do t'i bëjmë këto ndryshime sa më shpejt të jetë e mundur, insha'Allah. Të tjerat do të duhet t'u përcillen përkthyesve ose organizatave përgjegjëse, gjë që mund të kërkojë më shumë kohë. \\n \\n Ne shqyrtojmë dhe ruajmë çdo dorëzim, dhe kontributi juaj na ndihmon të vazhdojmë të përmirësojmë përvojën për të gjithë. Allahu (SWT) ju shpërbleftë për kontributin dhe qëllimin tuaj për të mbështetur Kuranin.",
+      "learn-more": "Mëso më shumë",
+      "see-less": "Shiko më pak",
+      "title": "Çfarë ndodh pasi të dërgoj reagime?"
+    },
     "feedback": "Reagime",
     "no-translations-in-preferences": "Nuk ka përkthime në preferencat tuaja",
     "placeholder": "Përdoreni këtë hapësirë për të raportuar një problem që lidhet me përkthimin e zgjedhur të këtij Ajeti.",

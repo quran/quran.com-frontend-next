@@ -237,6 +237,12 @@
   "trans-change": "Modifier",
   "translation-by": "Traduction par",
   "translation-feedback": {
+    "disclaimer": {
+      "content": "Nous vous remercions de votre aide pour améliorer la clarté des traductions du Coran. Toutes les traductions sont \\n fruit d'efforts humains \\n à transmettre le sens du Coran, tandis que le texte arabe original demeure la Parole d'Allah (SWT), inaltéré et parfait \\n Certains problèmes peuvent être résolus rapidement par notre équipe, et nous apporterons ces modifications dès que possible, incha'Allah. D'autres devront être transmis aux traducteurs ou aux organisations responsables, ce qui peut prendre plus de temps. Nous examinons et enregistrons chaque contribution, et votre avis nous aide \\n améliorer continuellement l'expérience pour tous. Qu'Allah (SWT) vous récompense pour votre contribution et votre intention de soutenir le Coran.",
+      "learn-more": "Apprendre encore plus",
+      "see-less": "Voir moins",
+      "title": "Que se passe-t-il après l'envoi de mes commentaires ?"
+    },
     "feedback": "Retour",
     "no-translations-in-preferences": "Aucune traduction dans vos préférences",
     "placeholder": "Utilisez cet espace pour signaler un problème concernant la traduction sélectionnée de ce verset.",
