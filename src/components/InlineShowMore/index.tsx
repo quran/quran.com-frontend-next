@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './InlineShowMore.module.scss';
+import { decodeHTMLEntities } from './utility';
 
 interface InlineShowMoreProps extends React.ComponentProps<'div'> {
   children: string;
@@ -35,7 +36,8 @@ const InlineShowMore: React.FC<InlineShowMoreProps> = ({
   const [needsTruncation, setNeedsTruncation] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const content = children ?? '';
+  // Decode HTML entities in the content (e.g., &gt; to >, &lt; to <)
+  const content = useMemo(() => decodeHTMLEntities(children ?? ''), [children]);
 
   // Check if content exceeds the specified number of lines
   useEffect(() => {
