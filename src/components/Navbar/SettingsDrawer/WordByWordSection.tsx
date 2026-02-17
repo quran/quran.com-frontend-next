@@ -318,7 +318,7 @@ const WordByWordSection = () => {
       <Section.Footer className={styles.footerWithBorder}>
         <Trans components={{ span: <span /> }} i18nKey="quran-reader:reciter-summary" />
       </Section.Footer>
-      <Section.Row>
+      <Section.Row className={styles.onClickRow}>
         <div>
           <p className={styles.sectionLabel}>{t('quran-reader:on-click')}</p>
           <div className={styles.checkboxContainer}>
@@ -334,7 +334,7 @@ const WordByWordSection = () => {
           </div>
         </div>
       </Section.Row>
-      <Section.Row>
+      <Section.Row className={styles.onHoldHoverRow}>
         <div>
           <p className={styles.sectionLabel}>{t('quran-reader:on-hold-hover')}</p>
           <div className={styles.checkboxContainer}>
