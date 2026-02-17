@@ -99,7 +99,7 @@
   "layers": {
     "alternative-translations": "ترجمات بديلة",
     "close-explanation": "إغلاق الشرح",
-    "contract": "تفسير العقود",
+    "contract": "إخفاء التفسير",
     "expand": "عرض التفسير",
     "read-explanation": "اقرأ الشرح",
     "title": "الطبقات"
@@ -149,6 +149,7 @@
   "no-pinned-verses": "لا توجد آيات مثبتة",
   "none": "لا شيء",
   "on-click": "عند النقر:",
+  "on-hold-hover": "في وضع الانتظار/التمرير:",
   "on-hover": "عند تمرير المؤشر:",
   "page-bookmark-removed": "تمّت إزالة الإشارة المرجعية من الصفحة",
   "page-bookmarked": "تمت إضافة إشارة مرجعية إلى الصفحة",
