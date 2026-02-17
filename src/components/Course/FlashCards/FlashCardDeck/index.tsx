@@ -88,6 +88,7 @@ const FlashCardDeck: React.FC<FlashCardDeckProps> = ({ cards, onComplete, classN
           className={classNames(styles.actionButton, styles.reviewButton)}
           onClick={() => handleSwipeComplete('left')}
           disabled={isAnimating}
+          data-testid="flashcard-deck-review-button"
           aria-label={t('flashcards.mark-as-need-review')}
         >
           <span className={styles.buttonIcon}>{REVIEW_ICON}</span>
@@ -98,6 +99,7 @@ const FlashCardDeck: React.FC<FlashCardDeckProps> = ({ cards, onComplete, classN
           className={classNames(styles.actionButton, styles.knowButton)}
           onClick={() => handleSwipeComplete('right')}
           disabled={isAnimating}
+          data-testid="flashcard-deck-know-button"
           aria-label={t('flashcards.mark-as-known')}
         >
           <span className={styles.buttonIcon}>{KNOW_ICON}</span>

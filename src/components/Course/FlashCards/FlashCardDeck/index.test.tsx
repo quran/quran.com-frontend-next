@@ -26,9 +26,7 @@ describe('FlashCardDeck', () => {
     const onComplete = vi.fn();
 
     render(<FlashCardDeck cards={cards} onComplete={onComplete} />);
-    fireEvent.click(
-      screen.getByRole('button', { name: /flashcards\.mark-as-known|Mark as known/u }),
-    );
+    fireEvent.click(screen.getByTestId('flashcard-deck-know-button'));
 
     act(() => {
       vi.advanceTimersByTime(SWIPE_ANIMATION_MS);
