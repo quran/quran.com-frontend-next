@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Достигните своих целей в Коране",
+  "apps": {
+    "description": "Встроенные приложения для дальнейшего развития ваших знаний Корана.",
+    "featured-apps": "Рекомендуемые приложения",
+    "qariah": {
+      "description": "Женщины-чтецы Корана",
+      "name": "Кариа"
+    },
+    "quran-android": {
+      "description": "Quran.com для Android",
+      "name": "Коран Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com для iPhone",
+      "name": "Коран iOS"
+    },
+    "quran-space": {
+      "description": "Живой учебный кружок",
+      "name": "Пространство Корана"
+    },
+    "quranreflect": {
+      "description": "Читайте и делитесь своими размышлениями",
+      "name": "QuranReflect"
+    },
+    "see-more": "Смотрите больше",
+    "title": "Приложения для чтения Корана"
+  },
   "begin": "Начинать",
   "calendar-cta": "Календарь",
   "chapters-and-verses": "Суры и аяты",

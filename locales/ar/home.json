@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "حقق أهدافك في القرآن",
+  "apps": {
+    "description": "تطبيقات متصلة لتعزيز نموك مع القرآن الكريم.",
+    "featured-apps": "التطبيقات المميزة",
+    "qariah": {
+      "description": "قارئات القرآن الكريم",
+      "name": "قارعة"
+    },
+    "quran-android": {
+      "description": "Quran.com لنظام Android",
+      "name": "تطبيق المصحف للأندرويد"
+    },
+    "quran-ios": {
+      "description": "Quran.com لأجهزة iPhone",
+      "name": "القرآن الكريم على نظام iOS"
+    },
+    "quran-space": {
+      "description": "حلقة دراسية مباشرة",
+      "name": "مساحة القرآن"
+    },
+    "quranreflect": {
+      "description": "اقرأ وشارك التأملات",
+      "name": "تأمل في القرآن"
+    },
+    "see-more": "شاهد المزيد",
+    "title": "تطبيقات القرآن الكريم"
+  },
   "begin": "ابدأ",
   "calendar-cta": "التقويم",
   "chapters-and-verses": "السور والآيات",

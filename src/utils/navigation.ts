@@ -81,6 +81,7 @@ export const LEARNING_PLANS_URL = '/learning-plans';
 export const RADIO_URL = '/radio';
 export const RECITERS_URL = '/reciters';
 export const ABOUT_US_URL = '/about-us';
+export const APPS_URL = '/apps';
 export const DEVELOPERS_URL = '/developers';
 export const PRODUCT_UPDATES_URL = '/product-updates';
 export const SUPPORT_URL = '/support';

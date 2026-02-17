@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Hoàn thành mục tiêu Qur'an của bạn",
+  "apps": {
+    "description": "Các ứng dụng kết nối giúp bạn phát triển hơn nữa trong việc học Kinh Qur'an.",
+    "featured-apps": "Ứng dụng nổi bật",
+    "qariah": {
+      "description": "Người phụ nữ đọc kinh Quran",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com dành cho Android",
+      "name": "Kinh Qur'an trên Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com dành cho iPhone",
+      "name": "Kinh Qur'an trên iOS"
+    },
+    "quran-space": {
+      "description": "Nhóm học tập trực tuyến",
+      "name": "Không gian Kinh Qur'an"
+    },
+    "quranreflect": {
+      "description": "Đọc và chia sẻ những suy ngẫm",
+      "name": "Kinh Qur'an Phản chiếu"
+    },
+    "see-more": "Xem thêm",
+    "title": "Ứng dụng Kinh Qur'an"
+  },
   "begin": "Bắt đầu",
   "calendar-cta": "Lịch",
   "chapters-and-verses": "Chương và Câu",
