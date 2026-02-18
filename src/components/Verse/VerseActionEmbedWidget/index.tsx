@@ -4,6 +4,7 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import CodeIcon from '@/icons/code-embed.svg';
 import { logButtonClick } from '@/utils/eventLogger';
+import { navigateToExternalUrl } from '@/utils/url';
 import Verse from 'types/Verse';
 
 type VerseActionEmbedWidgetProps = {
@@ -36,12 +37,7 @@ const VerseActionEmbedWidget = ({
     // Open widget builder with the selected verse in a new tab
     const versesParam = `${surah}:${ayah}`;
     const url = `/embed?verses=${encodeURIComponent(versesParam)}`;
-    const newWindow = window.open(url, '_blank');
-
-    // Fallback: if the popup is blocked, navigate in the current tab
-    if (!newWindow) {
-      window.location.href = url;
-    }
+    navigateToExternalUrl(url);
 
     if (onActionTriggered) {
       onActionTriggered();
