@@ -77,6 +77,11 @@ const Index: NextPage<IndexProps> = ({
               <>
                 {isUserLoggedIn ? (
                   <>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <LearningPlansSection />
+                    </div>
                     {todayAyah && (
                       <div
                         className={classNames(
@@ -88,11 +93,6 @@ const Index: NextPage<IndexProps> = ({
                         <QuranInYearSection chaptersData={chaptersData} />
                       </div>
                     )}
-                    <div
-                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
-                    >
-                      <LearningPlansSection />
-                    </div>
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
