@@ -35,7 +35,13 @@ const VerseActionEmbedWidget = ({
 
     // Open widget builder with the selected verse in a new tab
     const versesParam = `${surah}:${ayah}`;
-    window.open(`/embed?verses=${encodeURIComponent(versesParam)}`, '_blank');
+    const url = `/embed?verses=${encodeURIComponent(versesParam)}`;
+    const newWindow = window.open(url, '_blank');
+
+    // Fallback: if the popup is blocked, navigate in the current tab
+    if (!newWindow) {
+      window.location.href = url;
+    }
 
     if (onActionTriggered) {
       onActionTriggered();
