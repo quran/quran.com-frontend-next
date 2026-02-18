@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import Language from '@/types/Language';
 import {
@@ -5,7 +6,13 @@ import {
   SearchNavigationType,
 } from '@/types/Search/SearchNavigationResult';
 import { getChapterData } from '@/utils/chapter';
-import { Direction, isRTLLocale, toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
+import {
+  Direction,
+  isRTLLocale,
+  toLocalizedNumber,
+  toLocalizedVerseKey,
+  toLocalizedVerseKeyRTL,
+} from '@/utils/locale';
 import { getResultType } from '@/utils/search';
 
 /**
@@ -145,8 +152,18 @@ export const getVerseTextData = (
   const arabicSurahName = arabicChapterData?.nameArabic || arabicChapterData?.translatedName;
 
   // Convert verse key to localized format for both Arabic and user's locale
-  const arabicVerseKey = resultKeyString ? toLocalizedVerseKey(resultKeyString, Language.AR) : '';
-  const localizedVerseKey = resultKeyString ? toLocalizedVerseKey(resultKeyString, lang) : '';
+  const arabicVerseKey = resultKeyString
+    ? toLocalizedVerseKeyRTL(resultKeyString, Language.AR)
+    : '';
+
+  let localizedVerseKey = '';
+  if (resultKeyString) {
+    if (lang === Language.AR) {
+      localizedVerseKey = toLocalizedVerseKeyRTL(resultKeyString, lang);
+    } else {
+      localizedVerseKey = toLocalizedVerseKey(resultKeyString, lang);
+    }
+  }
 
   // Build suffix arrays, filtering out undefined/null values
   const arabicSuffixParts = [arabicSurahName, arabicVerseKey].filter(Boolean) as string[];
