@@ -1,5 +1,6 @@
 @use '@/styles/breakpoints';
 @use '@/styles/constants';
+@use '@/styles/utility';
 
 $layers-scales: (
   tablet: (
@@ -77,6 +78,7 @@ $font-scale-15: 0.9375; // 16px * 0.9375 = 15px
   gap: var(--spacing-medium2-px);
   padding-block-start: var(--spacing-medium);
   padding-block-end: var(--spacing-mega);
+  @include utility.edgeHorizontalPadding;
 }
 
 .errorContainer {
@@ -84,7 +86,8 @@ $font-scale-15: 0.9375; // 16px * 0.9375 = 15px
   align-items: center;
   justify-content: center;
   min-block-size: calc(var(--spacing-mega-px) * 2);
-  padding: var(--spacing-large);
+  padding-block: var(--spacing-large);
+  @include utility.edgeHorizontalPadding;
 }
 
 .controls {
