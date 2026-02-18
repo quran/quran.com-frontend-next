@@ -15,7 +15,7 @@ interface BannerProps {
 
 const Banner = ({ text, ctaButtonText }: BannerProps) => {
   const handleButtonClick = useCallback(() => {
-    logButtonClick('donate_button_banner_clicked');
+    logButtonClick('donate_button_banner');
   }, []);
 
   return (

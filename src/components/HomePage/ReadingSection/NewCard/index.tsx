@@ -1,5 +1,6 @@
-/* eslint-disable i18next/no-literal-string */
 import React from 'react';
+
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './NewCard.module.scss';
 
@@ -10,6 +11,8 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { ROUTES } from '@/utils/navigation';
 
 const NewCard: React.FC = () => {
+  const { t } = useTranslation('home');
+
   const onRamadanChallengeClicked = () => {
     logButtonClick('homepage_ramadan_challenge_link');
   };
@@ -24,9 +27,8 @@ const NewCard: React.FC = () => {
         <div className={styles.cardWithIcon}>
           <div className={styles.iconContainer}>
             <span aria-hidden="true">✨</span>
-            <span className={styles.srOnly}>Sparkles icon</span>
           </div>
-          <div className={styles.link}>Join the Ramadan Challenge</div>
+          <div className={styles.link}>{t('ramadan-challenge')}</div>
         </div>
         <IconContainer
           className={styles.arrowIcon}
