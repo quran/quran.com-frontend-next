@@ -26,15 +26,27 @@ import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { toLocalizedNumber } from '@/utils/locale';
 
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
-  loading: TafsirSkeleton,
+  loading: () => (
+    <div className={answerStyle.edgeToEdge}>
+      <TafsirSkeleton />
+    </div>
+  ),
 });
 
 export const StudyModeReflectionsTab = dynamic(() => import('./tabs/StudyModeReflectionsTab'), {
-  loading: TafsirSkeleton,
+  loading: () => (
+    <div className={answerStyle.edgeToEdge}>
+      <TafsirSkeleton />
+    </div>
+  ),
 });
 
 export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), {
-  loading: TafsirSkeleton,
+  loading: () => (
+    <div className={answerStyle.edgeToEdge}>
+      <TafsirSkeleton />
+    </div>
+  ),
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
@@ -46,7 +58,11 @@ export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswers
 });
 
 const StudyModeLayersTab = dynamic(() => import('./tabs/StudyModeLayersTab'), {
-  loading: TafsirSkeleton,
+  loading: () => (
+    <div className={answerStyle.edgeToEdge}>
+      <TafsirSkeleton />
+    </div>
+  ),
 });
 
 const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
@@ -57,7 +73,13 @@ const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
   ),
 });
 
-const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), { loading: TafsirSkeleton });
+const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), {
+  loading: () => (
+    <div className={answerStyle.edgeToEdge}>
+      <TafsirSkeleton />
+    </div>
+  ),
+});
 
 export const StudyModeRelatedVersesTab = dynamic(
   () => import('./tabs/StudyModeRelatedVerses/StudyModeRelatedVersesTab'),
