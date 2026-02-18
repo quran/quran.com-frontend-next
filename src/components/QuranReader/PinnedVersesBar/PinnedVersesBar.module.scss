@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .container {
   display: flex;
@@ -35,7 +36,7 @@
   }
 
   &.noPadding {
-    padding-inline: 0;
+    @include utility.edgeHorizontalPadding;
   }
 }
 

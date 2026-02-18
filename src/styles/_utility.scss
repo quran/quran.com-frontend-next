@@ -891,21 +891,21 @@ $page-container-max-width: 80rem;
 }
 
 @mixin edgePadding {
-  padding-inline: var(--spacing-medium2-px);
-  padding-block: var(--spacing-small-px);
+  padding-inline: var(--spacing-edge-horizontal-px);
+  padding-block: var(--spacing-edge-vertical-px);
 }
 
 @mixin edgePaddingEven {
-  padding-inline: var(--spacing-medium2-px);
-  padding-block: var(--spacing-medium2-px);
+  padding-inline: var(--spacing-edge-horizontal-px);
+  padding-block: var(--spacing-edge-vertical-even-px);
 }
 
 @mixin edgeHorizontalPadding {
-  padding-inline: var(--spacing-medium2-px);
+  padding-inline: var(--spacing-edge-horizontal-px);
 }
 
 @mixin edgeVerticalPadding {
-  padding-block: var(--spacing-small-px);
+  padding-block: var(--spacing-edge-vertical-px);
 }
 
 @mixin scrollbarNone {

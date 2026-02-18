@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .relatedVerse {
   padding-block: var(--spacing-medium2-px);
@@ -15,6 +16,7 @@
 }
 
 .skeletonContainer {
+  @include utility.edgeHorizontalPadding;
   margin-block: var(--spacing-medium2-px);
   display: flex;
   flex-direction: column;
@@ -24,4 +26,8 @@
     inline-size: 100%;
     block-size: var(--spacing-xxxlarge-px);
   }
+}
+
+.relatedVerseCta {
+  @include utility.edgeHorizontalPadding;
 }

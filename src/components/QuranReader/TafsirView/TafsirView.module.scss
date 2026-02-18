@@ -28,10 +28,9 @@ $container-max-width: calc(23 * var(--spacing-mega));
 }
 
 .tafsirContainer {
+  @include utility.edgeHorizontalPadding;
   padding-block-start: var(--spacing-medium);
   padding-block-end: var(--spacing-large);
-  padding-inline-start: 0;
-  padding-inline-end: 0;
   letter-spacing: 0;
   line-height: normal;
   p {

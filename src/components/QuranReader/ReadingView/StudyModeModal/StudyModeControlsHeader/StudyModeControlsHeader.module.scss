@@ -1,4 +1,8 @@
+@use 'src/styles/utility';
+
 .container {
+  @include utility.edgeHorizontalPadding;
+  @include utility.scrollbarNone;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;

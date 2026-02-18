@@ -70,7 +70,13 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({
   };
 
   const renderBody = () => {
-    if (isLoading) return <TafsirSkeleton />;
+    if (isLoading) {
+      return (
+        <div className={styles.edgeToEdge}>
+          <TafsirSkeleton />
+        </div>
+      );
+    }
 
     return (
       <div className={classNames(styles.answersContainer, scaleClass)}>

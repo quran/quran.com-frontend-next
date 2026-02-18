@@ -84,14 +84,16 @@ const StudyModeRelatedVerseContent: React.FC<StudyModeRelatedVerseContentProps> 
         canNavigateWordPrev={false}
         canNavigateWordNext={false}
       />
-      <Button
-        className={styles.goToVerseButton}
-        size={ButtonSize.Small}
-        variant={ButtonVariant.Compact}
-        onClick={handleGoToVerse}
-      >
-        {t('go-to-verse')}
-      </Button>
+      <div className={styles.relatedVerseCta}>
+        <Button
+          className={styles.goToVerseButton}
+          size={ButtonSize.Small}
+          variant={ButtonVariant.Compact}
+          onClick={handleGoToVerse}
+        >
+          {t('go-to-verse')}
+        </Button>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,9 @@
-@use '@/styles/breakpoints';
-@use '@/styles/constants';
+@use 'src/styles/breakpoints';
+@use 'src/styles/constants';
+@use 'src/styles/utility';
 
 .container {
+  @include utility.edgeHorizontalPadding;
   padding-block-end: calc(var(--spacing-xsmall) * 3);
 }
 
@@ -50,6 +52,7 @@
 }
 
 .content {
+  @include utility.edgeHorizontalPadding;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xxsmall-px);
