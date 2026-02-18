@@ -1,0 +1,38 @@
+.threeDotsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xsmall-px);
+  border-radius: var(--spacing-xxsmall-px);
+  background: var(--color-background-elevated);
+  box-shadow: var(--shadow-small);
+  cursor: pointer;
+  border: none;
+}
+
+.threeDotsIcon {
+  inline-size: var(--spacing-medium-plus-px);
+  block-size: var(--spacing-medium-plus-px);
+  color: var(--color-success-medium);
+}
+
+.menuContent {
+  padding-block: var(--spacing-small-px);
+  border-radius: var(--spacing-xxsmall-px);
+  min-inline-size: auto;
+  z-index: var(--z-index-modal);
+  direction: ltr;
+}
+
+.menuItemContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: var(--spacing-xxsmall);
+}
+
+.menuItemChevron {
+  inline-size: var(--spacing-small2-px);
+  block-size: var(--spacing-small2-px);
+}
