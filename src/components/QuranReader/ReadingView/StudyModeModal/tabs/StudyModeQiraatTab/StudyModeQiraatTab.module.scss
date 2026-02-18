@@ -1,7 +1,7 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/utility';
 
-.edgeToEdge {
+div.edgeToEdge {
   @include utility.edgeHorizontalPadding;
 }
 
