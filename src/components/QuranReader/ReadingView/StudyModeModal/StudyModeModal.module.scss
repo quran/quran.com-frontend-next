@@ -16,9 +16,10 @@ div.contentModal {
   overflow: hidden;
   background: var(--color-background-elevated-new);
   border-radius: var(--border-radius-large-px) var(--border-radius-large-px) 0 0;
+  --spacing-edge-horizontal-px: var(--spacing-medium2-px);
   @include breakpoints.tablet {
     --spacing-edge-vertical-px: var(--spacing-medium2-px);
-    --spacing-edge-horizontal-px: var(--spacing-large-px);
+    --spacing-edge-horizontal-px: var(--spacing-xlarge-px);
     block-size: auto;
     inline-size: 80%;
     max-inline-size: 80%;
@@ -48,6 +49,7 @@ div.mobileBottomSheetOverlay {
 }
 
 .header {
+  --spacing-edge-vertical-px: var(--spacing-medium-px);
   @include utility.edgePadding;
   box-sizing: border-box;
   display: grid;
@@ -57,6 +59,15 @@ div.mobileBottomSheetOverlay {
   column-gap: var(--spacing-small-px);
   row-gap: var(--spacing-xxsmall-px);
   inline-size: 100%;
+
+  @include breakpoints.smallerThanTablet {
+    padding-inline-end: var(--spacing-small-px);
+  }
+
+  @include breakpoints.tablet {
+    --spacing-edge-vertical-px: var(--spacing-xlarge-px);
+    padding-block-end: var(--spacing-medium2-px);
+  }
 
   // When left controls are hidden (no verse history), switch to 2-column layout
   &.hideHeaderLeftControls {
@@ -80,7 +91,9 @@ div.mobileBottomSheetOverlay {
 }
 
 .separatorContainer {
-  @include utility.edgeHorizontalPadding;
+  @include breakpoints.tablet {
+    @include utility.edgeHorizontalPadding;
+  }
 }
 
 .headerLeftControls {

@@ -11,6 +11,7 @@ import StudyModeRelatedVerseSkeleton from './StudyModeRelatedVerseSkeleton';
 
 import { fetcher } from '@/api';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Separator from '@/dls/Separator/Separator';
 import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
@@ -73,28 +74,33 @@ const StudyModeRelatedVerseContent: React.FC<StudyModeRelatedVerseContentProps> 
   }
 
   return (
-    <div className={styles.relatedVerse}>
-      <StudyModeBodyContent
-        verse={verse}
-        showWordBox={false}
-        onWordClick={NOOP}
-        onWordBoxClose={NOOP}
-        onNavigatePreviousWord={NOOP}
-        onNavigateNextWord={NOOP}
-        canNavigateWordPrev={false}
-        canNavigateWordNext={false}
-      />
-      <div className={styles.relatedVerseCta}>
-        <Button
-          className={styles.goToVerseButton}
-          size={ButtonSize.Small}
-          variant={ButtonVariant.Compact}
-          onClick={handleGoToVerse}
-        >
-          {t('go-to-verse')}
-        </Button>
+    <>
+      <div className={styles.relatedVerse}>
+        <StudyModeBodyContent
+          verse={verse}
+          showWordBox={false}
+          onWordClick={NOOP}
+          onWordBoxClose={NOOP}
+          onNavigatePreviousWord={NOOP}
+          onNavigateNextWord={NOOP}
+          canNavigateWordPrev={false}
+          canNavigateWordNext={false}
+        />
+        <div className={styles.relatedVerseCta}>
+          <Button
+            className={styles.goToVerseButton}
+            size={ButtonSize.Small}
+            variant={ButtonVariant.Compact}
+            onClick={handleGoToVerse}
+          >
+            {t('go-to-verse')}
+          </Button>
+        </div>
       </div>
-    </div>
+      <div className={styles.relatedVerseSeparatorContainer}>
+        <Separator />
+      </div>
+    </>
   );
 };
 

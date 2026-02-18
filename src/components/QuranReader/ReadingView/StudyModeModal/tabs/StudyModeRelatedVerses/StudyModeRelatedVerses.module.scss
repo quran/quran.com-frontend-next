@@ -3,11 +3,10 @@
 
 .relatedVerse {
   padding-block: var(--spacing-medium2-px);
-  border-block-end: 1px solid var(--color-borders-hairline);
+}
 
-  &:last-child {
-    border-block-end: none;
-  }
+.relatedVerseSeparatorContainer {
+  @include utility.edgeHorizontalPadding;
 }
 
 .goToVerseButton {
