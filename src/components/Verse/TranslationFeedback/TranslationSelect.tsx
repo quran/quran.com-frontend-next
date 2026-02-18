@@ -85,7 +85,7 @@ const TranslationSelect: React.FC<TranslationSelectProps> = ({
             aria-haspopup="listbox"
             aria-expanded={isMenuOpen}
             aria-label={displayLabel}
-            data-testid={TestId.TRANSLATION_SELECT}
+            data-testid={TestId.TRANSLATION_SELECT_TRIGGER}
           >
             <span className={styles.triggerLabel}>{displayLabel}</span>
             <span

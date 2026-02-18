@@ -39,7 +39,10 @@ export enum TestId {
   DARK_BUTTON = 'dark-button',
   DECREMENT_BUTTON = 'decrement-button',
   END_OF_SCROLLING_CONTROLS = 'end-of-scrolling-controls',
+  ERROR_TOAST = 'error-toast',
   EXPLORE_TOPICS_CONTAINER = 'explore-topics-container',
+  FEEDBACK_ERROR_MAXIMUM_LENGTH = 'feedback-error-maximum-length',
+  FEEDBACK_ERROR_REQUIRED_FIELD = 'feedback-error-required-field',
   FOOTNOTE_CONTENT = 'footnote-content',
   FORM_BUILDER_VALIDATION_ERRORS = 'form-builder-validation-errors',
   HEADER = 'header',
@@ -106,6 +109,7 @@ export enum TestId {
   SEPIA_BUTTON = 'sepia-button',
   SIDEBAR_NAVIGATION = 'sidebar-navigation',
   SIGNUP_BUTTON = 'signup-button',
+  SUCCESS_TOAST = 'success-toast',
   SURAH_INFO_BUTTON = 'surah-info-button',
   SURAH_NAME = 'surah-name',
   SURAH_NUMBER_OF_AYAHS = 'surah-number-of-ayahs',
@@ -117,10 +121,17 @@ export enum TestId {
   TEXT_UTHMANI_BUTTON = 'text_uthmani-button',
   THEME_SWITCHER = 'theme-switcher',
   TRANSLATION_BUTTON = 'translation-button',
-  TRANSLATION_SELECT = 'translation-select',
+  TRANSLATION_ERROR_REQUIRED_FIELD = 'translation-error-required-field',
+  TRANSLATION_FEEDBACK_SUBMIT_BUTTON = 'translation-feedback-submit-button',
+  TRANSLATION_FEEDBACK_TEXTAREA = 'translation-feedback-textarea',
+  TRANSLATION_SELECT_LABEL = 'translation-select-label',
+  TRANSLATION_SELECT_TRIGGER = 'translation-select-trigger',
   TRANSLATION_TAB = 'translation-tab',
   TRANSLATION_CARD = 'translation-card',
   VERIFICATION_CODE = 'verification-code',
+  VERSE_ACTIONS_MORE = 'verse-actions-more',
+  VERSE_ACTIONS_MENU_MORE = 'verse-actions-menu-more',
+  VERSE_ACTIONS_MENU_TRANSLATION_FEEDBACK = 'verse-actions-menu-translation-feedback',
   VERSE_BUTTON = 'verse-button',
   VERSE_LIST = 'verse-list',
   WBW_TRANSLATION = 'wbw-translation',
@@ -182,3 +193,9 @@ export const getThemeButtonTestId = (theme: ThemeType): TestId => THEME_BUTTON_T
 
 export const getQuranFontButtonTestId = (font: SettingsQuranFont): TestId =>
   QURAN_FONT_BUTTON_TEST_IDS[font];
+
+export const getTranslationPreviewTestId = (translationId: string): string =>
+  `translation-preview-${translationId}`;
+
+export const getTranslationSelectOptionTestId = (translationId: string): string =>
+  `translation-select-option-${translationId}`;
