@@ -17,7 +17,7 @@ Sentry.init({
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
   tracesSampleRate: isDev ? 1 : 0.1,
-  profileSessionSampleRate: isDev ? 1 : 0.1,
+  profileSessionSampleRate: isDev ? 1 : 0.001,
   profileLifecycle: 'trace',
   replaysOnErrorSampleRate: isDev ? 1 : 0.1,
   debug: isDev,
