@@ -60,9 +60,13 @@ vi.mock('./useSaveBookmarkData', () => ({
     mutateBookmarkCollectionIdsData: vi.fn(),
   }),
 }));
-vi.mock('./Collections/hooks/useCollectionsState', () => ({
-  useCollectionsState: () => ({ sortedCollections: [] }),
-}));
+vi.mock('./Collections/hooks/useCollectionsState', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./Collections/hooks/useCollectionsState')>();
+  return {
+    ...actual,
+    useCollectionsState: () => ({ sortedCollections: [] }),
+  };
+});
 vi.mock('./Collections/hooks/useCollectionToggle', () => ({
   useCollectionToggle: () => ({
     handleToggleCollection: vi.fn(),

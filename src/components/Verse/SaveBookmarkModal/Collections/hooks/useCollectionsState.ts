@@ -5,6 +5,14 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { DEFAULT_COLLECTION_ID } from '@/utils/auth/constants';
 
+export const COLLECTIONS_SORTING_MODE = {
+  LEGACY: 'legacy',
+  SAVE_BOOKMARK: 'saveBookmark',
+} as const;
+
+export type CollectionsSortingMode =
+  (typeof COLLECTIONS_SORTING_MODE)[keyof typeof COLLECTIONS_SORTING_MODE];
+
 interface CollectionItem {
   id: string;
   name: string;
@@ -26,11 +34,16 @@ interface UseCollectionsStateParams {
   isVerse: boolean;
   collectionListData: CollectionListData | undefined;
   bookmarkCollectionIdsData: string[] | undefined;
+  sortingMode?: CollectionsSortingMode;
 }
 
 interface UseCollectionsStateReturn {
   isInFavorites: boolean;
   sortedCollections: CollectionItem[];
+}
+
+interface CollectionItemWithUpdatedAtMs extends CollectionItem {
+  updatedAtMs: number | null;
 }
 
 /**
@@ -43,6 +56,7 @@ export const useCollectionsState = ({
   isVerse,
   collectionListData,
   bookmarkCollectionIdsData,
+  sortingMode = COLLECTIONS_SORTING_MODE.LEGACY,
 }: UseCollectionsStateParams): UseCollectionsStateReturn => {
   const commonT = useTranslation('common').t;
 
@@ -94,8 +108,53 @@ export const useCollectionsState = ({
       }
     });
 
-    return collections;
-  }, [collectionListData, bookmarkCollectionIdsData, isInFavorites, commonT, isVerse]);
+    if (sortingMode !== COLLECTIONS_SORTING_MODE.SAVE_BOOKMARK) {
+      return collections;
+    }
+
+    const toUpdatedAtMs = (updatedAt?: string): number | null => {
+      if (!updatedAt) return null;
+      const parsed = Date.parse(updatedAt);
+      return Number.isFinite(parsed) ? parsed : null;
+    };
+
+    const compareByRecentUpdateThenName = (
+      a: CollectionItemWithUpdatedAtMs,
+      b: CollectionItemWithUpdatedAtMs,
+    ): number => {
+      // Sort by newest updatedAt first; unknown dates go last.
+      if (a.updatedAtMs === null && b.updatedAtMs === null) {
+        return a.name.localeCompare(b.name);
+      }
+      if (a.updatedAtMs === null) return 1;
+      if (b.updatedAtMs === null) return -1;
+      if (a.updatedAtMs !== b.updatedAtMs) return b.updatedAtMs - a.updatedAtMs;
+      return a.name.localeCompare(b.name);
+    };
+
+    const collectionsWithUpdatedAtMs: CollectionItemWithUpdatedAtMs[] = collections.map(
+      (collection) => ({
+        ...collection,
+        updatedAtMs: toUpdatedAtMs(collection.updatedAt),
+      }),
+    );
+
+    const selectedCollections = collectionsWithUpdatedAtMs
+      .filter((collection) => collection.checked)
+      .sort(compareByRecentUpdateThenName);
+
+    const unselectedCollections = collectionsWithUpdatedAtMs.filter(
+      (collection) => !collection.checked,
+    );
+    const favoritesCollection = unselectedCollections.find((collection) => collection.isDefault);
+    const remainingUnselectedCollections = unselectedCollections
+      .filter((collection) => !collection.isDefault)
+      .sort(compareByRecentUpdateThenName);
+
+    return favoritesCollection
+      ? [...selectedCollections, favoritesCollection, ...remainingUnselectedCollections]
+      : [...selectedCollections, ...remainingUnselectedCollections];
+  }, [collectionListData, bookmarkCollectionIdsData, isInFavorites, commonT, isVerse, sortingMode]);
 
   return {
     isInFavorites,
