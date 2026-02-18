@@ -14,14 +14,18 @@ import CloseIcon from '@/icons/close.svg';
 import DiamondIcon from '@/icons/diamond.svg';
 import {
   selectIsHomepageBannerVisible,
+  selectIsQuranReaderBannerVisible,
   setIsHomepageBannerVisible,
+  setIsQuranReaderBannerVisible,
 } from '@/redux/slices/fundraisingBanner';
-import DonateButtonClickSource from '@/types/DonateButtonClickSource';
-import DonateButtonType from '@/types/DonateButtonType';
-import LearnMoreClickSource from '@/types/LearnMoreClickSource';
 import { makeDonatePageUrl, makeDonateUrl } from '@/utils/apiPaths';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 import { navigateToExternalUrl } from '@/utils/url';
+
+export enum FundraisingBannerContext {
+  Homepage = 'homepage',
+  QuranReader = 'quranReader',
+}
 
 interface HomepageFundraisingBannerProps {
   /**
@@ -31,29 +35,48 @@ interface HomepageFundraisingBannerProps {
    * @default true
    */
   isDismissible?: boolean;
+  /** Which Redux state to use for visibility/dismiss. Defaults to Homepage. */
+  context?: FundraisingBannerContext;
+  /** Prefix used for analytics event names. Defaults to context-based value. */
+  analyticsSource?: string;
+  /** Extra params attached to every analytics event fired by this banner. */
+  analyticsParams?: Record<string, any>;
 }
 
-const HomepageFundraisingBanner = ({ isDismissible = true }: HomepageFundraisingBannerProps) => {
+const HomepageFundraisingBanner = ({
+  isDismissible = true,
+  context = FundraisingBannerContext.Homepage,
+  analyticsSource,
+  analyticsParams,
+}: HomepageFundraisingBannerProps) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const isVisible = useSelector(selectIsHomepageBannerVisible);
+  const isHomepageVisible = useSelector(selectIsHomepageBannerVisible);
+  const isQuranReaderVisible = useSelector(selectIsQuranReaderBannerVisible);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
+  const isVisible =
+    context === FundraisingBannerContext.QuranReader ? isQuranReaderVisible : isHomepageVisible;
 
   // If dismissible and not visible in Redux state, don't render
   if (isDismissible && !isVisible) {
     return null;
   }
 
+  const resolvedAnalyticsSource =
+    analyticsSource ??
+    (context === FundraisingBannerContext.QuranReader
+      ? 'quran_reader'
+      : 'homepage_donation_section');
+
   const onDonateClicked = () => {
     const href = makeDonatePageUrl(false, true); // Monthly donation with provider URL
-    logEvent('donate_button_clicked', {
-      source: `${DonateButtonClickSource.BANNER}_${DonateButtonType.MONTHLY}`,
-    });
+    logButtonClick(`${resolvedAnalyticsSource}_donate`, analyticsParams);
     navigateToExternalUrl(href);
   };
 
   const onShareClicked = () => {
-    logButtonClick('fundraising_banner_share_button_clicked');
+    logButtonClick(`${resolvedAnalyticsSource}_share`, analyticsParams);
     setIsShareModalOpen(true);
   };
 
@@ -62,20 +85,17 @@ const HomepageFundraisingBanner = ({ isDismissible = true }: HomepageFundraising
   };
 
   const onLearnMoreClicked = () => {
-    logEvent('learn_more_button_clicked', {
-      source: LearnMoreClickSource.SIDEBAR_BANNER,
-    });
+    logButtonClick(`${resolvedAnalyticsSource}_learn_more`, analyticsParams);
   };
 
   const onCloseClicked = () => {
-    logEvent('fundraising_banner_closed', {
-      source: 'homepage_banner',
-    });
-    dispatch(setIsHomepageBannerVisible(false));
+    logButtonClick(`${resolvedAnalyticsSource}_dismissed`, analyticsParams);
+    if (context === FundraisingBannerContext.QuranReader) {
+      dispatch(setIsQuranReaderBannerVisible(false));
+    } else {
+      dispatch(setIsHomepageBannerVisible(false));
+    }
   };
-
-  const shareURL = makeDonateUrl();
-  const shareTitle = t('fundraising.title');
 
   return (
     <>
@@ -141,7 +161,12 @@ const HomepageFundraisingBanner = ({ isDismissible = true }: HomepageFundraising
             <CloseIcon />
           </button>
           <Modal.Title>{t('fundraising-share-title')}</Modal.Title>
-          <ShareButtons url={shareURL} title={shareTitle} analyticsContext="fundraising_banner" />
+          <ShareButtons
+            url={makeDonateUrl()}
+            title={t('fundraising.title')}
+            analyticsContext="fundraising_banner"
+            hideVideoGeneration
+          />
         </Modal.Body>
       </Modal>
     </>

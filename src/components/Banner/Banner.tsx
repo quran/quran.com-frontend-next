@@ -5,8 +5,8 @@ import styles from './Banner.module.scss';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import DiamondIcon from '@/icons/diamond.svg';
+import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
-import { ROUTES } from '@/utils/navigation';
 
 interface BannerProps {
   text: string;
@@ -15,7 +15,7 @@ interface BannerProps {
 
 const Banner = ({ text, ctaButtonText }: BannerProps) => {
   const handleButtonClick = useCallback(() => {
-    logButtonClick('ramadan_challenge_banner_cta');
+    logButtonClick('donate_button_banner');
   }, []);
 
   return (
@@ -23,11 +23,12 @@ const Banner = ({ text, ctaButtonText }: BannerProps) => {
       <div className={styles.text}>{text}</div>
       {ctaButtonText && (
         <Link
-          href={ROUTES.RAMADAN_CHALLENGE}
+          href={makeDonatePageUrl(false, true)}
           variant={LinkVariant.Blend}
           className={styles.cta}
           ariaLabel={ctaButtonText}
           onClick={handleButtonClick}
+          isNewTab
         >
           <IconContainer
             icon={<DiamondIcon aria-hidden="true" />}
