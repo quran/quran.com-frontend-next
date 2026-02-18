@@ -12,15 +12,19 @@ type Props = {
   fallbackHtml: string;
 };
 
-const parseRange = (value: string): WordTrimRange | undefined => {
+const parseRange = (value: string, allowDescending: boolean): WordTrimRange | undefined => {
   const [start, end] = value.split('-');
   const s = Number(start);
   const e = Number(end);
-  if (!Number.isInteger(s) || !Number.isInteger(e) || s < 0 || e < s) return undefined;
+  if (!Number.isInteger(s) || !Number.isInteger(e) || s < 0 || e < 0) return undefined;
+  if (!allowDescending && e < s) return undefined;
   return { startWordIndex: s, endWordIndex: e };
 };
 
-const parseTranslations = (value: string): Record<string, WordTrimRange> | undefined => {
+const parseTranslations = (
+  value: string,
+  allowDescending: boolean,
+): Record<string, WordTrimRange> | undefined => {
   const entries = value
     .split(',')
     .map((s) => s.trim())
@@ -31,7 +35,7 @@ const parseTranslations = (value: string): Record<string, WordTrimRange> | undef
   const valid = entries.every((entry) => {
     const colonIdx = entry.indexOf(':');
     const id = entry.slice(0, colonIdx);
-    const range = parseRange(entry.slice(colonIdx + 1));
+    const range = parseRange(entry.slice(colonIdx + 1), allowDescending);
     if (!id || !range || result[id]) return false;
     result[id] = range;
     return true;
@@ -39,7 +43,10 @@ const parseTranslations = (value: string): Record<string, WordTrimRange> | undef
   return valid ? result : undefined;
 };
 
-const parseTrim = (fallbackHtml: string): WidgetTrimOptions | undefined => {
+const parseTrim = (
+  fallbackHtml: string,
+  allowDescending: boolean,
+): WidgetTrimOptions | undefined => {
   const attrMatch = fallbackHtml.match(/\sdata-widget-trim=(['"])([^"']+)\1/i);
   if (!attrMatch) return undefined;
 
@@ -53,11 +60,11 @@ const parseTrim = (fallbackHtml: string): WidgetTrimOptions | undefined => {
     .every((section) => {
       if (section.startsWith('a:')) {
         if (arabic) return false;
-        arabic = parseRange(section.slice(2));
+        arabic = parseRange(section.slice(2), allowDescending);
         return Boolean(arabic);
       }
       if (section.startsWith('t:')) {
-        const parsed = parseTranslations(section.slice(2));
+        const parsed = parseTranslations(section.slice(2), allowDescending);
         if (!parsed) return false;
         if (Object.keys(parsed).some((id) => translations[id])) return false;
         translations = { ...translations, ...parsed };
@@ -75,11 +82,18 @@ const parseTrim = (fallbackHtml: string): WidgetTrimOptions | undefined => {
 
 const VerseChunkWidget: React.FC<Props> = ({ reference, fallbackHtml }) => {
   const { data, isValidating } = useVerseWidgetData(reference);
+  const isRange = Boolean(reference.to && reference.to > reference.from);
 
   if (isValidating && !data) return <Skeleton className={styles.widgetSkeleton} />;
   if (!data?.verses?.length) return <HtmlContent html={fallbackHtml} />;
 
-  return <QuranWidget verses={data.verses} options={data.options} trim={parseTrim(fallbackHtml)} />;
+  return (
+    <QuranWidget
+      verses={data.verses}
+      options={data.options}
+      trim={parseTrim(fallbackHtml, isRange)}
+    />
+  );
 };
 
 export default VerseChunkWidget;
