@@ -1,27 +1,27 @@
 {
   "achieve-quran-goals": "حقق أهدافك في القرآن",
   "apps": {
-    "description": "تطبيقات متصلة لتعزيز نموك مع القرآن الكريم.",
+    "description": "تطبيقات مرتبطة لتعزيز تقدمك مع القرآن الكريم.",
     "featured-apps": "التطبيقات المميزة",
     "qariah": {
       "description": "قارئات القرآن الكريم",
-      "name": "قارعة"
+      "name": "Qariah"
     },
     "quran-android": {
-      "description": "Quran.com لنظام Android",
+      "description": "القرآن الكريم لأجهزة أندرويد",
       "name": "تطبيق المصحف للأندرويد"
     },
     "quran-ios": {
-      "description": "Quran.com لأجهزة iPhone",
-      "name": "القرآن الكريم على نظام iOS"
+      "description": "تطبيق القرآن الكريم لأجهزة iOS",
+      "name": "تطبيق المصحف لأجهزة iOS"
     },
     "quran-space": {
       "description": "حلقة دراسية مباشرة",
-      "name": "مساحة القرآن"
+      "name": "Quran Space"
     },
     "quranreflect": {
-      "description": "اقرأ وشارك التأملات",
-      "name": "تأمل في القرآن"
+      "description": "اقرأ وشارك التدبرات",
+      "name": "QuranReflect"
     },
     "see-more": "شاهد المزيد",
     "title": "تطبيقات القرآن الكريم"
@@ -70,6 +70,7 @@
   "quran-in-year-cta": "قراءة هذا الأسبوع",
   "quran-in-year-verse-title": "آية من قراءة هذا الأسبوع",
   "ramadan-activities-cta": "<link> تابع <b>التقويم القرآني العالمي</b> للتلاوات الأسبوعية و البودكاست الملهمة و الدعوة للتدبر! </link>",
+  "ramadan-challenge": "انضم إلى تحدي رمضان",
   "ramadan": {
     "header": "أدوات لتعميق علاقتك بالقرآن الكريم",
     "title": "هل أنت مستعد لرمضان؟"
