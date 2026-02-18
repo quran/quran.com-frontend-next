@@ -3,7 +3,6 @@
 @use 'src/styles/utility';
 
 .container {
-  @include utility.edgeHorizontalPadding;
   padding-block-end: calc(var(--spacing-xsmall) * 3);
 }
 
@@ -13,6 +12,7 @@
   padding-block-end: var(--spacing-xxsmall-px);
   margin-block-end: var(--spacing-medium-px);
   overflow-x: auto;
+  @include utility.edgeHorizontalPadding;
 
   &::-webkit-scrollbar {
     block-size: var(--spacing-xxsmall-px);
@@ -52,10 +52,10 @@
 }
 
 .content {
-  @include utility.edgeHorizontalPadding;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xxsmall-px);
+  @include utility.edgeHorizontalPadding;
 }
 
 .label {
