@@ -5,8 +5,8 @@ import styles from './Banner.module.scss';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import DiamondIcon from '@/icons/diamond.svg';
+import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
-import { EXTERNAL_ROUTES } from '@/utils/navigation';
 
 interface BannerProps {
   text: string;
@@ -23,7 +23,7 @@ const Banner = ({ text, ctaButtonText }: BannerProps) => {
       <div className={styles.text}>{text}</div>
       {ctaButtonText && (
         <Link
-          href={EXTERNAL_ROUTES.DONATE_PAGE_URL}
+          href={makeDonatePageUrl(false, true)}
           variant={LinkVariant.Blend}
           className={styles.cta}
           ariaLabel={ctaButtonText}

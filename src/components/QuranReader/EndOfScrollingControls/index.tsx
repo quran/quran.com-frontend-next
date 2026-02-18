@@ -14,6 +14,9 @@ import PageControls from './PageControls';
 import RubControls from './RubControls';
 import VerseControls from './VerseControls';
 
+import HomepageFundraisingBanner, {
+  FundraisingBannerContext,
+} from '@/components/Fundraising/HomepageFundraisingBanner';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
@@ -24,6 +27,47 @@ interface Props {
   lastVerse: Verse;
   initialData: VersesResponse;
 }
+
+const getReaderAnalyticsParams = (
+  dataType: QuranReaderDataType,
+  verse: Verse,
+): Record<string, any> => {
+  switch (dataType) {
+    case QuranReaderDataType.Juz:
+      return { juzNumber: verse.juzNumber };
+    case QuranReaderDataType.Page:
+      return { pageNumber: verse.pageNumber };
+    case QuranReaderDataType.Verse:
+    case QuranReaderDataType.ChapterVerseRanges:
+    case QuranReaderDataType.Ranges:
+      return { verseKey: verse.verseKey };
+    case QuranReaderDataType.Hizb:
+      return { hizbNumber: verse.hizbNumber };
+    case QuranReaderDataType.Rub:
+      return { rubNumber: verse.rubElHizbNumber };
+    default:
+      return {};
+  }
+};
+
+const getReaderAnalyticsSource = (dataType: QuranReaderDataType): string => {
+  switch (dataType) {
+    case QuranReaderDataType.Juz:
+      return 'quran_reader_juz';
+    case QuranReaderDataType.Page:
+      return 'quran_reader_page';
+    case QuranReaderDataType.Verse:
+    case QuranReaderDataType.ChapterVerseRanges:
+    case QuranReaderDataType.Ranges:
+      return 'quran_reader_range';
+    case QuranReaderDataType.Hizb:
+      return 'quran_reader_hizb';
+    case QuranReaderDataType.Rub:
+      return 'quran_reader_rub';
+    default:
+      return 'quran_reader';
+  }
+};
 
 const EndOfScrollingControls: React.FC<Props> = ({
   quranReaderDataType,
@@ -59,6 +103,15 @@ const EndOfScrollingControls: React.FC<Props> = ({
           )}
         </div>
       </div>
+      {quranReaderDataType !== QuranReaderDataType.Chapter && (
+        <div className={styles.otherBannerWrapper}>
+          <HomepageFundraisingBanner
+            context={FundraisingBannerContext.QuranReader}
+            analyticsSource={getReaderAnalyticsSource(quranReaderDataType)}
+            analyticsParams={getReaderAnalyticsParams(quranReaderDataType, lastVerse)}
+          />
+        </div>
+      )}
     </>
   );
 };
