@@ -314,6 +314,15 @@ const AyahWidgetBuilderPage = () => {
       }
 
       const hasRange: boolean = Number.isFinite(rangeEnd);
+      const queryOverrides = {
+        selectedSurah: chapterId,
+        selectedAyah: verseNumber,
+        rangeEnabled: hasRange,
+        ...(hasRange && rangeEnd !== undefined ? { rangeEnd } : {}),
+      };
+
+      // Apply the verse selection overrides to the builder.
+      dispatch(updateAyahWidgetOverrides(queryOverrides));
 
       setUserPreferences((prev: Preferences) => ({
         ...prev,
@@ -322,10 +331,6 @@ const AyahWidgetBuilderPage = () => {
         rangeEnabled: hasRange,
         rangeEnd: rangeEnd ?? prev.rangeEnd,
       }));
-
-      if (!hasRange) {
-        dispatch(updateAyahWidgetOverrides({ rangeEnabled: false }));
-      }
 
       setLastParsedVersesParam(versesParam);
     } catch (error) {
