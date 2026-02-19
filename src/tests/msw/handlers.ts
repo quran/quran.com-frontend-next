@@ -1,8 +1,9 @@
 import { http, HttpResponse } from 'msw';
 
-// Relative import — intentional. The `@/tests` alias resolves to `src/tests/`,
-// not the root `tests/` directory (which is Playwright-only). We must cross the
-// src/ boundary with a relative path to reach the shared Playwright mock data.
+// Relative import — intentional. The `@/tests` alias resolves to the ROOT
+// `tests/` directory (shared Playwright mocks), not `src/tests/`. Using it here
+// would collide with the existing alias and resolve to the wrong location.
+// A relative path is used instead so the mapping is explicit and unambiguous.
 // If this file moves, update the path accordingly.
 import { mockCountryLanguagePreferences } from '../../../tests/mocks/data';
 

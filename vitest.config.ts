@@ -62,7 +62,6 @@ export default defineConfig({
       '@/*': `${path.resolve(__dirname, './src')}/*`,
       '@/icons': path.resolve(__dirname, './public/icons'),
       '@/dls': path.resolve(__dirname, './src/components/dls'),
-      '@/tests': path.resolve(__dirname, './src/tests'),
     },
   },
 });
