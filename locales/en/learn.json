@@ -17,6 +17,13 @@
   "enroll": "Enroll",
   "enroll-success": "Congratulations, You added {{title}} to your list!",
   "enrolled": "Enrolled",
+  "feedback": {
+    "add-feedback": "Add Feedback",
+    "desc": "Congratulations! You have completed the '{{courseName}}' learning plan. <br></br>  Please review the learning plan and share your feedback to help us improve the content.",
+    "feedback-placeholder": "Write your feedback",
+    "feedback-success": "Thank you for your feedback!",
+    "your-feedback": "Your Feedback"
+  },
   "flashcards": {
     "all-done": "All done!",
     "carousel-aria-label": "Flashcard carousel",
@@ -40,13 +47,6 @@
     "tap-to-flip-swipe-to-answer": "Tap to flip and swipe to answer",
     "tap-to-reveal": "Tap to reveal",
     "translation-label": "Translation:"
-  },
-  "feedback": {
-    "add-feedback": "Add Feedback",
-    "desc": "Congratulations! You have completed the '{{courseName}}' learning plan. <br></br>  Please review the learning plan and share your feedback to help us improve the content.",
-    "feedback-placeholder": "Write your feedback",
-    "feedback-success": "Thank you for your feedback!",
-    "your-feedback": "Your Feedback"
   },
   "help-about-reflection": "Help about reflection feature",
   "learn-duration": "Duration",
