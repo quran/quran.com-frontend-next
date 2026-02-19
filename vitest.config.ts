@@ -16,6 +16,18 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     include: ['**/src/**/*.test.{js,ts,jsx,tsx}'],
+    setupFiles: ['src/tests/setup.ts'],
+    coverage: {
+      provider: 'v8',
+      include: ['src/**'],
+      exclude: [
+        'src/**/*.stories.tsx',
+        'src/pages/_app.tsx',
+        'src/pages/_document.tsx',
+        'src/tests/**',
+      ],
+      reporter: ['text', 'html', 'json-summary'],
+    },
   },
   esbuild: {
     tsconfigRaw: JSON.stringify({
@@ -50,6 +62,7 @@ export default defineConfig({
       '@/*': `${path.resolve(__dirname, './src')}/*`,
       '@/icons': path.resolve(__dirname, './public/icons'),
       '@/dls': path.resolve(__dirname, './src/components/dls'),
+      '@/tests': path.resolve(__dirname, './src/tests'),
     },
   },
 });
