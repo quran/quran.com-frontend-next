@@ -89,11 +89,10 @@ const VersePreview = () => {
     [sampleVerse?.words],
   );
 
+  const { quranFont } = quranReaderStyles;
   const previewWords = useMemo(
     () =>
       (sampleVerse?.words as Word[])?.map((word) => {
-        const { quranFont } = quranReaderStyles;
-
         if (quranFont === QuranFont.QPCHafs) {
           return { ...word, text: word.qpcUthmaniHafs ?? word.text };
         }
@@ -104,7 +103,7 @@ const VersePreview = () => {
 
         return word;
       }) ?? [],
-    [sampleVerse?.words, quranReaderStyles],
+    [sampleVerse?.words, quranFont],
   );
 
   useEffect(() => {
