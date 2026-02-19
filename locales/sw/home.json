@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Fikia Malengo yako ya Qur'ani",
+  "apps": {
+    "description": "Programu zilizounganishwa ili kukuza ukuaji wako na Quran.",
+    "featured-apps": "Programu Zilizoangaziwa",
+    "qariah": {
+      "description": "Wanawake Wasomaji wa Quran",
+      "name": "Qaria"
+    },
+    "quran-android": {
+      "description": "Quran.com kwa Android",
+      "name": "Quran Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com kwa iPhone",
+      "name": "Kurani iOS"
+    },
+    "quran-space": {
+      "description": "Mzunguko wa Masomo wa Moja kwa Moja",
+      "name": "Nafasi ya Quran"
+    },
+    "quranreflect": {
+      "description": "Soma na Shiriki Tafakari",
+      "name": "Tafakari ya Quran"
+    },
+    "see-more": "Tazama zaidi",
+    "title": "Programu za Quran"
+  },
   "begin": "Anza",
   "calendar-cta": "Kalenda",
   "chapters-and-verses": "Surah na Aya",
@@ -44,6 +70,7 @@
   "quran-in-year-cta": "Usomaji wa Wiki Hii",
   "quran-in-year-verse-title": "Aya kutoka usomaji wa juma hili",
   "ramadan-activities-cta": "<link> Fuata <b> Global Quranic Calendar </b> kwa usomaji wa kila wiki, podikasti za kusisimua, na wito wa kutafakari! </link>",
+  "ramadan-challenge": "Jiunge na Changamoto ya Ramadhani",
   "ramadan": {
     "header": "Zana za Kukuza Uhusiano Wako na Qur'ani",
     "title": "Je, uko tayari kwa Ramadhani?"

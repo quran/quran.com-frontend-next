@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Capai Matlamat Al-Quran Anda",
+  "apps": {
+    "description": "Aplikasi yang disambungkan untuk memajukan perkembangan anda dengan Al-Quran.",
+    "featured-apps": "Aplikasi Pilihan",
+    "qariah": {
+      "description": "Pembaca Al-Quran Wanita",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com untuk Android",
+      "name": "Al-Quran Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com untuk iPhone",
+      "name": "Al-Quran iOS"
+    },
+    "quran-space": {
+      "description": "Bulatan Pembelajaran Langsung",
+      "name": "Ruang Al-Quran"
+    },
+    "quranreflect": {
+      "description": "Baca & Kongsi Refleksi",
+      "name": "Refleksi Al-Quran"
+    },
+    "see-more": "Lihat lagi",
+    "title": "Aplikasi Al-Quran"
+  },
   "begin": "Mulakan",
   "calendar-cta": "Kalendar",
   "chapters-and-verses": "Surah dan Ayat",
@@ -44,6 +70,7 @@
   "quran-in-year-cta": "Bacaan Minggu Ini",
   "quran-in-year-verse-title": "Sepotong ayat dari bacaan minggu ini",
   "ramadan-activities-cta": "<link> Ikuti <b> Kalendar Al-Quran Global </b> untuk bacaan mingguan, podcast yang memberi inspirasi dan panggilan untuk merenung! </link>",
+  "ramadan-challenge": "Sertai Cabaran Ramadan",
   "ramadan": {
     "header": "Alat untuk Memperdalam Hubungan Anda dengan Al-Quran",
     "title": "Bersedia untuk Ramadan?"

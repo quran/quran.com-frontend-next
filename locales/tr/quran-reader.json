@@ -238,6 +238,12 @@
   "trans-change": "Değiştir",
   "translation-by": "Çeviri:",
   "translation-feedback": {
+    "disclaimer": {
+      "content": "Kur'an tercümelerinin anlaşılırlığını artırmadaki yardımınız için teşekkür ederiz. Tüm tercümeler, Kur'an'ın anlamını aktarmaya yönelik insan çabalarıdır; orijinal Arapça metin ise Allah'ın (SWT) değiştirilmemiş ve mükemmel Sözleri olarak kalır. Bazı sorunlar ekibimiz tarafından hızlıca çözülebilir ve \\n en kısa sürede bu değişiklikleri yapacağız. Diğerleri \\n ilgili çevirmenlere veya kuruluşlara iletilmesi gerekecek ve bu daha fazla zaman alabilir. Her gönderiyi inceliyor ve kaydediyoruz ve sizin katkılarınız herkes için deneyimi geliştirmeye devam etmemize yardımcı oluyor. Katkınız \\n Kur'an'ı destekleme niyetiniz için Allah (SWT) \\n ödüllendirsin.",
+      "learn-more": "Daha fazla bilgi edin",
+      "see-less": "Daha az göster",
+      "title": "Geri bildirimimi gönderdikten sonra ne olur?"
+    },
     "feedback": "Geri bildirim",
     "no-translations-in-preferences": "Tercihlerinizde çeviri yok.",
     "placeholder": "Bu ayetin seçilen çevirisiyle ilgili bir sorunu bildirmek için bu alanı kullanın.",

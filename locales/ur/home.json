@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "اپنے قرآنی اہداف حاصل کریں۔",
+  "apps": {
+    "description": "قرآن کے ساتھ آپ کی ترقی کو آگے بڑھانے کے لیے مربوط ایپس۔",
+    "featured-apps": "نمایاں ایپس",
+    "qariah": {
+      "description": "خواتین تلاوت قرآن",
+      "name": "قریہ"
+    },
+    "quran-android": {
+      "description": "Quran.com برائے اینڈرائیڈ",
+      "name": "قرآن اینڈرائیڈ"
+    },
+    "quran-ios": {
+      "description": "قرآن ڈاٹ کام برائے آئی فون",
+      "name": "قرآن iOS"
+    },
+    "quran-space": {
+      "description": "لائیو اسٹڈی سرکل",
+      "name": "قرآن کی جگہ"
+    },
+    "quranreflect": {
+      "description": "مظاہر پڑھیں اور شیئر کریں۔",
+      "name": "قرآن کی عکاسی"
+    },
+    "see-more": "مزید دیکھیں",
+    "title": "قرآن ایپس"
+  },
   "begin": "شروع کریں",
   "calendar-cta": "کیلنڈر",
   "chapters-and-verses": "سورتیں اور آیات",
@@ -44,6 +70,7 @@
   "quran-in-year-cta": "اس ہفتے کا مطالعہ",
   "quran-in-year-verse-title": "اس ہفتے کی تلاوت میں سے ایک آیت",
   "ramadan-activities-cta": "<link>ہفتہ وار تلاوت، متاثر کن پوڈکاسٹس، اور تدبر کی دعوت کے لیے <b>عالمی قرآنی کیلنڈر</b> کی پیروی کریں!</link>",
+  "ramadan-challenge": "رمضان چیلنج میں شامل ہوں۔",
   "ramadan": {
     "header": "قرآن سے تعلق مضبوط کرنے کے وسائل",
     "title": "کیا آپ رمضان کے لیے تیار ہیں؟"

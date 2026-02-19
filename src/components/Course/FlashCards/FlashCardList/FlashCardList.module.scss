@@ -72,7 +72,7 @@
 }
 
 .arabicText {
-  font-family: 'Kitab', 'UthmanicHafs', var(--font-family-figtree);
+  font-family: var(--font-family-kitab);
   font-size: var(--font-size-large2);
   line-height: var(--flashcard-list-arabic-line-height);
   color: var(--color-text-default);

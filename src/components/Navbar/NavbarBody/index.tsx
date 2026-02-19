@@ -133,8 +133,8 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { openSearchDrawer, openNavigationDrawer, openLanguageDrawer } = useNavbarDrawerActions();
 
   const bannerProps = {
-    text: t('join-ramadan-challenge'),
-    ctaButtonText: t('learn-more'),
+    text: t('contribute-to-our-mission'),
+    ctaButtonText: t('donate'),
   };
 
   return (

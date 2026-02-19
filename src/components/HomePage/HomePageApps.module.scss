@@ -1,0 +1,160 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2-px);
+
+  @include breakpoints.tablet {
+    gap: var(--spacing-large-px);
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall);
+}
+
+.title {
+  font-size: var(--font-size-xlarge-px);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default-new);
+  line-height: 1;
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xxlarge-px);
+  }
+}
+
+.subtitle {
+  font-size: var(--font-size-small-px);
+  color: var(--color-text-faded-new);
+  line-height: 1;
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+  }
+}
+
+.appsContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: var(--spacing-xxsmall-px);
+  background-color: var(--color-background-elevated-new);
+  padding: var(--spacing-medium2-px);
+  border-radius: var(--border-radius-rounded);
+
+  @include breakpoints.tablet {
+    gap: var(--spacing-small-px);
+  }
+
+  @include theme.light {
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  @include theme.dark {
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  @include theme.sepia {
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.appsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-small-px);
+
+  .featured {
+    font-size: var(--font-size-small-px);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-default-new);
+    line-height: 1;
+
+    @include breakpoints.tablet {
+      font-size: var(--font-size-normal-px);
+    }
+  }
+
+  .seeMoreLink {
+    font-size: var(--font-size-small-px);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-faded-new);
+    line-height: 1;
+    text-underline-offset: var(--spacing-micro2-px);
+    text-decoration: underline;
+
+    @include breakpoints.tablet {
+      font-size: var(--font-size-normal-px);
+    }
+
+    &:hover {
+      color: var(--color-text-default-new);
+    }
+  }
+}
+
+.apps {
+  display: flex;
+  gap: var(--spacing-small-px);
+  justify-content: space-between;
+
+  @include breakpoints.mobileL {
+    justify-content: space-evenly;
+  }
+}
+
+.appCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  flex: 1;
+
+  padding-block: calc(var(--spacing-small-plus-px) * 2);
+}
+
+.appIconImage {
+  object-fit: cover;
+  overflow: hidden;
+  min-block-size: calc(var(--spacing-medium-plus-px) * 2.75);
+  block-size: calc(var(--spacing-medium-plus-px) * 2.75);
+  aspect-ratio: 1;
+  margin-block-end: var(--spacing-small-px);
+  border-radius: var(--border-radius-small-px);
+  box-shadow: 0px 1px 2px 0px #00000040;
+}
+
+.appName {
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default-new);
+  margin-block-end: var(--spacing-xxsmall-px);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-small-px);
+  }
+}
+
+.appDescription {
+  font-size: calc(var(--font-size-normal-px) * 0.5);
+  color: var(--color-text-faded-new);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xsmall-px);
+  }
+}
+
+// Hide Quran iOS and Android on mobile devices
+.quran-ios,
+.quran-android {
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}

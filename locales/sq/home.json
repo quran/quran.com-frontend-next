@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Arritni qëllimet tuaja të Kuranit",
+  "apps": {
+    "description": "Aplikacione të lidhura për të çuar më tej rritjen tuaj me Kuranin.",
+    "featured-apps": "Aplikacione të veçuara",
+    "qariah": {
+      "description": "Gratë recituese të Kuranit",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com për Android",
+      "name": "Kurani për Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com për iPhone",
+      "name": "Kurani për iOS"
+    },
+    "quran-space": {
+      "description": "Rrethi i Studimit të Drejtpërdrejtë",
+      "name": "Hapësira e Kuranit"
+    },
+    "quranreflect": {
+      "description": "Lexo dhe Ndani Reflektimet",
+      "name": "Reflektimi i Kuranit"
+    },
+    "see-more": "Shiko më shumë",
+    "title": "Aplikacionet e Kuranit"
+  },
   "begin": "Filloni",
   "calendar-cta": "Kalendari",
   "chapters-and-verses": "Kapitujt dhe vargjet",
@@ -44,6 +70,7 @@
   "quran-in-year-cta": "Leximi i kësaj jave",
   "quran-in-year-verse-title": "Një varg nga leximi i kësaj jave",
   "ramadan-activities-cta": "<link> Ndiqni <b> Kalendarin Global Kur'anor </b> për lexime javore, podkaste frymëzuese dhe thirrje për të reflektuar! </link>",
+  "ramadan-challenge": "Bashkohuni me Sfidën e Ramazanit",
   "ramadan": {
     "header": "Mjete për të thelluar lidhjen tuaj me Kuranin",
     "title": "Gati për Ramazan?"

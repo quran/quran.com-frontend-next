@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Достигните своих целей в Коране",
+  "apps": {
+    "description": "Встроенные приложения для дальнейшего развития ваших знаний Корана.",
+    "featured-apps": "Рекомендуемые приложения",
+    "qariah": {
+      "description": "Женщины-чтецы Корана",
+      "name": "Кариа"
+    },
+    "quran-android": {
+      "description": "Quran.com для Android",
+      "name": "Коран Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com для iPhone",
+      "name": "Коран iOS"
+    },
+    "quran-space": {
+      "description": "Живой учебный кружок",
+      "name": "Пространство Корана"
+    },
+    "quranreflect": {
+      "description": "Читайте и делитесь своими размышлениями",
+      "name": "QuranReflect"
+    },
+    "see-more": "Смотрите больше",
+    "title": "Приложения для чтения Корана"
+  },
   "begin": "Начинать",
   "calendar-cta": "Календарь",
   "chapters-and-verses": "Суры и аяты",
@@ -44,6 +70,7 @@
   "quran-in-year-cta": "Чтение этой недели",
   "quran-in-year-verse-title": "Аят из чтения этой недели",
   "ramadan-activities-cta": "<link> Следите за <b> Всемирным календарем Корана </b> чтобы еженедельно читать отрывки из Корана, слушать вдохновляющие подкасты и получать призывы к размышлениям! </link>",
+  "ramadan-challenge": "Присоединяйтесь к Рамадану!",
   "ramadan": {
     "header": "Инструменты для углубления вашей связи с Кораном",
     "title": "Готовы к Рамадану?"

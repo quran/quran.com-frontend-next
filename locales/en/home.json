@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Achieve Your Quran Goals",
+  "apps": {
+    "description": "Connected apps to further your growth with the Quran.",
+    "featured-apps": "Featured Apps",
+    "qariah": {
+      "description": "Women Quran Reciters",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com for Android",
+      "name": "Quran Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com for iPhone",
+      "name": "Quran iOS"
+    },
+    "quran-space": {
+      "description": "Live Study Circle",
+      "name": "Quran Space"
+    },
+    "quranreflect": {
+      "description": "Read & Share Reflections",
+      "name": "QuranReflect"
+    },
+    "see-more": "See more",
+    "title": "Quran Apps"
+  },
   "begin": "Begin",
   "calendar-cta": "Calendar",
   "chapters-and-verses": "Chapters and Verses",
@@ -44,6 +70,7 @@
   "quran-in-year-cta": "This Week’s Reading",
   "quran-in-year-verse-title": "A verse from this week's reading",
   "ramadan-activities-cta": "<link>Follow the <b>Global Quranic Calendar</b> for weekly readings, inspiring podcasts, and a call to reflect!</link>",
+  "ramadan-challenge": "Join the Ramadan Challenge",
   "ramadan": {
     "header": "Tools to Deepen Your Connection with the Quran",
     "title": "Ready for Ramadan?"
