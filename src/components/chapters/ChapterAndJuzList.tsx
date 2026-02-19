@@ -15,6 +15,7 @@ import styles from './ChapterAndJuzList.module.scss';
 import ChapterAndJuzListSkeleton from './ChapterAndJuzListSkeleton';
 
 import CaretDownIcon from '@/icons/caret-down.svg';
+import { ayahFormatLocale } from '@/utils/chapter';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 import Chapter from 'types/Chapter';
@@ -162,7 +163,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
                   description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
-                    'common:ayahs',
+                    ayahFormatLocale(chapter.versesCount, lang),
                   )}`}
                   surahName={chapter.transliteratedName}
                   surahNumber={Number(chapter.id)}
