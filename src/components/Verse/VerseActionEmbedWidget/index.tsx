@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
@@ -24,6 +25,7 @@ const VerseActionEmbedWidget = ({
   onActionTriggered,
 }: VerseActionEmbedWidgetProps) => {
   const { t } = useTranslation('quran-reader');
+  const { locale } = useRouter();
 
   const onClick = () => {
     // eslint-disable-next-line i18next/no-literal-string
@@ -36,7 +38,8 @@ const VerseActionEmbedWidget = ({
 
     // Open widget builder with the selected verse in a new tab
     const versesParam = `${surah}:${ayah}`;
-    const url = `/embed?verses=${encodeURIComponent(versesParam)}`;
+    const localePrefix = locale === 'en' ? '' : `/${locale}`;
+    const url = `${localePrefix}/embed?verses=${encodeURIComponent(versesParam)}`;
     navigateToExternalUrl(url);
 
     if (onActionTriggered) {
