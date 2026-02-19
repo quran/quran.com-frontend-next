@@ -26,13 +26,13 @@ describe('FlashCardDeck', () => {
     const onComplete = vi.fn();
 
     render(<FlashCardDeck cards={cards} onComplete={onComplete} />);
-    fireEvent.click(screen.getByRole('button', { name: 'Mark as known' }));
+    fireEvent.click(screen.getByTestId('flashcard-deck-know-button'));
 
     act(() => {
       vi.advanceTimersByTime(SWIPE_ANIMATION_MS);
     });
 
-    expect(screen.getByText('All done!')).toBeDefined();
+    expect(screen.getByText(/flashcards\.all-done|All done!/u)).toBeDefined();
     expect(onComplete).toHaveBeenCalledWith({ known: [cards[0]], unknown: [] });
   });
 });

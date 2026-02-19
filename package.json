@@ -79,6 +79,7 @@
     "@sanity/client": "^5.2.1",
     "@sanity/image-url": "^1.0.2",
     "@sentry/nextjs": "^9.19.0",
+    "@sentry/profiling-node": "9.19.0",
     "@types/crypto-js": "^4.2.2",
     "@umalqura/core": "^0.0.7",
     "@xstate/react": "^3.0.1",

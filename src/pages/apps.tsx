@@ -16,7 +16,7 @@ import useDebounce from '@/hooks/useDebounce';
 import GlobeIcon from '@/icons/globe.svg';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
-import { logButtonClick, logTextSearchQuery, logValueChange } from '@/utils/eventLogger';
+import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { getBasePath } from '@/utils/url';
@@ -156,7 +156,7 @@ const getFeaturedApps = (t: (key: string) => string): FeaturedApp[] => [
     description: t('featured.apps.quran-space.headline'),
     iconSrc: '/images/app-portal/featured/quran-space-icon.png',
     iconAlt: 'Quran Space',
-    webHref: 'https://spaces.labs.quran.com/',
+    webHref: 'https://quran.space/',
   },
   {
     id: 'quranreflect',
@@ -321,33 +321,15 @@ const Hero: FC<HeroProps> = ({ title, description }) => (
 
 interface AppCtaRowProps extends AppLinks {
   appId: string;
-  appName: string;
   ctaLabels: AppCtaLabels;
-  eventName: string;
-  categories?: AppCategory[];
 }
 
-const AppCtaRow: FC<AppCtaRowProps> = ({
-  androidHref,
-  iosHref,
-  webHref,
-  appId,
-  appName,
-  ctaLabels,
-  eventName,
-  categories,
-}) => {
-  if (!androidHref && !iosHref && !webHref) {
-    return null;
-  }
+const AppCtaRow: FC<AppCtaRowProps> = ({ androidHref, iosHref, webHref, appId, ctaLabels }) => {
+  if (!androidHref && !iosHref && !webHref) return null;
 
   const handleClick = (platform: AppPlatform) => {
-    logButtonClick(eventName, {
-      appId,
-      appName,
-      platform,
-      ...(categories ? { categories } : {}),
-    });
+    const normalizedAppId = appId.replaceAll('-', '_');
+    logButtonClick(`app_portal_${normalizedAppId}_${platform}`);
   };
 
   return (
@@ -428,12 +410,10 @@ const FeaturedCard: FC<{
       <p className={styles.appDescription}>{app.description}</p>
       <AppCtaRow
         appId={app.id}
-        appName={app.name}
         androidHref={app.androidHref}
         iosHref={app.iosHref}
         webHref={app.webHref}
         ctaLabels={ctaLabels}
-        eventName="app_portal_featured_app_cta"
       />
     </div>
   </article>
@@ -446,22 +426,28 @@ interface FeaturedAppsProps {
   ctaLabels: AppCtaLabels;
 }
 
-const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps, ctaLabels }) => (
-  <section className={styles.section}>
-    <div className={styles.sectionHeader}>
-      <h2 className={styles.sectionTitle}>{title}</h2>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <a className={styles.sectionLink} href="#browse-apps">
-        {viewAllText}
-      </a>
-    </div>
-    <div className={styles.featuredGrid}>
-      {apps.map((app) => (
-        <FeaturedCard key={app.id} app={app} ctaLabels={ctaLabels} />
-      ))}
-    </div>
-  </section>
-);
+const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps, ctaLabels }) => {
+  return (
+    <section className={styles.section}>
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.sectionTitle}>{title}</h2>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <a
+          className={styles.sectionLink}
+          href="#browse-apps"
+          onClick={() => logButtonClick('app_portal_featured_view_all')}
+        >
+          {viewAllText}
+        </a>
+      </div>
+      <div className={styles.featuredGrid}>
+        {apps.map((app) => (
+          <FeaturedCard key={app.id} app={app} ctaLabels={ctaLabels} />
+        ))}
+      </div>
+    </section>
+  );
+};
 
 const AppTileCard: FC<{
   app: AppTile;
@@ -487,13 +473,10 @@ const AppTileCard: FC<{
       <p className={styles.appDescription}>{app.description}</p>
       <AppCtaRow
         appId={app.id}
-        appName={app.title}
         androidHref={app.androidHref}
         iosHref={app.iosHref}
         webHref={app.webHref}
         ctaLabels={ctaLabels}
-        eventName="app_portal_app_tile_cta"
-        categories={app.categories}
       />
     </div>
   </article>
@@ -582,13 +565,11 @@ const BrowseApps: FC<BrowseAppsProps> = ({
     });
   }, [activeFilter, searchQuery, apps]);
 
-  const handleFilterChange = useCallback(
-    (filter: FilterValue) => {
-      logValueChange('app_portal_filter', activeFilter, filter);
-      setActiveFilter(filter);
-    },
-    [activeFilter],
-  );
+  const handleFilterChange = useCallback((filter: FilterValue) => {
+    const normalizeFilter = filter?.toLowerCase().replaceAll('-', '_');
+    logButtonClick(`app_portal_${normalizeFilter}_tab`);
+    setActiveFilter(filter);
+  }, []);
 
   const handleSearchChange = useCallback((query: string) => {
     setSearchQuery(query);

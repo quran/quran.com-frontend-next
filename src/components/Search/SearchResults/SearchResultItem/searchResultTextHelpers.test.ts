@@ -15,6 +15,7 @@ import { Direction } from '@/utils/locale';
 vi.mock('@/utils/locale', () => ({
   toLocalizedNumber: vi.fn((num) => `${num}`),
   toLocalizedVerseKey: vi.fn((key) => `KEY:${key}`),
+  toLocalizedVerseKeyRTL: vi.fn((key) => `RTLKEY:${key}`),
   isRTLLocale: vi.fn((lang) => lang === 'ar'),
   Direction: {
     LTR: 'ltr',
@@ -81,8 +82,17 @@ describe('searchResultTextHelpers', () => {
       const result = { resultType: SearchNavigationType.AYAH } as any;
       const data = getVerseTextData(result, '1:1', '1', {}, {}, 'en');
       expect(data.isAyahResult).toBe(true);
+      expect(data.arabicSuffixParts).toContain('RTLKEY:1:1');
       expect(data.arabicSuffixParts).toContain('الفاتحة');
       expect(data.translationSuffixParts).toContain('Al-Fatihah');
+      expect(data.translationSuffixParts).toContain('KEY:1:1');
+    });
+
+    it('uses RTL verse key in translation suffix when site language is Arabic', () => {
+      const result = { resultType: SearchNavigationType.AYAH } as any;
+      const data = getVerseTextData(result, '2:255', '1', {}, {}, 'ar');
+      expect(data.translationSuffixParts).toContain('RTLKEY:2:255');
+      expect(data.translationSuffixParts).not.toContain('KEY:2:255');
     });
   });
 
