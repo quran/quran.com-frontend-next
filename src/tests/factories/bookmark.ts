@@ -15,4 +15,4 @@ const defaults: Bookmark = {
 };
 
 export const makeBookmark = (overrides: Partial<Bookmark> = {}): Bookmark =>
-  merge({ ...defaults }, overrides) as Bookmark;
+  merge({}, defaults, overrides) as Bookmark;

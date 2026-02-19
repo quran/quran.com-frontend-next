@@ -13,6 +13,11 @@ import { server } from './msw/server';
  */
 vi.mock('@/redux/defaultSettings/util');
 
-beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
+// Use 'error' so any request that reaches the network without a handler fails the test
+// immediately, rather than logging a warning that is easy to miss in CI output.
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+// resetHandlers() restores the default handler list defined in handlers.ts.
+// The Vitest ESM handlers have no shared in-memory data store, so this is
+// sufficient to guarantee full test isolation — no clearTestData() call needed.
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());

@@ -9,4 +9,4 @@ const defaults: AudioState = {
 };
 
 export const makeAudioPlayerState = (overrides: Partial<AudioState> = {}): AudioState =>
-  merge({ ...defaults }, overrides) as AudioState;
+  merge({}, defaults, overrides) as AudioState;

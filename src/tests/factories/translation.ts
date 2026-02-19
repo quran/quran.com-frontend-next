@@ -11,4 +11,4 @@ const defaults: Translation = {
 };
 
 export const makeTranslation = (overrides: Partial<Translation> = {}): Translation =>
-  merge({ ...defaults }, overrides) as Translation;
+  merge({}, defaults, overrides) as Translation;

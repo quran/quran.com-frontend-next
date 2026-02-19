@@ -13,4 +13,4 @@ const defaults: Collection = {
 };
 
 export const makeCollection = (overrides: Partial<Collection> = {}): Collection =>
-  merge({ ...defaults }, overrides) as Collection;
+  merge({}, defaults, overrides) as Collection;

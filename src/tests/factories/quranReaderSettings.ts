@@ -22,4 +22,4 @@ const defaults: QuranReaderStyles = {
 
 export const makeQuranReaderSettings = (
   overrides: Partial<QuranReaderStyles> = {},
-): QuranReaderStyles => merge({ ...defaults }, overrides) as QuranReaderStyles;
+): QuranReaderStyles => merge({}, defaults, overrides) as QuranReaderStyles;

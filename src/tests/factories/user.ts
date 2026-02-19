@@ -21,4 +21,4 @@ const defaults: UserProfile = {
 };
 
 export const makeUser = (overrides: Partial<UserProfile> = {}): UserProfile =>
-  merge({ ...defaults }, overrides) as UserProfile;
+  merge({}, defaults, overrides) as UserProfile;

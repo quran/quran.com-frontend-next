@@ -5,14 +5,15 @@
  *   1. renderWithProviders renders with a real Redux store
  *   2. preloadedState is reflected in store.getState()
  *   3. Factories produce valid typed objects
- *   4. MSW intercepts network requests made by SWR
+ *   4. MSW intercepts network requests (fetch intercepted by MSW handler)
+ *   5. AuthContext is available with guest defaults
  *
  * i18n note: components that call useTranslation() must mock it:
  *   vi.mock('next-translate/useTranslation', () => ({
  *     default: () => ({ t: (key: string) => key, lang: 'en' }),
  *   }));
  */
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { describe, expect, it } from 'vitest';
 
@@ -20,6 +21,7 @@ import { makeVerse } from '../factories';
 
 import { renderWithProviders } from './render';
 
+import { AuthContext } from '@/contexts/AuthContext';
 import ThemeType from '@/redux/types/ThemeType';
 
 describe('Phase 1 — Foundation smoke tests', () => {
@@ -47,5 +49,24 @@ describe('Phase 1 — Foundation smoke tests', () => {
       direction: 'rtl',
     });
     expect(container).toBeTruthy();
+  });
+
+  it('AuthContext is available with guest defaults (isLoading=false)', () => {
+    let capturedAuth: ReturnType<typeof useContext<typeof AuthContext>> | undefined;
+    function AuthConsumer() {
+      capturedAuth = useContext(AuthContext);
+      return null;
+    }
+    renderWithProviders(<AuthConsumer />);
+    expect(capturedAuth).toBeDefined();
+    expect(capturedAuth?.state.isAuthenticated).toBe(false);
+    expect(capturedAuth?.state.isLoading).toBe(false);
+  });
+
+  it('MSW intercepts fetch requests for registered handlers', async () => {
+    const response = await fetch('/api/proxy/preferences/country-language?locale=en-US');
+    expect(response.ok).toBe(true);
+    const data = await response.json();
+    expect(data).toBeDefined();
   });
 });

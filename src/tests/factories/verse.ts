@@ -19,4 +19,4 @@ const defaults: Verse = {
 };
 
 export const makeVerse = (overrides: Partial<Verse> = {}): Verse =>
-  merge({ ...defaults }, overrides) as Verse;
+  merge({}, defaults, overrides) as Verse;
