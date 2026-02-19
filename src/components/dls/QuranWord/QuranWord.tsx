@@ -253,9 +253,6 @@ const QuranWord = ({
 
     if (isRecitationEnabled && word.charTypeName === CharType.Word && !showTooltip) {
       handleWordAction();
-      logButtonClick(`study_mode_open_word_${modeSuffix}`, { verseKey: word.verseKey });
-      dispatch(setReadingViewHoveredVerseKey(null));
-      dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
       return;
     }
 
