@@ -38,7 +38,7 @@ const HomePageApps: React.FC = () => {
       description: t('apps.qariah.description'),
       iconSrc: '/images/app-portal/featured/qaariah-icon.webp',
       iconAlt: t('apps.qariah.name'),
-      href: 'https://qariah.app/',
+      href: 'https://qariah.app',
     },
     {
       id: 'quran-space',
@@ -46,7 +46,7 @@ const HomePageApps: React.FC = () => {
       description: t('apps.quran-space.description'),
       iconSrc: '/images/app-portal/quran-space-100.jpg',
       iconAlt: t('apps.quran-space.name'),
-      href: 'https://quran.space/',
+      href: 'https://spaces.labs.quran.com',
     },
     {
       id: 'quran-ios',
@@ -54,7 +54,7 @@ const HomePageApps: React.FC = () => {
       description: t('apps.quran-ios.description'),
       iconSrc: '/images/app-portal/qdc-ios-logo.webp',
       iconAlt: t('apps.quran-ios.name'),
-      href: 'https://apps.apple.com/us/app/quran-by-quran-com-قرآن/id1118663303',
+      href: 'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303',
     },
     {
       id: 'quran-android',
@@ -87,11 +87,9 @@ const HomePageApps: React.FC = () => {
           {apps.map((app) => (
             <Link
               key={app.id}
+              href={APPS_URL}
               className={classNames(styles.appCard, styles[app.id])}
               onClick={() => handleAppClick(app.id)}
-              href={app.href}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={app.iconSrc} alt={app.iconAlt} className={styles.appIconImage} />

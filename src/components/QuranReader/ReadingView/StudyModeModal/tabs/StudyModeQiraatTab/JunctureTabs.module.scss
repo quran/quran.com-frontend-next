@@ -32,7 +32,7 @@
   block-size: calc(var(--spacing-small-plus-px) * 4);
   padding-inline: var(--spacing-medium-px);
   border-radius: var(--border-radius-pill);
-  background-color: var(--color-background-alternative-faint);
+  background-color: var(--color-background-alternative-medium);
   color: var(--color-text-default-new);
   line-height: 1;
   font-weight: var(--font-weight-medium);
@@ -40,8 +40,8 @@
   transition: background-color var(--transition-fast), transform var(--transition-fast);
 
   &:where(:hover, :focus-visible, [aria-selected='true']):not(:disabled) {
-    background-color: var(--color-success-medium);
-    color: var(--color-text-inverse);
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
   }
 
   &:active:not(:disabled) {

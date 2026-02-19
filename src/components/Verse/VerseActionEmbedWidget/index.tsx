@@ -5,7 +5,6 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import CodeIcon from '@/icons/code-embed.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { navigateToExternalUrl } from '@/utils/url';
 import Verse from 'types/Verse';
 
 type VerseActionEmbedWidgetProps = {
@@ -25,7 +24,7 @@ const VerseActionEmbedWidget = ({
   onActionTriggered,
 }: VerseActionEmbedWidgetProps) => {
   const { t } = useTranslation('quran-reader');
-  const { locale } = useRouter();
+  const router = useRouter();
 
   const onClick = () => {
     // eslint-disable-next-line i18next/no-literal-string
@@ -36,11 +35,8 @@ const VerseActionEmbedWidget = ({
     const surah = Number(surahStr);
     const ayah = Number(ayahStr);
 
-    // Open widget builder with the selected verse in a new tab
-    const versesParam = `${surah}:${ayah}`;
-    const localePrefix = locale === 'en' ? '' : `/${locale}`;
-    const url = `${localePrefix}/embed?verses=${encodeURIComponent(versesParam)}`;
-    navigateToExternalUrl(url);
+    // Navigate to widget builder with the selected verse
+    router.push(`/embed/${surah}/${ayah}`);
 
     if (onActionTriggered) {
       onActionTriggered();

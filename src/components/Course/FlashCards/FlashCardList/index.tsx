@@ -1,7 +1,7 @@
+/* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 
 import styles from './FlashCardList.module.scss';
 
@@ -16,10 +16,6 @@ type FlashCardListProps = {
   className?: string;
 };
 
-const MASTERED_ICON = '\u2713';
-const EXPANDED_ICON = '\u25b2';
-const COLLAPSED_ICON = '\u25bc';
-
 const FlashCardList: React.FC<FlashCardListProps> = ({
   cards,
   expandedCards,
@@ -28,8 +24,6 @@ const FlashCardList: React.FC<FlashCardListProps> = ({
   onToggleMastered,
   className,
 }) => {
-  const { t } = useTranslation('learn');
-
   return (
     <div className={classNames(styles.container, className)}>
       <div className={styles.cardsList}>
@@ -73,27 +67,18 @@ const FlashCardList: React.FC<FlashCardListProps> = ({
                       e.stopPropagation();
                       onToggleMastered(card.id);
                     }}
-                    aria-label={
-                      isMastered
-                        ? t('flashcards.mark-as-not-mastered')
-                        : t('flashcards.mark-as-mastered')
-                    }
+                    aria-label={isMastered ? 'Mark as not mastered' : 'Mark as mastered'}
                   >
-                    {isMastered ? MASTERED_ICON : null}
+                    {isMastered ? '✓' : null}
                   </button>
-                  <span className={styles.expandIcon}>
-                    {isExpanded ? EXPANDED_ICON : COLLAPSED_ICON}
-                  </span>
+                  <span className={styles.expandIcon}>{isExpanded ? '▲' : '▼'}</span>
                 </div>
               </div>
 
               {isExpanded && (
                 <div className={styles.cardBody}>
                   <div className={styles.translation}>
-                    <span className={styles.translationLabel}>
-                      {t('flashcards.translation-label')}
-                    </span>{' '}
-                    {card.translation}
+                    <span className={styles.translationLabel}>Translation:</span> {card.translation}
                   </div>
                 </div>
               )}

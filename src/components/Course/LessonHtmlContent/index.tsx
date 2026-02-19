@@ -1,7 +1,5 @@
 import React, { useMemo, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
-
 import styles from './LessonHtmlContent.module.scss';
 import VerseChunkWidget from './VerseChunkWidget';
 
@@ -13,23 +11,23 @@ import parseFlashcardsFromHtml from '@/utils/flashcardParser';
 import { ContentChunk, parseContentChunks } from '@/utils/lessonContentParser';
 import parseLessonQuizFromHtml from '@/utils/lessonQuizParser';
 
+const VARIANT_CONFIG = {
+  [FlashCardVariant.List]: {
+    subtitle: 'Tap to expand, mark words as mastered',
+  },
+  [FlashCardVariant.Carousel]: {
+    subtitle: 'Swipe through cards, tap to flip',
+  },
+  [FlashCardVariant.Deck]: {
+    subtitle: 'Swipe right if you know it, left to review',
+  },
+};
+
 type Props = {
   content: string;
   language: string;
   lessonSlug: string;
   courseSlug: string;
-};
-
-const FLASHCARD_VARIANT_CONFIG: Record<FlashCardVariant, { subtitleKey: string }> = {
-  [FlashCardVariant.List]: {
-    subtitleKey: 'flashcards.list-subtitle',
-  },
-  [FlashCardVariant.Carousel]: {
-    subtitleKey: 'flashcards.carousel-subtitle',
-  },
-  [FlashCardVariant.Deck]: {
-    subtitleKey: 'flashcards.deck-subtitle',
-  },
 };
 
 const renderChunks = (chunks: ContentChunk[], keyPrefix = '') =>
@@ -56,7 +54,6 @@ const toggleInSet = (set: Set<string>, item: string) => {
 };
 
 const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, courseSlug }) => {
-  const { t } = useTranslation('learn');
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [masteredCards, setMasteredCards] = useState<Set<string>>(new Set());
 
@@ -86,7 +83,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
   }
 
   if (flashcardData) {
-    const { subtitleKey } = FLASHCARD_VARIANT_CONFIG[flashcardData.variant];
+    const { subtitle } = VARIANT_CONFIG[flashcardData.variant];
     const isListVariant = flashcardData.variant === FlashCardVariant.List;
     const allExpanded =
       flashcardData.flashcards.length > 0 && expandedCards.size === flashcardData.flashcards.length;
@@ -100,15 +97,12 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
           <div className={styles.flashcardHeader}>
             <div className={styles.flashcardHeaderText}>
               <h4 className={styles.flashcardTitle}>{flashcardData.headingText}</h4>
-              <span className={styles.flashcardSubtitle}>{t(subtitleKey)}</span>
+              <span className={styles.flashcardSubtitle}>{subtitle}</span>
             </div>
             {isListVariant && (
               <div className={styles.flashcardHeaderActions}>
                 <span className={styles.flashcardProgress}>
-                  {t('flashcards.mastered-progress', {
-                    mastered: masteredCards.size,
-                    total: flashcardData.flashcards.length,
-                  })}
+                  {`${masteredCards.size} / ${flashcardData.flashcards.length} mastered`}
                 </span>
                 <button
                   type="button"
@@ -119,7 +113,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
                     )
                   }
                 >
-                  {allExpanded ? t('flashcards.collapse-all') : t('flashcards.expand-all')}
+                  {allExpanded ? 'Collapse All' : 'Expand All'}
                 </button>
               </div>
             )}

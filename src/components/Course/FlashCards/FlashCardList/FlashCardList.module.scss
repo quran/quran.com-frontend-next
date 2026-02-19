@@ -1,13 +1,6 @@
 @use 'src/styles/breakpoints';
 
 .container {
-  --flashcard-list-mastered-button-size: 28px;
-  --flashcard-list-expand-icon-font-size: 0.625rem;
-  --flashcard-list-arabic-line-height: 1.4;
-  --flashcard-list-translation-line-height: 1.5;
-  --flashcard-list-hover-shadow: 0 var(--spacing-micro-px) var(--spacing-xsmall-px)
-    rgba(0, 0, 0, 0.08);
-
   display: flex;
   flex-direction: column;
   padding: var(--spacing-medium);
@@ -21,15 +14,15 @@
 
 .cardItem {
   background-color: var(--color-background-elevated);
-  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-rounded);
   cursor: pointer;
-  transition: all var(--transition-moderate) ease;
+  transition: all 0.2s ease;
   overflow: hidden;
 
   &:hover {
     border-color: var(--color-primary-faded);
-    box-shadow: var(--flashcard-list-hover-shadow);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   &.mastered {
@@ -50,15 +43,15 @@
 }
 
 .cardNumber {
-  inline-size: var(--spacing-medium3-px);
-  block-size: var(--spacing-medium3-px);
+  inline-size: 24px;
+  block-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--color-background-alternative-medium);
   border-radius: var(--border-radius-circle);
-  font-size: var(--font-size-xsmall);
-  font-weight: var(--font-weight-semibold);
+  font-size: 0.75rem;
+  font-weight: 600;
   color: var(--color-text-faded);
   flex-shrink: 0;
 }
@@ -73,19 +66,19 @@
 
 .arabicText {
   font-family: var(--font-family-kitab);
-  font-size: var(--font-size-large2);
-  line-height: var(--flashcard-list-arabic-line-height);
+  font-size: 1.25rem;
+  line-height: 1.4;
   color: var(--color-text-default);
   direction: rtl;
-  transition: color var(--transition-moderate) ease;
+  transition: color 0.2s ease;
 
   @include breakpoints.tablet {
-    font-size: var(--font-size-xlarge);
+    font-size: 1.5rem;
   }
 }
 
 .transliteration {
-  font-size: var(--font-size-small);
+  font-size: 0.875rem;
   color: var(--color-text-faded);
   font-style: italic;
 }
@@ -97,18 +90,18 @@
 }
 
 .masteredButton {
-  inline-size: var(--flashcard-list-mastered-button-size);
-  block-size: var(--flashcard-list-mastered-button-size);
+  inline-size: 28px;
+  block-size: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: none;
-  border: var(--border-width-small-px) solid var(--color-borders-hairline);
+  border: 2px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-circle);
   cursor: pointer;
-  font-size: var(--font-size-small);
+  font-size: 0.875rem;
   color: var(--color-text-faded);
-  transition: all var(--transition-moderate) ease;
+  transition: all 0.2s ease;
 
   &:hover {
     border-color: var(--color-success-medium);
@@ -123,23 +116,21 @@
 }
 
 .expandIcon {
-  font-size: var(--flashcard-list-expand-icon-font-size);
+  font-size: 0.625rem;
   color: var(--color-text-faded);
 }
 
 .cardBody {
   padding: var(--spacing-small) var(--spacing-medium);
   padding-block-start: 0;
-  padding-inline-start: calc(
-    var(--spacing-medium3-px) + var(--spacing-medium) + var(--spacing-small)
-  );
-  animation: slideDown var(--transition-moderate) ease;
+  padding-inline-start: calc(24px + var(--spacing-medium) + var(--spacing-small));
+  animation: slideDown 0.2s ease;
 }
 
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(calc(-1 * var(--spacing-small-px)));
+    transform: translateY(-10px);
   }
 
   to {
@@ -149,10 +140,10 @@
 }
 
 .translation {
-  font-size: var(--font-size-normal);
+  font-size: 1rem;
   color: var(--color-text-default);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--flashcard-list-translation-line-height);
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .translationLabel {

@@ -11,20 +11,25 @@ import { logButtonClick } from '@/utils/eventLogger';
 
 const TOPICS = [
   {
-    slug: 'what-is-ramadan',
-    logKey: 'what-is-ramadan',
-    key: 'what-is-ramadan',
-    isHighlighted: true,
-  },
-  {
     slug: 'about-the-quran',
     logKey: 'about-quran',
     key: 'about-quran',
+    isHighlighted: true,
   },
+  // {
+  //   slug: 'jesus-in-the-quran',
+  //   logKey: 'jesus-in-quran',
+  //   key: 'jesus-in-quran',
+  // },
   {
     slug: 'collections/the-authority-and-importance-of-the-sunnah-clem7p7lf15921610rsdk4xzulfj',
     key: 'sunnah',
     logKey: 'sunnah_collection',
+  },
+  {
+    slug: 'what-is-ramadan',
+    logKey: 'what-is-ramadan',
+    key: 'what-is-ramadan',
   },
 ];
 

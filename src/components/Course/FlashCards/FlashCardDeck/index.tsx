@@ -1,7 +1,7 @@
+/* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 
 import ActiveCard from './ActiveCard';
 import CompletedView from './CompletedView';
@@ -16,11 +16,7 @@ type FlashCardDeckProps = {
   className?: string;
 };
 
-const REVIEW_ICON = '\u2715';
-const KNOW_ICON = '\u2713';
-
 const FlashCardDeck: React.FC<FlashCardDeckProps> = ({ cards, onComplete, className }) => {
-  const { t } = useTranslation('learn');
   const {
     currentIndex,
     currentCard,
@@ -88,22 +84,20 @@ const FlashCardDeck: React.FC<FlashCardDeckProps> = ({ cards, onComplete, classN
           className={classNames(styles.actionButton, styles.reviewButton)}
           onClick={() => handleSwipeComplete('left')}
           disabled={isAnimating}
-          data-testid="flashcard-deck-review-button"
-          aria-label={t('flashcards.mark-as-need-review')}
+          aria-label="Mark as need review"
         >
-          <span className={styles.buttonIcon}>{REVIEW_ICON}</span>
-          <span className={styles.buttonText}>{t('flashcards.review')}</span>
+          <span className={styles.buttonIcon}>&#10005;</span>
+          <span className={styles.buttonText}>Review</span>
         </button>
         <button
           type="button"
           className={classNames(styles.actionButton, styles.knowButton)}
           onClick={() => handleSwipeComplete('right')}
           disabled={isAnimating}
-          data-testid="flashcard-deck-know-button"
-          aria-label={t('flashcards.mark-as-known')}
+          aria-label="Mark as known"
         >
-          <span className={styles.buttonIcon}>{KNOW_ICON}</span>
-          <span className={styles.buttonText}>{t('flashcards.know')}</span>
+          <span className={styles.buttonIcon}>&#10003;</span>
+          <span className={styles.buttonText}>Know</span>
         </button>
       </div>
     </div>

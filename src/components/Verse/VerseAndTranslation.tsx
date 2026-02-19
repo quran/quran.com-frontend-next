@@ -1,9 +1,6 @@
 import { useMemo } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
-
-import Reference from '../QuranReader/TranslationView/TranslationText/Reference';
 
 import PlainVerseText from './PlainVerseText';
 import styles from './VerseAndTranslation.module.scss';
@@ -65,7 +62,6 @@ interface Props {
 
 const VerseAndTranslation: React.FC<Props> = (props) => {
   // If fixedFontScale is provided as a prop, use it; otherwise, get from hook (Redux)
-  const { lang } = useTranslation();
   const { fixedFontScale, chapter, ...restProps } = props;
   const {
     data,
@@ -113,15 +109,6 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
                 />
               </div>
             ))}
-            {!verse.translations?.length && shouldShowReference && (
-              <div className={styles.referenceContainer}>
-                <Reference
-                  reference={`${verse.chapterId}:${verse.verseNumber}`}
-                  chapterName={chapterData?.transliteratedName}
-                  lang={lang}
-                />
-              </div>
-            )}
           </div>
         </div>
       ))}

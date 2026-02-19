@@ -18,7 +18,7 @@ const SHEET_SAMPLES: AyahEntry[] = [
   { date: '11/10/2025', verseKey: '22:24' },
   { date: '28/11/2025', verseKey: '34:39' },
   { date: '19/01/2026', verseKey: '57:21' },
-  { date: '19/02/2026', verseKey: '2:121' },
+  { date: '19/02/2026', verseKey: '112:1' },
 ];
 
 const parseDateToTimestamp = (date: string): number => {

@@ -1,15 +1,9 @@
-.container {
-  --lesson-html-flashcard-subtitle-font-size: 0.8125rem;
-  --lesson-html-widget-skeleton-size: 200px;
-  --lesson-html-widget-translation-font-size: 22px;
-}
-
 .flashcardSection {
   display: flex;
   flex-direction: column;
   background-color: var(--color-background-default);
   border-radius: var(--border-radius-rounded);
-  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border: 1px solid var(--color-borders-hairline);
   overflow: hidden;
   margin-block: var(--spacing-medium);
 }
@@ -22,7 +16,7 @@
   gap: var(--spacing-small);
   padding: var(--spacing-medium);
   background-color: var(--color-background-alternative-faint);
-  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-block-end: 1px solid var(--color-borders-hairline);
 }
 
 .flashcardHeaderText {
@@ -32,14 +26,14 @@
 }
 
 .flashcardTitle {
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-weight-semibold);
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--color-text-default);
   margin: 0;
 }
 
 .flashcardSubtitle {
-  font-size: var(--lesson-html-flashcard-subtitle-font-size);
+  font-size: 0.8125rem;
   color: var(--color-text-faded);
 }
 
@@ -50,19 +44,19 @@
 }
 
 .flashcardProgress {
-  font-size: var(--font-size-small);
+  font-size: 0.875rem;
   color: var(--color-text-faded);
 }
 
 .flashcardHeaderButton {
   padding: var(--spacing-xxsmall) var(--spacing-small);
-  font-size: var(--font-size-xsmall);
+  font-size: 0.75rem;
   color: var(--color-text-faded);
   background: none;
-  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
   cursor: pointer;
-  transition: all var(--transition-moderate) ease;
+  transition: all 0.2s ease;
 
   &:hover {
     background-color: var(--color-background-alternative-medium);
@@ -72,7 +66,7 @@
 
 .widgetSkeleton {
   display: block;
-  block-size: var(--lesson-html-widget-skeleton-size);
+  block-size: 200px;
   margin-block: var(--spacing-medium);
   border-radius: var(--border-radius-default);
 }
@@ -82,10 +76,10 @@
 
   :global([class*='translation-font-size-']),
   :global([class*='translation-font-size-']) p {
-    font-size: var(--lesson-html-widget-translation-font-size) !important;
+    font-size: 22px !important;
   }
 
   :global([class*='translationName']) {
-    font-size: var(--font-size-small-px) !important;
+    font-size: 16px !important;
   }
 }

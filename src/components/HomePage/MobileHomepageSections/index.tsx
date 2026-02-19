@@ -20,19 +20,19 @@ type Props = {
 const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah, chaptersData }) => {
   return isUserLoggedIn ? (
     <>
-      <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-        <LearningPlansSection />
-      </div>
       {todayAyah && (
         <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
           <QuranInYearSection chaptersData={chaptersData} />
         </div>
       )}
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-        <ExploreTopicsSection />
+        <LearningPlansSection />
       </div>
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
         <CommunitySection />
+      </div>
+      <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
+        <ExploreTopicsSection />
       </div>
     </>
   ) : (

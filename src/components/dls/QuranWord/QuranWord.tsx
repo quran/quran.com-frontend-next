@@ -46,7 +46,7 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
-const TOOLTIP_HOVER_DELAY_MS = 700;
+const TOOLTIP_HOVER_DELAY_MS = 800;
 
 // IndoPak stop sign characters that require additional spacing
 const INDO_PAK_STOP_SIGN_CHARS = new Set([
@@ -253,6 +253,9 @@ const QuranWord = ({
 
     if (isRecitationEnabled && word.charTypeName === CharType.Word && !showTooltip) {
       handleWordAction();
+      logButtonClick(`study_mode_open_word_${modeSuffix}`, { verseKey: word.verseKey });
+      dispatch(setReadingViewHoveredVerseKey(null));
+      dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
       return;
     }
 

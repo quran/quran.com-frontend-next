@@ -1,23 +1,17 @@
 .quizContainer {
-  --lesson-quiz-question-line-height: 1.5;
-  --lesson-quiz-option-line-height: 1.4;
-  --lesson-quiz-disabled-opacity: 0.7;
-  --lesson-quiz-option-hover-shadow: 0 var(--spacing-micro-px) var(--spacing-xsmall-px)
-    rgba(0, 0, 0, 0.08);
-
   display: flex;
   flex-direction: column;
   margin-block: var(--spacing-medium);
   background-color: var(--color-background-default);
   border-radius: var(--border-radius-rounded);
-  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border: 1px solid var(--color-borders-hairline);
   overflow: hidden;
 }
 
 .header {
   padding: var(--spacing-medium);
   background-color: var(--color-background-alternative-faint);
-  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-block-end: 1px solid var(--color-borders-hairline);
 }
 
 .headerTitle {
@@ -36,7 +30,7 @@
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-default);
-  line-height: var(--lesson-quiz-question-line-height);
+  line-height: 1.5;
 }
 
 .optionsContainer {
@@ -53,17 +47,17 @@
   inline-size: 100%;
   gap: var(--spacing-small);
   padding: var(--spacing-small) var(--spacing-medium);
-  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-rounded);
   background-color: var(--color-background-elevated);
   font: inherit;
   text-align: start;
   cursor: pointer;
-  transition: all var(--transition-moderate) ease;
+  transition: all 0.2s ease;
 
   &:hover:not(:disabled) {
     border-color: var(--color-primary-faded);
-    box-shadow: var(--lesson-quiz-option-hover-shadow);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   &:focus {
@@ -71,13 +65,13 @@
   }
 
   &:focus-visible {
-    outline: var(--border-width-small-px) solid var(--color-borders-hairline);
-    outline-offset: var(--spacing-micro-px);
+    outline: 2px solid var(--color-borders-hairline);
+    outline-offset: 2px;
   }
 
   &:disabled {
     cursor: not-allowed;
-    opacity: var(--lesson-quiz-disabled-opacity);
+    opacity: 0.7;
   }
 }
 
@@ -88,10 +82,10 @@
 }
 
 .radioCircle {
-  inline-size: var(--spacing-medium2-px);
-  block-size: var(--spacing-medium2-px);
-  border-radius: var(--border-radius-circle);
-  border: var(--border-width-small-px) solid var(--color-borders-hairline);
+  inline-size: 20px;
+  block-size: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-borders-hairline);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,29 +97,29 @@
 }
 
 .radioInner {
-  inline-size: var(--spacing-small-px);
-  block-size: var(--spacing-small-px);
-  border-radius: var(--border-radius-circle);
+  inline-size: 10px;
+  block-size: 10px;
+  border-radius: 50%;
   background-color: var(--color-primary-medium);
 }
 
 .optionText {
   font-size: var(--font-size-normal);
   color: var(--color-text-default);
-  line-height: var(--lesson-quiz-option-line-height);
+  line-height: 1.4;
 }
 
 .resultIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  inline-size: var(--spacing-medium3-px);
-  block-size: var(--spacing-medium3-px);
+  inline-size: 24px;
+  block-size: 24px;
   flex-shrink: 0;
 
   svg {
-    inline-size: var(--spacing-medium-plus2-px);
-    block-size: var(--spacing-medium-plus2-px);
+    inline-size: 18px;
+    block-size: 18px;
   }
 }
 

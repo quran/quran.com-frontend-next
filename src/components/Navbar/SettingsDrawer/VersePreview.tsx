@@ -82,28 +82,10 @@ const VersePreview = () => {
   const hasBothTooltipTypes =
     showTooltipFor.includes(WordByWordType.Translation) &&
     showTooltipFor.includes(WordByWordType.Transliteration);
-
   const highlightedWord = useMemo(
     () =>
       (sampleVerse?.words as Word[])?.find((w) => w.position === HIGHLIGHTED_WORD_POSITION) ?? null,
     [sampleVerse?.words],
-  );
-
-  const { quranFont } = quranReaderStyles;
-  const previewWords = useMemo(
-    () =>
-      (sampleVerse?.words as Word[])?.map((word) => {
-        if (quranFont === QuranFont.QPCHafs) {
-          return { ...word, text: word.qpcUthmaniHafs ?? word.text };
-        }
-
-        if (quranFont === QuranFont.IndoPak) {
-          return { ...word, text: word.textIndopak ?? word.text };
-        }
-
-        return word;
-      }) ?? [],
-    [sampleVerse?.words, quranFont],
   );
 
   useEffect(() => {
@@ -158,7 +140,7 @@ const VersePreview = () => {
               />
             )}
             <VerseText
-              words={previewWords}
+              words={sampleVerse.words as Word[]}
               highlightedWordPosition={HIGHLIGHTED_WORD_POSITION}
               isWordInteractionDisabled
               shouldDisableForceTooltip

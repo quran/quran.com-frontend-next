@@ -3,9 +3,12 @@
 import React, { MouseEvent } from 'react';
 
 import classNames from 'classnames';
+import Link from 'next/link';
 
-import Reference from './Reference';
 import styles from './TranslationText.module.scss';
+
+import { logButtonClick } from '@/utils/eventLogger';
+import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 
 interface Props {
   text: string;
@@ -49,7 +52,16 @@ const TranslationAndReference: React.FC<Props> = ({
       {shouldShowReference && chapterName && reference && (
         <>
           {' '}
-          <Reference reference={reference} chapterName={chapterName} lang={lang} />
+          <Link
+            onClick={() => {
+              logButtonClick('translation_reference_open', { reference, chapterName, lang });
+            }}
+            href={getChapterWithStartingVerseUrl(reference)}
+            className={styles.referenceLink}
+            aria-label={`${chapterName} ${reference}`}
+          >
+            {`${chapterName} ${reference}`}
+          </Link>
         </>
       )}
     </div>

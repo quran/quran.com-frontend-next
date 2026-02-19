@@ -21,7 +21,7 @@ describe('FlashCardCarousel', () => {
 
     expect(screen.getByText('1 / 2')).toBeDefined();
 
-    fireEvent.click(screen.getByRole('button', { name: /flashcards\.next-card|Next card/u }));
+    fireEvent.click(screen.getByRole('button', { name: 'Next card' }));
     expect(screen.getByText('2 / 2')).toBeDefined();
   });
 });

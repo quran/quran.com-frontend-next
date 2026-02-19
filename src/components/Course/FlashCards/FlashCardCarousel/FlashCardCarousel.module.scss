@@ -2,23 +2,6 @@
 @use '../shared' as shared;
 
 .container {
-  --flashcard-carousel-wrapper-max-inline-size: 400px;
-  --flashcard-carousel-card-max-inline-size: 280px;
-  --flashcard-carousel-card-block-size: 180px;
-  --flashcard-carousel-card-max-inline-size-tablet: 320px;
-  --flashcard-carousel-card-block-size-tablet: 200px;
-  --flashcard-carousel-card-perspective: 1000px;
-  --flashcard-carousel-card-arabic-font-size: 1.75rem;
-  --flashcard-carousel-dots-max-inline-size: 300px;
-  --flashcard-carousel-slide-transition-duration: 0.25s;
-  --flashcard-carousel-shadow: 0 var(--spacing-micro-px) var(--spacing-xsmall-px) rgba(0, 0, 0, 0.1);
-  --flashcard-carousel-flip-transition-duration: 0.5s;
-  --flashcard-carousel-arabic-line-height: 1.6;
-  --flashcard-carousel-arabic-small-line-height: 1.4;
-  --flashcard-carousel-hint-opacity: 0.7;
-  --flashcard-carousel-nav-button-hover-scale: 1.05;
-  --flashcard-carousel-active-dot-scale: 1.2;
-
   @include shared.centeredContainer;
 }
 
@@ -26,7 +9,7 @@
   display: flex;
   align-items: center;
   inline-size: 100%;
-  max-inline-size: var(--flashcard-carousel-wrapper-max-inline-size);
+  max-inline-size: 400px;
   gap: var(--spacing-small);
 }
 
@@ -61,62 +44,52 @@
 }
 
 .slideNext {
-  animation: slideFromRight var(--flashcard-carousel-slide-transition-duration) ease-out;
+  animation: slideFromRight 0.25s ease-out;
 }
 
 .slidePrev {
-  animation: slideFromLeft var(--flashcard-carousel-slide-transition-duration) ease-out;
+  animation: slideFromLeft 0.25s ease-out;
 }
 
 .card {
   inline-size: 100%;
-  max-inline-size: var(--flashcard-carousel-card-max-inline-size);
-  block-size: var(--flashcard-carousel-card-block-size);
+  max-inline-size: 280px;
+  block-size: 180px;
   cursor: pointer;
-  perspective: var(--flashcard-carousel-card-perspective);
+  perspective: 1000px;
   user-select: none;
 
   @include breakpoints.tablet {
-    max-inline-size: var(--flashcard-carousel-card-max-inline-size-tablet);
-    block-size: var(--flashcard-carousel-card-block-size-tablet);
+    max-inline-size: 320px;
+    block-size: 200px;
   }
 }
 
-@include shared.cardContentStyles(
-  var(--flashcard-carousel-shadow),
-  var(--flashcard-carousel-card-arabic-font-size),
-  var(--font-size-jumbo),
-  var(--font-size-large),
-  var(--font-size-normal),
-  var(--flashcard-carousel-flip-transition-duration),
-  var(--flashcard-carousel-arabic-line-height),
-  var(--flashcard-carousel-arabic-small-line-height),
-  var(--flashcard-carousel-hint-opacity)
-);
+@include shared.cardContentStyles(0 4px 12px rgba(0, 0, 0, 0.1), 1.75rem, 2rem, 1.125rem, 1rem);
 
 .navButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  inline-size: var(--font-size-xxxlarge-px);
-  block-size: var(--font-size-xxxlarge-px);
+  inline-size: 36px;
+  block-size: 36px;
   border: none;
   border-radius: var(--border-radius-circle);
   background-color: var(--color-background-elevated);
-  box-shadow: var(--flashcard-carousel-shadow);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  font-size: var(--font-size-xlarge);
+  font-size: 1.5rem;
   color: var(--color-text-default);
-  transition: all var(--transition-moderate) ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
 
   &:hover:not(:disabled) {
     background-color: var(--color-background-alternative-medium);
-    transform: scale(var(--flashcard-carousel-nav-button-hover-scale));
+    transform: scale(1.05);
   }
 
   &:disabled {
-    opacity: var(--opacity-30);
+    opacity: 0.3;
     cursor: not-allowed;
   }
 }
@@ -127,7 +100,7 @@
   gap: var(--spacing-xxsmall);
   margin-block-start: var(--spacing-medium);
   flex-wrap: nowrap;
-  max-inline-size: var(--flashcard-carousel-dots-max-inline-size);
+  max-inline-size: 300px;
   overflow-x: auto;
   overflow-y: hidden;
   -ms-overflow-style: none;
@@ -139,8 +112,8 @@
 }
 
 .dot {
-  inline-size: var(--font-size-xxlarge-px);
-  block-size: var(--font-size-xxlarge-px);
+  inline-size: 32px;
+  block-size: 32px;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -151,11 +124,11 @@
 
   &::before {
     content: '';
-    inline-size: var(--spacing-xsmall-px);
-    block-size: var(--spacing-xsmall-px);
+    inline-size: 8px;
+    block-size: 8px;
     border-radius: var(--border-radius-circle);
     background-color: var(--color-borders-hairline);
-    transition: all var(--transition-moderate) ease;
+    transition: all 0.2s ease;
   }
 
   &:hover::before {
@@ -164,12 +137,12 @@
 
   &.activeDot::before {
     background-color: var(--color-primary-medium);
-    transform: scale(var(--flashcard-carousel-active-dot-scale));
+    transform: scale(1.2);
   }
 }
 
 .counter {
   margin-block-start: var(--spacing-small);
-  font-size: var(--font-size-small);
+  font-size: 0.875rem;
   color: var(--color-text-faded);
 }

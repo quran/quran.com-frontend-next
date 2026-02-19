@@ -5296,14 +5296,6 @@
   dependencies:
     "@sentry/core" "9.19.0"
 
-"@sentry-internal/node-cpu-profiler@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@sentry-internal/node-cpu-profiler/-/node-cpu-profiler-2.2.0.tgz#0640d4aebb4d36031658ccff83dc22b76f437ede"
-  integrity sha512-oLHVYurqZfADPh5hvmQYS5qx8t0UZzT2u6+/68VXsFruQEOnYJTODKgU3BVLmemRs3WE6kCJjPeFdHVYOQGSzQ==
-  dependencies:
-    detect-libc "^2.0.3"
-    node-abi "^3.73.0"
-
 "@sentry-internal/replay-canvas@9.19.0":
   version "9.19.0"
   resolved "https://registry.yarnpkg.com/@sentry-internal/replay-canvas/-/replay-canvas-9.19.0.tgz#0f830ebadb7c49a3fb04457f1510aa7972445780"
@@ -5475,15 +5467,6 @@
   integrity sha512-Js6153kW5mNjjukk6TVb04D/8DDhA9MO++WRzXWzNP+FiPi5zwtvm+Je2TvTeAjSH74f6o2JpfECdrfPYHWopA==
   dependencies:
     "@sentry/core" "9.19.0"
-
-"@sentry/profiling-node@9.19.0":
-  version "9.19.0"
-  resolved "https://registry.yarnpkg.com/@sentry/profiling-node/-/profiling-node-9.19.0.tgz#cecba00eee2245b9f57c9727ab03cb3276319b41"
-  integrity sha512-wZLEsJt4Bp/hZuMBYeLXKKzOUKPW5+0XATLT2CI2J8KPHktLFggvmbgRES+p+aXZV3v4fSM2l0PSLmgiQbxy4A==
-  dependencies:
-    "@sentry-internal/node-cpu-profiler" "^2.2.0"
-    "@sentry/core" "9.19.0"
-    "@sentry/node" "9.19.0"
 
 "@sentry/react@9.19.0":
   version "9.19.0"
@@ -14083,13 +14066,6 @@ no-case@^3.0.4:
   dependencies:
     lower-case "^2.0.2"
     tslib "^2.0.3"
-
-node-abi@^3.73.0:
-  version "3.87.0"
-  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.87.0.tgz#423e28fea5c2f195fddd98acded9938c001ae6dd"
-  integrity sha512-+CGM1L1CgmtheLcBuleyYOn7NWPVu0s0EJH2C4puxgEZb9h8QpR9G2dBfZJOAUhi7VQxuBPMd0hiISWcTyiYyQ==
-  dependencies:
-    semver "^7.3.5"
 
 node-abort-controller@^3.0.1:
   version "3.1.1"
