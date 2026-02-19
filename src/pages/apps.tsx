@@ -426,22 +426,28 @@ interface FeaturedAppsProps {
   ctaLabels: AppCtaLabels;
 }
 
-const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps, ctaLabels }) => (
-  <section className={styles.section}>
-    <div className={styles.sectionHeader}>
-      <h2 className={styles.sectionTitle}>{title}</h2>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <a className={styles.sectionLink} href="#browse-apps">
-        {viewAllText}
-      </a>
-    </div>
-    <div className={styles.featuredGrid}>
-      {apps.map((app) => (
-        <FeaturedCard key={app.id} app={app} ctaLabels={ctaLabels} />
-      ))}
-    </div>
-  </section>
-);
+const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps, ctaLabels }) => {
+  return (
+    <section className={styles.section}>
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.sectionTitle}>{title}</h2>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <a
+          className={styles.sectionLink}
+          href="#browse-apps"
+          onClick={() => logButtonClick('app_portal_featured_view_all')}
+        >
+          {viewAllText}
+        </a>
+      </div>
+      <div className={styles.featuredGrid}>
+        {apps.map((app) => (
+          <FeaturedCard key={app.id} app={app} ctaLabels={ctaLabels} />
+        ))}
+      </div>
+    </section>
+  );
+};
 
 const AppTileCard: FC<{
   app: AppTile;
