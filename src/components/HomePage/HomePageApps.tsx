@@ -46,7 +46,7 @@ const HomePageApps: React.FC = () => {
       description: t('apps.quran-space.description'),
       iconSrc: '/images/app-portal/quran-space-100.jpg',
       iconAlt: t('apps.quran-space.name'),
-      href: 'https://space.quran.com/',
+      href: 'https://quran.space/',
     },
     {
       id: 'quran-ios',

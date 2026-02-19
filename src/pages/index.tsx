@@ -14,7 +14,7 @@ import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import HomepageFundraisingBanner from '@/components/Fundraising/HomepageFundraisingBanner';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
-// import HomePageApps from '@/components/HomePage/HomePageApps';
+import HomePageApps from '@/components/HomePage/HomePageApps';
 import HomePageHero from '@/components/HomePage/HomePageHero';
 import LearningPlansSection from '@/components/HomePage/LearningPlansSection';
 import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections';
@@ -137,7 +137,7 @@ const Index: NextPage<IndexProps> = ({
               </>
             )}
 
-            {/*             <div
+            <div
               className={classNames(
                 styles.flowItem,
                 styles.fullWidth,
@@ -146,7 +146,7 @@ const Index: NextPage<IndexProps> = ({
               )}
             >
               <HomePageApps />
-            </div> */}
+            </div>
 
             <div className={styles.flowItem}>
               <ChapterAndJuzListWrapper chapters={chapters} />
