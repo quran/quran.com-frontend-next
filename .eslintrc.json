@@ -160,6 +160,7 @@
             "devDependencies": [
               "**/*.test.ts",
               "**/*.test.tsx",
+              "src/tests/**/*",
               "tests/**/*",
               "**/playwright.config.{ts,js,mjs,cjs}",
               "playwright.config.{ts,js,mjs,cjs}",
@@ -204,10 +205,23 @@
       }
     },
     {
-      "files": ["tests/**/*.{ts,tsx,js}"],
+      "files": ["tests/**/*.{ts,tsx,js}", "src/tests/**/*.{ts,tsx,js}"],
       "rules": {
         "react-func/max-lines-per-function": "off",
-        "max-lines": "off"
+        "max-lines": "off",
+        "import/prefer-default-export": "off",
+        "i18next/no-literal-string": "off",
+        "jsdoc/require-returns": "off",
+        "jsdoc/require-param-type": "off",
+        "jsdoc/require-returns-type": "off"
+      }
+    },
+    {
+      "files": ["src/**/__mocks__/**/*.{ts,tsx,js}"],
+      "rules": {
+        "jsdoc/require-returns": "off",
+        "jsdoc/require-param-type": "off",
+        "jsdoc/require-returns-type": "off"
       }
     },
     {
