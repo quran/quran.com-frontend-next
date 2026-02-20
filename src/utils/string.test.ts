@@ -7,6 +7,7 @@ import {
   stripHtml,
   getHtmlTextLength,
   truncateHtml,
+  getFirstVerseKeyFromReference,
   formatVerseReferencesToLinks,
   getWordCount,
   isNumericString,
@@ -531,6 +532,40 @@ describe('Test formatVerseReferencesToLinks', () => {
   it('should not modify Russian text without verse references', () => {
     const input = 'Это обычный текст без ссылок на аяты';
     expect(formatVerseReferencesToLinks(input)).toEqual(input);
+  });
+});
+
+describe('Test getFirstVerseKeyFromReference', () => {
+  it('returns verse key for a simple verse reference', () => {
+    expect(getFirstVerseKeyFromReference('1:1')).toBe('1:1');
+  });
+
+  it('returns the first verse key for a same-chapter range', () => {
+    expect(getFirstVerseKeyFromReference('2:1-3')).toBe('2:1');
+  });
+
+  it('returns the first verse key for a cross-chapter range', () => {
+    expect(getFirstVerseKeyFromReference('2:286-3:2')).toBe('2:286');
+  });
+
+  it('returns null for references without colon', () => {
+    expect(getFirstVerseKeyFromReference('1-1')).toBeNull();
+  });
+
+  it('returns null for references with extra segment', () => {
+    expect(getFirstVerseKeyFromReference('1:1:2')).toBeNull();
+  });
+
+  it('returns null for non-numeric chapter id', () => {
+    expect(getFirstVerseKeyFromReference('a:1')).toBeNull();
+  });
+
+  it('returns null for non-numeric verse number', () => {
+    expect(getFirstVerseKeyFromReference('1:b')).toBeNull();
+  });
+
+  it('returns null for empty string', () => {
+    expect(getFirstVerseKeyFromReference('')).toBeNull();
   });
 });
 

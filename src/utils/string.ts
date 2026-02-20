@@ -188,7 +188,7 @@ export const cleanTranscript = (text: string): string => {
  * @param {string} reference - The reference string (e.g. "1:1-2")
  * @returns {string | null} The first verse key (e.g. "1:1") or null if invalid
  */
-const getFirstVerseKeyFromReference = (reference: string): string | null => {
+export const getFirstVerseKeyFromReference = (reference: string): string | null => {
   const fromSegment = reference.split('-')[0];
   const [chapterId, verseNumber, extraSegment] = fromSegment.split(':');
   if (extraSegment || !isNumericString(chapterId) || !isNumericString(verseNumber)) {
