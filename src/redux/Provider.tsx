@@ -11,7 +11,9 @@ import getStore from './store';
 import resetSettings from '@/redux/actions/reset-settings';
 import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
-import { getUserPreferences } from '@/utils/auth/api';
+import { needsFontScaleRemap, remapFontScale } from '@/redux/migration-scripts/remap-font-scale';
+import { getMushafId } from '@/utils/api';
+import { addOrUpdateUserPreference, getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
 import isClient from '@/utils/isClient';
@@ -101,6 +103,27 @@ const ReduxProvider = ({ children, locale }) => {
         }
         const localeForDefaults = remoteLang || initialLocaleRef.current;
         store.dispatch(syncUserPreferences(userPreferences, localeForDefaults));
+
+        // Push corrected font scale back to the backend if the remote value was stale
+        const remoteStyles = userPreferences[PreferenceGroup.QURAN_READER_STYLES];
+        if (
+          remoteStyles?.quranFont &&
+          remoteStyles?.quranTextFontScale != null &&
+          needsFontScaleRemap(remoteStyles.quranFont, remoteStyles.quranTextFontScale)
+        ) {
+          const correctedScale = remapFontScale(
+            remoteStyles.quranFont,
+            remoteStyles.quranTextFontScale,
+          );
+          const { mushaf } = getMushafId(remoteStyles.quranFont, remoteStyles.mushafLines);
+          addOrUpdateUserPreference(
+            'quranTextFontScale',
+            correctedScale,
+            PreferenceGroup.QURAN_READER_STYLES,
+            mushaf,
+          ).catch(() => {}); // fire-and-forget
+        }
+
         const audioPlayerContext = audioService.getSnapshot().context;
         const playbackRate =
           userPreferences[PreferenceGroup.AUDIO]?.playbackRate || audioPlayerContext.playbackRate;
