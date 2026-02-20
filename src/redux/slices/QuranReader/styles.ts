@@ -12,6 +12,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import resetSettings from '@/redux/actions/reset-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { remapFontScale } from '@/redux/migration-scripts/remap-font-scale';
 import { RootState } from '@/redux/RootState';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import SliceName from '@/redux/types/SliceName';
@@ -144,6 +145,12 @@ export const quranReaderStylesSlice = createSlice({
         return {
           ...state,
           ...remotePreferences,
+          ...(remotePreferences.quranTextFontScale != null && {
+            quranTextFontScale: remapFontScale(
+              remotePreferences.quranFont,
+              remotePreferences.quranTextFontScale,
+            ),
+          }),
           isUsingDefaultFont:
             defaultQuranFont === remotePreferences.quranFont &&
             defaultMushafLines === remotePreferences.mushafLines,
