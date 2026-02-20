@@ -638,7 +638,7 @@ const AppPortalPage: NextPage = () => {
   const { t: tCommon } = useTranslation('common');
 
   const featuredApps = useMemo(() => getFeaturedApps(t), [t]);
-  const appTiles = useMemo(() => [...getFeaturedAppTiles(t), ...getAppTiles(t)], [t]);
+  const appTiles = useMemo(() => [...getAppTiles(t), ...getFeaturedAppTiles(t)], [t]);
   const ctaLabels = useMemo(
     () => ({
       playStoreAlt: t('cta.google-play'),
