@@ -307,26 +307,29 @@ describe('truncateHtml', () => {
 describe('Test formatVerseReferencesToLinks', () => {
   it('should convert single verse reference to link', () => {
     const input = 'See verse 1:1 for more details';
-    const expected = 'See verse <a href="/1:1" target="_blank">1:1</a> for more details';
+    const expected =
+      'See verse <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> for more details';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse reference with three digit verse number to link', () => {
     const input = 'Verse 2:123 is important';
-    const expected = 'Verse <a href="/2:123" target="_blank">2:123</a> is important';
+    const expected =
+      'Verse <a href="/2:123" target="_blank" data-verse-key="2:123">2:123</a> is important';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse range to link', () => {
     const input = 'Verses 1:1-3 are important';
-    const expected = 'Verses <a href="/1:1-3" target="_blank">1:1-3</a> are important';
+    const expected =
+      'Verses <a href="/1:1-3" target="_blank" data-verse-key="1:1">1:1-3</a> are important';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert multiple verse references to links', () => {
     const input = 'See 1:1 and 2:1-3 for details';
     const expected =
-      'See <a href="/1:1" target="_blank">1:1</a> and <a href="/2:1-3" target="_blank">2:1-3</a> for details';
+      'See <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> and <a href="/2:1-3" target="_blank" data-verse-key="2:1">2:1-3</a> for details';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
@@ -344,76 +347,91 @@ describe('Test formatVerseReferencesToLinks', () => {
     expect(formatVerseReferencesToLinks(undefined as any)).toEqual('');
   });
 
+  it('should add verse key data attribute when enabled for single verse', () => {
+    const input = 'See 2:255';
+    const expected = 'See <a href="/2:255" target="_blank" data-verse-key="2:255">2:255</a>';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
+  it('should add verse key data attribute when enabled for verse range using first verse', () => {
+    const input = 'See 2:1-3';
+    const expected = 'See <a href="/2:1-3" target="_blank" data-verse-key="2:1">2:1-3</a>';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
   // Additional positive test cases
   it('should handle verse references at the start of text', () => {
     const input = '1:1 is the first verse';
-    const expected = '<a href="/1:1" target="_blank">1:1</a> is the first verse';
+    const expected =
+      '<a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> is the first verse';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should handle verse references at the end of text', () => {
     const input = 'The last verse is 1:1';
-    const expected = 'The last verse is <a href="/1:1" target="_blank">1:1</a>';
+    const expected =
+      'The last verse is <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should handle verse references with multiple digits', () => {
     const input = 'See verses 114:1-3 and 1:1-7';
     const expected =
-      'See verses <a href="/114:1-3" target="_blank">114:1-3</a> and <a href="/1:1-7" target="_blank">1:1-7</a>';
+      'See verses <a href="/114:1-3" target="_blank" data-verse-key="114:1">114:1-3</a> and <a href="/1:1-7" target="_blank" data-verse-key="1:1">1:1-7</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should handle verse references with different separators', () => {
     const input = 'See 1:1, 2:1-3 and 3:1';
     const expected =
-      'See <a href="/1:1" target="_blank">1:1</a>, <a href="/2:1-3" target="_blank">2:1-3</a> and <a href="/3:1" target="_blank">3:1</a>';
+      'See <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a>, <a href="/2:1-3" target="_blank" data-verse-key="2:1">2:1-3</a> and <a href="/3:1" target="_blank" data-verse-key="3:1">3:1</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should handle verse ranges across chapters', () => {
     const input = 'See verses 1:1-2:3 and 3:1-4:2';
     const expected =
-      'See verses <a href="/1:1-2:3" target="_blank">1:1-2:3</a> and <a href="/3:1-4:2" target="_blank">3:1-4:2</a>';
+      'See verses <a href="/1:1-2:3" target="_blank" data-verse-key="1:1">1:1-2:3</a> and <a href="/3:1-4:2" target="_blank" data-verse-key="3:1">3:1-4:2</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should handle verse references in Arabic text', () => {
     const input = 'الآية 1:1 والآية 2:1-3';
     const expected =
-      'الآية <a href="/1:1" target="_blank">1:1</a> والآية <a href="/2:1-3" target="_blank">2:1-3</a>';
+      'الآية <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> والآية <a href="/2:1-3" target="_blank" data-verse-key="2:1">2:1-3</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   // Additional test cases that match current behavior
   it('should convert partial verse references', () => {
     const input = 'See 1: and :1 and 1-1';
-    const expected = 'See 1: and :1 and <a href="/1-1" target="_blank">1-1</a>';
+    const expected = 'See 1: and :1 and <a href="/1-1" target="_blank" data-verse-key="">1-1</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert dates that look like verse references', () => {
     const input = 'The date 1:1:2023 is not a verse reference';
     const expected =
-      'The date <a href="/1:1" target="_blank">1:1</a>:2023 is not a verse reference';
+      'The date <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a>:2023 is not a verse reference';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert time that looks like verse references', () => {
     const input = 'The time is 1:1 PM';
-    const expected = 'The time is <a href="/1:1" target="_blank">1:1</a> PM';
+    const expected = 'The time is <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> PM';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse references within HTML tags', () => {
     const input = '<div>1:1</div>';
-    const expected = '<div><a href="/1:1" target="_blank">1:1</a></div>';
+    const expected = '<div><a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a></div>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse references within script tags', () => {
     const input = '<script>const verse = "1:1";</script>';
-    const expected = '<script>const verse = "<a href="/1:1" target="_blank">1:1</a>";</script>';
+    const expected =
+      '<script>const verse = "<a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a>";</script>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
@@ -421,56 +439,56 @@ describe('Test formatVerseReferencesToLinks', () => {
   it('should convert verse references in English text', () => {
     const input = 'This is a normal text with verse 1:1 and 2:3 in it';
     const expected =
-      'This is a normal text with verse <a href="/1:1" target="_blank">1:1</a> and <a href="/2:3" target="_blank">2:3</a> in it';
+      'This is a normal text with verse <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> and <a href="/2:3" target="_blank" data-verse-key="2:3">2:3</a> in it';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse references in Arabic text', () => {
     const input = 'هذا نص عادي يحتوي على الآية 1:1 والآية 2:3';
     const expected =
-      'هذا نص عادي يحتوي على الآية <a href="/1:1" target="_blank">1:1</a> والآية <a href="/2:3" target="_blank">2:3</a>';
+      'هذا نص عادي يحتوي على الآية <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> والآية <a href="/2:3" target="_blank" data-verse-key="2:3">2:3</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse references in French text', () => {
     const input = 'Ceci est un texte normal avec le verset 1:1 et 2:3';
     const expected =
-      'Ceci est un texte normal avec le verset <a href="/1:1" target="_blank">1:1</a> et <a href="/2:3" target="_blank">2:3</a>';
+      'Ceci est un texte normal avec le verset <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> et <a href="/2:3" target="_blank" data-verse-key="2:3">2:3</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse references in Spanish text', () => {
     const input = 'Este es un texto normal con el versículo 1:1 y 2:3';
     const expected =
-      'Este es un texto normal con el versículo <a href="/1:1" target="_blank">1:1</a> y <a href="/2:3" target="_blank">2:3</a>';
+      'Este es un texto normal con el versículo <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> y <a href="/2:3" target="_blank" data-verse-key="2:3">2:3</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse references in Chinese text', () => {
     const input = '这是一个普通文本，包含经文 1:1 和 2:3';
     const expected =
-      '这是一个普通文本，包含经文 <a href="/1:1" target="_blank">1:1</a> 和 <a href="/2:3" target="_blank">2:3</a>';
+      '这是一个普通文本，包含经文 <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> 和 <a href="/2:3" target="_blank" data-verse-key="2:3">2:3</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse references in Japanese text', () => {
     const input = 'これは普通のテキストで、聖句 1:1 と 2:3 を含みます';
     const expected =
-      'これは普通のテキストで、聖句 <a href="/1:1" target="_blank">1:1</a> と <a href="/2:3" target="_blank">2:3</a> を含みます';
+      'これは普通のテキストで、聖句 <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> と <a href="/2:3" target="_blank" data-verse-key="2:3">2:3</a> を含みます';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse references in Korean text', () => {
     const input = '이것은 일반 텍스트로, 성구 1:1과 2:3을 포함합니다';
     const expected =
-      '이것은 일반 텍스트로, 성구 <a href="/1:1" target="_blank">1:1</a>과 <a href="/2:3" target="_blank">2:3</a>을 포함합니다';
+      '이것은 일반 텍스트로, 성구 <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a>과 <a href="/2:3" target="_blank" data-verse-key="2:3">2:3</a>을 포함합니다';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
   it('should convert verse references in Russian text', () => {
     const input = 'Это обычный текст с аятом 1:1 и 2:3';
     const expected =
-      'Это обычный текст с аятом <a href="/1:1" target="_blank">1:1</a> и <a href="/2:3" target="_blank">2:3</a>';
+      'Это обычный текст с аятом <a href="/1:1" target="_blank" data-verse-key="1:1">1:1</a> и <a href="/2:3" target="_blank" data-verse-key="2:3">2:3</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 

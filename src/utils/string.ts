@@ -184,6 +184,21 @@ export const cleanTranscript = (text: string): string => {
 };
 
 /**
+ * Get the first verse key from a reference string.
+ * @param {string} reference - The reference string (e.g. "1:1-2")
+ * @returns {string | null} The first verse key (e.g. "1:1") or null if invalid
+ */
+const getFirstVerseKeyFromReference = (reference: string): string | null => {
+  const fromSegment = reference.split('-')[0];
+  const [chapterId, verseNumber, extraSegment] = fromSegment.split(':');
+  if (extraSegment || !isNumericString(chapterId) || !isNumericString(verseNumber)) {
+    return null;
+  }
+
+  return `${chapterId}:${verseNumber}`;
+};
+
+/**
  * Converts verse references in text to clickable links.
  * Example: "1:1" or "1:1-2" or "1:1-2:3" will be converted to HTML anchor tags.
  *
@@ -194,7 +209,10 @@ export const formatVerseReferencesToLinks = (text: string): string => {
   if (!text) return '';
   return text.replace(
     /(\d{1,3}[:-]\d{1,3}(?:-\d{1,3}(?::\d{1,3})?)?)(?![^<]*<\/a>)/g,
-    (match) => `<a href="${`/${match}`}" target="_blank">${match}</a>`,
+    (match) =>
+      `<a href="${`/${match}`}" target="_blank" data-verse-key="${
+        getFirstVerseKeyFromReference(match) || ''
+      }">${match}</a>`,
   );
 };
 
