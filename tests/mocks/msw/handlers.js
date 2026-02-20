@@ -409,7 +409,7 @@ const handlers = [
     return HttpResponse.json({ collection: { id: 'test-collection-1', name: 'Test Collection' } });
   }),
 
-  http.put('*/collections/:id', () => {
+  http.post('*/collections/:id', () => {
     return HttpResponse.json({ collection: { id: 'test-collection-1' } });
   }),
 
