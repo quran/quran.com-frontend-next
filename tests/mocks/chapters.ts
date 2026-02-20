@@ -1,25 +1,24 @@
 export const chapter = {
   id: 1,
-  chapterNumber: 1,
   bismillahPre: false,
   revelationOrder: 5,
   revelationPlace: 'makkah',
+  nameSimple: 'Al-Fatihah',
   nameComplex: 'Al-Fātiĥah',
   nameArabic: 'الفاتحة',
   transliteratedName: 'Al-Fatihah',
   versesCount: 7,
   translatedName: 'The Opener',
   defaultSlug: { slug: 'al-fatihah', locale: 'english' },
-  languageName: 'english',
   pages: [1, 2],
 };
 
 export const chapter2 = {
   id: 2,
-  chapterNumber: 2,
   bismillahPre: true,
   revelationOrder: 87,
   revelationPlace: 'madinah',
+  nameSimple: 'Al-Baqarah',
   nameComplex: 'Al-Baqarah',
   nameArabic: 'البقرة',
   transliteratedName: 'Al-Baqarah',
@@ -31,10 +30,10 @@ export const chapter2 = {
 
 export const chapter3 = {
   id: 3,
-  chapterNumber: 3,
   bismillahPre: true,
   revelationOrder: 89,
   revelationPlace: 'madinah',
+  nameSimple: "Ali 'Imran",
   nameComplex: 'Āli `Imrān',
   nameArabic: 'آل عمران',
   transliteratedName: "Ali 'Imran",

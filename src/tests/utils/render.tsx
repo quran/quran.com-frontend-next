@@ -17,12 +17,27 @@ import type ChaptersData from 'types/ChaptersData';
  *   - Redux store (no redux-persist; no localStorage side effects)
  *   - DirectionProvider (RTL support via `direction` option)
  *   - AuthContext (guest state by default; override via `authState` option)
- *   - DataContext (empty chapters map by default)
+ *   - DataContext (empty chapters map by default — tests that render components
+ *     requiring chapter metadata must wrap with a populated DataContext.Provider)
  *
- * Providers intentionally omitted (mock per-test as needed):
- *   - i18n / next-translate — mock useTranslation() with vi.mock('next-translate/useTranslation')
- *   - ToastProvider — not required for unit tests
- *   - AudioPlayerMachineProvider — initialises XState actors; mock useAudioPlayer() directly
+ * Providers intentionally omitted — mock the hook per test instead:
+ *
+ *   i18n / next-translate:
+ *     vi.mock('next-translate/useTranslation', () => ({ default: () => ({ t: (k) => k, lang: 'en' }) }))
+ *
+ *   ToastProvider — ToastContext defaults to null; any component calling useToast() will
+ *   crash (null is not a function) unless mocked:
+ *     vi.mock('@/dls/Toast/Toast', () => ({ useToast: () => vi.fn(), ToastStatus: {} }))
+ *
+ *   AudioPlayerMachineProvider — components use useXstateSelector(AudioPlayerMachineContext, ...)
+ *   directly; there is no useAudioPlayer() hook. Mock the context value:
+ *     vi.mock('@/xstate/AudioPlayerMachineContext', () => ({ AudioPlayerMachineContext: { ... } }))
+ *
+ *   OnboardingProvider — OnboardingContext defaults to null; any component calling
+ *   useOnboarding() and destructuring will crash. Mock the hook:
+ *     vi.mock('@/components/Onboarding/OnboardingProvider', () => ({
+ *       useOnboarding: () => ({ isActive: false, startTour: vi.fn(), allSteps: {}, allGroups: [] }),
+ *     }))
  */
 
 /**

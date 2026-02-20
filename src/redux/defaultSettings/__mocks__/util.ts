@@ -11,9 +11,9 @@
  *     getStoreInitialState: (locale: string) => customDefaults,
  *   }))
  *
- * The `locale` parameter is accepted but intentionally ignored — all functions
- * return English defaults. This matches the real function signatures so tests
- * can call them with a locale without TypeScript errors.
+ * These functions have no locale parameter — they always return English defaults.
+ * The real util.ts functions accept a locale argument, but JavaScript silently
+ * ignores extra arguments, so call sites that pass a locale still work at runtime.
  */
 import type AudioState from '../../types/AudioState';
 import type NotificationsState from '../../types/NotificationsState';

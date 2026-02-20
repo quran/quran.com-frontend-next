@@ -339,11 +339,17 @@ const handlers = [
     return HttpResponse.json({
       chapter: {
         id: Number(params.chapterId),
-        chapterNumber: Number(params.chapterId),
-        nameSimple: 'Al-Fatihah',
-        nameArabic: 'الفاتحة',
-        versesCount: 7,
+        bismillahPre: true,
+        revelationOrder: 1,
         revelationPlace: 'makkah',
+        nameSimple: 'Al-Fatihah',
+        nameComplex: 'Al-Fātiĥah',
+        nameArabic: 'الفاتحة',
+        transliteratedName: 'Al-Fatihah',
+        translatedName: 'The Opening',
+        versesCount: 7,
+        pages: [1, 2],
+        defaultSlug: 'al-fatihah',
       },
     });
   }),
