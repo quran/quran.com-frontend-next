@@ -172,6 +172,44 @@ const getFeaturedApps = (t: (key: string) => string): FeaturedApp[] => [
   },
 ];
 
+const getFeaturedAppTiles = (t: (key: string) => string): AppTile[] => [
+  {
+    id: 'qariah',
+    title: t('featured.apps.qariah.name'),
+    description: t('featured.apps.qariah.headline'),
+    tagline: t('featured.apps.qariah.tagline'),
+    iconSrc: '/images/app-portal/featured/qaariah-icon.webp',
+    iconAlt: 'Qariah – women Quran reciters app',
+    webHref: 'https://www.qariah.app/',
+    iosHref: 'https://apps.apple.com/us/app/qariah/id1594917787',
+    androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qariah.app',
+    categories: ['popular', 'quran-reader', 'study-tools'],
+  },
+  {
+    id: 'quran-space',
+    title: t('featured.apps.quran-space.name'),
+    description: t('featured.apps.quran-space.headline'),
+    tagline: t('featured.apps.quran-space.tagline'),
+    iconSrc: '/images/app-portal/featured/quran-space-icon.png',
+    iconAlt: 'Quran Space',
+    webHref: 'https://quran.space/',
+    categories: ['popular', 'quran-reader', 'study-tools'],
+  },
+  {
+    id: 'quranreflect',
+    title: t('browse.apps.quranreflect.title'),
+    description: t('browse.apps.quranreflect.description'),
+    tagline: t('browse.apps.quranreflect.tagline'),
+    iconSrc: '/images/app-portal/icon_web_optimized.png',
+    iconAlt: 'QuranReflect',
+    webHref: 'https://quranreflect.com',
+    androidHref:
+      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
+    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
+    categories: ['popular', 'reflections', 'study-tools'],
+  },
+];
+
 const getFilters = (t: (key: string) => string): FilterChip[] => [
   { label: t('browse.filters.all'), value: 'all' },
   { label: t('browse.filters.study-tools'), value: 'study-tools' },
@@ -600,7 +638,7 @@ const AppPortalPage: NextPage = () => {
   const { t: tCommon } = useTranslation('common');
 
   const featuredApps = useMemo(() => getFeaturedApps(t), [t]);
-  const appTiles = useMemo(() => getAppTiles(t), [t]);
+  const appTiles = useMemo(() => [...getFeaturedAppTiles(t), ...getAppTiles(t)], [t]);
   const ctaLabels = useMemo(
     () => ({
       playStoreAlt: t('cta.google-play'),
