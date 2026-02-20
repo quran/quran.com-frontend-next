@@ -45,6 +45,7 @@ const ContentModal = ({
   onClick,
   shouldBeFullScreen = false,
   zIndexVariant,
+  isModal = true,
   isBottomSheetOnMobile = true,
   isFakeSEOFriendlyMode: isFake = false,
   dataTestId,
@@ -86,7 +87,7 @@ const ContentModal = ({
   );
 
   return (
-    <Root open={isOpen} onClose={onClose} onOpenChange={handleOpenChange}>
+    <Root open={isOpen} onClose={onClose} onOpenChange={handleOpenChange} modal={isModal}>
       <Portal>
         <Overlay
           ref={overlayRef}

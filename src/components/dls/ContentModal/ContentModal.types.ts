@@ -27,6 +27,7 @@ export type ContentModalProps = {
   isFixedHeight?: boolean;
   shouldBeFullScreen?: boolean;
   zIndexVariant?: ZIndexVariant;
+  isModal?: boolean;
   isBottomSheetOnMobile?: boolean;
   isFakeSEOFriendlyMode?: boolean;
   dataTestId?: string;

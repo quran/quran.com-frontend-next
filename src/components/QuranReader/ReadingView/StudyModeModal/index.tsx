@@ -28,6 +28,7 @@ import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import CloseIcon from '@/icons/close.svg';
 import PinFilledIcon from '@/icons/pin-filled.svg';
 import PinIcon from '@/icons/pin.svg';
+import { selectIsSettingsDrawerOpen } from '@/redux/slices/navbar';
 import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import {
@@ -91,6 +92,7 @@ const StudyModeModal: React.FC<Props> = ({
   const chaptersData = useContext(DataContext);
   const audioService = useContext(AudioPlayerMachineContext);
   const isAudioVisible = useXStateSelector(audioService, (state) => state.matches('VISIBLE'));
+  const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
   const tafsirs = useSelector(selectSelectedTafsirs, shallowEqual);
@@ -553,6 +555,7 @@ const StudyModeModal: React.FC<Props> = ({
       isOpen={isOpen}
       onClose={handleClose}
       onEscapeKeyDown={handleClose}
+      isModal={!isSettingsDrawerOpen}
       header={header}
       headerClassName={styles.modalHeader}
       hasCloseButton={false}
