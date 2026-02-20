@@ -15,6 +15,7 @@ import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import BackIcon from '@/icons/west.svg';
 import { selectNavbar, setSettingsView, SettingsView } from '@/redux/slices/navbar';
+import { selectStudyModeIsOpen } from '@/redux/slices/QuranReader/studyMode';
 import { logValueChange } from '@/utils/eventLogger';
 
 const SettingsBody = dynamic(() => import('./SettingsBody'), {
@@ -38,6 +39,7 @@ const SettingsDrawer = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const { isSettingsDrawerOpen, settingsView } = useSelector(selectNavbar);
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
   const { isActive } = useOnboarding();
 
   const onGoBackClicked = () => {
@@ -64,9 +66,13 @@ const SettingsDrawer = () => {
   const isReciterView = settingsView === SettingsView.Reciter;
 
   const getDrawerClassName = () => {
-    if (isTranslationView) return drawerStyles.translationView;
-    if (isReciterView) return drawerStyles.reciterView;
-    return undefined;
+    return [
+      isTranslationView ? drawerStyles.translationView : undefined,
+      isReciterView ? drawerStyles.reciterView : undefined,
+      isStudyModeOpen ? drawerStyles.studyModeOverlayLevel : undefined,
+    ]
+      .filter(Boolean)
+      .join(' ');
   };
 
   return (

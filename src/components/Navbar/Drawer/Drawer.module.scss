@@ -251,3 +251,8 @@
     padding-block-start: 0;
   }
 }
+
+.studyModeOverlayLevel {
+  border-inline-start: 2px var(--color-borders-hairline) solid;
+  z-index: var(--z-index-modal);
+}
