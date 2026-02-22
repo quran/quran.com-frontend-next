@@ -106,16 +106,18 @@ const ReduxProvider = ({ children, locale }) => {
 
         // Push corrected font scale back to the backend if the remote value was stale
         const remoteStyles = userPreferences[PreferenceGroup.QURAN_READER_STYLES];
+        const effectiveFont =
+          remoteStyles?.quranFont ?? store.getState().quranReaderStyles.quranFont;
         if (
-          remoteStyles?.quranFont &&
+          effectiveFont &&
           remoteStyles?.quranTextFontScale != null &&
-          needsFontScaleRemap(remoteStyles.quranFont, remoteStyles.quranTextFontScale)
+          needsFontScaleRemap(effectiveFont, remoteStyles.quranTextFontScale)
         ) {
-          const correctedScale = remapFontScale(
-            remoteStyles.quranFont,
-            remoteStyles.quranTextFontScale,
+          const correctedScale = remapFontScale(effectiveFont, remoteStyles.quranTextFontScale);
+          const { mushaf } = getMushafId(
+            effectiveFont,
+            remoteStyles?.mushafLines ?? store.getState().quranReaderStyles.mushafLines,
           );
-          const { mushaf } = getMushafId(remoteStyles.quranFont, remoteStyles.mushafLines);
           addOrUpdateUserPreference(
             'quranTextFontScale',
             correctedScale,
