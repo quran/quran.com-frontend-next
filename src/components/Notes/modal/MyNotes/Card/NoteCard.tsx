@@ -66,13 +66,15 @@ const NoteCard: React.FC<NoteCardProps> = ({
     return '';
   }, []);
 
+  const LinkOrDiv = showReadMore ? Link : 'div';
+
   return (
     <div key={note.id} className={styles.noteCard} data-testid={`note-card-${note.id}`}>
       <div className={styles.noteHeader}>
         <div className={styles.noteInfo}>
-          <Link href={getVerseLink(note)} className={styles.noteTitle}>
+          <LinkOrDiv href={getVerseLink(note)} className={styles.noteTitle}>
             <h3>{formatNoteTitle(note)}</h3>
-          </Link>
+          </LinkOrDiv>
           <time className={styles.noteDate} dateTime={toSafeISOString(note.createdAt)}>
             {dateToMonthDayYearFormat(note.createdAt, lang)}
           </time>
