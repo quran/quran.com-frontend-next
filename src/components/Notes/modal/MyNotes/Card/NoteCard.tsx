@@ -72,7 +72,11 @@ const NoteCard: React.FC<NoteCardProps> = ({
     <div key={note.id} className={styles.noteCard} data-testid={`note-card-${note.id}`}>
       <div className={styles.noteHeader}>
         <div className={styles.noteInfo}>
-          <LinkOrDiv href={getVerseLink(note)} className={styles.noteTitle}>
+          <LinkOrDiv
+            href={getVerseLink(note)}
+            className={styles.noteTitle}
+            data-link={showReadMore}
+          >
             <h3>{formatNoteTitle(note)}</h3>
           </LinkOrDiv>
           <time className={styles.noteDate} dateTime={toSafeISOString(note.createdAt)}>

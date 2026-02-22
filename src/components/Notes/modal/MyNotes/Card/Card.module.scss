@@ -33,7 +33,7 @@ $note_title_line_height: 1.5;
   line-height: $note_title_line_height;
   text-decoration: none;
 
-  &:hover {
+  &[data-link='true']:hover {
     text-decoration: underline;
     text-underline-offset: var(--spacing-micro-px);
   }
