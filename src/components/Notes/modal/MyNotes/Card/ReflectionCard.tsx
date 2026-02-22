@@ -47,7 +47,7 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({ reflection, showReadMor
     if (!ref.references || ref.references.length === 0) return '';
     const firstRef = ref.references[0];
     if (firstRef.chapterId && firstRef.from) {
-      const rangeKey = `${firstRef.chapterId}:${firstRef.from}-${firstRef.to}`;
+      const rangeKey = `${firstRef.chapterId}:${firstRef.from}-${firstRef.to ?? firstRef.from}`;
       return getSurahRangeNavigationUrlByVerseKey(rangeKey);
     }
 
