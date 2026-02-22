@@ -11,14 +11,17 @@ const useOutsideClickDetector = (
   ref: React.RefObject<HTMLElement>,
   onClickOutsideDetected: () => void,
   enableDetection: boolean,
+  preventDefault: boolean = false,
 ) => {
   useEffect(() => {
     if (!enableDetection) return () => {};
 
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && event.target instanceof Node && !ref.current.contains(event.target)) {
-        event.preventDefault();
-        event.stopPropagation();
+        if (preventDefault) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
         onClickOutsideDetected();
       }
     };
@@ -28,7 +31,7 @@ const useOutsideClickDetector = (
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
-  }, [ref, onClickOutsideDetected, enableDetection]);
+  }, [ref, onClickOutsideDetected, enableDetection, preventDefault]);
 };
 
 export default useOutsideClickDetector;
