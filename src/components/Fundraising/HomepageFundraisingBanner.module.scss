@@ -92,7 +92,7 @@
 
 .actions .donateButton {
   padding-block: var(--spacing-xxsmall-px);
-  padding-inline: calc(var(--spacing-medium2-px) + var(--spacing-xxsmall2-px));
+  padding-inline: var(--spacing-medium4-px);
   color: var(--color-text-white);
   font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-semibold);
@@ -103,7 +103,7 @@
   background-color: var(--color-blue-buttons-and-icons);
   border: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
   @include breakpoints.smallerThanTablet {
-    padding-inline: calc(var(--spacing-medium-plus-px) + var(--spacing-micro-px));
+    padding-inline: var(--spacing-medium-plus2-px);
     font-size: var(--font-size-small-px);
   }
   svg {
