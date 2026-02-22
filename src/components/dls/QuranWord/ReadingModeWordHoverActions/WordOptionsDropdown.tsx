@@ -4,6 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReadingModeWordHoverActions.module.scss';
 
+import ReadingViewNoteAction from '@/components/Notes/modal/ReadingViewNoteAction';
+import BookmarkAction from '@/components/Verse/BookmarkAction';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu, { PopoverMenuAlign } from '@/dls/PopoverMenu/PopoverMenu';
 import ArrowIcon from '@/icons/arrow.svg';
@@ -12,10 +14,12 @@ import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import PlayIcon from '@/icons/play-outline.svg';
 import RepeatIcon from '@/icons/repeat-new.svg';
 import { Direction } from '@/utils/locale';
+import Verse from 'types/Verse';
 
 const DROPDOWN_SIDE_OFFSET = 5;
 
 type Props = {
+  verse: Verse;
   onOpenChange?: (open: boolean) => void;
   onMore: () => void;
   onPlayFromWord: () => void;
@@ -23,6 +27,7 @@ type Props = {
 };
 
 const WordOptionsDropdown: React.FC<Props> = ({
+  verse,
   onOpenChange,
   onMore,
   onPlayFromWord,
@@ -80,6 +85,20 @@ const WordOptionsDropdown: React.FC<Props> = ({
       >
         {t('quran-reader:play-from-word')}
       </PopoverMenu.Item>
+
+      <BookmarkAction
+        verse={verse}
+        isTranslationView={false}
+        forceMenuItem
+        shouldCloseMenuAfterClick
+        unbookmarkedLabel={t('quran-reader:save-verse-short')}
+      />
+
+      <ReadingViewNoteAction
+        verseKey={verse.verseKey}
+        shouldCloseMenuAfterClick
+        label={t('quran-reader:take-a-note')}
+      />
 
       <PopoverMenu.Item
         icon={

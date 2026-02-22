@@ -1,3 +1,4 @@
+@use 'src/styles/theme';
 .threeDotsContainer {
   display: flex;
   align-items: center;
@@ -5,7 +6,7 @@
   padding: var(--spacing-xsmall-px);
   border-radius: var(--spacing-xxsmall-px);
   background: var(--color-background-elevated);
-  box-shadow: var(--shadow-small);
+  box-shadow: var(--shadow-reading-word-three-dots);
   cursor: pointer;
   border: none;
 }

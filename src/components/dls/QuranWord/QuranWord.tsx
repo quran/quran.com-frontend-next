@@ -41,10 +41,11 @@ import { areArraysEqual } from '@/utils/array';
 import { milliSecondsToSeconds } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { isQCFFont } from '@/utils/fontFaceHelper';
-import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
+import { getChapterNumberFromKey, getVerseNumberFromKey, makeWordLocation } from '@/utils/verse';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import Verse from 'types/Verse';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
@@ -189,6 +190,19 @@ const QuranWord = ({
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
   );
+
+  const verseForWordActions = useMemo(() => {
+    const fallbackChapterId = Number(getChapterNumberFromKey(word.verseKey));
+    const fallbackVerseNumber = Number(getVerseNumberFromKey(word.verseKey));
+    const baseVerse = word.verse || {};
+
+    return {
+      ...baseVerse,
+      chapterId: baseVerse.chapterId ?? fallbackChapterId,
+      verseNumber: baseVerse.verseNumber ?? fallbackVerseNumber,
+      verseKey: baseVerse.verseKey ?? word.verseKey,
+    } as Verse;
+  }, [word.verse, word.verseKey]);
 
   const getReadingModeSuffix = useCallback(() => {
     if (readingPreference === ReadingPreference.Translation) {
@@ -388,6 +402,7 @@ const QuranWord = ({
                 isTooltipVisible={showTooltip}
                 tooltipContent={translationViewTooltipContent}
                 tooltipDelay={TOOLTIP_HOVER_DELAY_MS}
+                verse={verseForWordActions}
                 onOpenStudyMode={handleOpenStudyModeFromOverlay}
                 onPlayFromWord={handlePlayFromWord}
                 verseKey={word.verseKey}

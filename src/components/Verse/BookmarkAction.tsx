@@ -28,6 +28,9 @@ interface Props {
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   isInsideStudyMode?: boolean;
+  forceMenuItem?: boolean;
+  shouldCloseMenuAfterClick?: boolean;
+  unbookmarkedLabel?: string;
 }
 
 /**
@@ -43,6 +46,9 @@ const BookmarkAction: React.FC<Props> = ({
   isTranslationView,
   onActionTriggered,
   isInsideStudyMode = false,
+  forceMenuItem = false,
+  shouldCloseMenuAfterClick = false,
+  unbookmarkedLabel,
 }): JSX.Element => {
   const dispatch = useDispatch();
   const {
@@ -123,10 +129,13 @@ const BookmarkAction: React.FC<Props> = ({
   );
 
   const isBookmarked = isVerseBookmarked || isVerseMultipleBookmarked || isVerseReadingBookmark;
-  const bookmarkLabel = isBookmarked ? t('bookmarked') : t('bookmark');
+  const bookmarkLabel = isBookmarked ? t('bookmarked') : unbookmarkedLabel || t('bookmark');
+
+  const shouldRenderAsButton =
+    !forceMenuItem && (isTranslationView || (!isTranslationView && isMobile));
 
   // For use in the TopActions component (standalone button)
-  if (isTranslationView || (!isTranslationView && isMobile)) {
+  if (shouldRenderAsButton) {
     return (
       <Button
         size={ButtonSize.Small}
@@ -151,6 +160,7 @@ const BookmarkAction: React.FC<Props> = ({
       onClick={onBookmarkClicked}
       icon={bookmarkIcon}
       isDisabled={isVerseBookmarkedLoading}
+      shouldCloseMenuAfterClick={shouldCloseMenuAfterClick}
     >
       {bookmarkLabel}
     </PopoverMenu.Item>
