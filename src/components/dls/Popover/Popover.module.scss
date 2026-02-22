@@ -47,7 +47,7 @@
   gap: var(--spacing-micro2-px);
 
   @include breakpoints.smallerThanTablet {
-    margin-inline: var(--spacing-small);
+    margin-inline-end: var(--spacing-small);
   }
 
   & > span {
@@ -83,11 +83,30 @@
   flex-shrink: 0;
   margin-inline-start: auto;
   cursor: pointer;
+
+  [dir='rtl'] & svg {
+    transform: scaleX(1);
+  }
+}
+
+.contentWithPrefix {
+  display: flex;
+  direction: ltr;
+  align-items: center;
+  gap: var(--spacing-xxsmall2-px);
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+
+  & > span {
+    fill: var(--color-success-medium);
+  }
 }
 
 .clickableContent {
   cursor: pointer;
   display: flex;
+  direction: ltr;
   align-items: center;
   gap: var(--spacing-micro2-px);
 

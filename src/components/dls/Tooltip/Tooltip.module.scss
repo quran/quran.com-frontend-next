@@ -16,9 +16,8 @@
   color: var(--color-text-inverse);
   background-color: var(--color-background-inverse);
   max-inline-size: calc(10 * var(--spacing-mega));
-  // Changed from text-align to flexbox to support icon alignment
-  // Flexbox allows the icon to be positioned at the end while keeping content centered
   display: flex;
+  direction: ltr;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-micro2-px);
@@ -76,11 +75,28 @@
   flex-shrink: 0;
   margin-inline-start: auto;
   cursor: pointer;
+
+  [dir='rtl'] & svg {
+    transform: scaleX(1);
+  }
+}
+
+.contentWithPrefix {
+  z-index: var(--z-index-sticky);
+  display: flex;
+  direction: ltr;
+  align-items: center;
+  gap: var(--spacing-xxsmall2-px);
+
+  & > span {
+    fill: var(--color-success-medium);
+  }
 }
 
 .clickableContent {
   cursor: pointer;
   display: flex;
+  direction: ltr;
   align-items: center;
   gap: var(--spacing-micro2-px);
 
