@@ -27,6 +27,7 @@ interface Props {
   verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
+  onActionClick?: () => void;
   isInsideStudyMode?: boolean;
   forceMenuItem?: boolean;
   shouldCloseMenuAfterClick?: boolean;
@@ -45,6 +46,7 @@ const BookmarkAction: React.FC<Props> = ({
   verse,
   isTranslationView,
   onActionTriggered,
+  onActionClick,
   isInsideStudyMode = false,
   forceMenuItem = false,
   shouldCloseMenuAfterClick = false,
@@ -73,6 +75,7 @@ const BookmarkAction: React.FC<Props> = ({
         e.preventDefault();
         e.stopPropagation();
       }
+      onActionClick?.();
 
       logButtonClick(
         `${
@@ -101,9 +104,7 @@ const BookmarkAction: React.FC<Props> = ({
         }),
       );
 
-      if (onActionTriggered) {
-        onActionTriggered();
-      }
+      onActionTriggered?.();
     },
     [
       verse,
@@ -115,6 +116,7 @@ const BookmarkAction: React.FC<Props> = ({
       studyModeActiveTab,
       studyModeHighlightedWordLocation,
       dispatch,
+      onActionClick,
       onActionTriggered,
     ],
   );

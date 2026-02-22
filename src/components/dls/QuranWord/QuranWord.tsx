@@ -14,6 +14,7 @@ import GlyphWord from './GlyphWord';
 import playFromWord from './playFromWord';
 import playWordAudio from './playWordAudio';
 import styles from './QuranWord.module.scss';
+import type { ReadingWordHoverActionSource } from './ReadingModeWordHoverActions';
 import ReadingModeWordHoverActions from './ReadingModeWordHoverActions';
 import TextWord from './TextWord';
 
@@ -194,7 +195,7 @@ const QuranWord = ({
   const verseForWordActions = useMemo(() => {
     const fallbackChapterId = Number(getChapterNumberFromKey(word.verseKey));
     const fallbackVerseNumber = Number(getVerseNumberFromKey(word.verseKey));
-    const baseVerse = word.verse || {};
+    const baseVerse: Partial<Verse> = word.verse ?? {};
 
     return {
       ...baseVerse,
@@ -241,16 +242,26 @@ const QuranWord = ({
     }
   }, [isRecitationEnabled, seekToWordIfPlaying, word]);
 
-  const handleOpenStudyModeFromOverlay = useCallback(() => {
-    logButtonClick('reading_word_overlay_open_study_mode', { verseKey: word.verseKey });
-    dispatch(setReadingViewHoveredVerseKey(null));
-    dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
-  }, [dispatch, word.verseKey, word.location]);
+  const handleOpenStudyModeFromOverlay = useCallback(
+    (source: ReadingWordHoverActionSource) => {
+      if (source !== '3dots') {
+        logButtonClick('reading_word_overlay_open_study_mode', { verseKey: word.verseKey });
+      }
+      dispatch(setReadingViewHoveredVerseKey(null));
+      dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
+    },
+    [dispatch, word.verseKey, word.location],
+  );
 
-  const handlePlayFromWord = useCallback(() => {
-    logButtonClick('reading_word_overlay_play_from_word', { verseKey: word.verseKey });
-    playFromWord(word, audioService);
-  }, [word, audioService]);
+  const handlePlayFromWord = useCallback(
+    (source: ReadingWordHoverActionSource) => {
+      if (source !== '3dots') {
+        logButtonClick('reading_word_overlay_play_from_word', { verseKey: word.verseKey });
+      }
+      playFromWord(word, audioService);
+    },
+    [word, audioService],
+  );
 
   const handleReadingModeWordClick = useCallback(() => {
     if (isRecitationEnabled) {

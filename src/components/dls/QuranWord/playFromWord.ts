@@ -40,7 +40,7 @@ const playAndSeekAfterLoad = (word: Word, audioService: AudioService): (() => vo
     ) {
       seekToWord(word, audioService, state.context.audioData.verseTimings);
       cleanup();
-    } else if (state.matches('IDLE') || state.done) {
+    } else if (state.matches('HIDDEN') || state.done) {
       cleanup();
     }
   });

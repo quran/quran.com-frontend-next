@@ -13,14 +13,16 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterNumberFromKey } from '@/utils/verse';
 import Verse from 'types/Verse';
 
+export type ReadingWordHoverActionSource = '3dots' | 'tooltip';
+
 type Props = {
   children: ReactNode;
   isTooltipVisible: boolean;
   tooltipContent: ReactNode;
   tooltipDelay: number;
   verse: Verse;
-  onOpenStudyMode: () => void;
-  onPlayFromWord: () => void;
+  onOpenStudyMode: (source: ReadingWordHoverActionSource) => void;
+  onPlayFromWord: (source: ReadingWordHoverActionSource) => void;
   verseKey: string;
 };
 
@@ -38,18 +40,24 @@ const ReadingModeWordHoverActions: React.FC<Props> = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isRepeatModalOpen, setIsRepeatModalOpen] = useState(false);
 
-  const handleDropdownOpenChange = useCallback((open: boolean) => {
-    setIsDropdownOpen(open);
-  }, []);
+  const handleDropdownOpenChange = useCallback(
+    (open: boolean) => {
+      logButtonClick(open ? 'reading_word_3dots_open' : 'reading_word_3dots_close', {
+        verseKey,
+      });
+      setIsDropdownOpen(open);
+    },
+    [verseKey],
+  );
 
   const handleMore = useCallback(() => {
     logButtonClick('reading_word_3dots_more', { verseKey });
-    onOpenStudyMode();
+    onOpenStudyMode('3dots');
   }, [onOpenStudyMode, verseKey]);
 
   const handlePlayFromWord = useCallback(() => {
     logButtonClick('reading_word_3dots_play_from_word', { verseKey });
-    onPlayFromWord();
+    onPlayFromWord('3dots');
   }, [onPlayFromWord, verseKey]);
 
   const handleRepeatVerse = useCallback(() => {
@@ -59,7 +67,7 @@ const ReadingModeWordHoverActions: React.FC<Props> = ({
 
   const handleTooltipClick = useCallback(() => {
     logButtonClick('reading_word_tooltip_open_study_mode', { verseKey });
-    onOpenStudyMode();
+    onOpenStudyMode('tooltip');
   }, [onOpenStudyMode, verseKey]);
 
   const chapterId = getChapterNumberFromKey(verseKey);

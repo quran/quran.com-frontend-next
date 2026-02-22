@@ -13,6 +13,7 @@ import BookIcon from '@/icons/book-open.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import PlayIcon from '@/icons/play-outline.svg';
 import RepeatIcon from '@/icons/repeat-new.svg';
+import { logButtonClick } from '@/utils/eventLogger';
 import { Direction } from '@/utils/locale';
 import Verse from 'types/Verse';
 
@@ -92,12 +93,18 @@ const WordOptionsDropdown: React.FC<Props> = ({
         forceMenuItem
         shouldCloseMenuAfterClick
         unbookmarkedLabel={t('quran-reader:save-verse-short')}
+        onActionClick={() => {
+          logButtonClick('reading_word_3dots_save_verse', { verseKey: verse.verseKey });
+        }}
       />
 
       <ReadingViewNoteAction
         verseKey={verse.verseKey}
         shouldCloseMenuAfterClick
         label={t('quran-reader:take-a-note')}
+        onActionClick={() => {
+          logButtonClick('reading_word_3dots_take_note', { verseKey: verse.verseKey });
+        }}
       />
 
       <PopoverMenu.Item
