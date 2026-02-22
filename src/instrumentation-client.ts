@@ -22,6 +22,26 @@ const IGNORED_ERRORS: Array<string | RegExp> = [
   /invariant=418/i,
 ];
 
+type HydrationFilterEvent = Sentry.ErrorEvent & {
+  metadata?: {
+    title?: string;
+  };
+  logentry?: {
+    message?: string;
+    formatted?: string;
+  };
+};
+
+const matchesIgnoredError = (value?: string): boolean =>
+  Boolean(
+    value &&
+      IGNORED_ERRORS.some((ignoredError) =>
+        typeof ignoredError === 'string'
+          ? value.toLowerCase().includes(ignoredError.toLowerCase())
+          : ignoredError.test(value),
+      ),
+  );
+
 Sentry.init({
   enabled: SENTRY_ENABLED,
   dsn: SENTRY_ENABLED ? SENTRY_DSN : null,
@@ -32,6 +52,27 @@ Sentry.init({
   replaysSessionSampleRate: isDev ? 1.0 : 0,
   release: version,
   ignoreErrors: IGNORED_ERRORS,
+  beforeSend: (event, hint) => {
+    const hydrationFilterEvent = event as HydrationFilterEvent;
+    const messages = [
+      hydrationFilterEvent.message,
+      hydrationFilterEvent.metadata?.title,
+      hydrationFilterEvent.logentry?.message,
+      hydrationFilterEvent.logentry?.formatted,
+      ...(hydrationFilterEvent.exception?.values?.flatMap((exception) => [
+        exception.value,
+        exception.type && exception.value ? `${exception.type}: ${exception.value}` : undefined,
+      ]) ?? []),
+    ];
+
+    const originalException = hint?.originalException;
+    if (typeof originalException === 'string') messages.push(originalException);
+    if (originalException instanceof Error) messages.push(originalException.message);
+
+    if (messages.some((message) => matchesIgnoredError(message))) return null;
+
+    return event;
+  },
   integrations: [
     // Add the replay integration for session replays
     Sentry.replayIntegration({
