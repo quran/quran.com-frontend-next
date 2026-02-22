@@ -1,5 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 
+import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Card.module.scss';
@@ -14,6 +15,7 @@ import AyahReflection from '@/types/QuranReflect/AyahReflection';
 import { toSafeISOString, dateToMonthDayYearFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
+import { getSurahRangeNavigationUrlByVerseKey } from '@/utils/navigation';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { readableVerseRangeKeys } from '@/utils/verseKeys';
 
@@ -41,6 +43,17 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({ reflection, showReadMor
     [chaptersData, lang],
   );
 
+  const getVerseLink = useCallback((ref: AyahReflection) => {
+    if (!ref.references || ref.references.length === 0) return '';
+    const firstRef = ref.references[0];
+    if (firstRef.chapterId && firstRef.from) {
+      const rangeKey = `${firstRef.chapterId}:${firstRef.from}-${firstRef.to}`;
+      return getSurahRangeNavigationUrlByVerseKey(rangeKey);
+    }
+
+    return '';
+  }, []);
+
   const onViewOnQrClicked = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     logButtonClick('posted_ref_view_on_qr', { postId: reflection.id });
@@ -64,7 +77,10 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({ reflection, showReadMor
     >
       <div className={styles.noteHeader}>
         <div className={styles.noteInfo}>
-          <h3 className={styles.noteTitle}>{formatReflectionTitle(reflection)}</h3>
+          <Link href={getVerseLink(reflection)} className={styles.noteTitle}>
+            <h3>{formatReflectionTitle(reflection)}</h3>
+          </Link>
+
           <time className={styles.noteDate} dateTime={toSafeISOString(reflection.createdAt)}>
             {dateToMonthDayYearFormat(reflection.createdAt, lang)}
           </time>
