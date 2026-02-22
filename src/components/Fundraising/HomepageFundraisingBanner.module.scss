@@ -7,7 +7,11 @@
   align-items: center;
   justify-content: space-between;
   border-radius: var(--border-radius-rounded);
-  padding: var(--spacing-medium);
+  padding: var(--spacing-medium2-px);
+  background: var(--color-success-faded);
+  @include breakpoints.smallerThanTablet {
+    padding: var(--spacing-small-px);
+  }
   @include theme.light {
     box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
   }
@@ -26,8 +30,8 @@
 .title {
   font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-bold);
-  margin-block-end: var(--spacing-xsmall);
-  color: var(--color-text-default);
+  margin-block-end: var(--spacing-small-px);
+  color: var(--color-text-default-new);
   @include breakpoints.tablet {
     font-size: var(--font-size-large-px);
   }
@@ -38,14 +42,17 @@
   @include breakpoints.tablet {
     font-size: var(--font-size-medium-px);
   }
-  color: var(--color-text-default);
-  margin-block-end: var(--spacing-small);
+  color: var(--color-text-default-new);
+  margin-block-end: var(--spacing-medium-px);
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: var(--spacing-medium);
+  gap: var(--spacing-small-px);
+  @include breakpoints.smallerThanTablet {
+    justify-content: center;
+  }
 }
 
 .rightActions {
@@ -54,25 +61,28 @@
   gap: var(--spacing-medium);
 }
 
-.shareButton {
-  padding-inline: var(--spacing-xxlarge-px);
-  background-color: var(--color-success-faded);
-  --themed-bg: var(--color-success-faded);
-  --themed-border: var(--color-success-faded);
+.actions .shareButton {
+  padding-block: var(--spacing-xxsmall-px);
+  padding-inline: calc(
+    var(--spacing-medium4-px) + var(--spacing-large-px) + var(--spacing-small2-px)
+  );
   color: var(--color-text-link-new);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
   display: flex;
   align-items: center;
   gap: var(--spacing-xsmall);
-
-  font-size: var(--font-size-xsmall-px);
-  @include breakpoints.tablet {
-    font-size: var(--font-size-medium-px);
+  font-size: var(--font-size-normal-px);
+  border-radius: var(--border-radius-small-px);
+  background-color: var(--color-success-faint);
+  border: var(--spacing-hairline-px) solid var(--color-success-faint);
+  @include breakpoints.smallerThanTablet {
+    padding-inline: calc(var(--spacing-medium3-px) + var(--spacing-large-px));
+    font-size: var(--font-size-small-px);
   }
 
   &:hover {
-    --themed-bg: var(--color-success-faded);
-    --themed-border: var(--color-success-faded);
+    background-color: var(--color-success-faint);
+    border: var(--spacing-hairline-px) solid var(--color-success-faint);
     color: var(--color-text-link-new);
   }
   svg {
@@ -80,40 +90,64 @@
   }
 }
 
-.donateButton {
-  padding-inline: var(--spacing-medium2-px);
-  color: var(--color-text-link-new);
-  font-size: var(--font-size-xsmall-px);
-  --themed-border: var(--color-blue-buttons-and-icons);
-  --themed-bg: var(--color-blue-buttons-and-icons);
-  @include breakpoints.tablet {
-    font-size: var(--font-size-medium-px);
-  }
-  font-weight: var(--font-weight-bold);
+.actions .donateButton {
+  padding-block: var(--spacing-xxsmall-px);
+  padding-inline: var(--spacing-medium4-px);
+  color: var(--color-text-white);
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-semibold);
   display: flex;
   align-items: center;
   gap: var(--spacing-xsmall);
+  border-radius: var(--border-radius-small-px);
+  background-color: var(--color-blue-buttons-and-icons);
+  border: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
+  @include breakpoints.smallerThanTablet {
+    padding-inline: var(--spacing-medium-plus2-px);
+    font-size: var(--font-size-small-px);
+  }
   svg {
     padding-inline-end: var(--spacing-small-px);
     path {
-      fill: var(--color-blue-buttons-and-icons);
+      fill: var(--color-text-white);
+    }
+  }
+  &:hover {
+    background-color: var(--color-blue-buttons-and-icons);
+    border: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+    svg {
+      path {
+        fill: var(--color-text-white);
+      }
     }
   }
 
   span {
     align-items: center;
+    @include breakpoints.smallerThanTablet {
+      text-wrap: wrap;
+    }
   }
 }
 
 .learnMoreLink {
+  color: var(--color-blue-buttons-and-icons);
   text-decoration: underline;
+  font-weight: var(--font-weight-medium);
+
+  &:hover,
+  &:focus,
+  &:visited {
+    color: var(--color-blue-buttons-and-icons);
+  }
 }
 
 .closeButton {
   position: absolute;
   inset-block-start: var(--spacing-xsmall);
   inset-inline-end: var(--spacing-xsmall);
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   background: none;
   border: none;
   cursor: pointer;
@@ -121,6 +155,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  @include breakpoints.smallerThanTablet {
+    padding: 0;
+  }
 
   &:hover {
     color: var(--color-text-default);
@@ -132,7 +169,7 @@
   position: absolute;
   inset-block-start: var(--spacing-medium);
   inset-inline-end: var(--spacing-medium);
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   background: none;
   border: none;
   cursor: pointer;
@@ -140,6 +177,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  @include breakpoints.smallerThanTablet {
+    padding: 0;
+  }
 
   &:hover {
     color: var(--color-text-default);
