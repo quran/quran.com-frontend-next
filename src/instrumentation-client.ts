@@ -18,6 +18,7 @@ const IGNORED_ERRORS: Array<string | RegExp> = [
   /expected server html to contain a matching/i,
   /did not match\. server:/i,
   /hydration error/i,
+  /(reactjs\.org\/docs\/error-decoder\.html\?invariant=|react\.dev\/errors\/)(418|419|422|423|425)/i,
   /minified react error #418/i,
   /invariant=418/i,
 ];
@@ -29,6 +30,15 @@ type HydrationFilterEvent = Sentry.Event & {
   logentry?: {
     message?: string;
     formatted?: string;
+  };
+};
+
+type ReplayRecordingEvent = {
+  data?: {
+    tag?: string;
+    payload?: {
+      category?: string;
+    };
   };
 };
 
@@ -61,6 +71,9 @@ const shouldDropHydrationEvent = (event: HydrationFilterEvent, hint: Sentry.Even
   return messages.some((message) => matchesIgnoredError(message));
 };
 
+const shouldDropHydrationEventWithoutHint = (event: HydrationFilterEvent): boolean =>
+  shouldDropHydrationEvent(event, {});
+
 const hydrationFilterIntegration: Sentry.Integration = {
   name: 'HydrationFilter',
   processEvent: (event, hint) => {
@@ -85,6 +98,18 @@ Sentry.init({
     Sentry.replayIntegration({
       maskAllText: false,
       blockAllMedia: true,
+      beforeErrorSampling: (event) => !shouldDropHydrationEventWithoutHint(event),
+      beforeAddRecordingEvent: (recordingEvent) => {
+        const replayRecordingEvent = recordingEvent as ReplayRecordingEvent;
+        if (
+          replayRecordingEvent.data?.tag === 'breadcrumb' &&
+          replayRecordingEvent.data.payload?.category === 'replay.hydrate-error'
+        ) {
+          return null;
+        }
+
+        return recordingEvent;
+      },
     }),
   ],
 });
