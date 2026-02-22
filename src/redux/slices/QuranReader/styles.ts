@@ -147,7 +147,7 @@ export const quranReaderStylesSlice = createSlice({
           ...remotePreferences,
           ...(remotePreferences.quranTextFontScale != null && {
             quranTextFontScale: remapFontScale(
-              remotePreferences.quranFont,
+              remotePreferences.quranFont ?? state.quranFont,
               remotePreferences.quranTextFontScale,
             ),
           }),
