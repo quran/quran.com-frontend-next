@@ -22,7 +22,7 @@ const IGNORED_ERRORS: Array<string | RegExp> = [
   /invariant=418/i,
 ];
 
-type HydrationFilterEvent = Sentry.ErrorEvent & {
+type HydrationFilterEvent = Sentry.Event & {
   metadata?: {
     title?: string;
   };
@@ -42,6 +42,33 @@ const matchesIgnoredError = (value?: string): boolean =>
       ),
   );
 
+const shouldDropHydrationEvent = (event: HydrationFilterEvent, hint: Sentry.EventHint): boolean => {
+  const messages = [
+    event.message,
+    event.metadata?.title,
+    event.logentry?.message,
+    event.logentry?.formatted,
+    ...(event.exception?.values?.flatMap((exception) => [
+      exception.value,
+      exception.type && exception.value ? `${exception.type}: ${exception.value}` : undefined,
+    ]) ?? []),
+  ];
+
+  const { originalException } = hint;
+  if (typeof originalException === 'string') messages.push(originalException);
+  if (originalException instanceof Error) messages.push(originalException.message);
+
+  return messages.some((message) => matchesIgnoredError(message));
+};
+
+const hydrationFilterIntegration: Sentry.Integration = {
+  name: 'HydrationFilter',
+  processEvent: (event, hint) => {
+    if (event.type === 'transaction') return event;
+    return shouldDropHydrationEvent(event as HydrationFilterEvent, hint) ? null : event;
+  },
+};
+
 Sentry.init({
   enabled: SENTRY_ENABLED,
   dsn: SENTRY_ENABLED ? SENTRY_DSN : null,
@@ -52,28 +79,8 @@ Sentry.init({
   replaysSessionSampleRate: isDev ? 1.0 : 0,
   release: version,
   ignoreErrors: IGNORED_ERRORS,
-  beforeSend: (event, hint) => {
-    const hydrationFilterEvent = event as HydrationFilterEvent;
-    const messages = [
-      hydrationFilterEvent.message,
-      hydrationFilterEvent.metadata?.title,
-      hydrationFilterEvent.logentry?.message,
-      hydrationFilterEvent.logentry?.formatted,
-      ...(hydrationFilterEvent.exception?.values?.flatMap((exception) => [
-        exception.value,
-        exception.type && exception.value ? `${exception.type}: ${exception.value}` : undefined,
-      ]) ?? []),
-    ];
-
-    const originalException = hint?.originalException;
-    if (typeof originalException === 'string') messages.push(originalException);
-    if (originalException instanceof Error) messages.push(originalException.message);
-
-    if (messages.some((message) => matchesIgnoredError(message))) return null;
-
-    return event;
-  },
   integrations: [
+    hydrationFilterIntegration,
     // Add the replay integration for session replays
     Sentry.replayIntegration({
       maskAllText: false,
