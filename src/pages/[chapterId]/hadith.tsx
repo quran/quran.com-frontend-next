@@ -119,12 +119,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       getPagesLookup({ chapterNumber: Number(chapterNumber), mushaf: mushafId }),
     ]);
 
-    if (!hadithsData?.hadiths?.length) {
-      return {
-        notFound: true,
-        revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-      };
-    }
+    if (!hadithsData?.hadiths?.length) return { notFound: true };
 
     const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
 
