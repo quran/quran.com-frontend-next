@@ -429,6 +429,17 @@ export const toLocalizedVerseKeyRTL = (verseKey: string, lang: string): string =
     .join(':');
 
 /**
+ * Get the localized value of the verse key based on the locale direction.
+ * This is a wrapper function that automatically chooses between RTL and LTR localization.
+ *
+ * @param {string} verseKey - The verse key in "chapter:verse" format (e.g., "3:1").
+ * @param {string} lang - The target language for number localization.
+ * @returns {string} The localized verse key based on locale direction.
+ */
+export const toLocalizedVerseKeyAuto = (verseKey: string, lang: string): string =>
+  isRTLLocale(lang) ? toLocalizedVerseKeyRTL(verseKey, lang) : toLocalizedVerseKey(verseKey, lang);
+
+/**
  * Get the localized value of a range e.g. "1-20"
  *
  * @param {string} range

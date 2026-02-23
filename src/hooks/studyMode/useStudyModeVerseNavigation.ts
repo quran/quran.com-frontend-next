@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import DataContext from '@/contexts/DataContext';
 import { setVerseKey } from '@/redux/slices/QuranReader/studyMode';
-import { isRTLLocale, toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
+import { toLocalizedVerseKeyAuto } from '@/utils/locale';
 import { fakeNavigateReplace } from '@/utils/navigation';
 import { getChapterNumberFromKey } from '@/utils/verse';
 
@@ -119,9 +119,7 @@ const useStudyModeVerseNavigation = ({
     if (versesHistory.length === 0) return null;
     const prevVerseKey = versesHistory[versesHistory.length - 1];
     const chapter = chaptersData?.[getChapterNumberFromKey(prevVerseKey)];
-    const localizedVerseKey = isRTLLocale(lang)
-      ? toLocalizedVerseKeyRTL(prevVerseKey, lang)
-      : toLocalizedVerseKey(prevVerseKey, lang);
+    const localizedVerseKey = toLocalizedVerseKeyAuto(prevVerseKey, lang);
     return {
       localizedVerseKey,
       chapterName: chapter?.transliteratedName || '',
