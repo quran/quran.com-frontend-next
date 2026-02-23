@@ -1,12 +1,12 @@
+/* eslint-disable max-lines */
+/* eslint-disable react-func/max-lines-per-function */
 import { describe, it, expect } from 'vitest';
 
 import migrations from './migrations';
 
-import { WordByWordType } from '@/types/QuranReader';
+import { QuranFont, WordByWordType } from '@/types/QuranReader';
 
-// eslint-disable-next-line react-func/max-lines-per-function
 describe('Redux migrations', () => {
-  // eslint-disable-next-line react-func/max-lines-per-function
   describe('migration 37: wordByWord content type split', () => {
     it('should migrate wordByWordContentType to tooltip and initialize inline as empty', () => {
       const oldState = {
@@ -145,5 +145,67 @@ describe('Redux migrations', () => {
     expect(m1.quranReaderStyles.showTajweedRules).toBe(true);
     const m2 = migrations[42]({ quranReaderStyles: { showTajweedRules: false } });
     expect(m2.quranReaderStyles.showTajweedRules).toBe(false);
+  });
+
+  describe('migration 46: font scale remap', () => {
+    it.each([
+      [QuranFont.QPCHafs, 6, 7],
+      [QuranFont.MadaniV1, 7, 9],
+      [QuranFont.MadaniV2, 8, 10],
+      [QuranFont.TajweedV4, 9, 10],
+      [QuranFont.IndoPak, 6, 7],
+    ])('remaps Quran font %s from scale %d to %d', (font, oldScale, newScale) => {
+      const state = {
+        quranReaderStyles: { quranFont: font, quranTextFontScale: oldScale },
+      };
+      const result = migrations[46](state);
+      expect(result.quranReaderStyles.quranTextFontScale).toBe(newScale);
+    });
+
+    it('remaps QPCHafs from legacy scale 4 to 7', () => {
+      const state = {
+        quranReaderStyles: { quranFont: QuranFont.QPCHafs, quranTextFontScale: 4 },
+      };
+      const result = migrations[46](state);
+      expect(result.quranReaderStyles.quranTextFontScale).toBe(7);
+    });
+
+    it('remaps IndoPak from legacy scale 5 to 7', () => {
+      const state = {
+        quranReaderStyles: { quranFont: QuranFont.IndoPak, quranTextFontScale: 5 },
+      };
+      const result = migrations[46](state);
+      expect(result.quranReaderStyles.quranTextFontScale).toBe(7);
+    });
+
+    it('does not remap QPCHafs at scale 3', () => {
+      const state = {
+        quranReaderStyles: { quranFont: QuranFont.QPCHafs, quranTextFontScale: 3 },
+      };
+      const result = migrations[46](state);
+      expect(result.quranReaderStyles.quranTextFontScale).toBe(3);
+    });
+
+    it('does not remap Uthmani at scale 6', () => {
+      const state = {
+        quranReaderStyles: { quranFont: QuranFont.Uthmani, quranTextFontScale: 6 },
+      };
+      const result = migrations[46](state);
+      expect(result.quranReaderStyles.quranTextFontScale).toBe(6);
+    });
+
+    it('preserves other quranReaderStyles properties', () => {
+      const state = {
+        quranReaderStyles: {
+          quranFont: QuranFont.QPCHafs,
+          quranTextFontScale: 6,
+          translationFontScale: 3,
+        },
+        otherSlice: { data: 'kept' },
+      };
+      const result = migrations[46](state);
+      expect(result.quranReaderStyles.translationFontScale).toBe(3);
+      expect(result.otherSlice).toEqual({ data: 'kept' });
+    });
   });
 });

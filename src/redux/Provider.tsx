@@ -11,7 +11,9 @@ import getStore from './store';
 import resetSettings from '@/redux/actions/reset-settings';
 import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
-import { getUserPreferences } from '@/utils/auth/api';
+import { needsFontScaleRemap, remapFontScale } from '@/redux/migration-scripts/remap-font-scale';
+import { getMushafId } from '@/utils/api';
+import { addOrUpdateUserPreference, getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
 import isClient from '@/utils/isClient';
@@ -100,7 +102,33 @@ const ReduxProvider = ({ children, locale }) => {
           }
         }
         const localeForDefaults = remoteLang || initialLocaleRef.current;
+
+        // Remap stale font scale in remote preferences BEFORE syncing to Redux.
+        // Must happen pre-dispatch so the corrected value flows through once;
+        // a remap inside the reducer would cascade on subsequent syncs (7→9→10).
+        const remoteStyles = userPreferences[PreferenceGroup.QURAN_READER_STYLES];
+        if (remoteStyles?.quranTextFontScale != null) {
+          const effectiveFont =
+            remoteStyles.quranFont ?? store.getState().quranReaderStyles.quranFont;
+          if (needsFontScaleRemap(effectiveFont, remoteStyles.quranTextFontScale)) {
+            const correctedScale = remapFontScale(effectiveFont, remoteStyles.quranTextFontScale);
+            remoteStyles.quranTextFontScale = correctedScale;
+            // Push corrected value back to backend (fire-and-forget)
+            const { mushaf } = getMushafId(
+              effectiveFont,
+              remoteStyles.mushafLines ?? store.getState().quranReaderStyles.mushafLines,
+            );
+            addOrUpdateUserPreference(
+              'quranTextFontScale',
+              correctedScale,
+              PreferenceGroup.QURAN_READER_STYLES,
+              mushaf,
+            ).catch(() => {}); // fire-and-forget
+          }
+        }
+
         store.dispatch(syncUserPreferences(userPreferences, localeForDefaults));
+
         const audioPlayerContext = audioService.getSnapshot().context;
         const playbackRate =
           userPreferences[PreferenceGroup.AUDIO]?.playbackRate || audioPlayerContext.playbackRate;
