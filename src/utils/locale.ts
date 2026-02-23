@@ -437,7 +437,9 @@ export const toLocalizedVerseKeyRTL = (verseKey: string, lang: string): string =
  * @returns {string} The localized verse key based on locale direction.
  */
 export const toLocalizedVerseKeyAuto = (verseKey: string, lang: string): string =>
-  isRTLLocale(lang) ? toLocalizedVerseKeyRTL(verseKey, lang) : toLocalizedVerseKey(verseKey, lang);
+  isRTLLocale(lang) && lang !== Language.UR
+    ? toLocalizedVerseKeyRTL(verseKey, lang)
+    : toLocalizedVerseKey(verseKey, lang);
 
 /**
  * Get the localized value of a range e.g. "1-20"
