@@ -157,12 +157,12 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
 
   const handleOptionSelect = useCallback(
     (groupKey: string, optionKey: string, options: LayeredTranslationGroup['options']) => {
-      const optionPosition = options.findIndex((o) => o.optionKey === optionKey);
+      const index = options.findIndex((o) => o.optionKey === optionKey);
       logButtonClick('study_mode_layers_option_select', {
         verseKey,
         groupKey,
         optionKey,
-        optionPosition,
+        optionPosition: index >= 0 ? index : undefined,
       });
       setActiveGroupKey(null);
       setIsExplanationOpen(false);
@@ -314,7 +314,15 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
             footnoteText={footnote?.text}
             isLoading={isLoadingFootnote}
             direction={langData.direction}
-            onClose={resetFootnote}
+            onClose={() => {
+              if (footnote) {
+                logButtonClick('study_mode_layers_footnote_close', {
+                  verseKey,
+                  footnoteId: String(footnote.id),
+                });
+              }
+              resetFootnote();
+            }}
           />
         </div>
       )}

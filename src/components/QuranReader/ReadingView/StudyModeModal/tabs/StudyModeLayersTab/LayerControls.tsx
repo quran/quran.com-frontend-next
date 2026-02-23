@@ -26,12 +26,14 @@ const LayerControls: React.FC<LayerControlsProps> = ({
   const { t } = useTranslation('quran-reader');
 
   const handleToggleLayerMode = useCallback(() => {
-    const isExpanding = layerMode !== LayerMode.Expanded;
-    logButtonClick(isExpanding ? 'study_mode_layers_expand' : 'study_mode_layers_collapse', {
-      verseKey,
+    setLayerMode((prev) => {
+      const isExpanding = prev !== LayerMode.Expanded;
+      logButtonClick(isExpanding ? 'study_mode_layers_expand' : 'study_mode_layers_collapse', {
+        verseKey,
+      });
+      return isExpanding ? LayerMode.Expanded : LayerMode.Collapsed;
     });
-    setLayerMode(isExpanding ? LayerMode.Expanded : LayerMode.Collapsed);
-  }, [layerMode, setLayerMode, verseKey]);
+  }, [setLayerMode, verseKey]);
 
   return (
     <div className={styles.controls}>
