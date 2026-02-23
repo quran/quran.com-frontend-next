@@ -21,12 +21,7 @@ import { addCollection, addCollectionBookmark } from '@/utils/auth/api';
 import { getErrorStatus } from '@/utils/auth/errors';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import {
-  isRTLLocale,
-  toLocalizedNumber,
-  toLocalizedVerseKey,
-  toLocalizedVerseKeyRTL,
-} from '@/utils/locale';
+import { toLocalizedNumber, toLocalizedVerseKeyAuto } from '@/utils/locale';
 import {
   getChapterWithStartingVerseUrl,
   getLoginNavigationUrl,
@@ -141,9 +136,7 @@ const useSaveBookmarkModal = ({
   // Localization
   let localizedVerseKey = '';
   if (verse) {
-    localizedVerseKey = isRTLLocale(lang)
-      ? toLocalizedVerseKeyRTL(verseKey, lang)
-      : toLocalizedVerseKey(verseKey, lang);
+    localizedVerseKey = toLocalizedVerseKeyAuto(verseKey, lang);
   }
   const localizedPageNumber = pageNumber ? toLocalizedNumber(pageNumber, lang) : '';
 

@@ -9,7 +9,7 @@ import styles from './VerseLink.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { selectStudyModeIsOpen } from '@/redux/slices/QuranReader/studyMode';
 import { logButtonClick } from '@/utils/eventLogger';
-import { isRTLLocale, toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
+import { toLocalizedVerseKeyAuto } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 
 interface Props {
@@ -37,9 +37,7 @@ const VerseLink: React.FC<Props> = ({ verseKey, isTranslationView }) => {
         logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_verse_link`);
       }}
     >
-      {isRTLLocale(lang)
-        ? toLocalizedVerseKeyRTL(verseKey, lang)
-        : toLocalizedVerseKey(verseKey, lang)}
+      {toLocalizedVerseKeyAuto(verseKey, lang)}
     </Button>
   );
 };
