@@ -86,7 +86,9 @@
   background-color: var(--color-background-alternative-faded);
 }
 
-// On mobile, use explicit verse-by-verse font sizes for translation or tafsir mode
+// On mobile, use dedicated verse-by-verse scale (--font-size-vbv) instead of the reading
+// scale. The 1.2x multiplier approach caused overly large text at higher scales; explicit
+// maps give finer per-font control. On tablet+, --font-size-vbv equals --font-size (no-op).
 .tafsirOrTranslationMode {
   font-size: var(--font-size-vbv);
 }

@@ -102,29 +102,32 @@ const ReduxProvider = ({ children, locale }) => {
           }
         }
         const localeForDefaults = remoteLang || initialLocaleRef.current;
-        store.dispatch(syncUserPreferences(userPreferences, localeForDefaults));
 
-        // Push corrected font scale back to the backend if the remote value was stale
+        // Remap stale font scale in remote preferences BEFORE syncing to Redux.
+        // Must happen pre-dispatch so the corrected value flows through once;
+        // a remap inside the reducer would cascade on subsequent syncs (7→9→10).
         const remoteStyles = userPreferences[PreferenceGroup.QURAN_READER_STYLES];
-        const effectiveFont =
-          remoteStyles?.quranFont ?? store.getState().quranReaderStyles.quranFont;
-        if (
-          effectiveFont &&
-          remoteStyles?.quranTextFontScale != null &&
-          needsFontScaleRemap(effectiveFont, remoteStyles.quranTextFontScale)
-        ) {
-          const correctedScale = remapFontScale(effectiveFont, remoteStyles.quranTextFontScale);
-          const { mushaf } = getMushafId(
-            effectiveFont,
-            remoteStyles?.mushafLines ?? store.getState().quranReaderStyles.mushafLines,
-          );
-          addOrUpdateUserPreference(
-            'quranTextFontScale',
-            correctedScale,
-            PreferenceGroup.QURAN_READER_STYLES,
-            mushaf,
-          ).catch(() => {}); // fire-and-forget
+        if (remoteStyles?.quranTextFontScale != null) {
+          const effectiveFont =
+            remoteStyles.quranFont ?? store.getState().quranReaderStyles.quranFont;
+          if (needsFontScaleRemap(effectiveFont, remoteStyles.quranTextFontScale)) {
+            const correctedScale = remapFontScale(effectiveFont, remoteStyles.quranTextFontScale);
+            remoteStyles.quranTextFontScale = correctedScale;
+            // Push corrected value back to backend (fire-and-forget)
+            const { mushaf } = getMushafId(
+              effectiveFont,
+              remoteStyles.mushafLines ?? store.getState().quranReaderStyles.mushafLines,
+            );
+            addOrUpdateUserPreference(
+              'quranTextFontScale',
+              correctedScale,
+              PreferenceGroup.QURAN_READER_STYLES,
+              mushaf,
+            ).catch(() => {}); // fire-and-forget
+          }
         }
+
+        store.dispatch(syncUserPreferences(userPreferences, localeForDefaults));
 
         const audioPlayerContext = audioService.getSnapshot().context;
         const playbackRate =
