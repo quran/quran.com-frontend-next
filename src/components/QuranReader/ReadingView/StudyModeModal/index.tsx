@@ -44,7 +44,7 @@ import Word, { CharType } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
-import { toLocalizedVerseKey, toLocalizedVerseKeyRTL, isRTLLocale } from '@/utils/locale';
+import { toLocalizedVerseKeyAuto } from '@/utils/locale';
 import {
   fakeNavigate,
   getVerseSelectedTafsirNavigationUrl,
@@ -398,9 +398,7 @@ const StudyModeModal: React.FC<Props> = ({
     if (versesHistory.length === 0) return null;
     const prevVerseKey = versesHistory[versesHistory.length - 1];
     const chapter = chaptersData?.[getChapterNumberFromKey(prevVerseKey)];
-    const localizedVerseKey = isRTLLocale(lang)
-      ? toLocalizedVerseKeyRTL(prevVerseKey, lang)
-      : toLocalizedVerseKey(prevVerseKey, lang);
+    const localizedVerseKey = toLocalizedVerseKeyAuto(prevVerseKey, lang);
     return {
       localizedVerseKey,
       chapterName: chapter?.transliteratedName || '',
