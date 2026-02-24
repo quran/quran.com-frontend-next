@@ -117,19 +117,22 @@ const ReduxProvider = ({ children, locale }) => {
               effectiveFont,
               remoteStyles.mushafLines ?? store.getState().quranReaderStyles.mushafLines,
             );
-            // Write corrected scale + marker so remap doesn't cascade on next load
+            // Write corrected scale, then persist marker only after scale succeeds
             addOrUpdateUserPreference(
               'quranTextFontScale',
               correctedScale,
               PreferenceGroup.QURAN_READER_STYLES,
               mushaf,
-            ).catch(() => {});
-            addOrUpdateUserPreference(
-              'fontScaleRemapVersion',
-              1,
-              PreferenceGroup.QURAN_READER_STYLES,
-              mushaf,
-            ).catch(() => {});
+            )
+              .then(() =>
+                addOrUpdateUserPreference(
+                  'fontScaleRemapVersion',
+                  1,
+                  PreferenceGroup.QURAN_READER_STYLES,
+                  mushaf,
+                ),
+              )
+              .catch(() => {});
           }
         }
 
