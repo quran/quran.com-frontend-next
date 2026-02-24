@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -8,15 +8,32 @@ import { LayerMode } from './types';
 import FontSizeControl from '@/components/QuranReader/ReadingView/StudyModeModal/FontSizeControl';
 import IconContainer from '@/dls/IconContainer/IconContainer';
 import ExpandArrowIcon from '@/icons/expand-arrow.svg';
+import { logButtonClick } from '@/utils/eventLogger';
 
 interface LayerControlsProps {
   layerMode: LayerMode;
   setLayerMode: Dispatch<SetStateAction<LayerMode>>;
   isExpandable: boolean;
+  verseKey: string;
 }
 
-const LayerControls: React.FC<LayerControlsProps> = ({ layerMode, setLayerMode, isExpandable }) => {
+const LayerControls: React.FC<LayerControlsProps> = ({
+  layerMode,
+  setLayerMode,
+  isExpandable,
+  verseKey,
+}) => {
   const { t } = useTranslation('quran-reader');
+
+  const handleToggleLayerMode = useCallback(() => {
+    setLayerMode((prev) => {
+      const isExpanding = prev !== LayerMode.Expanded;
+      logButtonClick(isExpanding ? 'study_mode_layers_expand' : 'study_mode_layers_collapse', {
+        verseKey,
+      });
+      return isExpanding ? LayerMode.Expanded : LayerMode.Collapsed;
+    });
+  }, [setLayerMode, verseKey]);
 
   return (
     <div className={styles.controls}>
@@ -25,11 +42,7 @@ const LayerControls: React.FC<LayerControlsProps> = ({ layerMode, setLayerMode, 
         type="button"
         className={styles.layerButton}
         disabled={!isExpandable}
-        onClick={() =>
-          setLayerMode((prev) =>
-            prev === LayerMode.Expanded ? LayerMode.Collapsed : LayerMode.Expanded,
-          )
-        }
+        onClick={handleToggleLayerMode}
       >
         <IconContainer
           icon={<ExpandArrowIcon />}
