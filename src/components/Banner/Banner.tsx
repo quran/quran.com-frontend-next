@@ -5,11 +5,12 @@ import styles from './Banner.module.scss';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import DiamondIcon from '@/icons/diamond.svg';
+import { UiSectionContentFormat } from '@/types/UiSection';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface BannerProps {
   text: string;
-  textFormat?: 'plain_text' | 'html';
+  textFormat?: UiSectionContentFormat;
   ctaButtonText?: string;
   ctaUrl?: string;
 }
