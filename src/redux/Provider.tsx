@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import getStore from './store';
 
+import { logErrorToSentry } from '@/lib/sentry';
 import resetSettings from '@/redux/actions/reset-settings';
 import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
@@ -107,23 +108,32 @@ const ReduxProvider = ({ children, locale }) => {
         // Must happen pre-dispatch so the corrected value flows through once;
         // a remap inside the reducer would cascade on subsequent syncs (7→9→10).
         const remoteStyles = userPreferences[PreferenceGroup.QURAN_READER_STYLES];
-        if (remoteStyles?.quranTextFontScale != null) {
+        if (remoteStyles?.quranTextFontScale != null && !remoteStyles.fontScaleRemapVersion) {
           const effectiveFont =
             remoteStyles.quranFont ?? store.getState().quranReaderStyles.quranFont;
           if (needsFontScaleRemap(effectiveFont, remoteStyles.quranTextFontScale)) {
             const correctedScale = remapFontScale(effectiveFont, remoteStyles.quranTextFontScale);
             remoteStyles.quranTextFontScale = correctedScale;
-            // Push corrected value back to backend (fire-and-forget)
             const { mushaf } = getMushafId(
               effectiveFont,
               remoteStyles.mushafLines ?? store.getState().quranReaderStyles.mushafLines,
             );
+            // Write corrected scale, then persist marker only after scale succeeds
             addOrUpdateUserPreference(
               'quranTextFontScale',
               correctedScale,
               PreferenceGroup.QURAN_READER_STYLES,
               mushaf,
-            ).catch(() => {}); // fire-and-forget
+            )
+              .then(() =>
+                addOrUpdateUserPreference(
+                  'fontScaleRemapVersion',
+                  1,
+                  PreferenceGroup.QURAN_READER_STYLES,
+                  mushaf,
+                ),
+              )
+              .catch((err) => logErrorToSentry(err, { transactionName: 'fontScaleRemap' }));
           }
         }
 
