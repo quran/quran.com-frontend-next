@@ -10,7 +10,6 @@ import { getWordCount } from '@/utils/string';
 import { ChapterContent } from 'types/ApiResponses';
 import Chapter from 'types/Chapter';
 
-const MIN_SUMMARY_WORDS = 3;
 const LONG_SUMMARY_THRESHOLD = 7;
 
 interface ChapterLinkProps {
@@ -40,7 +39,7 @@ const ChapterLink: React.FC<ChapterLinkProps> = ({
 
   const summaryText = summary?.text;
   const wordCount = summaryText ? getWordCount(summaryText) : 0;
-  const hasSummary = wordCount > MIN_SUMMARY_WORDS;
+  const hasSummary = Boolean(summaryText?.trim());
   const isLongSummary = hasSummary && wordCount > LONG_SUMMARY_THRESHOLD;
 
   const handleClick = () => {
