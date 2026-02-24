@@ -5,7 +5,7 @@
   justify-content: center;
   padding: var(--spacing-xsmall-px);
   border-radius: var(--spacing-xxsmall-px);
-  background: var(--color-background-elevated);
+  background: var(--color-success-medium);
   box-shadow: var(--shadow-reading-word-three-dots);
   cursor: pointer;
   border: none;
@@ -14,7 +14,7 @@
 .threeDotsIcon {
   inline-size: var(--spacing-medium-plus-px);
   block-size: var(--spacing-medium-plus-px);
-  color: var(--color-success-medium);
+  color: var(--color-text-white);
 }
 
 .menuContent {
