@@ -5,25 +5,31 @@ import styles from './Banner.module.scss';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import DiamondIcon from '@/icons/diamond.svg';
-import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface BannerProps {
   text: string;
+  textFormat?: 'plain_text' | 'html';
   ctaButtonText?: string;
+  ctaUrl?: string;
 }
 
-const Banner = ({ text, ctaButtonText }: BannerProps) => {
+const Banner = ({ text, textFormat = 'plain_text', ctaButtonText, ctaUrl }: BannerProps) => {
   const handleButtonClick = useCallback(() => {
-    logButtonClick('donate_button_banner');
+    logButtonClick('navbar_banner_cta');
   }, []);
 
   return (
     <div className={styles.container} data-testid="banner">
-      <div className={styles.text}>{text}</div>
-      {ctaButtonText && (
+      {textFormat === 'html' ? (
+        // eslint-disable-next-line react/no-danger
+        <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
+      ) : (
+        <div className={styles.text}>{text}</div>
+      )}
+      {ctaButtonText && ctaUrl && (
         <Link
-          href={makeDonatePageUrl(false, true)}
+          href={ctaUrl}
           variant={LinkVariant.Blend}
           className={styles.cta}
           ariaLabel={ctaButtonText}

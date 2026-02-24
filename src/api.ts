@@ -38,6 +38,7 @@ import {
   makeByRangeVersesUrl,
   makeWordByWordTranslationsUrl,
   makeChapterMetadataUrl,
+  makeUiSectionUrl,
   makeVersesFilterUrl,
   makeQiraatMatrixUrl,
   makeQiraatJuncturesCountUrl,
@@ -62,6 +63,7 @@ import {
   VersesResponse,
   ChapterInfoResponse,
   ChapterMetadataResponse,
+  UiSectionResponse,
   FootnoteResponse,
   ChapterResponse,
   ReciterResponse,
@@ -296,6 +298,16 @@ export const getChapterMetadata = async (
   chapterId: string,
   language: string,
 ): Promise<ChapterMetadataResponse> => fetcher(makeChapterMetadataUrl(chapterId, language));
+
+/**
+ * Get a dynamic UI section by key.
+ *
+ * @param {string} key
+ * @param {string} language
+ * @returns {Promise<UiSectionResponse>}
+ */
+export const getUiSection = async (key: string, language: string): Promise<UiSectionResponse> =>
+  fetcher(makeUiSectionUrl(key, language));
 
 /**
  * Get a chapter's.
