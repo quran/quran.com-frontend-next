@@ -60,6 +60,9 @@
 
 .pinnedVerseTags {
   @include utility.edgeHorizontalPadding;
+  & > *:nth-last-child {
+    margin-inline-end: calc(var(--spacing-small-px) * -1);
+  }
 }
 
 .actions {
