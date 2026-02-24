@@ -7,7 +7,7 @@ import styles from './TranslationViewCell.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
 import Scrollable from '@/dls/Scrollable/Scrollable';
-import EventNames from '@/utils/event-names';
+import EventName from '@/utils/event-names';
 import { isRTLLocale } from '@/utils/locale';
 
 export enum TabId {
@@ -67,7 +67,7 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
         [styles.center]: !isTranslationView,
         [styles.tabsContainerRTL]: isRTL && isTranslationView,
       })}
-      eventName={EventNames.QURAN_READER_BOTTOM_ACTION_SCROLLABLE}
+      eventName={EventName.QURAN_READER_BOTTOM_ACTION_SCROLLABLE}
     >
       {filteredTabs.map((tab, index) => (
         <React.Fragment key={tab.id}>
