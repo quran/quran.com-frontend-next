@@ -6,28 +6,35 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import DiamondIcon from '@/icons/diamond.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { ROUTES } from '@/utils/navigation';
 
 interface BannerProps {
   text: string;
+  textFormat?: 'plain_text' | 'html';
   ctaButtonText?: string;
+  ctaUrl?: string;
 }
 
-const Banner = ({ text, ctaButtonText }: BannerProps) => {
+const Banner = ({ text, textFormat = 'plain_text', ctaButtonText, ctaUrl }: BannerProps) => {
   const handleButtonClick = useCallback(() => {
-    logButtonClick('ramadan_challenge_banner_cta');
+    logButtonClick('navbar_banner_cta');
   }, []);
 
   return (
     <div className={styles.container} data-testid="banner">
-      <div className={styles.text}>{text}</div>
-      {ctaButtonText && (
+      {textFormat === 'html' ? (
+        // eslint-disable-next-line react/no-danger
+        <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
+      ) : (
+        <div className={styles.text}>{text}</div>
+      )}
+      {ctaButtonText && ctaUrl && (
         <Link
-          href={ROUTES.RAMADAN_CHALLENGE}
+          href={ctaUrl}
           variant={LinkVariant.Blend}
           className={styles.cta}
           ariaLabel={ctaButtonText}
           onClick={handleButtonClick}
+          isNewTab
         >
           <IconContainer
             icon={<DiamondIcon aria-hidden="true" />}

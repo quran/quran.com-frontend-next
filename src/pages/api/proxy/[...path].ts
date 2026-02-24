@@ -103,13 +103,8 @@ const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
       if (proxyCookies) {
         res.setHeader('Set-Cookie', proxyCookies);
       }
-
-      // Prevent intermediate proxy caching (Traefik, nginx, etc.)
-      // This ensures fresh data flows through from the API Gateway's CF cache
-      // Note: This does NOT affect CF caching at the API Gateway level
-      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
+      // Preserve upstream cache headers for content responses.
+      // Cache policy is controlled by upstream APIs and edge configuration.
     },
 
     error: (err, req, res) => {
