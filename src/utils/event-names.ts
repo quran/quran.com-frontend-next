@@ -5,4 +5,14 @@ enum EventNames {
   QURAN_READER_TRANSLATION_REFERENCE = 'quran_reader_translation_reference',
 }
 
+interface EventNameParams {
+  eventName: EventNames;
+  prefix?: string;
+  suffix?: string;
+}
+
+export const getEventName = ({ eventName, prefix, suffix }: EventNameParams) => {
+  return [prefix, eventName, suffix].filter(Boolean).join('_');
+};
+
 export default EventNames;
