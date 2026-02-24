@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import getStore from './store';
 
+import { logErrorToSentry } from '@/lib/sentry';
 import resetSettings from '@/redux/actions/reset-settings';
 import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
@@ -132,7 +133,7 @@ const ReduxProvider = ({ children, locale }) => {
                   mushaf,
                 ),
               )
-              .catch(() => {});
+              .catch((err) => logErrorToSentry(err, { transactionName: 'fontScaleRemap' }));
           }
         }
 
