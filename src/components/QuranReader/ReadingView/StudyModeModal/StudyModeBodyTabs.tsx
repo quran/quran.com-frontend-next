@@ -25,60 +25,38 @@ import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResp
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { toLocalizedNumber } from '@/utils/locale';
 
+const Loading = () => (
+  <div className={answerStyle.edgeToEdge}>
+    <TafsirSkeleton />
+  </div>
+);
+
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
-  loading: () => (
-    <div className={answerStyle.edgeToEdge}>
-      <TafsirSkeleton />
-    </div>
-  ),
+  loading: Loading,
 });
 
 export const StudyModeReflectionsTab = dynamic(() => import('./tabs/StudyModeReflectionsTab'), {
-  loading: () => (
-    <div className={answerStyle.edgeToEdge}>
-      <TafsirSkeleton />
-    </div>
-  ),
+  loading: Loading,
 });
 
 export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), {
-  loading: () => (
-    <div className={answerStyle.edgeToEdge}>
-      <TafsirSkeleton />
-    </div>
-  ),
+  loading: Loading,
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
-  loading: () => (
-    <div className={answerStyle.edgeToEdge}>
-      <TafsirSkeleton />
-    </div>
-  ),
+  loading: Loading,
 });
 
 const StudyModeLayersTab = dynamic(() => import('./tabs/StudyModeLayersTab'), {
-  loading: () => (
-    <div className={answerStyle.edgeToEdge}>
-      <TafsirSkeleton />
-    </div>
-  ),
+  loading: Loading,
 });
 
 const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
-  loading: () => (
-    <div className={answerStyle.edgeToEdge}>
-      <TafsirSkeleton />
-    </div>
-  ),
+  loading: Loading,
 });
 
 const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), {
-  loading: () => (
-    <div className={answerStyle.edgeToEdge}>
-      <TafsirSkeleton />
-    </div>
-  ),
+  loading: Loading,
 });
 
 export const StudyModeRelatedVersesTab = dynamic(
