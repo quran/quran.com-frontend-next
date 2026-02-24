@@ -91,10 +91,10 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const hasUiSectionCta = Boolean(uiSection?.url && uiSection?.ctaText?.trim());
   const bannerProps = hasUiSectionContent
     ? {
-        text: uiSection?.content?.value || '',
+        text: uiSection?.content?.value ?? '',
         textFormat: uiSection?.content?.format || 'plain_text',
         ctaButtonText: hasUiSectionCta ? uiSection?.ctaText?.trim() : undefined,
-        ctaUrl: hasUiSectionCta ? uiSection?.url || undefined : undefined,
+        ctaUrl: hasUiSectionCta ? uiSection?.url : undefined,
       }
     : undefined;
 
