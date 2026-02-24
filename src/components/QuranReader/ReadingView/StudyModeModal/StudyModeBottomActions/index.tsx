@@ -7,7 +7,7 @@ import styles from './StudyModeBottomActions.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
 import Scrollable from '@/dls/Scrollable/Scrollable';
-import EventNames from '@/utils/event-names';
+import EventName from '@/utils/event-names';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -66,7 +66,7 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
     >
       <Scrollable
         className={styles.tabsContainer}
-        eventName={EventNames.QURAN_READER_STUDY_MODE_BOTTOM_ACTION_SCROLLABLE}
+        eventName={EventName.QURAN_READER_STUDY_MODE_BOTTOM_ACTION_SCROLLABLE}
       >
         {filteredTabs.map((tab, index) => (
           <React.Fragment key={tab.id}>
