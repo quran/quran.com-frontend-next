@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReadingModeWordHoverActions.module.scss';
@@ -8,6 +9,7 @@ import ReadingViewNoteAction from '@/components/Notes/modal/ReadingViewNoteActio
 import BookmarkAction from '@/components/Verse/BookmarkAction';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu, { PopoverMenuAlign } from '@/dls/PopoverMenu/PopoverMenu';
+import useDirection from '@/hooks/useDirection';
 import ArrowIcon from '@/icons/arrow.svg';
 import BookIcon from '@/icons/book-open.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
@@ -35,10 +37,14 @@ const WordOptionsDropdown: React.FC<Props> = ({
   onRepeatVerse,
 }) => {
   const { t } = useTranslation('common');
+  const direction = useDirection();
+  const isRTL = direction === Direction.RTL;
 
   return (
     <PopoverMenu
-      contentClassName={styles.menuContent}
+      contentClassName={classNames(styles.menuContent, {
+        [styles.menuContentRtl]: isRTL,
+      })}
       dir={Direction.LTR}
       align={PopoverMenuAlign.END}
       sideOffset={DROPDOWN_SIDE_OFFSET}
@@ -68,7 +74,11 @@ const WordOptionsDropdown: React.FC<Props> = ({
       >
         <span className={styles.menuItemContent}>
           {t('more')}
-          <ArrowIcon className={styles.menuItemChevron} />
+          <ArrowIcon
+            className={classNames(styles.menuItemChevron, {
+              [styles.menuItemChevronRtl]: isRTL,
+            })}
+          />
         </span>
       </PopoverMenu.Item>
 

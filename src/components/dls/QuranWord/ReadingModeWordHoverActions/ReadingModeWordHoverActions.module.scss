@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-xsmall-px);
+  padding: var(--spacing-small2-px);
   border-radius: var(--spacing-xxsmall-px);
   background: var(--color-success-medium);
   box-shadow: var(--shadow-reading-word-three-dots);
@@ -22,7 +22,11 @@
   border-radius: var(--spacing-xxsmall-px);
   min-inline-size: auto;
   z-index: var(--z-index-modal);
-  direction: ltr;
+}
+
+.menuContentRtl {
+  direction: rtl;
+  text-align: end;
 }
 
 .menuItemContent {
@@ -36,4 +40,8 @@
 .menuItemChevron {
   inline-size: var(--spacing-small2-px);
   block-size: var(--spacing-small2-px);
+}
+
+.menuItemChevronRtl {
+  transform: rotate(180deg);
 }
