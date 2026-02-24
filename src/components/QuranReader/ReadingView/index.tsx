@@ -52,6 +52,7 @@ type ReadingViewProps = {
   initialData: VersesResponse;
   resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
   readingPreference: ReadingPreference;
+  isReadingModeQueryParamDifferent: boolean;
 };
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1200;
@@ -72,6 +73,7 @@ const ReadingView = ({
   initialData,
   resourceId,
   readingPreference,
+  isReadingModeQueryParamDifferent,
 }: ReadingViewProps) => {
   const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>(() =>
     getInitialMushafMap(initialData),
@@ -206,7 +208,9 @@ const ReadingView = ({
   }
 
   const shouldShowQueryParamMessage =
-    reciterQueryParamDifferent || wordByWordLocaleQueryParamDifferent;
+    reciterQueryParamDifferent ||
+    wordByWordLocaleQueryParamDifferent ||
+    isReadingModeQueryParamDifferent;
 
   // When in empty state, show mode actions and empty message
   // Only show ReadingModeActions here if ReaderTopActions wouldn't show them (to avoid duplicate)
@@ -230,6 +234,7 @@ const ReadingView = ({
           translationsQueryParamDifferent={false}
           reciterQueryParamDifferent={reciterQueryParamDifferent}
           wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+          isReadingModeQueryParamDifferent={isReadingModeQueryParamDifferent}
         />
       )}
       <div

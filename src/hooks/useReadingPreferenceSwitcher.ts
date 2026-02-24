@@ -11,6 +11,7 @@ import {
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
+import QueryParam from 'types/QueryParam';
 import { ReadingPreference } from 'types/QuranReader';
 
 // Threshold in pixels to consider the user "at the top" of the page
@@ -83,28 +84,30 @@ const useReadingPreferenceSwitcher = ({
         newQueryParams.startingVerse = lastReadVerse || '1';
       }
 
+      newQueryParams[QueryParam.READING_MODE] = newPreference;
+
       const newUrlObject = {
         pathname: router.pathname,
         query: newQueryParams,
       };
 
-      const updateReduxState = () => {
-        onSettingsChange(
-          'readingPreference',
-          newPreference,
-          setReadingPreference(newPreference),
-          setReadingPreference(readingPreference),
-          PreferenceGroup.READING,
-        );
-      };
+      // Update Redux state first (synchronous dispatch + async API sync),
+      // then update the URL. This ensures Redux and URL agree when the
+      // component tree re-renders, avoiding a brief mismatch window that
+      // would flash the QueryParamMessage banner and risk stale closures
+      // during the heavy TranslationView ↔ ReadingView transition.
+      onSettingsChange(
+        'readingPreference',
+        newPreference,
+        setReadingPreference(newPreference),
+        setReadingPreference(readingPreference),
+        PreferenceGroup.READING,
+      );
 
-      // Update URL with shallow routing (no page reload), then update Redux state.
+      // Update URL with shallow routing (no page reload).
       // The useScrollToVirtualizedVerse hooks in ReadingView/TranslationView
-      // will handle scrolling to the correct position based on startingVerse.
-      router
-        .replace(newUrlObject, null, { shallow: true, scroll: false })
-        .then(updateReduxState)
-        .catch(updateReduxState); // Still update Redux if router fails to keep UI in sync
+      // handle scrolling to the correct position based on startingVerse.
+      router.replace(newUrlObject, null, { shallow: true, scroll: false });
     },
     [context, lastReadVerse, onSettingsChange, readingPreference, router],
   );

@@ -23,7 +23,10 @@ import {
   selectVerseAlignment,
   selectVideoId,
 } from '@/redux/slices/mediaMaker';
-import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
+import {
+  selectReadingPreference,
+  selectWordByWordLocale,
+} from '@/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ChaptersData from '@/types/ChaptersData';
 import { areArraysEqual } from '@/utils/array';
@@ -51,6 +54,7 @@ import {
   isValidOpacityQueryParamValue,
   isValidOrientationQueryParamValue,
   isValidPreviewModeQueryParamValue,
+  isValidReadingModeQueryParamValue,
   isValidReciterId,
   isValidTranslationsQueryParamValue,
   isValidTranslationsQueryParamValueWithExistingKey,
@@ -79,6 +83,12 @@ export const QUERY_PARAMS_DATA = {
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
     isValidQueryParam: () => true,
+  },
+  [QueryParam.READING_MODE]: {
+    reduxValueSelector: selectReadingPreference,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: (val) => isValidReadingModeQueryParamValue(val),
   },
   [QueryParam.VERSE_TO]: {
     reduxValueSelector: selectSurahAndVersesFromAndTo,

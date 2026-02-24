@@ -30,6 +30,7 @@ type TranslationViewProps = {
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
   resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
+  isReadingModeQueryParamDifferent: boolean;
 };
 
 const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls'), {
@@ -44,6 +45,7 @@ const TranslationView = ({
   quranReaderDataType,
   initialData,
   resourceId,
+  isReadingModeQueryParamDifferent,
 }: TranslationViewProps) => {
   const [apiPageToVersesMap, setApiPageToVersesMap] = useState<Record<number, Verse[]>>({
     1: initialData.verses,
@@ -131,7 +133,8 @@ const TranslationView = ({
   const shouldShowQueryParamMessage =
     translationsQueryParamDifferent ||
     reciterQueryParamDifferent ||
-    wordByWordLocaleQueryParamDifferent;
+    wordByWordLocaleQueryParamDifferent ||
+    isReadingModeQueryParamDifferent;
 
   const isSingleVerse = quranReaderDataType === QuranReaderDataType.Verse;
 
@@ -142,6 +145,7 @@ const TranslationView = ({
           translationsQueryParamDifferent={translationsQueryParamDifferent}
           reciterQueryParamDifferent={reciterQueryParamDifferent}
           wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+          isReadingModeQueryParamDifferent={isReadingModeQueryParamDifferent}
         />
       )}
 

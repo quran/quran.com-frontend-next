@@ -13,7 +13,9 @@ import styles from './QueryParamMessage.module.scss';
 
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
+  selectReadingPreference,
   selectWordByWordLocale,
+  setReadingPreference,
   setSelectedWordByWordLocale,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import {
@@ -21,7 +23,7 @@ import {
   setSelectedTranslations,
 } from '@/redux/slices/QuranReader/translations';
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
-import { QuranReaderFlow } from '@/types/QuranReader';
+import { QuranReaderFlow, ReadingPreference } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -31,12 +33,14 @@ interface Props {
   translationsQueryParamDifferent: boolean;
   reciterQueryParamDifferent: boolean;
   wordByWordLocaleQueryParamDifferent: boolean;
+  isReadingModeQueryParamDifferent?: boolean;
 }
 
 const QueryParamMessage: React.FC<Props> = ({
   translationsQueryParamDifferent,
   reciterQueryParamDifferent,
   wordByWordLocaleQueryParamDifferent,
+  isReadingModeQueryParamDifferent = false,
 }) => {
   const { lang } = useTranslation('common');
   const router = useRouter();
@@ -44,6 +48,7 @@ const QueryParamMessage: React.FC<Props> = ({
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
   const selectedReciterId = useXstateSelector(audioService, (state) => state.context.reciterId);
   const selectedWordByWordLocale = useSelector(selectWordByWordLocale, shallowEqual);
+  const selectedReadingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   const {
     actions: { onSettingsChange, onXstateSettingsChange },
   } = usePersistPreferenceGroup();
@@ -62,6 +67,9 @@ const QueryParamMessage: React.FC<Props> = ({
     }
     if (wordByWordLocaleQueryParamDifferent) {
       router.query[QueryParam.WBW_LOCALE] = selectedWordByWordLocale;
+    }
+    if (isReadingModeQueryParamDifferent) {
+      router.query[QueryParam.READING_MODE] = selectedReadingPreference;
     }
     // if is in Quranic Calendar flow, remove the flow query param
     if (router.query[QueryParam.FLOW] === QuranReaderFlow.QURANIC_CALENDER) {
@@ -116,6 +124,19 @@ const QueryParamMessage: React.FC<Props> = ({
         () => audioService.send({ type: 'CHANGE_RECITER', reciterId: nextReciterId }),
         () => audioService.send({ type: 'CHANGE_RECITER', reciterId: selectedReciterId }),
         PreferenceGroup.AUDIO,
+      );
+    }
+
+    if (isReadingModeQueryParamDifferent) {
+      const nextReadingPreference = router.query[
+        QueryParam.READING_MODE
+      ] as string as ReadingPreference;
+      onSettingsChange(
+        'readingPreference',
+        nextReadingPreference,
+        setReadingPreference(nextReadingPreference),
+        setReadingPreference(selectedReadingPreference),
+        PreferenceGroup.READING,
       );
     }
   };
