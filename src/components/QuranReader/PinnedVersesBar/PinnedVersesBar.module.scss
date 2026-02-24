@@ -18,26 +18,16 @@
 }
 
 .barContent {
+  --spacing-edge-horizontal-px: var(--spacing-medium-px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-block-start: var(--spacing-xsmall-px);
-  padding-block-end: var(--spacing-xsmall-px);
-  padding-inline: calc(1.3 * var(--spacing-large));
   gap: var(--spacing-xxsmall-px);
+  padding-block: var(--spacing-xxsmall-px);
+}
 
-  @include breakpoints.tablet {
-    padding-inline: calc(1.2 * var(--spacing-mega));
-  }
-
-  @include breakpoints.smallerThanTablet {
-    padding-inline: var(--spacing-medium-px);
-    padding-block: var(--spacing-xxsmall-px);
-  }
-
-  &.noPadding {
-    @include utility.edgeHorizontalPadding;
-  }
+.barContentNoPadding {
+  padding-block: unset;
 }
 
 .labelAndTags {
@@ -50,6 +40,8 @@
 }
 
 .labelRow {
+  @include utility.edgeHorizontalPadding;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -62,25 +54,12 @@
   flex-shrink: 0;
 }
 
-.tagsContainer {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: var(--spacing-small-px);
+.pinnedVerseTagsContainer {
   inline-size: 100%;
-  padding-block: var(--spacing-micro-px);
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: thin;
+}
 
-  &::-webkit-scrollbar {
-    block-size: var(--spacing-micro-px);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--color-separators-new);
-    border-radius: var(--spacing-micro-px);
-  }
+.pinnedVerseTags {
+  @include utility.edgeHorizontalPadding;
 }
 
 .actions {
