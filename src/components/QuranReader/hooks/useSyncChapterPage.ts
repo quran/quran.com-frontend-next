@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+﻿import { useContext, useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -44,7 +44,7 @@ const useSyncChapterPage = (initialData: VersesResponse): void => {
   const { lang } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   const lastReadVerse = useSelector(selectLastReadVerseKey, shallowEqual);
-  const hasChapterIdInRoute = Boolean(router.query.chapterId);
+  const hasChapterIdInRoute = Boolean(router.query.chapterId) && !router.query.verseId;
   const chapterIdsByUrlPath = useChapterIdsByUrlPath(lang);
   const urlChapterId = hasChapterIdInRoute ? chapterIdsByUrlPath?.[0] : undefined;
 
