@@ -50,12 +50,12 @@ const Card = ({
   descriptionClassName,
 }: CardProps) => {
   return (
-      <div
-        className={classNames(className, styles.container, {
+    <div
+      className={classNames(className, styles.container, {
         [styles.large]: size === CardSize.Large,
         [styles.medium]: size === CardSize.Medium,
       })}
-      >
+    >
       <div
         className={classNames(styles.imageContainer)}
         role="button"
