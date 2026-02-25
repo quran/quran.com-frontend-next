@@ -300,11 +300,15 @@ const QuranWord = ({
       return;
     }
 
-    if (word.charTypeName === CharType.Word && (!isRecitationEnabled || !showTooltip)) {
-      if (isRecitationEnabled) handleWordAction();
+    if (!isRecitationEnabled && word.charTypeName === CharType.Word) {
       logButtonClick(`study_mode_open_word_${modeSuffix}`, { verseKey: word.verseKey });
       dispatch(setReadingViewHoveredVerseKey(null));
       dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
+      return;
+    }
+
+    if (isRecitationEnabled && word.charTypeName === CharType.Word && !showTooltip) {
+      handleWordAction();
       return;
     }
 
