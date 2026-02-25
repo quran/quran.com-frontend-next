@@ -1,112 +1,74 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
-import classNames from 'classnames'
-import { GetStaticProps, NextPage } from 'next'
-import useTranslation from 'next-translate/useTranslation'
+import classNames from 'classnames';
+import { GetStaticProps, NextPage } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 
-import styles from './explore.module.scss'
+import styles from './explore.module.scss';
 
-import { fetcher } from '@/api'
-import ContentContainer from '@/components/Course/ContentContainer'
-import coursesListStyles from '@/components/Course/CoursesList/LessonsList.module.scss'
-import coursesLayoutStyles from '@/components/Course/CoursesPageLayout/CoursesPageLayout.module.scss'
-import NextSeoWrapper from '@/components/NextSeoWrapper'
-import Card, { CardSize } from '@/dls/Card/Card'
-import Link from '@/dls/Link/Link'
-import { logErrorToSentry } from '@/lib/sentry'
-import layout_styles from '@/pages/index.module.scss'
-import { getDir, getLanguageAlternates } from '@/utils/locale'
-import { getCanonicalUrl } from '@/utils/navigation'
-import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration'
-import { getBasePath, getProxiedServiceUrl, QuranFoundationService } from '@/utils/url'
-
-type ContentPageSummary = {
-  id: string
-  parent?: string | null
-  slug?: string
-  title?: string
-  description?: string
-  image?: string
-  thumbnail?: string
-}
-
-type ContentArticleSummary = ContentPageSummary
-
-type ContentArticlesResponse = {
-  articles?: ContentArticleSummary[]
-}
+import ContentContainer from '@/components/Course/ContentContainer';
+import coursesListStyles from '@/components/Course/CoursesList/LessonsList.module.scss';
+import coursesLayoutStyles from '@/components/Course/CoursesPageLayout/CoursesPageLayout.module.scss';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import Card, { CardSize } from '@/dls/Card/Card';
+import Link from '@/dls/Link/Link';
+import { logErrorToSentry } from '@/lib/sentry';
+import layoutStyles from '@/pages/index.module.scss';
+import {
+  ContentArticle,
+  explorePath,
+  fetchContentArticles,
+  getExploreHref,
+  getPageImage,
+} from '@/utils/explore/content-api';
+import { getDir, getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl } from '@/utils/navigation';
+import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 
 interface Props {
-  articles?: ContentArticleSummary[]
+  articles?: ContentArticle[];
 }
-
-const path = '/explore'
-const placeholderImage = 'https://images.quran.com/coming-soon.png'
-
-const getPageImage = (url?: string) => {
-  if (!url) return placeholderImage
-  if (url.startsWith('//')) return `https:${url}`
-  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/')) return url
-  return placeholderImage
-}
-
-const getPageHref = (slug?: string): string => {
-  if (!slug) return '/'
-  const normalized = slug.replace(/^\/+/, '')
-  if (!normalized || normalized.includes('/')) return '/'
-  return `/explore/${normalized}`
-}
-
-const makeContentArticlesUrl = (language: string): string =>
-  getProxiedServiceUrl(
-    QuranFoundationService.CONTENT,
-    `/api/qdc/articles?language=${encodeURIComponent(language)}`,
-  )
 
 const ExplorePage: NextPage<Props> = ({ articles }) => {
-  const { t, lang } = useTranslation('articles')
-  const [contentArticles, setContentArticles] = useState(articles || [])
+  const { t, lang } = useTranslation('articles');
+  const [contentArticles, setContentArticles] = useState(articles || []);
 
   useEffect(() => {
-    fetcher<ContentArticlesResponse>(makeContentArticlesUrl(lang), {
-      headers: {
-        origin: getBasePath(),
-      },
-    })
+    fetchContentArticles(lang)
       .then((response) => {
-        setContentArticles(response?.articles ?? [])
+        setContentArticles(response);
       })
       .catch((error) => {
         logErrorToSentry(error, {
           transactionName: 'ExplorePage-useEffect',
           metadata: { language: lang },
-        })
-      })
-  }, [lang])
+        });
+      });
+  }, [lang]);
 
   const entries = contentArticles
     .filter((article) => article.slug)
     .map((article) => ({
-      href: getPageHref(article.slug),
+      href: getExploreHref(article.slug),
       title: article.title,
       description: article.description,
       image: getPageImage(article.thumbnail || article.image),
-    }))
+    }));
 
   return (
     <>
       <NextSeoWrapper
         title={t('title')}
-        url={getCanonicalUrl(lang, path)}
-        languageAlternates={getLanguageAlternates(path)}
+        url={getCanonicalUrl(lang, explorePath)}
+        languageAlternates={getLanguageAlternates(explorePath)}
         description={t('description')}
       />
-      <div className={layout_styles.pageContainer}>
+      <div className={layoutStyles.pageContainer}>
         <ContentContainer>
           <div dir={getDir(lang)}>
             <p className={coursesLayoutStyles.title}>{t('title')}</p>
             <div className={coursesLayoutStyles.desc}>{t('description')}</div>
-            <div className={classNames(layout_styles.flow, coursesLayoutStyles.container)}>
+            <div className={classNames(layoutStyles.flow, coursesLayoutStyles.container)}>
               <div className={styles.gridWrapper}>
                 <div className={classNames(coursesListStyles.container, styles.grid)} role="list">
                   {entries.map((page) => (
@@ -121,7 +83,10 @@ const ExplorePage: NextPage<Props> = ({ articles }) => {
                           footer={<span className={styles.readMore}>{t('read_more')}</span>}
                           size={CardSize.Large}
                           shouldShowFullTitle
-                          className={classNames(coursesListStyles.cardContainer, styles.cardContainer)}
+                          className={classNames(
+                            coursesListStyles.cardContainer,
+                            styles.cardContainer,
+                          )}
                         />
                       </Link>
                     </div>
@@ -133,40 +98,31 @@ const ExplorePage: NextPage<Props> = ({ articles }) => {
         </ContentContainer>
       </div>
     </>
-  )
-}
+  );
+};
 
 export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
-  const language = locale || 'en'
+  const language = locale || 'en';
   try {
-    const articlesResponse = await fetcher<ContentArticlesResponse>(
-      makeContentArticlesUrl(language),
-      {
-        headers: {
-          origin: getBasePath(),
-        },
-      },
-    )
-    const articles = articlesResponse?.articles ?? []
-
+    const articles = await fetchContentArticles(language);
     return {
       props: {
         articles,
       },
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    }
+    };
   } catch (error) {
     logErrorToSentry(error, {
       transactionName: 'getStaticProps-ExplorePage',
       metadata: { language },
-    })
+    });
     return {
       props: {
         articles: [],
       },
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    }
+    };
   }
-}
+};
 
-export default ExplorePage
+export default ExplorePage;
