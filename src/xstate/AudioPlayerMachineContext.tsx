@@ -20,6 +20,7 @@ export const AudioPlayerMachineContext = createContext(
 
 const LOCAL_STORAGE_PERSISTENCE_EVENT_TRIGGER = [
   'CHANGE_RECITER',
+  'SET_INITIAL_CONTEXT',
   'SET_PLAYBACK_SPEED',
   'UPDATE_VOLUME',
 ];

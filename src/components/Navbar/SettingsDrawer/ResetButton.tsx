@@ -44,8 +44,9 @@ const ResetButton = () => {
   };
 
   const resetAndSetInitialState = () => {
-    const shouldChangeReciter =
-      audioService.getSnapshot().context.reciterId !== DEFAULT_XSTATE_INITIAL_STATE.reciterId;
+    const snapshot = audioService.getSnapshot();
+    const activeReciterId = snapshot.context.audioData?.reciterId || snapshot.context.reciterId;
+    const shouldChangeReciter = activeReciterId !== DEFAULT_XSTATE_INITIAL_STATE.reciterId;
 
     dispatch(resetSettings(lang));
     audioService.send({
