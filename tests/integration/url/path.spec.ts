@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -15,6 +16,18 @@ test('Page /S should load Surah S', { tag: ['@url', '@smoke'] }, async ({ page }
   await expect(page.getByText('Al-Qiyamah').first()).toBeVisible();
   expect(await page.title()).toContain('Al-Qiyamah');
 });
+
+test(
+  'Page /S route change should update chapter navigation label',
+  { tag: ['@url', '@reader', '@header'] },
+  async ({ page }) => {
+    await homePage.goTo('/1');
+    await expect(page.getByTestId(TestId.CHAPTER_NAVIGATION)).toContainText('1. Al-Fatihah');
+
+    await page.goto('/16');
+    await expect(page.getByTestId(TestId.CHAPTER_NAVIGATION)).toContainText('16. An-Nahl');
+  },
+);
 
 test(
   'Page /S/V should load Ayah V of Surah S',

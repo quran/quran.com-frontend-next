@@ -1,10 +1,16 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import DataContext from '@/contexts/DataContext';
 import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
-import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
+import useChapterIdsByUrlPath from '@/hooks/useChapterId';
+import {
+  selectLastReadVerseKey,
+  setLastReadVerse,
+} from '@/redux/slices/QuranReader/readingTracker';
 import { VersesResponse } from 'types/ApiResponses';
 
 /**
@@ -20,15 +26,38 @@ import { VersesResponse } from 'types/ApiResponses';
  * Uses useBrowserLayoutEffect to ensure state is set synchronously before paint,
  * so the correct page number is displayed immediately.
  *
+ * Additional route sync:
+ * - On chapter routes (`/S`), we also align chapter context with the URL (and `startingVerse`
+ *   when needed) without clobbering in-chapter scroll progress.
+ *
  * @param {VersesResponse} initialData - The initial verses data from the page
  */
 const useSyncChapterPage = (initialData: VersesResponse): void => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const { lang } = useTranslation('common');
   const chaptersData = useContext(DataContext);
+  const lastReadVerse = useSelector(selectLastReadVerseKey, shallowEqual);
+  const chapterIdsByUrlPath = useChapterIdsByUrlPath(lang);
+  const urlChapterId = chapterIdsByUrlPath?.[0];
+  const hasChapterIdInRoute = Boolean(router.query.chapterId);
 
   const firstVerse = initialData?.verses?.[0];
   // Use verseKey as the dependency to detect navigation changes
   const firstVerseKey = firstVerse?.verseKey;
+
+  // If a startingVerse query param is present, use it to determine the verse to sync to.
+  const normalizedStartingVerse = useMemo(() => {
+    const rawStartingVerse = router.query.startingVerse;
+    const startingVerse = Array.isArray(rawStartingVerse) ? rawStartingVerse[0] : rawStartingVerse;
+    const parsedStartingVerse = Number(startingVerse);
+
+    if (Number.isNaN(parsedStartingVerse) || parsedStartingVerse < 1) {
+      return 1;
+    }
+
+    return parsedStartingVerse;
+  }, [router.query.startingVerse]);
 
   useBrowserLayoutEffect(() => {
     if (!firstVerse) return;
@@ -45,6 +74,48 @@ const useSyncChapterPage = (initialData: VersesResponse): void => {
       }),
     );
   }, [firstVerseKey, chaptersData, dispatch, firstVerse]);
+
+  // On /S routes, ensure Redux chapter context matches URL chapter without clobbering in-chapter scroll progress.
+  useEffect(() => {
+    if (!hasChapterIdInRoute || !urlChapterId || !chaptersData) {
+      return;
+    }
+
+    const expectedVerseKey = `${urlChapterId}:${normalizedStartingVerse}`;
+    const chapterFromVerseKey = lastReadVerse?.verseKey?.split(':')?.[0];
+    const currentReduxChapterId = lastReadVerse?.chapterId || chapterFromVerseKey;
+    const isAlreadyAligned = currentReduxChapterId === urlChapterId;
+
+    if (isAlreadyAligned) {
+      return;
+    }
+
+    const shouldPreserveCurrentVerseKey = chapterFromVerseKey === urlChapterId;
+
+    dispatch(
+      setLastReadVerse({
+        lastReadVerse: {
+          verseKey: shouldPreserveCurrentVerseKey ? lastReadVerse.verseKey : expectedVerseKey,
+          chapterId: urlChapterId,
+          page: String(firstVerse?.pageNumber ?? lastReadVerse?.page ?? ''),
+          hizb: String(firstVerse?.hizbNumber ?? lastReadVerse?.hizb ?? ''),
+        },
+        chaptersData,
+      }),
+    );
+  }, [
+    chaptersData,
+    dispatch,
+    firstVerse?.hizbNumber,
+    firstVerse?.pageNumber,
+    hasChapterIdInRoute,
+    lastReadVerse?.chapterId,
+    lastReadVerse?.hizb,
+    lastReadVerse?.page,
+    lastReadVerse?.verseKey,
+    normalizedStartingVerse,
+    urlChapterId,
+  ]);
 };
 
 export default useSyncChapterPage;
