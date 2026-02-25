@@ -378,6 +378,10 @@ div.bottomSheetInnerContent {
   gap: var(--spacing-large-px);
   padding-block: var(--spacing-small-px);
   border-block-start: 1px solid var(--color-borders-hairline);
+
+  @include breakpoints.tablet {
+    justify-content: flex-start;
+  }
 }
 
 .skeletonTab {
