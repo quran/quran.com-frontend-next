@@ -75,8 +75,10 @@ const AudioPlayer = () => {
     const downloadProgress = getAudioPlayerDownloadProgress(audioPlayer);
     const isWaiting = currentTimestamp > downloadProgress - AUDIO_DURATION_TOLERANCE;
 
-    const audioDataDuration = audioService.getSnapshot().context?.audioData?.duration;
-    if (audioDataDuration) {
+    const snapshot = audioService.getSnapshot();
+    const isAudioPlaying = snapshot.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
+    const audioDataDuration = snapshot.context?.audioData?.duration;
+    if (audioDataDuration && isAudioPlaying) {
       const isAlmostEnded =
         currentTimestamp > milliSecondsToSeconds(audioDataDuration) - AUDIO_DURATION_TOLERANCE;
 
@@ -120,7 +122,15 @@ const AudioPlayer = () => {
     });
   };
 
-  const onPlay = () => {
+  const onPlay = (e) => {
+    const isAudioPlaying = audioService
+      .getSnapshot()
+      .matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
+    if (!isAudioPlaying) {
+      e.target.pause();
+      return;
+    }
+
     audioService.send({ type: 'PLAY' });
   };
 
