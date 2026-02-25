@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -13,6 +13,11 @@ import {
 } from '@/redux/slices/QuranReader/readingTracker';
 import { normalizeQueryParam } from '@/utils/url';
 import { VersesResponse } from 'types/ApiResponses';
+
+const getNormalizedStartingVerse = (startingVerse: string | string[]): number => {
+  const parsedStartingVerse = Number(normalizeQueryParam(startingVerse));
+  return Number.isNaN(parsedStartingVerse) || parsedStartingVerse < 1 ? 1 : parsedStartingVerse;
+};
 
 /**
  * A hook that sets the initial page state when navigating to any content type
@@ -46,17 +51,7 @@ const useSyncChapterPage = (initialData: VersesResponse): void => {
   const firstVerse = initialData?.verses?.[0];
   // Use verseKey as the dependency to detect navigation changes
   const firstVerseKey = firstVerse?.verseKey;
-
-  // If a startingVerse query param is present, use it to determine the verse to sync to.
-  const normalizedStartingVerse = useMemo(() => {
-    const parsedStartingVerse = Number(normalizeQueryParam(router.query.startingVerse));
-
-    if (Number.isNaN(parsedStartingVerse) || parsedStartingVerse < 1) {
-      return 1;
-    }
-
-    return parsedStartingVerse;
-  }, [router.query.startingVerse]);
+  const normalizedStartingVerse = getNormalizedStartingVerse(router.query.startingVerse);
 
   useBrowserLayoutEffect(() => {
     if (!firstVerse) return;
@@ -82,10 +77,7 @@ const useSyncChapterPage = (initialData: VersesResponse): void => {
 
     const expectedVerseKey = `${urlChapterId}:${normalizedStartingVerse}`;
     const chapterFromVerseKey = lastReadVerse?.verseKey?.split(':')?.[0];
-    const currentReduxChapterId = lastReadVerse?.chapterId || chapterFromVerseKey;
-    const isAlreadyAligned = currentReduxChapterId === urlChapterId;
-
-    if (isAlreadyAligned) {
+    if ((lastReadVerse?.chapterId || chapterFromVerseKey) === urlChapterId) {
       return;
     }
 
