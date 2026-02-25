@@ -158,6 +158,7 @@
   "pin-verses-to-compare": "Épinglez des Ayahs pour les comparer",
   "pinned-saved-successfully": "Ayahs épinglées enregistrées avec succès",
   "pinned-verses": "Ayahs épinglées",
+  "play-from-word": "Jouer à partir de Word",
   "posted-in": "Publié dans",
   "prev-ayah": "Ayah Précédente",
   "prev-hizb": "Hizb précédent",
@@ -217,6 +218,7 @@
   "save-pinned-to-collection": "Ajouter à la collection",
   "save-to": "Enregistrer dans...",
   "save-verse": "Enregistrer l'Ayah {{verseKey}}",
+  "save-verse-short": "Sauver le verset",
   "saved-to": "Enregistré dans {{collectionName}}",
   "see-less": "Voir moins",
   "see-more": "Voir plus",
@@ -240,7 +242,7 @@
   "translation-feedback": {
     "disclaimer": {
       "content": "Nous vous remercions de votre aide pour améliorer la clarté des traductions du Coran. Toutes les traductions sont \\n fruit d'efforts humains \\n à transmettre le sens du Coran, tandis que le texte arabe original demeure la Parole d'Allah (SWT), inaltéré et parfait \\n Certains problèmes peuvent être résolus rapidement par notre équipe, et nous apporterons ces modifications dès que possible, incha'Allah. D'autres devront être transmis aux traducteurs ou aux organisations responsables, ce qui peut prendre plus de temps. Nous examinons et enregistrons chaque contribution, et votre avis nous aide \\n améliorer continuellement l'expérience pour tous. Qu'Allah (SWT) vous récompense pour votre contribution et votre intention de soutenir le Coran.",
-      "learn-more": "Apprendre encore plus",
+      "learn-more": "En apprendre davantage",
       "see-less": "Voir moins",
       "title": "Que se passe-t-il après l'envoi de mes commentaires ?"
     },
