@@ -18,16 +18,40 @@
 }
 
 .barContent {
-  --spacing-edge-horizontal-px: var(--spacing-medium-px);
+  --pinned-bar-horizontal-padding-start: calc(1.3 * var(--spacing-large));
+  --pinned-bar-horizontal-padding-end: var(--spacing-large-px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding-block-start: var(--spacing-xsmall-px);
+  padding-block-end: var(--spacing-xsmall-px);
+  padding-inline-start: var(--pinned-bar-horizontal-padding-start);
+  padding-inline-end: var(--pinned-bar-horizontal-padding-end);
   gap: var(--spacing-xxsmall-px);
-  padding-block: var(--spacing-xxsmall-px);
+
+  @include breakpoints.tablet {
+    --pinned-bar-horizontal-padding-start: calc(1.2 * var(--spacing-mega));
+    --pinned-bar-horizontal-padding-end: var(--spacing-large-px);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    --pinned-bar-horizontal-padding-start: var(--spacing-medium-px);
+    --pinned-bar-horizontal-padding-end: var(--spacing-large-px);
+    padding-block: var(--spacing-xxsmall-px);
+  }
 }
 
 .barContentNoPadding {
-  padding-block: unset;
+  --pinned-bar-horizontal-padding-start: var(--spacing-edge-horizontal-px);
+  --pinned-bar-horizontal-padding-end: var(--spacing-large-px);
+  padding-inline-start: var(--pinned-bar-horizontal-padding-start);
+  padding-inline-end: var(--pinned-bar-horizontal-padding-end);
+  padding-block-start: 0;
+  padding-block-end: var(--spacing-xsmall-px);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-end: var(--spacing-xxsmall-px);
+  }
 }
 
 .labelAndTags {
@@ -40,8 +64,6 @@
 }
 
 .labelRow {
-  @include utility.edgeHorizontalPadding;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,14 +77,18 @@
 }
 
 .pinnedVerseTagsContainer {
-  inline-size: 100%;
+  inline-size: calc(
+    100% + var(--pinned-bar-horizontal-padding-start) + var(--pinned-bar-horizontal-padding-end)
+  );
+  margin-inline-start: calc(-1 * var(--pinned-bar-horizontal-padding-start));
+  margin-inline-end: calc(-1 * var(--pinned-bar-horizontal-padding-end));
 }
 
 .pinnedVerseTags {
-  @include utility.edgeHorizontalPadding;
-  & > *:nth-last-child {
-    margin-inline-end: calc(var(--spacing-small-px) * -1);
-  }
+  gap: var(--spacing-small-px);
+  padding-block: var(--spacing-micro-px);
+  padding-inline-start: var(--pinned-bar-horizontal-padding-start);
+  padding-inline-end: var(--pinned-bar-horizontal-padding-end);
 }
 
 .actions {
