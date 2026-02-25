@@ -23,6 +23,17 @@ export const getWindowOrigin = (locale: string) => {
   return '';
 };
 
+export type QueryParamValue = string | string[] | undefined;
+
+/**
+ * Normalize a query parameter to a single string value.
+ *
+ * @param {QueryParamValue} param
+ * @returns {string | undefined}
+ */
+export const normalizeQueryParam = (param: QueryParamValue): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 /**
  * Navigate programmatically to an external url. we will try to open
  * the url in a new tab and if it doesn't work due to pop-ups being blocked,

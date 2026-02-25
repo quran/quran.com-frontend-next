@@ -11,6 +11,7 @@ import {
   selectLastReadVerseKey,
   setLastReadVerse,
 } from '@/redux/slices/QuranReader/readingTracker';
+import { normalizeQueryParam } from '@/utils/url';
 import { VersesResponse } from 'types/ApiResponses';
 
 /**
@@ -38,9 +39,9 @@ const useSyncChapterPage = (initialData: VersesResponse): void => {
   const { lang } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   const lastReadVerse = useSelector(selectLastReadVerseKey, shallowEqual);
-  const chapterIdsByUrlPath = useChapterIdsByUrlPath(lang);
-  const urlChapterId = chapterIdsByUrlPath?.[0];
   const hasChapterIdInRoute = Boolean(router.query.chapterId);
+  const chapterIdsByUrlPath = useChapterIdsByUrlPath(lang);
+  const urlChapterId = hasChapterIdInRoute ? chapterIdsByUrlPath?.[0] : undefined;
 
   const firstVerse = initialData?.verses?.[0];
   // Use verseKey as the dependency to detect navigation changes
@@ -48,9 +49,7 @@ const useSyncChapterPage = (initialData: VersesResponse): void => {
 
   // If a startingVerse query param is present, use it to determine the verse to sync to.
   const normalizedStartingVerse = useMemo(() => {
-    const rawStartingVerse = router.query.startingVerse;
-    const startingVerse = Array.isArray(rawStartingVerse) ? rawStartingVerse[0] : rawStartingVerse;
-    const parsedStartingVerse = Number(startingVerse);
+    const parsedStartingVerse = Number(normalizeQueryParam(router.query.startingVerse));
 
     if (Number.isNaN(parsedStartingVerse) || parsedStartingVerse < 1) {
       return 1;

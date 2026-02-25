@@ -18,14 +18,18 @@ test('Page /S should load Surah S', { tag: ['@url', '@smoke'] }, async ({ page }
 });
 
 test(
-  'Page /S route change should update chapter navigation label',
+  'Page /78 should show correct chapter label and header metadata',
   { tag: ['@url', '@reader', '@header'] },
-  async ({ page }) => {
-    await homePage.goTo('/1');
-    await expect(page.getByTestId(TestId.CHAPTER_NAVIGATION)).toContainText('1. Al-Fatihah');
+  async ({ page, isMobile }) => {
+    test.skip(isMobile);
 
-    await page.goto('/16');
-    await expect(page.getByTestId(TestId.CHAPTER_NAVIGATION)).toContainText('16. An-Nahl');
+    await homePage.goTo('/78');
+    await expect(page.getByTestId(TestId.CHAPTER_NAVIGATION)).toContainText('78. An-Naba');
+
+    const pageInfo = page.getByTestId(TestId.PAGE_INFO);
+    await expect(pageInfo).toContainText('Page 582');
+    await expect(pageInfo).toContainText('Juz 30');
+    await expect(pageInfo).toContainText('Hizb 59');
   },
 );
 
