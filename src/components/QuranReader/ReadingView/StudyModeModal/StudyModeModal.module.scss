@@ -297,10 +297,10 @@ div.bottomSheetInnerContent {
 
 // Skeleton styles
 .skeletonContainer {
+  @include utility.edgePadding;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium-px);
-  padding: var(--spacing-xsmall-px);
 }
 
 // Top actions row: split between left and right groups
