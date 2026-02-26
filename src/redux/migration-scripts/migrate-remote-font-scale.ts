@@ -24,13 +24,13 @@ const persistDefaultScaleMigration = (
 ) => {
   addOrUpdateUserPreference('quranTextFontScale', newScale, STYLES, mushaf)
     .then(() =>
-      Promise.all([
-        addOrUpdateUserPreference('defaultScaleMigrated', 1, STYLES, mushaf),
-        !hasRemapVersion
-          ? addOrUpdateUserPreference('fontScaleRemapVersion', 1, STYLES, mushaf)
-          : Promise.resolve(),
-      ]),
+      // Write fontScaleRemapVersion first to prevent the old remap from cascading 4→7
+      // if defaultScaleMigrated were to succeed alone in a partial-failure scenario.
+      !hasRemapVersion
+        ? addOrUpdateUserPreference('fontScaleRemapVersion', 1, STYLES, mushaf)
+        : Promise.resolve(),
     )
+    .then(() => addOrUpdateUserPreference('defaultScaleMigrated', 1, STYLES, mushaf))
     .catch((err) => logErrorToSentry(err, { transactionName: 'defaultScaleMigration' }));
 };
 
