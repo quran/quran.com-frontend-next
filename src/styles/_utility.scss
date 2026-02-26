@@ -944,7 +944,7 @@ $page-container-max-width: 80rem;
 @mixin pageContainer {
   max-inline-size: $page-container-max-width;
   @include breakpoints.tablet {
-    max-inline-size: 80%;
+    max-inline-size: min(80%, 1230px);
   }
 }
 
