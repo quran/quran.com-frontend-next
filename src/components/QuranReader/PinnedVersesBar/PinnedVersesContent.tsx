@@ -8,8 +8,10 @@ import PinnedVersesMenu from './PinnedVersesMenu';
 import VerseTag from './VerseTag';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Scrollable from '@/dls/Scrollable/Scrollable';
 import CompareIcon from '@/icons/compare.svg';
 import { PinnedVerse } from '@/redux/slices/QuranReader/pinnedVerses';
+import EventNames from '@/utils/event-names';
 
 interface PinnedVersesContentProps {
   pinnedVerses: PinnedVerse[];
@@ -45,7 +47,7 @@ const PinnedVersesContent: React.FC<PinnedVersesContentProps> = ({
   return (
     <div
       className={classNames(styles.barContent, {
-        [styles.noPadding]: noPadding,
+        [styles.barContentNoPadding]: noPadding,
       })}
     >
       <div className={styles.labelAndTags}>
@@ -74,7 +76,11 @@ const PinnedVersesContent: React.FC<PinnedVersesContentProps> = ({
             />
           </div>
         </div>
-        <div className={styles.tagsContainer}>
+        <Scrollable
+          eventName={EventNames.QURAN_READER_PINNED_VERSES_SCROLLABLE}
+          containerClassName={styles.pinnedVerseTagsContainer}
+          className={styles.pinnedVerseTags}
+        >
           {pinnedVerses.map((verse) => (
             <VerseTag
               key={verse.verseKey}
@@ -84,7 +90,7 @@ const PinnedVersesContent: React.FC<PinnedVersesContentProps> = ({
               isSelected={selectedVerseKey === verse.verseKey}
             />
           ))}
-        </div>
+        </Scrollable>
       </div>
     </div>
   );

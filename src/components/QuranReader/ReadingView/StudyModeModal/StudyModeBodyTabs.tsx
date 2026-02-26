@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
+import answerStyle from './tabs/StudyModeAnswersTab.module.scss';
 
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useBatchedCountRangeHadiths from '@/hooks/auth/useBatchedCountRangeHadiths';
@@ -25,31 +26,39 @@ import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResp
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { toLocalizedNumber } from '@/utils/locale';
 
+const Loading = () => (
+  <div className={answerStyle.edgeToEdge}>
+    <TafsirSkeleton />
+  </div>
+);
+
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
 export const StudyModeReflectionsTab = dynamic(() => import('./tabs/StudyModeReflectionsTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
 export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
 const StudyModeLayersTab = dynamic(() => import('./tabs/StudyModeLayersTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
 const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
-const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), { loading: TafsirSkeleton });
+const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), {
+  loading: Loading,
+});
 
 export const StudyModeRelatedVersesTab = dynamic(
   () => import('./tabs/StudyModeRelatedVerses/StudyModeRelatedVersesTab'),

@@ -1,18 +1,19 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
+
+.bottomSeparatorContainer {
+  @include utility.edgeHorizontalPadding;
+}
 
 .bottomActionsContainer {
   inline-size: 100%;
   position: sticky;
   inset-block-end: 0;
   background: var(--color-background-elevated-new);
-  border-block-end: 1px solid var(--color-borders-hairline);
-
-  &.noBorder {
-    border-block-end: none;
-  }
 }
 
 .tabsContainer {
+  @include utility.edgeHorizontalPadding;
   align-items: center;
   gap: var(--spacing-medium);
 

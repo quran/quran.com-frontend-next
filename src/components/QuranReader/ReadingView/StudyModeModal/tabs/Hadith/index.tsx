@@ -67,7 +67,13 @@ const StudyModeHadithTab: React.FC<StudyModeHadithTabProps> = ({
   };
 
   const renderBody = () => {
-    if (isLoading) return <TafsirSkeleton />;
+    if (isLoading) {
+      return (
+        <div className={styles.hadithsContainer}>
+          <TafsirSkeleton />
+        </div>
+      );
+    }
 
     return (
       <div className={classNames(styles.hadithsContainer, scaleClass)}>
