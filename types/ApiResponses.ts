@@ -14,6 +14,7 @@ import { SearchNavigationResult } from './Search/SearchNavigationResult';
 import SearchService from './Search/SearchService';
 import SearchVerseItem from './Search/SearchVerseItem';
 import TafsirInfo from './TafsirInfo';
+import { UiSection } from './UiSection';
 import Verse from './Verse';
 
 export interface BaseResponse {
@@ -152,6 +153,10 @@ export interface ChapterMetadata {
 
 export interface ChapterMetadataResponse extends BaseResponse {
   chapterMetadata?: ChapterMetadata;
+}
+
+export interface UiSectionResponse extends BaseResponse {
+  uiSection: UiSection | null;
 }
 
 export interface RamadanChallengeResponse extends BaseResponse {
