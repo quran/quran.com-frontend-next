@@ -17,6 +17,12 @@ import { ReadingPreference } from 'types/QuranReader';
 // Threshold in pixels to consider the user "at the top" of the page
 const SCROLL_TOP_THRESHOLD = 100;
 
+// Module-level flag: set to true when the user switches reading mode via the UI.
+// Survives component remounts (unlike useRef) so QuranReader can reliably
+// distinguish user-initiated switches from shared-link loads.
+let userSwitchedReadingMode = false;
+export const didUserSwitchReadingMode = () => userSwitchedReadingMode;
+
 export enum SwitcherContext {
   SurahHeader = 'surah_header',
   ContextMenu = 'context_menu',
@@ -85,6 +91,10 @@ const useReadingPreferenceSwitcher = ({
       }
 
       newQueryParams[QueryParam.READING_MODE] = newPreference;
+
+      // Mark that the user initiated this switch so the QueryParamMessage
+      // banner is suppressed (it should only appear on shared links).
+      userSwitchedReadingMode = true;
 
       const newUrlObject = {
         pathname: router.pathname,
