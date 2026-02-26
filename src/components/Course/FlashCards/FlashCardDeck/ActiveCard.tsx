@@ -1,7 +1,7 @@
-/* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import { SWIPE_THRESHOLD } from './constants';
 import styles from './FlashCardDeck.module.scss';
@@ -39,6 +39,8 @@ const ActiveCard: React.FC<ActiveCardProps> = ({
   onTouchEnd,
   onClick,
 }) => {
+  const { t } = useTranslation('learn');
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -71,13 +73,13 @@ const ActiveCard: React.FC<ActiveCardProps> = ({
         className={classNames(styles.swipeIndicator, styles.knowIndicator)}
         style={{ opacity: Math.min(offsetX / SWIPE_THRESHOLD, 1) }}
       >
-        Know
+        {t('flashcards.know')}
       </div>
       <div
         className={classNames(styles.swipeIndicator, styles.reviewIndicator)}
         style={{ opacity: Math.min(-offsetX / SWIPE_THRESHOLD, 1) }}
       >
-        Review
+        {t('flashcards.review')}
       </div>
       <div className={styles.cardInner}>
         <div className={styles.cardFront}>
@@ -85,7 +87,7 @@ const ActiveCard: React.FC<ActiveCardProps> = ({
           {card.transliteration && (
             <div className={styles.transliteration}>({card.transliteration})</div>
           )}
-          <div className={styles.hint}>Tap to flip &bull; Swipe to answer</div>
+          <div className={styles.hint}>{t('flashcards.tap-to-flip-swipe-to-answer')}</div>
         </div>
         <div className={styles.cardBack}>
           <div className={styles.arabicTextSmall}>{card.arabic}</div>

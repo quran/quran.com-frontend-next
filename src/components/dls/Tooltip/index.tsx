@@ -43,6 +43,7 @@ interface Props {
   onIconClick?: () => void;
   iconAriaLabel?: string;
   shouldContentBeClickable?: boolean;
+  suffixContent?: ReactNode;
 }
 
 const Tooltip: React.FC<Props> = ({
@@ -62,80 +63,99 @@ const Tooltip: React.FC<Props> = ({
   onIconClick,
   iconAriaLabel,
   shouldContentBeClickable = false,
-}) => (
-  <RadixTooltip.Root
-    delayDuration={delay}
-    {...(typeof open !== 'undefined' && { open })}
-    {...(onOpenChange && { onOpenChange })}
-  >
-    <RadixTooltip.Trigger aria-label="Open tooltip" asChild>
-      <span className={styles.trigger}>{children}</span>
-    </RadixTooltip.Trigger>
-    <RadixTooltip.Content
-      sideOffset={2}
-      side={contentSide}
-      align={contentAlign}
-      avoidCollisions={avoidCollisions}
-      className={classNames(styles.content, {
-        [styles.noInverse]: invertColors === false,
-        [styles.noCenter]: centerText === false,
-        [styles.success]: type === TooltipType.SUCCESS,
-        [styles.warning]: type === TooltipType.WARNING,
-        [styles.error]: type === TooltipType.ERROR,
-        [styles.secondary]: type === TooltipType.SECONDARY,
-        [styles.info]: type === TooltipType.INFO,
-      })}
+  suffixContent,
+}) => {
+  const typeClassNames = {
+    [styles.noInverse]: invertColors === false,
+    [styles.noCenter]: centerText === false,
+    [styles.success]: type === TooltipType.SUCCESS,
+    [styles.warning]: type === TooltipType.WARNING,
+    [styles.error]: type === TooltipType.ERROR,
+    [styles.secondary]: type === TooltipType.SECONDARY,
+    [styles.info]: type === TooltipType.INFO,
+  };
+
+  const handleIconClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onIconClick?.();
+  };
+  const handleIconKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      onIconClick?.();
+    }
+  };
+
+  const innerContent = shouldContentBeClickable ? (
+    <div
+      role="button"
+      tabIndex={0}
+      className={styles.clickableContent}
+      onClick={handleIconClick}
+      onKeyDown={handleIconKeyDown}
+      aria-label={iconAriaLabel}
     >
-      {shouldContentBeClickable ? (
-        <div
+      {text}
+      {icon && <span className={styles.icon}>{icon}</span>}
+    </div>
+  ) : (
+    <>
+      {text}
+      {icon && (
+        <span
+          className={styles.icon}
+          onClick={handleIconClick}
+          onKeyDown={handleIconKeyDown}
           role="button"
           tabIndex={0}
-          className={styles.clickableContent}
-          onClick={(e) => {
-            e.stopPropagation();
-            onIconClick?.();
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              e.stopPropagation();
-              onIconClick?.();
-            }
-          }}
           aria-label={iconAriaLabel}
         >
-          {icon && <span className={styles.icon}>{icon}</span>}
-          {text}
-        </div>
-      ) : (
-        <>
-          {icon && (
-            <span
-              className={styles.icon}
-              onClick={(e) => {
-                e.stopPropagation();
-                onIconClick?.();
-              }}
-              role="button"
-              tabIndex={0}
-              aria-label={iconAriaLabel}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onIconClick?.();
-                }
-              }}
-            >
-              {icon}
-            </span>
-          )}
-          {text}
-        </>
+          {icon}
+        </span>
       )}
-      {tip && <RadixTooltip.Arrow />}
-    </RadixTooltip.Content>
-  </RadixTooltip.Root>
-);
+    </>
+  );
+
+  return (
+    <RadixTooltip.Root
+      delayDuration={delay}
+      {...(typeof open !== 'undefined' && { open })}
+      {...(onOpenChange && { onOpenChange })}
+    >
+      <RadixTooltip.Trigger aria-label="Open tooltip" asChild>
+        <span className={styles.trigger}>{children}</span>
+      </RadixTooltip.Trigger>
+      {suffixContent ? (
+        <RadixTooltip.Portal>
+          <RadixTooltip.Content
+            sideOffset={2}
+            side={contentSide}
+            align={contentAlign}
+            avoidCollisions={avoidCollisions}
+            className={styles.contentWithPrefix}
+          >
+            {suffixContent}
+            {text && (
+              <div className={classNames(styles.content, typeClassNames)}>{innerContent}</div>
+            )}
+            {tip && <RadixTooltip.Arrow />}
+          </RadixTooltip.Content>
+        </RadixTooltip.Portal>
+      ) : (
+        <RadixTooltip.Content
+          sideOffset={2}
+          side={contentSide}
+          align={contentAlign}
+          avoidCollisions={avoidCollisions}
+          className={classNames(styles.content, typeClassNames)}
+        >
+          {innerContent}
+          {tip && <RadixTooltip.Arrow />}
+        </RadixTooltip.Content>
+      )}
+    </RadixTooltip.Root>
+  );
+};
 
 export default Tooltip;

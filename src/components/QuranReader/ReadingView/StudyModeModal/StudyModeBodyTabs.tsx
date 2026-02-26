@@ -14,6 +14,7 @@ import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat'
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import HadithIcon from '@/icons/bx-book.svg';
+import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LayerIcon from '@/icons/layer.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
@@ -172,7 +173,7 @@ export const useStudyModeTabs = ({
     {
       id: StudyModeTabId.REFLECTIONS,
       label: t('reflections'),
-      icon: <LightbulbIcon />,
+      icon: <ChatIcon />,
       onClick: () => handleTabClick(StudyModeTabId.REFLECTIONS),
       condition: true,
     },

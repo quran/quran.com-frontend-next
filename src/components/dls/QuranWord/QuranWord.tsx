@@ -11,14 +11,17 @@ import { TooltipType } from '../Tooltip';
 
 import getTooltipText from './getToolTipText';
 import GlyphWord from './GlyphWord';
+import playFromWord from './playFromWord';
 import playWordAudio from './playWordAudio';
 import styles from './QuranWord.module.scss';
+import type { ReadingWordHoverActionSource } from './ReadingModeWordHoverActions';
+import ReadingModeWordHoverActions from './ReadingModeWordHoverActions';
 import TextWord from './TextWord';
 
 import Wrapper from '@/components/Wrapper/Wrapper';
 import MobilePopover from '@/dls/Popover/HoverablePopover';
 import useIsMobile from '@/hooks/useIsMobile';
-import ArrowIcon from '@/public/icons/arrow.svg';
+import ArrowIcon from '@/icons/arrow.svg';
 import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/state';
 import {
   selectInlineDisplayWordByWordPreferences,
@@ -39,14 +42,15 @@ import { areArraysEqual } from '@/utils/array';
 import { milliSecondsToSeconds } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { isQCFFont } from '@/utils/fontFaceHelper';
-import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
+import { getChapterNumberFromKey, getVerseNumberFromKey, makeWordLocation } from '@/utils/verse';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import Verse from 'types/Verse';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
-const TOOLTIP_HOVER_DELAY_MS = 800;
+const TOOLTIP_HOVER_DELAY_MS = 700;
 
 // IndoPak stop sign characters that require additional spacing
 const INDO_PAK_STOP_SIGN_CHARS = new Set([
@@ -120,6 +124,7 @@ const QuranWord = ({
   const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
 
   const isTranslationMode = readingPreference === ReadingPreference.Translation;
+  const isArabicReadingMode = readingPreference === ReadingPreference.Reading;
   const isRecitationEnabled = wordClickFunctionality === WordClickFunctionality.PlayAudio;
 
   // creating wordLocation instead of using `word.location` because
@@ -189,6 +194,19 @@ const QuranWord = ({
     [isWordByWordAllowed, showTooltipFor, word],
   );
 
+  const verseForWordActions = useMemo(() => {
+    const fallbackChapterId = Number(getChapterNumberFromKey(word.verseKey));
+    const fallbackVerseNumber = Number(getVerseNumberFromKey(word.verseKey));
+    const baseVerse: Partial<Verse> = word.verse ?? {};
+
+    return {
+      ...baseVerse,
+      chapterId: baseVerse.chapterId ?? fallbackChapterId,
+      verseNumber: baseVerse.verseNumber ?? fallbackVerseNumber,
+      verseKey: baseVerse.verseKey ?? word.verseKey,
+    } as Verse;
+  }, [word.verse, word.verseKey]);
+
   const getReadingModeSuffix = useCallback(() => {
     if (readingPreference === ReadingPreference.Translation) {
       return 'verse_by_verse';
@@ -226,7 +244,45 @@ const QuranWord = ({
     }
   }, [isRecitationEnabled, seekToWordIfPlaying, word]);
 
+  const handleOpenStudyModeFromOverlay = useCallback(
+    (source: ReadingWordHoverActionSource) => {
+      if (source !== '3dots') {
+        logButtonClick('reading_word_overlay_open_study_mode', { verseKey: word.verseKey });
+      }
+      dispatch(setReadingViewHoveredVerseKey(null));
+      dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
+    },
+    [dispatch, word.verseKey, word.location],
+  );
+
+  const handlePlayFromWord = useCallback(
+    (source: ReadingWordHoverActionSource) => {
+      if (source !== '3dots') {
+        logButtonClick('reading_word_overlay_play_from_word', { verseKey: word.verseKey });
+      }
+      playFromWord(word, audioService);
+    },
+    [word, audioService],
+  );
+
+  const handleReadingModeWordClick = useCallback(() => {
+    if (isRecitationEnabled) {
+      const didSeek = seekToWordIfPlaying();
+      if (!didSeek) {
+        logButtonClick('quran_word_pronounce');
+        playWordAudio(word);
+      }
+    } else {
+      seekToWordIfPlaying();
+    }
+  }, [isRecitationEnabled, seekToWordIfPlaying, word]);
+
   const handleInteraction = useCallback(() => {
+    if (isArabicReadingMode && word.charTypeName === CharType.Word) {
+      handleReadingModeWordClick();
+      return;
+    }
+
     const modeSuffix = getReadingModeSuffix();
 
     if (word.charTypeName === CharType.Word && !isRecitationEnabled) {
@@ -253,19 +309,18 @@ const QuranWord = ({
 
     if (isRecitationEnabled && word.charTypeName === CharType.Word && !showTooltip) {
       handleWordAction();
-      logButtonClick(`study_mode_open_word_${modeSuffix}`, { verseKey: word.verseKey });
-      dispatch(setReadingViewHoveredVerseKey(null));
-      dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
       return;
     }
 
     handleWordAction();
   }, [
     word,
+    isArabicReadingMode,
     isRecitationEnabled,
     isMobile,
     showTooltip,
     handleWordAction,
+    handleReadingModeWordClick,
     dispatch,
     getReadingModeSuffix,
     seekToWordIfPlaying,
@@ -333,7 +388,8 @@ const QuranWord = ({
       className={classNames(styles.container, {
         [styles.interactionDisabled]: isWordInteractionDisabled,
         [styles.highlightOnHover]:
-          !isWordInteractionDisabled && (isRecitationEnabled || !showTooltip),
+          !isWordInteractionDisabled &&
+          (isArabicReadingMode || isRecitationEnabled || !showTooltip),
 
         /**
          * If the font is Tajweed V4, color: xyz syntax does not work
@@ -353,7 +409,27 @@ const QuranWord = ({
       <Wrapper
         shouldWrap
         wrapper={(children) => {
-          // Show tooltip in both reading and translation modes
+          if (
+            isArabicReadingMode &&
+            word.charTypeName === CharType.Word &&
+            !isInteractionDisabled &&
+            isWordByWordAllowed
+          ) {
+            return (
+              <ReadingModeWordHoverActions
+                isTooltipVisible={showTooltip}
+                tooltipContent={translationViewTooltipContent}
+                tooltipDelay={TOOLTIP_HOVER_DELAY_MS}
+                verse={verseForWordActions}
+                onOpenStudyMode={handleOpenStudyModeFromOverlay}
+                onPlayFromWord={handlePlayFromWord}
+                verseKey={word.verseKey}
+              >
+                {children}
+              </ReadingModeWordHoverActions>
+            );
+          }
+
           const shouldShowWordTooltip =
             showTooltip && (shouldForceShowTooltip || !isInteractionDisabled);
 
@@ -390,8 +466,6 @@ const QuranWord = ({
             );
           }
 
-          // All word clicks now open StudyModeModal directly via handleInteraction
-          // No need for separate mobile/desktop wrappers
           return <>{children}</>;
         }}
       >

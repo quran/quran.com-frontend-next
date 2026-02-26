@@ -8,7 +8,7 @@ import NavigationDrawerItem from './NavigationDrawerItem';
 import OurProjectsCollapsible from './OurProjectsCollapsible';
 
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
-// import IconApps from '@/icons/apps.svg';
+import IconApps from '@/icons/apps.svg';
 import IconBookmarkFilled from '@/icons/bookmark_filled.svg';
 import IconCode from '@/icons/code.svg';
 import DiamondIcon from '@/icons/diamond.svg';
@@ -19,7 +19,7 @@ import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
-  // APPS_URL,
+  APPS_URL,
   DEVELOPERS_URL,
   getMyQuranNavigationUrl,
   LEARNING_PLANS_URL,
@@ -86,12 +86,12 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
       href: RECITERS_URL,
       eventName: 'navigation_drawer_reciters',
     },
-    /*     {
+    {
       title: t('quran-apps'),
       icon: <IconApps />,
       href: APPS_URL,
       eventName: 'navigation_drawer_quran_apps',
-    }, */
+    },
     {
       title: t('developers'),
       icon: <IconCode />,

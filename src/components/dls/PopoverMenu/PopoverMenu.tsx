@@ -36,6 +36,7 @@ type PopoverMenuProps = {
   contentClassName?: string;
   shouldClose?: boolean;
   shouldUseModalZIndex?: boolean;
+  dir?: Direction;
 };
 
 const PopoverMenu = ({
@@ -51,9 +52,11 @@ const PopoverMenu = ({
   align = PopoverMenuAlign.CENTER,
   sideOffset = 0,
   contentClassName,
+  dir,
 }: PopoverMenuProps) => {
   const [open, setOpen] = useState(isOpen);
-  const direction = useDirection();
+  const pageDirection = useDirection();
+  const direction = dir || pageDirection;
   const content = (
     <PrimitiveDropdownMenu.Content
       className={classNames(styles.content, contentClassName, {
@@ -68,14 +71,8 @@ const PopoverMenu = ({
   );
 
   const handleOpenChange = (newOpen: boolean) => {
-    if (!shouldClose) {
-      return;
-    }
-
-    if (onOpenChange) {
-      onOpenChange(newOpen);
-    }
-
+    if (!shouldClose) return;
+    onOpenChange?.(newOpen);
     setOpen(newOpen);
   };
 
@@ -136,8 +133,7 @@ PopoverMenu.Item = ({
       onClick={(e) => {
         if (shouldStopPropagation) e.stopPropagation();
         if (!shouldCloseMenuAfterClick) {
-          // PopoverMenu automatically close itself when one of item is clicked
-          // this code prevent that, so it only close when user click outside of the PopoverMenu
+          // Prevent auto-close so menu only closes on outside click
           e.preventDefault();
         }
         if (onClick) onClick();

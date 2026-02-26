@@ -7,7 +7,7 @@ import styles from './StudyModeBottomActions.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
 import Scrollable from '@/dls/Scrollable/Scrollable';
-import EventNames from '@/utils/event-names';
+import EventName from '@/utils/event-names';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

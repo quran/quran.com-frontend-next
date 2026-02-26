@@ -27,7 +27,11 @@ interface Props {
   verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
+  onActionClick?: () => void;
   isInsideStudyMode?: boolean;
+  forceMenuItem?: boolean;
+  shouldCloseMenuAfterClick?: boolean;
+  unbookmarkedLabel?: string;
 }
 
 /**
@@ -42,7 +46,11 @@ const BookmarkAction: React.FC<Props> = ({
   verse,
   isTranslationView,
   onActionTriggered,
+  onActionClick,
   isInsideStudyMode = false,
+  forceMenuItem = false,
+  shouldCloseMenuAfterClick = false,
+  unbookmarkedLabel,
 }): JSX.Element => {
   const dispatch = useDispatch();
   const {
@@ -67,6 +75,7 @@ const BookmarkAction: React.FC<Props> = ({
         e.preventDefault();
         e.stopPropagation();
       }
+      onActionClick?.();
 
       logButtonClick(
         `${
@@ -95,9 +104,7 @@ const BookmarkAction: React.FC<Props> = ({
         }),
       );
 
-      if (onActionTriggered) {
-        onActionTriggered();
-      }
+      onActionTriggered?.();
     },
     [
       verse,
@@ -109,6 +116,7 @@ const BookmarkAction: React.FC<Props> = ({
       studyModeActiveTab,
       studyModeHighlightedWordLocation,
       dispatch,
+      onActionClick,
       onActionTriggered,
     ],
   );
@@ -123,10 +131,13 @@ const BookmarkAction: React.FC<Props> = ({
   );
 
   const isBookmarked = isVerseBookmarked || isVerseMultipleBookmarked || isVerseReadingBookmark;
-  const bookmarkLabel = isBookmarked ? t('bookmarked') : t('bookmark');
+  const bookmarkLabel = isBookmarked ? t('bookmarked') : unbookmarkedLabel || t('bookmark');
+
+  const shouldRenderAsButton =
+    !forceMenuItem && (isTranslationView || (!isTranslationView && isMobile));
 
   // For use in the TopActions component (standalone button)
-  if (isTranslationView || (!isTranslationView && isMobile)) {
+  if (shouldRenderAsButton) {
     return (
       <Button
         size={ButtonSize.Small}
@@ -151,6 +162,7 @@ const BookmarkAction: React.FC<Props> = ({
       onClick={onBookmarkClicked}
       icon={bookmarkIcon}
       isDisabled={isVerseBookmarkedLoading}
+      shouldCloseMenuAfterClick={shouldCloseMenuAfterClick}
     >
       {bookmarkLabel}
     </PopoverMenu.Item>

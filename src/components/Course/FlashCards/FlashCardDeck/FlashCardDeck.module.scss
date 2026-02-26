@@ -2,6 +2,30 @@
 @use '../shared' as shared;
 
 .container {
+  --flashcard-deck-progress-max-inline-size: 320px;
+  --flashcard-deck-card-inline-size: 280px;
+  --flashcard-deck-card-block-size: 200px;
+  --flashcard-deck-card-inline-size-tablet: 320px;
+  --flashcard-deck-card-block-size-tablet: 220px;
+  --flashcard-deck-card-perspective: 1000px;
+  --flashcard-deck-card-tablet-arabic-font-size: 2.25rem;
+  --flashcard-deck-progress-transition-duration: 0.3s;
+  --flashcard-deck-swipe-transition-duration: 0.3s;
+  --flashcard-deck-indicator-transition-duration: 0.1s;
+  --flashcard-deck-stat-min-inline-size: 80px;
+  --flashcard-deck-shadow: 0 var(--spacing-micro-px) var(--spacing-xsmall-px) rgba(0, 0, 0, 0.08);
+  --flashcard-deck-shadow-strong: 0 var(--spacing-micro-px) var(--spacing-xsmall-px)
+    rgba(0, 0, 0, 0.1);
+  --flashcard-deck-shadow-stronger: 0 var(--border-radius-smallxx-px) var(--spacing-medium-plus-px)
+    rgba(0, 0, 0, 0.12);
+  --flashcard-deck-flip-transition-duration: 0.5s;
+  --flashcard-deck-arabic-line-height: 1.6;
+  --flashcard-deck-arabic-small-line-height: 1.4;
+  --flashcard-deck-hint-opacity: 0.7;
+  --flashcard-deck-action-hover-scale: 1.05;
+  --flashcard-deck-action-active-scale: 0.98;
+  --flashcard-deck-restart-hover-scale: 1.02;
+
   @include shared.centeredContainer;
 }
 
@@ -10,40 +34,40 @@
   align-items: center;
   gap: var(--spacing-small);
   inline-size: 100%;
-  max-inline-size: 320px;
+  max-inline-size: var(--flashcard-deck-progress-max-inline-size);
   margin-block-end: var(--spacing-large);
 }
 
 .progressBar {
   flex: 1;
-  block-size: 6px;
+  block-size: var(--spacing-xxsmall2-px);
   background-color: var(--color-background-alternative-medium);
-  border-radius: 3px;
+  border-radius: var(--spacing-micro2-px);
   overflow: hidden;
 }
 
 .progressFill {
   block-size: 100%;
   background-color: var(--color-primary-medium);
-  transition: width 0.3s ease;
+  transition: width var(--flashcard-deck-progress-transition-duration) ease;
 }
 
 .progressText {
-  font-size: 0.875rem;
+  font-size: var(--font-size-small);
   color: var(--color-text-faded);
-  min-inline-size: 50px;
+  min-inline-size: var(--spacing-xxlarge-px);
   text-align: end;
 }
 
 .deckContainer {
   position: relative;
-  inline-size: 280px;
-  block-size: 200px;
+  inline-size: var(--flashcard-deck-card-inline-size);
+  block-size: var(--flashcard-deck-card-block-size);
   margin-block-end: var(--spacing-large);
 
   @include breakpoints.tablet {
-    inline-size: 320px;
-    block-size: 220px;
+    inline-size: var(--flashcard-deck-card-inline-size-tablet);
+    block-size: var(--flashcard-deck-card-block-size-tablet);
   }
 }
 
@@ -52,8 +76,8 @@
   inset: 0;
   background-color: var(--color-background-elevated);
   border-radius: var(--border-radius-rounded);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--color-borders-hairline);
+  box-shadow: var(--flashcard-deck-shadow);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
 }
 
 .card {
@@ -62,8 +86,8 @@
   cursor: grab;
   touch-action: none;
   z-index: 20;
-  perspective: 1000px;
-  transition: transform 0.3s ease;
+  perspective: var(--flashcard-deck-card-perspective);
+  transition: transform var(--flashcard-deck-swipe-transition-duration) ease;
   user-select: none;
 
   &.swiping {
@@ -76,18 +100,28 @@
   }
 }
 
-@include shared.cardContentStyles(0 4px 16px rgba(0, 0, 0, 0.12), 2rem, 2.25rem, 1.25rem, 1.125rem);
+@include shared.cardContentStyles(
+  var(--flashcard-deck-shadow-stronger),
+  var(--font-size-jumbo),
+  var(--flashcard-deck-card-tablet-arabic-font-size),
+  var(--font-size-large2),
+  var(--font-size-large),
+  var(--flashcard-deck-flip-transition-duration),
+  var(--flashcard-deck-arabic-line-height),
+  var(--flashcard-deck-arabic-small-line-height),
+  var(--flashcard-deck-hint-opacity)
+);
 
 .swipeIndicator {
   position: absolute;
   inset-block-start: var(--spacing-medium);
   padding: var(--spacing-xxsmall) var(--spacing-small);
   border-radius: var(--border-radius-default);
-  font-weight: 600;
-  font-size: 0.875rem;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-small);
   text-transform: uppercase;
   opacity: 0;
-  transition: opacity 0.1s ease;
+  transition: opacity var(--flashcard-deck-indicator-transition-duration) ease;
   z-index: 30;
   pointer-events: none;
 }
@@ -119,20 +153,20 @@
   border: none;
   border-radius: var(--border-radius-rounded);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-moderate) ease;
   background-color: var(--color-background-elevated);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--flashcard-deck-shadow-strong);
 
   &:hover:not(:disabled) {
-    transform: scale(1.05);
+    transform: scale(var(--flashcard-deck-action-hover-scale));
   }
 
   &:active:not(:disabled) {
-    transform: scale(0.98);
+    transform: scale(var(--flashcard-deck-action-active-scale));
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: var(--opacity-50);
     cursor: not-allowed;
   }
 }
@@ -154,14 +188,14 @@
 }
 
 .buttonIcon {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-bold);
 }
 
 .buttonText {
-  font-size: 0.75rem;
+  font-size: var(--font-size-xsmall);
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .completedContainer {
@@ -173,8 +207,8 @@
 }
 
 .completedTitle {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-default);
   margin-block-end: var(--spacing-large);
 }
@@ -192,17 +226,17 @@
   padding: var(--spacing-medium);
   background-color: var(--color-background-elevated);
   border-radius: var(--border-radius-rounded);
-  min-inline-size: 80px;
+  min-inline-size: var(--flashcard-deck-stat-min-inline-size);
 }
 
 .statNumber {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
   color: var(--color-primary-medium);
 }
 
 .statLabel {
-  font-size: 0.875rem;
+  font-size: var(--font-size-small);
   color: var(--color-text-faded);
 }
 
@@ -212,14 +246,14 @@
   color: var(--color-text-inverse);
   border: none;
   border-radius: var(--border-radius-pill);
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-moderate) ease;
 
   &:hover {
     background-color: var(--color-primary-faded);
     color: var(--color-text-default);
-    transform: scale(1.02);
+    transform: scale(var(--flashcard-deck-restart-hover-scale));
   }
 }

@@ -13,14 +13,18 @@
   $arabicFont,
   $tabletArabicFont,
   $smallArabicFont,
-  $translationFont
+  $translationFont,
+  $flipTransitionDuration,
+  $arabicLineHeight,
+  $arabicSmallLineHeight,
+  $hintOpacity
 ) {
   .cardInner {
     position: relative;
     inline-size: 100%;
     block-size: 100%;
     transform-style: preserve-3d;
-    transition: transform 0.5s ease;
+    transition: transform $flipTransitionDuration ease;
 
     .flipped & {
       transform: rotateY(180deg);
@@ -41,7 +45,7 @@
     box-shadow: $shadow;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    border: 2px solid var(--color-borders-hairline);
+    border: var(--border-width-small-px) solid var(--color-borders-hairline);
   }
 
   .cardBack {
@@ -53,7 +57,7 @@
   .arabicText {
     font-family: var(--font-family-kitab);
     font-size: $arabicFont;
-    line-height: 1.6;
+    line-height: $arabicLineHeight;
     text-align: center;
     color: var(--color-text-default);
     direction: rtl;
@@ -66,28 +70,28 @@
   .arabicTextSmall {
     font-family: var(--font-family-kitab);
     font-size: $smallArabicFont;
-    line-height: 1.4;
+    line-height: $arabicSmallLineHeight;
     text-align: center;
     color: var(--color-text-default);
     direction: rtl;
   }
 
   .transliteration {
-    font-size: 0.875rem;
+    font-size: var(--font-size-small);
     color: var(--color-text-faded);
     margin-block-start: var(--spacing-xxsmall);
     font-style: italic;
   }
 
   .transliterationSmall {
-    font-size: 0.75rem;
+    font-size: var(--font-size-xsmall);
     color: var(--color-text-faded);
     font-style: italic;
   }
 
   .divider {
     inline-size: 60%;
-    block-size: 1px;
+    block-size: var(--spacing-hairline-px);
     background-color: var(--color-borders-hairline);
     margin-block: var(--spacing-small);
   }
@@ -96,14 +100,14 @@
     font-size: $translationFont;
     color: var(--color-text-default);
     text-align: center;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
   }
 
   .hint {
     position: absolute;
     inset-block-end: var(--spacing-small);
-    font-size: 0.75rem;
+    font-size: var(--font-size-xsmall);
     color: var(--color-text-faded);
-    opacity: 0.7;
+    opacity: $hintOpacity;
   }
 }
