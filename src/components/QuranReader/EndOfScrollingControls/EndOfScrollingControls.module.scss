@@ -33,7 +33,7 @@
   margin-inline: auto;
   max-inline-size: 100%;
   @include breakpoints.tablet {
-    max-inline-size: 80%;
+    max-inline-size: min(80%, 1230px);
   }
 }
 

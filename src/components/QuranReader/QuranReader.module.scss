@@ -26,7 +26,7 @@ $virtual-scrolling-height-bandage: calc(
 
 .loading {
   text-align: center;
-  max-inline-size: 80%;
+  max-inline-size: min(80%, 1230px);
   margin-block-start: var(--spacing-medium);
   margin-block-end: var(--spacing-medium);
   margin-inline-start: auto;
