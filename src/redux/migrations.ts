@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 import initialState, { DEFAULT_TAFSIRS } from './defaultSettings/defaultSettings';
+import { migrateDefaultScale } from './migration-scripts/migrate-default-scale';
 import { migrateRecentReadingSessions } from './migration-scripts/migrating-recent-reading-sessions';
 import { remapFontScale } from './migration-scripts/remap-font-scale';
 import { initialSidebarIsVisible } from './slices/QuranReader/sidebarNavigation';
@@ -376,6 +377,16 @@ export default {
     quranReaderStyles: {
       ...state.quranReaderStyles,
       quranTextFontScale: remapFontScale(
+        state.quranReaderStyles.quranFont,
+        state.quranReaderStyles.quranTextFontScale,
+      ),
+    },
+  }),
+  48: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      quranTextFontScale: migrateDefaultScale(
         state.quranReaderStyles.quranFont,
         state.quranReaderStyles.quranTextFontScale,
       ),

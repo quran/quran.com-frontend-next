@@ -8,13 +8,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import getStore from './store';
 
-import { logErrorToSentry } from '@/lib/sentry';
 import resetSettings from '@/redux/actions/reset-settings';
 import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
-import { needsFontScaleRemap, remapFontScale } from '@/redux/migration-scripts/remap-font-scale';
-import { getMushafId } from '@/utils/api';
-import { addOrUpdateUserPreference, getUserPreferences } from '@/utils/auth/api';
+import remapRemoteFontScale from '@/redux/migration-scripts/migrate-remote-font-scale';
+import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
 import isClient from '@/utils/isClient';
@@ -104,38 +102,11 @@ const ReduxProvider = ({ children, locale }) => {
         }
         const localeForDefaults = remoteLang || initialLocaleRef.current;
 
-        // Remap stale font scale in remote preferences BEFORE syncing to Redux.
-        // Must happen pre-dispatch so the corrected value flows through once;
-        // a remap inside the reducer would cascade on subsequent syncs (7→9→10).
+        // Remap stale font scale + migrate default scale (3→4) in remote preferences
+        // BEFORE syncing to Redux. Mutates remoteStyles.quranTextFontScale in place.
         const remoteStyles = userPreferences[PreferenceGroup.QURAN_READER_STYLES];
-        if (remoteStyles?.quranTextFontScale != null && !remoteStyles.fontScaleRemapVersion) {
-          const effectiveFont =
-            remoteStyles.quranFont ?? store.getState().quranReaderStyles.quranFont;
-          if (needsFontScaleRemap(effectiveFont, remoteStyles.quranTextFontScale)) {
-            const correctedScale = remapFontScale(effectiveFont, remoteStyles.quranTextFontScale);
-            remoteStyles.quranTextFontScale = correctedScale;
-            const { mushaf } = getMushafId(
-              effectiveFont,
-              remoteStyles.mushafLines ?? store.getState().quranReaderStyles.mushafLines,
-            );
-            // Write corrected scale, then persist marker only after scale succeeds
-            addOrUpdateUserPreference(
-              'quranTextFontScale',
-              correctedScale,
-              PreferenceGroup.QURAN_READER_STYLES,
-              mushaf,
-            )
-              .then(() =>
-                addOrUpdateUserPreference(
-                  'fontScaleRemapVersion',
-                  1,
-                  PreferenceGroup.QURAN_READER_STYLES,
-                  mushaf,
-                ),
-              )
-              .catch((err) => logErrorToSentry(err, { transactionName: 'fontScaleRemap' }));
-          }
-        }
+        const { quranReaderStyles: localStyles } = store.getState();
+        remapRemoteFontScale(remoteStyles, localStyles.quranFont, localStyles.mushafLines);
 
         store.dispatch(syncUserPreferences(userPreferences, localeForDefaults));
 

@@ -56,7 +56,7 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   tafsirFontScale: 3,
   reflectionFontScale: 3,
   lessonFontScale: 3,
-  quranTextFontScale: 3,
+  quranTextFontScale: 4,
   translationFontScale: 3,
   wordByWordFontScale: 3,
   qnaFontScale: 3,
