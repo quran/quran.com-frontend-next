@@ -11,7 +11,7 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/But
 import Scrollable from '@/dls/Scrollable/Scrollable';
 import CompareIcon from '@/icons/compare.svg';
 import { PinnedVerse } from '@/redux/slices/QuranReader/pinnedVerses';
-import EventNames from '@/utils/event-names';
+import EventName from '@/utils/event-names';
 
 interface PinnedVersesContentProps {
   pinnedVerses: PinnedVerse[];
@@ -77,7 +77,7 @@ const PinnedVersesContent: React.FC<PinnedVersesContentProps> = ({
           </div>
         </div>
         <Scrollable
-          eventName={EventNames.QURAN_READER_PINNED_VERSES_SCROLLABLE}
+          eventName={EventName.QURAN_READER_PINNED_VERSES_SCROLLABLE}
           containerClassName={styles.pinnedVerseTagsContainer}
           className={styles.pinnedVerseTags}
         >

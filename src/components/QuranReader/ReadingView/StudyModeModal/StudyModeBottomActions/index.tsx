@@ -67,7 +67,7 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
       >
         <Scrollable
           className={styles.tabsContainer}
-          eventName={EventNames.QURAN_READER_STUDY_MODE_BOTTOM_ACTION_SCROLLABLE}
+          eventName={EventName.QURAN_READER_STUDY_MODE_BOTTOM_ACTION_SCROLLABLE}
         >
           {filteredTabs.map((tab, index) => (
             <React.Fragment key={tab.id}>
