@@ -8,10 +8,11 @@ import { needsFontScaleRemap, remapFontScale } from '@/redux/migration-scripts/r
 import { getMushafId } from '@/utils/api';
 import { addOrUpdateUserPreference } from '@/utils/auth/api';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
+import { Mushaf, MushafLines, QuranFont } from 'types/QuranReader';
 
 const STYLES = PreferenceGroup.QURAN_READER_STYLES;
 
-const persistScaleRemap = (correctedScale: number, mushaf: string) => {
+const persistScaleRemap = (correctedScale: number, mushaf: Mushaf) => {
   addOrUpdateUserPreference('quranTextFontScale', correctedScale, STYLES, mushaf)
     .then(() => addOrUpdateUserPreference('fontScaleRemapVersion', 1, STYLES, mushaf))
     .catch((err) => logErrorToSentry(err, { transactionName: 'fontScaleRemap' }));
@@ -19,7 +20,7 @@ const persistScaleRemap = (correctedScale: number, mushaf: string) => {
 
 const persistDefaultScaleMigration = (
   newScale: number,
-  mushaf: string,
+  mushaf: Mushaf,
   hasRemapVersion: boolean,
 ) => {
   addOrUpdateUserPreference('quranTextFontScale', newScale, STYLES, mushaf)
@@ -40,8 +41,8 @@ const persistDefaultScaleMigration = (
  */
 const remapRemoteFontScale = (
   remoteStyles: Record<string, any>,
-  localQuranFont: string,
-  localMushafLines: string,
+  localQuranFont: QuranFont,
+  localMushafLines: MushafLines,
 ) => {
   if (remoteStyles?.quranTextFontScale == null) return;
 
