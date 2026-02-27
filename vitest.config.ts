@@ -41,6 +41,7 @@ export default defineConfig({
       '@/redux': path.resolve(__dirname, './src/redux'),
       '@/contexts': path.resolve(__dirname, './src/contexts'),
       '@/styles': path.resolve(__dirname, './src/styles'),
+      '@/tests': path.resolve(__dirname, './tests'),
       types: path.resolve(__dirname, './types'),
       src: path.resolve(__dirname, './src'),
       '@/api': path.resolve(__dirname, './src/api.ts'),

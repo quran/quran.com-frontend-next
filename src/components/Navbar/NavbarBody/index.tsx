@@ -6,10 +6,12 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
+import useSWRImmutable from 'swr/immutable';
 
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
+import { getUiSection } from '@/api';
 import Banner from '@/components/Banner/Banner';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
@@ -30,6 +32,8 @@ import {
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { TestId } from '@/tests/test-ids';
+import { UiSectionResponse } from '@/types/ApiResponses';
+import { makeUiSectionUrl } from '@/utils/apiPaths';
 import { getSidebarTransitionDurationFromCss } from '@/utils/css';
 
 const SidebarNavigation = dynamic(
@@ -53,12 +57,10 @@ const QURAN_READER_ROUTES = new Set([
   '/rub/[rubId]',
 ]);
 
-interface Props {
-  isBannerVisible: boolean;
-}
+const NAVBAR_ANNOUNCEMENT_KEY = 'navbar_announcement';
 
 const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
@@ -76,6 +78,25 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const wasSidebarVisible = previousSidebarVisibilityRef.current;
   const isTransitioningToClose = wasSidebarVisible && !isSidebarNavigationVisible;
   const sidebarTransitionDuration = getSidebarTransitionDurationFromCss();
+
+  const uiSectionPath = makeUiSectionUrl(NAVBAR_ANNOUNCEMENT_KEY, lang);
+  const { data: uiSectionResponse } = useSWRImmutable<UiSectionResponse>(
+    uiSectionPath,
+    () => getUiSection(NAVBAR_ANNOUNCEMENT_KEY, lang),
+    { revalidateOnFocus: false },
+  );
+
+  const uiSection = uiSectionResponse?.uiSection;
+  const hasUiSectionContent = Boolean(uiSection?.content?.value?.trim());
+  const hasUiSectionCta = Boolean(uiSection?.url && uiSection?.ctaText?.trim());
+  const bannerProps = hasUiSectionContent
+    ? {
+        text: uiSection?.content?.value ?? '',
+        textFormat: uiSection?.content?.format || 'plain_text',
+        ctaButtonText: hasUiSectionCta ? uiSection?.ctaText?.trim() : undefined,
+        ctaUrl: hasUiSectionCta ? uiSection?.url : undefined,
+      }
+    : undefined;
 
   useEffect(() => {
     if (isQuranReaderRoute) return;
@@ -132,9 +153,12 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
 
   const { openSearchDrawer, openNavigationDrawer, openLanguageDrawer } = useNavbarDrawerActions();
 
-  const bannerProps = {
-    text: t('contribute-to-our-mission'),
-    ctaButtonText: t('donate'),
+  const renderBannerSlot = () => {
+    if (hasUiSectionContent && bannerProps) {
+      return <Banner {...bannerProps} />;
+    }
+
+    return <Banner text="" />;
   };
 
   return (
@@ -145,7 +169,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen,
           })}
         >
-          <Banner {...bannerProps} />
+          {renderBannerSlot()}
         </div>
       )}
       <div
@@ -160,9 +184,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
           </div>
         </div>
         {isBannerVisible && (
-          <div className={styles.bannerContainerCenter}>
-            <Banner {...bannerProps} />
-          </div>
+          <div className={styles.bannerContainerCenter}>{renderBannerSlot()}</div>
         )}
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>

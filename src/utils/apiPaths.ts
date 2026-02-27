@@ -228,6 +228,16 @@ export const makeChapterMetadataUrl = (chapterId: string, language: string): str
   makeUrl(`/chapters/${chapterId}/metadata`, { language });
 
 /**
+ * Compose the url for the UI section API.
+ *
+ * @param {string} key the UI section key.
+ * @param {string} language the user's language code.
+ * @returns {string}
+ */
+export const makeUiSectionUrl = (key: string, language: string): string =>
+  makeUrl(`/ui_sections/${key}`, { language });
+
+/**
  * Compose the url for the chapter's API.
  *
  * @param {string} chapterIdOrSlug the chapter Id or the slug.
