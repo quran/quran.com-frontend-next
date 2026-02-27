@@ -27,7 +27,7 @@ Sentry.init({
   dsn: SENTRY_ENABLED ? SENTRY_DSN : null,
   debug: isDev,
   tracesSampleRate: isDev ? 1 : 0.1,
-  replaysOnErrorSampleRate: isDev ? 1 : 0,
+  replaysOnErrorSampleRate: isDev ? 1 : 0.1,
   // Session replays sample rate - only capture dev sessions
   replaysSessionSampleRate: isDev ? 1.0 : 0,
   release: version,
