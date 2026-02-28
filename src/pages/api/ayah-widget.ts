@@ -7,26 +7,28 @@ import {
 } from '@/components/AyahWidget/getAyahWidgetData';
 import ThemeType from '@/redux/types/ThemeType';
 import type ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
+import { normalizeQueryParam } from '@/utils/url';
 
 type ApiResponse = AyahWidgetData | { error: string };
 
-const parseTranslationIds = (translations: string | string[] | undefined): number[] => {
-  if (!translations) return [131]; // Default to Clear Quran
-  return String(translations)
+const parseTranslationIds = (translations: string | undefined): number[] => {
+  if (translations === undefined) return [131];
+  return translations
     .split(',')
     .map((id) => Number(id.trim()))
-    .filter((id) => Number.isFinite(id));
+    .filter((id) => Number.isInteger(id) && id > 0);
 };
 
-const parseTheme = (theme: string | string[] | undefined): ThemeTypeVariant => {
+const parseTheme = (theme: string | undefined): ThemeTypeVariant => {
   if (theme === ThemeType.Dark || theme === ThemeType.Sepia) return theme as ThemeTypeVariant;
   return ThemeType.Light;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ApiResponse>) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
-  const { chapter, from, to, translations, theme } = req.query;
-
+  const { chapter, from, to } = req.query;
+  const translations = normalizeQueryParam(req.query.translations);
+  const theme = normalizeQueryParam(req.query.theme);
   const chapterNum = Number(chapter);
   const fromNum = Number(from);
 
@@ -40,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       rangeEnd: to ? Number(to) : undefined,
       translationIds: parseTranslationIds(translations),
       theme: parseTheme(theme),
-      locale: 'en',
+      locale: normalizeQueryParam(req.query.locale) || 'en',
       lp: true,
       mergeVerses: true,
       showTafsirs: false,

@@ -32,7 +32,7 @@ const FLASHCARD_VARIANT_CONFIG: Record<FlashCardVariant, { subtitleKey: string }
   },
 };
 
-const renderChunks = (chunks: ContentChunk[], keyPrefix = '') =>
+const renderChunks = (chunks: ContentChunk[], language: string, keyPrefix = '') =>
   chunks.map((chunk) =>
     chunk.type === 'html' ? (
       <HtmlContent key={`${keyPrefix}${chunk.key}`} html={chunk.content} />
@@ -41,12 +41,13 @@ const renderChunks = (chunks: ContentChunk[], keyPrefix = '') =>
         key={`${keyPrefix}${chunk.key}`}
         reference={chunk.reference}
         fallbackHtml={chunk.originalHtml}
+        language={language}
       />
     ),
   );
 
-const renderHtml = (html: string, keyPrefix = '') =>
-  renderChunks(parseContentChunks(html), keyPrefix);
+const renderHtml = (html: string, language: string, keyPrefix = '') =>
+  renderChunks(parseContentChunks(html), language, keyPrefix);
 
 const toggleInSet = (set: Set<string>, item: string) => {
   const nextSet = new Set(set);
@@ -81,10 +82,6 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
     [contentToRender, shouldUseInteractiveFeatures],
   );
 
-  if (!shouldUseInteractiveFeatures) {
-    return <HtmlContent html={content} />;
-  }
-
   if (flashcardData) {
     const { subtitleKey } = FLASHCARD_VARIANT_CONFIG[flashcardData.variant];
     const isListVariant = flashcardData.variant === FlashCardVariant.List;
@@ -95,7 +92,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
 
     return (
       <div className={styles.container}>
-        {flashcardData.beforeHtml && renderHtml(flashcardData.beforeHtml, 'before-')}
+        {flashcardData.beforeHtml && renderHtml(flashcardData.beforeHtml, language, 'before-')}
         <div className={styles.flashcardSection}>
           <div className={styles.flashcardHeader}>
             <div className={styles.flashcardHeaderText}>
@@ -137,7 +134,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
             <NonListFlashCardComponent key={contentToRender} cards={flashcardData.flashcards} />
           )}
         </div>
-        {flashcardData.afterHtml && renderHtml(flashcardData.afterHtml, 'after-')}
+        {flashcardData.afterHtml && renderHtml(flashcardData.afterHtml, language, 'after-')}
         {quizNode}
       </div>
     );
@@ -156,7 +153,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
 
   return (
     <div className={styles.container}>
-      {renderChunks(chunks)}
+      {renderChunks(chunks, language)}
       {quizNode}
     </div>
   );
