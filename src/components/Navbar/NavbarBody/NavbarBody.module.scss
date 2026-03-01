@@ -22,9 +22,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.mobileOnly {
   @include breakpoints.tablet {
     display: none;
   }
+}
+
+.desktopAndMobile {
+  display: flex;
 }
 
 .bannerContainerCenter {

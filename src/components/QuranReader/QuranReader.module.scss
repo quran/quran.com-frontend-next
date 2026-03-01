@@ -119,6 +119,41 @@ $virtual-scrolling-height-bandage: calc(
   }
 }
 
+.floatingDonationBanner {
+  position: fixed;
+  inset-inline-start: var(--spacing-small-px);
+  inset-inline-end: var(--spacing-small-px);
+  inset-block-end: var(--spacing-small-px);
+  z-index: calc(var(--z-index-sticky) - 1);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+
+  @include breakpoints.tablet {
+    inset-inline-start: auto;
+    inset-inline-end: var(--spacing-medium-plus-px);
+    inset-block-end: var(--spacing-medium-px);
+    justify-content: flex-end;
+    inline-size: 370px;
+  }
+}
+
+.floatingDonationBannerWithAudio {
+  inset-block-end: calc(
+    var(--spacing-small-px) + var(--audio-player-height-mobile) + var(--spacing-small-px)
+  );
+
+  @include breakpoints.tablet {
+    inset-block-end: calc(
+      var(--spacing-medium-px) + var(--audio-player-height-desktop) + var(--spacing-small-px)
+    );
+  }
+}
+
 .withPinnedVerses {
   --pinned-verses-bar-height: 83px;
 

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
-import Banner from '@/components/Banner/Banner';
+import Banner, { BannerVariant } from '@/components/Banner/Banner';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -31,6 +31,7 @@ import {
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { TestId } from '@/tests/test-ids';
 import { getSidebarTransitionDurationFromCss } from '@/utils/css';
+import { isQuranReaderRoutePathname } from '@/utils/routes';
 
 const SidebarNavigation = dynamic(
   () => import('@/components/QuranReader/SidebarNavigation/SidebarNavigation'),
@@ -44,19 +45,6 @@ interface Props {
   isBannerVisible: boolean;
 }
 
-const QURAN_READER_ROUTES = new Set([
-  '/[chapterId]',
-  '/[chapterId]/[verseId]',
-  '/hizb/[hizbId]',
-  '/juz/[juzId]',
-  '/page/[pageId]',
-  '/rub/[rubId]',
-]);
-
-interface Props {
-  isBannerVisible: boolean;
-}
-
 const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
@@ -65,7 +53,10 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const isLanguageDrawerOpen = useSelector(selectIsLanguageDrawerOpen);
   const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
-  const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
+  const isQuranReaderRoute = isQuranReaderRoutePathname(router.pathname);
+  const isHomepageRoute = router.pathname === '/';
+  const shouldRenderStandaloneDesktopBanner = isHomepageRoute;
+  const shouldRenderInlineDesktopBanner = !isHomepageRoute;
   const normalizedPathname = router.asPath.split(/[?#]/)[0];
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const isPersistHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
@@ -132,9 +123,30 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
 
   const { openSearchDrawer, openNavigationDrawer, openLanguageDrawer } = useNavbarDrawerActions();
 
-  const bannerProps = {
-    text: t('contribute-to-our-mission'),
-    ctaButtonText: t('donate'),
+  const bannerCopy = {
+    desktop: t('fundraising-sticky-banner-v2.desktop-text'),
+    mobileLineOne: t('fundraising-sticky-banner-v2.mobile-line-one'),
+    mobileLineTwo: t('fundraising-sticky-banner-v2.mobile-line-two'),
+  };
+
+  const homepageStandaloneDesktopText = `${bannerCopy.mobileLineOne} ${bannerCopy.mobileLineTwo}`;
+
+  const standaloneBannerProps = {
+    copy: {
+      desktop: isHomepageRoute ? homepageStandaloneDesktopText : bannerCopy.desktop,
+      mobileLineOne: bannerCopy.mobileLineOne,
+      mobileLineTwo: bannerCopy.mobileLineTwo,
+    },
+    text: isHomepageRoute ? homepageStandaloneDesktopText : bannerCopy.desktop,
+    ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
+  };
+
+  const inlineBannerProps = {
+    copy: {
+      desktop: bannerCopy.desktop,
+    },
+    text: t('fundraising-sticky-banner-v2.desktop-text'),
+    ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
   };
 
   return (
@@ -142,10 +154,12 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
       {isBannerVisible && (
         <div
           className={classNames(styles.bannerContainerTop, {
+            [styles.mobileOnly]: !shouldRenderStandaloneDesktopBanner,
+            [styles.desktopAndMobile]: shouldRenderStandaloneDesktopBanner,
             [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen,
           })}
         >
-          <Banner {...bannerProps} />
+          <Banner {...standaloneBannerProps} variant={BannerVariant.Standalone} />
         </div>
       )}
       <div
@@ -159,9 +173,9 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             <NavbarLogoWrapper />
           </div>
         </div>
-        {isBannerVisible && (
+        {isBannerVisible && shouldRenderInlineDesktopBanner && (
           <div className={styles.bannerContainerCenter}>
-            <Banner {...bannerProps} />
+            <Banner {...inlineBannerProps} variant={BannerVariant.InlineChip} />
           </div>
         )}
         <div className={styles.centerVertically}>
