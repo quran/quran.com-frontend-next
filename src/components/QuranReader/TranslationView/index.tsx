@@ -81,6 +81,7 @@ const TranslationView = ({
     apiPageToVersesMap,
     String(resourceId),
     initialData.pagination.perPage,
+    initialData.pagesLookup?.lookupRange,
   );
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);

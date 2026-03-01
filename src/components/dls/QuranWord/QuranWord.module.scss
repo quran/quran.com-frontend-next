@@ -34,6 +34,22 @@
   color: var(--color-success-medium);
 }
 
+.startingVerseHighlighted {
+  position: relative;
+  z-index: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 0;
+    inset-block-end: 0;
+    inset-inline-start: -2px;
+    inset-inline-end: -2px;
+    background-color: var(--color-success-faded);
+    z-index: -1;
+  }
+}
+
 .tooltipContent {
   display: flex;
   flex-direction: column;
