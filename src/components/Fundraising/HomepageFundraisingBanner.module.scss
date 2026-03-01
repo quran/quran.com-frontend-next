@@ -1,187 +1,172 @@
-@use 'src/styles/theme';
 @use 'src/styles/breakpoints';
+@use 'src/components/Fundraising/styles/donationTheme';
 
 .container {
+  @include donationTheme.donationCardThemeVars;
+  --donation-card-cta-height: calc(var(--spacing-medium3-px) + var(--spacing-xxsmall-px));
+  --donation-close-icon-size: var(--spacing-medium3-px);
+
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: var(--border-radius-rounded);
   padding: var(--spacing-medium2-px);
-  background: var(--color-success-faded);
-  @include breakpoints.smallerThanTablet {
-    padding: var(--spacing-small-px);
-  }
-  @include theme.light {
-    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
-  }
-  @include theme.dark {
-    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
-  }
-  @include theme.sepia {
-    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
-  }
+  background-image: linear-gradient(
+    180deg,
+    var(--donation-card-gradient-start) 0%,
+    var(--donation-card-gradient-end) 100%
+  );
+  box-shadow: var(--donation-card-shadow);
+  color: var(--donation-card-text);
 }
 
 .content {
-  flex: 1;
+  inline-size: 100%;
 }
 
 .title {
-  font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-bold);
-  margin-block-end: var(--spacing-small-px);
-  color: var(--color-text-default-new);
-  @include breakpoints.tablet {
-    font-size: var(--font-size-large-px);
-  }
+  margin: 0;
+  color: var(--donation-card-title);
 }
 
 .description {
-  font-size: var(--font-size-xsmall-px);
-  @include breakpoints.tablet {
-    font-size: var(--font-size-medium-px);
+  margin-block-start: var(--spacing-small-px);
+  margin-block-end: 0;
+  color: var(--donation-card-text);
+  line-height: 1.4;
+}
+
+.learnMoreLink {
+  color: var(--color-text-white);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: var(--font-weight-medium);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--donation-card-cta-bg);
   }
-  color: var(--color-text-default-new);
-  margin-block-end: var(--spacing-medium-px);
 }
 
 .actions {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-small-px);
-  @include breakpoints.smallerThanTablet {
-    justify-content: center;
-  }
-}
-
-.rightActions {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-medium);
-}
-
-.actions .shareButton {
-  padding-block: var(--spacing-xxsmall-px);
-  padding-inline: calc(
-    var(--spacing-medium4-px) + var(--spacing-large-px) + var(--spacing-small2-px)
-  );
-  color: var(--color-text-link-new);
-  font-weight: var(--font-weight-semibold);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xsmall);
-  font-size: var(--font-size-normal-px);
-  border-radius: var(--border-radius-small-px);
-  background-color: var(--color-success-faint);
-  border: var(--spacing-hairline-px) solid var(--color-success-faint);
-  @include breakpoints.smallerThanTablet {
-    padding-inline: calc(var(--spacing-medium3-px) + var(--spacing-large-px));
-    font-size: var(--font-size-small-px);
-  }
-
-  &:hover {
-    background-color: var(--color-success-faint);
-    border: var(--spacing-hairline-px) solid var(--color-success-faint);
-    color: var(--color-text-link-new);
-  }
-  svg {
-    padding-inline-end: var(--spacing-small-px);
-  }
+  margin-block-start: var(--spacing-medium2-px);
+  inline-size: 100%;
 }
 
 .actions .donateButton {
+  inline-size: 100%;
+  --button-size: var(--donation-card-cta-height);
+  block-size: var(--donation-card-cta-height);
+  padding-inline: var(--spacing-medium2-px);
   padding-block: var(--spacing-xxsmall-px);
-  padding-inline: var(--spacing-medium4-px);
-  color: var(--color-text-white);
-  font-size: var(--font-size-normal-px);
-  font-weight: var(--font-weight-semibold);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xsmall);
+  color: var(--donation-card-cta-fg);
   border-radius: var(--border-radius-small-px);
-  background-color: var(--color-blue-buttons-and-icons);
-  border: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
-  @include breakpoints.smallerThanTablet {
-    padding-inline: var(--spacing-medium-plus2-px);
-    font-size: var(--font-size-small-px);
-  }
-  svg {
-    padding-inline-end: var(--spacing-small-px);
-    path {
-      fill: var(--color-text-white);
-    }
-  }
+  background-color: var(--donation-card-cta-bg);
+  border: var(--spacing-hairline-px) solid var(--donation-card-cta-bg);
+  font-size: var(--font-size-small-px);
+  line-height: var(--line-height-large);
+  font-weight: var(--font-weight-semibold);
+
   &:hover {
-    background-color: var(--color-blue-buttons-and-icons);
-    border: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
-    color: var(--color-text-white);
-    svg {
-      path {
-        fill: var(--color-text-white);
-      }
-    }
+    background-color: var(--donation-card-cta-bg);
+    border: var(--spacing-hairline-px) solid var(--donation-card-cta-bg);
+    color: var(--donation-card-cta-fg);
   }
 
-  span {
-    align-items: center;
-    @include breakpoints.smallerThanTablet {
-      text-wrap: wrap;
+  svg {
+    inline-size: var(--spacing-medium-plus-px);
+    block-size: var(--spacing-medium-plus-px);
+    padding-inline-end: 0;
+
+    path {
+      fill: currentColor;
     }
   }
 }
 
-.learnMoreLink {
-  color: var(--color-blue-buttons-and-icons);
-  text-decoration: underline;
-  font-weight: var(--font-weight-medium);
+.inline {
+  inline-size: 100%;
+  max-inline-size: none;
+  margin-inline: 0;
+  box-sizing: border-box;
 
-  &:hover,
-  &:focus,
-  &:visited {
-    color: var(--color-blue-buttons-and-icons);
+  @include breakpoints.smallerThanTablet {
+    padding: var(--spacing-medium2-px);
+
+    .description {
+      // Matches Figma mobile card text block height.
+      line-height: var(--line-height-large);
+    }
+  }
+
+  .title {
+    font-size: var(--font-size-normal-px);
+  }
+
+  .description {
+    font-size: var(--font-size-xsmall-px);
+  }
+
+  @include breakpoints.tablet {
+    .title {
+      font-size: var(--font-size-xlarge-px);
+      line-height: var(--line-height-jumbo);
+      text-align: center;
+    }
+
+    .description {
+      font-size: var(--font-size-normal-px);
+      text-align: center;
+    }
+
+    .actions {
+      justify-content: center;
+    }
+
+    .actions .donateButton {
+      inline-size: 281px;
+      font-size: var(--font-size-normal-px);
+    }
+  }
+}
+
+.floating {
+  inline-size: min(370px, calc(100vw - var(--spacing-medium-px)));
+
+  .title {
+    font-size: var(--font-size-large-px);
+    line-height: 1.2;
+  }
+
+  .description {
+    font-size: var(--font-size-small-px);
+  }
+
+  .actions .donateButton {
+    font-size: var(--font-size-small-px);
   }
 }
 
 .closeButton {
   position: absolute;
-  inset-block-start: var(--spacing-xsmall);
-  inset-inline-end: var(--spacing-xsmall);
-  color: var(--color-text-faded-new);
+  inset-block-start: var(--spacing-medium-px);
+  inset-inline-end: var(--spacing-medium-px);
+  color: var(--donation-card-close);
   background: none;
   border: none;
   cursor: pointer;
-  padding: var(--spacing-xsmall);
+  padding: 0;
+  inline-size: 32px;
+  block-size: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  @include breakpoints.smallerThanTablet {
-    padding: 0;
-  }
 
-  &:hover {
-    color: var(--color-text-default);
-  }
-}
-
-/* Modal styles */
-.modalCloseButton {
-  position: absolute;
-  inset-block-start: var(--spacing-medium);
-  inset-inline-end: var(--spacing-medium);
-  color: var(--color-text-faded-new);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--spacing-xsmall);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @include breakpoints.smallerThanTablet {
-    padding: 0;
-  }
-
-  &:hover {
-    color: var(--color-text-default);
+  svg {
+    inline-size: var(--donation-close-icon-size);
+    block-size: var(--donation-close-icon-size);
   }
 }

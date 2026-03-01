@@ -41,6 +41,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
   const isLanguageDrawerOpen = useSelector(selectIsLanguageDrawerOpen);
   const isBannerVisible = useSelector(selectIsBannerVisible);
   const isEmbedPage = router.pathname === '/embed/v1';
+  const isHomepageRoute = router.pathname === '/';
 
   if (isEmbedPage) {
     return <Component {...pageProps} />;
@@ -50,6 +51,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
     <div
       className={classNames({
         bannerActive: isBannerVisible,
+        desktopHomepageStandaloneBannerActive: isBannerVisible && isHomepageRoute,
         navbarVisible: showNavbar,
         navbarHidden: !showNavbar,
       })}
