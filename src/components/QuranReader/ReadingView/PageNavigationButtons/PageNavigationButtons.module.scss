@@ -13,7 +13,7 @@
     inset-block-end: var(--spacing-mega);
     transition: var(--transition-regular);
     // Keep page controls above reader content but below floating donation card and header layers.
-    z-index: calc(var(--z-index-sticky) - 2);
+    z-index: 298;
     inset-inline-end: var(--spacing-large);
   }
 }

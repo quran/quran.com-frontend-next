@@ -124,7 +124,7 @@ $virtual-scrolling-height-bandage: calc(
   inset-inline-start: var(--spacing-small-px);
   inset-inline-end: var(--spacing-small-px);
   inset-block-end: var(--spacing-small-px);
-  z-index: calc(var(--z-index-sticky) - 1);
+  z-index: 299;
   display: flex;
   justify-content: center;
   pointer-events: none;
