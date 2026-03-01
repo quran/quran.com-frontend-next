@@ -271,7 +271,18 @@
     "verification-code": "የማረጋገጫ ኮድ"
   },
   "from": "ከ",
+  "fundraising-card-v2": {
+    "cta": "አሁን ይለግሱ",
+    "description": "ወርሃዊ ለጋሾች Quran.comን ለማሻሻል እና ስራዎችን ለማስቀጠል ይረዱናል፣ ስለዚህ በገንዘብ ማሰባሰብ ላይ ብዙም ትኩረት አንሰጥም እና ተጽዕኖ በመፍጠር ላይ የበለጠ እናተኩራለን።",
+    "title": "ወርሃዊ ለጋሽ ይሁኑ"
+  },
   "fundraising-share-title": "የ Quran.com የገንዘብ ማሰባሰብያ ያጋሩ",
+  "fundraising-sticky-banner-v2": {
+    "cta": "ይለግሱ",
+    "desktop-text": "ለተልዕኮአችን አስተዋጽኦ ያድርጉ",
+    "mobile-line-one": "የቁርዓን ወር ነው።",
+    "mobile-line-two": "ብርሃኑን እንድናሰራጭ እርዳን።"
+  },
   "fundraising-sticky-banner": {
     "cta": "ይለግሱ",
     "title": "በጣም ጥሩ በሆኑት ቀናት ይስጡ!"

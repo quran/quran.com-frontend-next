@@ -271,7 +271,18 @@
     "verification-code": "رمز التحقق"
   },
   "from": "من",
+  "fundraising-card-v2": {
+    "cta": "تبرع الآن",
+    "description": "يساعدنا المتبرعون شهرياً على تحسين موقع Quran.com واستدامة عملياتنا، لذا نركز بشكل أقل على جمع التبرعات وأكثر على إحداث التأثير.",
+    "title": "كن متبرعًا شهريًا"
+  },
   "fundraising-share-title": "شارك في جمع التبرعات لصالح  Quran.com",
+  "fundraising-sticky-banner-v2": {
+    "cta": "يتبرع",
+    "desktop-text": "ساهم في مهمتنا",
+    "mobile-line-one": "إنه شهر القرآن.",
+    "mobile-line-two": "ساعدنا في نشر نوره."
+  },
   "fundraising-sticky-banner": {
     "cta": "تبرع",
     "title": "تبرع في أفضل الأيام!"
@@ -542,16 +553,5 @@
     "title": "نطق الكلمة عند الضغط عليها"
   },
   "word-tooltip": "مربع منبثق للكلمة",
-  "yes": "نعم",
-  "fundraising-sticky-banner-v2": {
-    "desktop-text": " تبرع في أفضل الأيام! انضم إلى الداعمين",
-    "mobile-line-one": "إنه شهر القرآن.",
-    "mobile-line-two": "ساعدنا في نشر نوره.",
-    "cta": "تبرع الآن"
-  },
-  "fundraising-card-v2": {
-    "title": "كن متبرعًا شهريًا",
-    "description": "يساعد المتبرعون الشهريون في تحسين موقع Quran.com والحفاظ على العمليات بحيث نركز أقل على جمع التبرعات وأكثر على إحداث تأثير.",
-    "cta": "تبرع الآن"
-  }
+  "yes": "نعم"
 }

@@ -271,7 +271,18 @@
     "verification-code": "Verification Code"
   },
   "from": "From",
+  "fundraising-card-v2": {
+    "cta": "Donate now",
+    "description": "Monthly donors help us improve Quran.com and sustain operations so we focus less on fundraising and more on creating impact.",
+    "title": "Become a Monthly Donor"
+  },
   "fundraising-share-title": "Share Quran.com Fundraising",
+  "fundraising-sticky-banner-v2": {
+    "cta": "Donate",
+    "desktop-text": "Contribute to our mission",
+    "mobile-line-one": "It's the month of the Quran.",
+    "mobile-line-two": "Help us spread its light."
+  },
   "fundraising-sticky-banner": {
     "cta": "Donate",
     "title": "Give during the best days!"
@@ -542,16 +553,5 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes",
-  "fundraising-sticky-banner-v2": {
-    "desktop-text": "Contribute to our mission",
-    "mobile-line-one": "It's the month of the Quran.",
-    "mobile-line-two": "Help us spread its light.",
-    "cta": "Donate"
-  },
-  "fundraising-card-v2": {
-    "title": "Become a Monthly Donor",
-    "description": "Monthly donors help us improve Quran.com and sustain operations so we focus less on fundraising and more on creating impact.",
-    "cta": "Donate now"
-  }
+  "yes": "Yes"
 }
