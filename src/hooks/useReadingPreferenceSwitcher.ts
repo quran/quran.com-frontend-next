@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { markUserSwitchedReadingMode, resetUserSwitchFlag } from '@/hooks/readingModeSwitchTracker';
+import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import {
   selectReadingPreferences,
   setReadingPreference,
@@ -53,7 +54,13 @@ const useReadingPreferenceSwitcher = ({
   context,
 }: UseReadingPreferenceSwitcherOptions): UseReadingPreferenceSwitcherResult => {
   const router = useRouter();
-  const { readingPreference } = useSelector(selectReadingPreferences);
+  const { readingPreference: reduxReadingPreference } = useSelector(selectReadingPreferences);
+  const {
+    value: resolvedReadingPreference,
+  }: {
+    value: ReadingPreference;
+    isQueryParamDifferent: boolean;
+  } = useGetQueryParamOrReduxValue(QueryParam.READING_MODE);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
 
   const {
@@ -65,27 +72,33 @@ const useReadingPreferenceSwitcher = ({
     ? getVerseNumberFromKey(lastReadVerseKey.verseKey).toString()
     : undefined;
 
-  const switchReadingPreference = useCallback(
+  const getUpdatedQueryParams = useCallback(
     (newPreference: ReadingPreference) => {
-      if (newPreference === readingPreference) return;
-
-      // Prepare URL params
+      const previousQueryParams = { ...router.query };
       const newQueryParams = { ...router.query };
-
-      // Check if user is at the top of the page
       const isAtTop = typeof window !== 'undefined' && window.scrollY <= SCROLL_TOP_THRESHOLD;
 
       if (context === SwitcherContext.SurahHeader || isAtTop) {
-        // User is at the top of the page, so remove startingVerse to prevent scrolling
         delete newQueryParams.startingVerse;
       } else {
-        // For ContextMenu and MobileTabs when not at top, set startingVerse to ensure
-        // the virtualized scroll hooks navigate to the correct verse/page.
-        // Default to verse 1 if no verse has been tracked yet.
         newQueryParams.startingVerse = lastReadVerse || '1';
       }
 
       newQueryParams[QueryParam.READING_MODE] = newPreference;
+
+      return {
+        previousQueryParams,
+        newQueryParams,
+      };
+    },
+    [context, lastReadVerse, router.query],
+  );
+
+  const switchReadingPreference = useCallback(
+    (newPreference: ReadingPreference) => {
+      if (newPreference === resolvedReadingPreference) return;
+
+      const { previousQueryParams, newQueryParams } = getUpdatedQueryParams(newPreference);
 
       // Mark that the user initiated this switch so the QueryParamMessage
       // banner is suppressed while this mode switch is in-flight.
@@ -94,6 +107,10 @@ const useReadingPreferenceSwitcher = ({
       const newUrlObject = {
         pathname: router.pathname,
         query: newQueryParams,
+      };
+      const previousUrlObject = {
+        pathname: router.pathname,
+        query: previousQueryParams,
       };
 
       // Update Redux state first (synchronous dispatch + async API sync),
@@ -105,8 +122,12 @@ const useReadingPreferenceSwitcher = ({
         'readingPreference',
         newPreference,
         setReadingPreference(newPreference),
-        setReadingPreference(readingPreference),
+        setReadingPreference(reduxReadingPreference),
         PreferenceGroup.READING,
+        undefined,
+        () => {
+          router.replace(previousUrlObject, null, { shallow: true, scroll: false });
+        },
       );
 
       // Update URL with shallow routing (no page reload).
@@ -116,11 +137,17 @@ const useReadingPreferenceSwitcher = ({
         .replace(newUrlObject, null, { shallow: true, scroll: false })
         .finally(resetUserSwitchFlag);
     },
-    [context, lastReadVerse, onSettingsChange, readingPreference, router],
+    [
+      getUpdatedQueryParams,
+      onSettingsChange,
+      reduxReadingPreference,
+      resolvedReadingPreference,
+      router,
+    ],
   );
 
   return {
-    readingPreference,
+    readingPreference: resolvedReadingPreference,
     switchReadingPreference,
     isLoading,
   };
