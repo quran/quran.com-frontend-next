@@ -61,6 +61,10 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
         </div>
       </div>
 
+      {showEvent && (
+        <ChapterEvent title={title} description={description} ctaText={ctaText} ctaLink={ctaLink} />
+      )}
+
       <div className={classNames(styles.container, className)}>
         {/* Chapter title section */}
         <ChapterTitle
@@ -77,10 +81,6 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
           isTranslationView={isTranslationView}
         />
       </div>
-
-      {showEvent && (
-        <ChapterEvent title={title} description={description} ctaText={ctaText} ctaLink={ctaLink} />
-      )}
     </div>
   );
 };
