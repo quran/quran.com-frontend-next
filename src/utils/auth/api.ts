@@ -252,8 +252,13 @@ export const getUserProfile = async (): Promise<UserProfile> =>
 export const getUserFeatureFlags = async (): Promise<Record<string, boolean>> =>
   privateFetcher(makeUserFeatureFlagsUrl());
 
-export const refreshToken = async (): Promise<RefreshToken> =>
-  privateFetcher(makeRefreshTokenUrl());
+export const refreshToken = async (): Promise<RefreshToken> => {
+  // IMPORTANT: do NOT use privateFetcher here, otherwise refresh-fetch will deadlock on the
+  // in-flight refresh promise (privateFetcher waits for itself).
+  const result = await withCredentialsFetcher<RefreshToken>(makeRefreshTokenUrl());
+  throwIfResponseContainsError(result, 'Token refresh failed');
+  return result;
+};
 
 // Track token refresh progress to allow UI / logic to defer actions while refreshing
 let tokenRefreshInProgress = false;
