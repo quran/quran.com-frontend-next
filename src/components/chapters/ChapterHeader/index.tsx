@@ -52,17 +52,16 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
 
   return (
     <div className={styles.containerWrapper}>
-      <div className={classNames(styles.container, className)}>
-        {/* Top controls section */}
-        <div dir={direction} className={styles.topControls}>
-          <div className={styles.leftControls}>
-            <PlayChapterAudioButton chapterId={Number(chapterId)} />
-          </div>
-          <div className={styles.rightControls}>
-            {isReadingMode ? <ReadingModeActions /> : <TranslationSettingsButton />}
-          </div>
+      <div dir={direction} className={styles.topControls}>
+        <div className={styles.leftControls}>
+          <PlayChapterAudioButton chapterId={Number(chapterId)} />
         </div>
+        <div className={styles.rightControls}>
+          {isReadingMode ? <ReadingModeActions /> : <TranslationSettingsButton />}
+        </div>
+      </div>
 
+      <div className={classNames(styles.container, className)}>
         {/* Chapter title section */}
         <ChapterTitle
           chapterId={chapterId}
