@@ -1,5 +1,10 @@
 /* eslint-disable max-lines */
-import React, { MouseEventHandler, ButtonHTMLAttributes, forwardRef } from 'react';
+import React, {
+  MouseEventHandler,
+  PointerEventHandler,
+  ButtonHTMLAttributes,
+  forwardRef,
+} from 'react';
 
 import classNames from 'classnames';
 
@@ -66,6 +71,7 @@ export type ButtonProps = {
   isDisabled?: boolean;
   isSelected?: boolean;
   onClick?: MouseEventHandler;
+  onPointerDown?: PointerEventHandler<HTMLButtonElement>;
   tooltip?: string | React.ReactNode;
   tooltipContentSide?: ContentSide;
   className?: string;
@@ -94,6 +100,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       href,
       onClick,
+      onPointerDown,
       children,
       isDisabled: disabled = false,
       isLoading,
@@ -202,6 +209,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className={classes}
           disabled={disabled}
           onClick={onClick}
+          onPointerDown={onPointerDown}
           data-auto-flip-icon={shouldFlipOnRTL}
           // eslint-disable-next-line @typescript-eslint/naming-convention
           {...(ariaLabel && { 'aria-label': ariaLabel })}

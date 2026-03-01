@@ -174,7 +174,7 @@ const ShareButtons: React.FC<Props> = ({
 
       {verse?.chapterId && verse?.verseNumber && (
         <button type="button" className={styles.shareOptionButton} onClick={onCopyEmbedClicked}>
-          <div className={styles.socialIcon}>
+          <div className={styles.utilityIconWrapper}>
             <CodeCircleIcon />
           </div>
           <span>{isEmbedCopied ? `${t('embed-copied')}!` : t('copy-embed')}</span>

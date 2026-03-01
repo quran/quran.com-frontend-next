@@ -363,4 +363,11 @@ export default {
       layersFontScale: initialState.quranReaderStyles.layersFontScale,
     },
   }),
+  46: (state) => ({
+    ...state,
+    fundraisingBanner: {
+      isHomepageBannerVisible: true,
+      isQuranReaderBannerVisible: true,
+    },
+  }),
 };

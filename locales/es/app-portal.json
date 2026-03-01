@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "Compartir reflexiones",
-        "description": "Una plataforma social para fomentar y facilitar las reflexiones coránicas: comparta reflexiones, explore temas e interactúe con la comunidad.",
-        "tagline": "Compartir reflexiones y crecer juntos",
+        "description": "Una plataforma social para cultivar una cultura de reflexión sobre el Sagrado Corán.",
+        "tagline": "Leer y compartir reflexiones",
         "title": "Reflexión sobre el Corán"
       },
       "readtafsir": {
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Por fin, una aplicación del Corán para nuestras hijas",
+        "headline": "¡Escuche a más de 60 mujeres de todo el mundo recitar el Corán en diferentes recitaciones!",
         "name": "Qariah",
         "tagline": "Mujeres recitadoras del Corán"
       },
@@ -82,15 +82,23 @@
         "headline": "Explora más de 25 tafsirs y más de 100 traducciones en un solo lugar.",
         "name": "Enlace del Corán",
         "tagline": "Tafsir y compañero de estudio"
+      },
+      "quran-space": {
+        "headline": "Conéctese con profesores, estudiantes o compañeros en audio y video en tiempo real para leer, reflexionar y estudiar el Corán juntos.",
+        "name": "Espacio del Corán",
+        "tagline": "Espacio de encuentro del Corán en vivo"
       }
     },
     "learn-more": "Más información",
     "title": "Aplicaciones destacadas",
     "view-all": "Ver todo"
   },
+  "footer": {
+    "disclaimer": "Cada aplicación es propiedad de su desarrollador y está bajo su propio mantenimiento. Para obtener soporte, informar errores o solicitar funciones, contacte directamente con el creador de la aplicación."
+  },
   "hero": {
-    "description": "Explora una colección seleccionada de aplicaciones islámicas creadas con Quran.foundation. Desde herramientas de estudio hasta herramientas para la oración, encuentra aplicaciones que enriquecen tu camino espiritual.",
+    "description": "Explora aplicaciones únicas impulsadas por el contenido y las funciones de usuario verificadas de Quran Foundation, mientras tu cuenta, tu progreso y tu viaje permanecen conectados.",
     "title": "Descubre nuestro ecosistema de aplicaciones"
   },
-  "quran-apps-portal": "Portal de aplicaciones del Corán"
+  "quran-apps-portal": "Aplicaciones del Corán conectadas"
 }

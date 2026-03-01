@@ -4,6 +4,8 @@ import { useCallback, useMemo, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 
+import { COLLECTION_NAME_MAX_LENGTH } from '../components/Collection/collectionNameValidation';
+
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import {
@@ -13,7 +15,7 @@ import {
   updateCollection as apiUpdateCollection,
 } from '@/utils/auth/api';
 import { makeCollectionsUrl } from '@/utils/auth/apiPaths';
-import { isBookmarkSyncError } from '@/utils/auth/errors';
+import { getCommonErrorToastDescriptor } from '@/utils/auth/errors';
 import mutatingFetcherConfig from '@/utils/swr';
 import BookmarkType from 'types/BookmarkType';
 import { Collection } from 'types/Collection';
@@ -90,9 +92,11 @@ const useCollections = ({
 
   const showErrorToast = useCallback(
     (err: unknown) => {
-      toast(t(isBookmarkSyncError(err) ? 'error.bookmark-sync' : 'error.general'), {
-        status: ToastStatus.Error,
+      const descriptor = getCommonErrorToastDescriptor(err, {
+        fieldName: t('collection:collection-name'),
+        defaultMax: COLLECTION_NAME_MAX_LENGTH,
       });
+      toast(t(descriptor.key, descriptor.params), { status: ToastStatus.Error });
     },
     [toast, t],
   );

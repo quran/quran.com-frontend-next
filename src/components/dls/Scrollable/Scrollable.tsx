@@ -10,6 +10,7 @@ import styles from './Scrollable.module.scss';
 import useScrollable from '@/hooks/useScrollable';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
+import { logButtonClick } from '@/utils/eventLogger';
 import { isRTLLocale } from '@/utils/locale';
 
 interface ScrollableProps {
@@ -23,6 +24,7 @@ interface ScrollableProps {
   edgeButtonClassName?: string;
   leftEdgeButtonClassName?: string;
   rightEdgeButtonClassName?: string;
+  eventName: string;
 }
 
 const Scrollable = ({
@@ -36,6 +38,7 @@ const Scrollable = ({
   edgeButtonClassName,
   leftEdgeButtonClassName,
   rightEdgeButtonClassName,
+  eventName,
 }: ScrollableProps) => {
   const { lang } = useTranslation();
   const isRTL = isRTLLocale(lang);
@@ -47,6 +50,16 @@ const Scrollable = ({
       indicatorOnly,
       childrenCount: React.Children.count(children),
     });
+
+  const handleLeftButtonClick = () => {
+    onLeftButtonClick();
+    logButtonClick(`${eventName}_left`);
+  };
+
+  const handleRightButtonClick = () => {
+    onRightButtonClick();
+    logButtonClick(`${eventName}_right`);
+  };
 
   return (
     <div className={classNames(styles.container, containerClassName)}>
@@ -63,10 +76,11 @@ const Scrollable = ({
             edgeButtonClassName,
             leftEdgeButtonClassName,
           )}
-          onClick={onLeftButtonClick}
+          onClick={handleLeftButtonClick}
           size={ButtonSize.XXSmall}
           shape={ButtonShape.Circle}
           variant={ButtonVariant.Compact}
+          shouldFlipOnRTL={false}
         >
           <ChevronLeftIcon />
         </Button>
@@ -87,10 +101,11 @@ const Scrollable = ({
             edgeButtonClassName,
             rightEdgeButtonClassName,
           )}
-          onClick={onRightButtonClick}
+          onClick={handleRightButtonClick}
           size={ButtonSize.XXSmall}
           shape={ButtonShape.Circle}
           variant={ButtonVariant.Compact}
+          shouldFlipOnRTL={false}
         >
           <ChevronRightIcon />
         </Button>

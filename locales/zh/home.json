@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "实现您的《古兰经》目标",
+  "apps": {
+    "description": "借助各种应用程序，进一步提升您学习《古兰经》的能力。",
+    "featured-apps": "精选应用",
+    "qariah": {
+      "description": "女性古兰经诵读者",
+      "name": "卡里亚"
+    },
+    "quran-android": {
+      "description": "Quran.com 安卓版",
+      "name": "古兰经安卓版"
+    },
+    "quran-ios": {
+      "description": "Quran.com iPhone 版",
+      "name": "古兰经 iOS"
+    },
+    "quran-space": {
+      "description": "生活学习小组",
+      "name": "古兰经空间"
+    },
+    "quranreflect": {
+      "description": "阅读并分享感想",
+      "name": "古兰经反思"
+    },
+    "see-more": "查看更多",
+    "title": "古兰经应用程序"
+  },
   "begin": "开始",
   "calendar-cta": "日历",
   "chapters-and-verses": "章节和诗句",
@@ -44,6 +70,7 @@
   "quran-in-year-cta": "本周阅读",
   "quran-in-year-verse-title": "本周读经中的一节经文",
   "ramadan-activities-cta": "<link>关注<b>全球古兰经日历</b>获取每周阅读、启发性播客和反思呼吁！ </link>",
+  "ramadan-challenge": "加入斋月挑战",
   "ramadan": {
     "header": "加深与《古兰经》联系的工具",
     "title": "准备好迎接斋月了吗？"

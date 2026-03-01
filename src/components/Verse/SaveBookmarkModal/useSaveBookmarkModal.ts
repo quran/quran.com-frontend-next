@@ -27,7 +27,12 @@ import {
   toLocalizedVerseKey,
   toLocalizedVerseKeyRTL,
 } from '@/utils/locale';
-import { getChapterWithStartingVerseUrl, getPageNavigationUrl } from '@/utils/navigation';
+import {
+  getChapterWithStartingVerseUrl,
+  getLoginNavigationUrl,
+  getPageNavigationUrl,
+} from '@/utils/navigation';
+import { setPendingBookmarkModalRestore } from '@/utils/pendingBookmarkModalRestore';
 
 interface UseSaveBookmarkModalOptions {
   type: ReadingBookmarkType;
@@ -273,13 +278,33 @@ const useSaveBookmarkModal = ({
   const handleGuestSignIn = useCallback((): void => {
     logButtonClick('save_bookmark_modal_guest_sign_in');
 
-    const redirectUrl = isVerse
-      ? getChapterWithStartingVerseUrl(`${verse.chapterId}:${verse.verseNumber}`)
-      : getPageNavigationUrl(pageNumber);
-    router.push(`/login?r=${encodeURIComponent(redirectUrl)}`);
+    if (isVerse && !verse) {
+      router.push(getLoginNavigationUrl(router.asPath));
+      onClose();
+      return;
+    }
+
+    const redirectUrl =
+      isVerse && verse
+        ? getChapterWithStartingVerseUrl(`${verse.chapterId}:${verse.verseNumber}`)
+        : getPageNavigationUrl(pageNumber);
+
+    if (isVerse && verse) {
+      setPendingBookmarkModalRestore({
+        verse: {
+          chapterId: verse.chapterId,
+          verseNumber: verse.verseNumber,
+          verseKey: verse.verseKey || verseKey,
+        },
+        verseKey,
+        redirectUrl,
+      });
+    }
+
+    router.push(getLoginNavigationUrl(redirectUrl));
 
     onClose();
-  }, [isVerse, verse, pageNumber, onClose, router]);
+  }, [isVerse, verse, verseKey, pageNumber, onClose, router]);
 
   const isDataReady =
     isPage ||

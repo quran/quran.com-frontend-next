@@ -6,10 +6,10 @@
     "title": "Nyaraka za API"
   },
   "app-portal": {
-    "cta-explore": "Tembelea Tovuti ya Programu za Qur'ani",
+    "cta-explore": "Gundua Programu",
     "cta-oauth": "Tazama mwongozo wa OAuth2",
     "description": "Gundua Programu zinazobadilisha maisha na zinazoshughulikia mahitaji ya kipekee na makundi mbalimbali ya jamii.",
-    "heading": "Tovuti ya Programu za Qur'ani",
+    "heading": "Programu za Quran Zilizounganishwa",
     "oauth-pitch": "Tumia OAuth2.0 ya Quran.Foundation ili kumruhusu mtumiaji kupata data yake na kuendelea pale alipoishia kwenye Quran.com na Programu zilizounganishwa.",
     "tagline": "Onyesha programu zako za Qur'ani"
   },

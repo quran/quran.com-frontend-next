@@ -18,8 +18,8 @@ import { ROUTES } from '@/utils/navigation';
 import { getQRNavigationUrl } from '@/utils/quranReflect/navigation';
 
 const RAMADAN_EVENT = {
-  title: 'Get Ready for Ramadan!',
-  description: 'Tools & content to stay connected all month',
+  title: 'Discover Ramadan Activities!',
+  description: 'Tools & content to stay engaged all month',
 };
 
 const CommunitySection = () => {

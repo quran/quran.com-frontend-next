@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useContext, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -10,6 +10,7 @@ import TajweedFontPalettes from './TajweedFontPalettes';
 import styles from './VerseText.module.scss';
 
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
+import StartingVerseHighlightContext from '@/contexts/StartingVerseHighlightContext';
 import QuranWord from '@/dls/QuranWord/QuranWord';
 import { TooltipType } from '@/dls/Tooltip';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
@@ -57,6 +58,7 @@ const VerseText = ({
   shouldShowWordByWordTransliteration,
   isStandaloneMode = false,
 }: VerseTextProps) => {
+  const { verseKey: startingVerseHighlightVerseKey } = useContext(StartingVerseHighlightContext);
   const router = useRouter();
   const textRef = useRef(null);
   const reduxStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -129,6 +131,7 @@ const VerseText = ({
                 isHighlighted={
                   isHighlightedWord || word.verseKey === selectedVerseKey || isHoveredWord
                 }
+                isStartingVerseHighlighted={word.verseKey === startingVerseHighlightVerseKey}
                 tooltipType={tooltipType}
                 isWordInteractionDisabled={isWordInteractionDisabled}
                 shouldForceShowTooltip={isHighlightedWord && !shouldDisableForceTooltip}

@@ -1,5 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 
+import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Card.module.scss';
@@ -15,7 +16,8 @@ import EditIcon from '@/icons/edit.svg';
 import { Note } from '@/types/auth/Note';
 import { toSafeISOString, dateToMonthDayYearFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
-import { readableVerseRangeKeys } from '@/utils/verseKeys';
+import { getSurahRangeNavigationUrlByVerseKey } from '@/utils/navigation';
+import { parseVerseRange, readableVerseRangeKeys } from '@/utils/verseKeys';
 
 export interface NoteCardProps {
   note: NoteWithRecentReflection;
@@ -48,11 +50,35 @@ const NoteCard: React.FC<NoteCardProps> = ({
     [chaptersData, lang],
   );
 
+  const getVerseLink = useCallback((noteWithPostUrl: NoteWithRecentReflection) => {
+    if (!noteWithPostUrl.ranges || noteWithPostUrl.ranges.length === 0) return '';
+    const firstRange = noteWithPostUrl.ranges[0];
+    const parsedRange = parseVerseRange(firstRange, true);
+
+    if (parsedRange && parsedRange.length === 2) {
+      const from = parsedRange[0];
+      const to = parsedRange[1];
+
+      const rangeKey = `${from.chapter}:${from.verse}-${to.verse}`;
+      return getSurahRangeNavigationUrlByVerseKey(rangeKey);
+    }
+
+    return '';
+  }, []);
+
+  const LinkOrDiv = showReadMore ? Link : 'div';
+
   return (
     <div key={note.id} className={styles.noteCard} data-testid={`note-card-${note.id}`}>
       <div className={styles.noteHeader}>
         <div className={styles.noteInfo}>
-          <h3 className={styles.noteTitle}>{formatNoteTitle(note)}</h3>
+          <LinkOrDiv
+            href={getVerseLink(note)}
+            className={styles.noteTitle}
+            data-link={showReadMore}
+          >
+            <h3>{formatNoteTitle(note)}</h3>
+          </LinkOrDiv>
           <time className={styles.noteDate} dateTime={toSafeISOString(note.createdAt)}>
             {dateToMonthDayYearFormat(note.createdAt, lang)}
           </time>

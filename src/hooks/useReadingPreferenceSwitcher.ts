@@ -11,6 +11,7 @@ import {
   setReadingPreference,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
+import { normalizeQueryParam } from '@/utils/url';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import QueryParam from 'types/QueryParam';
@@ -61,15 +62,16 @@ const useReadingPreferenceSwitcher = ({
     value: ReadingPreference;
     isQueryParamDifferent: boolean;
   } = useGetQueryParamOrReduxValue(QueryParam.READING_MODE);
-  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  const lastReadVerseKeyState = useSelector(selectLastReadVerseKey);
 
   const {
     actions: { onSettingsChange },
     isLoading,
   } = usePersistPreferenceGroup();
 
-  const lastReadVerse = lastReadVerseKey.verseKey
-    ? getVerseNumberFromKey(lastReadVerseKey.verseKey).toString()
+  const lastReadVerseKey = lastReadVerseKeyState.verseKey;
+  const lastReadVerse = lastReadVerseKey
+    ? getVerseNumberFromKey(lastReadVerseKey).toString()
     : undefined;
 
   const getUpdatedQueryParams = useCallback(
@@ -81,7 +83,15 @@ const useReadingPreferenceSwitcher = ({
       if (context === SwitcherContext.SurahHeader || isAtTop) {
         delete newQueryParams.startingVerse;
       } else {
-        newQueryParams.startingVerse = lastReadVerse || '1';
+        const chapterId = normalizeQueryParam(router.query.chapterId);
+        const isChapterScopedRoute = !!chapterId && !String(chapterId).includes(':');
+
+        // For ContextMenu and MobileTabs when not at top, set startingVerse to ensure
+        // the virtualized scroll hooks navigate to the correct verse/page.
+        // Default to verse 1/1:1 if no verse has been tracked yet.
+        newQueryParams.startingVerse = isChapterScopedRoute
+          ? lastReadVerse || '1'
+          : lastReadVerseKey || '1:1';
       }
 
       newQueryParams[QueryParam.READING_MODE] = newPreference;
@@ -91,7 +101,7 @@ const useReadingPreferenceSwitcher = ({
         newQueryParams,
       };
     },
-    [context, lastReadVerse, router.query],
+    [context, lastReadVerse, lastReadVerseKey, router.query],
   );
 
   const switchReadingPreference = useCallback(

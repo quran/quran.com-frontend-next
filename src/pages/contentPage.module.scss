@@ -172,3 +172,7 @@
 .noMarginEnd {
   margin-block-end: 0 !important;
 }
+
+.paragraph {
+  margin-block-end: var(--spacing-small-px);
+}

@@ -6,10 +6,10 @@
     "title": "Documentazione API"
   },
   "app-portal": {
-    "cta-explore": "Visita il portale delle app del Corano",
+    "cta-explore": "Esplora le app",
     "cta-oauth": "Vedi la guida OAuth2",
     "description": "Esplora le ultime esperienze create dalla community e scopri cosa puoi fare con la nostra piattaforma.",
-    "heading": "Portale delle app del Corano",
+    "heading": "App del Corano connesse",
     "oauth-pitch": "Utilizza Quran Foundation OAuth2 per un accesso senza interruzioni e invia la tua app per renderla visibile sul portale delle app Quran.",
     "tagline": "Metti in mostra le tue app del Corano"
   },

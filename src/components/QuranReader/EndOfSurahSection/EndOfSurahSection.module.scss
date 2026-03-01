@@ -10,10 +10,10 @@ $cards-grid-min-height: 321px;
   @include utility.edgeHorizontalPadding;
   max-inline-size: $container-max-width;
   margin: 0 auto;
-  padding-block: var(--spacing-large);
+  padding-block: var(--spacing-medium3-px);
 
   @include breakpoints.smallerThanTablet {
-    padding-block: var(--spacing-medium);
+    padding-block: var(--spacing-medium-plus-px);
   }
 }
 

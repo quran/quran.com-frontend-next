@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .container {
   inline-size: 100%;
@@ -39,4 +40,23 @@
 
 .donationBannerContainer {
   margin-block-start: var(--spacing-large);
+}
+
+// Matches EndOfSurahSection container width (1230px, centered, with edge padding)
+.chapterBannerWrapper {
+  @include utility.edgeHorizontalPadding;
+  max-inline-size: 1230px;
+  margin-inline: auto;
+  inline-size: 100%;
+}
+
+// Matches translation cell width (80% on tablet+, 100% on mobile)
+.otherBannerWrapper {
+  margin-inline: auto;
+  max-inline-size: 100%;
+  padding-inline: var(--spacing-medium2-px);
+
+  @include breakpoints.tablet {
+    max-inline-size: 80%;
+  }
 }

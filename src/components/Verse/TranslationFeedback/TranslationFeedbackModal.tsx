@@ -2,6 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import TranslationFeedbackDisclaimer from './TranslationFeedbackDisclaimer';
 import styles from './TranslationFeedbackModal.module.scss';
 import TranslationPreview from './TranslationPreview';
 import TranslationSelect from './TranslationSelect';
@@ -69,6 +70,8 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
           </div>
         )}
       </div>
+
+      <TranslationFeedbackDisclaimer />
 
       <div className={styles.actions}>
         <Button

@@ -6,10 +6,10 @@
     "title": "API 文档"
   },
   "app-portal": {
-    "cta-explore": "访问古兰经应用程序门户",
+    "cta-explore": "探索应用",
     "cta-oauth": "请参阅 OAuth2 指南",
     "description": "探索社区打造的最新体验，看看我们的平台能带来哪些可能性。",
-    "heading": "古兰经应用程序门户",
+    "heading": "联网古兰经应用程序",
     "oauth-pitch": "使用 Quran Foundation OAuth2 进行无缝登录，并将您的应用提交到 Quran Apps Portal 进行展示。",
     "tagline": "展示您的古兰经应用程序"
   },

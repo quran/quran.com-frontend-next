@@ -1,78 +1,43 @@
-/* eslint-disable i18next/no-literal-string */
-import React, { useState } from 'react';
+import React from 'react';
 
-import dynamic from 'next/dynamic';
-import Trans from 'next-translate/Trans';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './NewCard.module.scss';
 
 import Card from '@/components/HomePage/Card';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
-import Link, { LinkVariant } from '@/dls/Link/Link';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getTakeNotesNavigationUrl } from '@/utils/navigation';
-
-const ShareQuranModal = dynamic(() => import('./ShareQuranModal'), {
-  ssr: false,
-});
+import { ROUTES } from '@/utils/navigation';
 
 const NewCard: React.FC = () => {
-  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const { t } = useTranslation('home');
 
-  const onTakeNotesClicked = () => {
-    logButtonClick('homepage_take_notes_link');
-  };
-
-  const onCloseShareModal = () => {
-    setIsShareModalOpen(false);
+  const onRamadanChallengeClicked = () => {
+    logButtonClick('homepage_ramadan_challenge_link');
   };
 
   return (
-    <>
-      <Card
-        onClick={() => {
-          logButtonClick('homepage_take_notes');
-        }}
-        className={styles.firstTimeReadingCard}
-        link={getTakeNotesNavigationUrl()}
-        isNewTab
-      >
-        <div className={styles.cardOuterContainer}>
-          <div className={styles.cardWithIcon}>
-            <div className={styles.iconContainer}>
-              <span aria-hidden="true">✏️</span>
-              <span className={styles.srOnly}>Pencil icon</span>
-            </div>
-            <div className={styles.link}>
-              <Trans
-                i18nKey="home:take-notes"
-                components={{
-                  modalLink: (
-                    <Link
-                      variant={LinkVariant.Blend}
-                      href={getTakeNotesNavigationUrl()}
-                      className={styles.linkHref}
-                      onClick={onTakeNotesClicked}
-                      isNewTab
-                    />
-                  ),
-                }}
-              />
-            </div>
+    <Card
+      onClick={onRamadanChallengeClicked}
+      className={styles.firstTimeReadingCard}
+      link={ROUTES.RAMADAN_CHALLENGE}
+    >
+      <div className={styles.cardOuterContainer}>
+        <div className={styles.cardWithIcon}>
+          <div className={styles.iconContainer}>
+            <span aria-hidden="true">✨</span>
           </div>
-          <IconContainer
-            className={styles.arrowIcon}
-            size={IconSize.Xsmall}
-            icon={<ArrowIcon />}
-            shouldForceSetColors={false}
-          />
+          <div className={styles.link}>{t('ramadan-challenge')}</div>
         </div>
-      </Card>
-      {isShareModalOpen && (
-        <ShareQuranModal isOpen={isShareModalOpen} onClose={onCloseShareModal} />
-      )}
-    </>
+        <IconContainer
+          className={styles.arrowIcon}
+          size={IconSize.Xsmall}
+          icon={<ArrowIcon />}
+          shouldForceSetColors={false}
+        />
+      </div>
+    </Card>
   );
 };
 

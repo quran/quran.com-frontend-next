@@ -6,10 +6,10 @@
     "title": "Dokumentacioni i API-t"
   },
   "app-portal": {
-    "cta-explore": "Vizitoni Portalin e Aplikacioneve të Kuranit",
+    "cta-explore": "Eksploro Aplikacionet",
     "cta-oauth": "Shihni udhëzuesin OAuth2",
     "description": "Eksploroni përvojat më të fundit të ndërtuara nga komuniteti dhe shikoni se çfarë është e mundur me platformën tonë.",
-    "heading": "Portali i Aplikacioneve të Kuranit",
+    "heading": "Aplikacione të lidhura të Kuranit",
     "oauth-pitch": "Dërgojeni me Fondacionin e Kuranit OAuth2 për hyrje pa probleme dhe dorëzoni aplikacionin tuaj që të shfaqet në Portalin e Aplikacioneve të Kuranit.",
     "tagline": "Shfaqni aplikacionet tuaja të Kuranit"
   },

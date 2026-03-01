@@ -362,37 +362,6 @@ export const getMonthsInYear = (year: number, locale: string): Month[] => {
 };
 
 /**
- * Normalizes a date to midnight and compares it with today's date.
- *
- * @param {string | Date} date - The date to compare (can be a string or Date object)
- * @returns {{ today: Date, normalizedDate: Date, isToday: boolean }} An object containing:
- *   - today: Today's date normalized to midnight (00:00:00.000)
- *   - normalizedDate: The provided date normalized to midnight (00:00:00.000)
- *   - isToday: Boolean indicating if the provided date is today
- *
- * @example
- * const { today, normalizedDate, isToday } = compareDateWithToday('2024-01-15');
- * // today: Date object for current date at 00:00:00.000
- * // normalizedDate: Date object for 2024-01-15 at 00:00:00.000
- * // isToday: true if today is January 15, 2024, false otherwise
- */
-export const compareDateWithToday = (
-  date: string | Date,
-): {
-  today: Date;
-  normalizedDate: Date;
-  isToday: boolean;
-} => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const normalizedDate = new Date(date);
-  normalizedDate.setHours(0, 0, 0, 0);
-  const isToday = normalizedDate.getTime() === today.getTime();
-
-  return { today, normalizedDate, isToday };
-};
-
-/**
  * Convert a date to a safe ISO string.
  *
  * @param {string | Date} date

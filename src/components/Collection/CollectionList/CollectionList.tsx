@@ -5,6 +5,7 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 
+import { COLLECTION_NAME_MAX_LENGTH } from '../collectionNameValidation';
 import CollectionSorter from '../CollectionSorter/CollectionSorter';
 import RenameCollectionModal from '../RenameCollectionModal/RenameCollectionModal';
 
@@ -17,6 +18,7 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import BookmarkIcon from '@/icons/unbookmarked.svg';
 import BookmarkType from '@/types/BookmarkType';
+import { getCommonErrorToastDescriptor } from '@/utils/auth/errors';
 import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
@@ -78,8 +80,12 @@ const CollectionList = () => {
         onCollectionUpdated();
         setCollectionToRename(null);
       })
-      .catch(() => {
-        toast(t('common:error.general'), {
+      .catch((err) => {
+        const descriptor = getCommonErrorToastDescriptor(err, {
+          fieldName: t('collection:collection-name'),
+          defaultMax: COLLECTION_NAME_MAX_LENGTH,
+        });
+        toast(t(`common:${descriptor.key}`, descriptor.params), {
           status: ToastStatus.Error,
         });
       });

@@ -76,7 +76,7 @@ const useGetWeekDayNames = (week: Day[], streak: number, showWeekdayName = false
       let dayName: { localizedNumber: string; title: string; shortName: string };
       if (showWeekdayName) {
         dayName = {
-          localizedNumber: toLocalizedNumber(i + 1, lang),
+          localizedNumber: toLocalizedNumber(week[i].date.getDate(), lang),
           title: getFullDayName(week[i].date, lang),
           shortName: getShortDayName(week[i].date, lang),
         };

@@ -46,6 +46,7 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
+const TOOLTIP_HOVER_DELAY_MS = 700;
 
 // IndoPak stop sign characters that require additional spacing
 const INDO_PAK_STOP_SIGN_CHARS = new Set([
@@ -68,6 +69,7 @@ export type QuranWordProps = {
   word: Word;
   font?: QuranFont;
   isHighlighted?: boolean;
+  isStartingVerseHighlighted?: boolean;
   isWordByWordAllowed?: boolean;
   isAudioHighlightingAllowed?: boolean;
   isFontLoaded?: boolean;
@@ -87,6 +89,7 @@ const QuranWord = ({
   isWordByWordAllowed = true,
   isAudioHighlightingAllowed = true,
   isHighlighted,
+  isStartingVerseHighlighted = false,
   isFontLoaded = true,
   tooltipType,
   isWordInteractionDisabled = false,
@@ -250,9 +253,6 @@ const QuranWord = ({
 
     if (isRecitationEnabled && word.charTypeName === CharType.Word && !showTooltip) {
       handleWordAction();
-      logButtonClick(`study_mode_open_word_${modeSuffix}`, { verseKey: word.verseKey });
-      dispatch(setReadingViewHoveredVerseKey(null));
-      dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
       return;
     }
 
@@ -341,6 +341,7 @@ const QuranWord = ({
          * top of the normal/black glyph.
          */
         [styles.highlighted]: shouldBeHighLighted && font !== QuranFont.TajweedV4,
+        [styles.startingVerseHighlighted]: isStartingVerseHighlighted,
         [styles.wbwContainer]: isWordByWordLayout,
         [styles.additionalWordGap]: isTranslationMode,
         [styles.additionalStopSignGap]: isTranslationMode && hasIndoPakStopSign,
@@ -376,6 +377,7 @@ const QuranWord = ({
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
                 tooltipType={tooltipType || TooltipType.SUCCESS}
+                tooltipDelay={TOOLTIP_HOVER_DELAY_MS}
                 shouldContentBeClickable
                 onIconClick={handleOpenStudyMode}
                 iconAriaLabel={t('aria.open-study-mode')}

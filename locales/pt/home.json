@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "Alcance seus objetivos do Quran",
+  "apps": {
+    "description": "Aplicativos conectados para aprofundar seu crescimento no estudo do Alcorão.",
+    "featured-apps": "Aplicativos em destaque",
+    "qariah": {
+      "description": "Mulheres recitadoras do Alcorão",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com para Android",
+      "name": "Alcorão para Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com para iPhone",
+      "name": "Alcorão iOS"
+    },
+    "quran-space": {
+      "description": "Círculo de Estudos ao Vivo",
+      "name": "Espaço do Alcorão"
+    },
+    "quranreflect": {
+      "description": "Leia e compartilhe suas reflexões.",
+      "name": "Refletir sobre o Alcorão"
+    },
+    "see-more": "Veja mais",
+    "title": "Aplicativos do Alcorão"
+  },
   "begin": "Começar",
   "calendar-cta": "Calendário",
   "chapters-and-verses": "Capítulos e Versículos",
@@ -44,6 +70,7 @@
   "quran-in-year-cta": "Leitura desta semana",
   "quran-in-year-verse-title": "Um versículo da leitura desta semana.",
   "ramadan-activities-cta": "<link> Siga o <b> Calendário Qurânico Global </b> para leituras semanais, podcasts inspiradores e um chamado para refletir! </link>",
+  "ramadan-challenge": "Participe do Desafio do Ramadã",
   "ramadan": {
     "header": "Ferramentas para aprofundar sua conexão com o Quran",
     "title": "Pronto para o Ramadan?"

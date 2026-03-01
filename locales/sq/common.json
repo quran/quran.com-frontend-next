@@ -249,6 +249,7 @@
     "translation-font-size": "Madhësia e shkronjave të përkthimit"
   },
   "footer": {
+    "apps-disclaimer": "Çdo aplikacion është në pronësi dhe mirëmbahet në mënyrë të pavarur nga zhvilluesi i tij. Për mbështetje, raportime gabimesh ose kërkesa për veçori, ju lutemi kontaktoni drejtpërdrejt krijuesin e aplikacionit.",
     "description": "Quran.com është një platformë e besueshme e përdorur nga miliona njerëz në mbarë botën për të lexuar, kërkuar, dëgjuar dhe reflektuar mbi Kuranin në gjuhë të shumta. Ajo ofron përkthime, tefsir, recitime, përkthim fjalë për fjalë dhe mjete për studim më të thellë, duke e bërë Kuranin të arritshëm për të gjithë. <br/> <br/> Si një Sadaka Xhariyah, Quran.com është i përkushtuar për të ndihmuar njerëzit të lidhen thellë me Kuranin. I mbështetur nga <link> Quran.Foundation </link>, një organizatë jofitimprurëse 501(c)(3), Quran.com vazhdon të rritet si një burim falas dhe i vlefshëm për të gjithë, Elhamdulillah.",
     "hiring": "Ne po punësojmë! Bashkohuni me ekipin e QuranFoundation dhe kontribuoni në misionin tonë. <link> Apliko tani! </link>",
     "rights": "Të gjitha të drejtat e rezervuara",
@@ -367,6 +368,7 @@
   "profile": "Profili",
   "projects-desc": "Projektet jofitimprurëse të zotëruara, të menaxhuara ose të sponsorizuara nga <link>Quran.Foundation</link>",
   "q-reflect": "Kurani Reflekto",
+  "quran-apps": "Aplikacionet e Kuranit",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radio",
   "read": "Lexo",

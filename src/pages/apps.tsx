@@ -13,11 +13,13 @@ import styles from './apps-portal.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import useDebounce from '@/hooks/useDebounce';
+import GlobeIcon from '@/icons/globe.svg';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
-import { logButtonClick, logTextSearchQuery, logValueChange } from '@/utils/eventLogger';
+import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import { getBasePath } from '@/utils/url';
 
 interface AppLinks {
   androidHref?: string;
@@ -67,54 +69,71 @@ interface AppCtaLabels {
   webCtaText: string;
 }
 
-const VisitBadge: FC<{ label: string }> = ({ label }) => (
-  <svg
-    className={styles.storeBadgeImage}
-    width={96}
-    height={32}
-    viewBox="0 0 135 40"
-    aria-hidden="true"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect width="135" height="40" rx="5" fill="#000" />
-    <g transform="translate(8 7)">
-      <g transform="scale(1.1)">
-        <path
-          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-          stroke="#FFF"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M2 12H22"
-          stroke="#FFF"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z"
-          stroke="#FFF"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
-    </g>
-    <text
-      x="46"
-      y="20"
-      fill="#FFF"
-      fontSize="15"
-      fontFamily="inherit"
-      fontWeight="600"
-      dominantBaseline="middle"
-    >
-      {label}
-    </text>
-  </svg>
-);
+const VisitBadge: FC<{ label: string }> = ({ label }) => {
+  const { lang } = useTranslation('app-portal');
+
+  if (!lang.startsWith('ar')) {
+    return (
+      <svg
+        className={styles.storeBadgeImage}
+        width={96}
+        height={32}
+        viewBox="0 0 135 40"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect width="135" height="40" rx="5" fill="#000" />
+        <g transform="translate(8 7)">
+          <g transform="scale(1.1)">
+            <path
+              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+              stroke="#FFF"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M2 12H22"
+              stroke="#FFF"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z"
+              stroke="#FFF"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </g>
+        </g>
+        <text
+          x="46"
+          y="20"
+          fill="#FFF"
+          fontSize="15"
+          fontFamily="inherit"
+          fontWeight="600"
+          dominantBaseline="middle"
+        >
+          {label}
+        </text>
+      </svg>
+    );
+  }
+
+  return (
+    <span className={styles.visitBadge}>
+      <span className={styles.visitBadgeIcon} aria-hidden="true">
+        <GlobeIcon />
+      </span>
+      <span className={styles.visitBadgeText} dir="auto">
+        {label}
+      </span>
+    </span>
+  );
+};
 
 const DEBOUNCE_DELAY = 1000;
 
@@ -131,26 +150,63 @@ const getFeaturedApps = (t: (key: string) => string): FeaturedApp[] => [
     androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qariah.app',
   },
   {
-    id: 'quran-kareem',
-    name: t('featured.apps.quran-kareem.name'),
-    tagline: t('featured.apps.quran-kareem.tagline'),
-    description: t('featured.apps.quran-kareem.headline'),
-    iconSrc: '/images/app-portal/featured/quran_kareem-icon.png',
-    iconAlt: 'Quran Kareem app',
-    iosHref:
-      'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
+    id: 'quran-space',
+    name: t('featured.apps.quran-space.name'),
+    tagline: t('featured.apps.quran-space.tagline'),
+    description: t('featured.apps.quran-space.headline'),
+    iconSrc: '/images/app-portal/featured/quran-space-icon.png',
+    iconAlt: 'Quran Space',
+    webHref: 'https://quran.space/',
   },
   {
-    id: 'quran-link',
-    name: t('featured.apps.quran-link.name'),
-    tagline: t('featured.apps.quran-link.tagline'),
-    description: t('featured.apps.quran-link.headline'),
-    iconSrc: '/images/app-portal/featured/QuranLink-icon.png',
-    iconAlt: 'Quran Link app',
-    iosHref:
-      'https://apps.apple.com/us/app/quran-link-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1425763263',
-    androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qortoba.quran.link',
-    webHref: 'https://quran.link/',
+    id: 'quranreflect',
+    name: t('browse.apps.quranreflect.title'),
+    tagline: t('browse.apps.quranreflect.tagline'),
+    description: t('browse.apps.quranreflect.description'),
+    iconSrc: '/images/app-portal/icon_web_optimized.png',
+    iconAlt: 'QuranReflect',
+    webHref: 'https://quranreflect.com',
+    androidHref:
+      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
+    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
+  },
+];
+
+const getFeaturedAppTiles = (t: (key: string) => string): AppTile[] => [
+  {
+    id: 'qariah',
+    title: t('featured.apps.qariah.name'),
+    description: t('featured.apps.qariah.headline'),
+    tagline: t('featured.apps.qariah.tagline'),
+    iconSrc: '/images/app-portal/featured/qaariah-icon.webp',
+    iconAlt: 'Qariah – women Quran reciters app',
+    webHref: 'https://www.qariah.app/',
+    iosHref: 'https://apps.apple.com/us/app/qariah/id1594917787',
+    androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qariah.app',
+    categories: ['popular', 'quran-reader', 'study-tools'],
+  },
+  {
+    id: 'quran-space',
+    title: t('featured.apps.quran-space.name'),
+    description: t('featured.apps.quran-space.headline'),
+    tagline: t('featured.apps.quran-space.tagline'),
+    iconSrc: '/images/app-portal/featured/quran-space-icon.png',
+    iconAlt: 'Quran Space',
+    webHref: 'https://quran.space/',
+    categories: ['popular', 'quran-reader', 'study-tools'],
+  },
+  {
+    id: 'quranreflect',
+    title: t('browse.apps.quranreflect.title'),
+    description: t('browse.apps.quranreflect.description'),
+    tagline: t('browse.apps.quranreflect.tagline'),
+    iconSrc: '/images/app-portal/icon_web_optimized.png',
+    iconAlt: 'QuranReflect',
+    webHref: 'https://quranreflect.com',
+    androidHref:
+      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
+    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
+    categories: ['popular', 'reflections', 'study-tools'],
   },
 ];
 
@@ -187,17 +243,28 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     categories: ['quran-reader', 'community', 'popular', 'study-tools'],
   },
   {
-    id: 'quranreflect',
-    title: t('browse.apps.quranreflect.title'),
-    description: t('browse.apps.quranreflect.description'),
-    tagline: t('browse.apps.quranreflect.tagline'),
-    iconSrc: '/images/app-portal/icon_web_optimized.png',
-    iconAlt: 'QuranReflect',
-    webHref: 'https://quranreflect.com',
-    androidHref:
-      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
-    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
-    categories: ['reflections', 'community'],
+    id: 'quran-kareem',
+    title: t('featured.apps.quran-kareem.name'),
+    description: t('featured.apps.quran-kareem.headline'),
+    tagline: t('featured.apps.quran-kareem.tagline'),
+    iconSrc: '/images/app-portal/featured/quran_kareem-icon.png',
+    iconAlt: 'Quran Kareem app',
+    iosHref:
+      'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
+    categories: ['quran-reader', 'popular', 'reflections'],
+  },
+  {
+    id: 'quran-link',
+    title: t('featured.apps.quran-link.name'),
+    description: t('featured.apps.quran-link.headline'),
+    tagline: t('featured.apps.quran-link.tagline'),
+    iconSrc: '/images/app-portal/featured/QuranLink-icon.png',
+    iconAlt: 'Quran Link app',
+    iosHref:
+      'https://apps.apple.com/us/app/quran-link-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1425763263',
+    androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.qortoba.quran.link',
+    webHref: 'https://quran.link/',
+    categories: ['study-tools', 'quran-reader', 'popular'],
   },
   {
     id: 'sunnah',
@@ -275,6 +342,7 @@ interface BrowseAppsProps {
 }
 
 const path = '/apps';
+const OG_IMAGE_URL = `${getBasePath()}/images/app-portal/connected-quran-apps.png`;
 
 interface HeroProps {
   title: string;
@@ -291,33 +359,15 @@ const Hero: FC<HeroProps> = ({ title, description }) => (
 
 interface AppCtaRowProps extends AppLinks {
   appId: string;
-  appName: string;
   ctaLabels: AppCtaLabels;
-  eventName: string;
-  categories?: AppCategory[];
 }
 
-const AppCtaRow: FC<AppCtaRowProps> = ({
-  androidHref,
-  iosHref,
-  webHref,
-  appId,
-  appName,
-  ctaLabels,
-  eventName,
-  categories,
-}) => {
-  if (!androidHref && !iosHref && !webHref) {
-    return null;
-  }
+const AppCtaRow: FC<AppCtaRowProps> = ({ androidHref, iosHref, webHref, appId, ctaLabels }) => {
+  if (!androidHref && !iosHref && !webHref) return null;
 
   const handleClick = (platform: AppPlatform) => {
-    logButtonClick(eventName, {
-      appId,
-      appName,
-      platform,
-      ...(categories ? { categories } : {}),
-    });
+    const normalizedAppId = appId.replaceAll('-', '_');
+    logButtonClick(`app_portal_${normalizedAppId}_${platform}`);
   };
 
   return (
@@ -374,7 +424,10 @@ const AppCtaRow: FC<AppCtaRowProps> = ({
   );
 };
 
-const FeaturedCard: FC<{ app: FeaturedApp; ctaLabels: AppCtaLabels }> = ({ app, ctaLabels }) => (
+const FeaturedCard: FC<{
+  app: FeaturedApp;
+  ctaLabels: AppCtaLabels;
+}> = ({ app, ctaLabels }) => (
   <article className={styles.featuredCard}>
     <div className={styles.cardBody}>
       <div className={styles.appMeta}>
@@ -395,12 +448,10 @@ const FeaturedCard: FC<{ app: FeaturedApp; ctaLabels: AppCtaLabels }> = ({ app, 
       <p className={styles.appDescription}>{app.description}</p>
       <AppCtaRow
         appId={app.id}
-        appName={app.name}
         androidHref={app.androidHref}
         iosHref={app.iosHref}
         webHref={app.webHref}
         ctaLabels={ctaLabels}
-        eventName="app_portal_featured_app_cta"
       />
     </div>
   </article>
@@ -413,24 +464,33 @@ interface FeaturedAppsProps {
   ctaLabels: AppCtaLabels;
 }
 
-const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps, ctaLabels }) => (
-  <section className={styles.section}>
-    <div className={styles.sectionHeader}>
-      <h2 className={styles.sectionTitle}>{title}</h2>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <a className={styles.sectionLink} href="#browse-apps">
-        {viewAllText}
-      </a>
-    </div>
-    <div className={styles.featuredGrid}>
-      {apps.map((app) => (
-        <FeaturedCard key={app.id} app={app} ctaLabels={ctaLabels} />
-      ))}
-    </div>
-  </section>
-);
+const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps, ctaLabels }) => {
+  return (
+    <section className={styles.section}>
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.sectionTitle}>{title}</h2>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <a
+          className={styles.sectionLink}
+          href="#browse-apps"
+          onClick={() => logButtonClick('app_portal_featured_view_all')}
+        >
+          {viewAllText}
+        </a>
+      </div>
+      <div className={styles.featuredGrid}>
+        {apps.map((app) => (
+          <FeaturedCard key={app.id} app={app} ctaLabels={ctaLabels} />
+        ))}
+      </div>
+    </section>
+  );
+};
 
-const AppTileCard: FC<{ app: AppTile; ctaLabels: AppCtaLabels }> = ({ app, ctaLabels }) => (
+const AppTileCard: FC<{
+  app: AppTile;
+  ctaLabels: AppCtaLabels;
+}> = ({ app, ctaLabels }) => (
   <article className={styles.appCard}>
     <div className={styles.cardBody}>
       <div className={styles.appMeta}>
@@ -451,13 +511,10 @@ const AppTileCard: FC<{ app: AppTile; ctaLabels: AppCtaLabels }> = ({ app, ctaLa
       <p className={styles.appDescription}>{app.description}</p>
       <AppCtaRow
         appId={app.id}
-        appName={app.title}
         androidHref={app.androidHref}
         iosHref={app.iosHref}
         webHref={app.webHref}
         ctaLabels={ctaLabels}
-        eventName="app_portal_app_tile_cta"
-        categories={app.categories}
       />
     </div>
   </article>
@@ -546,13 +603,11 @@ const BrowseApps: FC<BrowseAppsProps> = ({
     });
   }, [activeFilter, searchQuery, apps]);
 
-  const handleFilterChange = useCallback(
-    (filter: FilterValue) => {
-      logValueChange('app_portal_filter', activeFilter, filter);
-      setActiveFilter(filter);
-    },
-    [activeFilter],
-  );
+  const handleFilterChange = useCallback((filter: FilterValue) => {
+    const normalizeFilter = filter?.toLowerCase().replaceAll('-', '_');
+    logButtonClick(`app_portal_${normalizeFilter}_tab`);
+    setActiveFilter(filter);
+  }, []);
 
   const handleSearchChange = useCallback((query: string) => {
     setSearchQuery(query);
@@ -579,22 +634,11 @@ const BrowseApps: FC<BrowseAppsProps> = ({
 };
 
 const AppPortalPage: NextPage = () => {
-  const { t: tApps, lang } = useTranslation('apps');
-  const { t: tAppPortal } = useTranslation('app-portal');
+  const { t, lang } = useTranslation('app-portal');
   const { t: tCommon } = useTranslation('common');
 
-  // Prefer apps namespace; fallback to app-portal because most strings still live there across locales.
-  // Keep both namespaces mapped for /apps in i18n.json until Lokalise migration completes.
-  const t = useCallback(
-    (key: string) => {
-      const value = tApps(key);
-      return value === key ? tAppPortal(key) : value;
-    },
-    [tApps, tAppPortal],
-  );
-
   const featuredApps = useMemo(() => getFeaturedApps(t), [t]);
-  const appTiles = useMemo(() => getAppTiles(t), [t]);
+  const appTiles = useMemo(() => [...getAppTiles(t), ...getFeaturedAppTiles(t)], [t]);
   const ctaLabels = useMemo(
     () => ({
       playStoreAlt: t('cta.google-play'),
@@ -611,6 +655,8 @@ const AppPortalPage: NextPage = () => {
       <NextSeoWrapper
         title={t('quran-apps-portal')}
         description={t('hero.description')}
+        image={OG_IMAGE_URL}
+        imageAlt={t('quran-apps-portal')}
         url={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
       />

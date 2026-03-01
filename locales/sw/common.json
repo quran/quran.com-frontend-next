@@ -249,6 +249,7 @@
     "translation-font-size": "Ukubwa wa fonti ya tarjuma"
   },
   "footer": {
+    "apps-disclaimer": "Kila programu inamilikiwa na kutunzwa kwa kujitegemea na msanidi programu wake. Kwa usaidizi, ripoti za hitilafu, au maombi ya vipengele, tafadhali wasiliana na muundaji wa programu moja kwa moja.",
     "description": "Quran.com ni jukwaa linaloaminika na linalotumiwa na mamilioni duniani kote kusoma, kutafuta, kusikiliza na kutafakari kuhusu Qur'ani katika lugha tofauti. Inatoa huduma za tarjuma, tafsiri, vikariri, tarjuma ya neno kwa neno, na zana za ufahamu wa kina, kuifanya Qur'ani ipatikane na kila mtu. <br/> <br/> Kama mbinu ya Sadaqah Jariyah, Quran.com imejitolea kusaidia watu kuunganishwa kwa kina na Qur'ani. Ikiungwa mkono na <link> Quran.Foundation </link>, shirika lisilo la faida la 501(c)(3), Quran.com inaendelea kukua kama rasilimali ya bila malipo na yenye thamani kwa wote, Alhamdulillah.",
     "hiring": "Tunaajiri! Jiunge na timu ya QuranFoundation na uchangie katika dhamira yetu. <link> Tuma ombi sasa! </link>",
     "rights": "Haki Zote Zimehifadhiwa",
@@ -367,6 +368,7 @@
   "profile": "Wasifu",
   "projects-desc": "Miradi isiyo ya faida inayomilikiwa, kusimamiwa, au kufadhiliwa na <link>Quran.Foundation</link>",
   "q-reflect": "Quranreflect",
+  "quran-apps": "Programu za Quran",
   "quran-com": "Quran.com",
   "quran-radio": "Redio ya Qur'ani",
   "read": "Soma",

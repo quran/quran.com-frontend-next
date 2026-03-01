@@ -249,6 +249,7 @@
     "translation-font-size": "Saiz fon terjemahan"
   },
   "footer": {
+    "apps-disclaimer": "Setiap aplikasi dimiliki dan diselenggara secara bebas oleh pembangunnya. Untuk sokongan, laporan pepijat atau permintaan ciri, sila hubungi pencipta aplikasi secara langsung.",
     "description": "Quran.com ialah platform dipercayai yang digunakan oleh berjuta-juta orang di seluruh dunia untuk membaca, mencari, mendengar dan merenung Al-Quran dalam pelbagai bahasa. Ia menyediakan terjemahan, tafsir, bacaan, terjemahan perkataan demi perkataan, dan alat untuk kajian yang lebih mendalam, menjadikan al-Quran boleh diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang ramai berhubung secara mendalam dengan al-Quran. Disokong oleh <link> Quran.Foundation </link>, sebuah organisasi bukan untung 501(c)(3), Quran.com terus berkembang sebagai sumber percuma dan berharga untuk semua, Alhamdulillah.",
     "hiring": "Kami ada jawatan kosong untuk di penuhi! Sertai pasukan QuranFoundation dan menyumbang kepada misi kami. <link> Mohon sekarang! </link>",
     "rights": "Hak cipta terpelihara",
@@ -367,6 +368,7 @@
   "profile": "Profil",
   "projects-desc": "Projek tanpa untung yang dimiliki, diurus atau ditaja oleh <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
+  "quran-apps": "Aplikasi Al-Quran",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
   "read": "Baca",

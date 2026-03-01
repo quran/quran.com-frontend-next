@@ -6,10 +6,12 @@ import SliceName from '@/redux/types/SliceName';
 
 export type FundraisingBannerState = {
   isHomepageBannerVisible: boolean;
+  isQuranReaderBannerVisible: boolean;
 };
 
 const initialState: FundraisingBannerState = {
   isHomepageBannerVisible: true,
+  isQuranReaderBannerVisible: true,
 };
 
 export const fundraisingBannerSlice = createSlice({
@@ -23,12 +25,23 @@ export const fundraisingBannerSlice = createSlice({
       ...state,
       isHomepageBannerVisible: action.payload,
     }),
+    setIsQuranReaderBannerVisible: (
+      state: FundraisingBannerState,
+      action: PayloadAction<boolean>,
+    ) => ({
+      ...state,
+      isQuranReaderBannerVisible: action.payload,
+    }),
   },
 });
 
-export const { setIsHomepageBannerVisible } = fundraisingBannerSlice.actions;
+export const { setIsHomepageBannerVisible, setIsQuranReaderBannerVisible } =
+  fundraisingBannerSlice.actions;
 
 export const selectIsHomepageBannerVisible = (state: RootState) =>
   state.fundraisingBanner.isHomepageBannerVisible;
+
+export const selectIsQuranReaderBannerVisible = (state: RootState) =>
+  state.fundraisingBanner.isQuranReaderBannerVisible;
 
 export default fundraisingBannerSlice.reducer;

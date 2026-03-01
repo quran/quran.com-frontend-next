@@ -31,6 +31,12 @@ $note_title_line_height: 1.5;
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-medium);
   line-height: $note_title_line_height;
+  text-decoration: none;
+
+  &[data-link='true']:hover {
+    text-decoration: underline;
+    text-underline-offset: var(--spacing-micro-px);
+  }
 }
 
 .noteDate {

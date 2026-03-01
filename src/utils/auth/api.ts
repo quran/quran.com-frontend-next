@@ -506,8 +506,15 @@ export const getCollectionsList = async (
   return privateFetcher(makeCollectionsUrl(queryParams));
 };
 
-export const updateCollection = async (collectionId: string, { name }) => {
-  return postRequest(makeUpdateCollectionUrl(collectionId), { name });
+export const updateCollection = async (
+  collectionId: string,
+  { name }: { name: string },
+): Promise<unknown> => {
+  // Some endpoints may return `200` with `{ success: false, ... }` on validation errors.
+  // Ensure callers get a rejected promise so `.catch`/try-catch paths run and optimistic updates roll back.
+  const response = await postRequest<unknown>(makeUpdateCollectionUrl(collectionId), { name });
+  throwIfResponseContainsError(response);
+  return response;
 };
 
 export const deleteCollection = async (collectionId: string) => {
@@ -722,7 +729,10 @@ export const getUserCoursesCount = async (): Promise<{ count: number }> =>
   privateFetcher(makeGetUserCoursesCountUrl());
 
 export const addCollection = async (collectionName: string): Promise<Collection> => {
-  return postRequest<Collection>(makeAddCollectionUrl(), { name: collectionName });
+  // Some endpoints may return `200` with `{ success: false, ... }` on validation errors.
+  const response = await postRequest<unknown>(makeAddCollectionUrl(), { name: collectionName });
+  throwIfResponseContainsError(response);
+  return response as Collection;
 };
 
 type QuestionTypes = {

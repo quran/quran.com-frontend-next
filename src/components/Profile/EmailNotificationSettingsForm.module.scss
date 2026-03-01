@@ -25,6 +25,10 @@
       border-radius: var(--border-radius-xsmall2-px);
       block-size: var(--spacing-medium2-px);
       inline-size: var(--spacing-medium2-px);
+
+      svg path {
+        stroke: var(--color-text-white);
+      }
     }
   }
 }

@@ -1,5 +1,31 @@
 {
   "achieve-quran-goals": "به اهداف قرآنی خود دست یابید",
+  "apps": {
+    "description": "برنامه‌های متصل برای رشد بیشتر شما با قرآن.",
+    "featured-apps": "برنامه‌های ویژه",
+    "qariah": {
+      "description": "بانوان قاری قرآن",
+      "name": "قریه"
+    },
+    "quran-android": {
+      "description": "Quran.com برای اندروید",
+      "name": "قرآن اندروید"
+    },
+    "quran-ios": {
+      "description": "Quran.com برای آیفون",
+      "name": "قرآن iOS"
+    },
+    "quran-space": {
+      "description": "حلقه مطالعه زنده",
+      "name": "فضای قرآنی"
+    },
+    "quranreflect": {
+      "description": "بازتاب‌ها را بخوانید و به اشتراک بگذارید",
+      "name": "قرآن بازتاب"
+    },
+    "see-more": "بیشتر ببینید",
+    "title": "اپلیکیشن‌های قرآن"
+  },
   "begin": "شروع کنید",
   "calendar-cta": "تقویم",
   "chapters-and-verses": "سوره ها و آیات",
@@ -44,6 +70,7 @@
   "quran-in-year-cta": "خواندن این هفته",
   "quran-in-year-verse-title": "آیه ای از تلاوت این هفته",
   "ramadan-activities-cta": "<link> برای خواندن هفتگی، پادکست های الهام بخش، و دعوت به تفکر، <b> تقویم جهانی قرآنی </b> را دنبال کنید! </link>",
+  "ramadan-challenge": "به چالش رمضان بپیوندید",
   "ramadan": {
     "header": "ابزاری برای تعمیق ارتباط با قرآن",
     "title": "برای ماه رمضان آماده اید؟"

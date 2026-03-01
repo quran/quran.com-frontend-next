@@ -72,7 +72,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
           <div className={styles.subSection} id="join-surah-mulk-challenge">
             <h1>Take the Meaningful Memorization Challenge This Ramadan</h1>
             <h2>30 days with Surah Al-Mulk. One ayah a day. A lifetime of impact.</h2>
-            <div>
+            <div className={styles.paragraph}>
               Join the challenge and end this Ramadan with a deep connection with Surah Al-Mulk.
               Through one ayah a day, you're guided to focus on just one verse at a time - receiving
               the word-by-word breakdown, tafsir insights you need to understand it, reflect on it,
@@ -112,15 +112,26 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
               Don't miss this great opportunity to transform your relationship with this powerful
               Surah.
             </h2>
+            <div className={styles.paragraph}>
+              💌 Please check your promotions or spam folder if you signed up and don’t see the
+              daily lesson in your email inbox.
+            </div>
+            <div>This Challenge is based on the content contained in our new Learning Plan:</div>
+            <Link
+              href="/learning-plans/30-transformative-days-with-surah-al-mulk-learn-reflect-memorize"
+              isNewTab
+            >
+              🌍 30 Transformative Days with Surah Al-Mulk: Learn, Reflect, Memorize
+            </Link>
           </div>
           <hr />
           <div className={styles.subSection} id="how-the-challenge-works">
             <h1>How the Challenge Works</h1>
-            <div>
+            <div className={styles.paragraph}>
               Each day of Ramadan, you'll receive an email with a short, focused lesson built around{' '}
               <span className={pageStyles.bold}>one ayah</span> from Surah Al-Mulk.
             </div>
-            <ul className={pageStyles.list}>
+            <ul className={classNames(pageStyles.list, styles.paragraph)}>
               <li>
                 <span className={pageStyles.bold}>Word-by-word</span> breakdown to understand the
                 meaning of the words
@@ -157,25 +168,12 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
           </div>
           <hr />
           <div className={styles.subSection}>
-            <h1>Sign up Today and Take the Challenge This Ramadan (Free)</h1>
-            <div>
-              Begin your journey with Surah Al-Mulk and receive{' '}
-              <span className={pageStyles.bold}>Day 1</span> as soon as the challenge begins (Day 1
-              of Ramadan).
-            </div>
-            <h2>Sign up today and share with your friends, family, and community:</h2>
-            <div className={styles.ctaContainer}>
-              <UnauthEnrollButton section="join_surah_mulk_challenge" />
-            </div>
-          </div>
-          <hr />
-          <div className={styles.subSection}>
             <h1>Don't Miss This Opportunity</h1>
-            <div>
+            <div className={styles.paragraph}>
               Ramadan arrives quickly and passes even faster. Many of us intend to slow down with
               the Quran, but without a clear path, the days slip by.
             </div>
-            <div>
+            <div className={styles.paragraph}>
               This challenge gives you a simple, meaningful way to stay connected to Surah Al-Mulk
               every day of Ramadan. One ayah. One focus. A connection that builds quietly and lasts
               beyond the month.

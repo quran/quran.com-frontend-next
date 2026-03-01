@@ -27,8 +27,8 @@
       },
       "quranreflect": {
         "caption": "Bagikan refleksi Anda",
-        "description": "Sebuah platform sosial untuk mendorong dan memfasilitasi refleksi Al-Quran - berbagi refleksi, mengeksplorasi topik, dan berinteraksi dengan komunitas.",
-        "tagline": "Berbagi refleksi dan tumbuh bersama.",
+        "description": "Sebuah platform sosial untuk menumbuhkan budaya refleksi atas Al-Quran.",
+        "tagline": "Baca & Bagikan Refleksi",
         "title": "QuranReflect"
       },
       "readtafsir": {
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Akhirnya, sebuah aplikasi Al-Quran untuk putri-putri kita!",
+        "headline": "Dengarkan lebih dari 60 wanita dari seluruh dunia membacakan Al-Quran dengan berbagai gaya bacaan!",
         "name": "Qariah",
         "tagline": "Pembaca Al-Quran wanita"
       },
@@ -82,15 +82,23 @@
         "headline": "Jelajahi 25+ tafsir dan 100+ terjemahan di satu tempat.",
         "name": "Tautan Al-Quran",
         "tagline": "Tafsir & pendamping belajar"
+      },
+      "quran-space": {
+        "headline": "Terhubunglah dengan guru, siswa, atau teman sebaya secara langsung melalui audio dan video untuk membaca, merenungkan, dan mempelajari Al-Quran bersama-sama.",
+        "name": "Ruang Al-Quran",
+        "tagline": "Ruang Pertemuan Al-Quran Langsung"
       }
     },
     "learn-more": "Pelajari selengkapnya",
     "title": "Aplikasi Unggulan",
     "view-all": "Lihat semua"
   },
+  "footer": {
+    "disclaimer": "Setiap aplikasi dimiliki dan dikelola secara independen oleh pengembangnya. Untuk dukungan, laporan bug, atau permintaan fitur, silakan hubungi pembuat aplikasi secara langsung."
+  },
   "hero": {
-    "description": "Jelajahi koleksi aplikasi Islami pilihan yang dibangun dengan Quran.foundation. Dari alat bantu belajar hingga perlengkapan sholat, temukan aplikasi yang meningkatkan perjalanan spiritual Anda.",
+    "description": "Jelajahi aplikasi unik yang didukung oleh konten terverifikasi dan fitur pengguna dari Quran Foundation, sementara akun, kemajuan, dan perjalanan Anda tetap terhubung.",
     "title": "Temukan Ekosistem Aplikasi Kami"
   },
-  "quran-apps-portal": "Portal Aplikasi Al-Quran"
+  "quran-apps-portal": "Aplikasi Al-Quran Terhubung"
 }

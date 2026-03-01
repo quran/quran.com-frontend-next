@@ -107,6 +107,9 @@
   gap: var(--spacing-xxsmall-px);
   margin-block-end: var(--spacing-medium-px);
   animation: slideDown var(--transition-moderate) ease-out;
+  span {
+    overflow-wrap: anywhere;
+  }
 }
 
 .headerContent {

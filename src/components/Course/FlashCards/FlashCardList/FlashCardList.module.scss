@@ -1,0 +1,160 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  --flashcard-list-mastered-button-size: 28px;
+  --flashcard-list-expand-icon-font-size: 0.625rem;
+  --flashcard-list-arabic-line-height: 1.4;
+  --flashcard-list-translation-line-height: 1.5;
+  --flashcard-list-hover-shadow: 0 var(--spacing-micro-px) var(--spacing-xsmall-px)
+    rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-medium);
+}
+
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+}
+
+.cardItem {
+  background-color: var(--color-background-elevated);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-rounded);
+  cursor: pointer;
+  transition: all var(--transition-moderate) ease;
+  overflow: hidden;
+
+  &:hover {
+    border-color: var(--color-primary-faded);
+    box-shadow: var(--flashcard-list-hover-shadow);
+  }
+
+  &.mastered {
+    background-color: var(--color-success-faded);
+    border-color: var(--color-success-medium);
+
+    .arabicText {
+      color: var(--color-success-medium);
+    }
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-small) var(--spacing-medium);
+  gap: var(--spacing-small);
+}
+
+.cardNumber {
+  inline-size: var(--spacing-medium3-px);
+  block-size: var(--spacing-medium3-px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-background-alternative-medium);
+  border-radius: var(--border-radius-circle);
+  font-size: var(--font-size-xsmall);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded);
+  flex-shrink: 0;
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-small);
+  flex-wrap: wrap;
+}
+
+.arabicText {
+  font-family: var(--font-family-kitab);
+  font-size: var(--font-size-large2);
+  line-height: var(--flashcard-list-arabic-line-height);
+  color: var(--color-text-default);
+  direction: rtl;
+  transition: color var(--transition-moderate) ease;
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xlarge);
+  }
+}
+
+.transliteration {
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
+  font-style: italic;
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+}
+
+.masteredButton {
+  inline-size: var(--flashcard-list-mastered-button-size);
+  block-size: var(--flashcard-list-mastered-button-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: var(--border-width-small-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-circle);
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
+  transition: all var(--transition-moderate) ease;
+
+  &:hover {
+    border-color: var(--color-success-medium);
+    color: var(--color-success-medium);
+  }
+
+  &.masteredActive {
+    background-color: var(--color-success-medium);
+    border-color: var(--color-success-medium);
+    color: var(--color-text-inverse);
+  }
+}
+
+.expandIcon {
+  font-size: var(--flashcard-list-expand-icon-font-size);
+  color: var(--color-text-faded);
+}
+
+.cardBody {
+  padding: var(--spacing-small) var(--spacing-medium);
+  padding-block-start: 0;
+  padding-inline-start: calc(
+    var(--spacing-medium3-px) + var(--spacing-medium) + var(--spacing-small)
+  );
+  animation: slideDown var(--transition-moderate) ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--spacing-small-px)));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.translation {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--flashcard-list-translation-line-height);
+}
+
+.translationLabel {
+  color: var(--color-text-faded);
+}
