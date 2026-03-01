@@ -4,7 +4,7 @@
 .container {
   @include donationTheme.donationCardThemeVars;
   --donation-card-cta-height: calc(var(--spacing-medium3-px) + var(--spacing-xxsmall-px));
-  --donation-close-icon-size: var(--spacing-small-px);
+  --donation-close-icon-size: var(--spacing-medium3-px);
 
   position: relative;
   display: flex;
@@ -36,6 +36,18 @@
   margin-block-end: 0;
   color: var(--donation-card-text);
   line-height: 1.4;
+}
+
+.learnMoreLink {
+  color: var(--color-text-inverse);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: var(--font-weight-medium);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--donation-card-cta-bg);
+  }
 }
 
 .actions {

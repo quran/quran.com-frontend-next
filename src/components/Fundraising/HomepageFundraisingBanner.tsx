@@ -17,7 +17,7 @@ import {
   setIsQuranReaderBannerVisible,
   setIsQuranReaderFloatingBannerVisible,
 } from '@/redux/slices/fundraisingBanner';
-import { makeDonatePageUrl } from '@/utils/apiPaths';
+import { makeDonateUrl, makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import { navigateToExternalUrl } from '@/utils/url';
 
@@ -100,6 +100,13 @@ const HomepageFundraisingBanner = ({
     }
   };
 
+  const onLearnMoreClicked = () => {
+    logButtonClick(`${resolvedAnalyticsSource}_learn_more`, {
+      layout,
+      ...analyticsParams,
+    });
+  };
+
   return (
     <div
       className={classNames(styles.container, {
@@ -109,7 +116,18 @@ const HomepageFundraisingBanner = ({
     >
       <div className={styles.content}>
         <h2 className={styles.title}>{t('fundraising-card-v2.title')}</h2>
-        <p className={styles.description}>{t('fundraising-card-v2.description')}</p>
+        <p className={styles.description}>
+          {t('fundraising.description')}{' '}
+          <a
+            href={makeDonateUrl()}
+            className={styles.learnMoreLink}
+            onClick={onLearnMoreClicked}
+            rel="noreferrer"
+            target="_blank"
+          >
+            {t('learn-more')}
+          </a>
+        </p>
         <div className={styles.actions}>
           <Button
             onClick={onDonateClicked}
