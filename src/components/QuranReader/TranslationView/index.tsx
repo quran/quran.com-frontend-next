@@ -19,6 +19,7 @@ import Spinner from '@/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
+import useReadingModeBannerVisibility from '@/hooks/useReadingModeBannerVisibility';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
@@ -30,7 +31,6 @@ type TranslationViewProps = {
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
   resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
-  isReadingModeQueryParamDifferent: boolean;
 };
 
 const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls'), {
@@ -45,11 +45,11 @@ const TranslationView = ({
   quranReaderDataType,
   initialData,
   resourceId,
-  isReadingModeQueryParamDifferent,
 }: TranslationViewProps) => {
   const [apiPageToVersesMap, setApiPageToVersesMap] = useState<Record<number, Verse[]>>({
     1: initialData.verses,
   });
+  const isReadingModeQueryParamDifferent = useReadingModeBannerVisibility();
   const {
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,

@@ -11,10 +11,7 @@ import TranslationPage from './TranslationPage';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
-import {
-  selectInlineDisplayWordByWordPreferences,
-  selectReadingPreference,
-} from '@/redux/slices/QuranReader/readingPreferences';
+import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { FALLBACK_FONT, ReadingPreference } from '@/types/QuranReader';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
@@ -27,6 +24,7 @@ type PageProps = {
   pageIndex: number;
   bookmarksRangeUrl: string | null;
   lang: string;
+  readingPreference: ReadingPreference;
 };
 
 const Page = ({
@@ -36,9 +34,8 @@ const Page = ({
   pageIndex,
   bookmarksRangeUrl,
   lang,
+  readingPreference,
 }: PageProps) => {
-  const readingPreference = useSelector(selectReadingPreference);
-
   const lines = useMemo(() => (verses?.length > 0 ? groupLinesByVerses(verses) : {}), [verses]);
   const { quranTextFontScale, quranFont, mushafLines } = quranReaderStyles;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(

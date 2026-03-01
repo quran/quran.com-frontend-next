@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import { markUserSwitchedReadingMode, resetUserSwitchFlag } from '@/hooks/readingModeSwitchTracker';
 import {
   selectReadingPreferences,
   setReadingPreference,
@@ -16,12 +17,6 @@ import { ReadingPreference } from 'types/QuranReader';
 
 // Threshold in pixels to consider the user "at the top" of the page
 const SCROLL_TOP_THRESHOLD = 100;
-
-// Module-level flag: set to true when the user switches reading mode via the UI.
-// Survives component remounts (unlike useRef) so QuranReader can reliably
-// distinguish user-initiated switches from shared-link loads.
-let userSwitchedReadingMode = false;
-export const didUserSwitchReadingMode = () => userSwitchedReadingMode;
 
 export enum SwitcherContext {
   SurahHeader = 'surah_header',
@@ -93,8 +88,8 @@ const useReadingPreferenceSwitcher = ({
       newQueryParams[QueryParam.READING_MODE] = newPreference;
 
       // Mark that the user initiated this switch so the QueryParamMessage
-      // banner is suppressed (it should only appear on shared links).
-      userSwitchedReadingMode = true;
+      // banner is suppressed while this mode switch is in-flight.
+      markUserSwitchedReadingMode(router.asPath);
 
       const newUrlObject = {
         pathname: router.pathname,
@@ -117,7 +112,9 @@ const useReadingPreferenceSwitcher = ({
       // Update URL with shallow routing (no page reload).
       // The useScrollToVirtualizedVerse hooks in ReadingView/TranslationView
       // handle scrolling to the correct position based on startingVerse.
-      router.replace(newUrlObject, null, { shallow: true, scroll: false });
+      router
+        .replace(newUrlObject, null, { shallow: true, scroll: false })
+        .finally(resetUserSwitchFlag);
     },
     [context, lastReadVerse, onSettingsChange, readingPreference, router],
   );

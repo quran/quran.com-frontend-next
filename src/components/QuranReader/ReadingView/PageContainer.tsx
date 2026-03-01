@@ -209,6 +209,7 @@ const PageContainer: React.FC<Props> = ({
       pageIndex={pageIndex}
       bookmarksRangeUrl={bookmarksRangeUrl}
       lang={lang}
+      readingPreference={readingPreference}
     />
   );
 };

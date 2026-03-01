@@ -15,7 +15,6 @@ import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import useGetMushaf from '@/hooks/useGetMushaf';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useIsMobile from '@/hooks/useIsMobile';
-import { didUserSwitchReadingMode } from '@/hooks/useReadingPreferenceSwitcher';
 import { selectIsExpanded } from '@/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
 import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
@@ -41,16 +40,8 @@ const QuranReader = ({
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  const {
-    value: readingPreference,
-    isQueryParamDifferent: isReadingModeQueryParamDifferent,
-  }: { value: ReadingPreference; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
-    QueryParam.READING_MODE,
-  );
-  // Only show the reading mode mismatch banner on shared links, never on
-  // user-initiated switches. The module-level flag in the switcher survives
-  // component remounts that reset useRef, which was causing the flash.
-  const showReadingModeBanner = isReadingModeQueryParamDifferent && !didUserSwitchReadingMode();
+  const { value: readingPreference }: { value: ReadingPreference; isQueryParamDifferent: boolean } =
+    useGetQueryParamOrReduxValue(QueryParam.READING_MODE);
   const isReadingPreference = isInReadingMode(readingPreference);
   const isMobile = useIsMobile();
   const isExpanded = useSelector(selectIsExpanded);
@@ -103,7 +94,6 @@ const QuranReader = ({
               initialData={initialData}
               quranReaderDataType={quranReaderDataType}
               resourceId={id}
-              isReadingModeQueryParamDifferent={showReadingModeBanner}
             />
           </VerseTrackerContextProvider>
         </div>

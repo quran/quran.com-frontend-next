@@ -21,7 +21,6 @@ interface Props {
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
   resourceId: number | string;
-  isReadingModeQueryParamDifferent: boolean;
 }
 
 const QuranReaderView: React.FC<Props> = ({
@@ -31,7 +30,6 @@ const QuranReaderView: React.FC<Props> = ({
   quranReaderDataType,
   initialData,
   resourceId,
-  isReadingModeQueryParamDifferent,
 }) => {
   useSyncReadingProgress({
     isReadingPreference,
@@ -46,7 +44,6 @@ const QuranReaderView: React.FC<Props> = ({
           initialData={initialData}
           resourceId={resourceId}
           readingPreference={readingPreference}
-          isReadingModeQueryParamDifferent={isReadingModeQueryParamDifferent}
         />
         <StudyModeContainer />
         <VerseActionModalContainer />
@@ -61,7 +58,6 @@ const QuranReaderView: React.FC<Props> = ({
         quranReaderDataType={quranReaderDataType}
         initialData={initialData}
         resourceId={resourceId}
-        isReadingModeQueryParamDifferent={isReadingModeQueryParamDifferent}
       />
       <StudyModeContainer />
       <VerseActionModalContainer />

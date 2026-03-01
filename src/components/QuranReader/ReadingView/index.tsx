@@ -26,6 +26,7 @@ import Spinner from '@/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
+import useReadingModeBannerVisibility from '@/hooks/useReadingModeBannerVisibility';
 import Error from '@/pages/_error';
 import { selectedLastReadPage } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
@@ -52,7 +53,6 @@ type ReadingViewProps = {
   initialData: VersesResponse;
   resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
   readingPreference: ReadingPreference;
-  isReadingModeQueryParamDifferent: boolean;
 };
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1200;
@@ -73,7 +73,6 @@ const ReadingView = ({
   initialData,
   resourceId,
   readingPreference,
-  isReadingModeQueryParamDifferent,
 }: ReadingViewProps) => {
   const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>(() =>
     getInitialMushafMap(initialData),
@@ -82,6 +81,7 @@ const ReadingView = ({
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const lastReadPageNumber = useSelector(selectedLastReadPage, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations);
+  const isReadingModeQueryParamDifferent = useReadingModeBannerVisibility();
 
   // Check if we should show empty state (in ReadingTranslation mode with no translations)
   const isTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;
@@ -222,7 +222,7 @@ const ReadingView = ({
             <ReadingModeActions />
           </div>
         )}
-        <EmptyTranslationMessage />
+        <EmptyTranslationMessage readingPreference={readingPreference} />
       </div>
     );
   }

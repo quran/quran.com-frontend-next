@@ -128,9 +128,7 @@ const QueryParamMessage: React.FC<Props> = ({
     }
 
     if (isReadingModeQueryParamDifferent) {
-      const nextReadingPreference = router.query[
-        QueryParam.READING_MODE
-      ] as string as ReadingPreference;
+      const nextReadingPreference = router.query[QueryParam.READING_MODE] as ReadingPreference;
       onSettingsChange(
         'readingPreference',
         nextReadingPreference,
