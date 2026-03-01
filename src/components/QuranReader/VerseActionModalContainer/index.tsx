@@ -89,8 +89,6 @@ const VerseActionModalContainer: React.FC = () => {
     previousModalType: null,
   });
 
-  const lastNotesCountRef = useRef<number>(0);
-
   const { data: notesCount } = useBatchedCountRangeNotes(isOpen && verseKey ? verseKey : null);
 
   const getRestoredVerse = useCallback(
@@ -191,12 +189,6 @@ const VerseActionModalContainer: React.FC = () => {
     previousModalType,
   ]);
 
-  useEffect(() => {
-    if (isOpen && typeof notesCount === 'number') {
-      lastNotesCountRef.current = notesCount;
-    }
-  }, [isOpen, notesCount]);
-
   const handleBackToStudyMode = useCallback(() => {
     dispatch(closeVerseActionModal());
 
@@ -260,7 +252,6 @@ const VerseActionModalContainer: React.FC = () => {
 
   if (!effectiveState.verseKey || !effectiveState.modalType) return null;
 
-  const count = isOpen ? notesCount ?? lastNotesCountRef.current : lastNotesCountRef.current;
   const isNotesModal =
     effectiveState.modalType === VerseActionModalType.ADD_NOTE ||
     effectiveState.modalType === VerseActionModalType.MY_NOTES ||
@@ -272,7 +263,7 @@ const VerseActionModalContainer: React.FC = () => {
         isOpen={isOpen}
         modalType={effectiveState.modalType}
         verseKey={effectiveState.verseKey}
-        notesCount={count}
+        notesCount={notesCount}
         editingNote={effectiveState.editingNote}
         wasOpenedFromStudyMode={effectiveState.wasOpenedFromStudyMode}
         previousModalType={effectiveState.previousModalType}
