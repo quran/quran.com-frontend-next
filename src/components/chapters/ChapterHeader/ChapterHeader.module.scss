@@ -63,6 +63,7 @@ $bismillahSvgInlineSizeMobile: 148px;
   grid-row: 1;
   grid-column: 1 / -1;
   display: flex;
+  justify-content: center;
   justify-content: safe center;
   align-items: center;
   inline-size: calc(100% + 2 * var(--chapter-header-breakout, var(--spacing-medium2-px)));
