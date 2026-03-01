@@ -7,9 +7,22 @@
 ); // fallback font's line-width
 
 .container {
-  border-block-end: 1px var(--color-borders-hairline) solid;
-  margin-block-end: var(--spacing-large-px);
+  // Avoid external margins on virtualized items; they can cause spacer/measurement
+  // drift when items are recycled and trigger visible scroll jumps.
+  padding-block-end: var(--spacing-large-px);
   max-inline-size: 100%;
+  position: relative;
+
+  // Keep the separator visually centered between pages while preserving
+  // margin-free virtualized item measurements.
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: calc(var(--spacing-large-px) / 1.25);
+    block-size: 1px;
+    background: var(--color-borders-hairline);
+  }
 }
 
 .linesContainer {
