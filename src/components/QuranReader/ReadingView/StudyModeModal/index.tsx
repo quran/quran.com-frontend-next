@@ -506,7 +506,7 @@ const StudyModeModal: React.FC<Props> = ({
     </div>
   );
 
-  if (!isOpen || !chaptersData) return null;
+  if (!chaptersData) return null;
 
   const handleRetry = () => {
     logButtonClick('study_mode_retry', { verseKey });

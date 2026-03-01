@@ -12,6 +12,7 @@ import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import ArrowIcon from '@/icons/arrow.svg';
 
 interface FeedbackModalProps {
+  isOpen: boolean;
   verseKey: string;
   wasOpenedFromStudyMode: boolean;
   onClose: () => void;
@@ -19,6 +20,7 @@ interface FeedbackModalProps {
 }
 
 const FeedbackModal: React.FC<FeedbackModalProps> = ({
+  isOpen,
   verseKey,
   wasOpenedFromStudyMode,
   onClose,
@@ -46,7 +48,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({
 
   return (
     <ContentModal
-      isOpen
+      isOpen={isOpen}
       header={header}
       hasCloseButton
       onClose={onClose}

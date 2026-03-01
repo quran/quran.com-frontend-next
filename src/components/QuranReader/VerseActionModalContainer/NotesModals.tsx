@@ -7,6 +7,7 @@ import { VerseActionModalType as ModalType } from '@/redux/slices/QuranReader/ve
 import { Note } from '@/types/auth/Note';
 
 interface NotesModalsProps {
+  isOpen: boolean;
   modalType: ModalType;
   verseKey: string;
   notesCount: number;
@@ -22,6 +23,7 @@ interface NotesModalsProps {
 }
 
 const NotesModals: React.FC<NotesModalsProps> = ({
+  isOpen,
   modalType,
   verseKey,
   notesCount,
@@ -51,7 +53,7 @@ const NotesModals: React.FC<NotesModalsProps> = ({
   return (
     <>
       <AddNoteModal
-        isModalOpen={modalType === ModalType.ADD_NOTE}
+        isModalOpen={isOpen && modalType === ModalType.ADD_NOTE}
         onModalClose={onClose}
         onMyNotes={getOnMyNotesHandler()}
         notesCount={notesCount}
@@ -59,7 +61,7 @@ const NotesModals: React.FC<NotesModalsProps> = ({
         onBack={getBackHandler()}
       />
       <MyNotesModal
-        isOpen={modalType === ModalType.MY_NOTES}
+        isOpen={isOpen && modalType === ModalType.MY_NOTES}
         onClose={onClose}
         notesCount={notesCount}
         onAddNote={onOpenAddNote}
@@ -68,7 +70,7 @@ const NotesModals: React.FC<NotesModalsProps> = ({
       />
       <EditNoteModal
         note={editingNote}
-        isModalOpen={modalType === ModalType.EDIT_NOTE}
+        isModalOpen={isOpen && modalType === ModalType.EDIT_NOTE}
         onModalClose={onClose}
         onMyNotes={onOpenMyNotes}
         onBack={onOpenMyNotes}

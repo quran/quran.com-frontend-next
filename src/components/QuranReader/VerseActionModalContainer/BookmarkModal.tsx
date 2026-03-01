@@ -6,6 +6,7 @@ import SaveBookmarkModal, {
 import Verse from '@/types/Verse';
 
 interface BookmarkModalProps {
+  isOpen: boolean;
   verse: Verse;
   wasOpenedFromStudyMode: boolean;
   onClose: () => void;
@@ -13,13 +14,14 @@ interface BookmarkModalProps {
 }
 
 const BookmarkModal: React.FC<BookmarkModalProps> = ({
+  isOpen,
   verse,
   wasOpenedFromStudyMode,
   onClose,
   onBack,
 }) => (
   <SaveBookmarkModal
-    isOpen
+    isOpen={isOpen}
     type={SaveBookmarkType.AYAH}
     verse={verse}
     onClose={onClose}

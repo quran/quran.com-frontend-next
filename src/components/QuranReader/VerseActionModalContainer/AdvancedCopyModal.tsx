@@ -15,6 +15,7 @@ import ArrowIcon from '@/icons/arrow.svg';
 import Verse from '@/types/Verse';
 
 interface AdvancedCopyModalProps {
+  isOpen: boolean;
   verse: Verse;
   wasOpenedFromStudyMode: boolean;
   onClose: () => void;
@@ -22,6 +23,7 @@ interface AdvancedCopyModalProps {
 }
 
 const AdvancedCopyModal: React.FC<AdvancedCopyModalProps> = ({
+  isOpen,
   verse,
   wasOpenedFromStudyMode,
   onClose,
@@ -49,7 +51,7 @@ const AdvancedCopyModal: React.FC<AdvancedCopyModalProps> = ({
 
   return (
     <ContentModal
-      isOpen
+      isOpen={isOpen}
       header={header}
       hasCloseButton
       onClose={onClose}

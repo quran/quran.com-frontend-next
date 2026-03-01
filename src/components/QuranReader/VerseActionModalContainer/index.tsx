@@ -33,9 +33,13 @@ import {
   selectVerseActionModalWasOpenedFromStudyMode,
   setEditingNote,
   setModalType,
+  type StudyModeRestoreState,
   VerseActionModalType,
 } from '@/redux/slices/QuranReader/verseActionModal';
-import { Note } from '@/types/auth/Note';
+import type { Note } from '@/types/auth/Note';
+import Language from '@/types/Language';
+import type { QiraatReader } from '@/types/Qiraat';
+import type Verse from '@/types/Verse';
 import { logEvent } from '@/utils/eventLogger';
 import {
   consumePendingBookmarkModalRestore,
@@ -43,11 +47,22 @@ import {
 } from '@/utils/pendingBookmarkModalRestore';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
+type LastOpenState = {
+  modalType: VerseActionModalType | null;
+  verseKey: string | null;
+  verse: Verse | null;
+  editingNote: Note | null;
+  isTranslationView: boolean;
+  wasOpenedFromStudyMode: boolean;
+  studyModeRestoreState: StudyModeRestoreState | null;
+  readerBioReader: QiraatReader | null;
+  previousModalType: VerseActionModalType | null;
+};
+
 const VerseActionModalContainer: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const hasClosedStudyModeRef = useRef(false);
-  // Use a reactive source of truth so restores can happen even if auth state flips after mount.
   const { isLoggedIn: isUserLoggedIn } = useIsLoggedIn();
 
   const isOpen = useSelector(selectVerseActionModalIsOpen);
@@ -62,13 +77,27 @@ const VerseActionModalContainer: React.FC = () => {
   const previousModalType = useSelector(selectVerseActionModalPreviousModalType);
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
 
+  const lastOpenStateRef = useRef<LastOpenState>({
+    modalType: null,
+    verseKey: null,
+    verse: null,
+    editingNote: null,
+    isTranslationView: false,
+    wasOpenedFromStudyMode: false,
+    studyModeRestoreState: null,
+    readerBioReader: null,
+    previousModalType: null,
+  });
+
+  const lastNotesCountRef = useRef<number>(0);
+
   const { data: notesCount } = useBatchedCountRangeNotes(isOpen && verseKey ? verseKey : null);
 
   const getRestoredVerse = useCallback(
     async (pendingVerseKey: string) => {
       try {
         const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(pendingVerseKey);
-        const response = await getChapterVerses(chapterId, router.locale || 'en', {
+        const response = await getChapterVerses(chapterId, router.locale || Language.EN, {
           page: verseNumber,
           perPage: 1,
         });
@@ -133,6 +162,41 @@ const VerseActionModalContainer: React.FC = () => {
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen || !verseKey || !modalType) {
+      return;
+    }
+
+    lastOpenStateRef.current = {
+      modalType,
+      verseKey,
+      verse,
+      editingNote,
+      isTranslationView,
+      wasOpenedFromStudyMode,
+      studyModeRestoreState,
+      readerBioReader,
+      previousModalType,
+    };
+  }, [
+    isOpen,
+    modalType,
+    verseKey,
+    verse,
+    editingNote,
+    isTranslationView,
+    wasOpenedFromStudyMode,
+    studyModeRestoreState,
+    readerBioReader,
+    previousModalType,
+  ]);
+
+  useEffect(() => {
+    if (isOpen && typeof notesCount === 'number') {
+      lastNotesCountRef.current = notesCount;
+    }
+  }, [isOpen, notesCount]);
+
   const handleBackToStudyMode = useCallback(() => {
     dispatch(closeVerseActionModal());
 
@@ -180,25 +244,38 @@ const VerseActionModalContainer: React.FC = () => {
     handleClose();
   }, [isTranslationView, handleClose]);
 
-  if (!isOpen || !verseKey) {
-    return null;
-  }
+  const effectiveState: LastOpenState = isOpen
+    ? {
+        modalType,
+        verseKey,
+        verse,
+        editingNote,
+        isTranslationView,
+        wasOpenedFromStudyMode,
+        studyModeRestoreState,
+        readerBioReader,
+        previousModalType,
+      }
+    : lastOpenStateRef.current;
 
-  const count = notesCount ?? 0;
+  if (!effectiveState.verseKey || !effectiveState.modalType) return null;
+
+  const count = isOpen ? notesCount ?? lastNotesCountRef.current : lastNotesCountRef.current;
   const isNotesModal =
-    modalType === VerseActionModalType.ADD_NOTE ||
-    modalType === VerseActionModalType.MY_NOTES ||
-    modalType === VerseActionModalType.EDIT_NOTE;
+    effectiveState.modalType === VerseActionModalType.ADD_NOTE ||
+    effectiveState.modalType === VerseActionModalType.MY_NOTES ||
+    effectiveState.modalType === VerseActionModalType.EDIT_NOTE;
 
   if (isNotesModal) {
     return (
       <NotesModals
-        modalType={modalType}
-        verseKey={verseKey}
+        isOpen={isOpen}
+        modalType={effectiveState.modalType}
+        verseKey={effectiveState.verseKey}
         notesCount={count}
-        editingNote={editingNote}
-        wasOpenedFromStudyMode={wasOpenedFromStudyMode}
-        previousModalType={previousModalType}
+        editingNote={effectiveState.editingNote}
+        wasOpenedFromStudyMode={effectiveState.wasOpenedFromStudyMode}
+        previousModalType={effectiveState.previousModalType}
         onClose={handleClose}
         onBack={handleBackToStudyMode}
         onBackToBookmark={handleBackToBookmark}
@@ -212,47 +289,53 @@ const VerseActionModalContainer: React.FC = () => {
     );
   }
 
-  if (modalType === VerseActionModalType.TRANSLATION_FEEDBACK) {
+  if (effectiveState.modalType === VerseActionModalType.TRANSLATION_FEEDBACK) {
     return (
       <FeedbackModal
-        verseKey={verseKey}
-        wasOpenedFromStudyMode={wasOpenedFromStudyMode}
+        isOpen={isOpen}
+        verseKey={effectiveState.verseKey}
+        wasOpenedFromStudyMode={effectiveState.wasOpenedFromStudyMode}
         onClose={handleFeedbackClose}
         onBack={handleBackToStudyMode}
       />
     );
   }
 
-  if (modalType === VerseActionModalType.SAVE_BOOKMARK && verse) {
+  if (effectiveState.modalType === VerseActionModalType.SAVE_BOOKMARK && effectiveState.verse) {
     return (
       <BookmarkModal
-        verse={verse}
-        wasOpenedFromStudyMode={wasOpenedFromStudyMode}
+        isOpen={isOpen}
+        verse={effectiveState.verse}
+        wasOpenedFromStudyMode={effectiveState.wasOpenedFromStudyMode}
         onClose={handleClose}
         onBack={handleBackToStudyMode}
       />
     );
   }
 
-  if (modalType === VerseActionModalType.ADVANCED_COPY && verse) {
+  if (effectiveState.modalType === VerseActionModalType.ADVANCED_COPY && effectiveState.verse) {
     return (
       <AdvancedCopyModal
-        verse={verse}
-        wasOpenedFromStudyMode={wasOpenedFromStudyMode}
+        isOpen={isOpen}
+        verse={effectiveState.verse}
+        wasOpenedFromStudyMode={effectiveState.wasOpenedFromStudyMode}
         onClose={handleAdvancedCopyClose}
         onBack={handleBackToStudyMode}
       />
     );
   }
 
-  if (modalType === VerseActionModalType.READER_BIO && readerBioReader) {
+  if (
+    effectiveState.modalType === VerseActionModalType.READER_BIO &&
+    effectiveState.readerBioReader
+  ) {
     return (
       <ReaderBioModal
-        reader={readerBioReader}
+        reader={effectiveState.readerBioReader}
         isOpen={isOpen}
         onClose={handleClose}
         onBack={handleBackToStudyMode}
-        wasOpenedFromStudyMode={wasOpenedFromStudyMode}
+        wasOpenedFromStudyMode={effectiveState.wasOpenedFromStudyMode}
       />
     );
   }
