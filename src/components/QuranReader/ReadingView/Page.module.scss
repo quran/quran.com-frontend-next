@@ -10,6 +10,10 @@
   // Avoid external margins on virtualized items; they can cause spacer/measurement
   // drift when items are recycled and trigger visible scroll jumps.
   padding-block-end: var(--spacing-large-px);
+  // Prevent end-of-list wide items (EndOfScrollingControls) from stretching
+  // nearby page containers in the virtualized range.
+  inline-size: fit-content;
+  margin-inline: auto;
   max-inline-size: 100%;
   position: relative;
 
