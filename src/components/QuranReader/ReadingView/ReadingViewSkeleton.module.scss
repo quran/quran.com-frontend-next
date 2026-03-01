@@ -4,7 +4,9 @@
 
 .skeletonContainer {
   // the page's bottom margin + the height of the page footer
-  margin-block-end: calc(var(--spacing-large-px) + var(--spacing-medium2-px));
+  // Keep spacing as internal padding (not margin) to stabilize virtualized
+  // item measurements while skeletons are mounted.
+  padding-block-end: calc(var(--spacing-large-px) + var(--spacing-medium2-px));
   inline-size: 100%;
 }
 
