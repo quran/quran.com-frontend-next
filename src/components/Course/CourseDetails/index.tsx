@@ -8,6 +8,7 @@ import styles from './CourseDetails.module.scss';
 import EditorsDetails from './Tabs/MainDetails/DetailSection/EditorsDetails';
 
 import RepeatLearningPlan from '@/components/Course/Buttons/RepeatLearningPlan';
+import ShareCourse from '@/components/Course/Buttons/ShareCourse';
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
 import ContentContainer from '@/components/Course/ContentContainer';
 import StatusHeader from '@/components/Course/CourseDetails/StatusHeader';
@@ -98,13 +99,17 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
           </div>
           {isCompleted ? (
             <div className={styles.completedActionsRow}>
+              <ShareCourse course={course} />
               <RepeatLearningPlan course={course} />
               {course?.userHasFeedback === false && (
                 <CourseFeedback course={course} source={FeedbackSource.CoursePage} />
               )}
             </div>
           ) : (
-            <StatusHeader course={course} />
+            <div className={styles.actionsRow}>
+              <ShareCourse course={course} />
+              <StatusHeader course={course} />
+            </div>
           )}
         </div>
 

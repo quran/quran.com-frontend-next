@@ -13,20 +13,17 @@
 .headerContainer {
   padding-block-end: var(--spacing-small);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-small-px);
   inline-size: 100%;
   order: 1;
 
   @include breakpoints.smallerThanTablet {
     order: 2;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: var(--spacing-small-px);
   }
 
   &.completedHeader {
-    flex-direction: column;
     align-items: flex-start;
     padding-block-end: 0;
 
@@ -52,6 +49,7 @@
 .titleRow {
   display: flex;
   align-items: center;
+  align-self: flex-start;
 }
 
 .titleRow .completedPill {
@@ -74,6 +72,32 @@
     align-self: flex-end;
     margin-block-start: 0;
     margin-block-end: var(--spacing-medium2-px);
+  }
+}
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  align-self: flex-end;
+}
+
+.completedActionsRow,
+.actionsRow {
+  @include breakpoints.smallerThanMobileM {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  button {
+    padding-inline: var(--spacing-xsmall-px);
+    border-radius: var(--border-radius-small-px);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+
+    @include breakpoints.smallerThanTablet {
+      font-size: var(--font-size-small);
+    }
   }
 }
 

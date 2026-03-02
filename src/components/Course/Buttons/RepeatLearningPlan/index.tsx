@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './RepeatLearningPlan.module.scss';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
+import useIsMobile from '@/hooks/useIsMobile';
 import { Course } from '@/types/auth/Course';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLessonNavigationUrl } from '@/utils/navigation';
@@ -17,6 +18,7 @@ type Props = {
 const RepeatLearningPlan: React.FC<Props> = ({ course }) => {
   const { t } = useTranslation('learn');
   const router = useRouter();
+  const isMobile = useIsMobile();
   const { id, slug, lessons } = course;
 
   const onRepeatClicked = () => {
@@ -27,7 +29,11 @@ const RepeatLearningPlan: React.FC<Props> = ({ course }) => {
   };
 
   return (
-    <Button size={ButtonSize.Small} className={styles.repeatButton} onClick={onRepeatClicked}>
+    <Button
+      size={isMobile ? ButtonSize.Small : ButtonSize.Medium}
+      className={styles.repeatButton}
+      onClick={onRepeatClicked}
+    >
       {t('repeat-learning-plan')}
     </Button>
   );
