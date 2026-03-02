@@ -38,19 +38,25 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   isInsideStudyMode = false,
 }) => {
   const { t } = useTranslation('common');
-
-  const onOpenModalChange = (open: boolean) => {
-    logEvent(
-      `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
-        open ? 'open' : 'close'
-      }`,
-    );
-  };
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const onOpenModalChange = React.useCallback(
+    (open: boolean) => {
+      if (open === isMenuOpen) return;
+      logEvent(
+        `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
+          open ? 'open' : 'close'
+        }`,
+      );
+      setIsMenuOpen(open);
+    },
+    [isMenuOpen, isTranslationView],
+  );
 
   return (
     <div className={styles.container}>
       <PopoverMenu
         contentClassName={classNames(cellStyles.menuOffset, cellStyles.overlayModal)}
+        isOpen={isMenuOpen}
         trigger={
           <Button
             size={ButtonSize.Small}
@@ -66,6 +72,8 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             shouldFlipOnRTL={false}
             ariaLabel={t('more')}
             data-testid="verse-actions-more"
+            onClick={() => onOpenModalChange(!isMenuOpen)}
+            onPointerDown={(event) => event.stopPropagation()}
           >
             <span className={cellStyles.icon}>
               <IconContainer

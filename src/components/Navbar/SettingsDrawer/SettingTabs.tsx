@@ -22,7 +22,7 @@ const SettingTabs = ({ activeTab = SettingsTab.Arabic, onTabChange }: SettingTab
   const tabs = [
     { id: SettingsTab.Arabic, label: t('quran-reader:arabic') },
     { id: SettingsTab.Translation, label: t('translation') },
-    { id: SettingsTab.More, label: t('common:wbw') },
+    { id: SettingsTab.WBW, label: t('common:wbw') },
   ];
 
   return (
@@ -46,7 +46,7 @@ const SettingTabs = ({ activeTab = SettingsTab.Arabic, onTabChange }: SettingTab
           <Tabs.Content className={styles.content} key={tab.id} value={tab.id}>
             {tab.id === SettingsTab.Arabic && <QuranFontSection />}
             {tab.id === SettingsTab.Translation && <TranslationSection />}
-            {tab.id === SettingsTab.More && <WordByWordSection />}
+            {tab.id === SettingsTab.WBW && <WordByWordSection />}
           </Tabs.Content>
         ))}
       </div>

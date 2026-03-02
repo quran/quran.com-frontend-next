@@ -65,6 +65,7 @@ const SidebarNavigation = () => {
       dispatch(setIsSidebarNavigationVisible(false));
     },
     isSidebarVisible && isMobile(),
+    true,
   );
 
   const navigationItems = [

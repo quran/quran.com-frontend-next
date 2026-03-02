@@ -271,7 +271,18 @@
     "verification-code": "Kodi i verifikimit"
   },
   "from": "Nga",
+  "fundraising-card-v2": {
+    "cta": "Dhuro tani",
+    "description": "Donatorët mujorë na ndihmojnë të përmirësojmë Quran.com dhe të mbështesim operacionet, kështu që ne përqendrohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
+    "title": "Bëhuni një Donator Mujor"
+  },
   "fundraising-share-title": "Share Quran.com Mbledhja e fondeve",
+  "fundraising-sticky-banner-v2": {
+    "cta": "Dhuro",
+    "desktop-text": "Kontribuoni në misionin tonë",
+    "mobile-line-one": "Është muaji i Kuranit.",
+    "mobile-line-two": "Na ndihmoni të përhapim dritën e saj."
+  },
   "fundraising-sticky-banner": {
     "cta": "Dhuroni",
     "title": "Jepni në ditët më të mira!"

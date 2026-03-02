@@ -22,6 +22,7 @@ import { logErrorToSentry } from '@/lib/sentry';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Language from '@/types/Language';
 import { LayeredTranslationGroup, LayeredTranslationToken } from '@/types/LayeredTranslation';
+import { logButtonClick } from '@/utils/eventLogger';
 import { findLanguageIdByLocale, getLanguageDataById } from '@/utils/locale';
 import Footnote from 'types/Footnote';
 
@@ -140,6 +141,57 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
       : selectedOption.expandedHtml;
   };
 
+  const handleTokenClick = useCallback(
+    (groupKey: string, isActive: boolean) => {
+      if (isActive) {
+        logButtonClick('study_mode_layers_group_token_close', { verseKey, groupKey });
+        setActiveGroupKey(null);
+      } else {
+        logButtonClick('study_mode_layers_group_token_open', { verseKey, groupKey });
+        setActiveGroupKey(groupKey);
+      }
+      setIsExplanationOpen(false);
+    },
+    [verseKey],
+  );
+
+  const handleOptionSelect = useCallback(
+    (groupKey: string, optionKey: string, options: LayeredTranslationGroup['options']) => {
+      const index = options.findIndex((o) => o.optionKey === optionKey);
+      logButtonClick('study_mode_layers_option_select', {
+        verseKey,
+        groupKey,
+        optionKey,
+        optionPosition: index >= 0 ? index : undefined,
+      });
+      setActiveGroupKey(null);
+      setIsExplanationOpen(false);
+      setSelectedOptionByGroup((prev) => ({ ...prev, [groupKey]: optionKey }));
+    },
+    [verseKey],
+  );
+
+  const handlePanelClose = useCallback(
+    (groupKey: string) => {
+      logButtonClick('study_mode_layers_panel_close', { verseKey, groupKey });
+      setActiveGroupKey(null);
+    },
+    [verseKey],
+  );
+
+  const handleExplanationToggle = useCallback(
+    (groupKey: string) => {
+      logButtonClick(
+        isExplanationOpen
+          ? 'study_mode_layers_explanation_collapse'
+          : 'study_mode_layers_explanation_expand',
+        { verseKey, groupKey },
+      );
+      setIsExplanationOpen((prev) => !prev);
+    },
+    [verseKey, isExplanationOpen],
+  );
+
   const onTextClicked = useCallback(
     async (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -157,9 +209,12 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
       setActiveFootnoteName(footnoteText);
 
       if (footnote && footnote.id === Number(footNoteId)) {
+        logButtonClick('study_mode_layers_footnote_close', { verseKey, footnoteId: footNoteId });
         resetFootnote();
         return;
       }
+
+      logButtonClick('study_mode_layers_footnote_open', { verseKey, footnoteId: footNoteId });
 
       setIsLoadingFootnote(true);
       try {
@@ -204,6 +259,7 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
         layerMode={layerMode}
         setLayerMode={setLayerMode}
         isExpandable={isExpandable}
+        verseKey={verseKey}
       />
 
       {data.resource.description && (
@@ -223,28 +279,12 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
 
           const isActive = activeGroupKey === group.groupKey;
 
-          const handleTokenClick = () => {
-            if (isActive) {
-              setActiveGroupKey(null);
-              setIsExplanationOpen(false);
-            } else {
-              setActiveGroupKey(group.groupKey);
-              setIsExplanationOpen(false);
-            }
-          };
-
-          const handleOptionSelect = (optionKey: string) => {
-            setActiveGroupKey(null);
-            setIsExplanationOpen(false);
-            setSelectedOptionByGroup((prev) => ({ ...prev, [group.groupKey]: optionKey }));
-          };
-
           return (
             <React.Fragment key={key}>
               <GroupToken
                 isActive={isActive}
                 selectedOptionHtml={getSelectedOptionHtml(group)}
-                onClick={handleTokenClick}
+                onClick={() => handleTokenClick(group.groupKey, isActive)}
               />
 
               {isActive && (
@@ -253,9 +293,11 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
                   layerMode={layerMode}
                   selectedOptionKey={selectedOptionByGroup[group.groupKey]}
                   isExplanationOpen={isExplanationOpen}
-                  onOptionSelect={handleOptionSelect}
-                  onClose={() => setActiveGroupKey(null)}
-                  onExplanationToggle={() => setIsExplanationOpen((prev) => !prev)}
+                  onOptionSelect={(optionKey) =>
+                    handleOptionSelect(group.groupKey, optionKey, group.options)
+                  }
+                  onClose={() => handlePanelClose(group.groupKey)}
+                  onExplanationToggle={() => handleExplanationToggle(group.groupKey)}
                   onTextClicked={onTextClicked}
                   panelRef={panelRef}
                 />
@@ -272,7 +314,15 @@ const StudyModeLayersTab: React.FC<StudyModeLayersTabProps> = ({
             footnoteText={footnote?.text}
             isLoading={isLoadingFootnote}
             direction={langData.direction}
-            onClose={resetFootnote}
+            onClose={() => {
+              if (footnote) {
+                logButtonClick('study_mode_layers_footnote_close', {
+                  verseKey,
+                  footnoteId: String(footnote.id),
+                });
+              }
+              resetFootnote();
+            }}
           />
         </div>
       )}

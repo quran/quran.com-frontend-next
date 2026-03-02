@@ -19,6 +19,7 @@ import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { makeChapterMetadataUrl } from '@/utils/apiPaths';
 import { getNextChapterNumber } from '@/utils/chapter';
+import EventName from '@/utils/event-names';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSurahNavigationUrl } from '@/utils/navigation';
 
@@ -53,7 +54,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
   const nextChapterId = getNextChapterNumber(chapterNumber, isReadingByRevelationOrder);
 
   const handleCtaClick = () => {
-    logButtonClick('end_of_surah_cta');
+    logButtonClick(EventName.QURAN_READER_END_OF_SURAH_CTA);
   };
 
   return (

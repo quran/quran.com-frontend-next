@@ -14,12 +14,22 @@ interface Props {
 }
 
 const LessonContent: React.FC<Props> = ({ lesson, lessonSlugOrId, courseSlug }) => {
-  const { lang } = useTranslation('learn');
+  const { lang, t } = useTranslation('learn');
+  const description = t(
+    'lesson-meta-description',
+    { day: lesson.day, courseTitle: lesson.course.title },
+    { default: 'Lesson {{day}} of "{{courseTitle}}"' },
+  );
+
   return (
     <>
       <NextSeoWrapper
         title={lesson.title}
+        description={description}
         url={getCanonicalUrl(lang, getLessonNavigationUrl(courseSlug, lessonSlugOrId))}
+        image={lesson.course.thumbnail}
+        imageWidth={1200}
+        imageHeight={1000}
       />
       <LessonView lesson={lesson} lessonSlugOrId={lessonSlugOrId} courseSlug={courseSlug} />
     </>

@@ -271,7 +271,18 @@
     "verification-code": "Código de Verificação"
   },
   "from": "A partir de",
+  "fundraising-card-v2": {
+    "cta": "Faça sua doação agora",
+    "description": "Doadores mensais nos ajudam a aprimorar o Quran.com e a manter nossas operações, para que possamos nos concentrar menos na arrecadação de fundos e mais em gerar impacto.",
+    "title": "Torne-se um doador mensal"
+  },
   "fundraising-share-title": "Compartilhe Quran.com Arrecadação de fundos",
+  "fundraising-sticky-banner-v2": {
+    "cta": "Doar",
+    "desktop-text": "Contribua para a nossa missão.",
+    "mobile-line-one": "É o mês do Alcorão.",
+    "mobile-line-two": "Ajude-nos a espalhar essa luz."
+  },
   "fundraising-sticky-banner": {
     "cta": "Doar",
     "title": "Dê nos melhores dias!"

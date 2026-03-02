@@ -271,7 +271,18 @@
     "verification-code": "যাচাইকরণ কোড"
   },
   "from": "থেকে",
+  "fundraising-card-v2": {
+    "cta": "এখনই দান করুন",
+    "description": "মাসিক দাতারা আমাদের Quran.com উন্নত করতে এবং কার্যক্রম পরিচালনা করতে সাহায্য করে, তাই আমরা তহবিল সংগ্রহের উপর কম এবং প্রভাব তৈরিতে বেশি মনোযোগ দিই।",
+    "title": "মাসিক দাতা হন"
+  },
   "fundraising-share-title": "Quran.com তহবিল সংগ্রহ শেয়ার করুন",
+  "fundraising-sticky-banner-v2": {
+    "cta": "দান করুন",
+    "desktop-text": "আমাদের লক্ষ্যে অবদান রাখুন",
+    "mobile-line-one": "এটা কুরআনের মাস।",
+    "mobile-line-two": "এর আলো ছড়িয়ে দিতে আমাদের সাহায্য করুন।"
+  },
   "fundraising-sticky-banner": {
     "cta": "দান করুন",
     "title": "সেরা দিন সময় দিন!"

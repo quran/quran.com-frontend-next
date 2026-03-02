@@ -9,6 +9,7 @@ import styles from './FundraisingBanner.module.scss';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 import DonateButtonType from '@/types/DonateButtonType';
 import LearnMoreClickSource from '@/types/LearnMoreClickSource';
+import { logButtonClick } from '@/utils/eventLogger';
 
 const FundraisingBanner = () => {
   const { t } = useTranslation('common');
@@ -21,8 +22,14 @@ const FundraisingBanner = () => {
           type={DonateButtonType.MONTHLY}
           source={DonateButtonClickSource.SIDEBAR_BANNER}
           shouldUseProviderUrl
+          onAdditionalClick={() => logButtonClick('navigation_drawer_fundraising_banner_donate')}
         />
-        <LearnMoreButton source={LearnMoreClickSource.SIDEBAR_BANNER} />
+        <LearnMoreButton
+          source={LearnMoreClickSource.SIDEBAR_BANNER}
+          onAdditionalClick={() =>
+            logButtonClick('navigation_drawer_fundraising_banner_learn_more')
+          }
+        />
       </div>
       <div className={styles.backgroundImageContainer}>
         <MoonIllustrationSVG />

@@ -574,11 +574,12 @@ export const audioPlayerMachine =
                     actions: [
                       'setAudioData',
                       'setAudioPlayerSource',
+                      'pauseAudio',
                       'setAudioPlayerCurrentTime',
                       'updateRepeatVerseTimings',
                     ],
                     description: 'The API call to get the selected chapter + Surah succeeded',
-                    target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PAUSED.LOADING',
+                    target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PAUSED.ACTIVE',
                   },
                 ],
                 onError: [

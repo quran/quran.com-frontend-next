@@ -107,3 +107,11 @@ div.selectArrow.selectArrow {
 .sectionContainer .inlineContentRow {
   margin-block-start: 0;
 }
+
+.sectionContainer .onClickRow {
+  margin-block-start: var(--spacing-xsmall);
+}
+
+.sectionContainer .onHoldHoverRow {
+  margin-block-start: 0;
+}

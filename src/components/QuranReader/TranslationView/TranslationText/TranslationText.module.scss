@@ -1,3 +1,4 @@
+@use 'src/styles/breakpoints';
 @use 'src/styles/utility';
 @use 'src/components/QuranReader/TranslationView/TranslationText/footnote';
 @use 'src/styles/theme';
@@ -59,6 +60,11 @@ $translation-line-height: 1.5;
 .referenceLink {
   color: var(--color-text-link);
   text-decoration: none;
+  font-size: var(--font-size-small-px);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+  }
 
   &:hover {
     opacity: var(--opacity-50);

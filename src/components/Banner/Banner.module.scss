@@ -1,32 +1,99 @@
+@use 'src/styles/breakpoints';
+@use 'src/components/Fundraising/styles/donationTheme';
+
 .container {
+  @include donationTheme.donationStripThemeVars;
   margin-block-start: 0;
   box-sizing: border-box;
-  block-size: var(--banner-height);
-  max-block-size: var(--banner-height);
-  background-color: var(--color-background-elevated-new);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: var(--spacing-small-px);
-
-  padding-inline: var(--spacing-small-px);
   padding-block: var(--spacing-xsmall-px);
 }
 
+.standalone {
+  block-size: var(--banner-height);
+  max-block-size: var(--banner-height);
+  inline-size: 100%;
+  padding-inline: var(--spacing-medium2-px);
+  background-image: linear-gradient(
+    270deg,
+    var(--donation-strip-gradient-start) 0%,
+    var(--donation-strip-gradient-end) 100%
+  );
+}
+
+.inlineChip {
+  block-size: var(--banner-inline-height);
+  max-block-size: var(--banner-inline-height);
+  background-color: var(--color-background-elevated-new);
+  inline-size: min(390px, calc(100vw - (2 * var(--spacing-medium2-px))));
+  padding-inline: var(--spacing-small-px);
+  justify-content: center;
+}
+
 .text {
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.2;
+}
+
+.standalone .text {
+  text-align: center;
+  color: var(--donation-strip-text);
+}
+
+.inlineChip .text {
   text-align: center;
   color: var(--color-text-default-new);
-  font-weight: var(--font-weight-semibold);
-  font-size: clamp(var(--font-size-xsmall-px), 2.5vw, var(--font-size-small-px));
+  font-size: var(--font-size-small-px);
+}
+
+.mobileLine {
+  display: block;
+}
+
+.mobileLineUnderlined {
+  text-decoration: underline;
+  text-underline-offset: var(--spacing-micro-px);
+}
+
+.desktopLine {
+  display: none;
+}
+
+@include breakpoints.tablet {
+  .standalone {
+    padding-inline: var(--spacing-small-px);
+  }
+
+  .mobileLine {
+    display: none;
+  }
+
+  .desktopLine {
+    display: block;
+  }
+}
+
+@include breakpoints.smallerThanTablet {
+  .standalone {
+    justify-content: space-between;
+  }
+
+  .standalone .text {
+    text-align: start;
+    flex: 1;
+  }
 }
 
 .cta {
   text-align: center;
   padding-inline: var(--spacing-xsmall-px);
   padding-block: var(--spacing-micro2-px);
-  background-color: var(--color-success-faded);
-  color: var(--color-text-link-new);
-  font-size: clamp(var(--font-size-xsmall-px), 2.5vw, var(--font-size-small-px));
+  font-size: var(--font-size-small-px);
+  line-height: var(--line-height-large);
   font-weight: var(--font-weight-medium);
   display: flex;
   justify-content: center;
@@ -34,8 +101,19 @@
   gap: var(--spacing-xxsmall-px);
   border-radius: var(--border-radius-medium-px);
   text-decoration: none;
+  white-space: nowrap;
+}
+
+.standaloneCta,
+.inlineChipCta {
+  background-color: var(--donation-strip-cta-bg);
+  color: var(--donation-strip-cta-fg);
 }
 
 .icon > svg path {
-  fill: var(--color-text-link-new);
+  fill: currentColor;
+}
+
+.icon > svg {
+  color: var(--donation-strip-cta-fg);
 }

@@ -249,7 +249,7 @@
     "translation-font-size": "Ukubwa wa fonti ya tarjuma"
   },
   "footer": {
-    "apps-disclaimer": "Kila programu inamilikiwa na kutunzwa kwa kujitegemea na msanidi programu wake. Kwa usaidizi, ripoti za hitilafu, au maombi ya vipengele, tafadhali wasiliana na muundaji wa programu moja kwa moja.",
+    "apps-disclaimer": "Kila programu inamilikiwa na kutunzwa na msanidi programu wake. Kwa usaidizi, ripoti za hitilafu, au maombi ya vipengele, tafadhali wasiliana na muundaji wa programu moja kwa moja.",
     "description": "Quran.com ni jukwaa linaloaminika na linalotumiwa na mamilioni duniani kote kusoma, kutafuta, kusikiliza na kutafakari kuhusu Qur'ani katika lugha tofauti. Inatoa huduma za tarjuma, tafsiri, vikariri, tarjuma ya neno kwa neno, na zana za ufahamu wa kina, kuifanya Qur'ani ipatikane na kila mtu. <br/> <br/> Kama mbinu ya Sadaqah Jariyah, Quran.com imejitolea kusaidia watu kuunganishwa kwa kina na Qur'ani. Ikiungwa mkono na <link> Quran.Foundation </link>, shirika lisilo la faida la 501(c)(3), Quran.com inaendelea kukua kama rasilimali ya bila malipo na yenye thamani kwa wote, Alhamdulillah.",
     "hiring": "Tunaajiri! Jiunge na timu ya QuranFoundation na uchangie katika dhamira yetu. <link> Tuma ombi sasa! </link>",
     "rights": "Haki Zote Zimehifadhiwa",
@@ -271,7 +271,18 @@
     "verification-code": "Nambari ya Uthibitishaji"
   },
   "from": "Kutoka",
+  "fundraising-card-v2": {
+    "cta": "Toa mchango sasa",
+    "description": "Wafadhili wa kila mwezi hutusaidia kuboresha Quran.com na kudumisha shughuli ili tusizingatie sana ukusanyaji wa fedha na zaidi kuunda athari.",
+    "title": "Kuwa Mfadhili wa Kila Mwezi"
+  },
   "fundraising-share-title": "Shiriki Uchangishaji wa Quran.com",
+  "fundraising-sticky-banner-v2": {
+    "cta": "Toa mchango",
+    "desktop-text": "Changia katika dhamira yetu",
+    "mobile-line-one": "Ni mwezi wa Quran.",
+    "mobile-line-two": "Tusaidie kueneza mwanga wake."
+  },
   "fundraising-sticky-banner": {
     "cta": "Changia",
     "title": "Toa wakati wa siku bora!"
@@ -368,7 +379,7 @@
   "profile": "Wasifu",
   "projects-desc": "Miradi isiyo ya faida inayomilikiwa, kusimamiwa, au kufadhiliwa na <link>Quran.Foundation</link>",
   "q-reflect": "Quranreflect",
-  "quran-apps": "Programu za Quran",
+  "quran-apps": "Programu za Qur'ani",
   "quran-com": "Quran.com",
   "quran-radio": "Redio ya Qur'ani",
   "read": "Soma",

@@ -271,7 +271,18 @@
     "verification-code": "Kod Pengesahan"
   },
   "from": "Dari",
+  "fundraising-card-v2": {
+    "cta": "Derma sekarang",
+    "description": "Penderma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mewujudkan impak.",
+    "title": "Jadilah Penderma Bulanan"
+  },
   "fundraising-share-title": "Kongsi Pengumpulan Dana Quran.com",
+  "fundraising-sticky-banner-v2": {
+    "cta": "Derma",
+    "desktop-text": "Menyumbang kepada misi kami",
+    "mobile-line-one": "Bulan Al-Quran lah.",
+    "mobile-line-two": "Bantu kami menyebarkan cahayanya."
+  },
   "fundraising-sticky-banner": {
     "cta": "Derma",
     "title": "Berikan pada hari-hari terbaik!"

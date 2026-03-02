@@ -1,0 +1,1 @@
+../../.agents/quran/skills/figma-node-spec.md

@@ -271,7 +271,18 @@
     "verification-code": "کد تایید"
   },
   "from": "از جانب",
+  "fundraising-card-v2": {
+    "cta": "همین حالا اهدا کنید",
+    "description": "کمک‌های مالی ماهانه به ما در بهبود Quran.com و تداوم عملیات کمک می‌کند تا کمتر بر جمع‌آوری کمک‌های مالی و بیشتر بر ایجاد تأثیرگذاری تمرکز کنیم.",
+    "title": "ماهانه اهدا کننده شوید"
+  },
   "fundraising-share-title": "قران دات کام را به اشتراک بگذارید",
+  "fundraising-sticky-banner-v2": {
+    "cta": "اهدا کنید",
+    "desktop-text": "در ماموریت ما مشارکت کنید",
+    "mobile-line-one": "ماه قرآن است.",
+    "mobile-line-two": "به ما در گسترش نور آن کمک کنید."
+  },
   "fundraising-sticky-banner": {
     "cta": "اهدا کنید",
     "title": "در بهترین روزها هدیه دهید!"

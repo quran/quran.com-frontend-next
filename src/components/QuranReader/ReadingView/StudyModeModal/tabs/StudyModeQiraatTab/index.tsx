@@ -153,7 +153,7 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
 
   if (isLoading) {
     return (
-      <div className={styles.container}>
+      <div className={classNames(styles.edgeToEdge, styles.container)}>
         <TafsirSkeleton />
       </div>
     );
@@ -161,7 +161,7 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
 
   if (error) {
     return (
-      <div className={classNames(styles.errorContainer, styles.container)}>
+      <div className={classNames(styles.edgeToEdge, styles.errorContainer, styles.container)}>
         <Error error={error} onRetryClicked={refetch} />
       </div>
     );

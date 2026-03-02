@@ -4,10 +4,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding-inline-start: var(--spacing-small-px);
-  @include breakpoints.smallerThanTablet {
-    padding-inline-start: 0;
-  }
 }
 
 // Collapsed view - shows chapter verse buttons

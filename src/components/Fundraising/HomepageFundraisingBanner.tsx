@@ -1,150 +1,158 @@
-import React, { useState } from 'react';
+import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './HomepageFundraisingBanner.module.scss';
 
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/components/dls/Button/Button';
-import { ModalSize } from '@/components/dls/Modal/Content';
-import Modal from '@/components/dls/Modal/Modal';
-import ShareButtons from '@/components/dls/ShareButtons';
-import Link, { LinkVariant } from '@/dls/Link/Link';
 import CloseIcon from '@/icons/close.svg';
 import DiamondIcon from '@/icons/diamond.svg';
 import {
   selectIsHomepageBannerVisible,
+  selectIsQuranReaderBannerVisible,
+  selectIsQuranReaderFloatingBannerVisible,
   setIsHomepageBannerVisible,
+  setIsQuranReaderBannerVisible,
+  setIsQuranReaderFloatingBannerVisible,
 } from '@/redux/slices/fundraisingBanner';
-import DonateButtonClickSource from '@/types/DonateButtonClickSource';
-import DonateButtonType from '@/types/DonateButtonType';
-import LearnMoreClickSource from '@/types/LearnMoreClickSource';
-import { makeDonatePageUrl, makeDonateUrl } from '@/utils/apiPaths';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { makeDonateUrl, makeDonatePageUrl } from '@/utils/apiPaths';
+import { logButtonClick } from '@/utils/eventLogger';
 import { navigateToExternalUrl } from '@/utils/url';
+
+export enum FundraisingBannerContext {
+  Homepage = 'homepage',
+  QuranReader = 'quranReader',
+}
+
+export enum FundraisingBannerLayout {
+  Inline = 'inline',
+  Floating = 'floating',
+}
 
 interface HomepageFundraisingBannerProps {
   /**
-   * Whether the banner can be dismissed by the user
-   * When false, the banner will always be shown and cannot be closed
-   * When true, the banner visibility is controlled by Redux state
+   * Whether the banner can be dismissed by the user.
    * @default true
    */
   isDismissible?: boolean;
+  /** Which Redux state to use for visibility/dismiss. Defaults to Homepage. */
+  context?: FundraisingBannerContext;
+  /** Prefix used for analytics event names. Defaults to context-based value. */
+  analyticsSource?: string;
+  /** Extra params attached to every analytics event fired by this banner. */
+  analyticsParams?: Record<string, any>;
+  /** Render mode for homepage in-flow card vs reader floating card. */
+  layout?: FundraisingBannerLayout;
 }
 
-const HomepageFundraisingBanner = ({ isDismissible = true }: HomepageFundraisingBannerProps) => {
+const HomepageFundraisingBanner = ({
+  isDismissible = true,
+  context = FundraisingBannerContext.Homepage,
+  analyticsSource,
+  analyticsParams,
+  layout = FundraisingBannerLayout.Inline,
+}: HomepageFundraisingBannerProps) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const isVisible = useSelector(selectIsHomepageBannerVisible);
-  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const isHomepageVisible = useSelector(selectIsHomepageBannerVisible);
+  const isQuranReaderVisible = useSelector(selectIsQuranReaderBannerVisible);
+  const isQuranReaderFloatingVisible = useSelector(selectIsQuranReaderFloatingBannerVisible);
+  const isFloatingReaderBanner =
+    context === FundraisingBannerContext.QuranReader && layout === FundraisingBannerLayout.Floating;
 
-  // If dismissible and not visible in Redux state, don't render
+  const isVisible = (() => {
+    if (context !== FundraisingBannerContext.QuranReader) return isHomepageVisible;
+    return isFloatingReaderBanner ? isQuranReaderFloatingVisible : isQuranReaderVisible;
+  })();
+
   if (isDismissible && !isVisible) {
     return null;
   }
 
+  const resolvedAnalyticsSource =
+    analyticsSource ??
+    (context === FundraisingBannerContext.QuranReader
+      ? 'quran_reader_floating_banner'
+      : 'homepage_donation_section');
+
   const onDonateClicked = () => {
-    const href = makeDonatePageUrl(false, true); // Monthly donation with provider URL
-    logEvent('donate_button_clicked', {
-      source: `${DonateButtonClickSource.BANNER}_${DonateButtonType.MONTHLY}`,
+    const href = makeDonatePageUrl(false, true);
+    logButtonClick(`${resolvedAnalyticsSource}_donate`, {
+      layout,
+      ...analyticsParams,
     });
     navigateToExternalUrl(href);
   };
 
-  const onShareClicked = () => {
-    logButtonClick('fundraising_banner_share_button_clicked');
-    setIsShareModalOpen(true);
-  };
-
-  const onCloseShareModal = () => {
-    setIsShareModalOpen(false);
+  const onCloseClicked = () => {
+    logButtonClick(`${resolvedAnalyticsSource}_dismissed`, {
+      layout,
+      ...analyticsParams,
+    });
+    if (isFloatingReaderBanner) {
+      dispatch(setIsQuranReaderFloatingBannerVisible(false));
+    } else if (context === FundraisingBannerContext.QuranReader) {
+      dispatch(setIsQuranReaderBannerVisible(false));
+    } else {
+      dispatch(setIsHomepageBannerVisible(false));
+    }
   };
 
   const onLearnMoreClicked = () => {
-    logEvent('learn_more_button_clicked', {
-      source: LearnMoreClickSource.SIDEBAR_BANNER,
+    logButtonClick(`${resolvedAnalyticsSource}_learn_more`, {
+      layout,
+      ...analyticsParams,
     });
   };
-
-  const onCloseClicked = () => {
-    logEvent('fundraising_banner_closed', {
-      source: 'homepage_banner',
-    });
-    dispatch(setIsHomepageBannerVisible(false));
-  };
-
-  const shareURL = makeDonateUrl();
-  const shareTitle = t('fundraising.title');
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <h2 className={styles.title}>{t('fundraising.title')}</h2>
-          <div className={styles.description}>
-            <span>{`${t('fundraising.description')} `}</span>
-            <Link
-              href={makeDonateUrl()}
-              onClick={onLearnMoreClicked}
-              variant={LinkVariant.Highlight}
-              isNewTab
-              className={styles.learnMoreLink}
-            >
-              {t('learn-more')}
-            </Link>
-          </div>
-          <div className={styles.actions}>
-            <Button
-              onClick={onShareClicked}
-              type={ButtonType.Primary}
-              size={ButtonSize.Small}
-              variant={ButtonVariant.Simplified}
-              className={styles.shareButton}
-            >
-              {t('share')}
-            </Button>
-            <div className={styles.rightActions}>
-              <Button
-                onClick={onDonateClicked}
-                type={ButtonType.Primary}
-                size={ButtonSize.Small}
-                variant={ButtonVariant.Simplified}
-                className={styles.donateButton}
-              >
-                <DiamondIcon />
-                {t('donate-now')}
-              </Button>
-            </div>
-          </div>
-        </div>
-        {isDismissible && (
-          <button
-            onClick={onCloseClicked}
-            aria-label={t('close')}
-            className={styles.closeButton}
-            type="button"
+    <div
+      className={classNames(styles.container, {
+        [styles.inline]: layout === FundraisingBannerLayout.Inline,
+        [styles.floating]: layout === FundraisingBannerLayout.Floating,
+      })}
+    >
+      <div className={styles.content}>
+        <h2 className={styles.title}>{t('fundraising-card-v2.title')}</h2>
+        <p className={styles.description}>
+          {t('fundraising.description')}{' '}
+          <a
+            href={makeDonateUrl()}
+            className={styles.learnMoreLink}
+            onClick={onLearnMoreClicked}
+            rel="noreferrer"
+            target="_blank"
           >
-            <CloseIcon />
-          </button>
-        )}
+            {t('learn-more')}
+          </a>
+        </p>
+        <div className={styles.actions}>
+          <Button
+            onClick={onDonateClicked}
+            type={ButtonType.Primary}
+            size={ButtonSize.Small}
+            variant={ButtonVariant.Simplified}
+            className={styles.donateButton}
+          >
+            <DiamondIcon />
+            <span className={styles.fundraisingCard}>{t('fundraising-card-v2.cta')}</span>
+          </Button>
+        </div>
       </div>
 
-      <Modal isOpen={isShareModalOpen} onClickOutside={onCloseShareModal} size={ModalSize.MEDIUM}>
-        <Modal.Body>
-          <button
-            onClick={onCloseShareModal}
-            type="button"
-            aria-label={t('close')}
-            className={styles.modalCloseButton}
-          >
-            <CloseIcon />
-          </button>
-          <Modal.Title>{t('fundraising-share-title')}</Modal.Title>
-          <ShareButtons url={shareURL} title={shareTitle} analyticsContext="fundraising_banner" />
-        </Modal.Body>
-      </Modal>
-    </>
+      {isDismissible && (
+        <button
+          onClick={onCloseClicked}
+          aria-label={t('close')}
+          className={styles.closeButton}
+          type="button"
+        >
+          <CloseIcon />
+        </button>
+      )}
+    </div>
   );
 };
 

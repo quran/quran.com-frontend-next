@@ -1,0 +1,91 @@
+.container {
+  --lesson-html-flashcard-subtitle-font-size: 0.8125rem;
+  --lesson-html-widget-skeleton-size: 200px;
+  --lesson-html-widget-translation-font-size: 22px;
+}
+
+.flashcardSection {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-default);
+  border-radius: var(--border-radius-rounded);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  overflow: hidden;
+  margin-block: var(--spacing-medium);
+}
+
+.flashcardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-small);
+  padding: var(--spacing-medium);
+  background-color: var(--color-background-alternative-faint);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+}
+
+.flashcardHeaderText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-micro);
+}
+
+.flashcardTitle {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  margin: 0;
+}
+
+.flashcardSubtitle {
+  font-size: var(--lesson-html-flashcard-subtitle-font-size);
+  color: var(--color-text-faded);
+}
+
+.flashcardHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+}
+
+.flashcardProgress {
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
+}
+
+.flashcardHeaderButton {
+  padding: var(--spacing-xxsmall) var(--spacing-small);
+  font-size: var(--font-size-xsmall);
+  color: var(--color-text-faded);
+  background: none;
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  cursor: pointer;
+  transition: all var(--transition-moderate) ease;
+
+  &:hover {
+    background-color: var(--color-background-alternative-medium);
+    color: var(--color-text-default);
+  }
+}
+
+.widgetSkeleton {
+  display: block;
+  block-size: var(--lesson-html-widget-skeleton-size);
+  margin-block: var(--spacing-medium);
+  border-radius: var(--border-radius-default);
+}
+
+.container :global(.quran-widget) {
+  margin-block: var(--spacing-medium);
+
+  :global([class*='translation-font-size-']),
+  :global([class*='translation-font-size-']) p {
+    font-size: var(--lesson-html-widget-translation-font-size) !important;
+  }
+
+  :global([class*='translationName']) {
+    font-size: var(--font-size-small-px) !important;
+  }
+}

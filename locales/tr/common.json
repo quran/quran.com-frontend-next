@@ -271,7 +271,18 @@
     "verification-code": "Doğrulama Kodu"
   },
   "from": "İtibaren",
+  "fundraising-card-v2": {
+    "cta": "Şimdi bağış yapın",
+    "description": "Aylık bağışçılar, Quran.com'u geliştirmemize ve faaliyetlerimizi sürdürmemize yardımcı oluyor; böylece fon toplamaya daha az, etki yaratmaya daha çok odaklanabiliyoruz.",
+    "title": "Aylık Bağışçı Olun"
+  },
   "fundraising-share-title": "Quran.com bağış kampanyası'nı paylaşın",
+  "fundraising-sticky-banner-v2": {
+    "cta": "Bağış yapmak",
+    "desktop-text": "Misyonumuza katkıda bulunun",
+    "mobile-line-one": "Bu ay Kur'an ayıdır.",
+    "mobile-line-two": "Işığını yaymamıza yardımcı olun."
+  },
   "fundraising-sticky-banner": {
     "cta": "Bağış yapmak",
     "title": "En makbul günlerde ver!"
