@@ -1,0 +1,55 @@
+@use 'src/styles/breakpoints';
+
+.shareButton {
+  background-color: var(--color-background-alternative-faint-new);
+  color: var(--color-text-default-new);
+  border-color: var(--color-background-alternative-faint-new);
+
+  svg {
+    color: var(--color-text-default-new);
+  }
+
+  &:hover {
+    background-color: var(--color-background-alternative-faint-new);
+    color: var(--color-text-default-new);
+    opacity: var(--opacity-85);
+  }
+}
+
+.shareIcon {
+  display: flex;
+  align-items: center;
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: calc(var(--spacing-small-plus-px) * 2);
+    block-size: calc(var(--spacing-small-plus-px) * 2);
+  }
+
+  svg {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  inset-block-start: var(--spacing-medium);
+  inset-inline-end: var(--spacing-medium);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-default);
+  inline-size: var(--spacing-medium3-px);
+  block-size: var(--spacing-medium3-px);
+
+  svg {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+}
