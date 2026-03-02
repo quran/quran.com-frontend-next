@@ -137,7 +137,7 @@ const HomepageFundraisingBanner = ({
             className={styles.donateButton}
           >
             <DiamondIcon />
-            {t('fundraising-card-v2.cta')}
+            <span className={styles.fundraisingCard}>{t('fundraising-card-v2.cta')}</span>
           </Button>
         </div>
       </div>

@@ -56,6 +56,10 @@
   inline-size: 100%;
 }
 
+.actions .fundraisingCard {
+  margin-inline-start: var(--spacing-small-px);
+}
+
 .actions .donateButton {
   inline-size: 100%;
   --button-size: var(--donation-card-cta-height);
