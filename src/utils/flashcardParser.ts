@@ -27,7 +27,7 @@ export default function parseFlashcardsFromHtml(html: string): {
 
   const afterHeadingContent = html.slice(headingEndIndex);
   const nextSectionMatch = afterHeadingContent.match(
-    /<h[1-6][^>]*>|<hr\b[^>]*\/?>|<blockquote\b[^>]*>|<ul\b[^>]*>|<ol\b[^>]*>|<div\b[^>]*>|<p(?![^>]*\bdir=["'](?:rtl|ltr)["'])[^>]*>/i,
+    /<h[1-6][^>]*>|<hr\b[^>]*\/?>|<blockquote\b[^>]*>|<ul\b[^>]*>|<ol\b[^>]*>|<div\b[^>]*>|<p[^>]*>(?!\s*<strong\b)/i,
   );
   const splitAt = nextSectionMatch?.index ?? afterHeadingContent.length;
   const wordByWordHtml = afterHeadingContent.slice(0, splitAt);
@@ -41,7 +41,7 @@ export default function parseFlashcardsFromHtml(html: string): {
 
 function extractFlashcardsFromSection(html: string): FlashCardData[] {
   const flashcards: FlashCardData[] = [];
-  const paragraphRegex = /<p[^>]*dir=["'](?:rtl|ltr)["'][^>]*>([\s\S]*?)<\/p>/gi;
+  const paragraphRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
   let match: RegExpExecArray | null;
 
   // eslint-disable-next-line no-cond-assign

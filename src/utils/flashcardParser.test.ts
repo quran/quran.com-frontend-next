@@ -5,12 +5,15 @@ import parseFlashcardsFromHtml from './flashcardParser';
 import { FlashCardVariant } from '@/components/Course/FlashCards/types';
 
 const WORD_HTML = `<p dir="rtl"><strong>ٱلَّذِى</strong>(<em>alladhī</em>) - The One Who</p>`;
+const WORD_HTML_NO_DIR = `<p><strong>ٱلَّذِى</strong>(<em>alladhī</em>) - The One Who</p>`;
 const WORD_HTML_NO_TRANSLITERATION = `<p dir="rtl"><strong>خَلَقَ</strong> - created</p>`;
 const WORD_HTML_EM_DASH = `<p dir="rtl"><strong>رَحْمَة</strong>(<em>raḥmah</em>) — mercy</p>`;
 const WORD_HTML_NBSP = `<p dir="rtl"><strong>ٱلَّذِى</strong>(<em>alladhī</em>)&nbsp;-&nbsp;The One Who</p>`;
 
 const makeSection = (headingAttrs = '', title = 'Word-by-word breakdown') =>
   `<h3${headingAttrs}>${title}</h3>${WORD_HTML}`;
+const makeSectionWithoutDir = (headingAttrs = '', title = 'Word-by-word breakdown') =>
+  `<h3${headingAttrs}>${title}</h3>${WORD_HTML_NO_DIR}`;
 const makeSectionWithoutTransliteration = (headingAttrs = '', title = 'Word-by-word breakdown') =>
   `<h3${headingAttrs}>${title}</h3>${WORD_HTML_NO_TRANSLITERATION}`;
 const makeSectionWithEmDash = (headingAttrs = '', title = 'Word-by-word breakdown') =>
@@ -83,6 +86,14 @@ describe('flashcardParser', () => {
 
     it('parses arabic, transliteration and translation', () => {
       const result = parseFlashcardsFromHtml(makeSection());
+      const card = result?.flashcards[0];
+      expect(card?.arabic).toBe('ٱلَّذِى');
+      expect(card?.transliteration).toBe('alladhī');
+      expect(card?.translation).toBe('The One Who');
+    });
+
+    it('parses word rows even when paragraph dir is missing', () => {
+      const result = parseFlashcardsFromHtml(makeSectionWithoutDir());
       const card = result?.flashcards[0];
       expect(card?.arabic).toBe('ٱلَّذِى');
       expect(card?.transliteration).toBe('alladhī');
