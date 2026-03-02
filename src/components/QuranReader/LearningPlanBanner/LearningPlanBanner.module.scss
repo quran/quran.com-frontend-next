@@ -41,23 +41,14 @@
   @include breakpoints.smallerThanTablet {
     inline-size: 100vw;
     margin-inline: calc(50% - 50vw);
-    aspect-ratio: 9 / 3;
   }
 }
 
 .imageWrap {
   img {
     inline-size: 100%;
-    block-size: 100%;
+    block-size: auto;
     max-inline-size: 1230px;
-  }
-
-  @include breakpoints.smallerThanTablet {
-    inline-size: 100%;
-    block-size: 100%;
-    img {
-      object-fit: cover;
-    }
   }
 }
 
