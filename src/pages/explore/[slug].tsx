@@ -9,6 +9,7 @@ import contentPageStyles from '../contentPage.module.scss';
 
 import styles from './explore-page.module.scss';
 
+import VerseChunkWidget from '@/components/Course/LessonHtmlContent/VerseChunkWidget';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
@@ -22,6 +23,7 @@ import {
   getPageImage,
   normalizeExploreSlug,
 } from '@/utils/explore/content-api';
+import { parseContentChunks } from '@/utils/lessonContentParser';
 import { getDir, getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
@@ -29,7 +31,6 @@ import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGenerati
 interface Props {
   contentArticle?: ContentArticle | null;
 }
-
 const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
   const { lang } = useTranslation('articles');
   const { t: tCommon } = useTranslation('common');
@@ -64,7 +65,7 @@ const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
   const imageAlt = title || pageSlug;
   const shouldRenderTitle = Boolean(title && !currentArticle?.text?.includes('<h1'));
   const canonicalPath = `${explorePath}/${pageSlug}`;
-
+  const contentChunks = currentArticle?.text ? parseContentChunks(currentArticle.text) : [];
   return (
     <>
       <NextSeoWrapper
@@ -89,12 +90,21 @@ const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
               <img className={styles.heroImage} src={heroImage} alt={imageAlt} />
             </div>
           ) : null}
-          {currentArticle?.text ? (
-            <div
-              className={styles.pageBody}
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{ __html: currentArticle.text }}
-            />
+          {contentChunks.length ? (
+            <div className={styles.pageBody}>
+              {contentChunks.map((chunk) =>
+                chunk.type === 'html' ? (
+                  // eslint-disable-next-line react/no-danger
+                  <div key={chunk.key} dangerouslySetInnerHTML={{ __html: chunk.content }} />
+                ) : (
+                  <VerseChunkWidget
+                    key={chunk.key}
+                    reference={chunk.reference}
+                    fallbackHtml={chunk.originalHtml}
+                  />
+                ),
+              )}
+            </div>
           ) : null}
         </div>
       </PageContainer>
@@ -110,47 +120,29 @@ export const getStaticPaths: GetStaticPaths = async () => {
       .filter((articleSlug): articleSlug is string => Boolean(articleSlug))
       .map((articleSlug) => ({ params: { slug: articleSlug } }));
 
-    return {
-      paths,
-      fallback: 'blocking',
-    };
+    return { paths, fallback: 'blocking' };
   } catch (error) {
     logErrorToSentry(error, {
       transactionName: 'getStaticPaths-ExplorePageSlug',
     });
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
+    return { paths: [], fallback: 'blocking' };
   }
 };
-
 export const getStaticProps: GetStaticProps<Props> = async ({ params, locale }) => {
   const slug = String(params?.slug || '');
-  if (!slug) {
-    return { notFound: true };
-  }
+  if (!slug) return { notFound: true };
   try {
     const contentArticle = await fetchContentArticle(slug, locale || 'en');
     if (!contentArticle) {
       return { notFound: true, revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS };
     }
-    return {
-      props: {
-        contentArticle,
-      },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
+    return { props: { contentArticle }, revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS };
   } catch (error) {
     logErrorToSentry(error, {
       transactionName: 'getStaticProps-ExplorePageSlug',
       metadata: { slug },
     });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
+    return { notFound: true, revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS };
   }
 };
-
 export default ExploreContentPage;
