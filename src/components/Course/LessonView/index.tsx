@@ -29,6 +29,7 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
   const { title, content, day } = lesson;
   const { t, lang } = useTranslation('learn');
   const [isCourseMaterialModalOpen, setCourseMaterialModalOpen] = useState(false);
+  const widgetLanguage = lesson.course.widgetLanguage || lesson.course.language;
 
   const onBackButtonClicked = () => {
     logButtonClick('back_to_course', { lessonSlugOrId, courseSlug });
@@ -106,6 +107,7 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
                   key={lesson.id}
                   content={content}
                   language={lesson.course.language}
+                  widgetLanguage={widgetLanguage}
                   lessonSlug={lesson.slug}
                   courseSlug={courseSlug}
                 />

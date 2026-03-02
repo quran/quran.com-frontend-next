@@ -16,6 +16,7 @@ import parseLessonQuizFromHtml from '@/utils/lessonQuizParser';
 type Props = {
   content: string;
   language: string;
+  widgetLanguage?: string;
   lessonSlug: string;
   courseSlug: string;
 };
@@ -32,7 +33,7 @@ const FLASHCARD_VARIANT_CONFIG: Record<FlashCardVariant, { subtitleKey: string }
   },
 };
 
-const renderChunks = (chunks: ContentChunk[], keyPrefix = '') =>
+const renderChunks = (chunks: ContentChunk[], widgetLanguage: string, keyPrefix = '') =>
   chunks.map((chunk) =>
     chunk.type === 'html' ? (
       <HtmlContent key={`${keyPrefix}${chunk.key}`} html={chunk.content} />
@@ -41,12 +42,13 @@ const renderChunks = (chunks: ContentChunk[], keyPrefix = '') =>
         key={`${keyPrefix}${chunk.key}`}
         reference={chunk.reference}
         fallbackHtml={chunk.originalHtml}
+        language={widgetLanguage}
       />
     ),
   );
 
-const renderHtml = (html: string, keyPrefix = '') =>
-  renderChunks(parseContentChunks(html), keyPrefix);
+const renderHtml = (html: string, widgetLanguage: string, keyPrefix = '') =>
+  renderChunks(parseContentChunks(html), widgetLanguage, keyPrefix);
 
 const toggleInSet = (set: Set<string>, item: string) => {
   const nextSet = new Set(set);
@@ -55,10 +57,12 @@ const toggleInSet = (set: Set<string>, item: string) => {
   return nextSet;
 };
 
-const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, courseSlug }) => {
+const LessonHtmlContent: React.FC<Props> = (props) => {
+  const { content, language, widgetLanguage, lessonSlug, courseSlug } = props;
   const { t } = useTranslation('learn');
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [masteredCards, setMasteredCards] = useState<Set<string>>(new Set());
+  const widgetLang = widgetLanguage || language;
 
   const isInteractiveLearningPlan =
     courseSlug === '30-transformative-days-with-surah-al-mulk-learn-reflect-memorize';
@@ -81,10 +85,6 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
     [contentToRender, shouldUseInteractiveFeatures],
   );
 
-  if (!shouldUseInteractiveFeatures) {
-    return <HtmlContent html={content} />;
-  }
-
   if (flashcardData) {
     const { subtitleKey } = FLASHCARD_VARIANT_CONFIG[flashcardData.variant];
     const isListVariant = flashcardData.variant === FlashCardVariant.List;
@@ -95,7 +95,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
 
     return (
       <div className={styles.container}>
-        {flashcardData.beforeHtml && renderHtml(flashcardData.beforeHtml, 'before-')}
+        {flashcardData.beforeHtml && renderHtml(flashcardData.beforeHtml, widgetLang, 'before-')}
         <div className={styles.flashcardSection}>
           <div className={styles.flashcardHeader}>
             <div className={styles.flashcardHeaderText}>
@@ -137,7 +137,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
             <NonListFlashCardComponent key={contentToRender} cards={flashcardData.flashcards} />
           )}
         </div>
-        {flashcardData.afterHtml && renderHtml(flashcardData.afterHtml, 'after-')}
+        {flashcardData.afterHtml && renderHtml(flashcardData.afterHtml, widgetLang, 'after-')}
         {quizNode}
       </div>
     );
@@ -156,7 +156,7 @@ const LessonHtmlContent: React.FC<Props> = ({ content, language, lessonSlug, cou
 
   return (
     <div className={styles.container}>
-      {renderChunks(chunks)}
+      {renderChunks(chunks, widgetLang)}
       {quizNode}
     </div>
   );
