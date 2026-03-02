@@ -16,6 +16,18 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     include: ['**/src/**/*.test.{js,ts,jsx,tsx}'],
+    setupFiles: ['src/tests/setup.ts'],
+    coverage: {
+      provider: 'v8',
+      include: ['src/**'],
+      exclude: [
+        'src/**/*.stories.tsx',
+        'src/pages/_app.tsx',
+        'src/pages/_document.tsx',
+        'src/tests/**',
+      ],
+      reporter: ['text', 'html', 'json-summary'],
+    },
   },
   esbuild: {
     tsconfigRaw: JSON.stringify({

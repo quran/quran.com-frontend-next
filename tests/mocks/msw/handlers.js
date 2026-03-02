@@ -12,6 +12,11 @@ const testDataStore = {
   reflections: null,
   loginResponse: null,
   countryLanguagePreference: null,
+  verses: null,
+  chapter: null,
+  notes: null,
+  bookmarks: null,
+  collections: null,
 };
 
 // Helper function to set test-specific data
@@ -31,6 +36,11 @@ function clearTestData() {
   testDataStore.reflections = null;
   testDataStore.loginResponse = null;
   testDataStore.countryLanguagePreference = null;
+  testDataStore.verses = null;
+  testDataStore.chapter = null;
+  testDataStore.notes = null;
+  testDataStore.bookmarks = null;
+  testDataStore.collections = null;
 }
 
 // Mock data for different language/country combinations
@@ -307,6 +317,110 @@ const handlers = [
         { id: 4, text: 'French reflection', language: 'fr' },
       ],
     });
+  }),
+  // Handler for verses endpoint
+  http.get('*/verses', () => {
+    const customVerses = getTestData('verses');
+    if (customVerses) {
+      return HttpResponse.json(customVerses);
+    }
+    return HttpResponse.json({
+      verses: [],
+      pagination: { totalRecords: 0, currentPage: 1, nextPage: null },
+    });
+  }),
+
+  // Handler for chapter endpoint
+  http.get('*/chapters/:chapterId', ({ params }) => {
+    const customChapter = getTestData('chapter');
+    if (customChapter) {
+      return HttpResponse.json(customChapter);
+    }
+    return HttpResponse.json({
+      chapter: {
+        id: Number(params.chapterId),
+        bismillahPre: true,
+        revelationOrder: 1,
+        revelationPlace: 'makkah',
+        nameSimple: 'Al-Fatihah',
+        nameComplex: 'Al-Fātiĥah',
+        nameArabic: 'الفاتحة',
+        transliteratedName: 'Al-Fatihah',
+        translatedName: 'The Opening',
+        versesCount: 7,
+        pages: [1, 2],
+        defaultSlug: 'al-fatihah',
+      },
+    });
+  }),
+
+  // Handler for translations list
+  http.get('*/resources/translations', () => {
+    return HttpResponse.json({ translations: [] });
+  }),
+
+  // Handler for tafsirs list
+  http.get('*/resources/tafsirs', () => {
+    return HttpResponse.json({ tafsirs: [] });
+  }),
+
+  // Handlers for notes CRUD
+  http.get('*/notes', () => {
+    const customNotes = getTestData('notes');
+    if (customNotes) {
+      return HttpResponse.json(customNotes);
+    }
+    return HttpResponse.json({ notes: [], pagination: { totalRecords: 0 } });
+  }),
+
+  http.post('*/notes', () => {
+    return HttpResponse.json({ note: { id: 'test-note-1', body: '', verseKey: '1:1' } });
+  }),
+
+  http.patch('*/notes/:id', () => {
+    return HttpResponse.json({ note: { id: 'test-note-1' } });
+  }),
+
+  http.delete('*/notes/:id', () => {
+    return HttpResponse.json({}, { status: 200 });
+  }),
+
+  // Handlers for bookmarks CRUD
+  http.get('*/bookmarks', () => {
+    const customBookmarks = getTestData('bookmarks');
+    if (customBookmarks) {
+      return HttpResponse.json(customBookmarks);
+    }
+    return HttpResponse.json({ bookmarks: [], pagination: { totalRecords: 0 } });
+  }),
+
+  http.post('*/bookmarks', () => {
+    return HttpResponse.json({ bookmark: { id: 'test-bookmark-1' } });
+  }),
+
+  http.delete('*/bookmarks/:id', () => {
+    return HttpResponse.json({}, { status: 200 });
+  }),
+
+  // Handlers for collections CRUD
+  http.get('*/collections', () => {
+    const customCollections = getTestData('collections');
+    if (customCollections) {
+      return HttpResponse.json(customCollections);
+    }
+    return HttpResponse.json({ collections: [], pagination: { totalRecords: 0 } });
+  }),
+
+  http.post('*/collections', () => {
+    return HttpResponse.json({ collection: { id: 'test-collection-1', name: 'Test Collection' } });
+  }),
+
+  http.post('*/collections/:id', () => {
+    return HttpResponse.json({ collection: { id: 'test-collection-1' } });
+  }),
+
+  http.delete('*/collections/:id', () => {
+    return HttpResponse.json({}, { status: 200 });
   }),
 ];
 
