@@ -33,6 +33,7 @@ export type Course = {
   authors: { author: CourseAuthor }[];
   editors: { editor: CourseEditor }[];
   language: string; // language code
+  widgetLanguage?: string; // optional verse widget language override
   description: string;
   metaDescription?: string;
   image: string;

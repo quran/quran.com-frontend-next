@@ -10,6 +10,7 @@ import type { VerseReference } from '@/utils/lessonContentParser';
 type Props = {
   reference: VerseReference;
   fallbackHtml: string;
+  language?: string;
 };
 
 const parseRange = (value: string, allowDescending: boolean): WordTrimRange | undefined => {
@@ -80,8 +81,8 @@ const parseTrim = (
   };
 };
 
-const VerseChunkWidget: React.FC<Props> = ({ reference, fallbackHtml }) => {
-  const { data, isValidating } = useVerseWidgetData(reference);
+const VerseChunkWidget: React.FC<Props> = ({ reference, fallbackHtml, language }) => {
+  const { data, isValidating } = useVerseWidgetData(reference, language);
   const isRange = Boolean(reference.to && reference.to > reference.from);
 
   if (isValidating && !data) return <Skeleton className={styles.widgetSkeleton} />;
