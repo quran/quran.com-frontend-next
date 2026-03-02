@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/constants';
 @use 'src/styles/theme';
 @use 'src/styles/navbar';
 
@@ -9,7 +10,10 @@
   --adjuster: #{navbar.$adjuster};
   --navbar-height: #{navbar.$navbar-height};
   --navbar-logo-height: #{navbar.$navbar-logo-height};
-  --banner-height: #{navbar.$banner-height};
+  --banner-height-mobile: #{navbar.$banner-height};
+  --banner-height-desktop: 45px;
+  --banner-inline-height: 40px;
+  --banner-height: var(--banner-height-mobile);
 
   // Context menu dimensions
   --context-menu-section-height: #{navbar.$context-menu-section-height};
@@ -36,6 +40,10 @@
 
   // Pinned verses
   --pinned-verses-bar-height: 0px;
+
+  // Audio player
+  --audio-player-height-mobile: #{constants.$audio-player-default-height};
+  --audio-player-height-desktop: #{constants.$audio-player-default-desktop-height};
 
   // Derived values (calculated from base variables)
   --navbar-container-height: var(--navbar-height);

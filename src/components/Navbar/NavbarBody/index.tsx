@@ -6,13 +6,11 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
 
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
-import { getUiSection } from '@/api';
-import Banner from '@/components/Banner/Banner';
+import Banner, { BannerVariant } from '@/components/Banner/Banner';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -32,9 +30,8 @@ import {
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { TestId } from '@/tests/test-ids';
-import { UiSectionResponse } from '@/types/ApiResponses';
-import { makeUiSectionUrl } from '@/utils/apiPaths';
 import { getSidebarTransitionDurationFromCss } from '@/utils/css';
+import { isQuranReaderRoutePathname } from '@/utils/routes';
 
 const SidebarNavigation = dynamic(
   () => import('@/components/QuranReader/SidebarNavigation/SidebarNavigation'),
@@ -48,26 +45,18 @@ interface Props {
   isBannerVisible: boolean;
 }
 
-const QURAN_READER_ROUTES = new Set([
-  '/[chapterId]',
-  '/[chapterId]/[verseId]',
-  '/hizb/[hizbId]',
-  '/juz/[juzId]',
-  '/page/[pageId]',
-  '/rub/[rubId]',
-]);
-
-const NAVBAR_ANNOUNCEMENT_KEY = 'navbar_announcement';
-
 const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
   const isLanguageDrawerOpen = useSelector(selectIsLanguageDrawerOpen);
   const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
-  const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
+  const isQuranReaderRoute = isQuranReaderRoutePathname(router.pathname);
+  const isHomepageRoute = router.pathname === '/';
+  const shouldRenderStandaloneDesktopBanner = isHomepageRoute;
+  const shouldRenderInlineDesktopBanner = !isHomepageRoute;
   const normalizedPathname = router.asPath.split(/[?#]/)[0];
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const isPersistHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
@@ -78,25 +67,6 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const wasSidebarVisible = previousSidebarVisibilityRef.current;
   const isTransitioningToClose = wasSidebarVisible && !isSidebarNavigationVisible;
   const sidebarTransitionDuration = getSidebarTransitionDurationFromCss();
-
-  const uiSectionPath = makeUiSectionUrl(NAVBAR_ANNOUNCEMENT_KEY, lang);
-  const { data: uiSectionResponse } = useSWRImmutable<UiSectionResponse>(
-    uiSectionPath,
-    () => getUiSection(NAVBAR_ANNOUNCEMENT_KEY, lang),
-    { revalidateOnFocus: false },
-  );
-
-  const uiSection = uiSectionResponse?.uiSection;
-  const hasUiSectionContent = Boolean(uiSection?.content?.value?.trim());
-  const hasUiSectionCta = Boolean(uiSection?.url && uiSection?.ctaText?.trim());
-  const bannerProps = hasUiSectionContent
-    ? {
-        text: uiSection?.content?.value ?? '',
-        textFormat: uiSection?.content?.format || 'plain_text',
-        ctaButtonText: hasUiSectionCta ? uiSection?.ctaText?.trim() : undefined,
-        ctaUrl: hasUiSectionCta ? uiSection?.url : undefined,
-      }
-    : undefined;
 
   useEffect(() => {
     if (isQuranReaderRoute) return;
@@ -153,12 +123,30 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
 
   const { openSearchDrawer, openNavigationDrawer, openLanguageDrawer } = useNavbarDrawerActions();
 
-  const renderBannerSlot = () => {
-    if (hasUiSectionContent && bannerProps) {
-      return <Banner {...bannerProps} />;
-    }
+  const bannerCopy = {
+    desktop: t('fundraising-sticky-banner-v2.desktop-text'),
+    mobileLineOne: t('fundraising-sticky-banner-v2.mobile-line-one'),
+    mobileLineTwo: t('fundraising-sticky-banner-v2.mobile-line-two'),
+  };
 
-    return <Banner text="" />;
+  const homepageStandaloneDesktopText = `${bannerCopy.mobileLineOne} ${bannerCopy.mobileLineTwo}`;
+
+  const standaloneBannerProps = {
+    copy: {
+      desktop: isHomepageRoute ? homepageStandaloneDesktopText : bannerCopy.desktop,
+      mobileLineOne: bannerCopy.mobileLineOne,
+      mobileLineTwo: bannerCopy.mobileLineTwo,
+    },
+    text: isHomepageRoute ? homepageStandaloneDesktopText : bannerCopy.desktop,
+    ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
+  };
+
+  const inlineBannerProps = {
+    copy: {
+      desktop: bannerCopy.desktop,
+    },
+    text: t('fundraising-sticky-banner-v2.desktop-text'),
+    ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
   };
 
   return (
@@ -166,10 +154,12 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
       {isBannerVisible && (
         <div
           className={classNames(styles.bannerContainerTop, {
+            [styles.mobileOnly]: !shouldRenderStandaloneDesktopBanner,
+            [styles.desktopAndMobile]: shouldRenderStandaloneDesktopBanner,
             [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen,
           })}
         >
-          {renderBannerSlot()}
+          <Banner {...standaloneBannerProps} variant={BannerVariant.Standalone} />
         </div>
       )}
       <div
@@ -183,8 +173,10 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             <NavbarLogoWrapper />
           </div>
         </div>
-        {isBannerVisible && (
-          <div className={styles.bannerContainerCenter}>{renderBannerSlot()}</div>
+        {isBannerVisible && shouldRenderInlineDesktopBanner && (
+          <div className={styles.bannerContainerCenter}>
+            <Banner {...inlineBannerProps} variant={BannerVariant.InlineChip} />
+          </div>
         )}
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>

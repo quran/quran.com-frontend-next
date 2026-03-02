@@ -7,7 +7,7 @@ import type { WidgetOptions } from '@/types/Embed';
 import { logEvent } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 
-const WIDGET_ROOT_SELECTOR = '.quran-widget';
+type WidgetRootRef = { current: HTMLDivElement | null };
 
 /**
  * Build quran.com URL for this widget configuration.
@@ -128,14 +128,16 @@ const buildCopyText = (root: HTMLElement, options: WidgetOptions): string => {
 /**
  * Wire widget interactions (copy, share, audio) on the client.
  * @param {WidgetOptions} options - The widget options.
+ * @param {WidgetRootRef} widgetRef - Optional widget root ref.
  */
-const useWidgetInteractions = (options?: WidgetOptions): void => {
+const useWidgetInteractions = (options?: WidgetOptions, widgetRef?: WidgetRootRef): void => {
   const hasLoggedViewRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (!options) return undefined;
+    const isEmbed = typeof window !== 'undefined' && window.location.pathname.startsWith('/embed/');
 
-    if (!hasLoggedViewRef.current) {
+    if (isEmbed && !hasLoggedViewRef.current) {
       logEvent('embed_widget_view', {
         ayah: options.ayah,
         rangeEnd: options.rangeEnd,
@@ -155,7 +157,7 @@ const useWidgetInteractions = (options?: WidgetOptions): void => {
       hasLoggedViewRef.current = true;
     }
 
-    const widgetRoot = document.querySelector(WIDGET_ROOT_SELECTOR) as HTMLElement | null;
+    const widgetRoot = widgetRef?.current;
     if (!widgetRoot) return undefined;
 
     const copyButton = widgetRoot.querySelector('[data-copy-verse]') as HTMLButtonElement | null;
@@ -187,6 +189,7 @@ const useWidgetInteractions = (options?: WidgetOptions): void => {
     });
 
     const logWidgetEvent = (eventName: string, eventParams: Record<string, unknown> = {}) => {
+      if (!isEmbed) return;
       logEvent(eventName, {
         ...buildCommonEventParams(),
         ...eventParams,
@@ -371,7 +374,7 @@ const useWidgetInteractions = (options?: WidgetOptions): void => {
       widgetRoot.removeEventListener('click', handleContentClick);
       cleanupAudio?.();
     };
-  }, [options]);
+  }, [options, widgetRef]);
 };
 
 export default useWidgetInteractions;

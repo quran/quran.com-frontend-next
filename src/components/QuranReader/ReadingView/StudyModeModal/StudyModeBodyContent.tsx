@@ -42,23 +42,25 @@ const StudyModeBodyContent: React.FC<StudyModeBodyContentProps> = ({
 
   return (
     <>
-      <TopActions verse={verse} shouldUseModalZIndex />
-      <div className={styles.arabicVerseContainer}>
-        {showWordBox && selectedWord && (
-          <WordNavigationBox
-            word={selectedWord}
-            onPrevious={onNavigatePreviousWord}
-            onNext={onNavigateNextWord}
-            onClose={onWordBoxClose}
-            canNavigatePrev={canNavigateWordPrev}
-            canNavigateNext={canNavigateWordNext}
+      <div className={styles.studyModeBodyContentContainer}>
+        <TopActions verse={verse} shouldUseModalZIndex />
+        <div className={styles.arabicVerseContainer}>
+          {showWordBox && selectedWord && (
+            <WordNavigationBox
+              word={selectedWord}
+              onPrevious={onNavigatePreviousWord}
+              onNext={onNavigateNextWord}
+              onClose={onWordBoxClose}
+              canNavigatePrev={canNavigateWordPrev}
+              canNavigateNext={canNavigateWordNext}
+            />
+          )}
+          <StudyModeVerseText
+            words={getVerseWords(verse)}
+            highlightedWordLocation={selectedWordLocation}
+            onWordClick={onWordClick}
           />
-        )}
-        <StudyModeVerseText
-          words={getVerseWords(verse)}
-          highlightedWordLocation={selectedWordLocation}
-          onWordClick={onWordClick}
-        />
+        </div>
       </div>
       <div className={styles.translationsContainer}>
         {verse.translations?.map((translation: Translation) => (

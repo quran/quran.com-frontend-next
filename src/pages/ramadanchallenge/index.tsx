@@ -112,6 +112,10 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
               Don't miss this great opportunity to transform your relationship with this powerful
               Surah.
             </h2>
+            <div className={styles.paragraph}>
+              💌 Please check your promotions or spam folder if you signed up and don't see the
+              daily lesson in your email inbox.
+            </div>
             <div>This Challenge is based on the content contained in our new Learning Plan:</div>
             <Link
               href="/learning-plans/30-transformative-days-with-surah-al-mulk-learn-reflect-memorize"
@@ -161,19 +165,6 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
               <li>A daily habit of engaging the Quran</li>
               <li>Verses that stay with you long after Ramadan ends</li>
             </ul>
-          </div>
-          <hr />
-          <div className={styles.subSection}>
-            <h1>Sign up Today and Take the Challenge This Ramadan (Free)</h1>
-            <div>
-              Begin your journey with Surah Al-Mulk and receive{' '}
-              <span className={pageStyles.bold}>Day 1</span> as soon as the challenge begins (Day 1
-              of Ramadan).
-            </div>
-            <h2>Sign up today and share with your friends, family, and community:</h2>
-            <div className={styles.ctaContainer}>
-              <UnauthEnrollButton section="join_surah_mulk_challenge" />
-            </div>
           </div>
           <hr />
           <div className={styles.subSection}>

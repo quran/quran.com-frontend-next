@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
+import answerStyle from './tabs/StudyModeAnswersTab.module.scss';
 
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useBatchedCountRangeHadiths from '@/hooks/auth/useBatchedCountRangeHadiths';
@@ -13,6 +14,7 @@ import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat'
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import HadithIcon from '@/icons/bx-book.svg';
+import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LayerIcon from '@/icons/layer.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
@@ -24,31 +26,39 @@ import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResp
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { toLocalizedNumber } from '@/utils/locale';
 
+const Loading = () => (
+  <div className={answerStyle.edgeToEdge}>
+    <TafsirSkeleton />
+  </div>
+);
+
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
 export const StudyModeReflectionsTab = dynamic(() => import('./tabs/StudyModeReflectionsTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
 export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
 const StudyModeLayersTab = dynamic(() => import('./tabs/StudyModeLayersTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
 const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
-  loading: TafsirSkeleton,
+  loading: Loading,
 });
 
-const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), { loading: TafsirSkeleton });
+const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), {
+  loading: Loading,
+});
 
 export const StudyModeRelatedVersesTab = dynamic(
   () => import('./tabs/StudyModeRelatedVerses/StudyModeRelatedVersesTab'),
@@ -163,7 +173,7 @@ export const useStudyModeTabs = ({
     {
       id: StudyModeTabId.REFLECTIONS,
       label: t('reflections'),
-      icon: <LightbulbIcon />,
+      icon: <ChatIcon />,
       onClick: () => handleTabClick(StudyModeTabId.REFLECTIONS),
       condition: true,
     },

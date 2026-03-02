@@ -10,6 +10,7 @@ import styles from './Scrollable.module.scss';
 import useScrollable from '@/hooks/useScrollable';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
+import EventName, { getEventName } from '@/utils/event-names';
 import { logButtonClick } from '@/utils/eventLogger';
 import { isRTLLocale } from '@/utils/locale';
 
@@ -24,7 +25,7 @@ interface ScrollableProps {
   edgeButtonClassName?: string;
   leftEdgeButtonClassName?: string;
   rightEdgeButtonClassName?: string;
-  eventName: string;
+  eventName: EventName;
 }
 
 const Scrollable = ({
@@ -53,12 +54,12 @@ const Scrollable = ({
 
   const handleLeftButtonClick = () => {
     onLeftButtonClick();
-    logButtonClick(`${eventName}_left`);
+    logButtonClick(getEventName({ eventName, suffix: 'left' }));
   };
 
   const handleRightButtonClick = () => {
     onRightButtonClick();
-    logButtonClick(`${eventName}_right`);
+    logButtonClick(getEventName({ eventName, suffix: 'right' }));
   };
 
   return (

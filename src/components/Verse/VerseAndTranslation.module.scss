@@ -11,3 +11,9 @@
 .verseContainer + .verseContainer {
   margin-block-start: var(--spacing-mega);
 }
+
+.referenceContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

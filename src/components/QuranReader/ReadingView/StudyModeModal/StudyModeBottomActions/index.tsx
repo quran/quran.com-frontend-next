@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import styles from './StudyModeBottomActions.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
+import Scrollable from '@/dls/Scrollable/Scrollable';
+import EventName from '@/utils/event-names';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -47,54 +49,61 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
     }
   }, [activeTab]);
 
-  const handleTabClick = (onClick: () => void) => {
-    onClick();
-  };
-
-  const handleTabKeyDown = (e: React.KeyboardEvent, onClick: () => void) => {
+  const handleTabKeyDown = (e: React.KeyboardEvent, handleClick: () => void) => {
     if (e.key === 'Enter' || (e.key === ' ' && !isAudioVisible)) {
       e.preventDefault();
-      onClick();
+      handleClick();
     }
   };
 
   const filteredTabs = useMemo(() => tabs.filter((tab) => tab.condition !== false), [tabs]);
 
   return (
-    <div
-      className={classNames(styles.bottomActionsContainer, {
-        [styles.noBorder]: !activeTab,
-      })}
-    >
-      <div className={styles.tabsContainer}>
-        {filteredTabs.map((tab, index) => (
-          <React.Fragment key={tab.id}>
-            <div
-              ref={(el) => {
-                tabRefs.current[tab.id] = el;
-              }}
-              className={classNames(styles.tabItem, {
-                [styles.tabItemActive]: activeTab === tab.id,
-              })}
-              data-testid={`study-mode-tab-${tab.id}`}
-              onClick={() => handleTabClick(tab.onClick)}
-              onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
-              role="button"
-              tabIndex={0}
-              aria-label={tab.label}
-            >
-              <span className={styles.tabIcon}>{tab.icon}</span>
-              <span className={styles.tabLabel}>{tab.label}</span>
-            </div>
-            {index < filteredTabs.length - 1 && (
-              <div className={styles.separatorContainer}>
-                <Separator isVertical weight={SeparatorWeight.SemiBold} />
+    <>
+      <div
+        className={classNames(styles.bottomActionsContainer, {
+          [styles.noBorder]: !activeTab,
+        })}
+      >
+        <Scrollable
+          className={styles.tabsContainer}
+          eventName={EventName.QURAN_READER_STUDY_MODE_BOTTOM_ACTION_SCROLLABLE}
+        >
+          {filteredTabs.map((tab, index) => (
+            <React.Fragment key={tab.id}>
+              <div
+                ref={(el) => {
+                  tabRefs.current[tab.id] = el;
+                }}
+                className={classNames(styles.tabItem, {
+                  [styles.tabItemActive]: activeTab === tab.id,
+                })}
+                data-testid={`study-mode-tab-${tab.id}`}
+                // eslint-disable-next-line react/jsx-handler-names
+                onClick={tab.onClick}
+                onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
+                role="button"
+                tabIndex={0}
+                aria-label={tab.label}
+              >
+                <span className={styles.tabIcon}>{tab.icon}</span>
+                <span className={styles.tabLabel}>{tab.label}</span>
               </div>
-            )}
-          </React.Fragment>
-        ))}
+              {index < filteredTabs.length - 1 && (
+                <div className={styles.separatorContainer}>
+                  <Separator isVertical weight={SeparatorWeight.SemiBold} />
+                </div>
+              )}
+            </React.Fragment>
+          ))}
+        </Scrollable>
       </div>
-    </div>
+      {activeTab && (
+        <div className={styles.bottomSeparatorContainer}>
+          <Separator />
+        </div>
+      )}
+    </>
   );
 };
 

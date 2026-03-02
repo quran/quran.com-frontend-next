@@ -271,7 +271,18 @@
     "verification-code": "Mã xác minh"
   },
   "from": "Từ",
+  "fundraising-card-v2": {
+    "cta": "Quyên góp ngay",
+    "description": "Các nhà tài trợ hàng tháng giúp chúng tôi cải thiện Quran.com và duy trì hoạt động để chúng tôi tập trung ít hơn vào việc gây quỹ và nhiều hơn vào việc tạo ra tác động.",
+    "title": "Trở thành nhà tài trợ hàng tháng"
+  },
   "fundraising-share-title": "Chia sẻ gây quỹ Quran.com",
+  "fundraising-sticky-banner-v2": {
+    "cta": "Quyên tặng",
+    "desktop-text": "Hãy cùng chung tay thực hiện sứ mệnh của chúng tôi",
+    "mobile-line-one": "Đây là tháng của kinh Quran.",
+    "mobile-line-two": "Hãy giúp chúng tôi lan tỏa ánh sáng này."
+  },
   "fundraising-sticky-banner": {
     "cta": "Quyên góp",
     "title": "Hãy cho đi vào những ngày tốt đẹp nhất!"

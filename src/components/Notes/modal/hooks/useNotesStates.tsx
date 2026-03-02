@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import { decodeHTMLEntities } from '@/components/InlineShowMore/utility';
 import {
   MAX_NOTE_LENGTH,
   MIN_NOTE_LENGTH,
@@ -30,7 +31,8 @@ export const useNotesStates = (
 ) => {
   const { t, lang } = useTranslation();
 
-  const [noteInput, setNoteInput] = useState(initialNote);
+  // Decode HTML entities in the initial note (e.g., &gt; to >, &lt; to <)
+  const [noteInput, setNoteInput] = useState(decodeHTMLEntities(initialNote));
   const [errors, setErrors] = useState<Record<string, NoteFormError>>({});
   const [loading, setLoading] = useState<LoadingState | null>(null);
 
@@ -115,7 +117,7 @@ export const useNotesStates = (
 
   useEffect(() => {
     setErrors({});
-    setNoteInput(initialNote);
+    setNoteInput(decodeHTMLEntities(initialNote));
   }, [isModalOpen, initialNote]);
 
   return {

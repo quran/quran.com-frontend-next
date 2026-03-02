@@ -6,6 +6,7 @@
 
 .children {
   @include utility.scrollbarNone;
+  box-sizing: border-box;
   display: flex;
   overflow-x: auto;
   flex-wrap: nowrap;
@@ -38,16 +39,20 @@
 
 .leftEdge {
   inset-inline-start: 0;
-  background-image: linear-gradient(
-    to right,
-    var(--color-background-elevated-new) 50%,
-    transparent
-  );
+  background-image: linear-gradient(to right, var(--color-background-gradient) 50%, transparent);
+  [dir='rtl'] & {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+  }
 }
 
 .rightEdge {
   inset-inline-end: 0;
-  background-image: linear-gradient(to left, var(--color-background-elevated-new) 50%, transparent);
+  background-image: linear-gradient(to left, var(--color-background-gradient) 50%, transparent);
+  [dir='rtl'] & {
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+  }
 }
 
 .hiddenEdge {
