@@ -1,0 +1,62 @@
+@use 'src/styles/theme';
+
+@mixin donationStripThemeVars {
+  @include theme.light {
+    --donation-strip-gradient-start: #22a5ad;
+    --donation-strip-gradient-end: #124245;
+    --donation-strip-text: #ffffff;
+    --donation-strip-cta-bg: #ebf9fa;
+    --donation-strip-cta-fg: #2ca4ab;
+  }
+
+  @include theme.dark {
+    --donation-strip-gradient-start: #2ca4ab;
+    --donation-strip-gradient-end: #124245;
+    --donation-strip-text: #ffffff;
+    --donation-strip-cta-bg: #272f33;
+    --donation-strip-cta-fg: #2ca4ab;
+  }
+
+  @include theme.sepia {
+    --donation-strip-gradient-start: #72603f;
+    --donation-strip-gradient-end: #124245;
+    --donation-strip-text: #ffffff;
+    --donation-strip-cta-bg: #f2e0bf;
+    --donation-strip-cta-fg: #72603f;
+  }
+}
+
+@mixin donationCardThemeVars {
+  @include theme.light {
+    --donation-card-gradient-start: #2ca4ab;
+    --donation-card-gradient-end: #124245;
+    --donation-card-title: #ffffff;
+    --donation-card-text: #ffffff;
+    --donation-card-cta-bg: #2ca4ab;
+    --donation-card-cta-fg: #ffffff;
+    --donation-card-close: #ffffff;
+    --donation-card-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  @include theme.dark {
+    --donation-card-gradient-start: #2ca4ab;
+    --donation-card-gradient-end: #124245;
+    --donation-card-title: #ffffff;
+    --donation-card-text: #ffffff;
+    --donation-card-cta-bg: #2ca4ab;
+    --donation-card-cta-fg: #ffffff;
+    --donation-card-close: #ffffff;
+    --donation-card-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  @include theme.sepia {
+    --donation-card-gradient-start: #72603f;
+    --donation-card-gradient-end: #d8b677;
+    --donation-card-title: #ffffff;
+    --donation-card-text: #ffffff;
+    --donation-card-cta-bg: #72603f;
+    --donation-card-cta-fg: #ffffff;
+    --donation-card-close: #ffffff;
+    --donation-card-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
+  }
+}

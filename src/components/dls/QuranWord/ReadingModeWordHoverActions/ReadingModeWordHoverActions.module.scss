@@ -1,0 +1,47 @@
+@use 'src/styles/theme';
+.threeDotsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-small2-px);
+  border-radius: var(--spacing-xxsmall-px);
+  background: var(--color-success-medium);
+  box-shadow: var(--shadow-reading-word-three-dots);
+  cursor: pointer;
+  border: none;
+}
+
+.threeDotsIcon {
+  inline-size: var(--spacing-medium-plus-px);
+  block-size: var(--spacing-medium-plus-px);
+  color: var(--color-text-white);
+}
+
+.menuContent {
+  padding-block: var(--spacing-small-px);
+  border-radius: var(--spacing-xxsmall-px);
+  min-inline-size: auto;
+  z-index: var(--z-index-modal);
+}
+
+.menuContentRtl {
+  direction: rtl;
+  text-align: end;
+}
+
+.menuItemContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: var(--spacing-xxsmall);
+}
+
+.menuItemChevron {
+  inline-size: var(--spacing-small2-px);
+  block-size: var(--spacing-small2-px);
+}
+
+.menuItemChevronRtl {
+  transform: rotate(180deg);
+}

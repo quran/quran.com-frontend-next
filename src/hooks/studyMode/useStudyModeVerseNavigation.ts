@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import DataContext from '@/contexts/DataContext';
 import { setVerseKey } from '@/redux/slices/QuranReader/studyMode';
-import { isRTLLocale, toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
+import { toLocalizedVerseKeyAuto } from '@/utils/locale';
 import { fakeNavigateReplace } from '@/utils/navigation';
 import { getChapterNumberFromKey } from '@/utils/verse';
 
@@ -61,7 +61,6 @@ const useStudyModeVerseNavigation = ({
 
   const navigateToVerse = useCallback(
     (newChapterId: string, newVerseNumber: string, shouldAddToHistory = true) => {
-      // Add current verse to history before navigating
       if (shouldAddToHistory) {
         setVersesHistory((prev) => [...prev, verseKey]);
       }
@@ -79,14 +78,14 @@ const useStudyModeVerseNavigation = ({
 
   const handleChapterChange = useCallback(
     (newChapterId: string) => {
-      navigateToVerse(newChapterId, '1');
+      navigateToVerse(newChapterId, '1', false);
     },
     [navigateToVerse],
   );
 
   const handleVerseChange = useCallback(
     (newVerseNumber: string) => {
-      navigateToVerse(selectedChapterId, newVerseNumber);
+      navigateToVerse(selectedChapterId, newVerseNumber, false);
     },
     [navigateToVerse, selectedChapterId],
   );
@@ -111,7 +110,6 @@ const useStudyModeVerseNavigation = ({
 
     const [prevChapterId, prevVerseNumber] = previousVerseKey.split(':');
 
-    // Don't add to history when going back
     navigateToVerse(prevChapterId, prevVerseNumber, false);
   }, [versesHistory, navigateToVerse]);
 
@@ -119,9 +117,7 @@ const useStudyModeVerseNavigation = ({
     if (versesHistory.length === 0) return null;
     const prevVerseKey = versesHistory[versesHistory.length - 1];
     const chapter = chaptersData?.[getChapterNumberFromKey(prevVerseKey)];
-    const localizedVerseKey = isRTLLocale(lang)
-      ? toLocalizedVerseKeyRTL(prevVerseKey, lang)
-      : toLocalizedVerseKey(prevVerseKey, lang);
+    const localizedVerseKey = toLocalizedVerseKeyAuto(prevVerseKey, lang);
     return {
       localizedVerseKey,
       chapterName: chapter?.transliteratedName || '',

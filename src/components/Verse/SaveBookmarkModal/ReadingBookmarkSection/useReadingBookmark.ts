@@ -36,12 +36,7 @@ import { addBookmark, deleteBookmarkById as deleteBookmark } from '@/utils/auth/
 import { GuestReadingBookmark } from '@/utils/bookmark';
 import { getChapterData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
-import {
-  isRTLLocale,
-  toLocalizedNumber,
-  toLocalizedVerseKey,
-  toLocalizedVerseKeyRTL,
-} from '@/utils/locale';
+import { toLocalizedNumber, toLocalizedVerseKeyAuto } from '@/utils/locale';
 
 /** Debounce delay to prevent flicker when state updates */
 const STATE_TRANSITION_DELAY_MS = 300;
@@ -95,11 +90,9 @@ const useReadingBookmark = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const currentMushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines)
     .mushaf as Mushaf;
-  const isRtlLocale = isRTLLocale(lang);
   const localizeVerseKey = useCallback(
-    (key: string): string =>
-      isRtlLocale ? toLocalizedVerseKeyRTL(key, lang) : toLocalizedVerseKey(key, lang),
-    [isRtlLocale, lang],
+    (key: string): string => toLocalizedVerseKeyAuto(key, lang),
+    [lang],
   );
 
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);

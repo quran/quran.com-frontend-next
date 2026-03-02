@@ -20,12 +20,7 @@ import { TestId } from '@/tests/test-ids';
 import { getMushafId } from '@/utils/api';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import {
-  isRTLLocale,
-  toLocalizedDate,
-  toLocalizedVerseKey,
-  toLocalizedVerseKeyRTL,
-} from '@/utils/locale';
+import { toLocalizedDate, toLocalizedVerseKeyAuto } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
@@ -91,10 +86,7 @@ const RecentContent = () => {
             />
             <div className={styles.recentContentItemTitle}>
               <p>
-                {surah.transliteratedName}{' '}
-                {isRTLLocale(lang)
-                  ? toLocalizedVerseKeyRTL(verseKey, lang)
-                  : toLocalizedVerseKey(verseKey, lang)}
+                {surah.transliteratedName} {toLocalizedVerseKeyAuto(verseKey, lang)}
               </p>
               <IconContainer icon={<ArrowIcon />} />
             </div>

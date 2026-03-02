@@ -11,13 +11,20 @@ import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 interface ReadingViewNoteActionProps {
   verseKey: string;
   onActionTriggered?: () => void;
+  onActionClick?: () => void;
+  shouldCloseMenuAfterClick?: boolean;
+  label?: string;
 }
 
 const ReadingViewNoteAction: React.FC<ReadingViewNoteActionProps> = ({
   verseKey,
   onActionTriggered,
+  onActionClick,
+  shouldCloseMenuAfterClick = false,
+  label,
 }) => {
   const { t } = useTranslation('common');
+  const noteLabel = label || t('notes.label');
 
   return (
     <NoteActionController
@@ -27,8 +34,12 @@ const ReadingViewNoteAction: React.FC<ReadingViewNoteActionProps> = ({
     >
       {({ onClick, hasNote }) => (
         <PopoverMenu.Item
-          onClick={onClick}
+          onClick={() => {
+            onActionClick?.();
+            onClick();
+          }}
           dataTestId="notes-menu-item"
+          shouldCloseMenuAfterClick={shouldCloseMenuAfterClick}
           icon={
             <IconContainer
               shouldForceSetColors={false}
@@ -38,7 +49,7 @@ const ReadingViewNoteAction: React.FC<ReadingViewNoteActionProps> = ({
             />
           }
         >
-          {t('notes.label')}
+          {noteLabel}
         </PopoverMenu.Item>
       )}
     </NoteActionController>

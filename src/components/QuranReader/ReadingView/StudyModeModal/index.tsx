@@ -21,6 +21,7 @@ import Error from '@/components/Error';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
+import Separator from '@/dls/Separator/Separator';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
@@ -44,7 +45,7 @@ import Word, { CharType } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
-import { toLocalizedVerseKey, toLocalizedVerseKeyRTL, isRTLLocale } from '@/utils/locale';
+import { toLocalizedVerseKeyAuto } from '@/utils/locale';
 import {
   fakeNavigate,
   getVerseSelectedTafsirNavigationUrl,
@@ -398,9 +399,7 @@ const StudyModeModal: React.FC<Props> = ({
     if (versesHistory.length === 0) return null;
     const prevVerseKey = versesHistory[versesHistory.length - 1];
     const chapter = chaptersData?.[getChapterNumberFromKey(prevVerseKey)];
-    const localizedVerseKey = isRTLLocale(lang)
-      ? toLocalizedVerseKeyRTL(prevVerseKey, lang)
-      : toLocalizedVerseKey(prevVerseKey, lang);
+    const localizedVerseKey = toLocalizedVerseKeyAuto(prevVerseKey, lang);
     return {
       localizedVerseKey,
       chapterName: chapter?.transliteratedName || '',
@@ -423,85 +422,90 @@ const StudyModeModal: React.FC<Props> = ({
     ].includes(activeContentTab);
 
   const header = (
-    <div
-      className={classNames(styles.header, {
-        [styles.hideHeaderLeftControls]: !showHeaderLeftControls,
-      })}
-    >
-      {showHeaderLeftControls && (
-        <div className={styles.headerLeftControls}>
+    <div className={styles.headerContainer}>
+      <div
+        className={classNames(styles.header, {
+          [styles.hideHeaderLeftControls]: !showHeaderLeftControls,
+        })}
+      >
+        {showHeaderLeftControls && (
+          <div className={styles.headerLeftControls}>
+            <Button
+              className={styles.previousRelatedVerseButton}
+              contentClassName={styles.previousRelatedVerseButtonContent}
+              size={ButtonSize.Small}
+              variant={ButtonVariant.Compact}
+              onClick={handleGoBack}
+              ariaLabel={t('aria.previous-related-verse')}
+            >
+              <ChevronLeftIcon />
+              <p>
+                {verseHistory?.chapterName} {verseHistory?.localizedVerseKey}
+              </p>
+            </Button>
+          </div>
+        )}
+        <div className={styles.headerMiddleControls}>
+          <div className={styles.selectionWrapper}>
+            <SearchableVerseSelector
+              selectedChapterId={selectedChapterId}
+              selectedVerseNumber={selectedVerseNumber}
+              onChapterChange={handleChapterChange}
+              onVerseChange={handleVerseChange}
+            />
+          </div>
           <Button
-            className={styles.previousRelatedVerseButton}
-            contentClassName={styles.previousRelatedVerseButtonContent}
             size={ButtonSize.Small}
-            variant={ButtonVariant.Compact}
-            onClick={handleGoBack}
-            ariaLabel={t('aria.previous-related-verse')}
+            variant={ButtonVariant.Ghost}
+            onClick={handlePreviousVerse}
+            className={classNames(styles.navButton, styles.prevButton)}
+            ariaLabel={t('aria.previous-verse')}
+            isDisabled={!canNavigatePrev}
+            shouldFlipOnRTL={false}
           >
-            <ChevronLeftIcon />
-            <p>
-              {verseHistory?.chapterName} {verseHistory?.localizedVerseKey}
-            </p>
+            <ArrowIcon />
+          </Button>
+          <Button
+            size={ButtonSize.Small}
+            variant={ButtonVariant.Ghost}
+            onClick={handleNextVerse}
+            className={classNames(styles.navButton, styles.nextButton)}
+            ariaLabel={t('aria.next-verse')}
+            isDisabled={!canNavigateNext}
+            shouldFlipOnRTL={false}
+          >
+            <ArrowIcon />
+          </Button>
+          <Button
+            size={ButtonSize.Small}
+            variant={ButtonVariant.Ghost}
+            shape={ButtonShape.Circle}
+            onClick={handlePinClick}
+            className={styles.pinButton}
+            ariaLabel={isPinned ? t('unpin-verse') : t('pin-verse')}
+            tooltip={isPinned ? t('unpin-verse') : t('pin-verse')}
+          >
+            {isPinned ? (
+              <PinFilledIcon className={classNames(styles.pinIcon, styles.pinIconFilled)} />
+            ) : (
+              <PinIcon className={styles.pinIcon} />
+            )}
           </Button>
         </div>
-      )}
-      <div className={styles.headerMiddleControls}>
-        <div className={styles.selectionWrapper}>
-          <SearchableVerseSelector
-            selectedChapterId={selectedChapterId}
-            selectedVerseNumber={selectedVerseNumber}
-            onChapterChange={handleChapterChange}
-            onVerseChange={handleVerseChange}
-          />
+        <div className={styles.headerRightControls}>
+          <Button
+            variant={ButtonVariant.Ghost}
+            shape={ButtonShape.Circle}
+            onClick={handleClose}
+            className={styles.closeButton}
+            ariaLabel={t('aria.close')}
+          >
+            <CloseIcon />
+          </Button>
         </div>
-        <Button
-          size={ButtonSize.Small}
-          variant={ButtonVariant.Ghost}
-          onClick={handlePreviousVerse}
-          className={classNames(styles.navButton, styles.prevButton)}
-          ariaLabel={t('aria.previous-verse')}
-          isDisabled={!canNavigatePrev}
-          shouldFlipOnRTL={false}
-        >
-          <ArrowIcon />
-        </Button>
-        <Button
-          size={ButtonSize.Small}
-          variant={ButtonVariant.Ghost}
-          onClick={handleNextVerse}
-          className={classNames(styles.navButton, styles.nextButton)}
-          ariaLabel={t('aria.next-verse')}
-          isDisabled={!canNavigateNext}
-          shouldFlipOnRTL={false}
-        >
-          <ArrowIcon />
-        </Button>
-        <Button
-          size={ButtonSize.Small}
-          variant={ButtonVariant.Ghost}
-          shape={ButtonShape.Circle}
-          onClick={handlePinClick}
-          className={styles.pinButton}
-          ariaLabel={isPinned ? t('unpin-verse') : t('pin-verse')}
-          tooltip={isPinned ? t('unpin-verse') : t('pin-verse')}
-        >
-          {isPinned ? (
-            <PinFilledIcon className={classNames(styles.pinIcon, styles.pinIconFilled)} />
-          ) : (
-            <PinIcon className={styles.pinIcon} />
-          )}
-        </Button>
       </div>
-      <div className={styles.headerRightControls}>
-        <Button
-          variant={ButtonVariant.Ghost}
-          shape={ButtonShape.Circle}
-          onClick={handleClose}
-          className={styles.closeButton}
-          ariaLabel={t('aria.close')}
-        >
-          <CloseIcon />
-        </Button>
+      <div className={styles.separatorContainer}>
+        <Separator />
       </div>
     </div>
   );

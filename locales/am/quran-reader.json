@@ -158,6 +158,7 @@
   "pin-verses-to-compare": "እነሱን ለማነፃፀር ጥቅሶችን ይሰኩ",
   "pinned-saved-successfully": "የተሰኩ ጥቅሶች በተሳካ ሁኔታ ተቀምጠዋል",
   "pinned-verses": "የተሰኩ ጥቅሶች",
+  "play-from-word": "ከዎርድ አጫውት",
   "posted-in": "የተለጠፈው በ",
   "prev-ayah": "ቀዳሚ አያህ",
   "prev-hizb": "ቀዳሚ ሂዝብ",
@@ -186,10 +187,10 @@
     "reader-bio": "የአንባቢ የህይወት ታሪክ",
     "readers": "አንባቢዎች",
     "readings": "ንባቦች",
-    "title": "ቂራት",
+    "title": "ቂርዓት",
     "translation": "ትርጉም",
     "transliteration": "በቋንቋ ፊደል መጻፍ",
-    "what-are": "ኪራት ምንድን ናቸው?"
+    "what-are": "ቂርዓት (የተለያዩ የቁርዓን አቀራሮች) ምንድን ናቸው?"
   },
   "query-param-message": "አስቀድመው የተመረጡ የንባብ ቅንብሮችን እያዩ ነው። <0>በአሁኑ ቅንብሮችዎ ውስጥ ለማየት ያሰናብቱ</0> ወይም ቅንብርዎን ለማዘመን <1>ይቀዱ</1>",
   "ramadan-of-reflection": "\"የረመዳን ነጸብራቅ\" የሚለውን QuranReflectን ይቀላቀሉ",
@@ -217,6 +218,7 @@
   "save-pinned-to-collection": "ወደ ስብስብ ያስቀምጡ",
   "save-to": "አስቀምጥ ወደ...",
   "save-verse": "ጥቅስ አስቀምጥ {{verseKey}}",
+  "save-verse-short": "ጥቅስ አስቀምጥ",
   "saved-to": "ወደ {{collectionName}} ተቀምጧል",
   "see-less": "ያነሰ ይመልከቱ",
   "see-more": "ተጨማሪ ይመልከቱ",
