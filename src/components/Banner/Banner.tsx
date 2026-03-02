@@ -31,11 +31,12 @@ interface BannerProps {
 const Banner = ({ text, ctaButtonText, variant = BannerVariant.InlineChip, copy }: BannerProps) => {
   const mobileLineOne = copy?.mobileLineOne || '';
   const mobileLineTwo = copy?.mobileLineTwo || '';
+  const combinedMobileText = `${mobileLineOne} ${mobileLineTwo}`.trim();
   const desktopText = copy?.desktop || text || copy?.mobileLineOne || '';
   const shouldRenderTwoLineMobileCopy =
     variant === BannerVariant.Standalone && Boolean(mobileLineOne && mobileLineTwo);
   const shouldRenderDesktopUnderlinedSecondSegment =
-    shouldRenderTwoLineMobileCopy && desktopText.trim() === `${mobileLineOne} ${mobileLineTwo}`;
+    shouldRenderTwoLineMobileCopy && desktopText.trim() === combinedMobileText;
 
   const handleButtonClick = useCallback(() => {
     logButtonClick('donate_button_banner');

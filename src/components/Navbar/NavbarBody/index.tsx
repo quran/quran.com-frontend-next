@@ -54,7 +54,6 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
   const isQuranReaderRoute = isQuranReaderRoutePathname(router.pathname);
-  const shouldRenderStandaloneDesktopBanner = true;
   const normalizedPathname = router.asPath.split(/[?#]/)[0];
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const isPersistHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
@@ -122,7 +121,6 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { openSearchDrawer, openNavigationDrawer, openLanguageDrawer } = useNavbarDrawerActions();
 
   const bannerCopy = {
-    desktop: t('fundraising-sticky-banner-v2.desktop-text'),
     mobileLineOne: t('fundraising-sticky-banner-v2.mobile-line-one'),
     mobileLineTwo: t('fundraising-sticky-banner-v2.mobile-line-two'),
   };
@@ -144,8 +142,6 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
       {isBannerVisible && (
         <div
           className={classNames(styles.bannerContainerTop, {
-            [styles.mobileOnly]: !shouldRenderStandaloneDesktopBanner,
-            [styles.desktopAndMobile]: shouldRenderStandaloneDesktopBanner,
             [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen,
           })}
         >
