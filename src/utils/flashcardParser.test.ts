@@ -76,6 +76,13 @@ describe('flashcardParser', () => {
       expect(result?.afterHtml).toBe('<p>Practice this line slowly.</p>');
     });
 
+    it('keeps strong note paragraphs after flashcards in afterHtml', () => {
+      const html = `${makeSection()}<p><strong>Tip:</strong> Practice this line slowly.</p>`;
+      const result = parseFlashcardsFromHtml(html);
+      expect(result?.flashcards).toHaveLength(1);
+      expect(result?.afterHtml).toBe('<p><strong>Tip:</strong> Practice this line slowly.</p>');
+    });
+
     it('splits before trailing blockquote sections', () => {
       const html = `${makeSection()}<blockquote><a href="https://quran.com/2/1">2:1</a><p>Verse widget</p></blockquote>`;
       const result = parseFlashcardsFromHtml(html);
