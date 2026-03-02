@@ -1,6 +1,8 @@
 /* eslint-disable max-lines */
 import initialState, { DEFAULT_TAFSIRS } from './defaultSettings/defaultSettings';
+import { migrateDefaultScale } from './migration-scripts/migrate-default-scale';
 import { migrateRecentReadingSessions } from './migration-scripts/migrating-recent-reading-sessions';
+import { remapFontScale } from './migration-scripts/remap-font-scale';
 import { initialSidebarIsVisible } from './slices/QuranReader/sidebarNavigation';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
@@ -365,12 +367,32 @@ export default {
   }),
   46: (state) => ({
     ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      quranTextFontScale: remapFontScale(
+        state.quranReaderStyles.quranFont,
+        state.quranReaderStyles.quranTextFontScale,
+      ),
+    },
+  }),
+  47: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      quranTextFontScale: migrateDefaultScale(
+        state.quranReaderStyles.quranFont,
+        state.quranReaderStyles.quranTextFontScale,
+      ),
+    },
+  }),
+  48: (state) => ({
+    ...state,
     fundraisingBanner: {
       isHomepageBannerVisible: true,
       isQuranReaderBannerVisible: true,
     },
   }),
-  47: (state) => ({
+  49: (state) => ({
     ...state,
     fundraisingBanner: {
       ...state.fundraisingBanner,
@@ -378,7 +400,7 @@ export default {
       isQuranReaderFloatingBannerVisible: true,
     },
   }),
-  48: (state) => ({
+  50: (state) => ({
     ...state,
     fundraisingBanner: {
       ...state.fundraisingBanner,
