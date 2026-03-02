@@ -54,9 +54,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
   const isQuranReaderRoute = isQuranReaderRoutePathname(router.pathname);
-  const isHomepageRoute = router.pathname === '/';
-  const shouldRenderStandaloneDesktopBanner = isHomepageRoute;
-  const shouldRenderInlineDesktopBanner = !isHomepageRoute;
+  const shouldRenderStandaloneDesktopBanner = true;
   const normalizedPathname = router.asPath.split(/[?#]/)[0];
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const isPersistHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
@@ -129,23 +127,15 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
     mobileLineTwo: t('fundraising-sticky-banner-v2.mobile-line-two'),
   };
 
-  const homepageStandaloneDesktopText = `${bannerCopy.mobileLineOne} ${bannerCopy.mobileLineTwo}`;
+  const standaloneDesktopText = `${bannerCopy.mobileLineOne} ${bannerCopy.mobileLineTwo}`;
 
   const standaloneBannerProps = {
     copy: {
-      desktop: isHomepageRoute ? homepageStandaloneDesktopText : bannerCopy.desktop,
+      desktop: standaloneDesktopText,
       mobileLineOne: bannerCopy.mobileLineOne,
       mobileLineTwo: bannerCopy.mobileLineTwo,
     },
-    text: isHomepageRoute ? homepageStandaloneDesktopText : bannerCopy.desktop,
-    ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
-  };
-
-  const inlineBannerProps = {
-    copy: {
-      desktop: bannerCopy.desktop,
-    },
-    text: t('fundraising-sticky-banner-v2.desktop-text'),
+    text: standaloneDesktopText,
     ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
   };
 
@@ -173,11 +163,6 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             <NavbarLogoWrapper />
           </div>
         </div>
-        {isBannerVisible && shouldRenderInlineDesktopBanner && (
-          <div className={styles.bannerContainerCenter}>
-            <Banner {...inlineBannerProps} variant={BannerVariant.InlineChip} />
-          </div>
-        )}
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>
             {!isLoggedIn && <ProfileAvatarButton />}
