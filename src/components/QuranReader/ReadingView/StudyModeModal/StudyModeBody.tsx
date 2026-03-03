@@ -56,8 +56,14 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   hadithsInitialData,
   onGoToVerse,
 }) => {
-  const { containerRef, bottomActionsRef, tabContentRef, hasScrolledDown, showScrollGradient } =
-    useStudyModeScroll({ verseKey: verse.verseKey, activeTab });
+  const {
+    containerRef,
+    bottomActionsRef,
+    tabContentRef,
+    tabContentMinBlockSize,
+    hasScrolledDown,
+    showScrollGradient,
+  } = useStudyModeScroll({ verseKey: verse.verseKey, activeTab });
   const [relatedVersesCount, setRelatedVersesCount] = React.useState<number | null>(null);
 
   const tabs = useStudyModeTabs({
@@ -109,6 +115,11 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
               key={`${activeTab}-${verse.verseKey}`}
               ref={tabContentRef}
               className={styles.tabContentContainer}
+              style={
+                tabContentMinBlockSize !== null
+                  ? { minBlockSize: `${tabContentMinBlockSize}px` }
+                  : undefined
+              }
             >
               <TabComponent
                 chapterId={selectedChapterId}
