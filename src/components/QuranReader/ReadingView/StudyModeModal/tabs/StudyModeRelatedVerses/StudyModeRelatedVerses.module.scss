@@ -1,8 +1,8 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/utility';
 
-.relatedVerse {
-  padding-block: var(--spacing-medium2-px);
+.relatedVerseContent {
+  padding-block-end: var(--spacing-medium2-px);
 }
 
 .relatedVerseSeparatorContainer {
@@ -29,4 +29,19 @@
 
 .relatedVerseCta {
   @include utility.edgeHorizontalPadding;
+}
+
+.collapsibleHeader {
+  @include utility.edgeHorizontalPadding;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  inline-size: 100%;
+  padding-block: var(--spacing-medium2-px);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-background-alternative-medium);
+  }
 }

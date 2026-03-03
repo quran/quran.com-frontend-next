@@ -1002,6 +1002,24 @@ $page-container-max-width: 80rem;
   padding-block: var(--spacing-edge-vertical-px);
 }
 
+@mixin edgeMargin {
+  margin-inline: var(--spacing-edge-horizontal-px);
+  margin-block: var(--spacing-edge-vertical-px);
+}
+
+@mixin edgeMarginEven {
+  margin-inline: var(--spacing-edge-horizontal-px);
+  margin-block: var(--spacing-edge-vertical-even-px);
+}
+
+@mixin edgeHorizontalMargin {
+  margin-inline: var(--spacing-edge-horizontal-px);
+}
+
+@mixin edgeVerticalMargin {
+  margin-block: var(--spacing-edge-vertical-px);
+}
+
 @mixin scrollbarNone {
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
