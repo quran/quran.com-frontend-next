@@ -1,22 +1,23 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import LoadFromCollectionModal from '../PinnedVerses/LoadFromCollectionModal';
-import SavePinnedToCollectionModal from '../PinnedVerses/SavePinnedToCollectionModal';
 import copyPinnedVerses from '../PinnedVerses/utils/copyPinnedVerses';
 
 import styles from './PinnedVersesBar.module.scss';
 import PinnedVersesContent from './PinnedVersesContent';
 
-import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import { selectPinnedVerses, selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
+import {
+  openPinnedVersesModal,
+  PinnedVersesModalType,
+} from '@/redux/slices/QuranReader/pinnedVersesModal';
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
@@ -38,10 +39,6 @@ const PinnedVersesBar: React.FC = () => {
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
 
   const { unpinVerseWithSync, clearPinnedWithSync } = usePinnedVerseSync();
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
-  const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
-  const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
-
   const handleCompareClick = useCallback(() => {
     logButtonClick('pinned_bar_compare');
     if (pinnedVerseKeys.length > 0) {
@@ -56,8 +53,8 @@ const PinnedVersesBar: React.FC = () => {
       router.push(getLoginNavigationUrl(router.asPath));
       return;
     }
-    setIsLoadModalOpen(true);
-  }, [router]);
+    dispatch(openPinnedVersesModal({ modalType: PinnedVersesModalType.LOAD_FROM_COLLECTION }));
+  }, [dispatch, router]);
 
   const handleCopy = useCallback(async () => {
     logButtonClick('pinned_menu_copy');
@@ -107,8 +104,8 @@ const PinnedVersesBar: React.FC = () => {
       router.push(getLoginNavigationUrl(router.asPath));
       return;
     }
-    setIsSaveModalOpen(true);
-  }, [router]);
+    dispatch(openPinnedVersesModal({ modalType: PinnedVersesModalType.SAVE_TO_COLLECTION }));
+  }, [dispatch, router]);
 
   const handleAddNote = useCallback(() => {
     logButtonClick('pinned_menu_add_note');
@@ -117,8 +114,8 @@ const PinnedVersesBar: React.FC = () => {
       return;
     }
 
-    setIsNoteModalOpen(true);
-  }, [router]);
+    dispatch(openPinnedVersesModal({ modalType: PinnedVersesModalType.ADD_NOTE }));
+  }, [dispatch, router]);
 
   if (pinnedVerses.length === 0) return null;
 
@@ -143,26 +140,6 @@ const PinnedVersesBar: React.FC = () => {
           onAddNote={handleAddNote}
         />
       </div>
-
-      {isLoggedIn() && (
-        <>
-          <SavePinnedToCollectionModal
-            isOpen={isSaveModalOpen}
-            onClose={() => setIsSaveModalOpen(false)}
-          />
-          <LoadFromCollectionModal
-            isOpen={isLoadModalOpen}
-            onClose={() => setIsLoadModalOpen(false)}
-          />
-          <AddNoteModal
-            showRanges
-            isModalOpen={isNoteModalOpen}
-            onModalClose={() => setIsNoteModalOpen(false)}
-            onMyNotes={() => setIsNoteModalOpen(false)}
-            verseKeys={pinnedVerseKeys}
-          />
-        </>
-      )}
     </>
   );
 };

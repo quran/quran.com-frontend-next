@@ -3,6 +3,7 @@ import React from 'react';
 import { StudyModeTabId } from './StudyModeBottomActions';
 import StudyModeSsrModalContent from './StudyModeSsrModalContent';
 
+import PinnedVersesModalContainer from '@/components/QuranReader/PinnedVersesModalContainer';
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
 import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
@@ -54,6 +55,7 @@ const StudyModeSsrContainerView: React.FC<StudyModeSsrContainerViewProps> = (pro
     <>
       <StudyModeSsrModalContent {...props} />
       <VerseActionModalContainer />
+      <PinnedVersesModalContainer />
     </>
   );
 };
