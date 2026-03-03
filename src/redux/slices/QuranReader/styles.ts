@@ -34,6 +34,10 @@ export const quranReaderStylesSlice = createSlice({
       ...state,
       quranTextFontScale: state.quranTextFontScale + 1,
     }),
+    setQuranTextFontScale: (state, action: PayloadAction<number>) => ({
+      ...state,
+      quranTextFontScale: action.payload,
+    }),
     decreaseQuranTextFontScale: (state) => ({
       ...state,
       quranTextFontScale: state.quranTextFontScale - 1,
@@ -164,6 +168,7 @@ export const {
   setQuranFont,
   increaseQuranTextFontScale,
   decreaseQuranTextFontScale,
+  setQuranTextFontScale,
   increaseTranslationFontScale,
   decreaseTranslationFontScale,
   increaseWordByWordFontScale,

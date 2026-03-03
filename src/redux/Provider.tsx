@@ -11,6 +11,9 @@ import getStore from './store';
 import resetSettings from '@/redux/actions/reset-settings';
 import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
+import useSyncQuranScaleWithViewport, {
+  syncQuranScaleWithViewport,
+} from '@/redux/hooks/useSyncQuranScaleWithViewport';
 import remapRemoteFontScale from '@/redux/migration-scripts/migrate-remote-font-scale';
 import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -68,6 +71,8 @@ const ReduxProvider = ({ children, locale }) => {
   const initialLocaleRef = useRef(locale);
   const audioService = useContext(AudioPlayerMachineContext);
 
+  useSyncQuranScaleWithViewport(store);
+
   /**
    * Before the Gate lifts, we want to get the user preferences
    * then store in Redux so that they can be used.
@@ -124,6 +129,7 @@ const ReduxProvider = ({ children, locale }) => {
         // eslint-disable-next-line no-empty
       } catch (error) {}
     }
+    syncQuranScaleWithViewport(store);
   };
 
   return (
