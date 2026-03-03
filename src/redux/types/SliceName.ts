@@ -35,6 +35,7 @@ enum SliceName {
   VERSE_ACTION_MODAL = 'verseActionModal',
   AYAH_WIDGET = 'ayahWidget',
   PINNED_VERSES = 'pinnedVerses',
+  PINNED_VERSES_MODAL = 'pinnedVersesModal',
 }
 
 export default SliceName;

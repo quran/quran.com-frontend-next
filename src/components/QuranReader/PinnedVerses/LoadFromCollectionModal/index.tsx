@@ -27,9 +27,14 @@ import { Collection } from 'types/Collection';
 interface LoadFromCollectionModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onBack?: () => void;
 }
 
-const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpen, onClose }) => {
+const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({
+  isOpen,
+  onClose,
+  onBack,
+}) => {
   const { t } = useTranslation('quran-reader');
   const dispatch = useDispatch();
   const toast = useToast();
@@ -95,7 +100,11 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
     >
       <Modal.Body>
         <div className={styles.container}>
-          <SaveBookmarkModalHeader title={t('load-from-collection')} onClose={onClose} />
+          <SaveBookmarkModalHeader
+            title={t('load-from-collection')}
+            onClose={onClose}
+            onBack={onBack}
+          />
           <CollectionsList
             collections={sortedCollections}
             isDataReady={!isLoadingCollections}

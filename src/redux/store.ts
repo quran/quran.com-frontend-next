@@ -34,6 +34,7 @@ import contextMenu from './slices/QuranReader/contextMenu';
 import fontFaces from './slices/QuranReader/font-faces';
 import notes from './slices/QuranReader/notes';
 import pinnedVerses from './slices/QuranReader/pinnedVerses';
+import pinnedVersesModal from './slices/QuranReader/pinnedVersesModal';
 import readingPreferences from './slices/QuranReader/readingPreferences';
 import readingTracker from './slices/QuranReader/readingTracker';
 import readingViewVerse from './slices/QuranReader/readingViewVerse';
@@ -117,6 +118,7 @@ export const rootReducer = combineReducers({
   studyMode,
   verseActionModal,
   pinnedVerses,
+  pinnedVersesModal,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

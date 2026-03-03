@@ -4,6 +4,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 import useSyncReadingProgress from './hooks/useSyncReadingProgress';
+import PinnedVersesModalContainer from './PinnedVersesModalContainer';
 import StudyModeContainer from './StudyModeContainer';
 import TranslationView from './TranslationView';
 import VerseActionModalContainer from './VerseActionModalContainer';
@@ -47,6 +48,7 @@ const QuranReaderView: React.FC<Props> = ({
         />
         <StudyModeContainer />
         <VerseActionModalContainer />
+        <PinnedVersesModalContainer />
       </>
     );
   }
@@ -61,6 +63,7 @@ const QuranReaderView: React.FC<Props> = ({
       />
       <StudyModeContainer />
       <VerseActionModalContainer />
+      <PinnedVersesModalContainer />
     </>
   );
 };
