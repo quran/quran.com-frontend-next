@@ -6,7 +6,7 @@ const DEFAULT_LOCALE = 'en';
 
 const SURAH_NAMES_FONT = {
   type: 'font/woff2',
-  location: '/fonts/quran/surah-names/v1/sura_names.woff2',
+  location: '/fonts/quran/surah-names/v4/sura_names.woff2',
 };
 
 const LOCALE_PRELOADED_FONTS = {

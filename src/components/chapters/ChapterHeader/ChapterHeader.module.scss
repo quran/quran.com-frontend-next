@@ -293,16 +293,6 @@ $bismillahSvgInlineSizeMobile: 148px;
   min-block-size: calc(3.75 * var(--spacing-medium-plus-px));
 }
 
-.chapterIconContainer {
-  // a hack to make it visually aligned with the surah name
-  /* stylelint-disable-next-line csstools/use-logical */
-  margin-left: calc(var(--spacing-medium-plus-px) * -1);
-
-  // add extra space to right to fix overlap, (calligraphy is off sometime)
-  /* stylelint-disable-next-line csstools/use-logical */
-  margin-right: var(--spacing-xxsmall-px);
-}
-
 .chapterEventWrapper {
   grid-row: 2;
   @include breakpoints.desktopL {
