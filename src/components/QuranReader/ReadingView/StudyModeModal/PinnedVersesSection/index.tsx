@@ -105,23 +105,21 @@ const PinnedVersesSection: React.FC<PinnedVersesSectionProps> = ({ onGoToVerse }
   }
 
   return (
-    <>
-      <div className={styles.pinnedSection}>
-        <PinnedVersesContent
-          pinnedVerses={pinnedVerses}
-          selectedVerseKey={currentStudyModeVerseKey}
-          showCompareButton={false}
-          noPadding
-          onVerseTagClick={handleVerseTagClick}
-          onRemoveVerse={handleRemoveVerse}
-          onClear={handleClear}
-          onSaveToCollection={handleSaveToCollection}
-          onLoadFromCollection={handleLoadFromCollection}
-          onCopy={handleCopy}
-          onAddNote={handleAddNote}
-        />
-      </div>
-    </>
+    <div className={styles.pinnedSection}>
+      <PinnedVersesContent
+        pinnedVerses={pinnedVerses}
+        selectedVerseKey={currentStudyModeVerseKey}
+        showCompareButton={false}
+        noPadding
+        onVerseTagClick={handleVerseTagClick}
+        onRemoveVerse={handleRemoveVerse}
+        onClear={handleClear}
+        onSaveToCollection={handleSaveToCollection}
+        onLoadFromCollection={handleLoadFromCollection}
+        onCopy={handleCopy}
+        onAddNote={handleAddNote}
+      />
+    </div>
   );
 };
 

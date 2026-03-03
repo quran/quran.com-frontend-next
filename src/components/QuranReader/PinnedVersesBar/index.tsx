@@ -120,27 +120,25 @@ const PinnedVersesBar: React.FC = () => {
   if (pinnedVerses.length === 0) return null;
 
   return (
-    <>
-      <div
-        className={classNames(styles.container, {
-          [styles.withSidebarNavigation]: isSidebarNavigationVisible,
-        })}
-      >
-        <PinnedVersesContent
-          pinnedVerses={pinnedVerses}
-          selectedVerseKey={null}
-          showCompareButton
-          onVerseTagClick={handleVerseTagClick}
-          onRemoveVerse={handleRemoveVerse}
-          onCompareClick={handleCompareClick}
-          onClear={handleClear}
-          onSaveToCollection={handleSaveToCollection}
-          onLoadFromCollection={handleLoadFromCollection}
-          onCopy={handleCopy}
-          onAddNote={handleAddNote}
-        />
-      </div>
-    </>
+    <div
+      className={classNames(styles.container, {
+        [styles.withSidebarNavigation]: isSidebarNavigationVisible,
+      })}
+    >
+      <PinnedVersesContent
+        pinnedVerses={pinnedVerses}
+        selectedVerseKey={null}
+        showCompareButton
+        onVerseTagClick={handleVerseTagClick}
+        onRemoveVerse={handleRemoveVerse}
+        onCompareClick={handleCompareClick}
+        onClear={handleClear}
+        onSaveToCollection={handleSaveToCollection}
+        onLoadFromCollection={handleLoadFromCollection}
+        onCopy={handleCopy}
+        onAddNote={handleAddNote}
+      />
+    </div>
   );
 };
 
