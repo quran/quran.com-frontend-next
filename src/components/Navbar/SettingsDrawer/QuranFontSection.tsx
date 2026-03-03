@@ -14,6 +14,7 @@ import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select from '@/dls/Forms/Select';
 import Switch from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import useIsMobile, { MobileSizeVariant } from '@/hooks/useIsMobile';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { resetLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import {
@@ -31,9 +32,14 @@ import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { logEvent, logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
+const MOBILE_FONT_SCALE_CAP = 4;
+const SMALL_MOBILE_FONT_SCALE_CAP = 3;
+
 const QuranFontSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
+  const isMobile = useIsMobile();
+  const isSmallMobile = useIsMobile(MobileSizeVariant.SMALL);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const {
     actions: { onSettingsChange },
@@ -188,6 +194,7 @@ const QuranFontSection = () => {
   };
 
   const onFontScaleIncreaseClicked = () => {
+    if (quranTextFontScale >= maxSelectableQuranScale) return;
     const value = quranTextFontScale + 1;
     logEvent('quran_font_size_increased');
     logValueChange('font_scale', quranTextFontScale, value);
@@ -210,6 +217,14 @@ const QuranFontSection = () => {
       PreferenceGroup.QURAN_READER_STYLES,
     );
   };
+
+  let maxSelectableQuranScale = MAXIMUM_QURAN_FONT_STEP;
+  if (isMobile) {
+    maxSelectableQuranScale = MOBILE_FONT_SCALE_CAP;
+  }
+  if (isSmallMobile) {
+    maxSelectableQuranScale = SMALL_MOBILE_FONT_SCALE_CAP;
+  }
 
   return (
     <Section id="quran-font-section" hideSeparator>
@@ -275,7 +290,7 @@ const QuranFontSection = () => {
           count={quranTextFontScale}
           onDecrement={quranTextFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
           onIncrement={
-            quranTextFontScale === MAXIMUM_QURAN_FONT_STEP ? null : onFontScaleIncreaseClicked
+            quranTextFontScale >= maxSelectableQuranScale ? null : onFontScaleIncreaseClicked
           }
           className={styles.counter}
         />
