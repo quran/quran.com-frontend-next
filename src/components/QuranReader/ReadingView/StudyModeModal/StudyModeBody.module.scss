@@ -35,7 +35,6 @@
 .tabContentContainer {
   display: block;
   overflow: visible;
-  min-block-size: clamp(460px, 75dvh, 760px);
 }
 
 // Gradient fade overlay above bottom actions

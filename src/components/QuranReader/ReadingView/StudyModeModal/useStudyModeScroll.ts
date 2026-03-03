@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState, useCallback, RefObject } from 'react';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
+import useStudyModeTabAutoScroll from './useStudyModeTabAutoScroll';
 
 interface UseStudyModeScrollProps {
   verseKey: string;
@@ -11,6 +12,7 @@ interface UseStudyModeScrollReturn {
   containerRef: RefObject<HTMLDivElement>;
   bottomActionsRef: RefObject<HTMLDivElement>;
   tabContentRef: RefObject<HTMLDivElement>;
+  tabContentMinBlockSize: number | null;
   hasScrolledDown: boolean;
   hasScrollableContent: boolean;
   showScrollGradient: boolean;
@@ -33,7 +35,13 @@ const useStudyModeScroll = ({
   const tabContentRef = useRef<HTMLDivElement>(null);
   const [hasScrolledDown, setHasScrolledDown] = useState(false);
   const [hasScrollableContent, setHasScrollableContent] = useState(false);
-  const [hasScrolledToTab, setHasScrolledToTab] = useState(false);
+  const { tabContentMinBlockSize } = useStudyModeTabAutoScroll({
+    verseKey,
+    activeTab,
+    containerRef,
+    bottomActionsRef,
+    tabContentRef,
+  });
 
   // Check if content is scrollable
   useEffect(() => {
@@ -76,30 +84,7 @@ const useStudyModeScroll = ({
   // Reset scroll state when verse changes
   useEffect(() => {
     setHasScrolledDown(false);
-    setHasScrolledToTab(false);
   }, [verseKey]);
-
-  // Reset scroll-to-tab state when tab closes
-  useEffect(() => {
-    if (!activeTab) {
-      setHasScrolledToTab(false);
-    }
-  }, [activeTab]);
-
-  // Auto-scroll to tab content when a tab is opened
-  useEffect(() => {
-    if (activeTab && !hasScrolledToTab && bottomActionsRef.current && containerRef.current) {
-      setHasScrolledToTab(true);
-      const scrollContainer = containerRef.current.parentElement;
-      if (scrollContainer) {
-        const bottomActionsTop = bottomActionsRef.current.offsetTop;
-        scrollContainer.scrollTo({
-          top: bottomActionsTop - 140,
-          behavior: 'smooth',
-        });
-      }
-    }
-  }, [activeTab, hasScrolledToTab]);
 
   const showScrollGradient = hasScrollableContent && !hasScrolledDown && !activeTab;
 
@@ -107,6 +92,7 @@ const useStudyModeScroll = ({
     containerRef,
     bottomActionsRef,
     tabContentRef,
+    tabContentMinBlockSize,
     hasScrolledDown,
     hasScrollableContent,
     showScrollGradient,
