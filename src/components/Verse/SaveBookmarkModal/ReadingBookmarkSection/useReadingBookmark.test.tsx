@@ -82,17 +82,17 @@ vi.mock('@/utils/chapter', () => ({
 }));
 
 const toLocalizedNumberMock = vi.fn((n: number, _lang?: string) => String(n));
-const toLocalizedVerseKeyMock = vi.fn((key: string, _lang: string) => key);
-const toLocalizedVerseKeyRTLMock = vi.fn((key: string, _lang: string) =>
-  key.split(':').reverse().join(':'),
-);
-const isRTLLocaleMock = vi.fn((lang: string) => lang === 'ar');
+const toLocalizedVerseKeyAutoMock = vi.fn((key: string, lang: string) => {
+  if (['ar', 'fa'].includes(lang)) {
+    return key.split(':').reverse().join(':');
+  }
+
+  return key;
+});
 
 vi.mock('@/utils/locale', () => ({
   toLocalizedNumber: (n: number, lang?: string) => toLocalizedNumberMock(n, lang),
-  toLocalizedVerseKey: (key: string, lang: string) => toLocalizedVerseKeyMock(key, lang),
-  toLocalizedVerseKeyRTL: (key: string, lang: string) => toLocalizedVerseKeyRTLMock(key, lang),
-  isRTLLocale: (lang: string) => isRTLLocaleMock(lang),
+  toLocalizedVerseKeyAuto: (key: string, lang: string) => toLocalizedVerseKeyAutoMock(key, lang),
 }));
 
 describe('useReadingBookmark - Logged-in User', () => {
@@ -487,7 +487,7 @@ describe('useReadingBookmark - Logged-in User', () => {
       );
 
       expect(result.current.resourceDisplayName).toBe('Al-Baqarah 255:2');
-      expect(toLocalizedVerseKeyRTLMock).toHaveBeenCalledWith('2:255', 'ar');
+      expect(toLocalizedVerseKeyAutoMock).toHaveBeenCalledWith('2:255', 'ar');
     });
 
     it('uses RTL verse key for displayReadingBookmark', () => {
@@ -508,7 +508,7 @@ describe('useReadingBookmark - Logged-in User', () => {
       );
 
       expect(result.current.displayReadingBookmark).toBe('Al-Baqarah 255:2');
-      expect(toLocalizedVerseKeyRTLMock).toHaveBeenCalledWith('2:255', 'ar');
+      expect(toLocalizedVerseKeyAutoMock).toHaveBeenCalledWith('2:255', 'ar');
     });
   });
 });

@@ -271,7 +271,18 @@
     "verification-code": "Verificatie code"
   },
   "from": "Van",
+  "fundraising-card-v2": {
+    "cta": "Doneer nu",
+    "description": "Maandelijkse donaties helpen ons Quran.com te verbeteren en de bedrijfsvoering te financieren, waardoor we ons minder hoeven te richten op fondsenwerving en meer op het creëren van impact.",
+    "title": "Word een maandelijkse donateur"
+  },
   "fundraising-share-title": "Deel Quran.com Fondsenwerving",
+  "fundraising-sticky-banner-v2": {
+    "cta": "Doneer",
+    "desktop-text": "Draag bij aan onze missie.",
+    "mobile-line-one": "Het is de maand van de Koran.",
+    "mobile-line-two": "Help ons het licht ervan te verspreiden."
+  },
   "fundraising-sticky-banner": {
     "cta": "Doneer",
     "title": "Geef tijdens de beste dagen!"

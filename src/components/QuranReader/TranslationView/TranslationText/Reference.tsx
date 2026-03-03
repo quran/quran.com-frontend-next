@@ -3,9 +3,9 @@ import { useCallback, useMemo } from 'react';
 import styles from './TranslationText.module.scss';
 
 import Link from '@/dls/Link/Link';
-import EventNames from '@/utils/event-names';
+import EventName from '@/utils/event-names';
 import { logButtonClick } from '@/utils/eventLogger';
-import { isRTLLocale, toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
+import { toLocalizedVerseKeyAuto } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 
 interface Props {
@@ -18,13 +18,11 @@ const Reference = ({ reference, chapterName, lang }: Props) => {
   const localizedReference = useMemo(() => {
     if (!reference) return '';
 
-    return isRTLLocale(lang)
-      ? toLocalizedVerseKeyRTL(reference, lang)
-      : toLocalizedVerseKey(reference, lang);
+    return toLocalizedVerseKeyAuto(reference, lang);
   }, [reference, lang]);
 
   const handleClick = useCallback(() => {
-    logButtonClick(EventNames.QURAN_READER_TRANSLATION_REFERENCE, { reference, chapterName, lang });
+    logButtonClick(EventName.QURAN_READER_TRANSLATION_REFERENCE, { reference, chapterName, lang });
   }, [reference, chapterName, lang]);
 
   return (

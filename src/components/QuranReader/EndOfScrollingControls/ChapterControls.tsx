@@ -35,6 +35,7 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
       <div className={styles.chapterBannerWrapper}>
         <HomepageFundraisingBanner
           context={FundraisingBannerContext.QuranReader}
+          isDismissible={false}
           analyticsSource="quran_reader_chapter"
           analyticsParams={{ chapterId: chapterNumber }}
         />

@@ -50,6 +50,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
     <div
       className={classNames({
         bannerActive: isBannerVisible,
+        desktopStandaloneBannerActive: isBannerVisible,
         navbarVisible: showNavbar,
         navbarHidden: !showNavbar,
       })}

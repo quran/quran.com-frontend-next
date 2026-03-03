@@ -44,15 +44,21 @@ const ResetButton = () => {
   };
 
   const resetAndSetInitialState = () => {
+    const snapshot = audioService.getSnapshot();
+    const activeReciterId = snapshot.context.audioData?.reciterId || snapshot.context.reciterId;
+    const shouldChangeReciter = activeReciterId !== DEFAULT_XSTATE_INITIAL_STATE.reciterId;
+
     dispatch(resetSettings(lang));
     audioService.send({
       type: 'SET_INITIAL_CONTEXT',
       ...DEFAULT_XSTATE_INITIAL_STATE,
     });
-    audioService.send({
-      type: 'CHANGE_RECITER',
-      reciterId: DEFAULT_XSTATE_INITIAL_STATE.reciterId,
-    });
+    if (shouldChangeReciter) {
+      audioService.send({
+        type: 'CHANGE_RECITER',
+        reciterId: DEFAULT_XSTATE_INITIAL_STATE.reciterId,
+      });
+    }
   };
 
   const onResetSettingsClicked = async () => {

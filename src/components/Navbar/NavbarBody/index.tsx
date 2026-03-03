@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
-import Banner from '@/components/Banner/Banner';
+import Banner, { BannerVariant } from '@/components/Banner/Banner';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -31,6 +31,7 @@ import {
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { TestId } from '@/tests/test-ids';
 import { getSidebarTransitionDurationFromCss } from '@/utils/css';
+import { isQuranReaderRoutePathname } from '@/utils/routes';
 
 const SidebarNavigation = dynamic(
   () => import('@/components/QuranReader/SidebarNavigation/SidebarNavigation'),
@@ -44,19 +45,6 @@ interface Props {
   isBannerVisible: boolean;
 }
 
-const QURAN_READER_ROUTES = new Set([
-  '/[chapterId]',
-  '/[chapterId]/[verseId]',
-  '/hizb/[hizbId]',
-  '/juz/[juzId]',
-  '/page/[pageId]',
-  '/rub/[rubId]',
-]);
-
-interface Props {
-  isBannerVisible: boolean;
-}
-
 const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
@@ -65,7 +53,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const isLanguageDrawerOpen = useSelector(selectIsLanguageDrawerOpen);
   const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
-  const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
+  const isQuranReaderRoute = isQuranReaderRoutePathname(router.pathname);
   const normalizedPathname = router.asPath.split(/[?#]/)[0];
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const isPersistHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
@@ -132,9 +120,21 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
 
   const { openSearchDrawer, openNavigationDrawer, openLanguageDrawer } = useNavbarDrawerActions();
 
-  const bannerProps = {
-    text: t('contribute-to-our-mission'),
-    ctaButtonText: t('donate'),
+  const bannerCopy = {
+    mobileLineOne: t('fundraising-sticky-banner-v2.mobile-line-one'),
+    mobileLineTwo: t('fundraising-sticky-banner-v2.mobile-line-two'),
+  };
+
+  const standaloneDesktopText = `${bannerCopy.mobileLineOne} ${bannerCopy.mobileLineTwo}`;
+
+  const standaloneBannerProps = {
+    copy: {
+      desktop: standaloneDesktopText,
+      mobileLineOne: bannerCopy.mobileLineOne,
+      mobileLineTwo: bannerCopy.mobileLineTwo,
+    },
+    text: standaloneDesktopText,
+    ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
   };
 
   return (
@@ -145,7 +145,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen,
           })}
         >
-          <Banner {...bannerProps} />
+          <Banner {...standaloneBannerProps} variant={BannerVariant.Standalone} />
         </div>
       )}
       <div
@@ -159,11 +159,6 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             <NavbarLogoWrapper />
           </div>
         </div>
-        {isBannerVisible && (
-          <div className={styles.bannerContainerCenter}>
-            <Banner {...bannerProps} />
-          </div>
-        )}
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>
             {!isLoggedIn && <ProfileAvatarButton />}

@@ -13,6 +13,7 @@ const version = `quran.com-frontend-next@${process.env.NEXT_PUBLIC_APP_VERSION}`
 Sentry.init({
   enabled: SENTRY_ENABLED,
   dsn: SENTRY_ENABLED ? SENTRY_DSN : null,
+  sendDefaultPii: true,
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production

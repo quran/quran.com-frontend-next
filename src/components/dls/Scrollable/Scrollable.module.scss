@@ -6,6 +6,7 @@
 
 .children {
   @include utility.scrollbarNone;
+  box-sizing: border-box;
   display: flex;
   overflow-x: auto;
   flex-wrap: nowrap;

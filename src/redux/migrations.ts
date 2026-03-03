@@ -374,6 +374,23 @@ export default {
   }),
   47: (state) => ({
     ...state,
+    fundraisingBanner: {
+      ...state.fundraisingBanner,
+      // Keep floating reader donation visible after decoupling it from end-of-surah visibility.
+      isQuranReaderFloatingBannerVisible: true,
+    },
+  }),
+  48: (state) => ({
+    ...state,
+    fundraisingBanner: {
+      ...state.fundraisingBanner,
+      // One-time reset after reader donation visibility refactor to recover stale hidden states.
+      isQuranReaderBannerVisible: true,
+      isQuranReaderFloatingBannerVisible: true,
+    },
+  }),
+  49: (state) => ({
+    ...state,
     quranReaderStyles: {
       ...state.quranReaderStyles,
       quranTextFontScale: remapFontScale(
@@ -382,7 +399,7 @@ export default {
       ),
     },
   }),
-  48: (state) => ({
+  50: (state) => ({
     ...state,
     quranReaderStyles: {
       ...state.quranReaderStyles,

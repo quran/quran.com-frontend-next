@@ -147,7 +147,7 @@ describe('Redux migrations', () => {
     expect(m2.quranReaderStyles.showTajweedRules).toBe(false);
   });
 
-  describe('migration 47: font scale remap', () => {
+  describe('migration 49: font scale remap', () => {
     it.each([
       [QuranFont.QPCHafs, 6, 7],
       [QuranFont.MadaniV1, 7, 9],
@@ -158,7 +158,7 @@ describe('Redux migrations', () => {
       const state = {
         quranReaderStyles: { quranFont: font, quranTextFontScale: oldScale },
       };
-      const result = migrations[47](state);
+      const result = migrations[49](state);
       expect(result.quranReaderStyles.quranTextFontScale).toBe(newScale);
     });
 
@@ -166,7 +166,7 @@ describe('Redux migrations', () => {
       const state = {
         quranReaderStyles: { quranFont: QuranFont.QPCHafs, quranTextFontScale: 4 },
       };
-      const result = migrations[47](state);
+      const result = migrations[49](state);
       expect(result.quranReaderStyles.quranTextFontScale).toBe(7);
     });
 
@@ -174,7 +174,7 @@ describe('Redux migrations', () => {
       const state = {
         quranReaderStyles: { quranFont: QuranFont.IndoPak, quranTextFontScale: 5 },
       };
-      const result = migrations[47](state);
+      const result = migrations[49](state);
       expect(result.quranReaderStyles.quranTextFontScale).toBe(7);
     });
 
@@ -182,7 +182,7 @@ describe('Redux migrations', () => {
       const state = {
         quranReaderStyles: { quranFont: QuranFont.QPCHafs, quranTextFontScale: 3 },
       };
-      const result = migrations[47](state);
+      const result = migrations[49](state);
       expect(result.quranReaderStyles.quranTextFontScale).toBe(3);
     });
 
@@ -190,7 +190,7 @@ describe('Redux migrations', () => {
       const state = {
         quranReaderStyles: { quranFont: QuranFont.Uthmani, quranTextFontScale: 6 },
       };
-      const result = migrations[47](state);
+      const result = migrations[49](state);
       expect(result.quranReaderStyles.quranTextFontScale).toBe(6);
     });
 
@@ -203,7 +203,7 @@ describe('Redux migrations', () => {
         },
         otherSlice: { data: 'kept' },
       };
-      const result = migrations[47](state);
+      const result = migrations[49](state);
       expect(result.quranReaderStyles.translationFontScale).toBe(3);
       expect(result.otherSlice).toEqual({ data: 'kept' });
     });

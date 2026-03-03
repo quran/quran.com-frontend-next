@@ -271,7 +271,18 @@
     "verification-code": "Kode Verifikasi"
   },
   "from": "Dari",
+  "fundraising-card-v2": {
+    "cta": "Donasi sekarang",
+    "description": "Donatur bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasional sehingga kami dapat lebih fokus pada menciptakan dampak daripada penggalangan dana.",
+    "title": "Menjadi Donatur Bulanan"
+  },
   "fundraising-share-title": "Sebarkan Penggalangan Dana Quran.com",
+  "fundraising-sticky-banner-v2": {
+    "cta": "Menyumbangkan",
+    "desktop-text": "Berkontribusilah pada misi kami",
+    "mobile-line-one": "Ini adalah bulan Al-Quran.",
+    "mobile-line-two": "Bantu kami menyebarkan cahayanya."
+  },
   "fundraising-sticky-banner": {
     "cta": "Menyumbang",
     "title": "Menyumbang di hari-hari terbaik!"

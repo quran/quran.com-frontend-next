@@ -1,5 +1,6 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/mixins/qna-font-scales';
+@use 'src/styles/utility';
 
 // Font scale generation for Hadith components
 $hadith-scales: (
@@ -47,5 +48,7 @@ $hadith-scales: (
 }
 
 .hadithsContainer {
+  @include utility.edgeHorizontalPadding;
   padding-block-end: var(--spacing-max);
+  margin-block-start: var(--spacing-small-px);
 }

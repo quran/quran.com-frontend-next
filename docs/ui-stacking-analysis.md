@@ -3,6 +3,39 @@
 This document provides a comprehensive visual analysis of how UI elements stack on top of each other
 across different states in the Quran.com frontend application.
 
+## 2026 Donation Surface Update
+
+This document now reflects the donation-surface behavior implemented from Figma:
+
+- **Mobile (homepage + reader):** donation strip is standalone above the navbar row.
+- **Desktop homepage:** donation strip is standalone above the navbar row.
+- **Desktop Quran Reader:** donation strip is an inline center chip inside the navbar row.
+- **Quran Reader donation card:** moved from end-of-scroll to a fixed floating surface.
+  - Mobile: bottom-center block.
+  - Desktop: bottom-right compact block.
+
+### Height math update
+
+- `--banner-height` uses mobile strip height.
+- Desktop standalone strip height is controlled via `--banner-height-desktop` (`45px`).
+- `desktopHomepageStandaloneBannerActive` is the route-aware class that enables:
+  - `--navbar-container-height = calc(var(--navbar-height) + var(--banner-height))` on desktop
+    homepage.
+- For non-homepage desktop routes, navbar container height stays `var(--navbar-height)` even when
+  banner is active.
+
+### Reader floating card layer
+
+- Reader floating donation card is rendered from `QuranReader/index.tsx` with:
+  - `z-index: calc(var(--z-index-sticky) - 1)` (below sticky/context/sidebar layers, above page
+    content).
+  - Desktop offset: `right: 16px`, `bottom: 15px`.
+  - Mobile offset: `left/right: 10px`, `bottom: 10px` (centered card block).
+- This guarantees:
+  - Navbar (`--z-index-header = 400`) always wins.
+  - Context menu / sidebar (`--z-index-sticky = 300`) always wins.
+  - Donation card remains interactive without covering core reader navigation layers.
+
 ## Z-Index Hierarchy (from theme.scss)
 
 | Layer                | Z-Index | Components Using It            |

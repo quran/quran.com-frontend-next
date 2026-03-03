@@ -7,11 +7,13 @@ import SliceName from '@/redux/types/SliceName';
 export type FundraisingBannerState = {
   isHomepageBannerVisible: boolean;
   isQuranReaderBannerVisible: boolean;
+  isQuranReaderFloatingBannerVisible: boolean;
 };
 
 const initialState: FundraisingBannerState = {
   isHomepageBannerVisible: true,
   isQuranReaderBannerVisible: true,
+  isQuranReaderFloatingBannerVisible: true,
 };
 
 export const fundraisingBannerSlice = createSlice({
@@ -32,16 +34,31 @@ export const fundraisingBannerSlice = createSlice({
       ...state,
       isQuranReaderBannerVisible: action.payload,
     }),
+    setIsQuranReaderFloatingBannerVisible: (
+      state: FundraisingBannerState,
+      action: PayloadAction<boolean>,
+    ) => ({
+      ...state,
+      isQuranReaderFloatingBannerVisible: action.payload,
+    }),
   },
 });
 
-export const { setIsHomepageBannerVisible, setIsQuranReaderBannerVisible } =
-  fundraisingBannerSlice.actions;
+export const {
+  setIsHomepageBannerVisible,
+  setIsQuranReaderBannerVisible,
+  setIsQuranReaderFloatingBannerVisible,
+} = fundraisingBannerSlice.actions;
 
 export const selectIsHomepageBannerVisible = (state: RootState) =>
-  state.fundraisingBanner.isHomepageBannerVisible;
+  state.fundraisingBanner.isHomepageBannerVisible ?? true;
 
 export const selectIsQuranReaderBannerVisible = (state: RootState) =>
-  state.fundraisingBanner.isQuranReaderBannerVisible;
+  state.fundraisingBanner.isQuranReaderBannerVisible ?? true;
+
+export const selectIsQuranReaderFloatingBannerVisible = (state: RootState) =>
+  state.fundraisingBanner.isQuranReaderFloatingBannerVisible ??
+  state.fundraisingBanner.isQuranReaderBannerVisible ??
+  true;
 
 export default fundraisingBannerSlice.reducer;

@@ -271,7 +271,18 @@
     "verification-code": "Code de vérification"
   },
   "from": "De",
+  "fundraising-card-v2": {
+    "cta": "Faites un don maintenant",
+    "description": "Les donateurs mensuels nous aident à améliorer Quran.com et à assurer la pérennité de nos activités, ce qui nous permet de nous concentrer moins sur la collecte de fonds et plus sur la création d'impact.",
+    "title": "Devenez donateur mensuel"
+  },
   "fundraising-share-title": "Partager la collecte de fonds de Quran.com",
+  "fundraising-sticky-banner-v2": {
+    "cta": "Faire un don",
+    "desktop-text": "Contribuez à notre mission",
+    "mobile-line-one": "C'est le mois du Coran.",
+    "mobile-line-two": "Aidez-nous à répandre sa lumière."
+  },
   "fundraising-sticky-banner": {
     "cta": "Faire un don",
     "title": "Donnez pendant les meilleurs jours !"
@@ -368,7 +379,7 @@
   "profile": "Profil",
   "projects-desc": "Projets à but non lucratif détenus, gérés ou sponsorisés par <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
-  "quran-apps": "Applications du Coran",
+  "quran-apps": "Quran Apps",
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
   "read": "Lire",

@@ -63,7 +63,14 @@ const Index: NextPage<IndexProps> = ({
               <ReadingSection />
             </div>
             {isBannerVisible && (
-              <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
+              <div
+                className={classNames(
+                  styles.flowItem,
+                  styles.fullWidth,
+                  styles.homepageCard,
+                  styles.homepageFundraisingCard,
+                )}
+              >
                 <HomepageFundraisingBanner />
               </div>
             )}

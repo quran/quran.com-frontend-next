@@ -54,7 +54,7 @@ const curatedStations: Record<string, CuratedStation> = {
         reciterId: '7',
       },
       {
-        surah: '96',
+        surah: '56',
         reciterId: '7',
       },
       {

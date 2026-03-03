@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -11,6 +11,8 @@ import StudyModeRelatedVerseSkeleton from './StudyModeRelatedVerseSkeleton';
 
 import { fetcher } from '@/api';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Separator from '@/dls/Separator/Separator';
+import useQcfFont from '@/hooks/useQcfFont';
 import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
@@ -68,31 +70,41 @@ const StudyModeRelatedVerseContent: React.FC<StudyModeRelatedVerseContentProps> 
 
   const verse = data?.verse;
 
+  const versesForFont = useMemo(() => (verse ? [verse] : []), [verse]);
+  useQcfFont(quranReaderStyles.quranFont, versesForFont);
+
   if (isValidating || !verse) {
     return <StudyModeRelatedVerseSkeleton />;
   }
 
   return (
-    <div className={styles.relatedVerse}>
-      <StudyModeBodyContent
-        verse={verse}
-        showWordBox={false}
-        onWordClick={NOOP}
-        onWordBoxClose={NOOP}
-        onNavigatePreviousWord={NOOP}
-        onNavigateNextWord={NOOP}
-        canNavigateWordPrev={false}
-        canNavigateWordNext={false}
-      />
-      <Button
-        className={styles.goToVerseButton}
-        size={ButtonSize.Small}
-        variant={ButtonVariant.Compact}
-        onClick={handleGoToVerse}
-      >
-        {t('go-to-verse')}
-      </Button>
-    </div>
+    <>
+      <div className={styles.relatedVerse}>
+        <StudyModeBodyContent
+          verse={verse}
+          showWordBox={false}
+          onWordClick={NOOP}
+          onWordBoxClose={NOOP}
+          onNavigatePreviousWord={NOOP}
+          onNavigateNextWord={NOOP}
+          canNavigateWordPrev={false}
+          canNavigateWordNext={false}
+        />
+        <div className={styles.relatedVerseCta}>
+          <Button
+            className={styles.goToVerseButton}
+            size={ButtonSize.Small}
+            variant={ButtonVariant.Compact}
+            onClick={handleGoToVerse}
+          >
+            {t('go-to-verse')}
+          </Button>
+        </div>
+      </div>
+      <div className={styles.relatedVerseSeparatorContainer}>
+        <Separator />
+      </div>
+    </>
   );
 };
 
