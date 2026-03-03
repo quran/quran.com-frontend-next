@@ -236,6 +236,7 @@
     "code_v2": "King Fahad Complex V2",
     "font-size": "Tamaño de fuente",
     "lines": "Líneas",
+    "mobile-font-scale-cap-note": "En este tamaño de pantalla, el tamaño máximo de fuente del Corán es {{max}} para preservar la alineación de la línea Mushaf.",
     "qcf-desc": "Las fuentes King Fahad Complex (V1 y V2) generan una mejor calidad pero toman más en cargar.",
     "qcf-v4-desc": "Las fuentes Tajweed se creó con Easy Quran - Dar Al Marifa Tajweed Mushaf y King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts después de recibir el permiso de ambos.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",

@@ -236,6 +236,7 @@
     "code_v2": "King Fahad Complex V2",
     "font-size": "Cỡ phông",
     "lines": "Dòng",
+    "mobile-font-scale-cap-note": "Trên kích thước màn hình này, kích thước phông chữ tối đa của Kinh Qur'an là {{max}} Để duy trì sự thẳng hàng của tuyến Mushaf.",
     "qcf-desc": "Bộ phông chữ King Fahad Complex (V1 và V2) có chất lượng cao hơn nhưng thời gian tải lâu hơn.",
     "qcf-v4-desc": "Các phông chữ Tajweed được tạo ra bằng cách sử dụng Easy Quran - Dar Al Marifa Tajweed Mushaf và King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts sau khi nhận được sự cho phép từ cả hai bên.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",

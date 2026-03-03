@@ -236,6 +236,7 @@
     "code_v2": "ศูนย์กษัตริย์ฟาฮัด V2",
     "font-size": "ขนาดตัวอักษร",
     "lines": "บรรทัด",
+    "mobile-font-scale-cap-note": "สำหรับขนาดหน้าจอนี้ ขนาดตัวอักษรสูงสุดของคัมภีร์อัลกุรอานคือ {{max}} เพื่อรักษาแนวเส้นของคัมภีร์มุสฮัฟให้ตรงกัน",
     "qcf-desc": "แบบอักษร ศูนย์กษัตริย์ฟาฮัด (V1 และ V2) ให้คุณภาพที่สูงกว่าแต่ใช้เวลาในการโหลดนานกว่า",
     "qcf-v4-desc": "แบบอักษร Tajweed ถูกสร้างขึ้นโดยใช้ Easy Quran - Dar Al Marifa Tajweed Mushaf และ King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts หลังจากได้รับอนุญาตจากทั้งคู่",
     "qpc_uthmani_hafs": "QPC อุสมานี",

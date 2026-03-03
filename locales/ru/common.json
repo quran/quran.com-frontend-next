@@ -236,6 +236,7 @@
     "code_v2": "Комплекс Короля Фахда V2",
     "font-size": "Размер шрифта",
     "lines": "Линии",
+    "mobile-font-scale-cap-note": "На этом размере экрана максимальный размер шрифта Корана составляет... {{max}} для сохранения выравнивания линии Мусхафа.",
     "qcf-desc": "Шрифты Комплекс Короля Фахда (V1 и V2) обеспечивают более высокое качество, но загружаются дольше.",
     "qcf-v4-desc": "Шрифты Tajweed были созданы с использованием шрифтов Easy Quran - Dar Al Marifa Tajweed Mushaf и King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 после получения разрешения от обеих сторон.",
     "qpc_uthmani_hafs": "QPC Усмани Хафс",

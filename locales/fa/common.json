@@ -236,6 +236,7 @@
     "code_v2": "مجتمع شاه فهد V2",
     "font-size": "اندازه فونت",
     "lines": "خطوط",
+    "mobile-font-scale-cap-note": "در این اندازه صفحه نمایش، حداکثر اندازه فونت قرآن ... {{max}} برای حفظ راستای خطوط مصحف.",
     "qcf-desc": "فونت‌های مجتمع شاه فهد (V1 و V2) کیفیت بالاتری را ارائه می‌دهند، اما بارگذاری طولانی‌تر طول می‌کشد.",
     "qcf-v4-desc": "فونت های تجوید با استفاده از Easy Quran - Dar Al Marifa Tajweed Mushaf و King Fahad Glorious Quran Print Complex (KFGQPC) - Uthmanic Hafs V4 Fonts پس از دریافت مجوز از هر دو ایجاد شد.",
     "qpc_uthmani_hafs": "QPC عثمانی حفص",

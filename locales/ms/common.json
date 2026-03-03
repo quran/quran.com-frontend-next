@@ -236,6 +236,7 @@
     "code_v2": "Kompleks Raja Fahad V2",
     "font-size": "Saiz fon",
     "lines": "Barisan",
+    "mobile-font-scale-cap-note": "Pada saiz skrin ini, saiz fon Al-Quran maksimum ialah {{max}} untuk mengekalkan penjajaran garisan Mushaf.",
     "qcf-desc": "Fon Kompleks Raja Fahad (V1 dan V2) berkualiti tinggi tetapi mengambil masa yang lebih lama untuk dimuatkan.",
     "qcf-v4-desc": "Fon Tajwid dicipta menggunakan Easy Quran - Dar Al Marifa Tajwid Mushaf dan King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts selepas mendapat kebenaran daripada kedua-duanya.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",

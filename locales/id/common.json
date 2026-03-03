@@ -236,6 +236,7 @@
     "code_v2": "Kompleks Raja Fahad V2",
     "font-size": "Ukuran huruf",
     "lines": "Garis",
+    "mobile-font-scale-cap-note": "Pada ukuran layar ini, ukuran font Al-Quran maksimum adalah {{max}} untuk menjaga keselarasan garis Mushaf.",
     "qcf-desc": "Font Kompleks Raja Fahad (V1 dan V2) memberikan kualitas lebih tinggi tetapi perlu waktu lebih lama untuk memuat.",
     "qcf-v4-desc": "Jenis huruf Tajwid dibuat menggunakan jenis huruf Easy Quran - Dar Al Marifa Tajweed Mushaf dan King Fahad Glorious Quran Printing Complex (KFGQPC) Uthmanic Hafs V4 - setelah mendapat izin dari keduanya.",
     "qpc_uthmani_hafs": "QPC Utsmani Hafs",

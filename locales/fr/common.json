@@ -236,6 +236,7 @@
     "code_v2": "King Fahad V2 Complexe",
     "font-size": "Taille de police",
     "lines": "Lignes",
+    "mobile-font-scale-cap-note": "Sur cet écran, la taille maximale de la police du Coran est {{max}} afin de préserver l'alignement de la ligne Mushaf.",
     "qcf-desc": "Les polices King Fahad (V1 et V2) Complexe offrent une qualité supérieure mais prennent plus de temps à charger.",
     "qcf-v4-desc": "Les polices Tajweed ont été créées à l'aide des polices Easy Quran - Dar Al Marifa Tajweed Mushaf et King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 après avoir reçu leur autorisation.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",

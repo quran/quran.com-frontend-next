@@ -236,6 +236,7 @@
     "code_v2": "Koning Fahad Complex V2",
     "font-size": "Lettertype grootte",
     "lines": "lijnen",
+    "mobile-font-scale-cap-note": "Op dit schermformaat is de maximale lettergrootte van de Koran {{max}} om de uitlijning van de Mushaf-lijn te behouden.",
     "qcf-desc": "Koning Fahad Complex (V1 en V2) Fonts bieden een hogere kwaliteit, maar laden duurt langer.",
     "qcf-v4-desc": "Tajweed-lettertypen zijn gemaakt met behulp van Easy Quran - Dar Al Marifa Tajweed Mushaf en King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4-lettertypen, nadat we van beide partijen toestemming hadden gekregen.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",

@@ -236,6 +236,7 @@
     "code_v2": "Kral Fehd Kompleksi V2",
     "font-size": "Yazı Boyutu",
     "lines": "Çizgiler",
+    "mobile-font-scale-cap-note": "Bu ekran boyutunda, Kur'an yazı tipinin maksimum boyutu şöyledir: {{max}} Mushaf hattının hizasını korumak için.",
     "qcf-desc": "Kral Fehd Kompleksi (V1 ve V2) Yazı Tipleri daha yüksek kalite sağlar ancak yüklenmesi daha uzun sürer.",
     "qcf-v4-desc": "Tecvid yazı tipleri, her ikisinden de izin alınarak Easy Quran - Dar Al Marifa Tajweed Mushaf ve King Fahad Glorious Quran Printing Complex (KFGQPC) - Osmanic Hafs V4 Yazı Tipleri kullanılarak oluşturulmuştur.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",

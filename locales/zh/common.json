@@ -236,6 +236,7 @@
     "code_v2": "King Fahad Complex V2",
     "font-size": "字体大小",
     "lines": "线",
+    "mobile-font-scale-cap-note": "在此屏幕尺寸下，《古兰经》的最大字体大小为 {{max}} 为了保持《穆沙夫》经文的对齐。",
     "qcf-desc": "King Fahad Complex (V1 和 V2) 字体提供更高的质量，但加载时间更长。",
     "qcf-v4-desc": "Tajweed 字体是在获得双方许可后，使用 Easy Quran - Dar Al Marifa Tajweed Mushaf 和 King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts 创建的。",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",

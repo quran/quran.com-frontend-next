@@ -236,6 +236,7 @@
     "code_v2": "King Fahad Complex V2",
     "font-size": "Ukubwa wa herufi",
     "lines": "Mistari",
+    "mobile-font-scale-cap-note": "Kwenye ukubwa huu wa skrini, ukubwa wa juu zaidi wa fonti ya Quran ni {{max}} ili kuhifadhi mpangilio wa mstari wa Mushaf.",
     "qcf-desc": "Fonti za King Fahad Complex (V1 na V2) hupeana ubora wa juu lakini huchukua muda mrefu kupakiwa.",
     "qcf-v4-desc": "Fonti za Tajweed ziliundwa kwa kutumia Easy Quran - Dar Al Marifa Tajweed Mushaf na King Fahad Glorious Quran Printing Complex (KFGQPC) - Fonti za Uthmanic Hafs V4 baada ya kupokea ruhusa kutoka kwa wote wawili.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
@@ -273,14 +274,14 @@
   "from": "Kutoka",
   "fundraising-card-v2": {
     "cta": "Toa mchango sasa",
-    "description": "Wafadhili wa kila mwezi hutusaidia kuboresha Quran.com na kudumisha shughuli ili tusizingatie sana ukusanyaji wa fedha na zaidi kuunda athari.",
+    "description": "Wafadhili wa kila mwezi wanatusaidia kuboresha Quran.com na kudumisha shughuli ili tuzingatie kuunda athari na tusizingatie sana ukusanyaji wa fedha.",
     "title": "Kuwa Mfadhili wa Kila Mwezi"
   },
   "fundraising-share-title": "Shiriki Uchangishaji wa Quran.com",
   "fundraising-sticky-banner-v2": {
     "cta": "Toa mchango",
-    "desktop-text": "Changia katika dhamira yetu",
-    "mobile-line-one": "Ni mwezi wa Quran.",
+    "desktop-text": "Changia katika misheni yetu",
+    "mobile-line-one": "Ni mwezi wa Qur'ani.",
     "mobile-line-two": "Tusaidie kueneza mwanga wake."
   },
   "fundraising-sticky-banner": {

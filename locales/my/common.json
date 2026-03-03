@@ -236,6 +236,7 @@
     "code_v2": "ဘုရင်ဖာဟတ် ကွန်ပလက်စ် V2",
     "font-size": "ဖောင့်အရွယ်အစား",
     "lines": "လိုင်းများ",
+    "mobile-font-scale-cap-note": "ဒီမျက်နှာပြင်အရွယ်အစားမှာ ကုရ်အာန်စာလုံးအရွယ်အစား အများဆုံးက {{max}} Mushaf မျဉ်းဖြောင့်ကို ထိန်းသိမ်းရန်။",
     "qcf-desc": "King Fahad Complex (V1 နှင့် V2) ဖောင့်များသည် အရည်အသွေးမြင့်မားသော်လည်း load လုပ်ရန် အချိန်ပိုကြာပါသည်။",
     "qcf-v4-desc": "နှစ်ဖက်စလုံးမှ ခွင့်ပြုချက်ရရှိပြီးနောက် Tajweed ဖောင့်များကို Easy Quran - Dar Al Marifa Tajweed Mushaf နှင့် King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 ဖောင့်များကို အသုံးပြု၍ ဖန်တီးခဲ့သည်။",
     "qpc_uthmani_hafs": "QPC အူသမာနီ ဟတ်ဖ်စ်",
