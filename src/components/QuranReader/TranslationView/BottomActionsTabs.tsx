@@ -65,7 +65,6 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
       containerClassName={styles.tabContainerWrapper}
       className={classNames(styles.tabsContainer, className, {
         [styles.center]: !isTranslationView,
-        [styles.tabsContainerRTL]: isRTL && isTranslationView,
       })}
       eventName={EventName.QURAN_READER_BOTTOM_ACTION_SCROLLABLE}
     >

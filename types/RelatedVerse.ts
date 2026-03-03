@@ -1,9 +1,12 @@
 interface RelatedVerse {
   id: number;
-  verseId: number;
-  verseKey: string;
+  verseIdFrom: number;
+  verseIdTo: number;
+  verseKeyFrom: string;
+  verseKeyTo: string;
   relation: string;
-  chapterName: string;
+  chapterNameFrom: string;
+  chapterNameTo: string;
 }
 
 export default RelatedVerse;
