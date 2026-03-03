@@ -289,7 +289,7 @@ const QuranFontSection = () => {
       {isMobile && (
         <Section.Row className={styles.fontScaleNoteRow}>
           <p className={styles.fontScaleNote}>
-            {`On this screen size, the maximum Quran font size is ${maxSelectableQuranScale} to preserve Mushaf line alignment.`}
+            {t('fonts.mobile-font-scale-cap-note', { max: maxSelectableQuranScale })}
           </p>
         </Section.Row>
       )}
