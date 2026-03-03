@@ -27,32 +27,37 @@ export default function parseFlashcardsFromHtml(html: string): {
 
   const afterHeadingContent = html.slice(headingEndIndex);
   const nextSectionMatch = afterHeadingContent.match(
-    /<h[1-6][^>]*>|<hr\b[^>]*\/?>|<blockquote\b[^>]*>|<ul\b[^>]*>|<ol\b[^>]*>|<div\b[^>]*>|<p(?![^>]*\bdir=["'](?:rtl|ltr)["'])[^>]*>/i,
+    /<h[1-6][^>]*>|<hr\b[^>]*\/?>|<blockquote\b[^>]*>|<ul\b[^>]*>|<ol\b[^>]*>|<div\b[^>]*>/i,
   );
   const splitAt = nextSectionMatch?.index ?? afterHeadingContent.length;
   const wordByWordHtml = afterHeadingContent.slice(0, splitAt);
-  const afterHtml = afterHeadingContent.slice(splitAt);
+  const htmlAfterSection = afterHeadingContent.slice(splitAt);
+  const { flashcards, remainingHtml } = extractFlashcardsFromSection(wordByWordHtml);
+  const afterHtml = `${remainingHtml}${htmlAfterSection}`;
 
-  const flashcards = extractFlashcardsFromSection(wordByWordHtml);
   if (flashcards.length === 0) return null;
 
   return { beforeHtml, flashcards, afterHtml, variant, headingText };
 }
 
-function extractFlashcardsFromSection(html: string): FlashCardData[] {
+function extractFlashcardsFromSection(html: string): {
+  flashcards: FlashCardData[];
+  remainingHtml: string;
+} {
   const flashcards: FlashCardData[] = [];
-  const paragraphRegex = /<p[^>]*dir=["'](?:rtl|ltr)["'][^>]*>([\s\S]*?)<\/p>/gi;
-  let match: RegExpExecArray | null;
+  let remainingHtml = html;
 
-  // eslint-disable-next-line no-cond-assign
-  while ((match = paragraphRegex.exec(html)) !== null) {
+  // Parse only contiguous paragraph rows right after the heading.
+  for (;;) {
+    const match = remainingHtml.match(/^\s*<p[^>]*>([\s\S]*?)<\/p>/i);
+    if (!match) break;
     const cardData = parseWordParagraph(match[1]);
-    if (cardData) {
-      flashcards.push({ ...cardData, id: `flashcard-${flashcards.length}` });
-    }
+    if (!cardData) break;
+    flashcards.push({ ...cardData, id: `flashcard-${flashcards.length}` });
+    remainingHtml = remainingHtml.slice(match[0].length);
   }
 
-  return flashcards;
+  return { flashcards, remainingHtml };
 }
 
 function parseWordParagraph(html: string): Omit<FlashCardData, 'id'> | null {
@@ -61,7 +66,7 @@ function parseWordParagraph(html: string): Omit<FlashCardData, 'id'> | null {
   if (!arabicMatch) return null;
 
   const arabic = stripHtmlTags(arabicMatch[1]).trim();
-  if (!arabic) return null;
+  if (!arabic || !/[\u0600-\u06FF]/.test(arabic)) return null;
 
   const transliterationMatch = normalizedHtml.match(/<em[^>]*>(.*?)<\/em>/i);
   const transliteration = transliterationMatch ? stripHtmlTags(transliterationMatch[1]).trim() : '';
@@ -69,6 +74,8 @@ function parseWordParagraph(html: string): Omit<FlashCardData, 'id'> | null {
   const translationMatch =
     normalizedHtml.match(/\)\s*[-–—]\s*([\s\S]+?)$/) ||
     normalizedHtml.match(/\s[-–—]\s*([\s\S]+?)$/);
+  if (!transliterationMatch && !translationMatch) return null;
+
   let translation = '';
   if (translationMatch) {
     translation = stripHtmlTags(translationMatch[1])
