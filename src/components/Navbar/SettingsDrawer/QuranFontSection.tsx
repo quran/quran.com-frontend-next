@@ -14,6 +14,7 @@ import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select from '@/dls/Forms/Select';
 import Switch from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import useIsMobile from '@/hooks/useIsMobile';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { resetLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import {
@@ -29,11 +30,13 @@ import {
 import { TestId } from '@/tests/test-ids';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { logEvent, logValueChange } from '@/utils/eventLogger';
+import { MOBILE_FONT_SCALE_CAP } from '@/utils/quran-font-scale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const QuranFontSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
+  const isMobile = useIsMobile();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const {
     actions: { onSettingsChange },
@@ -188,6 +191,7 @@ const QuranFontSection = () => {
   };
 
   const onFontScaleIncreaseClicked = () => {
+    if (quranTextFontScale >= maxSelectableQuranScale) return;
     const value = quranTextFontScale + 1;
     logEvent('quran_font_size_increased');
     logValueChange('font_scale', quranTextFontScale, value);
@@ -210,6 +214,8 @@ const QuranFontSection = () => {
       PreferenceGroup.QURAN_READER_STYLES,
     );
   };
+
+  const maxSelectableQuranScale = isMobile ? MOBILE_FONT_SCALE_CAP : MAXIMUM_QURAN_FONT_STEP;
 
   return (
     <Section id="quran-font-section" hideSeparator>
@@ -275,11 +281,18 @@ const QuranFontSection = () => {
           count={quranTextFontScale}
           onDecrement={quranTextFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
           onIncrement={
-            quranTextFontScale === MAXIMUM_QURAN_FONT_STEP ? null : onFontScaleIncreaseClicked
+            quranTextFontScale >= maxSelectableQuranScale ? null : onFontScaleIncreaseClicked
           }
           className={styles.counter}
         />
       </Section.Row>
+      {isMobile && (
+        <Section.Row className={styles.fontScaleNoteRow}>
+          <p className={styles.fontScaleNote}>
+            {`On this screen size, the maximum Quran font size is ${maxSelectableQuranScale} to preserve Mushaf line alignment.`}
+          </p>
+        </Section.Row>
+      )}
       <ReciterSection />
     </Section>
   );

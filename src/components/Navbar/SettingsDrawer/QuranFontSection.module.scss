@@ -8,7 +8,20 @@
 
 .fontSizeSection {
   padding-block-start: var(--spacing-small-px);
+  padding-block-end: var(--spacing-small-px);
+}
+
+.fontScaleNoteRow {
+  padding-block-start: 0;
   padding-block-end: var(--spacing-medium3-px);
+}
+
+.fontScaleNote {
+  color: var(--color-text-faded-new);
+  font-size: var(--font-size-xsmall);
+  line-height: 1.4;
+  margin: 0;
+  padding-inline: var(--spacing-small-plus-px);
 }
 
 .counter {
