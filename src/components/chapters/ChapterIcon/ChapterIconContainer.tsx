@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import styles from './ChapterIconContainer.module.scss';
 
-import ChapterIcon from '@/components/chapters/ChapterIcon';
+import { SurahName } from '@/components/SurahName';
 
 export enum ChapterIconsSize {
   Small = 'small',
@@ -15,18 +15,12 @@ export enum ChapterIconsSize {
   Massive = 'massive',
 }
 
-// TODO: maybe replace `hasSurahPrefix` with `variant` and use it to show v1 or v2 surah name font
 interface Props {
   chapterId: string;
   size?: ChapterIconsSize;
-  hasSurahPrefix?: boolean;
 }
 
-const IconContainer: React.FC<Props> = ({
-  chapterId,
-  size = ChapterIconsSize.Medium,
-  hasSurahPrefix = true,
-}) => (
+const IconContainer: React.FC<Props> = ({ chapterId, size = ChapterIconsSize.Medium }) => (
   <span
     className={classNames(styles.iconContainer, {
       [styles.iconContainerSmall]: size === ChapterIconsSize.Small,
@@ -36,8 +30,7 @@ const IconContainer: React.FC<Props> = ({
       [styles.iconContainerMassive]: size === ChapterIconsSize.Massive,
     })}
   >
-    <ChapterIcon id={chapterId} />
-    {hasSurahPrefix && <ChapterIcon id="surah" />}
+    <SurahName chapterId={Number(chapterId)} />
   </span>
 );
 

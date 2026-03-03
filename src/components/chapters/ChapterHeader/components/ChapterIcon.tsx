@@ -22,7 +22,7 @@ const ChapterIcon: React.FC<ChapterIconProps> = ({
 }) => (
   <div className={styles.header}>
     <div className={styles.chapterIconContainer}>
-      <ChapterIconContainer chapterId={chapterId} size={size} hasSurahPrefix={false} />
+      <ChapterIconContainer chapterId={chapterId} size={size} />
     </div>
   </div>
 );

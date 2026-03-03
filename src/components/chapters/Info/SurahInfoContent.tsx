@@ -48,11 +48,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
     <>
       <div className={styles.headerContainer}>
         <div className={styles.calligraphyContainer}>
-          <ChapterIconContainer
-            chapterId={chapterId}
-            size={ChapterIconsSize.XMega}
-            hasSurahPrefix={false}
-          />
+          <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.XMega} />
         </div>
 
         {!shouldHideTransliteration && (

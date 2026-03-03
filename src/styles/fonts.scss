@@ -21,16 +21,6 @@
   font-display: swap;
 }
 
-// TODO: regenerate this font and add font-family name
-@font-face {
-  font-family: 'surahnames';
-  src: url('/fonts/quran/surah-names/v1/sura_names.woff2'),
-    url('/fonts/quran/quran/surah-names/v1/sura_names.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 /*Language specific fonts*/
 @font-face {
   font-family: 'divehi';

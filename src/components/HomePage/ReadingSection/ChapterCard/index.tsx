@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ChapterCard.module.scss';
 
 import Card from '@/components/HomePage/Card';
+import { SurahName } from '@/components/SurahName';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
@@ -49,8 +50,8 @@ const ChapterCard: React.FC<Props> = ({
   return (
     <Card className={styles.chapterCard} link={link} testId="chapter-card">
       <div className={styles.surahContainer}>
-        <div className={styles.surahName} translate="no">
-          {surahNumberString.padStart(3, '0')}
+        <div className={styles.surahName}>
+          <SurahName chapterId={surahNumber} />
         </div>
         <div className={styles.surahInfo}>
           <div>

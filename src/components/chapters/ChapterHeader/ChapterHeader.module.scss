@@ -282,7 +282,7 @@ $bismillahSvgInlineSizeMobile: 148px;
   display: flex;
   justify-content: center;
   align-items: center;
-  // setting the value below to avoid the CLS issue when the surahnames font has not loaded yet
+  // setting the value below to avoid the CLS issue when the surah name font has not loaded yet
   min-block-size: calc(3.75 * var(--spacing-medium-plus-px));
 }
 

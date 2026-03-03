@@ -1,37 +1,26 @@
 .iconContainer {
-  span {
-    line-height: normal;
-    font-family: 'surahnames';
-    font-size: var(--font-size-large);
-  }
+  display: inline-flex;
+  align-items: center;
+  line-height: normal;
+  font-size: var(--font-size-large);
 }
 
 .iconContainerSmall {
-  span {
-    font-size: var(--font-size-xsmall);
-  }
+  font-size: var(--font-size-xsmall);
 }
 
 .iconContainerLarge {
-  span {
-    font-size: var(--font-size-jumbo);
-  }
+  font-size: var(--font-size-jumbo);
 }
 
 .iconContainerMega {
-  span {
-    font-size: calc(1.5 * var(--font-size-jumbo));
-  }
+  font-size: calc(1.5 * var(--font-size-jumbo));
 }
 
 .iconContainerXMega {
-  span {
-    font-size: calc(2 * var(--font-size-jumbo));
-  }
+  font-size: calc(2 * var(--font-size-jumbo));
 }
 
 .iconContainerMassive {
-  span {
-    font-size: calc(3 * var(--font-size-jumbo));
-  }
+  font-size: calc(3 * var(--font-size-jumbo));
 }

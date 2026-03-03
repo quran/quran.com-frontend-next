@@ -47,11 +47,7 @@ const SurahPreviewBlock = ({
         <div className={styles.surahNumber}>{localizedSurahNumber}</div>
       </div>
       <div className={styles.surahIcon}>
-        <ChapterIconContainer
-          chapterId={chapterId.toString()}
-          hasSurahPrefix={false}
-          size={ChapterIconsSize.Large}
-        />
+        <ChapterIconContainer chapterId={chapterId.toString()} size={ChapterIconsSize.Large} />
         {description && <div className={styles.description}>{description}</div>}
       </div>
     </div>

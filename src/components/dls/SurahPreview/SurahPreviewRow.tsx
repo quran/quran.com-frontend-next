@@ -42,11 +42,7 @@ const SurahPreviewRow = ({
           <div className={styles.surahNumber}>
             <span>{localizedSurahNumber}</span>
           </div>
-          <ChapterIconContainer
-            chapterId={chapterId.toString()}
-            hasSurahPrefix={false}
-            size={ChapterIconsSize.Large}
-          />
+          <ChapterIconContainer chapterId={chapterId.toString()} size={ChapterIconsSize.Large} />
         </div>
         <div className={styles.right}>
           {description && (
@@ -74,7 +70,7 @@ const SurahPreviewRow = ({
       {isLoading && <Spinner />}
       <div className={styles.right}>
         <div>
-          <ChapterIconContainer chapterId={chapterId.toString()} hasSurahPrefix={false} />
+          <ChapterIconContainer chapterId={chapterId.toString()} />
         </div>
         {description && <div className={styles.description}>{description}</div>}
       </div>

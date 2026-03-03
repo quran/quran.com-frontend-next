@@ -84,11 +84,7 @@ const RecentContent = () => {
             data-testid={TestId.MY_QURAN_RECENT_CONTENT_ITEM}
             aria-label={t('recent-read-verse', { verseKey })}
           >
-            <ChapterIconContainer
-              chapterId={chapterId.toString()}
-              hasSurahPrefix={false}
-              size={ChapterIconsSize.Large}
-            />
+            <ChapterIconContainer chapterId={chapterId.toString()} size={ChapterIconsSize.Large} />
             <div className={styles.recentContentItemTitle}>
               <p>
                 {surah.transliteratedName}{' '}

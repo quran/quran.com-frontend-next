@@ -115,7 +115,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
                   {chapter.localizedId}. {chapter.transliteratedName}
                 </div>
                 <span className={styles.chapterIconContainer}>
-                  <ChapterIconContainer chapterId={chapter.id.toString()} hasSurahPrefix={false} />
+                  <ChapterIconContainer chapterId={chapter.id.toString()} />
                 </span>
               </div>
             </div>

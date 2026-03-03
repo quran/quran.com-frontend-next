@@ -86,7 +86,6 @@
 .surahName {
   line-height: normal;
   font-weight: var(--font-weight-normal);
-  font-family: 'surahnames' !important;
   font-size: var(--font-size-jumbo-px);
   margin-inline-end: var(--spacing-medium2-px);
   @include breakpoints.smallerThanTablet {
