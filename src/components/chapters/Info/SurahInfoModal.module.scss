@@ -2,7 +2,6 @@
 @use 'src/styles/constants';
 @use 'sass:map';
 
-$calligraphy-offset: -0.875rem;
 $container-min-height: 200px;
 $line-height-relaxed: 1.6;
 
@@ -116,13 +115,6 @@ div {
 
 .calligraphyContainer {
   max-inline-size: max-content;
-
-  // The calligraphy SVG has a lot of whitespace on the left side in LTR, so we shift it left to visually center it.
-  // If we applied this transform in RTL, it would shift the calligraphy further to the right, increasing whitespace on the right
-  // and misaligning the calligraphy away from the main content. Therefore, only apply this transform for LTR layouts.
-  :global([dir='ltr']) & {
-    transform: translateX($calligraphy-offset);
-  }
 }
 
 .surahName {

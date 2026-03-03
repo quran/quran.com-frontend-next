@@ -24,7 +24,8 @@ const SurahName: React.FC<SurahNameProps> = ({ chapterId, style, ...props }) => 
       style={{
         fontFamily: `'${fontFamily}', sans-serif`,
         color: isLoaded ? undefined : 'transparent',
-        lineHeight: 0.8, // It has lot of unnecessary space top and bottom, so we need to reduce the line height to 0.8
+        lineHeight: 0.6,
+        display: 'block',
         ...style,
       }}
     >
