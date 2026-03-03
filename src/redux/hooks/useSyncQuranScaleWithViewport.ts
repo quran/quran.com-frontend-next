@@ -5,8 +5,14 @@ import { setQuranTextFontScale } from '@/redux/slices/QuranReader/styles';
 import isClient from '@/utils/isClient';
 import { clampQuranScaleForViewport } from '@/utils/quran-font-scale';
 
+type QuranScaleState = Partial<
+  Pick<RootState, 'quranReaderStyles'> & {
+    quranReaderStyles?: { quranTextFontScale?: number };
+  }
+>;
+
 type QuranScaleStore = {
-  getState: () => RootState;
+  getState: () => QuranScaleState;
   dispatch: (action: ReturnType<typeof setQuranTextFontScale>) => void;
   subscribe: (listener: () => void) => () => void;
 };
@@ -14,7 +20,8 @@ type QuranScaleStore = {
 export const syncQuranScaleWithViewport = (store: QuranScaleStore): void => {
   if (!isClient) return;
   const viewportWidth = document.documentElement.clientWidth;
-  const currentScale = store.getState().quranReaderStyles.quranTextFontScale;
+  const currentScale = store.getState().quranReaderStyles?.quranTextFontScale;
+  if (currentScale == null) return;
   const nextScale = clampQuranScaleForViewport(currentScale, viewportWidth);
   if (currentScale !== nextScale) {
     store.dispatch(setQuranTextFontScale(nextScale));
