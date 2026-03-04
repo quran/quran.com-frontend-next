@@ -1,9 +1,16 @@
 /* eslint-disable react/no-danger */
+/*
+ * Keyboard interaction is handled by native child anchors rendered from trusted HTML.
+ * This container only delegates click events to route verse-reference links to Study Mode.
+ */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 
-import React, { MouseEvent, useMemo } from 'react';
+import React, { MouseEvent, useCallback, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import styles from './FootnoteText.module.scss';
 import transStyles from './TranslationText.module.scss';
@@ -11,7 +18,9 @@ import transStyles from './TranslationText.module.scss';
 import Button, { ButtonSize, ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
+import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import Language from '@/types/Language';
+import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageDataById, findLanguageIdByLocale, toLocalizedNumber } from '@/utils/locale';
 import { formatVerseReferencesToLinks, isNumericString } from '@/utils/string';
 import Footnote from 'types/Footnote';
@@ -32,6 +41,7 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   isLoading,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
+  const dispatch = useDispatch();
 
   // App locale language data (for container/header direction)
   const appLanguageData = useMemo(() => {
@@ -56,6 +66,30 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
     if (!footnote?.text) return '';
     return formatVerseReferencesToLinks(footnote.text);
   }, [footnote?.text]);
+
+  /**
+   * Handles clicks on the footnote content. If a verse link is clicked,
+   * opens Study Mode for the referenced verse.
+   * @param {MouseEvent} event - The mouse event
+   */
+  const onContentClick = useCallback(
+    (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const anchorElement = target.closest('a[href]');
+      const verseKey = anchorElement?.getAttribute('data-verse-key');
+
+      if (verseKey) {
+        event.preventDefault();
+        event.stopPropagation();
+        logButtonClick('study_mode_open_footnote_verse_reference', { verseKey });
+        dispatch(openStudyMode({ verseKey }));
+        return;
+      }
+
+      onTextClicked?.(event);
+    },
+    [dispatch, onTextClicked],
+  );
 
   return (
     <div
@@ -85,7 +119,7 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
             transStyles[footnoteLanguageData.font],
           )}
           dangerouslySetInnerHTML={{ __html: updatedText }}
-          {...(onTextClicked && { onClick: onTextClicked })}
+          onClick={onContentClick}
         />
       )}
     </div>
