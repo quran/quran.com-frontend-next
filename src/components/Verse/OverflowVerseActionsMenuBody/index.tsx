@@ -7,6 +7,8 @@ import TranslationFeedbackAction from '../TranslationFeedback/TranslationFeedbac
 import VerseActionAdvancedCopy from '../VerseActionAdvancedCopy';
 import VerseActionEmbedWidget from '../VerseActionEmbedWidget';
 import VerseActionRepeatAudio from '../VerseActionRepeatAudio';
+import VerseActionSettings from '../VerseActionSettings';
+import VerseActionTranslationsSettings from '../VerseActionTranslationsSettings';
 
 import ShareVerseActionsMenu from './ShareVerseActionsMenu';
 
@@ -50,6 +52,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       {!isStudyModeOpen && (
         <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
       )}
+      <VerseActionTranslationsSettings onActionTriggered={onActionTriggered} />
       <TranslationFeedbackAction
         verse={verse}
         isTranslationView={isTranslationView}
@@ -61,6 +64,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         isTranslationView={isTranslationView}
         onActionTriggered={onActionTriggered}
       />
+      <VerseActionSettings onActionTriggered={onActionTriggered} />
     </div>
   ) : (
     <ShareVerseActionsMenu
