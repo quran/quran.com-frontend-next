@@ -6,8 +6,7 @@ const switchToMode = async (
   verseKey: string = '1:1',
 ) => {
   // Sometimes on mobile, the tab is not visible, so we need to scroll down and up to make it visible
-  await page.evaluate(() => window.scrollBy(0, 100));
-  await page.waitForTimeout(1000);
+  await page.evaluate(() => window.scrollBy(0, 500));
   await page.evaluate(() => window.scrollTo(0, 0));
 
   const tabTestId = `${mode}-tab`;
@@ -17,15 +16,13 @@ const switchToMode = async (
   const button = page.getByTestId(buttonTestId);
 
   // Try clicking the tab first (desktop view), fallback to button (mobile view)
-  if (await tab.isVisible()) {
+  if (await tab.isVisible({ timeout: 15000 })) {
     await tab.click();
-  } else if (await button.isVisible()) {
+  } else if (await button.isVisible({ timeout: 15000 })) {
     await button.click();
   } else {
     throw new Error(`Neither ${tabTestId} nor ${buttonTestId} is visible`);
   }
-
-  await page.waitForTimeout(200); // Wait for the page to be fully loaded
 
   // Verify the mode switch was successful by checking that the verse is visible
   await expect(page.getByTestId(`verse-arabic-${verseKey}`)).toBeVisible();
