@@ -544,6 +544,29 @@ export const getReaderShareQueryParams = (query: ParsedUrlQuery): Record<string,
   return shareParams;
 };
 
+export const getReaderShareQueryParamsFromAsPath = (
+  asPath: string | undefined,
+  fallbackQuery: ParsedUrlQuery = {},
+): Record<string, string> => {
+  const queryString = asPath?.split('?')[1]?.split('#')[0];
+
+  if (!queryString) {
+    return getReaderShareQueryParams(fallbackQuery);
+  }
+
+  const searchParams = new URLSearchParams(queryString);
+  const shareParams: Record<string, string> = {};
+
+  READER_SHARE_QUERY_PARAMS.forEach((queryParam) => {
+    const value = searchParams.get(queryParam);
+    if (value !== null) {
+      shareParams[queryParam] = value;
+    }
+  });
+
+  return shareParams;
+};
+
 export const getVerseShareNavigationUrl = (
   chapterIdOrSlug: string | number,
   verseNumber: string | number,

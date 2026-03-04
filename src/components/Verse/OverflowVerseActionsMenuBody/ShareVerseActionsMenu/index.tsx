@@ -16,7 +16,11 @@ import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import Verse from '@/types/Verse';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getQuranMediaMakerNavigationUrl, getVerseShareNavigationUrl } from '@/utils/navigation';
+import {
+  getQuranMediaMakerNavigationUrl,
+  getReaderShareQueryParamsFromAsPath,
+  getVerseShareNavigationUrl,
+} from '@/utils/navigation';
 import { getWindowOrigin } from '@/utils/url';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
@@ -75,12 +79,13 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
   }, [isCopied, onActionTriggered]);
 
   const onCopyLinkClicked = () => {
+    const readerShareQueryParams = getReaderShareQueryParamsFromAsPath(router.asPath, router.query);
     copyLink(
       verse.verseKey,
       isTranslationView,
       () => toast(t('shared'), { status: ToastStatus.Success }),
       lang,
-      router.query,
+      readerShareQueryParams,
     );
     onActionTriggered?.();
   };

@@ -14,6 +14,7 @@ import CloseIcon from '@/icons/close.svg';
 import {
   getCanonicalUrl,
   getFirstTimeReadingGuideNavigationUrl,
+  getReaderShareQueryParamsFromAsPath,
   getVerseShareNavigationUrl,
 } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
@@ -29,12 +30,13 @@ interface Props {
 const ShareQuranModal: React.FC<Props> = ({ isOpen, onClose, verse }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
+  const readerShareQueryParams = getReaderShareQueryParamsFromAsPath(router.asPath, router.query);
   const shareURL = verse
     ? (() => {
         const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verse.verseKey);
         return getCanonicalUrl(
           lang,
-          getVerseShareNavigationUrl(chapterId, verseNumber, router.query),
+          getVerseShareNavigationUrl(chapterId, verseNumber, readerShareQueryParams),
         );
       })()
     : getCanonicalUrl(lang, getFirstTimeReadingGuideNavigationUrl());

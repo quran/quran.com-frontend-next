@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { getReaderShareQueryParams, getVerseShareNavigationUrl } from './navigation';
+import {
+  getReaderShareQueryParams,
+  getReaderShareQueryParamsFromAsPath,
+  getVerseShareNavigationUrl,
+} from './navigation';
 
 import QueryParam from '@/types/QueryParam';
 
@@ -55,5 +59,38 @@ describe('getVerseShareNavigationUrl', () => {
     expect(searchParams.get(QueryParam.READING_MODE)).toBe('arabic');
     expect(searchParams.get(QueryParam.RECITER)).toBe('7');
     expect(searchParams.get(QueryParam.STARTING_VERSE)).toBeNull();
+  });
+});
+
+describe('getReaderShareQueryParamsFromAsPath', () => {
+  it('prefers asPath query params over stale fallback query values', () => {
+    const shareParams = getReaderShareQueryParamsFromAsPath(
+      `/2/255?readingMode=translation&translations=20,131&${QueryParam.RECITER}=7`,
+      {
+        [QueryParam.READING_MODE]: 'arabic',
+        [QueryParam.TRANSLATIONS]: '131',
+        [QueryParam.RECITER]: '3',
+        [QueryParam.WBW_LOCALE]: 'ur',
+      },
+    );
+
+    expect(shareParams).toEqual({
+      [QueryParam.READING_MODE]: 'translation',
+      [QueryParam.TRANSLATIONS]: '20,131',
+      [QueryParam.RECITER]: '7',
+    });
+  });
+
+  it('falls back to query object when asPath has no query string', () => {
+    const shareParams = getReaderShareQueryParamsFromAsPath('/2/255', {
+      [QueryParam.READING_MODE]: 'arabic',
+      [QueryParam.TRANSLATIONS]: '20,131',
+      [QueryParam.STARTING_VERSE]: '255',
+    });
+
+    expect(shareParams).toEqual({
+      [QueryParam.READING_MODE]: 'arabic',
+      [QueryParam.TRANSLATIONS]: '20,131',
+    });
   });
 });
