@@ -334,7 +334,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
 
       // Fill in the form with valid input that passes client-side validation
       await selectTranslationOption(page, '131');
-      const feedbackTextarea = page.getByTestId('translation-feedback-textarea');
+      const feedbackTextarea = page.getByTestId(TestId.TRANSLATION_FEEDBACK_TEXTAREA);
 
       // Use text that would pass client validation but fail server validation after sanitization
       await feedbackTextarea.fill(
@@ -342,16 +342,16 @@ test.describe('Translation Feedback - Logged In Users', () => {
       );
 
       // Submit the form
-      const reportButton = page.getByTestId('translation-feedback-submit-button');
+      const reportButton = page.getByTestId(TestId.TRANSLATION_FEEDBACK_SUBMIT_BUTTON);
       await reportButton.click();
 
       // Should show specific validation error message instead of generic error
-      await expect(page.getByTestId('feedback-error-maximum-length')).toBeVisible();
-      await expect(page.getByTestId('translation-error-required-field')).toBeVisible();
-      await expect(page.getByTestId('error-toast')).not.toBeVisible();
+      await expect(page.getByTestId(TestId.FEEDBACK_ERROR_MAXIMUM_LENGTH)).toBeVisible();
+      await expect(page.getByTestId(TestId.TRANSLATION_ERROR_REQUIRED_FIELD)).toBeVisible();
+      await expect(page.getByTestId(TestId.ERROR_TOAST)).not.toBeVisible();
 
       // Modal should remain open so user can correct the feedback
-      const modal = page.getByTestId('modal-content');
+      const modal = page.getByTestId(TestId.MODAL_CONTENT);
       await expect(modal).toBeVisible();
     },
   );
