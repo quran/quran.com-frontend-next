@@ -4,8 +4,8 @@ import QuranFont from '../../types/Media/QuranFont';
 
 import AvailableTranslation from '@/types/AvailableTranslation';
 import PreviewMode from '@/types/Media/PreviewMode';
-import { ReadingPreference } from '@/types/QuranReader';
 import Reciter from '@/types/Reciter';
+import { isValidReadingModeQueryParamValue as isValidReadingModeQueryParamValueByLabel } from '@/utils/readingPreference';
 
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
   const translationIds = value === '' ? [] : value.split(',');
@@ -126,5 +126,5 @@ export const isValidPreviewModeQueryParamValue = (value: string): boolean => {
 };
 
 export const isValidReadingModeQueryParamValue = (value: string): boolean => {
-  return Object.values(ReadingPreference).includes(value as ReadingPreference);
+  return isValidReadingModeQueryParamValueByLabel(value);
 };

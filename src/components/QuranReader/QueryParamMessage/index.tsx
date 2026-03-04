@@ -26,6 +26,10 @@ import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import { QuranReaderFlow, ReadingPreference } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
+import {
+  getReadingModeQueryParamValue,
+  getReadingPreferenceFromQueryParam,
+} from '@/utils/readingPreference';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 
@@ -52,6 +56,11 @@ const QueryParamMessage: React.FC<Props> = ({
   const {
     actions: { onSettingsChange, onXstateSettingsChange },
   } = usePersistPreferenceGroup();
+  const readingModeFromAsPath = router.asPath
+    ? new URLSearchParams(router.asPath.split('?')[1]?.split('#')[0] || '').get(
+        QueryParam.READING_MODE,
+      )
+    : null;
 
   /**
    * When the use clicks on use Redux, we will import the values from redux and
@@ -69,7 +78,8 @@ const QueryParamMessage: React.FC<Props> = ({
       router.query[QueryParam.WBW_LOCALE] = selectedWordByWordLocale;
     }
     if (isReadingModeQueryParamDifferent) {
-      router.query[QueryParam.READING_MODE] = selectedReadingPreference;
+      router.query[QueryParam.READING_MODE] =
+        getReadingModeQueryParamValue(selectedReadingPreference);
     }
     // if is in Quranic Calendar flow, remove the flow query param
     if (router.query[QueryParam.FLOW] === QuranReaderFlow.QURANIC_CALENDER) {
@@ -128,14 +138,18 @@ const QueryParamMessage: React.FC<Props> = ({
     }
 
     if (isReadingModeQueryParamDifferent) {
-      const nextReadingPreference = router.query[QueryParam.READING_MODE] as ReadingPreference;
-      onSettingsChange(
-        'readingPreference',
-        nextReadingPreference,
-        setReadingPreference(nextReadingPreference),
-        setReadingPreference(selectedReadingPreference),
-        PreferenceGroup.READING,
-      );
+      const readingModeCandidate =
+        readingModeFromAsPath ?? String(router.query[QueryParam.READING_MODE] || '');
+      const nextReadingPreference = getReadingPreferenceFromQueryParam(readingModeCandidate);
+      if (nextReadingPreference) {
+        onSettingsChange(
+          'readingPreference',
+          nextReadingPreference,
+          setReadingPreference(nextReadingPreference),
+          setReadingPreference(selectedReadingPreference),
+          PreferenceGroup.READING,
+        );
+      }
     }
   };
 

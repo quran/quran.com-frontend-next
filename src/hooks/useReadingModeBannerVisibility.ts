@@ -10,6 +10,8 @@ const useReadingModeBannerVisibility = (): boolean => {
   const { isQueryParamDifferent }: { value: ReadingPreference; isQueryParamDifferent: boolean } =
     useGetQueryParamOrReduxValue(QueryParam.READING_MODE);
 
+  if (!router.isReady) return false;
+
   return isQueryParamDifferent && !didUserSwitchReadingMode(router.asPath);
 };
 

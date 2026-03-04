@@ -1,7 +1,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { useContext, useEffect, useRef } from 'react';
 
-import setLanguage from 'next-translate/setLanguage';
+import Router from 'next/router';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -11,6 +11,7 @@ import getStore from './store';
 import resetSettings from '@/redux/actions/reset-settings';
 import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
+import resolveCurrentLocale from '@/redux/providerLocale';
 import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
@@ -28,6 +29,36 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
  * @returns {Provider}
  */
 const ReduxProvider = ({ children, locale }) => {
+  const getCurrentLocale = (fallbackLocale: string): string => {
+    if (!isClient) return fallbackLocale;
+
+    return resolveCurrentLocale({
+      fallbackLocale,
+      pathname: window.location.pathname,
+      routerLocale: Router.locale,
+      routerDefaultLocale: Router.defaultLocale,
+      routerLocales: Router.locales,
+    });
+  };
+
+  const setLanguagePreservingQueryParams = async (nextLocale: string) => {
+    if (!isClient) return;
+    if (getCurrentLocale(locale) === nextLocale) return;
+
+    const searchParamsQuery = Object.fromEntries(new URLSearchParams(window.location.search));
+    await Router.push(
+      {
+        pathname: Router.pathname,
+        query: {
+          ...Router.query,
+          ...searchParamsQuery,
+        },
+      },
+      Router.asPath,
+      { locale: nextLocale },
+    );
+  };
+
   /**
    * Keep a single Redux store instance for the lifetime of the app.
    *
@@ -77,14 +108,18 @@ const ReduxProvider = ({ children, locale }) => {
         const userPreferences = await getUserPreferences();
         const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE];
         const remoteLang = remoteLocale?.[PreferenceGroup.LANGUAGE];
+        const currentLocale = getCurrentLocale(initialLocaleRef.current);
         if (remoteLang) {
-          await setLanguage(remoteLang);
+          const shouldSwitchLocale = remoteLang !== currentLocale;
+          if (shouldSwitchLocale) {
+            await setLanguagePreservingQueryParams(remoteLang);
+          }
           setLocaleCookie(remoteLang);
 
           // If the logged-in user's saved language differs from the URL locale we first rendered,
           // ensure locale-dependent defaults (translations/tafsir tabs, reflection/lesson languages, etc.)
           // reflect the final language before applying remote preferences (which are often partial).
-          if (remoteLang !== initialLocaleRef.current) {
+          if (shouldSwitchLocale) {
             const { isUsingDefaultSettings } = store.getState().defaultSettings || {};
             if (isUsingDefaultSettings) {
               store.dispatch(resetSettings(remoteLang));
@@ -92,14 +127,14 @@ const ReduxProvider = ({ children, locale }) => {
               store.dispatch(
                 // This is intentionally granular (vs. resetSettings) to preserve customized settings.
                 syncLocaleDependentSettings({
-                  prevLocale: initialLocaleRef.current,
+                  prevLocale: currentLocale,
                   nextLocale: remoteLang,
                 }),
               );
             }
           }
         }
-        const localeForDefaults = remoteLang || initialLocaleRef.current;
+        const localeForDefaults = remoteLang || currentLocale;
         store.dispatch(syncUserPreferences(userPreferences, localeForDefaults));
         const audioPlayerContext = audioService.getSnapshot().context;
         const playbackRate =

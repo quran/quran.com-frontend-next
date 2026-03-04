@@ -122,6 +122,7 @@ const PageContainer: React.FC<Props> = ({
 
   // Only use initial data if it has actual verses (not empty array)
   const hasInitialVerses = initialVerses && initialVerses.length > 0;
+  const firstPageInitialVerses = pageIndex === 0 && hasInitialVerses ? initialVerses : null;
 
   // For ReadingTranslation mode, we can only use initialData if the selected translation
   // matches the default for the current locale (which is what SSR would have used).
@@ -164,13 +165,13 @@ const PageContainer: React.FC<Props> = ({
   const { data: verses } = useSWRImmutable(requestKey, verseFetcher, {
     // CRITICAL: Always provide fallbackData for SSR compatibility
     // This ensures verses render immediately server-side and during hydration
-    fallbackData: shouldUseInitialData ? initialVerses : null,
+    fallbackData: firstPageInitialVerses,
     revalidateOnMount: !shouldUseInitialData,
   });
 
-  // FALLBACK for SSR/hydration: If no verses from SWR but we have initialData, use it
-  // This prevents blank content during the hydration delay while preserving the cache fix
-  const effectiveVerses = verses || (shouldUseInitialData ? initialVerses : null);
+  // During hydration or post-hydration key changes (e.g., persisted non-default settings),
+  // keep first-page initial verses visible instead of flashing a skeleton.
+  const effectiveVerses = verses || firstPageInitialVerses;
 
   useEffect(() => {
     if (effectiveVerses) {

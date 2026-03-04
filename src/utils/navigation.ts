@@ -521,6 +521,36 @@ export const getQuranMediaMakerNavigationUrl = (params?: ParsedUrlQuery) => {
   return params ? `${baseUrl}?${stringify(params)}` : baseUrl;
 };
 
+const READER_SHARE_QUERY_PARAMS = [
+  QueryParam.TRANSLATIONS,
+  QueryParam.RECITER,
+  QueryParam.WBW_LOCALE,
+  QueryParam.READING_MODE,
+] as const;
+
+const normalizeParsedQueryValue = (value: string | string[] | undefined): string | undefined =>
+  Array.isArray(value) ? value[0] : value;
+
+export const getReaderShareQueryParams = (query: ParsedUrlQuery): Record<string, string> => {
+  const shareParams: Record<string, string> = {};
+
+  READER_SHARE_QUERY_PARAMS.forEach((queryParam) => {
+    const normalizedValue = normalizeParsedQueryValue(query[queryParam]);
+    if (normalizedValue !== undefined) {
+      shareParams[queryParam] = normalizedValue;
+    }
+  });
+
+  return shareParams;
+};
+
+export const getVerseShareNavigationUrl = (
+  chapterIdOrSlug: string | number,
+  verseNumber: string | number,
+  query: ParsedUrlQuery = {},
+): string =>
+  buildUrlWithParams(`/${chapterIdOrSlug}/${verseNumber}`, getReaderShareQueryParams(query));
+
 /**
  * Build a url with query parameters
  *

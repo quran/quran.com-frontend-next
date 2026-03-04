@@ -11,6 +11,7 @@ import {
   setReadingPreference,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
+import { getReadingModeQueryParamValue } from '@/utils/readingPreference';
 import { normalizeQueryParam } from '@/utils/url';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -19,6 +20,17 @@ import { ReadingPreference } from 'types/QuranReader';
 
 // Threshold in pixels to consider the user "at the top" of the page
 const SCROLL_TOP_THRESHOLD = 100;
+
+const getQueryParamValueFromAsPath = (
+  asPath: string,
+  queryParam: QueryParam,
+): string | undefined => {
+  const queryString = asPath.split('?')[1]?.split('#')[0];
+  if (!queryString) return undefined;
+
+  const value = new URLSearchParams(queryString).get(queryParam);
+  return value ?? undefined;
+};
 
 export enum SwitcherContext {
   SurahHeader = 'surah_header',
@@ -77,7 +89,16 @@ const useReadingPreferenceSwitcher = ({
   const getUpdatedQueryParams = useCallback(
     (newPreference: ReadingPreference) => {
       const previousQueryParams = { ...router.query };
-      const newQueryParams = { ...router.query };
+      const currentReadingModeFromAsPath = getQueryParamValueFromAsPath(
+        router.asPath,
+        QueryParam.READING_MODE,
+      );
+      if (currentReadingModeFromAsPath !== undefined) {
+        previousQueryParams[QueryParam.READING_MODE] = currentReadingModeFromAsPath;
+      } else {
+        delete previousQueryParams[QueryParam.READING_MODE];
+      }
+      const newQueryParams = { ...previousQueryParams };
       const isAtTop = typeof window !== 'undefined' && window.scrollY <= SCROLL_TOP_THRESHOLD;
 
       if (context === SwitcherContext.SurahHeader || isAtTop) {
@@ -94,14 +115,14 @@ const useReadingPreferenceSwitcher = ({
           : lastReadVerseKey || '1:1';
       }
 
-      newQueryParams[QueryParam.READING_MODE] = newPreference;
+      newQueryParams[QueryParam.READING_MODE] = getReadingModeQueryParamValue(newPreference);
 
       return {
         previousQueryParams,
         newQueryParams,
       };
     },
-    [context, lastReadVerse, lastReadVerseKey, router.query],
+    [context, lastReadVerse, lastReadVerseKey, router.asPath, router.query],
   );
 
   const switchReadingPreference = useCallback(

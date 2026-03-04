@@ -60,8 +60,20 @@ import {
   isValidTranslationsQueryParamValueWithExistingKey,
   isValidVideoIdQueryParamValue,
 } from '@/utils/queryParamValidator';
+import { getReadingPreferenceFromQueryParam } from '@/utils/readingPreference';
 import { isValidChapterId } from '@/utils/validator';
 import QueryParam from 'types/QueryParam';
+
+const getQueryParamValueFromAsPath = (
+  asPath: string,
+  queryParam: QueryParam,
+): string | undefined => {
+  const queryString = asPath.split('?')[1]?.split('#')[0];
+  if (!queryString) return undefined;
+
+  const value = new URLSearchParams(queryString).get(queryParam);
+  return value ?? undefined;
+};
 
 export const QUERY_PARAMS_DATA = {
   [QueryParam.TRANSLATIONS]: {
@@ -225,7 +237,7 @@ const useGetQueryParamOrReduxValue = (
   chaptersData?: ChaptersData,
   extraData?: any,
 ): { value: any; isQueryParamDifferent: boolean } => {
-  const { query, isReady } = useRouter();
+  const { query, asPath } = useRouter();
 
   // either pass the redux selector or the redux selector and the equality function as well
   let reduxValueSelectorWithOrWithoutEqualityFunction = [
@@ -251,12 +263,28 @@ const useGetQueryParamOrReduxValue = (
   const reduxParamValue = reduxObjectKey
     ? reduxSelectorValueOrValues[reduxObjectKey]
     : reduxSelectorValueOrValues;
+  const asPathQueryParamValue =
+    queryParam === QueryParam.READING_MODE
+      ? getQueryParamValueFromAsPath(asPath, queryParam)
+      : undefined;
+  const queryParamValue =
+    queryParam === QueryParam.READING_MODE
+      ? asPathQueryParamValue ?? query[queryParam]
+      : query[queryParam];
 
   // if the param exists in the url
-  if (isReady && query[queryParam] !== undefined) {
-    const queryParamStringValue = String(query[queryParam]);
+  if (queryParamValue !== undefined) {
+    const queryParamStringValue = String(queryParamValue);
+    const normalizedReadingModeQueryParamValue =
+      queryParam === QueryParam.READING_MODE
+        ? getReadingPreferenceFromQueryParam(queryParamStringValue)
+        : undefined;
+    const normalizedQueryParamStringValue =
+      queryParam === QueryParam.READING_MODE
+        ? normalizedReadingModeQueryParamValue || queryParamStringValue
+        : queryParamStringValue;
     const parsedQueryParamValue = getQueryParamValueByType(
-      queryParamStringValue,
+      normalizedQueryParamStringValue,
       queryParamValueType,
     );
 
@@ -282,7 +310,7 @@ const useGetQueryParamOrReduxValue = (
 
     // Check if the URL value is different from Redux
     const isQueryParamDifferent = isQueryParamDifferentThanReduxValue(
-      queryParamStringValue,
+      normalizedQueryParamStringValue,
       queryParamValueType,
       reduxParamValue,
     );
