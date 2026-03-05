@@ -20,3 +20,8 @@
 .fixedWidth {
   inline-size: var(--line-width, auto);
 }
+
+[data-mushaf-overflow-wrap='true'] .fixedWidth {
+  // In overflow mode, let each line use the container width instead of fixed mushaf width.
+  inline-size: 100%;
+}

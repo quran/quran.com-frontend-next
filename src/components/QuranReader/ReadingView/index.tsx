@@ -19,6 +19,7 @@ import PageContainer from './PageContainer';
 import PageNavigationButtons from './PageNavigationButtons';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
+import shouldEnableMushafOverflowWrap from './utils/mushafOverflowWrap';
 
 import ReadingModeActions from '@/components/chapters/ChapterHeader/ReadingModeActions';
 import EmptyTranslationMessage from '@/components/QuranReader/ContextMenu/components/EmptyTranslationMessage';
@@ -92,8 +93,11 @@ const ReadingView = ({
   const [startingVerseHighlightVerseKey, setStartingVerseHighlightVerseKey] = useState<
     string | undefined
   >(undefined);
+  const [isMushafOverflowWrapEnabled, setIsMushafOverflowWrapEnabled] = useState(false);
   const lastShownStartingVerseKeyRef = useRef<string | undefined>(undefined);
   const lastStartingVerseValueRef = useRef<string | undefined>(undefined);
+  const readingViewContainerRef = useRef<HTMLDivElement | null>(null);
+  const overflowMeasureRafRef = useRef<number | null>(null);
   const isVerseAudioPlaying = useXstateSelector(
     audioService,
     (state) => selectIsAudioPlaying(state) && !state.context.radioActor,
@@ -274,6 +278,71 @@ const ReadingView = ({
   useHotkeys('Up', onUpClicked, { enabled: allowKeyboardNavigation }, [scrollToPreviousPage]);
   useHotkeys('Down', onDownClicked, { enabled: allowKeyboardNavigation }, [scrollToNextPage]);
 
+  const measureMushafOverflowWrap = useCallback(() => {
+    const container = readingViewContainerRef.current;
+    if (!container) {
+      setIsMushafOverflowWrapEnabled(false);
+      return;
+    }
+
+    const probe = document.createElement('div');
+    probe.style.position = 'absolute';
+    probe.style.visibility = 'hidden';
+    probe.style.pointerEvents = 'none';
+    probe.style.blockSize = '0';
+    // This resolves the computed value of --line-width in the same styling context as the page.
+    probe.style.inlineSize = 'var(--line-width)';
+    container.appendChild(probe);
+
+    const shouldEnableWrap = shouldEnableMushafOverflowWrap({
+      isReadingMode: readingPreference === ReadingPreference.Reading,
+      viewportWidth: document.documentElement.clientWidth,
+      availableWidth: container.clientWidth,
+      // get the resolved line width
+      resolvedLineWidth: probe.getBoundingClientRect().width,
+    });
+
+    container.removeChild(probe);
+    setIsMushafOverflowWrapEnabled((prev) => (prev === shouldEnableWrap ? prev : shouldEnableWrap));
+  }, [readingPreference]);
+
+  useEffect(() => {
+    const scheduleMeasurement = () => {
+      if (overflowMeasureRafRef.current !== null) {
+        cancelAnimationFrame(overflowMeasureRafRef.current);
+      }
+
+      overflowMeasureRafRef.current = requestAnimationFrame(() => {
+        overflowMeasureRafRef.current = null;
+        measureMushafOverflowWrap();
+      });
+    };
+
+    // Initial pass so first render can switch to wrap mode immediately if needed
+    scheduleMeasurement();
+
+    let resizeObserver: ResizeObserver | null = null;
+    const container = readingViewContainerRef.current;
+
+    if (typeof ResizeObserver !== 'undefined' && container) {
+      // Container width can change without window resize (layout/sidebar changes)
+      resizeObserver = new ResizeObserver(scheduleMeasurement);
+      resizeObserver.observe(container);
+    }
+
+    // Fallback for viewport changes
+    window.addEventListener('resize', scheduleMeasurement);
+
+    return () => {
+      if (overflowMeasureRafRef.current !== null) {
+        cancelAnimationFrame(overflowMeasureRafRef.current);
+        overflowMeasureRafRef.current = null;
+      }
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', scheduleMeasurement);
+    };
+  }, [measureMushafOverflowWrap, quranFont, quranTextFontScale, mushafLines]);
+
   // This context is used to pass the starting verse highlight information to the PageContainer
   const startingVerseHighlightContextValue = useMemo(
     () => ({
@@ -344,6 +413,9 @@ const ReadingView = ({
         />
       )}
       <div
+        ref={readingViewContainerRef}
+        // CSS modules under this subtree use this flag to enable overflow-safe wrapping.
+        data-mushaf-overflow-wrap={isMushafOverflowWrapEnabled ? 'true' : undefined}
         onCopy={(event) => onCopyQuranWords(event, verses, quranFont)}
         className={classNames(
           styles.container,

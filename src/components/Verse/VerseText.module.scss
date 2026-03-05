@@ -92,3 +92,10 @@
 .tafsirOrTranslationMode {
   font-size: var(--font-size-vbv);
 }
+
+[data-mushaf-overflow-wrap='true'] .verseText {
+  @include breakpoints.tablet {
+    // Match the mobile-like flow so words can wrap naturally when fixed mushaf width is impossible.
+    display: inline;
+  }
+}
