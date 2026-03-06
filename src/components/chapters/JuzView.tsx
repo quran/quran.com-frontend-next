@@ -7,7 +7,7 @@ import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 
 import styles from './JuzView.module.scss';
 
-import { getAllJuzMappings, getChapterData } from '@/utils/chapter';
+import { ayahFormatLocale, getAllJuzMappings, getChapterData } from '@/utils/chapter';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 import DataContext from 'src/contexts/DataContext';
 
@@ -62,7 +62,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
                     <SurahPreviewRow
                       chapterId={Number(chapterId)}
                       description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
-                        'common:ayahs',
+                        ayahFormatLocale(chapter.versesCount, lang),
                       )}`}
                       surahName={chapter.transliteratedName}
                       surahNumber={Number(chapterId)}
