@@ -30,6 +30,7 @@ import {
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { TestId } from '@/tests/test-ids';
+import { makeDonateUrl } from '@/utils/apiPaths';
 import { getSidebarTransitionDurationFromCss } from '@/utils/css';
 import { isQuranReaderRoutePathname } from '@/utils/routes';
 
@@ -135,6 +136,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
     },
     text: standaloneDesktopText,
     ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
+    underlinedSegmentHref: makeDonateUrl(),
   };
 
   return (

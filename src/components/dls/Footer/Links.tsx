@@ -30,6 +30,7 @@ const Links = () => {
     },
     {
       title: t('our-projects'),
+      className: styles.ourProjectsGroup,
       links: [
         { text: 'Quran.com', url: 'https://quran.com', isExternal: true },
         {
@@ -43,6 +44,7 @@ const Links = () => {
           isExternal: true,
         },
         { text: 'QuranReflect.com', url: 'https://quranreflect.com', isExternal: true },
+        { text: 'Quran.AI', url: 'https://quran.ai', isExternal: true },
         { text: 'Sunnah.com', url: 'https://sunnah.com', isExternal: true },
         { text: 'Nuqayah.com', url: 'https://nuqayah.com', isExternal: true },
         { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com', isExternal: true },
@@ -76,7 +78,7 @@ const Links = () => {
   return (
     <div className={styles.groupListContainer}>
       {linksGroup.map((group) => (
-        <div className={styles.group} key={group.title}>
+        <div className={classNames(styles.group, group.className)} key={group.title}>
           <div className={styles.groupTitle}>{group.title}</div>
           {group.links.map((link) => (
             <div

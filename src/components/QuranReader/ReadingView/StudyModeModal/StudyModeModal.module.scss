@@ -10,7 +10,8 @@ div.contentModal {
   padding: unset;
   display: flex;
   flex-direction: column;
-  block-size: 95dvh;
+  block-size: auto;
+  max-block-size: 95dvh;
   inline-size: 100%;
   max-inline-size: 100%;
   overflow: hidden;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import Banner, { BannerVariant } from './Banner';
@@ -14,7 +14,19 @@ vi.mock('@/dls/IconContainer/IconContainer', () => ({
 }));
 
 vi.mock('@/dls/Link/Link', () => ({
-  default: ({ children }: { children: React.ReactNode }) => <a>{children}</a>,
+  default: ({
+    children,
+    href,
+    className,
+  }: {
+    children: React.ReactNode;
+    href: string;
+    className?: string;
+  }) => (
+    <a href={href} className={className}>
+      {children}
+    </a>
+  ),
   LinkVariant: {
     Blend: 'blend',
   },
@@ -54,5 +66,28 @@ describe('Banner', () => {
     expect(desktopLine).not.toBeNull();
     expect(desktopLine?.textContent?.trim()).toBe(copy.desktop);
     expect(desktopLine?.querySelector(`.${styles.mobileLineUnderlined}`)).toBeNull();
+  });
+
+  it('renders the underlined segment as a donate link when an href is provided', () => {
+    const copy = {
+      desktop: "It's the month of the Quran. Help us spread its light.",
+      mobileLineOne: "It's the month of the Quran.",
+      mobileLineTwo: 'Help us spread its light.',
+    };
+
+    render(
+      <Banner
+        variant={BannerVariant.Standalone}
+        copy={copy}
+        underlinedSegmentHref="https://donate.quran.foundation"
+      />,
+    );
+
+    const underlinedSegmentLinks = screen.getAllByRole('link', { name: copy.mobileLineTwo });
+
+    expect(underlinedSegmentLinks).toHaveLength(2);
+    underlinedSegmentLinks.forEach((link) => {
+      expect(link.getAttribute('href')).toBe('https://donate.quran.foundation');
+    });
   });
 });

@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import copyPinnedVerses from '@/components/QuranReader/PinnedVerses/utils/copyPinnedVerses';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { PinnedVerse } from '@/redux/slices/QuranReader/pinnedVerses';
+import { PinnedVersesModalType } from '@/redux/slices/QuranReader/pinnedVersesModal';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
@@ -19,9 +20,7 @@ interface UsePinnedVerseHandlersProps {
   lang: string;
   chaptersData: ChaptersData;
   selectedTranslations: number[];
-  setIsSaveModalOpen: (isOpen: boolean) => void;
-  setIsLoadModalOpen: (isOpen: boolean) => void;
-  setIsNoteModalOpen: (isOpen: boolean) => void;
+  openPinnedModal: (modalType: PinnedVersesModalType) => void;
   unpinVerseWithSync: (verseKey: string) => Promise<void>;
   clearPinnedWithSync: () => Promise<void>;
   onGoToVerse: (chapterId: string, verseNumber: string) => void;
@@ -35,9 +34,7 @@ const usePinnedVerseHandlers = ({
   lang,
   chaptersData,
   selectedTranslations,
-  setIsSaveModalOpen,
-  setIsLoadModalOpen,
-  setIsNoteModalOpen,
+  openPinnedModal,
   unpinVerseWithSync,
   clearPinnedWithSync,
   onGoToVerse,
@@ -79,8 +76,8 @@ const usePinnedVerseHandlers = ({
       router.push(getLoginNavigationUrl(router.asPath));
       return;
     }
-    setIsSaveModalOpen(true);
-  }, [router, setIsSaveModalOpen]);
+    openPinnedModal(PinnedVersesModalType.SAVE_TO_COLLECTION);
+  }, [openPinnedModal, router]);
 
   const handleLoadFromCollection = useCallback(() => {
     logButtonClick('study_mode_load_from_collection');
@@ -88,8 +85,8 @@ const usePinnedVerseHandlers = ({
       router.push(getLoginNavigationUrl(router.asPath));
       return;
     }
-    setIsLoadModalOpen(true);
-  }, [router, setIsLoadModalOpen]);
+    openPinnedModal(PinnedVersesModalType.LOAD_FROM_COLLECTION);
+  }, [openPinnedModal, router]);
 
   const handleAddNote = useCallback(() => {
     logButtonClick('study_mode_add_note');
@@ -97,8 +94,8 @@ const usePinnedVerseHandlers = ({
       router.push(getLoginNavigationUrl(router.asPath));
       return;
     }
-    setIsNoteModalOpen(true);
-  }, [router, setIsNoteModalOpen]);
+    openPinnedModal(PinnedVersesModalType.ADD_NOTE);
+  }, [openPinnedModal, router]);
 
   const handleCopy = useCallback(async () => {
     logButtonClick('study_mode_copy_pinned');

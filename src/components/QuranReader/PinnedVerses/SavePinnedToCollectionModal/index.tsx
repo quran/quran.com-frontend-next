@@ -14,11 +14,13 @@ import Modal from '@/dls/Modal/Modal';
 interface SavePinnedToCollectionModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onBack?: () => void;
 }
 
 const SavePinnedToCollectionModal: React.FC<SavePinnedToCollectionModalProps> = ({
   isOpen,
   onClose,
+  onBack,
 }) => {
   const { t } = useTranslation('common');
 
@@ -58,7 +60,11 @@ const SavePinnedToCollectionModal: React.FC<SavePinnedToCollectionModalProps> = 
           />
         ) : (
           <div className={styles.container}>
-            <SaveBookmarkModalHeader title={t('save-to-collection')} onClose={onClose} />
+            <SaveBookmarkModalHeader
+              title={t('save-to-collection')}
+              onClose={onClose}
+              onBack={onBack}
+            />
             <CollectionsList
               collections={collectionItems}
               isDataReady={!isLoading}

@@ -26,9 +26,16 @@ interface BannerProps {
   ctaButtonText?: string;
   variant?: BannerVariant;
   copy?: BannerCopy;
+  underlinedSegmentHref?: string;
 }
 
-const Banner = ({ text, ctaButtonText, variant = BannerVariant.InlineChip, copy }: BannerProps) => {
+const Banner = ({
+  text,
+  ctaButtonText,
+  variant = BannerVariant.InlineChip,
+  copy,
+  underlinedSegmentHref,
+}: BannerProps) => {
   const mobileLineOne = copy?.mobileLineOne || '';
   const mobileLineTwo = copy?.mobileLineTwo || '';
   const combinedMobileText = `${mobileLineOne} ${mobileLineTwo}`.trim();
@@ -42,19 +49,36 @@ const Banner = ({ text, ctaButtonText, variant = BannerVariant.InlineChip, copy 
     logButtonClick('donate_button_banner');
   }, []);
 
+  const renderUnderlinedSegment = (className?: string) => {
+    if (underlinedSegmentHref) {
+      return (
+        <Link
+          href={underlinedSegmentHref}
+          className={classNames(className, styles.textLink)}
+          isNewTab
+          shouldPrefetch={false}
+        >
+          {mobileLineTwo}
+        </Link>
+      );
+    }
+
+    return (
+      <span className={classNames(className, styles.mobileLineUnderlined)}>{mobileLineTwo}</span>
+    );
+  };
+
   return (
     <div className={classNames(styles.container, styles[variant])} data-testid="banner">
       <div className={styles.text}>
         {shouldRenderTwoLineMobileCopy ? (
           <>
             <span className={styles.mobileLine}>{mobileLineOne}</span>
-            <span className={classNames(styles.mobileLine, styles.mobileLineUnderlined)}>
-              {mobileLineTwo}
-            </span>
+            {renderUnderlinedSegment(styles.mobileLine)}
             {shouldRenderDesktopUnderlinedSecondSegment ? (
               <span className={styles.desktopLine}>
                 <span>{mobileLineOne}&nbsp;</span>
-                <span className={styles.mobileLineUnderlined}>{mobileLineTwo}</span>
+                {renderUnderlinedSegment()}
               </span>
             ) : (
               <span className={styles.desktopLine}>{desktopText}</span>

@@ -25,14 +25,15 @@ const playAndSeekAfterLoad = (word: Word, audioService: AudioService): (() => vo
   audioService.send({ type: 'PLAY_AYAH', surah: wordSurah, ayahNumber: verseNumber });
 
   let unsubscribed = false;
+  let subscription: ReturnType<AudioService['subscribe']> | null = null;
   const cleanup = () => {
-    if (!unsubscribed) {
-      subscription.unsubscribe();
-      unsubscribed = true;
-      activeCleanup = null;
-    }
+    if (unsubscribed) return;
+    unsubscribed = true;
+    subscription?.unsubscribe();
+    subscription = null;
+    if (activeCleanup === cleanup) activeCleanup = null;
   };
-  const subscription = audioService.subscribe((state) => {
+  subscription = audioService.subscribe((state) => {
     if (unsubscribed) return;
     if (
       state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING') &&
@@ -44,7 +45,10 @@ const playAndSeekAfterLoad = (word: Word, audioService: AudioService): (() => vo
       cleanup();
     }
   });
-
+  if (unsubscribed) {
+    subscription.unsubscribe();
+    subscription = null;
+  }
   return cleanup;
 };
 

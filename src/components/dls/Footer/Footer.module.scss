@@ -94,6 +94,12 @@
   }
 }
 
+.ourProjectsGroup {
+  @include breakpoints.tablet {
+    inline-size: 28%;
+  }
+}
+
 .groupTitle {
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-large);
