@@ -39,7 +39,7 @@
     "desc": "Hizmetimizi her ziyaret ettiğinizde tarayıcınızın gönderdiği bilgileri (“Günlük Verileri”) topluyoruz. Bu Günlük Verileri, bilgisayarınızın İnternet Protokolü (“IP”) adresi, tarayıcı türü, tarayıcı sürümü, Hizmetimizin ziyaret ettiğiniz sayfaları, ziyaretinizin saati ve tarihi, bu sayfalarda geçirilen süre ve diğer bilgiler gibi bilgileri içerebilir. İstatistik.",
     "title": "Günlük Verileri"
   },
-  "main-privacy-desc": "Quran Foundation, Inc. (Currain.com'u da içerir) her insanın Kuran'dan faydalanmasını sağlamayı amaçlayan 501(c)(3) kar amacı gütmeyen bir kuruluştur. Quran Foundation, Inc. tüm kullanıcılarımızın gizliliğine değer verir ve saygı duyar.",
+  "main-privacy-desc": "Quran Foundation, Inc. (Quran.com'u da içerir) her insanın Kuran'dan faydalanmasını sağlamayı amaçlayan 501(c)(3) kar amacı gütmeyen bir kuruluştur. Quran Foundation, Inc. tüm kullanıcılarımızın gizliliğine değer verir ve saygı duyar.",
   "personal-info-use": {
     "desc": "Topladığımız kişisel bilgileri aşağıdaki amaçlar için kullanırız: <br/> <li> <underline> Hesap Oluşturma ve Yönetim </underline> : E-posta adresiniz, web sitemizde hesabınızı oluşturmak ve yönetmek için kullanılır. Oturum açmanıza, ayarlarınıza erişmenize ve yer imlerinizi ve okuma geçmişinizi saklamanıza olanak tanır. </li> <li> <underline> Kişiselleştirme </underline> : Tercihlerinize ve ilgi alanlarınıza göre kişiselleştirilmiş öneriler ve öneriler sağlamak için okuma geçmişinizi kullanabiliriz. </li>",
     "title": "Kişisel Bilgilerin Kullanımı"

@@ -27,7 +27,7 @@
       },
       "quranreflect": {
         "caption": "Shiriki tafakari",
-        "description": "Jukwaa la kijamii la kukuza utamaduni wa kutafakari Quran Tukufu",
+        "description": "Jukwaa la kijamii la kukuza utamaduni wa kutafakari Qur'ani Tukufu",
         "tagline": "Soma na Shiriki Tafakari",
         "title": "QuranReflect"
       },
@@ -69,7 +69,7 @@
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Sikiliza wanawake zaidi ya 60 kutoka kote ulimwenguni wakisoma Quran katika visomo tofauti!",
+        "headline": "Sikiliza zaidi ya wanawake 60 kutoka kote ulimwenguni wakisoma Qur'ani katika visomo tofauti!",
         "name": "Qariah",
         "tagline": "Wasomaji wanawake wa Qur'ani"
       },
@@ -84,9 +84,9 @@
         "tagline": "Tafsir & mwenzi wa masomo"
       },
       "quran-space": {
-        "headline": "Ungana na walimu, wanafunzi, au wenzako katika sauti na video za muda halisi ili kusoma, kutafakari, na kujifunza Quran pamoja.",
-        "name": "Nafasi ya Quran",
-        "tagline": "Nafasi ya Mkutano wa Kurani Moja kwa Moja"
+        "headline": "Ungana na walimu, wanafunzi, au wenzako kupitia sauti na video za moja kea moja ili kusoma, kutafakari, na kujifunza Qur'ani pamoja.",
+        "name": "Quran Space",
+        "tagline": "Nafasi ya Mkutano wa Moja kwa Moja"
       }
     },
     "learn-more": "Jifunze zaidi",
@@ -94,11 +94,11 @@
     "view-all": "Tazama yote"
   },
   "footer": {
-    "disclaimer": "Kila programu inamilikiwa na kutunzwa kwa kujitegemea na msanidi programu wake. Kwa usaidizi, ripoti za hitilafu, au maombi ya vipengele, tafadhali wasiliana na muundaji wa programu moja kwa moja."
+    "disclaimer": "Kila programu inamilikiwa na kutunzwa na msanidi programu wake. Kwa usaidizi, ripoti za hitilafu, au maombi ya vipengele, tafadhali wasiliana na muundaji wa programu moja kwa moja."
   },
   "hero": {
-    "description": "Gundua programu za kipekee zinazoendeshwa na maudhui na vipengele vya mtumiaji vilivyothibitishwa na Wakfu wa Quran, huku akaunti yako, maendeleo, na safari yako zikiendelea kuunganishwa.",
+    "description": "Gundua programu za kipekee zinazoendeshwa na maudhui na vipengele vya mtumiaji vilivyothibitishwa na Quran Foundation, huku akaunti yako, maendeleo, na safari yako zikiendelea kuunganishwa.",
     "title": "Gundua Mfumo wetu wa Ikolojia wa Programu"
   },
-  "quran-apps-portal": "Programu za Quran Zilizounganishwa"
+  "quran-apps-portal": "Programu za Qur'ani Zilizounganishwa"
 }

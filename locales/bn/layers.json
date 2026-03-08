@@ -1,4 +1,4 @@
 {
-  "description": "আয়াহ'র স্তরযুক্ত অনুবাদ অন্বেষণ করুন {{ayahNumber}} সূরার {{surahName}} সম্প্রসারণযোগ্য এবং সংকুচিত অর্থ সহ।",
-  "title": "অনুবাদ স্তরসমূহ {{surahName}} - {{ayahNumber}}"
+  "description": "{{ayahNumber}}   {{surahName}}\\nSurah 2:surahName-এর আয়াত 1:ayahNumber-এর স্তরভিত্তিক অনুবাদ অন্বেষণ করুন। এখানে আপনি অর্থগুলো প্রয়োজন অনুযায়ী বিস্তারিতভাবে (expand) বা সংক্ষিপ্তভাবে (collapse) দেখতে পারবেন, যাতে বোঝা আরও সহজ ও স্পষ্ট হয়।",
+  "title": "অনুবাদের ধাপ বা পর্যায়সমূহ {{surahName}} - {{ayahNumber}}"
 }

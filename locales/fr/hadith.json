@@ -1,4 +1,4 @@
 {
-  "description": "Découvrez des hadiths et des récits authentiques liés à Ayah {{ayahNumber}} de la sourate {{surahName}}Accédez aux traditions savantes liées à ce verset coranique.",
+  "description": "Découvrez des hadiths et des récits authentiques liés à l'Ayah {{ayahNumber}} de la Sourate {{surahName}}. Accédez aux récits des savants liés à cette Ayah Coranique.",
   "title": "Hadiths {{surahName}} - {{ayahNumber}}"
 }

@@ -4,7 +4,7 @@
     "description": "Verbonden apps om je groei met de Koran te bevorderen.",
     "featured-apps": "Aanbevolen apps",
     "qariah": {
-      "description": "Vrouwelijke Koranreciteerders",
+      "description": "Vrouwelijke Koran reciteerders",
       "name": "Qariah"
     },
     "quran-android": {
@@ -16,12 +16,12 @@
       "name": "Koran iOS"
     },
     "quran-space": {
-      "description": "Live studiekring",
-      "name": "Koranruimte"
+      "description": "Live studie kring",
+      "name": "Koran ruimte"
     },
     "quranreflect": {
       "description": "Lees en deel je reflecties",
-      "name": "KoranReflectie"
+      "name": "QuaranReflect"
     },
     "see-more": "Meer bekijken",
     "title": "Koran-apps"
@@ -70,7 +70,7 @@
   "quran-in-year-cta": "De lezing van deze week",
   "quran-in-year-verse-title": "Een vers uit de lezing van deze week",
   "ramadan-activities-cta": "<link> Volg de <b> Global Quranic Calendar </b> voor wekelijkse lezingen, inspirerende podcasts en een oproep tot reflectie! </link>",
-  "ramadan-challenge": "Doe mee aan de Ramadan-uitdaging",
+  "ramadan-challenge": "Doe mee aan de Ramadan uitdaging",
   "ramadan": {
     "header": "Hulpmiddelen om je verbinding met de Koran te verdiepen",
     "title": "Klaar voor de Ramadan?"

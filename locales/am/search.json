@@ -1,0 +1,12 @@
+{
+  "default-translations": "ነባሪ ትርጉሞች",
+  "filter": "ማጣሪያ",
+  "language-filter-label": "የአንድ ቋንቋ ትርጉሞችን በሙሉ ይፈልጉ",
+  "language-select": "ቋንቋ ይምረጡ",
+  "reset": "ዳግም አስጀምር",
+  "search": "ፈልግ",
+  "search-desc": "ኃይለኛ እና በጣም ትክክለኛ የሆነ ባለብዙ ቋንቋ የፍለጋ ፕሮግራም በመጠቀም የቅዱስ ቁርዓንን እና የትርጉሞቹን ኮርፐስ ይፈልጉ።",
+  "search-title": "ፈልግ '{{searchQuery}}'",
+  "searching-translations": "ትርጉሞችን መፈለግ",
+  "translation-select": "ትርጉም ይምረጡ"
+}

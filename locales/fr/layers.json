@@ -1,4 +1,4 @@
 {
-  "description": "Explorez la traduction à plusieurs niveaux pour Ayah {{ayahNumber}} de la sourate {{surahName}} avec des significations extensibles et contractées.",
-  "title": "Couches de traduction {{surahName}} - {{ayahNumber}}"
+  "description": "Explorez la traduction à plusieurs niveaux pour l'Ayah {{ayahNumber}} de la Sourate {{surahName}} avec des significations extensibles et contractées.",
+  "title": "Niveaux de traduction {{surahName}} - {{ayahNumber}}"
 }

@@ -6,7 +6,7 @@
     "collapse-all": "Tout réduire",
     "expand-all": "Développer tout",
     "pin": "Épingle",
-    "pin-verses": "Versets d'épingles",
+    "pin-verses": "Épingler les Ayahs",
     "select": "Sélectionner"
   },
   "collections": {
@@ -16,13 +16,13 @@
       "chapters": "Chapitre",
       "clear-all": "Effacer tout",
       "juz": "Juz",
-      "no-matches": "Aucun verset enregistré ne correspond à vos filtres.",
+      "no-matches": "Aucune des Ayahs enregistrées ne correspond à vos filtres.",
       "no-results": "Aucun résultat",
       "title": "Filtre"
     },
     "guest-promo": {
       "sign-in": "Se connecter",
-      "subtitle": "Comparer et opposer les versets",
+      "subtitle": "Comparer et mettre les Ayahs face à face.",
       "title": "Créer des collections personnalisées"
     },
     "items": "{{count}} article",
@@ -39,8 +39,8 @@
   "notes-and-reflections": "Notes et réflexions",
   "page": "Page",
   "reading-bookmark": {
-    "empty": "Commencez à lire et enregistrez un marque-page de lecture !",
-    "title": "Mon marque-page de lecture"
+    "empty": "Commencez à lire et enregistrez un favori de lecture !",
+    "title": "Mon favori de lecture"
   },
   "recent": "Récent",
   "recent-empty": "Commencez à lire pour voir vos lectures récentes",
@@ -55,7 +55,7 @@
   },
   "sign-in-prompt": {
     "features": {
-      "attach-notes": "Ajouter des notes aux versets",
+      "attach-notes": "Ajouter des notes aux Ayahs",
       "custom-collections": "Créer des collections personnalisées"
     },
     "title": "Connectez-vous ou inscrivez-vous gratuitement pour accéder à plus de fonctionnalités !"

@@ -55,9 +55,9 @@
   },
   "sign-in-prompt": {
     "features": {
-      "attach-notes": "Attach notes to verses",
-      "custom-collections": "Create custom collections"
+      "attach-notes": "Write and revisit your reflections and notes",
+      "custom-collections": "Save verses into custom collections"
     },
-    "title": "Sign in or Sign up for free to gain access to the more features!"
+    "title": "Sign in or create a free account to gain access to more features!"
   }
 }

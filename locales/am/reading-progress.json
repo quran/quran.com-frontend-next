@@ -7,9 +7,9 @@
     "confirmation": {
       "action-text": "ውጤቱን ተረድቻለሁ፣ ግቤን ሰርዝ",
       "confirmation-text": "ግቤን ሰርዝ",
-      "instruction-text": "እባክዎ ይተይቡ <strong>{{text}}</strong> ለማረጋገጥ",
+      "instruction-text": "እባክዎ ለማረጋገጥ <strong>{{text}}</strong> ይተይቡ",
       "subtitle": "ይህ እርምጃ ሊቀለበስ አይችልም። ይህ ግብዎን በቋሚነት ይሰርዘዋል፣ እና እድገትዎን መከታተል እናቆማለን።",
-      "title": "ኧረ"
+      "title": "እርግጠኛ ነዎት?"
     },
     "success": "የንባብ ግብዎ በተሳካ ሁኔታ ተሰርዟል።"
   },
@@ -20,13 +20,13 @@
     "title": "የንባብ ግብዎን ያርትዑ"
   },
   "history": "የንባብ ታሪክ",
-  "history-for": "ታሪክን በማንበብ ላይ {{date}}",
+  "history-for": "የ {{date}} የንባብ ታሪክ",
   "manage-goal": "የንባብ ግብዎን ያስተዳድሩ",
   "manually-add": "ንባቦችን በእጅ ያክሉ",
-  "no-reading-history-for": "የንባብ ታሪክ የለም ለ {{date}}",
+  "no-reading-history-for": "ለ {{date}} የንባብ ታሪክ የለም",
   "reading-progress-header": "የእርስዎ እድገት",
-  "reading-progress-streak": "ስትሬክ",
+  "reading-progress-streak": "የማንበብ ፍጥነት",
   "reading-time": "የንባብ ጊዜ",
-  "seconds-read-tooltip": "ይህ የገቡትን አያዎች በማንበብ ያሳለፉት ጊዜ ነው። በQuran.com ላይ በአማካይ የንባብ ፍጥነት በራስ-ሰር እንሞላዋለን፣ ነገር ግን በትክክለኛው የንባብ ጊዜዎ ሊሽሩት ይችላሉ።",
+  "seconds-read-tooltip": "ይህ ያስገቡትን አያዎች(አንቀፆች) በማንበብ ያሳለፉት ጊዜ ነው። በQuran.com ላይ በአማካይ የንባብ ፍጥነት በራስ-ሰር እንሞላዋለን፣ ነገር ግን በትክክለኛው የንባብ ጊዜዎ ሊሽሩት ይችላሉ።",
   "you-read": "እንዲህ ብለህ ታነባለህ፦"
 }

@@ -55,9 +55,9 @@
   },
   "sign-in-prompt": {
     "features": {
-      "attach-notes": "Voeg aantekeningen toe aan de verzen.",
+      "attach-notes": "Voeg reflecties en aantekeningen toe aan de verzen en bekijk ze opnieuw.",
       "custom-collections": "Maak aangepaste collecties aan"
     },
-    "title": "Meld u aan of registreer u gratis om toegang te krijgen tot meer functies!"
+    "title": "Meld je aan of registreer je om gratis toegang te krijgen tot meer functies!"
   }
 }

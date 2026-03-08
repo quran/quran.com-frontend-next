@@ -6,8 +6,8 @@
   "collection-list-empty": "সংগ্রহের তালিকা খালি। আপনি এখনো কোনো সংগ্রহ তৈরি করেননি",
   "collection-name": "সংগ্রহের নাম",
   "collections": "সংগ্রহ",
-  "date-asc": "তারিখ (সবচেয়ে পুরনো)",
-  "date-desc": "তারিখ (সর্বশেষ)",
+  "date-asc": "তারিখ অনুযায়ী (পুরোনো থেকে নতুন)",
+  "date-desc": "তারিখ অনুযায়ী (নতুন থেকে পুরোনো)",
   "delete-bookmark": {
     "confirmation-subtitle": "আপনি আইটেম(গুলো) মুছে ফেলতে যাচ্ছেন। \\n{{count}}  {{collectionName}}, আপনি কি নিশ্চিত?",
     "subtitle": "আপনি কি {{bookmarkName}} {{collectionName}} সংগ্রহ থেকে মুছতে চান?",
@@ -30,8 +30,8 @@
   "go-to-ayah": "আয়াতে যান",
   "load-more": "আর ঢুকাও",
   "no-collections": "আপনার কাছে এখনও কোনও সংগ্রহ নেই।",
-  "quranic-asc": "কুরআনের ক্রম (আরোহী)",
-  "quranic-desc": "কুরআনের ক্রম (অবরোহণ)",
+  "quranic-asc": "কুরআনের আয়াতের ক্রম (উর্ধ্বমুখী)",
+  "quranic-desc": "কুরআনের আয়াতের ক্রম (নিম্নমুখী)",
   "recently-added": "সম্প্রতি যোগ",
   "recently-updated": "সম্প্রতি আপডেট করা হয়েছে",
   "verse-key": "অধ্যায় ও পদ সংখ্যা"

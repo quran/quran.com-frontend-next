@@ -1,0 +1,4 @@
+{
+  "meta-description": "{{transliteratedName}} ሱራን(ምዕራፍን) አንብብና አዳምጥ ሱራን(ምዕራፍን) የወረደው በ {{revelationPlace}}, በቁርአን ውስጥ ቅደም ተከተሉ {{chapterOrder}} ነው። የሱራው ርዕስ \"{{translatedName}}\" በ {{localeName}} እና የሚከተሉትን {{versesCount}} አንቀጾች ያካትታል።",
+  "ranges-meta-desc": "ከ አንቀፅ {{rangeFrom}} እስከ አንቀፅ {{rangeTo}} ያንብቡ እና ያድምጡ"
+}

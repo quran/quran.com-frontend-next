@@ -26,26 +26,26 @@
   },
   "flashcards": {
     "all-done": "تم الانتهاء!",
-    "carousel-aria-label": "مجموعة بطاقات تعليمية دوارة",
+    "carousel-aria-label": "بطاقات تعليمية دوارة",
     "carousel-subtitle": "مرر بين البطاقات، وانقر لقلبها",
-    "collapse-all": "طي الكل",
+    "collapse-all": "إخفاء الكل",
     "deck-subtitle": "اسحب لليمين إذا كنت تعرفه، ولليسار للمراجعة",
     "expand-all": "عرض الكل",
     "go-to-card": "انتقل إلى البطاقة {{index}}",
     "know": "يعرف",
-    "known": "معروف",
-    "list-subtitle": "انقر للتوسيع، وضع علامة على الكلمات التي تم إتقانها",
-    "mark-as-known": "مارك كما هو معروف",
-    "mark-as-mastered": "تم وضع علامة \"متقن\"",
+    "known": "معلوم",
+    "list-subtitle": "اضغط للتوسيع، وحدد الكلمات كمُتقنة",
+    "mark-as-known": "ضع علامة \"معلوم\"",
+    "mark-as-mastered": "ضع علامة \"مُتقَن\"",
     "mark-as-need-review": "ضع علامة \"بحاجة إلى مراجعة\"",
-    "mark-as-not-mastered": "ضع علامة \"لم يتم إتقانها\"",
+    "mark-as-not-mastered": "ضع علامة \"غير مُتقَن\"",
     "mastered-progress": "{{mastered}} / {{total}} أتقن",
     "next-card": "البطاقة التالية",
     "previous-card": "البطاقة السابقة",
     "review": "مراجعة",
     "start-over": "ابدأ من جديد",
-    "tap-to-flip-swipe-to-answer": "انقر للقلب واسحب للإجابة",
-    "tap-to-reveal": "انقر للكشف",
+    "tap-to-flip-swipe-to-answer": "اضغط لقلب البطاقة واسحب للإجابة",
+    "tap-to-reveal": "اضغط لإظهار",
     "translation-label": "ترجمة:"
   },
   "help-about-reflection": "مساعدة حول خاصية التدبر",
@@ -63,10 +63,10 @@
   "reflection-description-1": "عند الضغط على \"إضافة تدبر\"، سيتم توجيهك إلى QuranReflect، وهي منصة لمشاركة التدبرات الشخصية حول القرآن الكريم. وبخلاف التفسير العلمي، فإن التدبرات تعبّر عن رؤى وتجارب شخصية مرتبطة بالآيات.",
   "reflection-description-2": "إذا نشرت تدبرك بشكل عام فسيتم مراجعة تدبرك من قبل فريق الإشراف، ثم يظهر لمجتمع QuranReflect.",
   "repeat-learning-plan": "إعادة خطة التعلم",
-  "start-here": "ابدأ من هنا",
+  "start-here": "ابدأ التعلم",
   "tabs": {
     "main": "التفاصيل الرئيسة",
-    "syllabus": "المنهج"
+    "syllabus": "مخطط"
   },
   "what-happens-when-you-click-add-reflection": "ماذا يحدث عند الضغط على \"إضافة تدبر\"؟"
 }

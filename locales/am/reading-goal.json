@@ -1,5 +1,5 @@
 {
-  "achieve-quran-goals": "የቁርዓን ግቦችህን ማሳካት",
+  "achieve-quran-goals": "የቁርዓን ግቦችዎን ያሳኩ",
   "continue-reading": "ማንበብ ይቀጥሉ",
   "continuous": {
     "description": "ግብዎ እድገትዎን በቀናት ቆይታ ያሰላል",
@@ -14,22 +14,22 @@
     "title": "ዕለታዊ ግብ"
   },
   "day-streak": "የቀን ተከታታይ",
-  "day-x": "ቀን {{day}}",
+  "day-x": "{{day}} ቀን",
   "days": "ቀናት",
   "days-remaining": "የቀሩት ቀናት",
   "duration": "የቆይታ ጊዜ (ቀናት)",
-  "ending-chapter": "የመጨረሻ ሱራ",
-  "ending-verse": "አያህ ማጠናቀቂያ",
+  "ending-chapter": "የመጨረሻ ሱራ (ምእራፍ)",
+  "ending-verse": "አያህ (አንቀፅ) ማጠናቀቂያ",
   "examples-subtitle": "የጋራ ግቦች ዝርዝር እነሆ። የራስዎን ግብ መፍጠርም ይችላሉ።",
   "examples-title": "አስቀድሞ የተዘጋጀ ግብ ይምረጡ ወይም የራስዎን ግብ ይፍጠሩ",
   "examples": {
     "custom": {
       "description": "ለእርስዎ የሚስማማ ብጁ ግብ ያዘጋጁ",
-      "title": "ብጁ"
+      "title": "ለግል የተበጀ"
     },
     "khatm": {
-      "description": "ክላሲክ የካትም ግብ። በቀን 1 ጁዝ ያንብቡ",
-      "title": "ቁርዓንን በ30 ቀናት ውስጥ አንብብ"
+      "description": "ለየት ያለ ቁርዓን የማኽተም ግብ። በቀን 1 ጁዝ ያንብቡ",
+      "title": "ቁርዓንን በ30 ቀናት ውስጥ ያንብቡ"
     },
     "time": {
       "description": "ለጀማሪዎች ቀላል ግብ",
@@ -54,7 +54,7 @@
     "title": "ለግብህ ኢላማ አስቀምጥ"
   },
   "goal-type": {
-    "description": "ግብህ በጊዜ፣ በገጾች ወይም በተበጀ ክልል (ማለትም 3 የቁርዓን ጁዝ) ላይ የተመሠረተ መሆን አለበት?",
+    "description": "ግብህ በጊዜ፣ በገጾች ወይም በግላዊ መሰረት በተበጀ ብዛት (ማለትም 3 የቁርዓን ጁዝ) ላይ የተመሠረተ መሆን አለበት?",
     "title": "ለዓላማዎ መስፈርት ይምረጡ"
   },
   "goal-types": {
@@ -64,7 +64,7 @@
     },
     "range": {
       "description": "ግብህ በተበጁ የጥቅሶች ስብስብ ላይ የተመሰረተ ይሆናል (ይህ ሱራ፣ ጁዝ ወይም ሙሉ ቁርዓን ሊሆን ይችላል)",
-      "title": "ብጁ ክልል"
+      "title": "ለግል የተበጁ መጠን ( የግብ ርቀት)"
     },
     "time": {
       "description": "ግብዎ በጊዜ ላይ የተመሰረተ ይሆናል",
@@ -72,19 +72,19 @@
     }
   },
   "plus-x-more-days": {
-    "one": "አንድ",
-    "other": "ሌላ"
+    "one": "አንድ ተጨማሪ ቀን",
+    "other": "ሌላ ተጨማሪ ቀናት"
   },
   "preview-schedule": {
-    "description": "ግብዎ እንደዚህ ይመስላል። በኋላ ላይ ሁልጊዜ መለወጥ ይችላሉ።",
+    "description": "ግብዎ እንደዚህ ይመስላል። በማንኛውም ጊዜ በኋላ ላይ መለወጥ ይችላሉ።",
     "title": "የጊዜ ሰሌዳዎ ቅድመ እይታ ይኸውና"
   },
   "progress": {
     "complete": "የዛሬው ግብ ተጠናቋል 🎉",
     "goal-complete": "ግብህ ሙሉ በሙሉ ተጠናቋል 🎉",
-    "pages-goal": "አንብብ {{pages}} የቁርዓን ገጾች",
-    "range-goal": "አንብብ {{from}} ወደ {{to}}",
-    "time-goal": "አንብብ {{time}} የቁርዓን"
+    "pages-goal": "{{pages}} የቁርዓን ገጾች ያንብቡ",
+    "range-goal": "ከ {{from}} እስከ {{to}} ያንብቡ",
+    "time-goal": "ከቁርዓን {{time}} አንብብ"
   },
   "reading-goal": "የንባብ ግብ",
   "reading-goal-description": "ከቁርአን ንባብ ግቦችዎ ጋር ወጥነት ያለው ሆኖ መቆየት ፈታኝ ሆኖብዎታል?<br/><br/> የቁርአን እድገት ጉዞ በቁርአን ጉዞዎ ላይ ወጥነት እንዲኖራቸው የሚረዳ እንደሚፈልጉት ተለዋዋጭ ነው። በቀን 10 ደቂቃ የማንበብ አላማ ቢያደርጉ፣ በወር ውስጥ ጁዝ መጨረስ ቢያልሙ ወይም ቁርዓንን በዓመት ውስጥ መጨረስ ቢያልሙ፣ ወዘተ...፣ Quran.com አሁኑኑ ግብ እንዲያወጡ እና የእለት ተእለት ንባብዎን እንዲከታተሉ ያስችልዎታል፣ እድገት እያደረጉም እንደሚፈልጉትም እያስተካከሉ። ለመጠቀም ሙሉ በሙሉ ነፃ ነው እና ግብዎ ላይ ለመድረስ እንዲነቃቁ ይረዳዎታል ብለን ተስፋ እናደርጋለን!",
@@ -94,48 +94,48 @@
   "remaining": "ለዛሬው የቀረው",
   "remaining-base": "የቀረው",
   "remaining-days": {
-    "one": "",
-    "other": ""
+    "one": "አንድ ቀን የቀረው",
+    "other": "ተጨማሪ ቀናቶች"
   },
   "set-a-new-goal": "አዲስ ግብ ያዘጋጁ",
-  "set-custom-goal": "ብጁ ግብ ያዘጋጁ",
+  "set-custom-goal": "በእርስዎ ልክ የተስተካከለ ግብ ያዘጋጁ",
   "set-reading-goal-success": "የንባብ ግብዎ በተሳካ ሁኔታ ተቀምጧል።",
   "start-journey": "ጉዞዎን ይጀምሩ!",
   "start-reading": "ማንበብ ይጀምሩ",
-  "starting-chapter": "የሱራ መጀመሪያ",
+  "starting-chapter": "የመጀመሪያ ሱራ (ምእራፍ)",
   "starting-verse": "የአያህ ጅምር",
-  "streak": "ስትሬክ",
-  "streak-definition": "ተከታታይ ቁርዓንን ያነበብክባቸው ተከታታይ ቀናት ብዛት ነው።",
+  "streak": "ስትሬክ ( ይፈንጠሩ)",
+  "streak-definition": "የንባብ ተከታታይ (ስትራይክ) ቁርዓንን ያነበብክባቸው ተከታታይ ቀናት ብዛት ነው።",
   "timeline-meaning": "የጊዜ መስመርህ ምን ማለት ነው?",
   "timeline-states": {
     "checked": "ግብህን አሳክተሃል",
     "filled": "የሆነ ነገር አንብበሃል ነገር ግን ግብህን ለማሳካት በቂ አይደለም",
-    "none": "በዚያ ቀን እስካሁን ምንም አላነበባችሁም",
+    "none": "በዚያ ቀን እስካሁን ምንም አላነበቡም",
     "stroked": "ዛሬ ምንም አላነበብክም"
   },
   "todays-goal": "የዛሬው ግብ",
-  "track-your-streak": "ትራኮችን ይከታተሉ፣ ብጁ ግቦችን ይፍጠሩ፣ ወጥነት ይኑርዎት",
+  "track-your-streak": "ትራኮችን ይከታተሉ፣ በእርስዎ ልክ የተስተካከሉ ግቦችን ይፍጠሩ፣ ወጥነት ይኑርዎት",
   "view-progress": "ሂደትን ይመልከቱ",
   "week-progress": "የዚህ ሳምንት እድገት",
   "x-days": {
-    "one": "",
-    "other": ""
+    "one": "ቀን",
+    "other": "ተጨማሪ ቀናቶች"
   },
-  "x-days-streak": "<p>{{days}}</p> <span>የቀን ተከታታይ</span>",
+  "x-days-streak": "የ <p>{{days}}</p> <span> ቀን ተከታታይ (ዝውተራ)</span>",
   "x-hours": {
-    "one": "",
-    "other": ""
+    "one": "አንድ ሰዓት",
+    "other": "ተጨማሪ ሰዓቶች"
   },
   "x-minutes": {
-    "one": "",
-    "other": ""
+    "one": "ደቂቃ",
+    "other": "ተጨማሪ ደቂቃዎች"
   },
   "x-pages": {
     "one": "አንድ",
     "other": "ሌላ"
   },
   "x-seconds": {
-    "one": "አንድ",
-    "other": ""
+    "one": "አንድ ሰኮንድ",
+    "other": "ሌላ ሰኮንዶች"
   }
 }

@@ -1,0 +1,24 @@
+{
+  "all-notifications": "ሁሉም ማሳወቂያዎች",
+  "channels-notifications": "የሰርጦች (የቻናሎች) ማሳወቂያዎች",
+  "channels": {
+    "chat": "ተወያይ (ቻት)",
+    "email": "ኢሜይል",
+    "in_app": "የውስጠ-መተግበሪያ",
+    "push": "ይግፉ",
+    "sms": "ኤስኤምኤስ"
+  },
+  "notif-settings-not-enabled": "የማሳወቂያ ቅንብሮች አልነቁም",
+  "notif-update-success": "የማሳወቂያ ቅንብሮችዎ በተሳካ ሁኔታ ተዘምነዋል!",
+  "tabs": {
+    "categories-settings": "የምድቦች ቅንብሮች",
+    "global-settings": "ሁሉን ጠቅላይ ቅንብሮች"
+  },
+  "tags": {
+    "calendar": "ቁርዓን በዓመት",
+    "goal-reminder": "የግብ አስታዋሽ",
+    "learning-plans": "የመማሪያ እቅዶች",
+    "qgj": "የቁርዓን እድገት ጉዞ",
+    "streaks": "ጭረቶች"
+  }
+}

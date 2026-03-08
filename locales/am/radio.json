@@ -1,0 +1,27 @@
+{
+  "change": "ለውጥ",
+  "curated-station": {
+    "juz-amma": {
+      "description": "የመጨረሻውን የቁርዓን ጁዝ ያዳምጡ",
+      "title": "ጁዝ ዓመ"
+    },
+    "popular-recitations": {
+      "description": "በየቀኑ የተመረጡ የንባብ ምግቦች",
+      "title": "ታዋቂ ንባቦች"
+    },
+    "surah-al-kahf": {
+      "description": "ሱረቱ አልካህፍ ደጋግሞ ያዳምጡ",
+      "title": "ሱረቱ አል-ካህፍ"
+    },
+    "yaseen-alwaqiah-al-mulk": {
+      "description": "ከአንባቢዎች ስብስብ የተገኙ ሱራዎች",
+      "title": "ያሲን, አል-ዋቂዓህ, አል-ሙልክ"
+    }
+  },
+  "curated-stations": "የተመረጡ ጣቢያዎች",
+  "pause-radio": "ሬዲዮን ለአፍታ አቁም",
+  "play-radio": "ሬዲዮን አጫውት",
+  "radio-desc": "በተለያዩ አንባቢዎች የሚቀርበውን የቅዱስ ቁርዓንን ደጋግሞ የሚያቀርብ ድንቅ ንባብ ያዳምጡ።",
+  "reciter-stations": "የቃሪኦች ጣቢያዎች",
+  "station": "መሣፈሪያ"
+}

@@ -9,12 +9,12 @@
     "audio": "Activer la lecture audio",
     "customSize": "Utilisez une largeur/hauteur personnalisée",
     "lessons": "Bouton Afficher les leçons",
-    "mergeVerses": "Fusionner les versets (affichage en ligne)",
+    "mergeVerses": "Fusionner les Ayahs (affichage en ligne)",
     "reflections": "Bouton Afficher les reflets",
-    "showArabic": "Afficher le verset arabe",
+    "showArabic": "Afficher l'Ayah en arabe",
     "tafsirs": "Bouton Afficher les Tafsirs",
     "translator": "Afficher le nom du traducteur",
-    "verseRange": "Activer la plage de versets",
+    "verseRange": "Activer la plage de l'Ayah",
     "wordByWord": "Activer la traduction mot à mot",
     "wordByWordTransliteration": "Activer la translittération mot à mot"
   },
@@ -38,12 +38,12 @@
     "width": "Largeur"
   },
   "header": {
-    "subtitle": "<bold>Une méthode de meilleure qualité et personnalisable pour intégrer des versets du Coran à votre contenu.</bold><br />Créez un contenu intégré que vous pouvez facilement personnaliser, avec <bold>Traduction arabe précise, récitation intégrée</bold> et plus encore, afin que les lecteurs puissent écouter tout en s'immergeant dans le verset.",
+    "subtitle": "<bold>Une méthode de meilleure qualité et personnalisable pour intégrer des Ayahs du Coran à votre contenu.</bold><br />Créez un contenu intégré que vous pouvez facilement personnaliser, avec une <bold>traduction Arabe précise, uen récitation intégrée</bold>, et plus encore, afin que les lecteurs puissent écouter tout en s'immergeant dans l'Ayah.",
     "title": "Générateur d'intégration Ayah"
   },
   "meta": {
     "description": "Configurez et prévisualisez les widgets d'intégration pour le partage du Coran, puis copiez l'extrait de script prêt à l'emploi.",
-    "title": "Outil d'intégration de versets coraniques | Quran.com"
+    "title": "Outil d'intégration d'Ayahs | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -67,7 +67,7 @@
     "loadingChapters": "Chargement des chapitres...",
     "loadingPreview": "Chargement de l'aperçu...",
     "loadingReciters": "Chargement des récitants...",
-    "loadingVerses": "Chargement des versets...",
+    "loadingVerses": "Chargement des Ayahs...",
     "noTranslations": "Aucune traduction trouvée"
   },
   "theme": {

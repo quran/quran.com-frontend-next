@@ -27,7 +27,7 @@
   },
   "fields": {
     "ayah": "آية",
-    "clientId": "معرّف العميل",
+    "clientId": "معرف العميل",
     "height": "الارتفاع",
     "language": "اللغة",
     "mushaf": "المصحف",
@@ -72,7 +72,7 @@
   },
   "theme": {
     "dark": "داكن",
-    "light": "ضوء",
+    "light": "فاتح",
     "sepia": "بني داكن"
   },
   "translations": {

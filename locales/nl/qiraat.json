@@ -1,4 +1,4 @@
 {
-  "description": "Ontdek de verschillende Qiraat (variantlezingen) van Ayah {{ayahNumber}} van Soera {{surahName}}",
+  "description": "Ontdek de verschillende Qiraat (variant lezingen) van Ayah {{ayahNumber}} van Soera {{surahName}}",
   "title": "Qiraat {{surahName}} - {{ayahNumber}}"
 }

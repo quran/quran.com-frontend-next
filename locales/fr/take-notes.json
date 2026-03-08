@@ -61,10 +61,10 @@
       "description": "Bientôt disponible: partagez vos notes avec vos amis, votre famille ou des groupes d'étude. Collaborez pour mieux comprendre et diffuser des connaissances.",
       "paragraph1": "Bien que les notes sur Quran.com soient enregistrées de manière privée, vous avez également la possibilité de partager publiquement certaines réflexions sur <0>QuranReflect.com</0>. Il s'agit d'une plateforme communautaire à but non lucratif conçue pour encourager un échange approfondi avec le Coran, non pas par le biais de tafsirs savants (réservés aux érudits qualifiés), mais par des réflexions sincères et personnelles, revues et guidées par une équipe de modération qualifiée.",
       "paragraph2": "Allah invite tous les croyants, et pas seulement les savants, à s'engager dans le tadabbur:",
-      "quote": "[Voici] un Livre béni que Nous avons fait descendre vers toi, afin qu’ils méditent sur ses versets et que les doués d’intelligence réfléchissent ! (Sourate Sad 38:29)",
+      "quote": "[Voici] un Livre béni que Nous avons fait descendre vers toi, afin qu’ils méditent sur ses Ayahs et que les doués d’intelligence réfléchissent ! (Sourate Sad 38:29)",
       "reflection-prompt": "Exemples de questions de réflexion personnelle que vous pouvez utiliser pour réfléchir:",
       "reflection-questions": [
-        "De quelle manière ce verset vous a-t-il ému ou inspiré ?",
+        "De quelle manière cette Ayah vous a-t-elle ému(e) ou inspiré(e) ?",
         "Y a-t-il des qualités ou des actions mentionnées que vous pouvez améliorer ?",
         "Existe-t-il une promesse ou un avertissement/une interdiction que vous pouvez appliquer à votre vie ?",
         "Avez-vous une histoire personnelle liée à cette Ayah ?",
@@ -74,7 +74,7 @@
     },
     "title": "Avantages de l'utilisation de la fonctionnalité Notes"
   },
-  "description": "Découvrez 5 bonnes raisons de prendre des notes sur Quran.com et comment les notes peuvent jouer un rôle essentiel dans votre voyage avec le Coran.",
+  "description": "Découvrir les 5 bonnes raisons de prendre des notes sur Quran.com et comment les notes peuvent jouer un rôle essentiel dans votre voyage avec le Coran.",
   "heading": "5 bonnes raisons de prendre des notes – Et comment elles peuvent transformer votre voyage avec le Coran",
   "how-to-use": {
     "saved-note-explanation": "Une fois que vous avez enregistré une note pour une Ayah, l'icône de note devient bleue, ce qui vous permettra de facilement identifier les Ayahs que vous avez déjà annotés.",

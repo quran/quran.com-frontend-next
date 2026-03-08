@@ -273,14 +273,14 @@
   "from": "Kutoka",
   "fundraising-card-v2": {
     "cta": "Toa mchango sasa",
-    "description": "Wafadhili wa kila mwezi hutusaidia kuboresha Quran.com na kudumisha shughuli ili tusizingatie sana ukusanyaji wa fedha na zaidi kuunda athari.",
+    "description": "Wafadhili wa kila mwezi wanatusaidia kuboresha Quran.com na kudumisha shughuli ili tuzingatie kuunda athari na tusizingatie sana ukusanyaji wa fedha.",
     "title": "Kuwa Mfadhili wa Kila Mwezi"
   },
   "fundraising-share-title": "Shiriki Uchangishaji wa Quran.com",
   "fundraising-sticky-banner-v2": {
     "cta": "Toa mchango",
-    "desktop-text": "Changia katika dhamira yetu",
-    "mobile-line-one": "Ni mwezi wa Quran.",
+    "desktop-text": "Changia katika misheni yetu",
+    "mobile-line-one": "Ni mwezi wa Qur'ani.",
     "mobile-line-two": "Tusaidie kueneza mwanga wake."
   },
   "fundraising-sticky-banner": {

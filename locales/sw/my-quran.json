@@ -55,9 +55,9 @@
   },
   "sign-in-prompt": {
     "features": {
-      "attach-notes": "Ambatisha maelezo kwenye aya",
-      "custom-collections": "Unda mikusanyiko maalum"
+      "attach-notes": "Andika na urejelee tafakari na maelezo yako",
+      "custom-collections": "Hifadhi aya katika mikusanyiko maalum"
     },
-    "title": "Ingia au Jisajili bure ili upate huduma zaidi!"
+    "title": "Ingia au fungua akaunti bila malipo ili upate huduma zaidi!"
   }
 }

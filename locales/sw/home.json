@@ -1,11 +1,11 @@
 {
   "achieve-quran-goals": "Fikia Malengo yako ya Qur'ani",
   "apps": {
-    "description": "Programu zilizounganishwa ili kukuza ukuaji wako na Quran.",
+    "description": "Programu zilizounganishwa ili kukuza ukuaji wako na Qur'ani.",
     "featured-apps": "Programu Zilizoangaziwa",
     "qariah": {
-      "description": "Wanawake Wasomaji wa Quran",
-      "name": "Qaria"
+      "description": "Wasomaji Wanawake wa Qur'ani",
+      "name": "Qariah"
     },
     "quran-android": {
       "description": "Quran.com kwa Android",
@@ -13,18 +13,18 @@
     },
     "quran-ios": {
       "description": "Quran.com kwa iPhone",
-      "name": "Kurani iOS"
+      "name": "Quran iOS"
     },
     "quran-space": {
-      "description": "Mzunguko wa Masomo wa Moja kwa Moja",
-      "name": "Nafasi ya Quran"
+      "description": "Kikundi cha Masomo cha Moja kwa Moja",
+      "name": "Quran Space"
     },
     "quranreflect": {
       "description": "Soma na Shiriki Tafakari",
-      "name": "Tafakari ya Quran"
+      "name": "QuranReflect"
     },
     "see-more": "Tazama zaidi",
-    "title": "Programu za Quran"
+    "title": "Programu za Qur'ani"
   },
   "begin": "Anza",
   "calendar-cta": "Kalenda",
