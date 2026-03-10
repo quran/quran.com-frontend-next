@@ -10,6 +10,7 @@ import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import AuthRedirects from '@/components/Auth/AuthRedirects';
 import UserAccountModal from '@/components/Auth/UserAccountModal';
 import DeveloperUtility from '@/components/DeveloperUtility/DeveloperUtility';
+import DonatePopup from '@/components/DonatePopup/DonatePopup';
 import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/dls/Footer/Footer';
@@ -57,6 +58,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
     >
       <AuthRedirects />
       <UserAccountModal announcement={userData?.announcement} consents={userData?.consents} />
+      <DonatePopup />
       <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
       <GlobalListeners />
       {!isAuth && <Navbar />}

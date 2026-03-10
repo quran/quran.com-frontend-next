@@ -1,22 +1,51 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { describe, expect, it } from 'vitest';
 
 import {
   getReaderBannerAnalyticsParams,
   getReaderBannerAnalyticsSource,
+  ReaderFundraisingBannerPlacement,
 } from './fundraisingAnalytics';
 
 import { QuranReaderDataType } from '@/types/QuranReader';
 
 describe('getReaderBannerAnalyticsSource', () => {
-  it('returns source per reader data type', () => {
+  it('returns end-of-scroll source per reader data type by default', () => {
     expect(getReaderBannerAnalyticsSource(QuranReaderDataType.Chapter)).toBe(
-      'quran_reader_chapter_floating_banner',
+      'quran_reader_chapter_end_of_scroll_banner',
     );
     expect(getReaderBannerAnalyticsSource(QuranReaderDataType.Page)).toBe(
-      'quran_reader_page_floating_banner',
+      'quran_reader_page_end_of_scroll_banner',
     );
     expect(getReaderBannerAnalyticsSource(QuranReaderDataType.Juz)).toBe(
-      'quran_reader_juz_floating_banner',
+      'quran_reader_juz_end_of_scroll_banner',
+    );
+  });
+
+  it('returns floating source variants when explicitly requested', () => {
+    expect(
+      getReaderBannerAnalyticsSource(
+        QuranReaderDataType.Rub,
+        ReaderFundraisingBannerPlacement.Floating,
+      ),
+    ).toBe('quran_reader_rub_floating_banner');
+    expect(
+      getReaderBannerAnalyticsSource(
+        QuranReaderDataType.Ranges,
+        ReaderFundraisingBannerPlacement.Floating,
+      ),
+    ).toBe('quran_reader_range_floating_banner');
+  });
+
+  it('maps range-like reader types to the shared range source', () => {
+    expect(getReaderBannerAnalyticsSource(QuranReaderDataType.Verse)).toBe(
+      'quran_reader_range_end_of_scroll_banner',
+    );
+    expect(getReaderBannerAnalyticsSource(QuranReaderDataType.ChapterVerseRanges)).toBe(
+      'quran_reader_range_end_of_scroll_banner',
+    );
+    expect(getReaderBannerAnalyticsSource(QuranReaderDataType.Ranges)).toBe(
+      'quran_reader_range_end_of_scroll_banner',
     );
   });
 });

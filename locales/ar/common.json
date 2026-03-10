@@ -382,6 +382,20 @@
   "quran-apps": "تطبيقات القرآن الكريم",
   "quran-com": "Quran.com",
   "quran-radio": "راديو القرآن الكريم",
+  "ramadan-donation-popup": {
+    "donate-now": "تبرع الآن",
+    "dont-show-again": "لا تعرض هذا مرة أخرى",
+    "goal-label": "هدف جمع التبرعات في رمضان",
+    "learn-more": "أقرأ المزيد",
+    "month-goal": "الهدف الشهري",
+    "month-raised": "تم جمعه شهريًا",
+    "next-ayah": "تابعونا غداً للآية التالية",
+    "subtitle": {
+      "end": "شارك في الثواب.",
+      "start": "ساعد الملايين على التواصل مع القرآن الكريم."
+    },
+    "title": "صاحب القرآن الكريم،"
+  },
   "read": "اقرأ",
   "read-more": "اقرأ المزيد",
   "reading-history": "سجل القراءة",

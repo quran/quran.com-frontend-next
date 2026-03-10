@@ -61,12 +61,16 @@
 }
 
 .actions .donateButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   inline-size: 100%;
   --button-size: var(--donation-card-cta-height);
   block-size: var(--donation-card-cta-height);
   padding-inline: var(--spacing-medium2-px);
   padding-block: var(--spacing-xxsmall-px);
   color: var(--donation-card-cta-fg);
+  text-decoration: none;
   border-radius: var(--border-radius-small-px);
   background-color: var(--donation-card-cta-bg);
   border: var(--spacing-hairline-px) solid var(--donation-card-cta-bg);

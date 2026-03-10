@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { describe, it, expect } from 'vitest';
 
 import migrations from './migrations';
@@ -145,5 +146,52 @@ describe('Redux migrations', () => {
     expect(m1.quranReaderStyles.showTajweedRules).toBe(true);
     const m2 = migrations[42]({ quranReaderStyles: { showTajweedRules: false } });
     expect(m2.quranReaderStyles.showTajweedRules).toBe(false);
+  });
+
+  it('migration 49: initializes donation popup state from legacy fundraising banner state', () => {
+    const migratedState = migrations[49]({
+      fundraisingBanner: {
+        isHomepageBannerVisible: false,
+        isQuranReaderBannerVisible: true,
+        isQuranReaderFloatingBannerVisible: false,
+      },
+      otherSlice: {
+        value: 'preserved',
+      },
+    });
+
+    expect(migratedState.fundraisingBanner).toEqual({
+      isHomepageBannerVisible: false,
+      donationPopup: {
+        hiddenUntilMs: null,
+        permanentlyDismissed: false,
+      },
+    });
+    expect(migratedState.otherSlice).toEqual({ value: 'preserved' });
+  });
+
+  it('migration 50: removes dead quran reader banner visibility while preserving homepage and popup state', () => {
+    const migratedState = migrations[50]({
+      fundraisingBanner: {
+        isHomepageBannerVisible: false,
+        isQuranReaderBannerVisible: false,
+        donationPopup: {
+          hiddenUntilMs: 123,
+          permanentlyDismissed: true,
+        },
+      },
+      otherSlice: {
+        value: 'preserved',
+      },
+    });
+
+    expect(migratedState.fundraisingBanner).toEqual({
+      isHomepageBannerVisible: false,
+      donationPopup: {
+        hiddenUntilMs: 123,
+        permanentlyDismissed: true,
+      },
+    });
+    expect(migratedState.otherSlice).toEqual({ value: 'preserved' });
   });
 });

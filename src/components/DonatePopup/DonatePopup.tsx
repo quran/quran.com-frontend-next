@@ -1,78 +1,257 @@
+/* eslint-disable max-lines */
+import { useMemo } from 'react';
+
+import * as Dialog from '@radix-ui/react-dialog';
+import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
+import useSWRImmutable from 'swr/immutable';
 
 import styles from './DonatePopup.module.scss';
+import { getCurrentRamadanDonationPopupAyah } from './ramadanDonationPopupAyah';
+import useDonationPopupImpression from './useDonationPopupImpression';
+import useDonationPopupNow from './useDonationPopupNow';
+import { DONATION_POPUP_HIDE_DURATION_MS, shouldShowDonationPopup } from './utils';
 
-import DonateButton from '@/components/Fundraising/DonateButton';
-import LearnMoreButton from '@/components/Fundraising/DonateButton/LearnMoreButton';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Skeleton from '@/components/dls/Skeleton/Skeleton';
+import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import Modal from '@/dls/ContentModal/ContentModal';
 import CloseIcon from '@/icons/close.svg';
-import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
-import { selectIsDonationPopupVisible, setIsDonationPopupVisible } from '@/redux/slices/session';
-import DonateButtonClickSource from '@/types/DonateButtonClickSource';
-import DonateButtonType from '@/types/DonateButtonType';
-import LearnMoreClickSource from '@/types/LearnMoreClickSource';
+import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
+import {
+  selectDonationPopupState,
+  setDonationPopupHiddenUntilMs,
+  setDonationPopupPermanentlyDismissed,
+} from '@/redux/slices/fundraisingBanner';
+import DonationOverview from '@/types/DonationOverview';
+import Language from '@/types/Language';
+import { QuranFont } from '@/types/QuranReader';
+import { makeDonatePageUrl, makeDonateUrl } from '@/utils/apiPaths';
+import {
+  getDonationOverview,
+  getDonationProgressPercentage,
+  RAMADAN_2026_DONATION_CAMPAIGN,
+  RAMADAN_2026_MONTHLY_GOAL,
+} from '@/utils/donation/api';
 import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
+import { isAuthPage, isQuranReaderRoutePathname } from '@/utils/routes';
+
+const DONATE_POPUP_VERSE_FONT_SCALE = 3;
+const renderVerseLoadingFallback = () => (
+  <div className={styles.verseLoading}>
+    <Skeleton className={styles.verseArabicSkeleton} />
+    <Skeleton className={styles.verseTranslationSkeleton} />
+  </div>
+);
 
 const DonatePopup = () => {
-  const { t } = useTranslation('common');
+  const { t, lang: locale } = useTranslation('common');
+  const router = useRouter();
   const dispatch = useDispatch();
-  const isPopupVisible = useSelector(selectIsDonationPopupVisible);
+  const donationPopupState = useSelector(selectDonationPopupState);
+  const nowMs = useDonationPopupNow(donationPopupState);
+  const currentAyah = useMemo(() => getCurrentRamadanDonationPopupAyah(new Date(nowMs)), [nowMs]);
+  const popupTranslationIds = useMemo(
+    () => getTranslationsInitialState(locale).selectedTranslations,
+    [locale],
+  );
+  const shouldShowPopupReference = locale !== Language.AR;
+  const shouldHidePopupTranslation = !shouldShowPopupReference && popupTranslationIds.length === 0;
 
-  const onCloseButtonClicked = () => {
-    logButtonClick('donate_popup_close');
-    dispatch({ type: setIsDonationPopupVisible.type, payload: false });
+  const isEmbedPage = router.pathname.startsWith('/embed');
+  const isReaderRoute = isQuranReaderRoutePathname(router.pathname);
+  const shouldShow = shouldShowDonationPopup({
+    nowMs,
+    isAuthPage: isAuthPage(router),
+    isEmbedPage,
+    popupState: donationPopupState,
+  });
+
+  const analyticsParams = useMemo(
+    () => ({
+      pathname: router.asPath || router.pathname,
+      locale,
+      isReaderRoute,
+    }),
+    [isReaderRoute, locale, router.asPath, router.pathname],
+  );
+
+  const { data: donationOverview, error: donationOverviewError } =
+    useSWRImmutable<DonationOverview | null>(
+      shouldShow ? ['ramadan-donation-overview', RAMADAN_2026_DONATION_CAMPAIGN] : null,
+      () => getDonationOverview(RAMADAN_2026_DONATION_CAMPAIGN),
+    );
+
+  useDonationPopupImpression({
+    shouldShow,
+    asPath: router.asPath,
+    analyticsParams,
+  });
+
+  const handleTemporaryDismiss = () => {
+    logButtonClick('ramadan_donation_popup_close', analyticsParams);
+    dispatch(setDonationPopupHiddenUntilMs(Date.now() + DONATION_POPUP_HIDE_DURATION_MS));
   };
 
-  const onPopupClose = () => {
-    dispatch({ type: setIsDonationPopupVisible.type, payload: false });
+  const handleDismissPermanently = () => {
+    logButtonClick('ramadan_donation_popup_dont_show_again', analyticsParams);
+    dispatch(setDonationPopupPermanentlyDismissed(true));
   };
 
-  if (!isPopupVisible) return null;
+  const handleLearnMoreClick = () => {
+    logButtonClick('ramadan_donation_popup_learn_more', analyticsParams);
+  };
+
+  const handleDonateClick = () => {
+    logButtonClick('ramadan_donation_popup_donate', analyticsParams);
+  };
+
+  if (!shouldShow) return null;
+
+  const isOverviewLoading = donationOverview === undefined && !donationOverviewError;
+  const shouldShowProgress = !!donationOverview && !donationOverviewError;
+  const totalAmount = donationOverview?.totalAmount ?? 0;
+  const formattedTotalAmount = toLocalizedNumber(Math.round(totalAmount), locale);
+  const formattedGoalAmount = toLocalizedNumber(RAMADAN_2026_MONTHLY_GOAL, locale);
+  const progressPercentage = getDonationProgressPercentage(totalAmount, RAMADAN_2026_MONTHLY_GOAL);
 
   return (
-    <Modal hasHeader={false} isOpen contentClassName={styles.modalSize} onClose={onPopupClose}>
-      <div className={styles.outerContainer}>
-        <div className={styles.illustrationContainer}>
-          <MoonIllustrationSVG />
-        </div>
-        <div className={styles.container}>
-          <Button
-            size={ButtonSize.Large}
-            className={styles.closeIcon}
-            variant={ButtonVariant.Ghost}
-            shape={ButtonShape.Circle}
-            onClick={onCloseButtonClicked}
-          >
-            <CloseIcon />
-          </Button>
-          <h1 className={styles.title}>{t('popup.title')}</h1>
-          <div className={styles.textsContainer}>
-            <p className={styles.text}>{t('popup.subtitle')}</p>
-            <p className={styles.text}>{t('popup.text-1')}</p>
-            <p className={styles.text}>{t('popup.text-2')}</p>
+    <Modal
+      hasHeader={false}
+      isOpen
+      onEscapeKeyDown={(event) => event.preventDefault()}
+      overlayClassName={styles.mobileBottomSheetOverlay}
+      contentClassName={styles.modalContent}
+      innerContentClassName={styles.modalInnerContent}
+      isBottomSheetOnMobile
+      shouldCloseOnOutsideClick={false}
+    >
+      <div className={styles.container} data-testid="ramadan-donation-popup">
+        <Dialog.Title className={styles.srOnly}>{t('ramadan-donation-popup.title')}</Dialog.Title>
+        <Dialog.Description className={styles.srOnly}>
+          {`${t('ramadan-donation-popup.subtitle.start')} ${t(
+            'ramadan-donation-popup.subtitle.end',
+          )}`}
+        </Dialog.Description>
+
+        <button
+          type="button"
+          onClick={handleTemporaryDismiss}
+          className={styles.closeButton}
+          aria-label={t('close')}
+        >
+          <CloseIcon />
+        </button>
+
+        <div className={styles.content}>
+          <div className={styles.header}>
+            <h1 className={styles.title}>{t('ramadan-donation-popup.title')}</h1>
+            <p className={styles.subtitle}>
+              <span className={styles.subtitlePrimaryLine}>
+                {t('ramadan-donation-popup.subtitle.start')}
+              </span>
+              <span
+                className={styles.subtitleSecondaryLine}
+                data-testid="ramadan-donation-popup-subtitle-secondary-line"
+              >
+                {t('ramadan-donation-popup.subtitle.end')}{' '}
+                <a
+                  href={makeDonateUrl()}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={handleLearnMoreClick}
+                  className={styles.learnMoreLink}
+                >
+                  {t('ramadan-donation-popup.learn-more')}
+                </a>
+              </span>
+            </p>
           </div>
-          <div className={styles.actionsContainer}>
-            <DonateButton
-              type={DonateButtonType.MONTHLY}
-              source={DonateButtonClickSource.DONATE_POPOVER}
-              shouldUseProviderUrl
-              onAdditionalClick={onPopupClose}
-            />
-            <DonateButton
-              type={DonateButtonType.ONCE}
-              isOutlined
-              source={DonateButtonClickSource.DONATE_POPOVER}
-              shouldUseProviderUrl
-              onAdditionalClick={onPopupClose}
-            />
-            <LearnMoreButton
-              source={LearnMoreClickSource.DONATE_POPOVER}
-              onAdditionalClick={onPopupClose}
-            />
+
+          <div className={styles.verseSection}>
+            <div className={styles.verseCard}>
+              {currentAyah ? (
+                <VerseAndTranslation
+                  chapter={currentAyah.chapter}
+                  from={currentAyah.verse}
+                  to={currentAyah.verse}
+                  quranFont={QuranFont.QPCHafs}
+                  translationsLimit={1}
+                  translationIds={popupTranslationIds}
+                  arabicVerseClassName={styles.verseArabic}
+                  translationClassName={classNames(styles.verseTranslation, {
+                    [styles.verseTranslationHidden]: shouldHidePopupTranslation,
+                  })}
+                  translationTextClassName={styles.verseTranslationText}
+                  fixedFontScale={DONATE_POPUP_VERSE_FONT_SCALE}
+                  shouldShowReference={shouldShowPopupReference}
+                  shouldLinkReference={false}
+                  loadingFallback={renderVerseLoadingFallback()}
+                />
+              ) : (
+                renderVerseLoadingFallback()
+              )}
+            </div>
+
+            <p className={styles.nextAyahText}>{t('ramadan-donation-popup.next-ayah')}</p>
           </div>
-          <div className={styles.text}>{t('popup.footnote')}.</div>
+
+          <div className={styles.footerContent}>
+            {isOverviewLoading && (
+              <div className={styles.progressSection} data-testid="ramadan-donation-popup-progress">
+                <div className={styles.progressHeader}>
+                  <Skeleton className={styles.amountSkeleton} />
+                  <Skeleton className={styles.amountSkeleton} />
+                </div>
+                <Skeleton className={styles.progressSkeleton} />
+                <Skeleton className={styles.goalSkeleton} />
+              </div>
+            )}
+
+            {shouldShowProgress && (
+              <div className={styles.progressSection} data-testid="ramadan-donation-popup-progress">
+                <div className={styles.progressHeader}>
+                  <p className={styles.amountText}>
+                    <span className={styles.amountValue}>${formattedTotalAmount}</span>
+                    <span>{t('ramadan-donation-popup.month-raised')}</span>
+                  </p>
+                  <p className={styles.goalAmountText}>
+                    <span>${formattedGoalAmount}</span>
+                    <span>{t('ramadan-donation-popup.month-goal')}</span>
+                  </p>
+                </div>
+                <div className={styles.progressTrack} aria-hidden="true">
+                  <div
+                    className={styles.progressFill}
+                    style={{ width: `${progressPercentage}%` }}
+                    data-testid="ramadan-donation-popup-progress-fill"
+                  />
+                </div>
+                <p className={styles.progressLabel}>{t('ramadan-donation-popup.goal-label')}</p>
+              </div>
+            )}
+
+            <div className={styles.actions}>
+              <a
+                href={makeDonatePageUrl(false, true)}
+                onClick={handleDonateClick}
+                className={styles.donateButton}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {t('ramadan-donation-popup.donate-now')}
+              </a>
+              <button
+                type="button"
+                onClick={handleDismissPermanently}
+                className={styles.dismissForeverButton}
+              >
+                {t('ramadan-donation-popup.dont-show-again')}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </Modal>

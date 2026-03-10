@@ -1,66 +1,506 @@
 @use 'src/styles/breakpoints';
+@use 'src/components/Fundraising/styles/donationTheme';
+
+.modalContent {
+  inline-size: 100vw !important;
+  max-inline-size: 100vw;
+  block-size: min(640px, 100dvh) !important;
+  padding: 0 !important;
+  border-radius: var(--border-radius-large-px);
+  overflow: hidden;
+  overflow-y: auto !important;
+  background: transparent;
+
+  @include breakpoints.smallerThanTablet {
+    border-radius: var(--border-radius-large-px) var(--border-radius-large-px) 0 0;
+  }
+
+  @include breakpoints.tablet {
+    inline-size: 758px !important;
+    max-inline-size: min(758px, calc(100vw - var(--spacing-xlarge-px)));
+    block-size: min(640px, calc(100dvh - calc(2 * var(--spacing-medium2-px)))) !important;
+  }
+}
+
+.mobileBottomSheetOverlay {
+  @include breakpoints.smallerThanTablet {
+    place-items: end center !important;
+    padding-block-start: 0 !important;
+    padding-block-end: 0 !important;
+  }
+
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-medium2-px) !important;
+    padding-block-end: var(--spacing-medium2-px) !important;
+  }
+}
+
+.modalInnerContent {
+  block-size: 100%;
+  padding-inline: 0 !important;
+  padding-block: 0 !important;
+}
 
 .container {
-  padding: var(--spacing-mega);
-}
-.title {
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-jumbo);
-  color: var(--color-success-medium);
-  margin-block-end: var(--spacing-small);
-}
+  @include donationTheme.donationPopupThemeVars;
 
-.textsContainer {
-  margin-block-end: calc(1.5 * var(--spacing-medium));
-}
-.text {
-  color: var(--color-success-medium);
-  & + & {
-    margin-block-start: var(--spacing-xsmall);
+  position: relative;
+  box-sizing: border-box;
+  block-size: 100%;
+  padding: var(--spacing-large-px) var(--spacing-medium-px) var(--spacing-medium2-px);
+  color: var(--donation-popup-text);
+  text-align: center;
+  background-color: var(--donation-popup-bg-start);
+  background-image: url('/images/ramadan-donation-popup-background-mobile.png');
+  background-size: 406.13% 295.13%;
+  background-position: 74.87% 88.64%;
+  background-repeat: no-repeat;
+
+  @include breakpoints.tablet {
+    padding: var(--spacing-xlarge-px);
+    background-image: url('/images/ramadan-donation-popup-background-desktop.png');
+    background-size: 208.96% 295.13%;
+    background-position: 85.95% 88.68%;
   }
 }
 
-.actionsContainer {
+.content {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-small) 0px;
-  margin-block-start: var(--spacing-medium);
-  margin-block-end: var(--spacing-medium);
-}
-
-.action {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  block-size: 100%;
   inline-size: 100%;
-  @include breakpoints.tablet {
-    inline-size: auto;
-  }
-  margin-inline-end: var(--spacing-medium);
-  font-weight: var(--font-weight-bold);
-  margin-block-end: var(--spacing-small);
 }
 
-.closeIcon {
+.srOnly {
   position: absolute;
-  inset-block-start: 0;
-  inset-inline-end: 0;
-  margin-block-start: var(--spacing-small);
-  margin-inline-end: var(--spacing-small);
+  inline-size: var(--spacing-hairline-px);
+  block-size: var(--spacing-hairline-px);
+  padding: 0;
+  margin: calc(-1 * var(--spacing-hairline-px));
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.outerContainer {
-  display: flex;
-}
+.closeButton {
+  position: absolute;
+  inset-block-start: var(--spacing-small-px);
+  inset-inline-end: var(--spacing-small-px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--font-size-xxlarge-px);
+  block-size: var(--font-size-xxlarge-px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--donation-popup-text);
+  cursor: pointer;
 
-.illustrationContainer {
-  display: none;
-  background-color: var(--color-success-faded);
-  color: var(--color-success-medium);
+  svg {
+    inline-size: var(--font-size-xxsmall-px);
+    block-size: var(--font-size-xxsmall-px);
+  }
+
   @include breakpoints.tablet {
-    display: inline-flex;
-    padding: var(--spacing-medium);
-    inline-size: calc(10 * var(--spacing-mega));
+    inset-block-start: var(--spacing-medium2-px);
+    inset-inline-end: var(--spacing-medium2-px);
   }
 }
 
-.modalSize {
-  padding: 0px !important;
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small-px);
+  inline-size: 100%;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-family-figtree);
+  font-size: 22px;
+  line-height: normal;
+  font-weight: var(--font-weight-bold);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
+}
+
+.subtitle {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--font-size-xsmall-px);
+  line-height: normal;
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-small-px);
+  }
+}
+
+.subtitlePrimaryLine,
+.subtitleSecondaryLine {
+  display: block;
+}
+
+.learnMoreLink {
+  color: var(--donation-popup-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:hover,
+  &:focus-visible {
+    opacity: var(--opacity-75);
+  }
+}
+
+.verseSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small-px);
+  inline-size: 100%;
+}
+
+.verseCard {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-medium-px);
+  inline-size: 100%;
+  max-inline-size: 100%;
+  padding: var(--spacing-large-px) var(--spacing-medium2-px);
+  border-radius: var(--border-radius-large-px);
+  background: var(--donation-popup-surface);
+}
+
+.verseArabic {
+  margin-block-start: 0 !important;
+  color: var(--donation-popup-muted);
+  font-family: 'UthmanicHafs', var(--font-family-kitab);
+  text-align: center;
+  inline-size: 100%;
+
+  [class*='VerseText_verseTextContainer'] {
+    gap: 0;
+    color: inherit;
+    font-size: var(--font-size-small-px) !important;
+    line-height: 1;
+  }
+
+  [class*='VerseText_verseText'] {
+    justify-content: center;
+    line-height: 1;
+  }
+
+  [class*='PlainVerseTextWord_plainVerseWordContainer'] {
+    margin-block-end: 0;
+  }
+
+  [class*='TextWord_word'],
+  [class*='GlyphWord_styledWord'] {
+    line-height: 1.4 !important;
+  }
+
+  @include breakpoints.tablet {
+    [class*='VerseText_verseTextContainer'] {
+      font-size: var(--font-size-normal-px) !important;
+    }
+  }
+}
+
+.verseTranslation {
+  inline-size: 100%;
+  margin-block-start: 0 !important;
+
+  [class*='VerseAndTranslation_translationContainer'],
+  [class*='VerseAndTranslation_referenceContainer'] {
+    margin-block-end: 0 !important;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    inline-size: 46px;
+    block-size: var(--spacing-hairline-px);
+    margin: var(--spacing-xsmall-px) auto var(--spacing-medium-px);
+    border-radius: var(--border-radius-small-px);
+    background: var(--donation-popup-muted);
+  }
+
+  > div {
+    margin-block-end: 0 !important;
+  }
+
+  @include breakpoints.tablet {
+    &::before {
+      inline-size: 102px;
+      margin: var(--spacing-small-px) auto var(--spacing-medium-px);
+    }
+  }
+}
+
+.verseTranslationHidden {
+  display: none;
+
+  &::before {
+    display: none;
+  }
+}
+
+.verseTranslationText {
+  color: var(--donation-popup-text);
+  font-size: var(--font-size-xsmall-px) !important;
+  font-style: italic;
+  line-height: normal;
+  text-align: center;
+
+  [class*='TranslationText_text'] {
+    font-size: inherit !important;
+    line-height: normal !important;
+    padding-block-end: 0;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  [class*='TranslationText_referenceLink'] {
+    color: var(--donation-popup-muted);
+    font-size: var(--font-size-xxsmall-px) !important;
+    font-style: normal;
+    line-height: normal;
+    text-decoration: none;
+    pointer-events: none;
+    cursor: default;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+    }
+  }
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-small-px) !important;
+
+    [class*='TranslationText_referenceLink'] {
+      font-size: var(--font-size-xsmall-px) !important;
+    }
+  }
+}
+
+.verseLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-medium-px);
+  inline-size: 100%;
+}
+
+.verseArabicSkeleton {
+  inline-size: 100%;
+  block-size: 56px;
+  border-radius: var(--border-radius-medium-px);
+}
+
+.verseTranslationSkeleton {
+  inline-size: 100%;
+  block-size: var(--font-size-jumbo2-px);
+  border-radius: var(--border-radius-medium-px);
+}
+
+.nextAyahText {
+  margin: 0;
+  color: var(--donation-popup-muted);
+  font-size: var(--font-size-xxsmall-px);
+  line-height: normal;
+  font-weight: var(--font-weight-semibold);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xsmall-px);
+  }
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2-px);
+  inline-size: 100%;
+
+  @include breakpoints.tablet {
+    gap: var(--spacing-large-px);
+  }
+}
+
+.progressSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small-px);
+  inline-size: 100%;
+}
+
+.progressHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-small-px);
+}
+
+.amountText,
+.goalAmountText {
+  margin: 0;
+  font-size: var(--font-size-xxsmall-px);
+  line-height: normal;
+  color: var(--donation-popup-muted);
+
+  span + span {
+    margin-inline-start: var(--spacing-hairline-px);
+  }
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xsmall-px);
+  }
+}
+
+.amountValue {
+  color: var(--donation-popup-progress-fill);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-bold);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-small-px);
+  }
+}
+
+.progressTrack {
+  inline-size: 100%;
+  block-size: var(--spacing-xsmall-px);
+  overflow: hidden;
+  border-radius: var(--border-radius-pill);
+  background: var(--donation-popup-progress-track);
+
+  @include breakpoints.tablet {
+    block-size: var(--font-size-xsmall-px);
+  }
+}
+
+.progressFill {
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--donation-popup-progress-fill);
+}
+
+.progressLabel {
+  margin: 0;
+  color: var(--donation-popup-text);
+  font-size: var(--font-size-xxsmall-px);
+  line-height: normal;
+  font-weight: var(--font-weight-light);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-small-px);
+  }
+}
+
+.amountSkeleton {
+  inline-size: 112px;
+  block-size: var(--font-size-medium-px);
+  border-radius: var(--border-radius-pill);
+
+  @include breakpoints.tablet {
+    inline-size: 140px;
+    block-size: var(--font-size-normal-px);
+  }
+}
+
+.progressSkeleton {
+  inline-size: 100%;
+  block-size: var(--spacing-xsmall-px);
+  border-radius: var(--border-radius-pill);
+
+  @include breakpoints.tablet {
+    block-size: var(--font-size-xsmall-px);
+  }
+}
+
+.goalSkeleton {
+  align-self: center;
+  inline-size: 180px;
+  block-size: var(--font-size-medium-px);
+  border-radius: var(--border-radius-pill);
+}
+
+.verseArabicSkeleton,
+.verseTranslationSkeleton,
+.amountSkeleton,
+.progressSkeleton,
+.goalSkeleton {
+  background-color: var(--donation-popup-skeleton);
+
+  &::before {
+    background-color: var(--donation-popup-skeleton) !important;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-medium-px);
+  inline-size: 100%;
+
+  @include breakpoints.tablet {
+    gap: var(--spacing-medium2-px);
+  }
+}
+
+.donateButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  min-block-size: 42px;
+  border-radius: var(--border-radius-large-px);
+  background-color: var(--donation-popup-button-bg);
+  border: none;
+  color: var(--donation-popup-button-fg);
+  text-decoration: none;
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-semibold);
+
+  &:hover {
+    background-color: var(--donation-popup-button-bg);
+    color: var(--donation-popup-button-fg);
+  }
+
+  @include breakpoints.tablet {
+    max-inline-size: 304px;
+    min-block-size: var(--font-size-jumbo2-px);
+    border-radius: var(--border-radius-pill);
+    font-size: var(--font-size-normal-px);
+  }
+}
+
+.dismissForeverButton {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--donation-popup-text);
+  font-size: var(--font-size-xxsmall-px);
+  font-weight: var(--font-weight-semibold);
+  line-height: normal;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    opacity: var(--opacity-75);
+  }
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xsmall-px);
+  }
 }

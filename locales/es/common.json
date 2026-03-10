@@ -382,6 +382,20 @@
   "quran-apps": "Aplicaciones del Corán",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Coránica",
+  "ramadan-donation-popup": {
+    "donate-now": "Donar ahora",
+    "dont-show-again": "No volver a mostrar esto",
+    "goal-label": "Objetivo de recaudación de fondos para el Ramadán",
+    "learn-more": "Más información",
+    "month-goal": "/meta mensual",
+    "month-raised": "/mes recaudado",
+    "next-ayah": "Vuelve mañana para ver la siguiente aleya.",
+    "subtitle": {
+      "end": "Comparte la recompensa.",
+      "start": "Ayude a millones de personas a conectarse con el Corán."
+    },
+    "title": "Querido Compañero del Corán,"
+  },
   "read": "Leer",
   "read-more": "Leer más",
   "reading-history": "Historial de lectura",

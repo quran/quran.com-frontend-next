@@ -382,6 +382,20 @@
   "quran-apps": "Quran Apps",
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
+  "ramadan-donation-popup": {
+    "donate-now": "Faites un don maintenant",
+    "dont-show-again": "Ne plus afficher ceci",
+    "goal-label": "Objectif de collecte de fonds pour le Ramadan",
+    "learn-more": "Apprendre encore plus",
+    "month-goal": "objectif mensuel",
+    "month-raised": "/mois augmenté",
+    "next-ayah": "Revenez demain pour le prochain verset.",
+    "subtitle": {
+      "end": "Partagez la récompense.",
+      "start": "Aidez des millions de personnes à se connecter au Coran."
+    },
+    "title": "Cher Compagnon du Coran,"
+  },
   "read": "Lire",
   "read-more": "En savoir plus",
   "reading-history": "Historique de lecture",

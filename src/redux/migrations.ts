@@ -387,4 +387,24 @@ export default {
       isQuranReaderFloatingBannerVisible: true,
     },
   }),
+  49: (state) => ({
+    ...state,
+    fundraisingBanner: {
+      isHomepageBannerVisible: state.fundraisingBanner?.isHomepageBannerVisible ?? true,
+      donationPopup: {
+        hiddenUntilMs: null,
+        permanentlyDismissed: false,
+      },
+    },
+  }),
+  50: (state) => ({
+    ...state,
+    fundraisingBanner: {
+      isHomepageBannerVisible: state.fundraisingBanner?.isHomepageBannerVisible ?? true,
+      donationPopup: {
+        hiddenUntilMs: state.fundraisingBanner?.donationPopup?.hiddenUntilMs ?? null,
+        permanentlyDismissed: state.fundraisingBanner?.donationPopup?.permanentlyDismissed ?? false,
+      },
+    },
+  }),
 };

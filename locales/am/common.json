@@ -382,6 +382,20 @@
   "quran-apps": "የቁርዓን መተግበሪያዎች",
   "quran-com": "Quran.com",
   "quran-radio": "የቁርአን ሬዲዮ",
+  "ramadan-donation-popup": {
+    "donate-now": "አሁኑኑ ይለግሱ",
+    "dont-show-again": "ይህንን ዳግመኛ አታሳይ",
+    "goal-label": "የረመዳን የገንዘብ ማሰባሰቢያ ግብ",
+    "learn-more": "ተጨማሪ ይወቁ",
+    "month-goal": "/የወር ግብ",
+    "month-raised": "/ወር ተጨምሯል",
+    "next-ayah": "የሚቀጥለውን የቁርአን ክፍል ለማየት ነገ ተመልሰው ይመልከቱ",
+    "subtitle": {
+      "end": "በሽልማቱ ውስጥ ይካፈሉ።",
+      "start": "ሚሊዮኖች ከቁርዓን ጋር እንዲገናኙ እርዷቸው።"
+    },
+    "title": "ውድ የቁርዓን ጓደኛ፣"
+  },
   "read": "አንብብ",
   "read-more": "ተጨማሪ ያንብቡ",
   "reading-history": "የንባብ ታሪክ",

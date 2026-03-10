@@ -382,6 +382,20 @@
   "quran-apps": "App del Corano",
   "quran-com": "Corano.com",
   "quran-radio": "Radio del Corano",
+  "ramadan-donation-popup": {
+    "donate-now": "Fai una donazione ora",
+    "dont-show-again": "Non mostrare più questo messaggio",
+    "goal-label": "Obiettivo di raccolta fondi per il Ramadan",
+    "learn-more": "Saperne di più",
+    "month-goal": "/obiettivo mensile",
+    "month-raised": "/mese raccolto",
+    "next-ayah": "Torna domani per il prossimo versetto",
+    "subtitle": {
+      "end": "Condividi la ricompensa.",
+      "start": "Aiuta milioni di persone a entrare in contatto con il Corano."
+    },
+    "title": "Caro compagno del Corano,"
+  },
   "read": "Leggere",
   "read-more": "Per saperne di più",
   "reading-history": "Leggere la storia",

@@ -382,6 +382,20 @@
   "quran-apps": "Koran-apps",
   "quran-com": "Quran.com",
   "quran-radio": "Koran Radio",
+  "ramadan-donation-popup": {
+    "donate-now": "Doneer nu",
+    "dont-show-again": "Niet meer laten zien",
+    "goal-label": "Ramadan-inzamelingsdoel",
+    "learn-more": "Leer meer",
+    "month-goal": "/maanddoel",
+    "month-raised": "/maand verhoogd",
+    "next-ayah": "Kom morgen terug voor het volgende vers.",
+    "subtitle": {
+      "end": "Deel in de beloning.",
+      "start": "Help miljoenen mensen in contact te komen met de Koran."
+    },
+    "title": "Geachte metgezel van de Koran,"
+  },
   "read": "Lezen",
   "read-more": "Lees meer",
   "reading-history": "Geschiedenis lezen",

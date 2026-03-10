@@ -382,6 +382,20 @@
   "quran-apps": "Aplicativos do Alcorão",
   "quran-com": "Quran.com",
   "quran-radio": "Rádio Quran",
+  "ramadan-donation-popup": {
+    "donate-now": "Faça sua doação agora",
+    "dont-show-again": "Não mostrar isso novamente",
+    "goal-label": "Meta de arrecadação de fundos para o Ramadã",
+    "learn-more": "Saber mais",
+    "month-goal": "meta mensal",
+    "month-raised": "/mês arrecadado",
+    "next-ayah": "Volte amanhã para conferir o próximo versículo.",
+    "subtitle": {
+      "end": "Partilha da recompensa.",
+      "start": "Ajude milhões de pessoas a se conectarem com o Alcorão."
+    },
+    "title": "Prezado Companheiro do Alcorão,"
+  },
   "read": "Ler",
   "read-more": "Leia mais",
   "reading-history": "Lendo o histórico",

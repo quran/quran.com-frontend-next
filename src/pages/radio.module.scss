@@ -7,9 +7,8 @@
   position: relative;
 }
 
-$ribbon-text-color: #fff;
 .titleOnRibbon {
-  color: $ribbon-text-color;
+  color: var(--color-text-default-new);
 }
 
 .footerContainer {

@@ -20,6 +20,7 @@ import Footnote from 'types/Footnote';
 
 interface Props {
   shouldShowReference?: boolean;
+  shouldLinkReference?: boolean;
   translationFontScale: number;
   text: string;
   resourceName?: string;
@@ -31,6 +32,7 @@ interface Props {
 
 const TranslationText: React.FC<Props> = ({
   shouldShowReference = false,
+  shouldLinkReference = true,
   translationFontScale,
   text,
   languageId,
@@ -178,6 +180,7 @@ const TranslationText: React.FC<Props> = ({
         reference={reference}
         lang={lang}
         languageCode={langData.code}
+        shouldLinkReference={shouldLinkReference}
       />
       <FootnoteAndSubFootnote
         shouldShowFootnote={shouldShowFootnote}

@@ -382,6 +382,20 @@
   "quran-apps": "Kuran Uygulamaları",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radyo",
+  "ramadan-donation-popup": {
+    "donate-now": "Şimdi Bağış Yapın",
+    "dont-show-again": "Bunu bir daha gösterme",
+    "goal-label": "Ramazan Bağış Toplama Hedefi",
+    "learn-more": "Daha fazla bilgi edin",
+    "month-goal": "/aylık hedef",
+    "month-raised": "/aylık olarak toplanan",
+    "next-ayah": "Yarın bir sonraki ayet için tekrar kontrol edin.",
+    "subtitle": {
+      "end": "Ödülü paylaşın.",
+      "start": "Milyonlarca insanın Kur'an ile bağlantı kurmasına yardımcı olun."
+    },
+    "title": "Ey Kur'an-ı Kerim'in Sevgili Yoldaşı,"
+  },
   "read": "Okumak",
   "read-more": "Devamını oku",
   "reading-history": "tarih okuma",

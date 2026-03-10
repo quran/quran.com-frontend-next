@@ -60,3 +60,47 @@
     --donation-card-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
   }
 }
+
+@mixin donationPopupThemeVars {
+  @include theme.light {
+    --donation-popup-bg-start: #0b1631;
+    --donation-popup-bg-end: #071126;
+    --donation-popup-surface: rgba(44, 54, 72, 0.43);
+    --donation-popup-text: #ffffff;
+    --donation-popup-link: #2ca4ab;
+    --donation-popup-muted: #c3e6e9;
+    --donation-popup-progress-track: rgba(44, 54, 72, 0.43);
+    --donation-popup-progress-fill: #bb8b10;
+    --donation-popup-button-bg: #43a4ad;
+    --donation-popup-button-fg: #ffffff;
+    --donation-popup-skeleton: rgba(195, 230, 233, 0.18);
+  }
+
+  @include theme.dark {
+    --donation-popup-bg-start: #0b1631;
+    --donation-popup-bg-end: #071126;
+    --donation-popup-surface: rgba(44, 54, 72, 0.43);
+    --donation-popup-text: #ffffff;
+    --donation-popup-link: #2ca4ab;
+    --donation-popup-muted: #c3e6e9;
+    --donation-popup-progress-track: rgba(44, 54, 72, 0.43);
+    --donation-popup-progress-fill: #bb8b10;
+    --donation-popup-button-bg: #43a4ad;
+    --donation-popup-button-fg: #ffffff;
+    --donation-popup-skeleton: rgba(195, 230, 233, 0.18);
+  }
+
+  @include theme.sepia {
+    --donation-popup-bg-start: #0b1631;
+    --donation-popup-bg-end: #071126;
+    --donation-popup-surface: rgba(44, 54, 72, 0.43);
+    --donation-popup-text: #ffffff;
+    --donation-popup-link: #2ca4ab;
+    --donation-popup-muted: #c3e6e9;
+    --donation-popup-progress-track: rgba(44, 54, 72, 0.43);
+    --donation-popup-progress-fill: #bb8b10;
+    --donation-popup-button-bg: #43a4ad;
+    --donation-popup-button-fg: #ffffff;
+    --donation-popup-skeleton: rgba(195, 230, 233, 0.18);
+  }
+}

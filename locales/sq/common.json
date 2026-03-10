@@ -382,6 +382,20 @@
   "quran-apps": "Aplikacionet e Kuranit",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radio",
+  "ramadan-donation-popup": {
+    "donate-now": "Dhuro tani",
+    "dont-show-again": "Mos e shfaq më këtë",
+    "goal-label": "Qëllimi i Mbledhjes së Fondeve për Ramazanin",
+    "learn-more": "Mëso më shumë",
+    "month-goal": "objektivi /mujor",
+    "month-raised": "/muaj i mbledhur",
+    "next-ayah": "Kontrolloni përsëri nesër për ajetin tjetër",
+    "subtitle": {
+      "end": "Merrni pjesë në Shpërblim.",
+      "start": "Ndihmoni Miliona Njerëz të Lidhen me Kuranin."
+    },
+    "title": "I dashur shok i Kuranit,"
+  },
   "read": "Lexo",
   "read-more": "Lexo më shumë",
   "reading-history": "Leximi i historisë",

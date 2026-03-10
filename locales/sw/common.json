@@ -382,6 +382,20 @@
   "quran-apps": "Programu za Qur'ani",
   "quran-com": "Quran.com",
   "quran-radio": "Redio ya Qur'ani",
+  "ramadan-donation-popup": {
+    "donate-now": "Toa Mchango Sasa",
+    "dont-show-again": "Usionyeshe hii tena",
+    "goal-label": "Lengo la Kuchangisha Fedha la Ramadhani",
+    "learn-more": "Pata maelezo zaidi",
+    "month-goal": "/lengo la mwezi",
+    "month-raised": "/mshahara wa mwezi",
+    "next-ayah": "Angalia tena kesho kwa ayah inayofuata",
+    "subtitle": {
+      "end": "Shiriki katika Zawadi.",
+      "start": "Wasaidie Mamilioni Kuungana na Quran."
+    },
+    "title": "Mpendwa mwenzangu wa Quran,"
+  },
   "read": "Soma",
   "read-more": "Soma Zaidi",
   "reading-history": "Historia ya kusoma",

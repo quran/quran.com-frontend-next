@@ -382,6 +382,20 @@
   "quran-apps": "Quran Apps",
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
+  "ramadan-donation-popup": {
+    "donate-now": "Donate Now",
+    "dont-show-again": "Don’t show this again",
+    "goal-label": "Ramadan Fundraising Goal",
+    "learn-more": "Learn more",
+    "month-goal": "/month goal",
+    "month-raised": "/month raised",
+    "next-ayah": "Check back tomorrow for the next ayah",
+    "subtitle": {
+      "end": "Share in the Reward.",
+      "start": "Help Millions Connect with the Quran."
+    },
+    "title": "Dear Companion of the Quran,"
+  },
   "read": "Read",
   "read-more": "Read More",
   "reading-history": "Reading history",

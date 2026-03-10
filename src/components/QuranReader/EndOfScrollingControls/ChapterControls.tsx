@@ -6,11 +6,6 @@ import EndOfSurahSection from '../EndOfSurahSection';
 import LearningPlanBanner from '../LearningPlanBanner';
 import { getLearningPlanBannerConfig } from '../LearningPlanBanner/learningPlanBannerConfigs';
 
-import styles from './EndOfScrollingControls.module.scss';
-
-import HomepageFundraisingBanner, {
-  FundraisingBannerContext,
-} from '@/components/Fundraising/HomepageFundraisingBanner';
 import Language from '@/types/Language';
 import { VersesResponse } from 'types/ApiResponses';
 
@@ -32,14 +27,6 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
     <>
       <EndOfSurahSection chapterNumber={chapterNumber} />
       {bannerConfig && <LearningPlanBanner language={language} chapterId={chapterNumber} />}
-      <div className={styles.chapterBannerWrapper}>
-        <HomepageFundraisingBanner
-          context={FundraisingBannerContext.QuranReader}
-          isDismissible={false}
-          analyticsSource="quran_reader_chapter"
-          analyticsParams={{ chapterId: chapterNumber }}
-        />
-      </div>
     </>
   );
 };

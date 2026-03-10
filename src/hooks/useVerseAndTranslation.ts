@@ -18,9 +18,17 @@ interface Props {
   to: number;
   quranFont?: QuranFont;
   translationsLimit?: number;
+  translationIds?: Array<number | string>;
 }
 
-const useVerseAndTranslation = ({ chapter, from, to, quranFont, translationsLimit }: Props) => {
+const useVerseAndTranslation = ({
+  chapter,
+  from,
+  to,
+  quranFont,
+  translationsLimit,
+  translationIds,
+}: Props) => {
   const { lang } = useTranslation();
   const translations = useSelector(selectSelectedTranslations, areArraysEqual);
   const {
@@ -31,7 +39,8 @@ const useVerseAndTranslation = ({ chapter, from, to, quranFont, translationsLimi
   } = useSelector(selectQuranReaderStyles, shallowEqual);
 
   const resolvedFont = quranFont ?? selectedQuranFont;
-  const resolvedTranslationsList = translations.slice(0, translationsLimit);
+  const resolvedTranslations = translationIds ?? translations;
+  const resolvedTranslationsList = resolvedTranslations.slice(0, translationsLimit);
 
   const mushafId = getMushafId(resolvedFont, mushafLines).mushaf;
   const apiParams = {
@@ -56,7 +65,7 @@ const useVerseAndTranslation = ({ chapter, from, to, quranFont, translationsLimi
     data,
     error,
     mutate,
-    translations,
+    translations: resolvedTranslations,
     translationFontScale,
     quranTextFontScale,
     quranFont,

@@ -4,16 +4,22 @@ import { RootState } from '../RootState';
 
 import SliceName from '@/redux/types/SliceName';
 
+export type DonationPopupState = {
+  hiddenUntilMs: number | null;
+  permanentlyDismissed: boolean;
+};
+
 export type FundraisingBannerState = {
   isHomepageBannerVisible: boolean;
-  isQuranReaderBannerVisible: boolean;
-  isQuranReaderFloatingBannerVisible: boolean;
+  donationPopup: DonationPopupState;
 };
 
 const initialState: FundraisingBannerState = {
   isHomepageBannerVisible: true,
-  isQuranReaderBannerVisible: true,
-  isQuranReaderFloatingBannerVisible: true,
+  donationPopup: {
+    hiddenUntilMs: null,
+    permanentlyDismissed: false,
+  },
 };
 
 export const fundraisingBannerSlice = createSlice({
@@ -27,38 +33,45 @@ export const fundraisingBannerSlice = createSlice({
       ...state,
       isHomepageBannerVisible: action.payload,
     }),
-    setIsQuranReaderBannerVisible: (
+    setDonationPopupHiddenUntilMs: (
       state: FundraisingBannerState,
-      action: PayloadAction<boolean>,
+      action: PayloadAction<number | null>,
     ) => ({
       ...state,
-      isQuranReaderBannerVisible: action.payload,
+      donationPopup: {
+        ...state.donationPopup,
+        hiddenUntilMs: action.payload,
+      },
     }),
-    setIsQuranReaderFloatingBannerVisible: (
+    setDonationPopupPermanentlyDismissed: (
       state: FundraisingBannerState,
       action: PayloadAction<boolean>,
     ) => ({
       ...state,
-      isQuranReaderFloatingBannerVisible: action.payload,
+      donationPopup: {
+        hiddenUntilMs: action.payload ? null : state.donationPopup.hiddenUntilMs,
+        permanentlyDismissed: action.payload,
+      },
     }),
   },
 });
 
 export const {
   setIsHomepageBannerVisible,
-  setIsQuranReaderBannerVisible,
-  setIsQuranReaderFloatingBannerVisible,
+  setDonationPopupHiddenUntilMs,
+  setDonationPopupPermanentlyDismissed,
 } = fundraisingBannerSlice.actions;
 
 export const selectIsHomepageBannerVisible = (state: RootState) =>
   state.fundraisingBanner.isHomepageBannerVisible ?? true;
 
-export const selectIsQuranReaderBannerVisible = (state: RootState) =>
-  state.fundraisingBanner.isQuranReaderBannerVisible ?? true;
+export const selectDonationPopupState = (state: RootState): DonationPopupState =>
+  state.fundraisingBanner.donationPopup ?? initialState.donationPopup;
 
-export const selectIsQuranReaderFloatingBannerVisible = (state: RootState) =>
-  state.fundraisingBanner.isQuranReaderFloatingBannerVisible ??
-  state.fundraisingBanner.isQuranReaderBannerVisible ??
-  true;
+export const selectDonationPopupHiddenUntilMs = (state: RootState) =>
+  selectDonationPopupState(state).hiddenUntilMs;
+
+export const selectDonationPopupPermanentlyDismissed = (state: RootState) =>
+  selectDonationPopupState(state).permanentlyDismissed;
 
 export default fundraisingBannerSlice.reducer;

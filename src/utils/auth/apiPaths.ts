@@ -65,6 +65,9 @@ export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword
 
 export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');
 
+export const makeDonationOverviewUrl = (campaign?: string): string =>
+  makeUrl('donation/overview', campaign ? { campaign } : undefined);
+
 export const makeSendMagicLinkUrl = (redirect?: string): string =>
   makeUrl('auth/magiclogin', redirect ? { redirect } : undefined);
 

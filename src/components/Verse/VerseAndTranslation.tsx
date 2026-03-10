@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,10 +10,12 @@ import styles from './VerseAndTranslation.module.scss';
 
 import Error from '@/components/Error';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
+import DataContext from '@/contexts/DataContext';
 import Spinner from '@/dls/Spinner/Spinner';
 import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
 import { QuranFont } from '@/types/QuranReader';
 import { getChapterData } from '@/utils/chapter';
+import { isRTLLocale } from '@/utils/locale';
 import { getVerseWords } from '@/utils/verse';
 import ChaptersData from 'types/ChaptersData';
 
@@ -58,15 +60,30 @@ interface Props {
   titleText?: string;
   quranFont?: QuranFont;
   translationsLimit?: number;
+  translationIds?: Array<number | string>;
   arabicVerseClassName?: string;
   translationClassName?: string;
+  translationTextClassName?: string;
   fixedFontScale?: number; // Optional override for font scales of Quran text and translations
+  shouldShowReference?: boolean;
+  shouldLinkReference?: boolean;
+  loadingFallback?: React.ReactNode;
+  errorFallback?: React.ReactNode;
 }
 
 const VerseAndTranslation: React.FC<Props> = (props) => {
   // If fixedFontScale is provided as a prop, use it; otherwise, get from hook (Redux)
   const { lang } = useTranslation();
-  const { fixedFontScale, chapter, ...restProps } = props;
+  const {
+    fixedFontScale,
+    chapter,
+    shouldShowReference: shouldShowReferenceFromProps,
+    shouldLinkReference = true,
+    loadingFallback,
+    errorFallback,
+    translationTextClassName,
+    ...restProps
+  } = props;
   const {
     data,
     error,
@@ -74,17 +91,32 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
     translationFontScale: reduxTranslationFontScale,
     quranTextFontScale: reduxQuranTextFontScale,
   } = useVerseAndTranslation({ ...restProps, chapter });
+  const chaptersDataFromContext = useContext(DataContext);
+  const resolvedChaptersData = restProps.chaptersData || chaptersDataFromContext;
   const chapterData = useMemo(() => {
-    if (!restProps.chaptersData) return null;
-    return getChapterData(restProps.chaptersData, chapter?.toString());
-  }, [restProps.chaptersData, chapter]);
-  const shouldShowReference = !!restProps.titleText;
+    if (!resolvedChaptersData) return null;
+    return getChapterData(resolvedChaptersData, chapter?.toString());
+  }, [resolvedChaptersData, chapter]);
+  const resolvedChapterName = isRTLLocale(lang)
+    ? chapterData?.nameArabic || chapterData?.transliteratedName
+    : chapterData?.transliteratedName;
+  const shouldShowReference = shouldShowReferenceFromProps ?? !!restProps.titleText;
 
   if (error) {
+    if (errorFallback) {
+      return <>{errorFallback}</>;
+    }
+
     return <Error error={error} onRetryClicked={mutate} />;
   }
 
-  if (!data) return <Spinner />;
+  if (!data) {
+    if (loadingFallback) {
+      return <>{loadingFallback}</>;
+    }
+
+    return <Spinner />;
+  }
 
   return (
     <div className={styles.container}>
@@ -105,11 +137,13 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
               <div key={translation.id} className={styles.translationContainer}>
                 <TranslationText
                   shouldShowReference={shouldShowReference}
-                  chapterName={chapterData?.transliteratedName}
+                  chapterName={resolvedChapterName}
                   reference={`${verse.chapterId}:${verse.verseNumber}`}
                   languageId={translation.languageId}
                   translationFontScale={fixedFontScale ?? reduxTranslationFontScale}
                   text={translation.text}
+                  className={translationTextClassName}
+                  shouldLinkReference={shouldLinkReference}
                 />
               </div>
             ))}
@@ -117,8 +151,9 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
               <div className={styles.referenceContainer}>
                 <Reference
                   reference={`${verse.chapterId}:${verse.verseNumber}`}
-                  chapterName={chapterData?.transliteratedName}
+                  chapterName={resolvedChapterName}
                   lang={lang}
+                  isLink={shouldLinkReference}
                 />
               </div>
             )}

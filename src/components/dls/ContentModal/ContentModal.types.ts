@@ -1,4 +1,6 @@
-import { ForwardedRef } from 'react';
+import type { ComponentPropsWithoutRef, ForwardedRef } from 'react';
+
+import * as Dialog from '@radix-ui/react-dialog';
 
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
@@ -11,7 +13,7 @@ export enum ContentModalSize {
 export type ContentModalProps = {
   isOpen?: boolean;
   onClose?: () => void;
-  onEscapeKeyDown?: () => void;
+  onEscapeKeyDown?: ComponentPropsWithoutRef<typeof Dialog.Content>['onEscapeKeyDown'];
   children: React.ReactNode;
   hasCloseButton?: boolean;
   hasHeader?: boolean;
@@ -32,6 +34,7 @@ export type ContentModalProps = {
   dataTestId?: string;
   footer?: React.ReactNode;
   footerClassName?: string;
+  shouldCloseOnOutsideClick?: boolean;
 };
 
 export const SCROLLBAR_WIDTH = 15;

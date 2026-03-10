@@ -382,6 +382,20 @@
   "quran-apps": "Aplikasi Al-Quran",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
+  "ramadan-donation-popup": {
+    "donate-now": "Derma Sekarang",
+    "dont-show-again": "Jangan tunjukkan ini lagi",
+    "goal-label": "Matlamat Pengumpulan Dana Ramadan",
+    "learn-more": "Ketahui lebih lanjut",
+    "month-goal": "matlamat /bulan",
+    "month-raised": "/bulan dikumpul",
+    "next-ayah": "Semak semula esok untuk ayat seterusnya",
+    "subtitle": {
+      "end": "Kongsi Ganjaran.",
+      "start": "Bantu Berjuta-juta Orang Berhubung dengan Al-Quran."
+    },
+    "title": "Wahai Sahabat Al-Quran yang dikasihi,"
+  },
   "read": "Baca",
   "read-more": "Baca Lagi",
   "reading-history": "Sejarah Pembacaan",

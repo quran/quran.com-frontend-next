@@ -382,6 +382,20 @@
   "quran-apps": "قرآن ایپس",
   "quran-com": "Quran.com",
   "quran-radio": "قرآن ریڈیو",
+  "ramadan-donation-popup": {
+    "donate-now": "ابھی عطیہ کریں۔",
+    "dont-show-again": "اسے دوبارہ مت دکھائیں۔",
+    "goal-label": "رمضان فنڈ ریزنگ گول",
+    "learn-more": "مزید جانیں",
+    "month-goal": "/ماہ کا مقصد",
+    "month-raised": "/مہینہ اٹھایا",
+    "next-ayah": "اگلی آیت کے لیے کل دوبارہ چیک کریں۔",
+    "subtitle": {
+      "end": "ثواب میں شریک کریں۔",
+      "start": "لاکھوں لوگوں کو قرآن سے جڑنے میں مدد کریں۔"
+    },
+    "title": "پیارے ساتھی قرآن!"
+  },
   "read": "پڑھیں",
   "read-more": "مزید پڑھیں",
   "reading-history": "پڑھائ کی ہسٹری",

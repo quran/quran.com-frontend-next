@@ -11,15 +11,10 @@ import CloseIcon from '@/icons/close.svg';
 import DiamondIcon from '@/icons/diamond.svg';
 import {
   selectIsHomepageBannerVisible,
-  selectIsQuranReaderBannerVisible,
-  selectIsQuranReaderFloatingBannerVisible,
   setIsHomepageBannerVisible,
-  setIsQuranReaderBannerVisible,
-  setIsQuranReaderFloatingBannerVisible,
 } from '@/redux/slices/fundraisingBanner';
 import { makeDonateUrl, makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
-import { navigateToExternalUrl } from '@/utils/url';
 
 export enum FundraisingBannerContext {
   Homepage = 'homepage',
@@ -57,45 +52,24 @@ const HomepageFundraisingBanner = ({
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const isHomepageVisible = useSelector(selectIsHomepageBannerVisible);
-  const isQuranReaderVisible = useSelector(selectIsQuranReaderBannerVisible);
-  const isQuranReaderFloatingVisible = useSelector(selectIsQuranReaderFloatingBannerVisible);
-  const isFloatingReaderBanner =
-    context === FundraisingBannerContext.QuranReader && layout === FundraisingBannerLayout.Floating;
+  const isHomepageBanner = context === FundraisingBannerContext.Homepage;
 
-  const isVisible = (() => {
-    if (context !== FundraisingBannerContext.QuranReader) return isHomepageVisible;
-    return isFloatingReaderBanner ? isQuranReaderFloatingVisible : isQuranReaderVisible;
-  })();
-
-  if (isDismissible && !isVisible) {
+  if (isHomepageBanner && isDismissible && !isHomepageVisible) {
     return null;
   }
 
   const resolvedAnalyticsSource =
     analyticsSource ??
     (context === FundraisingBannerContext.QuranReader
-      ? 'quran_reader_floating_banner'
+      ? 'quran_reader_end_of_scroll_banner'
       : 'homepage_donation_section');
-
-  const onDonateClicked = () => {
-    const href = makeDonatePageUrl(false, true);
-    logButtonClick(`${resolvedAnalyticsSource}_donate`, {
-      layout,
-      ...analyticsParams,
-    });
-    navigateToExternalUrl(href);
-  };
 
   const onCloseClicked = () => {
     logButtonClick(`${resolvedAnalyticsSource}_dismissed`, {
       layout,
       ...analyticsParams,
     });
-    if (isFloatingReaderBanner) {
-      dispatch(setIsQuranReaderFloatingBannerVisible(false));
-    } else if (context === FundraisingBannerContext.QuranReader) {
-      dispatch(setIsQuranReaderBannerVisible(false));
-    } else {
+    if (isHomepageBanner) {
       dispatch(setIsHomepageBannerVisible(false));
     }
   };
@@ -130,10 +104,17 @@ const HomepageFundraisingBanner = ({
         </p>
         <div className={styles.actions}>
           <Button
-            onClick={onDonateClicked}
+            href={makeDonatePageUrl(false, true)}
+            onClick={() =>
+              logButtonClick(`${resolvedAnalyticsSource}_donate`, {
+                layout,
+                ...analyticsParams,
+              })
+            }
             type={ButtonType.Primary}
             size={ButtonSize.Small}
             variant={ButtonVariant.Simplified}
+            isNewTab
             className={styles.donateButton}
           >
             <DiamondIcon />
@@ -142,7 +123,7 @@ const HomepageFundraisingBanner = ({
         </div>
       </div>
 
-      {isDismissible && (
+      {isHomepageBanner && isDismissible && (
         <button
           onClick={onCloseClicked}
           aria-label={t('close')}

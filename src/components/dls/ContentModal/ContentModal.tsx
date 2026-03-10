@@ -50,6 +50,7 @@ const ContentModal = ({
   dataTestId,
   footer,
   footerClassName,
+  shouldCloseOnOutsideClick = true,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const contentRef = useRef<HTMLDivElement>(null);
@@ -62,8 +63,11 @@ const ContentModal = ({
   }));
 
   const onPointerDownOutside = useMemo(
-    () => createPointerDownOutsideHandler(locale, onClose, isRTLLocale),
-    [locale, onClose],
+    () =>
+      shouldCloseOnOutsideClick
+        ? createPointerDownOutsideHandler(locale, onClose, isRTLLocale)
+        : (event) => event.preventDefault(),
+    [locale, onClose, shouldCloseOnOutsideClick],
   );
 
   const handleOpenAutoFocus = useCallback((event: Event) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentPropsWithoutRef } from 'react';
 
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import classNames from 'classnames';
@@ -29,7 +29,7 @@ type BaseModalProps = {
   isPropagationStopped?: boolean;
   contentClassName?: string;
   overlayClassName?: string;
-  onEscapeKeyDown?: () => void;
+  onEscapeKeyDown?: ComponentPropsWithoutRef<typeof DialogPrimitive.Content>['onEscapeKeyDown'];
   size?: ModalSize;
   zIndexVariant?: ZIndexVariant;
   testId?: string;

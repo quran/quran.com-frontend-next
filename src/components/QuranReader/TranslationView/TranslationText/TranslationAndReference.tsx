@@ -17,6 +17,7 @@ interface Props {
   reference?: string;
   lang: string;
   languageCode: string;
+  shouldLinkReference?: boolean;
 }
 
 const TranslationAndReference: React.FC<Props> = ({
@@ -29,6 +30,7 @@ const TranslationAndReference: React.FC<Props> = ({
   reference,
   lang,
   languageCode,
+  shouldLinkReference = true,
 }) => {
   return (
     <div
@@ -49,7 +51,12 @@ const TranslationAndReference: React.FC<Props> = ({
       {shouldShowReference && chapterName && reference && (
         <>
           {' '}
-          <Reference reference={reference} chapterName={chapterName} lang={lang} />
+          <Reference
+            reference={reference}
+            chapterName={chapterName}
+            lang={lang}
+            isLink={shouldLinkReference}
+          />
         </>
       )}
     </div>

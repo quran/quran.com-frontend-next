@@ -4,8 +4,8 @@
 .container {
   inline-size: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .buttonsContainer {
@@ -39,9 +39,13 @@
 }
 
 // Matches EndOfSurahSection container width (1230px, centered, with edge padding)
-.chapterBannerWrapper {
-  @include utility.edgeHorizontalPadding;
+.fundraisingBannerWrapper {
+  box-sizing: border-box;
   max-inline-size: 1230px;
   margin-inline: auto;
   inline-size: 100%;
+
+  @include breakpoints.smallerThanDesktop {
+    @include utility.edgeHorizontalPadding;
+  }
 }
