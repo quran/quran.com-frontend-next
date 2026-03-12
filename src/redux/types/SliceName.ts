@@ -36,6 +36,7 @@ enum SliceName {
   AYAH_WIDGET = 'ayahWidget',
   PINNED_VERSES = 'pinnedVerses',
   PINNED_VERSES_MODAL = 'pinnedVersesModal',
+  EBOOK_BANNER = 'ebookBanner',
 }
 
 export default SliceName;

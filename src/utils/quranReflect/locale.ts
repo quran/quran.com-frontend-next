@@ -27,6 +27,8 @@ const LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID = {
   [Language.SW]: 59,
 };
 
+const DEFAULT_QURAN_REFLECT_FEED_LOCALE = Language.EN;
+
 export const LOCALE_TO_TRANSLATION_ID = {
   [Language.AR]: null, // Arabic text doesn't need translation
   [Language.EN]: 131, // The Clear Quran (Khattab)
@@ -54,6 +56,26 @@ export const localeToQuranReflectLanguageID = (locale: string): number => {
   return (
     LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID[locale] || LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID[Language.EN]
   );
+};
+
+export const normalizeQuranReflectLocale = (locale: string): string => {
+  if (!locale) return DEFAULT_QURAN_REFLECT_FEED_LOCALE;
+
+  const normalized = locale.toLowerCase().split('-')[0];
+  return (
+    normalized in LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID
+      ? normalized
+      : DEFAULT_QURAN_REFLECT_FEED_LOCALE
+  ) as string;
+};
+
+export const getQuranReflectFeedLocales = (locale: string): string[] => {
+  const normalizedLocale = normalizeQuranReflectLocale(locale);
+  if (normalizedLocale === Language.EN) {
+    return [Language.EN];
+  }
+
+  return Array.from(new Set([normalizedLocale, Language.EN]));
 };
 
 const QURAN_REFLECT_LANGUAGE_ID_TO_LOCALE = Object.fromEntries(

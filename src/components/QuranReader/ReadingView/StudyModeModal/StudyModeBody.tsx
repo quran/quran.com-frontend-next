@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 
 import classNames from 'classnames';
@@ -8,6 +9,8 @@ import { TAB_COMPONENTS, useStudyModeTabs } from './StudyModeBodyTabs';
 import StudyModeBottomActions, { StudyModeTabId } from './StudyModeBottomActions';
 import useStudyModeScroll from './useStudyModeScroll';
 
+import EbookBanner, { EbookBannerContext } from '@/components/Ebook/EbookBanner';
+import StudyModeChapterBanner from '@/components/StudyMode/StudyModeChapterBanner';
 import { AyahHadithsResponse } from 'types/Hadith';
 import AyahQuestionsResponse from 'types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Verse from 'types/Verse';
@@ -34,6 +37,8 @@ interface StudyModeBodyProps {
   hadithsInitialData?: AyahHadithsResponse;
   onGoToVerse?: (chapterId: string, verseNumber: string, previousVerseKey?: string) => void;
 }
+
+const SHOW_BANNER_ON_TABS = [StudyModeTabId.LESSONS, StudyModeTabId.REFLECTIONS];
 
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   verse,
@@ -110,6 +115,29 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
               ref={tabContentRef}
               className={styles.tabContentContainer}
             >
+              {SHOW_BANNER_ON_TABS.includes(activeTab) && (
+                <>
+                  <EbookBanner
+                    disableMobile
+                    floating
+                    context={
+                      activeTab === StudyModeTabId.LESSONS
+                        ? EbookBannerContext.LESSONS
+                        : EbookBannerContext.REFLECTIONS
+                    }
+                  />
+                  <StudyModeChapterBanner
+                    disableMobile
+                    floating
+                    chapterId={selectedChapterId}
+                    context={
+                      activeTab === StudyModeTabId.LESSONS
+                        ? EbookBannerContext.LESSONS
+                        : EbookBannerContext.REFLECTIONS
+                    }
+                  />
+                </>
+              )}
               <TabComponent
                 chapterId={selectedChapterId}
                 verseNumber={selectedVerseNumber}

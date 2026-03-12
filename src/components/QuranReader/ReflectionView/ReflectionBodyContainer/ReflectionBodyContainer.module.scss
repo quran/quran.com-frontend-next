@@ -44,6 +44,10 @@
   }
 }
 
+.bannerContainer {
+  margin-block-end: var(--spacing-medium2-px);
+}
+
 .titleContainer {
   display: flex;
   align-items: center;
@@ -56,4 +60,46 @@
   @include breakpoints.tablet {
     font-size: var(--font-size-normal-px);
   }
+}
+
+.sortChips {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-plus-px);
+  padding: 0;
+  min-block-size: var(--spacing-xlarge-px);
+}
+
+button.sortChip {
+  min-block-size: var(--spacing-medium4-px);
+  block-size: var(--spacing-medium4-px);
+  padding-block: var(--spacing-xxsmall-px);
+  padding-inline: var(--spacing-small-px);
+  border: none;
+  border-radius: var(--border-radius-circle-small);
+  box-shadow: none;
+  font-size: var(--font-size-xsmall-px);
+  line-height: normal;
+
+  &:active {
+    transform: none;
+  }
+}
+
+button.sortChipDefault,
+button.sortChipDefault:hover {
+  background-color: var(--color-background-alternative-faint-new);
+  color: var(--color-text-default-new);
+}
+
+button.sortChipSelected,
+button.sortChipSelected:hover {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-white);
+}
+
+.sortChipContent {
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-medium);
+  line-height: normal;
 }

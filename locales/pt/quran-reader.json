@@ -199,6 +199,16 @@
   "reciter-summary": "(Com a gentil permissão do Tafsir Center)",
   "referencing": "Referência",
   "reflection-disclaimer": "As reflexões não representam a opinião do Quran.com e não devem ser tiradas do contexto",
+  "reflection-feed": {
+    "engage": "Participe no QuranReflect",
+    "follow": "Seguir",
+    "load-more": "Carregar mais",
+    "sort": {
+      "label": "Classificar reflexões por",
+      "latest": "Mais recente",
+      "popular": "Popular"
+    }
+  },
   "reflection-languages": "Linguagens de reflexão",
   "reflection-not-available": "Não há reflexões revisadas para este ayah",
   "reflections": "Reflexões",

@@ -1,0 +1,89 @@
+@use 'src/styles/breakpoints';
+
+.disableMobile {
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.disableDesktop {
+  @include breakpoints.tablet {
+    display: none;
+  }
+}
+
+.studyModeChapterBannerFloating {
+  display: none;
+  z-index: var(--z-index-onboarding-overlay);
+  @include breakpoints.tablet {
+    display: block;
+    position: absolute;
+    inset-inline-end: var(--spacing-edge-horizontal-px);
+    inset-block-end: var(--spacing-edge-vertical-px);
+    max-inline-size: calc(var(--spacing-mega-px) * 4.1);
+
+    [dir='rtl'] & {
+      inset-inline: var(--spacing-edge-horizontal-px) unset;
+    }
+  }
+}
+
+.studyModeChapterBannerBlock {
+  position: relative;
+}
+
+.studyModeChapterBanner {
+  background-color: var(--color-blue-buttons-and-icons);
+  border-radius: var(--spacing-medium-px);
+  padding: var(--spacing-medium-px);
+  color: var(--color-primary-faded);
+
+  .studyModeChapterBannerTitle {
+    text-align: center;
+    font-weight: var(--font-weight-bold);
+    @include breakpoints.tablet {
+      font-size: var(--font-size-normal-px);
+    }
+  }
+
+  .studyModeChapterBannerDescription {
+    padding-block: var(--spacing-small-px);
+
+    li {
+      font-size: var(--font-size-xxsmall-px);
+      padding-block: var(--spacing-xxsmall-px);
+      @include breakpoints.tablet {
+        font-size: var(--font-size-xsmall-px);
+      }
+    }
+  }
+
+  .studyModeChapterBannerFooter {
+    opacity: var(--opacity-85);
+    padding-block: var(--spacing-xxsmall-px);
+    font-size: var(--spacing-small2-px);
+    text-align: center;
+  }
+
+  .studyModeChapterBannerCta {
+    inline-size: 100%;
+    color: var(--color-blue-buttons-and-icons);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xsmall-px);
+
+    &:not(:disabled) {
+      background-color: var(--color-primary-faded);
+    }
+  }
+
+  .closeButton {
+    color: var(--color-primary-faded);
+    position: absolute;
+    inset-inline-end: calc(var(--spacing-medium-px) / 2);
+    inset-block-start: calc(var(--spacing-medium-px) / 2);
+
+    [dir='rtl'] & {
+      inset-inline: calc(var(--spacing-medium-px) / 2) unset;
+    }
+  }
+}

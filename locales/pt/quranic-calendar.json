@@ -4,6 +4,7 @@
   "ask-question": "Faça uma pergunta",
   "complete": "Completo",
   "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} semanas concluídas",
+  "current": "Atual",
   "divine-book-club": "O Clube do Livro Divino",
   "divine-book-club-description": "Esta é uma discussão leve em grupo que ajuda você a acompanhar o contexto da leitura de cada semana.",
   "end-of-calendar": "Fim do calendário",
@@ -53,6 +54,10 @@
     {
       "answer": "Sim. \"Quran em um Ano\" é completamente gratuito, e encorajamos a compartilhá-lo com outros. Convide um amigo, comece um clube do livro e ajude mais pessoas a completar a sua primeira leitura completa do Quran.",
       "question": "Isso é grátis? Posso compartilhar?"
+    },
+    {
+      "answer": "Sim. \"O Alcorão em um Ano\" é totalmente gratuito e encorajamos você a compartilhá-lo com outras pessoas. Convide um amigo, crie um clube de leitura e ajude mais pessoas a concluir sua primeira leitura completa do Alcorão.",
+      "question": "É gratuito? Posso compartilhar?"
     }
   ],
   "hero": {
@@ -93,6 +98,9 @@
   "quran-calendar-title": "Quran em um Ano – Um plano simples para ler e entender todo o Quran",
   "quran-reflect": "QuranReflect",
   "quran-reflect-description": "Interaja com outras pessoas em relação aos versículos que você leu esta semana.",
+  "quran-space-cta": "Criar um espaço",
+  "quran-space-description": "Crie ou participe de um grupo de estudos online ao vivo com amigos e familiares para o projeto \"O Alcorão em um Ano\".",
+  "quran-space-title": "<quran>Alcorão</quran> Espaço",
   "quranic-calendar": "Quran em um Ano",
   "ramadan": "Ramadan",
   "read-online": "Ler Online",

@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
 
 import styles from './ChapterHeader.module.scss';
 import BismillahSection from './components/BismillahSection';
@@ -15,11 +14,13 @@ import ReadingModeActions from './ReadingModeActions';
 import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import useChapterEvent from '@/hooks/useChapterEvent';
 import useDirection from '@/hooks/useDirection';
-import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
+import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import Language from '@/types/Language';
+import { ReadingPreference } from '@/types/QuranReader';
 import { getChapterData } from '@/utils/chapter';
 import isInReadingMode from '@/utils/readingPreference';
 import DataContext from 'src/contexts/DataContext';
+import QueryParam from 'types/QueryParam';
 
 interface ChapterHeaderProps {
   chapterId: string;
@@ -44,7 +45,8 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   const chapterData = getChapterData(chaptersData, chapterId);
   const isArabicOrUrdu = lang === Language.AR || lang === Language.UR;
   const direction = useDirection();
-  const readingPreference = useSelector(selectReadingPreference);
+  const { value: readingPreference }: { value: ReadingPreference; isQueryParamDifferent: boolean } =
+    useGetQueryParamOrReduxValue(QueryParam.READING_MODE);
   const { showEvent, title, description, ctaText, ctaLink } = useChapterEvent(chapterId);
 
   // Check if we're in Reading mode (Arabic or Translation)

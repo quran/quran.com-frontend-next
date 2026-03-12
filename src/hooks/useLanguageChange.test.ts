@@ -104,7 +104,6 @@ describe('useLanguageChange', () => {
     });
 
     expect(syncLocaleDependentSettings).toHaveBeenCalledWith({
-      prevLocale: 'ar',
       nextLocale: 'en',
     });
     expect(dispatch).toHaveBeenCalledWith(expect.any(Function));

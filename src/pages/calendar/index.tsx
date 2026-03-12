@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import umalqura from '@umalqura/core';
 import { GetStaticProps } from 'next';
@@ -13,6 +13,7 @@ import FAQ from '@/components/QuranicCalendar/FAQ';
 import MyProgress from '@/components/QuranicCalendar/MyProgress';
 import QuranicCalendarHero from '@/components/QuranicCalendar/QuranicCalendarHero';
 import WeeklyVerses from '@/components/QuranicCalendar/WeeklyVerses';
+import quranicCalendarData from '@/data/quranic-calendar.json';
 import useGetQuranicProgramWeek from '@/hooks/auth/useGetQuranicProgramWeek';
 import { getQuranicCalendarOgImageUrl } from '@/lib/og';
 import { QURANIC_CALENDAR_PROGRAM_ID } from '@/utils/auth/constants';
@@ -22,6 +23,7 @@ import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 
 const PATH = getQuranicCalendarNavigationUrl();
+type QuranicCalendarWeekEntry = { weekNumber: string; ranges: string };
 
 const QuranicCalendarPage = () => {
   const { t, lang } = useTranslation('quranic-calendar');
@@ -35,8 +37,18 @@ const QuranicCalendarPage = () => {
     currentWeek: selectedWeek,
   });
 
-  // Use range from the API response if available, otherwise fallback to default
-  const weekRanges = weekData?.ranges?.[0] || '1:1-2:1';
+  const weekRangesByWeekNumber = useMemo(() => {
+    const weekMap = new Map<number, string>();
+    Object.values(quranicCalendarData as Record<string, QuranicCalendarWeekEntry[]>)
+      .flat()
+      .forEach((week) => {
+        weekMap.set(Number(week.weekNumber), week.ranges);
+      });
+    return weekMap;
+  }, []);
+
+  // Prefer local calendar data to keep UI in sync with selected week even if API data lags.
+  const weekRanges = weekRangesByWeekNumber.get(selectedWeek) || weekData?.ranges?.[0] || '1:1-2:1';
 
   return (
     <>
@@ -56,7 +68,7 @@ const QuranicCalendarPage = () => {
         currentHijriDate={currentHijriDate}
       />
       <PageContainer>
-        <div className={styles.section}>
+        <div className={styles.section} id="weekly-verses-section">
           <WeeklyVerses
             weekNumber={selectedWeek}
             weekRanges={weekRanges}
@@ -69,7 +81,7 @@ const QuranicCalendarPage = () => {
           <AdditionalResources weekData={weekData} weekNumber={selectedWeek} />
         </div>
         <div className={styles.section}>
-          <MyProgress onWeekSelect={setSelectedWeek} />
+          <MyProgress selectedWeek={selectedWeek} onWeekSelect={setSelectedWeek} />
         </div>
 
         <div className={styles.section}>

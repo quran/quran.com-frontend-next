@@ -11,13 +11,11 @@ import TranslationPage from './TranslationPage';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
-import {
-  selectInlineDisplayWordByWordPreferences,
-  selectReadingPreference,
-} from '@/redux/slices/QuranReader/readingPreferences';
+import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { FALLBACK_FONT, ReadingPreference } from '@/types/QuranReader';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
+import { doesVerseStartOnPage } from '@/utils/verse';
 import Verse from 'types/Verse';
 
 type PageProps = {
@@ -27,6 +25,7 @@ type PageProps = {
   pageIndex: number;
   bookmarksRangeUrl: string | null;
   lang: string;
+  readingPreference: ReadingPreference;
 };
 
 const Page = ({
@@ -36,9 +35,8 @@ const Page = ({
   pageIndex,
   bookmarksRangeUrl,
   lang,
+  readingPreference,
 }: PageProps) => {
-  const readingPreference = useSelector(selectReadingPreference);
-
   const lines = useMemo(() => (verses?.length > 0 ? groupLinesByVerses(verses) : {}), [verses]);
   const { quranTextFontScale, quranFont, mushafLines } = quranReaderStyles;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
@@ -51,7 +49,8 @@ const Page = ({
 
   // Check if this page contains the first verse of a chapter (for chapter header)
   const firstVerse = verses?.[0];
-  const shouldShowChapterHeader = firstVerse?.verseNumber === 1;
+  const shouldShowChapterHeader =
+    firstVerse?.verseNumber === 1 && doesVerseStartOnPage(firstVerse, pageNumber);
   const chapterId = firstVerse?.chapterId?.toString();
 
   const isReadingTranslation = readingPreference === ReadingPreference.ReadingTranslation;

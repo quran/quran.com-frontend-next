@@ -1,0 +1,87 @@
+@use 'src/styles/breakpoints';
+
+.disableMobile {
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.disableDesktop {
+  @include breakpoints.tablet {
+    display: none;
+  }
+}
+
+.ebookBannerFloating {
+  z-index: var(--z-index-onboarding-overlay);
+  @include breakpoints.tablet {
+    position: absolute;
+    inset-inline-end: var(--spacing-edge-horizontal-px);
+    inset-block-end: var(--spacing-edge-vertical-px);
+    max-inline-size: calc(var(--spacing-mega-px) * 4.1);
+
+    [dir='rtl'] & {
+      inset-inline: var(--spacing-edge-horizontal-px) unset;
+    }
+  }
+}
+
+.ebookBannerBlock {
+  position: relative;
+}
+
+.ebookBanner {
+  background-color: var(--color-blue-buttons-and-icons);
+  border-radius: var(--spacing-medium-px);
+  padding: var(--spacing-medium-px);
+  color: var(--color-primary-faded);
+
+  .ebookBannerTitle {
+    text-align: center;
+    font-weight: var(--font-weight-bold);
+    @include breakpoints.tablet {
+      font-size: var(--font-size-normal-px);
+    }
+  }
+
+  .ebookBannerDescription {
+    padding-block: var(--spacing-small-px);
+
+    li {
+      font-size: var(--font-size-xxsmall-px);
+      padding-block: var(--spacing-xxsmall-px);
+      @include breakpoints.tablet {
+        font-size: var(--font-size-xsmall-px);
+      }
+    }
+  }
+
+  .ebookBannerCtaContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ebookBannerCta {
+    border: none;
+    inline-size: 100%;
+    color: var(--color-blue-buttons-and-icons);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xsmall-px);
+
+    &:not(:disabled) {
+      background-color: var(--color-primary-faded);
+    }
+  }
+
+  .closeButton {
+    color: var(--color-primary-faded);
+    position: absolute;
+    inset-inline-end: calc(var(--spacing-medium-px) / 2);
+    inset-block-start: calc(var(--spacing-medium-px) / 2);
+
+    [dir='rtl'] & {
+      inset-inline: calc(var(--spacing-medium-px) / 2) unset;
+    }
+  }
+}

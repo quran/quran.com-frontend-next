@@ -199,6 +199,16 @@
   "reciter-summary": "(Với sự cho phép của Trung tâm Tafsir)",
   "referencing": "Tham chiếu",
   "reflection-disclaimer": "Những suy nghĩ này là quan điểm cá nhân (đã được duyệt về chất lượng) và không mang tính chính thống.",
+  "reflection-feed": {
+    "engage": "Tham gia thảo luận về Kinh Qur'an và Phản chiếu.",
+    "follow": "Theo",
+    "load-more": "Tải thêm",
+    "sort": {
+      "label": "Sắp xếp các bài phản hồi theo",
+      "latest": "Mới nhất",
+      "popular": "Phổ biến"
+    }
+  },
   "reflection-languages": "Ngôn ngữ phản chiếu",
   "reflection-not-available": "Hiện chưa có bài bình luận nào cho ayah này",
   "reflections": "Suy ngẫm",

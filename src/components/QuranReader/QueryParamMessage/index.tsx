@@ -13,7 +13,9 @@ import styles from './QueryParamMessage.module.scss';
 
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
+  selectReadingPreference,
   selectWordByWordLocale,
+  setReadingPreference,
   setSelectedWordByWordLocale,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import {
@@ -21,9 +23,14 @@ import {
   setSelectedTranslations,
 } from '@/redux/slices/QuranReader/translations';
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
-import { QuranReaderFlow } from '@/types/QuranReader';
+import { QuranReaderFlow, ReadingPreference } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
+import {
+  getReadingModeQueryParamValue,
+  getReadingPreferenceFromQueryParam,
+} from '@/utils/readingPreference';
+import { getQueryParamValueFromAsPath } from '@/utils/url';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 
@@ -31,12 +38,14 @@ interface Props {
   translationsQueryParamDifferent: boolean;
   reciterQueryParamDifferent: boolean;
   wordByWordLocaleQueryParamDifferent: boolean;
+  isReadingModeQueryParamDifferent?: boolean;
 }
 
 const QueryParamMessage: React.FC<Props> = ({
   translationsQueryParamDifferent,
   reciterQueryParamDifferent,
   wordByWordLocaleQueryParamDifferent,
+  isReadingModeQueryParamDifferent = false,
 }) => {
   const { lang } = useTranslation('common');
   const router = useRouter();
@@ -44,9 +53,14 @@ const QueryParamMessage: React.FC<Props> = ({
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
   const selectedReciterId = useXstateSelector(audioService, (state) => state.context.reciterId);
   const selectedWordByWordLocale = useSelector(selectWordByWordLocale, shallowEqual);
+  const selectedReadingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   const {
     actions: { onSettingsChange, onXstateSettingsChange },
   } = usePersistPreferenceGroup();
+  const readingModeFromAsPath = getQueryParamValueFromAsPath(
+    router.asPath,
+    QueryParam.READING_MODE,
+  );
 
   /**
    * When the use clicks on use Redux, we will import the values from redux and
@@ -62,6 +76,10 @@ const QueryParamMessage: React.FC<Props> = ({
     }
     if (wordByWordLocaleQueryParamDifferent) {
       router.query[QueryParam.WBW_LOCALE] = selectedWordByWordLocale;
+    }
+    if (isReadingModeQueryParamDifferent) {
+      router.query[QueryParam.READING_MODE] =
+        getReadingModeQueryParamValue(selectedReadingPreference);
     }
     // if is in Quranic Calendar flow, remove the flow query param
     if (router.query[QueryParam.FLOW] === QuranReaderFlow.QURANIC_CALENDER) {
@@ -117,6 +135,21 @@ const QueryParamMessage: React.FC<Props> = ({
         () => audioService.send({ type: 'CHANGE_RECITER', reciterId: selectedReciterId }),
         PreferenceGroup.AUDIO,
       );
+    }
+
+    if (isReadingModeQueryParamDifferent) {
+      const readingModeCandidate =
+        readingModeFromAsPath ?? String(router.query[QueryParam.READING_MODE] || '');
+      const nextReadingPreference = getReadingPreferenceFromQueryParam(readingModeCandidate);
+      if (nextReadingPreference) {
+        onSettingsChange(
+          'readingPreference',
+          nextReadingPreference,
+          setReadingPreference(nextReadingPreference),
+          setReadingPreference(selectedReadingPreference),
+          PreferenceGroup.READING,
+        );
+      }
     }
   };
 

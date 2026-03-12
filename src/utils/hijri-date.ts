@@ -15,28 +15,18 @@ type Month = {
 
 // Constants for better readability
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-// Weeks in quranic-calendar.json are already anchored to start on Friday per the Google Sheet,
-// so we don't need to shift them in code. Set to 0 to keep anchors as-is.
-const WEEK_SHIFT_DAYS = 0;
 
-// Pre-compute all UTC timestamps for better performance
-const weekUTCCache = new Map<string, { startTimestamp: number; endTimestamp: number }>();
-
-// Initialize cache (only stores first occurrence of each week number to preserve original behavior)
-for (const weeks of Object.values(monthsMap)) {
-  for (const week of weeks) {
-    // Only cache if this week number hasn't been seen before
-    if (!weekUTCCache.has(week.weekNumber)) {
-      const startTimestamp = Date.UTC(Number(week.year), Number(week.month) - 1, Number(week.day));
-      // Shift the start date by WEEK_SHIFT_DAYS to make it start from Friday
-      const shiftedStartTimestamp = startTimestamp + WEEK_SHIFT_DAYS * ONE_DAY_MS;
-      // Add 7 days to get the end of the week (exclusive end range for 7-day weeks)
-      const endTimestamp = shiftedStartTimestamp + 7 * ONE_DAY_MS;
-
-      weekUTCCache.set(week.weekNumber, { startTimestamp: shiftedStartTimestamp, endTimestamp });
-    }
-  }
-}
+const weekUTCCache = Object.values(monthsMap)
+  .flat()
+  .sort((a, b) => Number(a.weekNumber) - Number(b.weekNumber))
+  .map((week) => {
+    const startTimestamp = Date.UTC(Number(week.year), Number(week.month) - 1, Number(week.day));
+    return {
+      weekNumber: Number(week.weekNumber),
+      startTimestamp,
+      endTimestamp: startTimestamp + 7 * ONE_DAY_MS,
+    };
+  });
 
 /**
  * The idea is to sum the number of weeks from the start of the Quranic
@@ -53,20 +43,23 @@ export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQur
   // from drifting a day earlier/later on machines with non-UTC offsets.
   const today = currentHijriDate.date;
   const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+  const firstWeek = weekUTCCache[0];
+  const lastWeek = weekUTCCache[weekUTCCache.length - 1];
 
-  // Look up from cache - use for...of with Array.from to allow early return
-  const weekEntries = Array.from(weekUTCCache.entries());
-  for (const [weekNumber, cache] of weekEntries) {
-    if (todayUTC >= cache.startTimestamp && todayUTC < cache.endTimestamp) {
-      return Number(weekNumber);
+  for (const week of weekUTCCache) {
+    if (todayUTC >= week.startTimestamp && todayUTC < week.endTimestamp) {
+      return week.weekNumber;
     }
   }
 
-  // TODO: reset back again to 0. this is temporary fix
-  return weekEntries.length;
+  // Clamp out-of-range dates to the nearest boundary week.
+  if (firstWeek && todayUTC < firstWeek.startTimestamp) {
+    return firstWeek.weekNumber;
+  }
+
+  return lastWeek?.weekNumber || 0;
 };
 
-// TODO: add unit tests
 export const generateWeeksOfMonths = (
   months: Month[],
 ): {

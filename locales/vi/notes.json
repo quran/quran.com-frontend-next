@@ -8,13 +8,10 @@
     },
     "post-button": "Điều gì sẽ xảy ra khi tôi đăng bài?",
     "qr-intro": "QuranReflect, cùng với Quran.com, thuộc gia đình Quran.Foundation. Đây là nền tảng xã hội để chia sẻ suy ngẫm cá nhân về Kinh Qur'an, giúp người dùng thấu hiểu thông điệp, chia sẻ góc nhìn truyền cảm hứng thay đổi tích cực. Khác với tafsir mang tính học thuật, suy ngẫm là những ý nghĩ và trải nghiệm riêng gắn với các câu kinh. Bài đăng được đội ngũ chuyên môn duyệt để bảo đảm chất lượng, giữ phép tắc khi tương tác với Kinh Qur'an, và hỗ trợ người dùng qua phản hồi, làm nổi bật trao đổi giá trị, xây dựng cộng đồng hướng Kinh Qur'an, nâng cao đời sống tinh thần. Tìm hiểu thêm: <link>Quranreflect.com/faq</link>",
-    "qr-title": "QuranReflect là gì?",
-    "title": "QuranReflect là gì và điều gì sẽ xảy ra nếu tôi chọn ô này?"
+    "qr-title": "QuranReflect là gì?"
   },
-  "click-to-see-more": "Nhấp chuột để xem thêm",
-  "delete-note": "Xóa ghi chú",
   "delete-note-modal": {
-    "subtitle": "Bạn chắc chắn muốn xóa ghi chú này chứ?",
+    "subtitle": "Bạn có chắc chắn muốn xóa ghi chú này không?",
     "title": "Xóa ghi chú"
   },
   "delete-success": "Ghi chú đã xóa thành công.",
@@ -44,17 +41,13 @@
     }
   },
   "note": "Ghi chú",
-  "notes-and-reflcs": "Ghi chú & Suy ngẫm",
   "notes-on-this-verse": "{{count}} ghi chú về câu thơ này",
   "post-confirmation": {
     "question": "Bạn có chắc chắn muốn đăng bài suy ngẫm này lên QuranReflect không?"
   },
-  "post-on-qr": "Bài đăng trên QuranReflect",
   "post-to": "Đăng lên",
   "posted-reflections": "Suy ngẫm đã đăng",
   "private-notes": "Ghi chú",
-  "qr-tooltip": "<span><link>QuranReflect</link> là một nền tảng xã hội để chia sẻ những suy ngẫm về Kinh Qur'an. Kết nối xung quanh Kinh Qur'an, kết nối với những điều quan trọng.</span>",
-  "reflection-update-success": "Dòng suy ngẫm đã được cập nhật thành công.",
   "reflections-intro": {
     "line-1": "Để xem và tương tác với các bình luận, tham gia cộng đồng và làm nhiều việc khác, hãy truy cập <link>QuranReflect.com</link>.",
     "line-2": "Bạn có thể đăng nhập vào tài khoản QuranReflect đã liên kết bằng cách đăng nhập hoặc đăng ký bằng cùng địa chỉ email Quran.com mà bạn đã sử dụng khi đăng nhập.",
@@ -65,11 +58,8 @@
   "save-privately": "Lưu riêng tư",
   "save-publish-failed": "Ghi chú đã được lưu thành công nhưng không thể xuất bản.",
   "save-success": "Ghi chú đã được lưu thành công.",
-  "share-to-qr": "Chia sẻ lên QuranReflect.com",
-  "share-to-qr-desc": "Chia sẻ như <b>{{name}}</b>. Khán giả là <b>Người dùng QuranReflect</b>",
   "take-a-note-or-reflection": "Ghi chú hoặc suy ngẫm",
   "update-publish-failed": "Ghi chú đã cập nhật nhưng xuất bản không thành công.",
-  "update-reflection": "Cập nhật suy ngẫm",
   "update-success": "Ghi chú đã được cập nhật thành công.",
   "view-on-qr": "Xem trên QuranReflect"
 }

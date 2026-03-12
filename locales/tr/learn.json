@@ -63,9 +63,13 @@
   "reflection-description-1": "\"Tefekkur yansıma Ekle\"ye tıklamak sizi Kuran'a dair kişisel düşünceleri paylaşmak için bir platform olan QuranReflect'e götürecektir. Tefsir'in (bilimsel yorumlama) aksine, düşünceler ayetlerle ilgili kişisel içgörüler ve deneyimlerdir.",
   "reflection-description-2": "Herkese açık olarak paylaşım yapmanız durumunda, düşünceleriniz moderasyon ekibi tarafından incelenecek ve QuranReflect topluluğuna görünür hale gelecektir.",
   "repeat-learning-plan": "Tekrar Öğrenme Planı",
+  "share": "Paylaşmak",
+  "share-title": "Paylaşmak:",
   "start-here": "Buradan Başlayın",
+  "start-learning": "Öğrenmeye Başlayın",
   "tabs": {
     "main": "Ana Detaylar",
+    "outline": "Özet",
     "syllabus": "Müfredat"
   },
   "what-happens-when-you-click-add-reflection": "\"Tefekkur yansıma Ekle\"ye tıkladığınızda ne olur?"

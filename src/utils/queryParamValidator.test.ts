@@ -18,6 +18,7 @@ import {
   isValidVideoIdQueryParamValue,
   isValidFontStyleQueryParamValue,
   isValidPreviewModeQueryParamValue,
+  isValidReadingModeQueryParamValue,
 } from './queryParamValidator';
 
 import AvailableTranslation from '@/types/AvailableTranslation';
@@ -218,5 +219,22 @@ describe('isValidFontStyleQueryParamValue', () => {
     expect(isValidFontStyleQueryParamValue(null as unknown as QuranFont)).toBe(false);
     expect(isValidFontStyleQueryParamValue(undefined as unknown as QuranFont)).toBe(false);
     expect(isValidFontStyleQueryParamValue({} as unknown as QuranFont)).toBe(false);
+  });
+});
+
+describe('isValidReadingModeQueryParamValue', () => {
+  it('Returns true for valid reading mode values', () => {
+    expect(isValidReadingModeQueryParamValue('verse-by-verse')).toBe(true);
+    expect(isValidReadingModeQueryParamValue('arabic')).toBe(true);
+    expect(isValidReadingModeQueryParamValue('translation')).toBe(true);
+  });
+
+  it('Returns false for invalid reading mode values', () => {
+    expect(isValidReadingModeQueryParamValue('invalid')).toBe(false);
+    expect(isValidReadingModeQueryParamValue('')).toBe(false);
+    expect(isValidReadingModeQueryParamValue('READING')).toBe(false);
+    expect(isValidReadingModeQueryParamValue('Translation')).toBe(false);
+    expect(isValidReadingModeQueryParamValue('reading')).toBe(false);
+    expect(isValidReadingModeQueryParamValue('readingTranslation')).toBe(false);
   });
 });

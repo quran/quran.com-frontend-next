@@ -83,6 +83,25 @@
   --border: #e4c5a2;
 }
 
+.lavender,
+[data-theme='light'] .lavender {
+  --background: #cdcff5;
+  --color: #4b4e88;
+  --border: #b8b5e9;
+}
+
+[data-theme='sepia'] .lavender {
+  --background: #cdcff5;
+  --color: #4b4e88;
+  --border: #b8b5e9;
+}
+
+[data-theme='dark'] .lavender {
+  --background: #9498e2;
+  --color: #20236f;
+  --border: #b8b5e9;
+}
+
 /* Auto theme: follow system preference */
 @media (prefers-color-scheme: dark) {
   [data-theme='auto'] .green {
@@ -107,5 +126,11 @@
     --background: #bd986f;
     --color: #3e2811;
     --border: #e4c5a2;
+  }
+
+  [data-theme='auto'] .lavender {
+    --background: #9498e2;
+    --color: #20236f;
+    --border: #b8b5e9;
   }
 }

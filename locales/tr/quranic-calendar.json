@@ -4,6 +4,7 @@
   "ask-question": "Soru Sor",
   "complete": "Tamamla",
   "completed-weeks": "{{completedWeeks}} / {{totalWeeks}}Tamamlanan haftalar",
+  "current": "Akım",
   "divine-book-club": "İlahi okuma grubu",
   "divine-book-club-description": "Bu, her haftanın okumasının bağlamını takip etmenize yardımcı olan hafif bir grup tartışmasıdır.",
   "end-of-calendar": "Takvimin Sonu",
@@ -53,6 +54,10 @@
     {
       "answer": "Evet. \"Bir yılda Kur’an\" tamamen ücretsizdir ve onu başkalarıyla paylaşmanızı teşvik ediyoruz. Bir arkadaşınızı davet edin, bir okuma grubu başlatın ve daha fazla kişinin Kur’an'ı ilk defa baştan sona okumasına yardımcı olun.",
       "question": "Bu ücretsiz mi? Paylaşabilir miyim?"
+    },
+    {
+      "answer": "Evet. \"Bir Yılda Kur'an\" tamamen ücretsizdir ve başkalarıyla paylaşmanızı teşvik ediyoruz. Bir arkadaşınızı davet edin, bir kitap kulübü kurun ve daha fazla insanın Kur'an'ı ilk kez baştan sona okumasına yardımcı olun.",
+      "question": "Bu ücretsiz mi? Paylaşabilir miyim?"
     }
   ],
   "hero": {
@@ -93,6 +98,9 @@
   "quran-calendar-title": "Bir Yılda Kur’an – Kur’an’ı tamamen okumak ve anlamak için basit bir plan",
   "quran-reflect": "Tefekkür-ü Kur’an",
   "quran-reflect-description": "Bu hafta okuduğunuz ayetlerle ilgili olarak başkalarıyla etkileşime geçin.",
+  "quran-space-cta": "Bir Alan Oluşturun",
+  "quran-space-description": "Arkadaşlarınız ve ailenizle birlikte Kur'an'ı Bir Yılda Öğrenme amacıyla canlı bir çalışma grubu oluşturun veya mevcut bir gruba katılın.",
+  "quran-space-title": "<kuran>Kuran</kuran> Uzay",
   "quranic-calendar": "Küresel Kuran Takvimi",
   "ramadan": "Ramazan",
   "read-online": "Çevrimiçi oku",

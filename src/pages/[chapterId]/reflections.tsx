@@ -6,9 +6,8 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
-import { fetcher, getPagesLookup } from '@/api';
+import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import QuranReader from '@/components/QuranReader';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import StudyModeSsrContainer from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeSsrContainer';
 import { getChapterOgImageUrl } from '@/lib/og';
@@ -17,27 +16,19 @@ import {
   getQuranReaderStylesInitialState,
   getTranslationsInitialState,
 } from '@/redux/defaultSettings/util';
-import { ChapterResponse, VersesResponse, VerseResponse } from '@/types/ApiResponses';
+import { ChapterResponse, VerseResponse } from '@/types/ApiResponses';
 import ChaptersData from '@/types/ChaptersData';
-import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
-import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { makeVersesUrl } from '@/utils/apiPaths';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getVerseReflectionNavigationUrl } from '@/utils/navigation';
-import {
-  getAyahReflections,
-  makeAyahReflectionsUrl,
-  REFLECTION_POST_TYPE_ID,
-} from '@/utils/quranReflect/apiPaths';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { buildVersesResponse, buildStudyModeVerseUrl } from '@/utils/verseKeys';
+import { buildStudyModeVerseUrl } from '@/utils/verseKeys';
 
 type AyahReflectionProp = {
   chapter?: ChapterResponse;
@@ -46,7 +37,6 @@ type AyahReflectionProp = {
   chaptersData: ChaptersData;
   fallback?: Record<string, unknown>;
   verse?: Verse;
-  versesResponse?: VersesResponse;
 };
 
 const ReflectionsPage: NextPage<AyahReflectionProp> = ({
@@ -55,7 +45,6 @@ const ReflectionsPage: NextPage<AyahReflectionProp> = ({
   chapterId,
   fallback,
   verse,
-  versesResponse,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
 
@@ -89,13 +78,6 @@ const ReflectionsPage: NextPage<AyahReflectionProp> = ({
           verseNumber={verseNumber}
           verse={verse}
         />
-        {chapter?.chapter?.id && versesResponse && (
-          <QuranReader
-            initialData={versesResponse}
-            id={chapter.chapter.id}
-            quranReaderDataType={QuranReaderDataType.Chapter}
-          />
-        )}
       </SWRConfig>
     </>
   );
@@ -115,40 +97,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const translations = getTranslationsInitialState(locale).selectedTranslations;
 
   try {
-    const verseReflectionUrl = makeAyahReflectionsUrl({
-      surahId: chapterNumber,
-      ayahNumber: verseNumber,
-      locales: [locale],
-      postTypeIds: [REFLECTION_POST_TYPE_ID],
-    });
-
-    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
     const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
-
-    const versesUrl = makeVersesUrl(chapterNumber, locale, {
-      ...getDefaultWordFields(quranFont),
-      translationFields: 'resource_name,language_id',
-      translations: translations.join(','),
-      mushaf: mushafId,
-      from: `${chapterNumber}:${verseNumber}`,
-      to: `${chapterNumber}:${verseNumber}`,
-    });
-
-    const [verseReflectionsData, verseData, versesData, pagesLookupResponse] = await Promise.all([
-      getAyahReflections(verseReflectionUrl),
-      fetcher(verseUrl) as Promise<VerseResponse>,
-      fetcher(versesUrl),
-      getPagesLookup({
-        chapterNumber: Number(chapterNumber),
-        mushaf: mushafId,
-      }),
-    ]);
-
-    const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
+    const verseData = (await fetcher(verseUrl)) as VerseResponse;
 
     const fallback = {
-      [verseReflectionUrl]: verseReflectionsData,
-      [versesUrl]: versesData,
       [verseUrl]: verseData,
     };
 
@@ -160,7 +112,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         verseNumber,
         fallback,
         verse: verseData.verse,
-        versesResponse,
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };

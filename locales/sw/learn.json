@@ -63,9 +63,13 @@
   "reflection-description-1": "Kubofya \"Andika Tafakari\" kutakupeleka kwenye QuranReflect, jukwaa la kushiriki tafakari za kibinafsi kuhusu Qur'ani. Tofauti na Tafsir (Fasiri za kitaalamu), tafakuri ni utambuzi wa kibinafsi na uzoefu unaohusiana na aya.",
   "reflection-description-2": "Ukichapisha hadharani, tafakari yako itakaguliwa na timu ya wasimamizi na itaonekana kwa jumuiya ya QuranReflect.",
   "repeat-learning-plan": "Soma tena Mpango wa Kujifunza",
+  "share": "Shiriki",
+  "share-title": "Shiriki:",
   "start-here": "Anza Kujifunza",
+  "start-learning": "Anza Kujifunza",
   "tabs": {
     "main": "Maelezo kuu",
+    "outline": "Muhtasari",
     "syllabus": "Muhtasari wa masomo"
   },
   "what-happens-when-you-click-add-reflection": "Nini kitafanyika unapobofya \"Andika Tafakari\"?"

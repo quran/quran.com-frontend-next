@@ -384,6 +384,35 @@ export const getDistanceBetweenVerses = (
 export const isFirstVerseOfSurah = (verseNumber: number): boolean => verseNumber === 1;
 
 /**
+ * Whether a verse starts on a given page.
+ *
+ * Some Mushaf layouts can return partial verse fragments on a page
+ * (e.g. verse 1 continuing from a previous page). In those cases,
+ * the first word on the page does not have position 1.
+ *
+ * @param {Verse} verse
+ * @param {number} [pageNumber]
+ * @returns {boolean}
+ */
+export const doesVerseStartOnPage = (verse: Verse, pageNumber?: number): boolean => {
+  if (!verse?.words?.length) {
+    // Fallback to previous behavior when words are unavailable.
+    return true;
+  }
+
+  const firstWordOfVerse = verse.words.find((word) => word.position === 1);
+  if (!firstWordOfVerse) {
+    return false;
+  }
+
+  if (!pageNumber || !firstWordOfVerse.pageNumber) {
+    return true;
+  }
+
+  return firstWordOfVerse.pageNumber === pageNumber;
+};
+
+/**
  * Whether the current verse is the last in surah.
  *
  * @param {ChaptersData} chaptersData

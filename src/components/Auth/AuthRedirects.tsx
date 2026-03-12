@@ -3,9 +3,14 @@
 import { useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
 
 import useAuthData from '@/hooks/auth/useAuthData';
 import { logMessageToSentry, addSentryBreadcrumb } from '@/lib/sentry';
+import {
+  selectAfterOnboardingRedirect,
+  setAfterOnboardingRedirect,
+} from '@/redux/slices/onboarding';
 import { isCompleteProfile } from '@/utils/auth/complete-signup'; // NEW: to recompute completeness defensively
 import { ROUTES, getLoginNavigationUrl } from '@/utils/navigation';
 import { isAuthPage } from '@/utils/routes';
@@ -22,6 +27,8 @@ const AuthRedirects = (): null => {
     isRefreshingToken,
   } = useAuthData();
   const TIMEOUT_MS = Number(process.env.NEXT_PUBLIC_AUTH_PROFILE_TIMEOUT_MS) || 4000;
+  const dispatch = useDispatch();
+  const afterOnboardingRedirect = useSelector(selectAfterOnboardingRedirect);
   const timeoutFiredRef = useRef(false);
 
   // Core redirect effect: decides if/where to redirect once we know enough about auth + profile state.
@@ -132,6 +139,18 @@ const AuthRedirects = (): null => {
         );
         return;
       }
+      if (afterOnboardingRedirect) {
+        const url = new URL(afterOnboardingRedirect, window.location.origin);
+        url.searchParams.set('source', 'signup');
+        const redirectUrl = `${url.pathname}${url.search}${url.hash}`;
+        dispatch(setAfterOnboardingRedirect(null));
+        logMessageToSentry('AuthRedirects redirect -> onboarding redirect', {
+          transactionName: 'AuthRedirects',
+          metadata: { from: path, to: redirectUrl, userId: userData?.id || null },
+        });
+        router.replace(redirectUrl);
+        return;
+      }
       if (path !== ROUTES.HOME) {
         logMessageToSentry('AuthRedirects redirect -> home (auth page)', {
           transactionName: 'AuthRedirects',
@@ -153,6 +172,8 @@ const AuthRedirects = (): null => {
     hasValidatedProfileFromNetwork,
     isRefreshingToken,
     router,
+    dispatch,
+    afterOnboardingRedirect,
   ]);
 
   useEffect(() => {

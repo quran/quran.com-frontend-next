@@ -6,15 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from '../styles/EmptyTranslationMessage.module.scss';
 
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
-import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { logButtonClick } from '@/utils/eventLogger';
 import { ReadingPreference } from 'types/QuranReader';
 
-const EmptyTranslationMessage: React.FC = () => {
+type EmptyTranslationMessageProps = {
+  readingPreference: ReadingPreference;
+};
+
+const EmptyTranslationMessage: React.FC<EmptyTranslationMessageProps> = ({ readingPreference }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const readingPreference = useSelector(selectReadingPreference);
   const selectedTranslations = useSelector(selectSelectedTranslations);
 
   const isTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;

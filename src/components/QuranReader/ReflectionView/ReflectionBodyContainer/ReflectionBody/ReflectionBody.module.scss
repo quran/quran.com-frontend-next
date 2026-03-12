@@ -14,6 +14,45 @@
 .readMoreButtonContainer {
   display: flex;
   justify-content: center;
+  margin-block-start: var(--spacing-large-px);
+}
+
+button.loadMoreButton,
+button.loadMoreButton:hover {
+  min-block-size: var(--spacing-large-px);
+  block-size: var(--spacing-large-px);
+  padding-block: var(--spacing-micro2-px);
+  padding-inline: var(--spacing-small-px);
+  border: none;
+  border-radius: var(--border-radius-small-px);
+  background-color: var(--color-black-buttons);
+  color: var(--color-text-inverse);
+  box-shadow: none;
+
+  &:active {
+    transform: none;
+  }
+}
+
+.loadMoreButtonContent {
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  line-height: normal;
+}
+
+.engageLinkContainer {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--spacing-small-px);
+  margin-block-end: var(--spacing-large-px);
+}
+
+a.engageLink {
+  color: var(--color-text-link-new);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-medium);
+  line-height: normal;
+  text-decoration: underline;
 }
 
 .endOfScrollActionsContainer {

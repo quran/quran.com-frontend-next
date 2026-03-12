@@ -31,6 +31,7 @@ import Spinner from '@/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
+import useReadingModeBannerVisibility from '@/hooks/useReadingModeBannerVisibility';
 import Error from '@/pages/_error';
 import { selectedLastReadPage } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
@@ -103,6 +104,7 @@ const ReadingView = ({
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const lastReadPageNumber = useSelector(selectedLastReadPage, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations);
+  const isReadingModeQueryParamDifferent = useReadingModeBannerVisibility();
 
   // Check if we should show empty state (in ReadingTranslation mode with no translations)
   const isTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;
@@ -318,7 +320,9 @@ const ReadingView = ({
   }
 
   const shouldShowQueryParamMessage =
-    reciterQueryParamDifferent || wordByWordLocaleQueryParamDifferent;
+    reciterQueryParamDifferent ||
+    wordByWordLocaleQueryParamDifferent ||
+    isReadingModeQueryParamDifferent;
 
   // When in empty state, show mode actions and empty message
   // Only show ReadingModeActions here if ReaderTopActions wouldn't show them (to avoid duplicate)
@@ -330,7 +334,7 @@ const ReadingView = ({
             <ReadingModeActions />
           </div>
         )}
-        <EmptyTranslationMessage />
+        <EmptyTranslationMessage readingPreference={readingPreference} />
       </div>
     );
   }
@@ -342,6 +346,7 @@ const ReadingView = ({
           translationsQueryParamDifferent={false}
           reciterQueryParamDifferent={reciterQueryParamDifferent}
           wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+          isReadingModeQueryParamDifferent={isReadingModeQueryParamDifferent}
         />
       )}
       <div

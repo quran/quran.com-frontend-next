@@ -161,6 +161,18 @@
   "donate_monthly": "Donate monthly",
   "donate_once": "Donate once",
   "done": "Done",
+  "ebook": {
+    "cta": {
+      "sign-up": "Sign Up Now",
+      "subscribe": "Subscribe",
+      "subscribed": "Subscribed"
+    },
+    "descriptions": {
+      "line1": "📖 Receive a free eBook on Surah Al-Mulk Reflections after Ramadan",
+      "line2": "✨ Add your Reflections by March 19th for a chance to have your Reflection included!"
+    },
+    "title": "Free Reflections eBook"
+  },
   "edit": "Edit",
   "email-verification": {
     "check-spam": "Didn't receive the verification email? Check your spam inbox",
@@ -493,6 +505,15 @@
     "sort": "Sort"
   },
   "stay-on-track": "🎯 Stay on track!",
+  "study-mode-chapter-banner": {
+    "cta": "Add your Reflection",
+    "descriptions": {
+      "line1": "✍️ Write a Reflection on a verse(s) of Surah Al-Mulk",
+      "line2": "✨ Add #AlMulkReflections to your post"
+    },
+    "footer": "Select Reflections will be included in the eBook. Add your reflection by March 19th 11:59PM UTC.",
+    "title": "Surah Al-Mulk Reflections eBook"
+  },
   "style": "Style",
   "submit": "Submit",
   "subscribe": "Subscribe",

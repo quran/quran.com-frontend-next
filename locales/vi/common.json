@@ -161,6 +161,18 @@
   "donate_monthly": "Quyên góp định kỳ hàng tháng",
   "donate_once": "Quyên góp một lần",
   "done": "Xong",
+  "ebook": {
+    "cta": {
+      "sign-up": "Đăng ký ngay",
+      "subscribe": "Đặt mua",
+      "subscribed": "Đã đăng ký"
+    },
+    "descriptions": {
+      "line1": "📖 Nhận ngay sách điện tử miễn phí về những suy ngẫm về Surah Al-Mulk sau tháng Ramadan",
+      "line2": "✨ Hãy chia sẻ suy nghĩ của bạn trước ngày 19 tháng 3 để có cơ hội được chọn!"
+    },
+    "title": "Sách điện tử Suy ngẫm miễn phí"
+  },
   "edit": "Sửa",
   "email-verification": {
     "check-spam": "Bạn không nhận được email xác nhận? Vui lòng kiểm tra hộp thư spam.",
@@ -493,6 +505,15 @@
     "sort": "Loại"
   },
   "stay-on-track": "🎯 Giữ vững mục tiêu!",
+  "study-mode-chapter-banner": {
+    "cta": "Thêm suy nghĩ của bạn",
+    "descriptions": {
+      "line1": "✍️ Viết bài suy ngẫm về một hoặc nhiều câu trong Surah Al-Mulk",
+      "line2": "✨ Thêm hashtag #AlMulkReflections vào bài đăng của bạn"
+    },
+    "footer": "Những suy ngẫm được chọn lọc sẽ được đưa vào sách điện tử. Hãy gửi suy ngẫm của bạn trước 23:59 UTC ngày 19 tháng 3.",
+    "title": "Sách điện tử Suy ngẫm về Surah Al-Mulk"
+  },
   "style": "Phong cách",
   "submit": "Nộp",
   "subscribe": "Đăng ký",

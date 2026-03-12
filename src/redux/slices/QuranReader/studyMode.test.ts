@@ -70,8 +70,24 @@ describe('studyMode slice', () => {
 
       const result = studyModeReducer(stateWithPinnedSection, closeStudyMode());
 
-      expect(result).toEqual(initialState);
+      expect(result).toEqual({ ...initialState, showPinnedSection: false });
       expect(result.showPinnedSection).toBe(false);
+    });
+
+    it('should preserve isLessonsChapterBannerVisible and isReflectionsChapterBannerVisible', () => {
+      const stateWithModifiedBanners = {
+        ...initialState,
+        isOpen: true,
+        verseKey: '1:1',
+        isLessonsChapterBannerVisible: false,
+        isReflectionsChapterBannerVisible: false,
+      };
+
+      const result = studyModeReducer(stateWithModifiedBanners, closeStudyMode());
+
+      expect(result.isLessonsChapterBannerVisible).toBe(false);
+      expect(result.isReflectionsChapterBannerVisible).toBe(false);
+      expect(result.isOpen).toBe(false);
     });
   });
 

@@ -199,6 +199,16 @@
   "reciter-summary": "(بتصريح من مركز التفسير)",
   "referencing": "المراجع",
   "reflection-disclaimer": "التدبرات هي آراء شخصية (يتم مراجعتها لضمان الجودة) ولا ينبغي اعتبارها تفسيرات مُعتمدة.",
+  "reflection-feed": {
+    "engage": "انخرط في تطبيق QuranReflect",
+    "follow": "يتبع",
+    "load-more": "عرض المزيد",
+    "sort": {
+      "label": "فرز الانعكاسات حسب",
+      "latest": "أحدث",
+      "popular": "شائع"
+    }
+  },
   "reflection-languages": "لغات التدبر",
   "reflection-not-available": "لا توجد تدبرات مراجعة لهذه الآية",
   "reflections": "تدبرات",

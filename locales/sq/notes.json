@@ -8,14 +8,11 @@
     },
     "post-button": "Çfarë ndodh kur postoj?",
     "qr-intro": "QuranReflex, së bashku me Quran.com, është një pjesë e familjes Quran.Foundation. Është një platformë sociale për ndarjen e reflektimeve personale mbi Kuranin, duke inkurajuar përdoruesit të përvetësojnë mesazhet e tij dhe të ndajnë njohuri që frymëzojnë ndryshime pozitive. Ndryshe nga tefsiri, i cili është një interpretim dijetar, reflektimet janë mendime dhe përvoja personale që lidhen me ajetet. Postimet e përdoruesve në QuranReflect shqyrtohen dhe moderohen nga një ekip i kualifikuar, i cili do të ndihmojë në sigurimin e cilësisë së përmbajtjes, etiketave kur ndërveprojnë me Kuranin, dhe ato do të fuqizojnë përdoruesit duke ndarë komente dhe duke nxjerrë në pah diskursin e vlefshëm duke nxitur kështu një komunitet shpirtëror të fokusuar në Kuran. . Mësoni më shumë: <link> Quranreflect.com/faq </link>",
-    "qr-title": "Çfarë është Kur'ani Reflekt?",
-    "title": "Çfarë është QuranReflect dhe çfarë ndodh nëse e shënoj këtë kuti?"
+    "qr-title": "Çfarë është Kur'ani Reflekt?"
   },
-  "click-to-see-more": "kliko për të parë më shumë",
-  "delete-note": "Fshi shënimin",
   "delete-note-modal": {
-    "subtitle": "Jeni i sigurt që dëshironi të fshini shënimin?",
-    "title": "Fshi shënimin"
+    "subtitle": "Je i sigurt që dëshiron ta fshish këtë shënim?",
+    "title": "Fshij shënimin"
   },
   "delete-success": "Shënimi është fshirë me sukses",
   "edit-note": "Modifiko Shënimin",
@@ -44,17 +41,13 @@
     }
   },
   "note": "shënim",
-  "notes-and-reflcs": "Shënime & Reflektime",
   "notes-on-this-verse": "{{count}} shënime mbi këtë varg",
   "post-confirmation": {
     "question": "A je i sigurt që dëshiron ta postosh këtë Reflektim në QuranReflect?"
   },
-  "post-on-qr": "Postoni në Kuran Reflect",
   "post-to": "Posto te",
   "posted-reflections": "Reflektime të postuara",
   "private-notes": "Shënime",
-  "qr-tooltip": "<span> <link> QuranReflect </link> është një platformë sociale për ndarjen e reflektimeve mbi Kuranin. Lidhu rreth Kuranit, lidhu me atë që ka rëndësi. </span>",
-  "reflection-update-success": "Reflektimi është përditësuar me sukses",
   "reflections-intro": {
     "line-1": "Për të parë dhe ndërvepruar me komentet, për t'u angazhuar me komunitetin dhe për të bërë më shumë, vizitoni <link> QuranReflec.com </link> .",
     "line-2": "Ju mund të identifikoheni në llogarinë tuaj të lidhur në QuranReflec duke u identifikuar ose duke u regjistruar me të njëjtin email të Quran.com të përdorur në hyrjen tuaj.",
@@ -65,11 +58,8 @@
   "save-privately": "Ruaj privatisht",
   "save-publish-failed": "Shënimi u ruajt me sukses, por nuk u publikua",
   "save-success": "Shënimi është ruajtur me sukses",
-  "share-to-qr": "Shpërndaje në QuranReflec.com",
-  "share-to-qr-desc": "Ndaje si <b> {{name}} </b> . Audienca është përdorues i <b> QuranReflect </b>",
   "take-a-note-or-reflection": "Merrni një shënim ose reflektim",
   "update-publish-failed": "Shënimi është përditësuar me sukses, por nuk u publikua",
-  "update-reflection": "Përditëso Reflektimin",
   "update-success": "Shënimi është përditësuar me sukses",
   "view-on-qr": "Shiko në Kuran Reflect"
 }

@@ -8,12 +8,12 @@ import styles from './WeeklyVerses.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PdfIcon from '@/icons/pdf.svg';
+import CheckIcon from '@/public/icons/check.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   getQuranicCalendarRangesNavigationUrl,
   QuranicCalendarRangesNavigationSettings,
 } from '@/utils/navigation';
-import { isMobile } from '@/utils/responsive';
 
 type ActionButtonsProps = {
   onMarkAsCompletedClick: () => void;
@@ -42,8 +42,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
     logButtonClick('quran_calendar_read_online');
   };
 
-  const isMobileBrowser = isMobile();
-
   return (
     <div className={styles.actionButtons}>
       <Button
@@ -57,7 +55,13 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           [styles.completedButton]: isCompleted,
         })}
       >
-        {isMobileBrowser ? '✔' : !isCompleted ? t('mark-as-completed') : t('week-completed')}
+        {!isCompleted ? (
+          <span className={styles.desktopText}>{t('mark-as-completed')}</span>
+        ) : (
+          <span className={styles.desktopText}>{t('week-completed')}</span>
+        )}
+
+        <CheckIcon className={styles.mobileIcon} />
       </Button>
       <div className={styles.rightButtons}>
         <div className={styles.pdfButtonContainer}>

@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -7,9 +7,11 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './AuthorInfo.module.scss';
 import buildReferredVerseText from './buildReferredVerseText';
 
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import VerifiedIcon from '@/icons/verified.svg';
+import { logErrorToSentry } from '@/lib/sentry';
 import Reference from '@/types/QuranReflect/Reference';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -20,7 +22,7 @@ type Props = {
   authorUsername: string;
   authorName: string;
   avatarUrl: string;
-  isAuthorVerified: boolean;
+  isAuthorVerified?: boolean;
   shouldShowReferredVerses: boolean;
   date: string;
   verseReferences: Reference[];
@@ -28,6 +30,9 @@ type Props = {
   reflectionGroup?: string;
   reflectionGroupLink?: string;
   onReferredVersesHeaderClicked: () => void;
+  shouldShowFollowButton?: boolean;
+  onFollow?: () => Promise<void>;
+  isFollowLoading?: boolean;
 };
 
 const SEPARATOR = ' · ';
@@ -44,23 +49,23 @@ const AuthorInfo: React.FC<Props> = ({
   shouldShowReferredVerses,
   reflectionGroup,
   reflectionGroupLink,
+  shouldShowFollowButton = false,
+  onFollow,
+  isFollowLoading = false,
 }) => {
   const { t, lang } = useTranslation();
   const [imageError, setImageError] = useState(false);
   const formattedDate = formatDateRelatively(new Date(date), lang);
-
-  const onReflectAuthorClicked = () => {
-    logButtonClick('reflection_item_author');
-  };
-
   const referredVerseText = useMemo(
     () => buildReferredVerseText(verseReferences, nonChapterVerseReferences, lang, t),
     [verseReferences, nonChapterVerseReferences, lang, t],
   );
-
-  const handleImageError = useCallback(() => {
-    setImageError(true);
-  }, []);
+  const onFollowClicked = () => {
+    if (!onFollow || isFollowLoading) return;
+    onFollow().catch((caughtError) => {
+      logErrorToSentry(caughtError, { transactionName: 'quranReflectFollowClick' });
+    });
+  };
 
   return (
     <div className={styles.authorInfo}>
@@ -71,24 +76,40 @@ const AuthorInfo: React.FC<Props> = ({
           src={imageError ? AUTHOR_DEFAULT_IMAGE : getImageSrc(avatarUrl)}
           width={40}
           height={40}
-          onError={handleImageError}
+          onError={() => setImageError(true)}
         />
       </Link>
       <div>
-        <Link
-          isNewTab
-          href={getQuranReflectAuthorUrl(authorUsername)}
-          variant={LinkVariant.Primary}
-          className={styles.author}
-          onClick={onReflectAuthorClicked}
-        >
-          {authorName}
-          {isAuthorVerified && (
-            <span className={styles.verifiedIcon}>
-              <VerifiedIcon />
-            </span>
+        <div className={styles.authorRow}>
+          <Link
+            isNewTab
+            href={getQuranReflectAuthorUrl(authorUsername)}
+            variant={LinkVariant.Primary}
+            className={styles.author}
+            onClick={() => logButtonClick('reflection_item_author')}
+          >
+            {authorName}
+            {isAuthorVerified && (
+              <span className={styles.verifiedIcon}>
+                <VerifiedIcon />
+              </span>
+            )}
+          </Link>
+          {shouldShowFollowButton && onFollow && (
+            <Button
+              size={ButtonSize.XSmall}
+              type={ButtonType.Success}
+              variant={ButtonVariant.Compact}
+              className={styles.followButton}
+              contentClassName={styles.followButtonContent}
+              isDisabled={isFollowLoading}
+              isLoading={isFollowLoading}
+              onClick={onFollowClicked}
+            >
+              {t('quran-reader:reflection-feed.follow')}
+            </Button>
           )}
-        </Link>
+        </div>
         <div>
           <span className={styles.date}>{formattedDate}</span>
           {verseReferences.length !== 0 && (

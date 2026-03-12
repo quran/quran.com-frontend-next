@@ -8,14 +8,11 @@
     },
     "post-button": "What happens when I post?",
     "qr-intro": "QuranReflect, along with Quran.com, is a part of the Quran.Foundation family. It is a social platform for sharing personal reflections on the Quran, encouraging users to internalize its messages and share insights that inspire positive change. Unlike tafsir, which is a scholarly interpretation, reflections are personal thoughts and experiences related to the verses. User posts to QuranReflect are reviewed and moderated by a qualified team, who will help ensure quality of content, etiquettes when interacting with the Quran, and they will empower users by sharing feedback and highlighting valuable discourse thus fostering a spiritually uplifting, Quran-focused community. Learn more: <link>Quranreflect.com/faq</link>",
-    "qr-title": "What is QuranReflect?",
-    "title": "What is QuranReflect and what happens if I check this box?"
+    "qr-title": "What is QuranReflect?"
   },
-  "click-to-see-more": "click to see more",
-  "delete-note": "Delete note",
   "delete-note-modal": {
-    "subtitle": "Are you sure you want to delete the note?",
-    "title": "Delete note"
+    "subtitle": "Are you sure you want to delete this note?",
+    "title": "Delete Note"
   },
   "delete-success": "Note has been deleted successfully",
   "edit-note": "Edit Note",
@@ -44,17 +41,13 @@
     }
   },
   "note": "Note",
-  "notes-and-reflcs": "Notes & Reflections",
   "notes-on-this-verse": "{{count}} notes on this verse",
   "post-confirmation": {
     "question": "Are you sure you would like to post this Reflection to QuranReflect?"
   },
-  "post-on-qr": "Post on QuranReflect",
   "post-to": "Post to",
   "posted-reflections": "Posted Reflections",
   "private-notes": "Notes",
-  "qr-tooltip": "<span><link>QuranReflect</link> is a social platform for sharing reflections on the Quran. Connect around the Quran, connect with what matters.</span>",
-  "reflection-update-success": "Reflection has been updated successfully",
   "reflections-intro": {
     "line-1": "To view and interact with comments, engage with the community, and do more, visit <link>QuranReflect.com</link>.",
     "line-2": "You can log into your linked QuranReflect account by logging in or signing up with the same Quran.com email used in your sign-in.",
@@ -65,11 +58,8 @@
   "save-privately": "Save Privately",
   "save-publish-failed": "Note has been saved successfully but failed to publish",
   "save-success": "Note has been saved successfully",
-  "share-to-qr": "Share to QuranReflect.com",
-  "share-to-qr-desc": "Share as <b>{{name}}</b>. Audience is <b>QuranReflect users</b>",
   "take-a-note-or-reflection": "Add a Note or Reflection",
   "update-publish-failed": "Note has been updated successfully but failed to publish",
-  "update-reflection": "Update Reflection",
   "update-success": "Note has been updated successfully",
   "view-on-qr": "View on QuranReflect"
 }

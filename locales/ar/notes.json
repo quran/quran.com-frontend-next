@@ -8,13 +8,10 @@
     },
     "post-button": "ماذا يحدث عند النشر؟",
     "qr-intro": "يعتبر \"QuranReflect\" إلى جانب \"Quran.com\" جزءًا من عائلة \"Quran.Foundation\". إنها منصة اجتماعية لمشاركة التدبرات الشخصية حول القرآن الكريم، وتشجيع المستخدمين على استيعاب رسائله ومشاركة الأفكار التي تلهم التغيير الإيجابي.\\nبخلاف التفسير، وهو التفسير العلمي، فإن التدبرات هي أفكار وتجارب شخصية تتعلق بالآيات. تتم مراجعة منشورات المستخدمين على موقع QuranReflect وإدارتها من قبل فريق مؤهل، لضمان جودة المحتوى وآداب التعامل مع القرآن، وتمكين المستخدمين من خلال تقديم الملاحظات وتسليط الضوء على النقاشات القيمة وبالتالي مما يعزز مجتمعًا روحانيًا يركز على القرآن الكريم. لمزيد من المعلومات: <link> Quranreflect.com/faq </link>",
-    "qr-title": "ما هو QuranReflect؟",
-    "title": "ما هو QuranReflect، وماذا يحدث إذا حدّدت هذا الخيار؟"
+    "qr-title": "ما هو QuranReflect؟"
   },
-  "click-to-see-more": "اضغط لعرض المزيد",
-  "delete-note": "احذف الملاحظة",
   "delete-note-modal": {
-    "subtitle": "هل أنت متأكد أنك تريد حذف الملاحظة؟",
+    "subtitle": "هل أنت متأكد من رغبتك في حذف هذه الملاحظة؟",
     "title": "حذف الملاحظة"
   },
   "delete-success": "تم حذف الملاحظة بنجاح",
@@ -44,17 +41,13 @@
     }
   },
   "note": "ملحوظة",
-  "notes-and-reflcs": "ملاحظات وتدبرات",
   "notes-on-this-verse": "{{count}} ملاحظات على هذه الآية",
   "post-confirmation": {
     "question": "هل أنت متأكد أنك ترغب في نشر هذا التدبر على QuranReflect؟"
   },
-  "post-on-qr": "مشاركة على QuranReflect",
   "post-to": "انشر إلى",
   "posted-reflections": "تدبرات منشورة",
   "private-notes": "ملاحظات",
-  "qr-tooltip": "<span> <link> QuranReflect </link> منصة اجتماعية لمشاركة التدبرات حول القرآن. ارتبط بالقرآن، وارتبط بما يهمك. </span>",
-  "reflection-update-success": "تم تحديث التدبر بنجاح",
   "reflections-intro": {
     "line-1": "للإطلاع على التعليقات والتفاعل مع المجتمع والمزيد، تفضل بزيارة</link>QuranReflect.com.<link>",
     "line-2": "يمكنك تسجيل الدخول إلى حسابك المرتبط في QuranReflect باستخدام نفس البريد الإلكتروني الذي تستعمله في Quran.com.",
@@ -65,11 +58,8 @@
   "save-privately": "احفظ بشكل خاص",
   "save-publish-failed": "تم حفظ الملاحظة بنجاح لكن لم يتم نشرها بعد",
   "save-success": "تم حفظ الملاحظة بنجاح",
-  "share-to-qr": "شارك على QuranReflect.com",
-  "share-to-qr-desc": "شارك بإسم <b> {{name}} </b>. الجمهور هو <b> مستخدمو  QuranReflect  </b>",
   "take-a-note-or-reflection": "أضف ملاحظة أو تدبر",
   "update-publish-failed": "تم تحديث الملاحظة، ولكن لم يتم نشرها بعد",
-  "update-reflection": "تحديث التدبر",
   "update-success": "تم تحديث الملاحظة بنجاح",
   "view-on-qr": "عرض على QuranReflect"
 }

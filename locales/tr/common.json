@@ -161,6 +161,18 @@
   "donate_monthly": "Aylık bağış yapın",
   "donate_once": "Bir kez bağış yapın",
   "done": "Tamamlamak",
+  "ebook": {
+    "cta": {
+      "sign-up": "Şimdi Kaydolun",
+      "subscribe": "Abone",
+      "subscribed": "Abone olundu"
+    },
+    "descriptions": {
+      "line1": "📖 Ramazan sonrası Mülk Suresi üzerine tefekkürler içeren ücretsiz bir e-kitap edinin.",
+      "line2": "✨ Düşüncelerinizi 19 Mart'a kadar ekleyin ve düşüncelerinizin dahil edilme şansını yakalayın!"
+    },
+    "title": "Ücretsiz Düşünceler e-Kitabı"
+  },
   "edit": "Düzenlemek",
   "email-verification": {
     "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
@@ -493,6 +505,15 @@
     "sort": "Düzenlemek"
   },
   "stay-on-track": "🎯 Yolda kalın!",
+  "study-mode-chapter-banner": {
+    "cta": "Düşüncelerinizi ekleyin",
+    "descriptions": {
+      "line1": "✍️ Mülk Suresi'nin bir veya birkaç ayeti üzerine bir tefekkür yazın.",
+      "line2": "✨ Gönderinize #AlMulkReflections etiketini ekleyin"
+    },
+    "footer": "Seçtiğiniz düşünceler e-kitaba dahil edilecektir. Düşüncelerinizi 19 Mart saat 23:59 UTC'ye kadar ekleyin.",
+    "title": "Mülk Suresi Üzerine Düşünceler e-Kitabı"
+  },
   "style": "Stil",
   "submit": "Gönder",
   "subscribe": "Abone ol",

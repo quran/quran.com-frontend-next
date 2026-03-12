@@ -207,3 +207,13 @@
     }
   }
 }
+
+.menuIcon {
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.popoverContainer {
+  min-inline-size: fit-content;
+  border-radius: var(--border-radius-xsmall-px);
+}

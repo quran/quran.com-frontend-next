@@ -37,11 +37,13 @@
 }
 
 .subtitle {
-  color: var(--color-text-default);
-  margin-block-end: var(--spacing-large-px);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-xsmall-px);
+  margin-block-end: var(--spacing-medium2-px);
 
-  @include breakpoints.smallerThanTablet {
-    margin-block-end: var(--spacing-medium2-px);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+    margin-block-end: var(--spacing-large-px);
   }
 }
 
@@ -172,6 +174,23 @@
   border-color: var(--color-check) !important;
   color: var(--color-text-white) !important;
   background-color: var(--color-check) !important;
+}
+
+.desktopText {
+  display: none;
+
+  @include breakpoints.tablet {
+    display: inline;
+  }
+}
+
+.mobileIcon {
+  block-size: var(--spacing-medium);
+  inline-size: var(--spacing-medium);
+
+  @include breakpoints.tablet {
+    display: none;
+  }
 }
 
 .pdfButtonContent {

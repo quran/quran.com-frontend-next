@@ -199,6 +199,16 @@
   "reciter-summary": "（经 Tafsir Center 友情许可）",
   "referencing": "参考",
   "reflection-disclaimer": "这些参悟不代表 Quran.com 的观点，不应断章取义",
+  "reflection-feed": {
+    "engage": "参与 QuranReflect 活动",
+    "follow": "跟随",
+    "load-more": "加载更多",
+    "sort": {
+      "label": "按反射排序",
+      "latest": "最新的",
+      "popular": "受欢迎的"
+    }
+  },
   "reflection-languages": "反思语言",
   "reflection-not-available": "没有评论过这个啊啊啊",
   "reflections": "反思",

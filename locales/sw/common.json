@@ -161,6 +161,18 @@
   "donate_monthly": "Changia kila mwezi",
   "donate_once": "Changia mara moja",
   "done": "Imekamilika",
+  "ebook": {
+    "cta": {
+      "sign-up": "Jisajili Sasa",
+      "subscribe": "Jisajili",
+      "subscribed": "Umejisajili"
+    },
+    "descriptions": {
+      "line1": "📖 Pokea kitabu pepe cha bure kuhusu Tafakari za Surah Al-Mulk baada ya Ramadhani",
+      "line2": "✨ Ongeza Tafakari zako ifikapo Machi 19 kwa nafasi ya kujumuisha Tafakari yako!"
+    },
+    "title": "Kitabu cha Tafakari cha Bure"
+  },
   "edit": "Hariri",
   "email-verification": {
     "check-spam": "Hukupokea barua pepe ya uthibitishaji? Angalia kisanduku pokezi chako cha barua taka",
@@ -384,17 +396,17 @@
   "quran-radio": "Redio ya Qur'ani",
   "ramadan-donation-popup": {
     "donate-now": "Toa Mchango Sasa",
-    "dont-show-again": "Usionyeshe hii tena",
-    "goal-label": "Lengo la Kuchangisha Fedha la Ramadhani",
+    "dont-show-again": "Usiionyeshe tena",
+    "goal-label": "Lengo la Mchango Ramadhani hii",
     "learn-more": "Pata maelezo zaidi",
     "month-goal": "/lengo la mwezi",
-    "month-raised": "/mshahara wa mwezi",
+    "month-raised": "/imechangishwa kwa mwezi",
     "next-ayah": "Angalia tena kesho kwa ayah inayofuata",
     "subtitle": {
-      "end": "Shiriki katika Zawadi.",
-      "start": "Wasaidie Mamilioni Kuungana na Quran."
+      "end": "Shiriki katika Thawabu.",
+      "start": "Wasaidie Mamilioni Kuungana na Qur'ani."
     },
-    "title": "Mpendwa mwenzangu wa Quran,"
+    "title": "Mpendwa mwenzangu wa Qur'ani,"
   },
   "read": "Soma",
   "read-more": "Soma Zaidi",
@@ -493,6 +505,15 @@
     "sort": "Panga"
   },
   "stay-on-track": "🎯 Endelea kufuatilia!",
+  "study-mode-chapter-banner": {
+    "cta": "Ongeza Tafakari Yako",
+    "descriptions": {
+      "line1": "✍️ Andika Tafakari kuhusu aya moja ya Surah Al-Mulk",
+      "line2": "✨ Ongeza #AlMulkReflections kwenye chapisho lako"
+    },
+    "footer": "Chagua Tafakari zitajumuishwa kwenye kitabu pepe. Ongeza tafakari yako ifikapo Machi 19 saa 11:59PM UTC.",
+    "title": "Tafakari za Surah Al-Mulk eBook"
+  },
   "style": "Mtindo",
   "submit": "Wasilisha",
   "subscribe": "Jisajili",

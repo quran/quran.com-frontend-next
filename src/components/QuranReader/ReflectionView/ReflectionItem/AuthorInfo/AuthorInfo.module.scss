@@ -6,8 +6,16 @@
 .author {
   display: flex;
   align-items: center;
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-medium);
+  line-height: normal;
+}
+
+.authorRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-xsmall-px);
+  flex-wrap: wrap;
 }
 
 .avatar {
@@ -24,6 +32,19 @@
   display: inline-flex;
   margin-inline-start: var(--spacing-xxsmall);
   color: var(--color-success-medium);
+}
+
+.followButton {
+  min-block-size: unset;
+  block-size: auto;
+  padding: 0;
+  border-radius: 0;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+}
+
+.followButtonContent {
+  line-height: 1.6;
 }
 
 .date {

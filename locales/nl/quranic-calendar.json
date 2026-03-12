@@ -4,6 +4,7 @@
   "ask-question": "Stel een vraag",
   "complete": "Compleet",
   "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} Weken voltooid",
+  "current": "Huidig",
   "divine-book-club": "Divine Boekenclub",
   "divine-book-club-description": "Dit is een korte groepsdiscussie waarmee u de context van de wekelijkse leesstof beter kunt volgen.",
   "end-of-calendar": "Einde van de kalender",
@@ -53,6 +54,10 @@
     {
       "answer": "Ja. \"Quran in a Year\" is helemaal gratis en we moedigen u aan om het met anderen te delen. Nodig een vriend uit, start een boekenclub en help meer mensen hun eerste volledige lezing van de Koran te voltooien.",
       "question": "Is dit gratis? Mag ik dit delen?"
+    },
+    {
+      "answer": "Ja. \"De Koran in een jaar\" is volledig gratis en we moedigen je aan om het met anderen te delen. Nodig een vriend uit, start een leesclub en help meer mensen om de Koran voor het eerst helemaal uit te lezen.",
+      "question": "Is dit gratis? Mag ik het delen?"
     }
   ],
   "hero": {
@@ -93,6 +98,9 @@
   "quran-calendar-title": "Koran in een jaar – Een eenvoudig plan om de hele Koran te lezen en te begrijpen",
   "quran-reflect": "Koran Reflectie",
   "quran-reflect-description": "Praat met anderen over de verzen die u deze week hebt gelezen.",
+  "quran-space-cta": "Creëer een ruimte",
+  "quran-space-description": "Start of sluit je aan bij een online studiegroep met vrienden en familie om de Koran in een jaar te bestuderen.",
+  "quran-space-title": "<quran>Quran</quran> Space",
   "quranic-calendar": "Koran in een Jaar",
   "ramadan": "Ramadan",
   "read-online": "Online lezen",

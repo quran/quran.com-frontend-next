@@ -161,6 +161,18 @@
   "donate_monthly": "Doe mensalmente",
   "donate_once": "Doe uma vez",
   "done": "Feito",
+  "ebook": {
+    "cta": {
+      "sign-up": "Inscreva-se agora",
+      "subscribe": "Inscreva-se",
+      "subscribed": "Inscrito"
+    },
+    "descriptions": {
+      "line1": "📖 Receba um e-book gratuito sobre reflexões da Surata Al-Mulk após o Ramadã",
+      "line2": "✨ Envie suas reflexões até 19 de março para ter a chance de vê-las incluídas!"
+    },
+    "title": "eBook gratuito de Reflexões"
+  },
   "edit": "Editar",
   "email-verification": {
     "check-spam": "Não recebeu o e-mail de verificação? Verifique sua caixa de spam",
@@ -493,6 +505,15 @@
     "sort": "Organizar"
   },
   "stay-on-track": "🎯 Mantenha o foco!",
+  "study-mode-chapter-banner": {
+    "cta": "Adicione sua reflexão",
+    "descriptions": {
+      "line1": "✍️ Escreva uma reflexão sobre um ou mais versículos da Surata Al-Mulk",
+      "line2": "✨ Adicione #AlMulkReflections à sua publicação"
+    },
+    "footer": "Algumas reflexões serão incluídas no e-book. Adicione sua reflexão até 19 de março, às 23h59 UTC.",
+    "title": "Surata Al-Mulk Reflexões em formato eBook"
+  },
   "style": "Estilo",
   "submit": "Enviar",
   "subscribe": "Se inscrever",

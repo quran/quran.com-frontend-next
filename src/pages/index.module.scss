@@ -101,3 +101,21 @@ $list-max-width: 80rem;
     border-start-end-radius: var(--border-radius-rounded);
   }
 }
+
+.ebookBannerTitle.ebookBannerTitle {
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
+}
+.ebookBannerDescription.ebookBannerDescription li {
+  @include breakpoints.tablet {
+    text-align: center;
+    font-size: var(--font-size-small-px);
+  }
+}
+
+.ebookBannerCta {
+  @include breakpoints.tablet {
+    max-inline-size: calc(var(--spacing-mega-px) * 2);
+  }
+}

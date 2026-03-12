@@ -21,6 +21,7 @@ import banner from './slices/banner';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
+import ebookBanner from './slices/ebookBanner';
 import fundraisingBanner from './slices/fundraisingBanner';
 import guestBookmark from './slices/guestBookmark';
 import mediaMaker from './slices/mediaMaker';
@@ -40,6 +41,7 @@ import readingTracker from './slices/QuranReader/readingTracker';
 import readingViewVerse from './slices/QuranReader/readingViewVerse';
 import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
 import studyMode from './slices/QuranReader/studyMode';
+import studyModePersistConfig from './slices/QuranReader/studyModePersistConfig';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
@@ -82,6 +84,7 @@ const persistConfig = {
     SliceName.PINNED_VERSES,
     SliceName.GUEST_ENROLLMENT,
     SliceName.GUEST_BOOKMARK,
+    SliceName.EBOOK_BANNER,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -105,6 +108,7 @@ export const rootReducer = combineReducers({
   sidebarNavigation,
   readingViewVerse,
   banner,
+  ebookBanner,
   fundraisingBanner,
   session,
   persistGateHydration,
@@ -115,7 +119,7 @@ export const rootReducer = combineReducers({
   mediaMaker,
   microphone,
   guestBookmark,
-  studyMode,
+  studyMode: persistReducer(studyModePersistConfig, studyMode),
   verseActionModal,
   pinnedVerses,
   pinnedVersesModal,

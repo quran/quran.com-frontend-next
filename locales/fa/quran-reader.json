@@ -199,6 +199,16 @@
   "reciter-summary": "(با مجوز مرکز تفسیر)",
   "referencing": "ارجاع دادن",
   "reflection-disclaimer": "بازتاب ها بیانگر نظر Quran.com نیست و نباید از متن خارج شود",
+  "reflection-feed": {
+    "engage": "در سایت QuranReflect مشارکت کنید",
+    "follow": "دنبال کردن",
+    "load-more": "بارگذاری بیشتر",
+    "sort": {
+      "label": "مرتب سازی بازتاب ها بر اساس",
+      "latest": "جدیدترین‌ها",
+      "popular": "محبوب"
+    }
+  },
   "reflection-languages": "زبان‌های بازتابی",
   "reflection-not-available": "هیچ بازتاب بررسی شده ای برای این آیه وجود ندارد",
   "reflections": "بازتاب‌ها",

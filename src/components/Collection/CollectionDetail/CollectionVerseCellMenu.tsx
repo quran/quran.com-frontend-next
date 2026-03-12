@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CollectionVerseCell.module.scss';
@@ -12,7 +13,7 @@ import PinIcon from '@/icons/pin.svg';
 import ShareIcon from '@/icons/share.svg';
 import TrashIcon from '@/icons/trash.svg';
 import pinIconStyles from '@/styles/pinIcon.module.scss';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import PopoverMenu, { PopoverMenuAlign } from 'src/components/dls/PopoverMenu/PopoverMenu';
 
 interface CollectionVerseCellMenuProps {
   isPinned: boolean;
@@ -44,6 +45,8 @@ const CollectionVerseCellMenu: React.FC<CollectionVerseCellMenuProps> = ({
     <PopoverMenu
       isOpen={isMenuOpen}
       onOpenChange={setIsMenuOpen}
+      contentClassName={styles.popoverContainer}
+      align={PopoverMenuAlign.END}
       trigger={
         <button
           type="button"
@@ -61,24 +64,48 @@ const CollectionVerseCellMenu: React.FC<CollectionVerseCellMenuProps> = ({
             onClick={onDelete}
             shouldCloseMenuAfterClick
             shouldStopPropagation
-            icon={<TrashIcon />}
+            icon={
+              <IconContainer
+                size={IconSize.Xsmall}
+                icon={<TrashIcon />}
+                color={IconColor.tertiary}
+                shouldForceSetColors
+                className={styles.menuIcon}
+              />
+            }
           >
             {t('common:delete')}
           </PopoverMenu.Item>
         )}
         <PopoverMenu.Item
           onClick={onShare}
-          icon={<ShareIcon />}
           shouldCloseMenuAfterClick
           shouldStopPropagation
+          icon={
+            <IconContainer
+              size={IconSize.Xsmall}
+              icon={<ShareIcon />}
+              color={IconColor.tertiary}
+              shouldForceSetColors
+              className={styles.menuIcon}
+            />
+          }
         >
           {t('common:share')}
         </PopoverMenu.Item>
         <PopoverMenu.Item
           onClick={onCopy}
-          icon={<CopyIcon />}
           shouldCloseMenuAfterClick
           shouldStopPropagation
+          icon={
+            <IconContainer
+              size={IconSize.Xsmall}
+              icon={<CopyIcon />}
+              color={IconColor.tertiary}
+              shouldForceSetColors
+              className={styles.menuIcon}
+            />
+          }
         >
           {t('common:copy')}
         </PopoverMenu.Item>
@@ -91,7 +118,7 @@ const CollectionVerseCellMenu: React.FC<CollectionVerseCellMenuProps> = ({
               icon={isPinned ? <PinFilledIcon /> : <PinIcon />}
               color={isPinned ? undefined : IconColor.tertiary}
               shouldForceSetColors={!isPinned}
-              className={isPinned ? pinIconStyles.pinned : undefined}
+              className={classNames(styles.menuIcon, { [pinIconStyles.pinned]: isPinned })}
               size={IconSize.Xsmall}
               shouldFlipOnRTL={false}
             />

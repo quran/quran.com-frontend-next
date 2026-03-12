@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { ParsedUrlQuery } from 'querystring';
+
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -14,7 +16,11 @@ import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import Verse from '@/types/Verse';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
+import {
+  getQuranMediaMakerNavigationUrl,
+  getReaderShareQueryParamsFromAsPath,
+  getVerseShareNavigationUrl,
+} from '@/utils/navigation';
 import { getWindowOrigin } from '@/utils/url';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
@@ -25,6 +31,7 @@ export const copyLink = (
   isTranslationView: boolean,
   callback: () => void,
   locale: string,
+  query: ParsedUrlQuery = {},
 ) => {
   logButtonClick(
     // eslint-disable-next-line i18next/no-literal-string
@@ -33,7 +40,7 @@ export const copyLink = (
   const origin = getWindowOrigin(locale);
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
   if (origin) {
-    clipboardCopy(`${origin}/${chapter}/${verse}`).then(callback);
+    clipboardCopy(`${origin}${getVerseShareNavigationUrl(chapter, verse, query)}`).then(callback);
   }
 };
 
@@ -72,11 +79,13 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
   }, [isCopied, onActionTriggered]);
 
   const onCopyLinkClicked = () => {
+    const readerShareQueryParams = getReaderShareQueryParamsFromAsPath(router.asPath, router.query);
     copyLink(
       verse.verseKey,
       isTranslationView,
       () => toast(t('shared'), { status: ToastStatus.Success }),
       lang,
+      readerShareQueryParams,
     );
     onActionTriggered?.();
   };

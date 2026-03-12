@@ -199,6 +199,16 @@
   "reciter-summary": "(ได้รับอนุญาตจากศูนย์ตัฟซีร)",
   "referencing": "อ้างอิง",
   "reflection-disclaimer": "การไตร่ตรองไม่ได้เป็นตัวแทนของความคิดเห็นของ Quran.com และไม่ควรนำออกจากบริบท",
+  "reflection-feed": {
+    "engage": "ร่วมพูดคุยบน QuranReflect",
+    "follow": "ติดตาม",
+    "load-more": "โหลดเพิ่มเติม",
+    "sort": {
+      "label": "เรียงลำดับภาพสะท้อนตาม",
+      "latest": "ล่าสุด",
+      "popular": "เป็นที่นิยม"
+    }
+  },
   "reflection-languages": "ภาษาสะท้อน",
   "reflection-not-available": "ยังไม่มีการทบทวนบทเรียนสำหรับอายะห์นี้",
   "reflections": "การสะท้อน",

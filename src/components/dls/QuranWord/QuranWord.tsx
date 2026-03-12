@@ -20,12 +20,12 @@ import TextWord from './TextWord';
 
 import Wrapper from '@/components/Wrapper/Wrapper';
 import MobilePopover from '@/dls/Popover/HoverablePopover';
+import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useIsMobile from '@/hooks/useIsMobile';
 import ArrowIcon from '@/icons/arrow.svg';
 import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/state';
 import {
   selectInlineDisplayWordByWordPreferences,
-  selectReadingPreference,
   selectTooltipContentType,
   selectWordClickFunctionality,
 } from '@/redux/slices/QuranReader/readingPreferences';
@@ -46,6 +46,7 @@ import { getChapterNumberFromKey, getVerseNumberFromKey, makeWordLocation } from
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import QueryParam from 'types/QueryParam';
 import Verse from 'types/Verse';
 import Word, { CharType } from 'types/Word';
 
@@ -120,7 +121,8 @@ const QuranWord = ({
     shouldShowWordByWordTranslation ?? reduxWbwPrefs.showWordByWordTranslation;
   const showWordByWordTransliteration =
     shouldShowWordByWordTransliteration ?? reduxWbwPrefs.showWordByWordTransliteration;
-  const readingPreference = useSelector(selectReadingPreference);
+  const { value: readingPreference }: { value: ReadingPreference; isQueryParamDifferent: boolean } =
+    useGetQueryParamOrReduxValue(QueryParam.READING_MODE);
   const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
 
   const isTranslationMode = readingPreference === ReadingPreference.Translation;

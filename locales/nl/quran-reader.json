@@ -199,6 +199,16 @@
   "reciter-summary": "Recitatie bron: (Met vriendelijke toestemming van Tafseer Center)",
   "referencing": "Verwijzen naar",
   "reflection-disclaimer": "Reflecties zijn persoonlijke perspectieven, deze kunnen niet worden aangenomen als maatstaf voor de interpretatie.",
+  "reflection-feed": {
+    "engage": "Ga de dialoog aan op QuranReflect",
+    "follow": "Volgen",
+    "load-more": "Meer laden",
+    "sort": {
+      "label": "Sorteer reflecties op",
+      "latest": "Laatste",
+      "popular": "Populair"
+    }
+  },
   "reflection-languages": "Reflectietalen",
   "reflection-not-available": "Er zijn geen beoordeelde reflecties voor deze ayah",
   "reflections": "Reflecties",

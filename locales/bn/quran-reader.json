@@ -199,6 +199,16 @@
   "reciter-summary": "(তাফসির কেন্দ্রের সদয় অনুমতিক্রমে)",
   "referencing": "রেফারেন্সিং",
   "reflection-disclaimer": "প্রতিফলন Quran.com-এর মতামতের প্রতিনিধিত্ব করে না এবং প্রেক্ষাপটের বাইরে নেওয়া উচিত নয়",
+  "reflection-feed": {
+    "engage": "কুরআন প্রতিফলনে অংশগ্রহণ করুন",
+    "follow": "ফলো করুন",
+    "load-more": "আরও লোড করুন",
+    "sort": {
+      "label": "প্রতিফলনগুলি এই অনুসারে সাজান",
+      "latest": "সর্বশেষ",
+      "popular": "জনপ্রিয়"
+    }
+  },
   "reflection-languages": "প্রতিফলন ভাষা",
   "reflection-not-available": "এই আয়াতের জন্য কোনো পর্যালোচনা করা প্রতিফলন নেই",
   "reflections": "প্রতিফলন",

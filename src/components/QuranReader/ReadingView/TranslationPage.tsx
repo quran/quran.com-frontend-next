@@ -10,6 +10,7 @@ import styles from './TranslationPage.module.scss';
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import useIntersectionObserver from '@/hooks/useObserveElement';
 import { getLanguageDataById, toLocalizedNumber } from '@/utils/locale';
+import { doesVerseStartOnPage } from '@/utils/verse';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
@@ -56,7 +57,10 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
       if (!translation) return null;
 
       const chapterId = verse.chapterId?.toString();
-      const shouldShowChapterHeader = verse.verseNumber === 1 && chapterId !== pageHeaderChapterId;
+      const shouldShowChapterHeader =
+        verse.verseNumber === 1 &&
+        chapterId !== pageHeaderChapterId &&
+        doesVerseStartOnPage(verse, pageNumber);
 
       return (
         <React.Fragment key={verse.verseKey}>

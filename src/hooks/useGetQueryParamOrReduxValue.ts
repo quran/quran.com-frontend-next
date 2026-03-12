@@ -23,7 +23,10 @@ import {
   selectVerseAlignment,
   selectVideoId,
 } from '@/redux/slices/mediaMaker';
-import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
+import {
+  selectReadingPreference,
+  selectWordByWordLocale,
+} from '@/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ChaptersData from '@/types/ChaptersData';
 import { areArraysEqual } from '@/utils/array';
@@ -51,11 +54,14 @@ import {
   isValidOpacityQueryParamValue,
   isValidOrientationQueryParamValue,
   isValidPreviewModeQueryParamValue,
+  isValidReadingModeQueryParamValue,
   isValidReciterId,
   isValidTranslationsQueryParamValue,
   isValidTranslationsQueryParamValueWithExistingKey,
   isValidVideoIdQueryParamValue,
 } from '@/utils/queryParamValidator';
+import { getReadingPreferenceFromQueryParam } from '@/utils/readingPreference';
+import { getQueryParamValueFromAsPath } from '@/utils/url';
 import { isValidChapterId } from '@/utils/validator';
 import QueryParam from 'types/QueryParam';
 
@@ -79,6 +85,12 @@ export const QUERY_PARAMS_DATA = {
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
     isValidQueryParam: () => true,
+  },
+  [QueryParam.READING_MODE]: {
+    reduxValueSelector: selectReadingPreference,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: (val) => isValidReadingModeQueryParamValue(val),
   },
   [QueryParam.VERSE_TO]: {
     reduxValueSelector: selectSurahAndVersesFromAndTo,
@@ -215,7 +227,7 @@ const useGetQueryParamOrReduxValue = (
   chaptersData?: ChaptersData,
   extraData?: any,
 ): { value: any; isQueryParamDifferent: boolean } => {
-  const { query, isReady } = useRouter();
+  const { query, asPath } = useRouter();
 
   // either pass the redux selector or the redux selector and the equality function as well
   let reduxValueSelectorWithOrWithoutEqualityFunction = [
@@ -241,12 +253,28 @@ const useGetQueryParamOrReduxValue = (
   const reduxParamValue = reduxObjectKey
     ? reduxSelectorValueOrValues[reduxObjectKey]
     : reduxSelectorValueOrValues;
+  const asPathQueryParamValue =
+    queryParam === QueryParam.READING_MODE
+      ? getQueryParamValueFromAsPath(asPath, queryParam)
+      : undefined;
+  const queryParamValue =
+    queryParam === QueryParam.READING_MODE
+      ? asPathQueryParamValue ?? query[queryParam]
+      : query[queryParam];
 
   // if the param exists in the url
-  if (isReady && query[queryParam] !== undefined) {
-    const queryParamStringValue = String(query[queryParam]);
+  if (queryParamValue !== undefined) {
+    const queryParamStringValue = String(queryParamValue);
+    const normalizedReadingModeQueryParamValue =
+      queryParam === QueryParam.READING_MODE
+        ? getReadingPreferenceFromQueryParam(queryParamStringValue)
+        : undefined;
+    const normalizedQueryParamStringValue =
+      queryParam === QueryParam.READING_MODE
+        ? normalizedReadingModeQueryParamValue || queryParamStringValue
+        : queryParamStringValue;
     const parsedQueryParamValue = getQueryParamValueByType(
-      queryParamStringValue,
+      normalizedQueryParamStringValue,
       queryParamValueType,
     );
 
@@ -272,7 +300,7 @@ const useGetQueryParamOrReduxValue = (
 
     // Check if the URL value is different from Redux
     const isQueryParamDifferent = isQueryParamDifferentThanReduxValue(
-      queryParamStringValue,
+      normalizedQueryParamStringValue,
       queryParamValueType,
       reduxParamValue,
     );

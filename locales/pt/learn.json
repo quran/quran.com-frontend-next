@@ -63,9 +63,13 @@
   "reflection-description-1": "Clicar em \"Adicionar Reflexão\" levará você ao QuranReflect, uma plataforma para compartilhar reflexões pessoais sobre o Quran. Diferentemente do Tafsir (interpretação acadêmica), as reflexões são insights e experiências pessoais relacionadas aos versos.",
   "reflection-description-2": "Se você postar publicamente, sua reflexão será revisada pela equipe de moderação e ficará visível para a comunidade QuranReflect.",
   "repeat-learning-plan": "Plano de Aprendizagem Repetida",
+  "share": "Compartilhar",
+  "share-title": "Compartilhar:",
   "start-here": "Comece aqui",
+  "start-learning": "Comece a aprender",
   "tabs": {
     "main": "Detalhes principais",
+    "outline": "Contorno",
     "syllabus": "Programa de Estudos"
   },
   "what-happens-when-you-click-add-reflection": "O que acontece quando você clica em \"Adicionar reflexão\"?"

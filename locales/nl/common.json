@@ -161,6 +161,18 @@
   "donate_monthly": "Doneer maandelijks",
   "donate_once": "Doneer eenmalig",
   "done": "Klaar",
+  "ebook": {
+    "cta": {
+      "sign-up": "Meld je nu aan",
+      "subscribe": "Abonneren",
+      "subscribed": "Abonneer"
+    },
+    "descriptions": {
+      "line1": "📖 Ontvang na de Ramadan een gratis e-book met reflecties over Soera Al-Mulk.",
+      "line2": "✨ Voeg je reflecties vóór 19 maart toe en maak kans dat jouw reflectie wordt opgenomen!"
+    },
+    "title": "Gratis Reflections eBook"
+  },
   "edit": "Bewerking",
   "email-verification": {
     "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Controleer je spam-inbox",
@@ -493,6 +505,15 @@
     "sort": "Soort"
   },
   "stay-on-track": "🎯 Blijf op koers!",
+  "study-mode-chapter-banner": {
+    "cta": "Voeg je reflectie toe",
+    "descriptions": {
+      "line1": "✍️ Schrijf een reflectie over een of meer verzen uit Soera Al-Mulk",
+      "line2": "✨ Voeg #AlMulkReflections toe aan je bericht"
+    },
+    "footer": "Een selectie van reflecties wordt opgenomen in het e-book. Voeg je reflectie toe vóór 19 maart 23:59 UTC.",
+    "title": "Reflecties over Soera Al-Mulk (e-book)"
+  },
   "style": "Stijl",
   "submit": "Indienen",
   "subscribe": "Abonneren",

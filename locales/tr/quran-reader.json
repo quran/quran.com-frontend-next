@@ -199,6 +199,16 @@
   "reciter-summary": "(Tefsir Merkezi'nin izniyle)",
   "referencing": "referans",
   "reflection-disclaimer": "Düşünceler Kuran.com'un görüşünü temsil etmemektedir ve bağlamdan çıkarılmamalıdır.",
+  "reflection-feed": {
+    "engage": "QuranReflect'te etkileşim kurun",
+    "follow": "Takip etmek",
+    "load-more": "Daha Fazla Yükle",
+    "sort": {
+      "label": "Yansımaları sırala",
+      "latest": "En sonuncu",
+      "popular": "Popüler"
+    }
+  },
   "reflection-languages": "Yansıma Dilleri",
   "reflection-not-available": "Bu ayet için gözden geçirilmiş bir yansıma yok",
   "reflections": "Yansımalar",

@@ -298,6 +298,7 @@ export const getQuranicCalendarRangesNavigationUrl = (
 ): string => {
   const params = {
     [QueryParam.FLOW]: QuranReaderFlow.QURANIC_CALENDER,
+    [QueryParam.READING_MODE]: 'translation',
   };
 
   if (settings !== QuranicCalendarRangesNavigationSettings.DefaultSettings) {
@@ -521,6 +522,59 @@ export const getQuranMediaMakerNavigationUrl = (params?: ParsedUrlQuery) => {
   return params ? `${baseUrl}?${stringify(params)}` : baseUrl;
 };
 
+const READER_SHARE_QUERY_PARAMS = [
+  QueryParam.TRANSLATIONS,
+  QueryParam.RECITER,
+  QueryParam.WBW_LOCALE,
+  QueryParam.READING_MODE,
+] as const;
+
+const normalizeParsedQueryValue = (value: string | string[] | undefined): string | undefined =>
+  Array.isArray(value) ? value[0] : value;
+
+export const getReaderShareQueryParams = (query: ParsedUrlQuery): Record<string, string> => {
+  const shareParams: Record<string, string> = {};
+
+  READER_SHARE_QUERY_PARAMS.forEach((queryParam) => {
+    const normalizedValue = normalizeParsedQueryValue(query[queryParam]);
+    if (normalizedValue !== undefined) {
+      shareParams[queryParam] = normalizedValue;
+    }
+  });
+
+  return shareParams;
+};
+
+export const getReaderShareQueryParamsFromAsPath = (
+  asPath: string | undefined,
+  fallbackQuery: ParsedUrlQuery = {},
+): Record<string, string> => {
+  const queryString = asPath?.split('?')[1]?.split('#')[0];
+
+  if (!queryString) {
+    return getReaderShareQueryParams(fallbackQuery);
+  }
+
+  const searchParams = new URLSearchParams(queryString);
+  const shareParams: Record<string, string> = {};
+
+  READER_SHARE_QUERY_PARAMS.forEach((queryParam) => {
+    const value = searchParams.get(queryParam);
+    if (value !== null) {
+      shareParams[queryParam] = value;
+    }
+  });
+
+  return shareParams;
+};
+
+export const getVerseShareNavigationUrl = (
+  chapterIdOrSlug: string | number,
+  verseNumber: string | number,
+  query: ParsedUrlQuery = {},
+): string =>
+  buildUrlWithParams(`/${chapterIdOrSlug}/${verseNumber}`, getReaderShareQueryParams(query));
+
 /**
  * Build a url with query parameters
  *
@@ -577,4 +631,26 @@ export const getReflectionNavigationUrl = (verseKey: string, selectedContentType
   return selectedContentType === ContentType.REFLECTIONS
     ? getVerseReflectionNavigationUrl(verseKey)
     : getVerseLessonNavigationUrl(verseKey);
+};
+
+export const getEbookBannerNavigationUrl = (
+  baseUrl: string,
+  context: string,
+  origin?: string,
+  studyModeVerseKey?: string | null,
+  studyModeTab?: string | null,
+): string => {
+  const url = new URL(
+    baseUrl,
+    origin || (typeof window !== 'undefined' ? window.location.origin : undefined),
+  );
+  url.searchParams.set('ebookConsent', 'true');
+  url.searchParams.set('ebookContext', context);
+  if (studyModeVerseKey) {
+    url.searchParams.set('studyModeVerseKey', studyModeVerseKey);
+  }
+  if (studyModeTab) {
+    url.searchParams.set('studyModeTab', studyModeTab);
+  }
+  return `${url.pathname}${url.search}`;
 };

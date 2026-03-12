@@ -32,7 +32,7 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
     logButtonClick('quran_in_year_header_calendar');
   };
 
-  // Get the Ayah for today's date
+  // Get today's UTC ayah, falling back to the nearest configured date when needed.
   const todayAyah = useMemo(() => getCurrentDayAyah(), []);
 
   /**
@@ -75,7 +75,7 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
     clipboardCopy(parts.join('\n'));
   };
 
-  // Don't render anything if we're before April 1st, 2025
+  // Don't render anything only when there is no ayah-of-the-day data at all.
   if (!todayAyah) {
     return null;
   }

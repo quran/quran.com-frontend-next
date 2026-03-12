@@ -83,6 +83,13 @@ vi.mock('@/hooks/useGetMushaf', () => ({
   default: () => Mushaf.QCFV2,
 }));
 
+vi.mock('@/hooks/useGetQueryParamOrReduxValue', () => ({
+  default: () => ({
+    value: ReadingPreference.Reading,
+    isQueryParamDifferent: false,
+  }),
+}));
+
 vi.mock('@/hooks/useIsMobile', () => ({
   default: () => false,
 }));

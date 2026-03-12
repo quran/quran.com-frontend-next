@@ -161,6 +161,18 @@
   "donate_monthly": "Derma bulanan",
   "donate_once": "Derma sekali",
   "done": "Selesai",
+  "ebook": {
+    "cta": {
+      "sign-up": "Daftar Sekarang",
+      "subscribe": "Langgan",
+      "subscribed": "Dilanggan"
+    },
+    "descriptions": {
+      "line1": "📖 Terima eBook percuma tentang Renungan Surah Al-Mulk selepas Ramadan",
+      "line2": "✨ Tambahkan Renungan anda sebelum 19 Mac untuk peluang memasukkan Renungan anda!"
+    },
+    "title": "eBook Refleksi Percuma"
+  },
   "edit": "Sunting",
   "email-verification": {
     "check-spam": "Tidak menerima e-mel pengesahan? Semak peti masuk spam anda",
@@ -493,6 +505,15 @@
     "sort": "Isih"
   },
   "stay-on-track": "🎯 Kekal di landasan yang betul!",
+  "study-mode-chapter-banner": {
+    "cta": "Tambahkan Refleksi Anda",
+    "descriptions": {
+      "line1": "✍️ Tulis Refleksi tentang ayat-ayat Surah Al-Mulk",
+      "line2": "✨ Tambahkan #AlMulkReflections pada siaran anda"
+    },
+    "footer": "Refleksi terpilih akan dimasukkan ke dalam eBook. Tambahkan refleksi anda sebelum 19 Mac, 11:59PM UTC.",
+    "title": "eBook Renungan Surah Al-Mulk"
+  },
   "style": "Gaya",
   "submit": "Hantar",
   "subscribe": "Langgan",

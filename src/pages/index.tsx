@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import styles from './index.module.scss';
 
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
+import EbookBanner, { EbookBannerContext } from '@/components/Ebook/EbookBanner';
 import HomepageFundraisingBanner from '@/components/Fundraising/HomepageFundraisingBanner';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
@@ -21,6 +22,7 @@ import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections
 import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import { selectIsHomepageEbookBannerVisible } from '@/redux/slices/ebookBanner';
 import { selectIsHomepageBannerVisible } from '@/redux/slices/fundraisingBanner';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -44,6 +46,7 @@ const Index: NextPage<IndexProps> = ({
   const isUserLoggedIn = isLoggedIn();
   const todayAyah = useMemo(() => getCurrentDayAyah(), []);
   const isBannerVisible = useSelector(selectIsHomepageBannerVisible);
+  const isEbookBannerVisible = useSelector(selectIsHomepageEbookBannerVisible);
 
   return (
     <>
@@ -62,7 +65,7 @@ const Index: NextPage<IndexProps> = ({
             <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
               <ReadingSection />
             </div>
-            {isBannerVisible && (
+            {(isBannerVisible || isEbookBannerVisible) && (
               <div
                 className={classNames(
                   styles.flowItem,
@@ -71,7 +74,16 @@ const Index: NextPage<IndexProps> = ({
                   styles.homepageFundraisingCard,
                 )}
               >
-                <HomepageFundraisingBanner />
+                {isBannerVisible ? (
+                  <HomepageFundraisingBanner />
+                ) : (
+                  <EbookBanner
+                    context={EbookBannerContext.HOMEPAGE}
+                    titleClassName={styles.ebookBannerTitle}
+                    descriptionClassName={styles.ebookBannerDescription}
+                    ctaClassName={styles.ebookBannerCta}
+                  />
+                )}
               </div>
             )}
             {isMobile() ? (

@@ -63,9 +63,13 @@
   "reflection-description-1": "Als u op \"Add Reflection\" klikt, komt u op QuranReflect, een platform voor het delen van persoonlijke reflecties op de Koran. In tegenstelling tot Tafseer (wetenschappelijke interpretatie) zijn reflecties persoonlijke inzichten en ervaringen gerelateerd aan de verzen.",
   "reflection-description-2": "Als u een openbaar bericht plaatst, wordt uw reflectie beoordeeld door het moderatieteam en zichtbaar voor de QuranReflect-community.",
   "repeat-learning-plan": "Herhaling van het leerplan",
+  "share": "Deel",
+  "share-title": "Deel:",
   "start-here": "Begin hier",
+  "start-learning": "Begin met leren",
   "tabs": {
     "main": "Belangrijkste details",
+    "outline": "Overzicht",
     "syllabus": "Syllabus"
   },
   "what-happens-when-you-click-add-reflection": "Wat gebeurt er als je op 'Reflectie toevoegen' klikt?"

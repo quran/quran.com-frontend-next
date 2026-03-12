@@ -8,14 +8,11 @@
     },
     "post-button": "¿Qué pasa cuando publico?",
     "qr-intro": "QuranReflect, junto con Quran.com, es parte de la familia Quran.Foundation. Es una plataforma social para compartir reflexiones personales sobre el Corán, animando a los usuarios a interiorizar sus mensajes y compartir ideas que inspiren cambios positivos. A diferencia del tafsir, que es una interpretación académica, las reflexiones son pensamientos y experiencias personales relacionadas con los versículos. Las publicaciones de los usuarios en QuranReflect son revisadas y moderadas por un equipo calificado, que ayudará a garantizar la calidad del contenido y las normas de etiqueta al interactuar con el Corán, y empoderará a los usuarios a compartir comentarios y destacando comentarios valiosos, fomentando así una comunidad espiritualmente edificante y centrada en el Corán. Obtén más información: <link> Quranreflect.com/faq </link>",
-    "qr-title": "¿Qué es QuranReflect?",
-    "title": "¿Qué es QuranReflect y qué sucede si marco esta casilla?"
+    "qr-title": "¿Qué es QuranReflect?"
   },
-  "click-to-see-more": "Haz clic para ver más",
-  "delete-note": "Eliminar nota",
   "delete-note-modal": {
-    "subtitle": "¿Estás seguro de que deseas eliminar la nota?",
-    "title": "Borrar nota."
+    "subtitle": "¿Estás seguro que deseas eliminar esta nota?",
+    "title": "Eliminar nota"
   },
   "delete-success": "La nota ha sido eliminada con éxito",
   "edit-note": "Editar nota",
@@ -44,17 +41,13 @@
     }
   },
   "note": "Nota",
-  "notes-and-reflcs": "Notas y reflexiones",
   "notes-on-this-verse": "{{count}} notas sobre este verso",
   "post-confirmation": {
     "question": "¿Estás seguro de que deseas publicar esta reflexión en QuranReflect?"
   },
-  "post-on-qr": "Publicación en QuranReflect",
   "post-to": "Publicar en",
   "posted-reflections": "Reflexiones publicadas",
   "private-notes": "Notas",
-  "qr-tooltip": "<span> <link> QuranReflect </link> es una plataforma social para compartir reflexiones sobre el Corán. Conéctate en torno al Corán, conéctate con lo que importa. </span>",
-  "reflection-update-success": "La reflexión se ha actualizado correctamente",
   "reflections-intro": {
     "line-1": "Para ver e interactuar con los comentarios, interactuar con la comunidad y más, visita <link> QuranReflect.com </link>.",
     "line-2": "Puedes iniciar sesión en tu cuenta de QuranReflect vinculada iniciando sesión o registrándote con el mismo correo electrónico de Quran.com utilizado en tu inicio de sesión.",
@@ -65,11 +58,8 @@
   "save-privately": "Guardar en privado.",
   "save-publish-failed": "La nota se guardó correctamente pero no se pudo publicar.",
   "save-success": "La nota se ha guardado correctamente.",
-  "share-to-qr": "Compartir en QuranReflect.com",
-  "share-to-qr-desc": "Compartir como <b> {{name}} </b>. La audiencia son <b> usuarios de QuranReflect </b>",
   "take-a-note-or-reflection": "Tome una nota o reflexión",
   "update-publish-failed": "La nota se actualizó correctamente pero no se pudo publicar",
-  "update-reflection": "Reflexión sobre la actualización",
   "update-success": "La nota se ha actualizado correctamente.",
   "view-on-qr": "Ver en QuranReflect"
 }

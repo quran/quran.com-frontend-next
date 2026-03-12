@@ -89,19 +89,7 @@ const CollectionDetailContainer = ({
 
   const onItemDeleted = (bookmarkId: string) => {
     if (shouldDeleteBookmark) {
-      deleteBookmarkById(bookmarkId)
-        .then(() => {
-          onUpdated();
-          toast(
-            t('collection:delete-bookmark.success', {
-              count: toLocalizedNumber(SINGLE_ITEM_COUNT, lang),
-            }),
-            { status: ToastStatus.Success },
-          );
-        })
-        .catch(() => toast(t('common:error.general'), { status: ToastStatus.Error }));
-    } else {
-      deleteCollectionBookmarkById(collectionId, bookmarkId)
+      return deleteBookmarkById(bookmarkId)
         .then(() => {
           onUpdated();
           toast(
@@ -113,6 +101,18 @@ const CollectionDetailContainer = ({
         })
         .catch(() => toast(t('common:error.general'), { status: ToastStatus.Error }));
     }
+
+    return deleteCollectionBookmarkById(collectionId, bookmarkId)
+      .then(() => {
+        onUpdated();
+        toast(
+          t('collection:delete-bookmark.success', {
+            count: toLocalizedNumber(SINGLE_ITEM_COUNT, lang),
+          }),
+          { status: ToastStatus.Success },
+        );
+      })
+      .catch(() => toast(t('common:error.general'), { status: ToastStatus.Error }));
   };
 
   // Handler to toggle card expansion

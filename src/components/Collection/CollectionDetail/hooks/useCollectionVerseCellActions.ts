@@ -21,13 +21,14 @@ type UseCollectionVerseCellActionsProps = {
   collectionId: string;
   chapterData?: Chapter;
   onShare?: (verseKey: string) => void;
-  onDelete?: (bookmarkId: string) => void;
+  onDelete?: (bookmarkId: string) => Promise<void>;
 };
 
 type UseCollectionVerseCellActionsReturn = {
   isDeleteModalOpen: boolean;
+  isDeleting: boolean;
   handleDelete: () => void;
-  handleDeleteConfirm: () => void;
+  handleDeleteConfirm: () => Promise<void>;
   handleDeleteCancel: () => void;
   handleCopy: () => void;
   handleShare: () => void;
@@ -48,16 +49,22 @@ const useCollectionVerseCellActions = ({
     areArraysEqual,
   );
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = useCallback(() => {
     logButtonClick('collection_detail_delete_menu');
     setIsDeleteModalOpen(true);
   }, []);
 
-  const handleDeleteConfirm = useCallback(() => {
+  const handleDeleteConfirm = useCallback(async () => {
     logButtonClick('bookmark_delete_confirm', { verseKey, collectionId });
-    setIsDeleteModalOpen(false);
-    onDelete?.(bookmarkId);
+    setIsDeleting(true);
+    try {
+      await onDelete?.(bookmarkId);
+      setIsDeleteModalOpen(false);
+    } finally {
+      setIsDeleting(false);
+    }
   }, [bookmarkId, collectionId, onDelete, verseKey]);
 
   const handleDeleteCancel = useCallback(() => {
@@ -92,6 +99,7 @@ const useCollectionVerseCellActions = ({
 
   return {
     isDeleteModalOpen,
+    isDeleting,
     handleDelete,
     handleDeleteConfirm,
     handleDeleteCancel,

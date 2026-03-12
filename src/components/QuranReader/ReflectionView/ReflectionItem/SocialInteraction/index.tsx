@@ -10,7 +10,9 @@ import { getRangeVerses } from '@/api';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ChatIcon from '@/icons/chat.svg';
+import HeartIcon from '@/icons/heart.svg';
 import LoveIcon from '@/icons/love.svg';
+import { logErrorToSentry } from '@/lib/sentry';
 import Language from '@/types/Language';
 import Reference from '@/types/QuranReflect/Reference';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -24,6 +26,9 @@ type Props = {
   postId: number;
   reflectionText: string;
   references: Reference[];
+  isLiked: boolean;
+  onLikeToggle: () => Promise<void>;
+  isLikeLoading: boolean;
 };
 
 const referenceRequiresApiCall = (reference: Reference) => {
@@ -64,6 +69,9 @@ const SocialInteraction: React.FC<Props> = ({
   postId,
   reflectionText,
   references,
+  isLiked,
+  onLikeToggle,
+  isLikeLoading,
 }) => {
   const chaptersData = useContext(DataContext);
 
@@ -82,7 +90,12 @@ const SocialInteraction: React.FC<Props> = ({
   // We now handle the verses API shape directly in getCopyReflectionContent
 
   const onLikesCountClicked = () => {
+    if (isLikeLoading) return;
+
     logButtonClick('reflection_item_likes');
+    onLikeToggle().catch((caughtError) => {
+      logErrorToSentry(caughtError, { transactionName: 'quranReflectLikeClick' });
+    });
   };
 
   const onCommentsCountClicked = () => {
@@ -103,12 +116,11 @@ const SocialInteraction: React.FC<Props> = ({
       <Button
         className={styles.actionItemContainer}
         variant={ButtonVariant.Compact}
-        href={getQuranReflectPostUrl(postId)}
-        isNewTab
-        prefix={<LoveIcon />}
+        prefix={isLiked ? <HeartIcon /> : <LoveIcon />}
         size={ButtonSize.Small}
         onClick={onLikesCountClicked}
         shouldFlipOnRTL={false}
+        isDisabled={isLikeLoading}
       >
         {toLocalizedNumber(likesCount, lang)}
       </Button>

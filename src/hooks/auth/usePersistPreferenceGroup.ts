@@ -30,6 +30,7 @@ type Actions = {
     undoAction: ActionOrThunkAction,
     preferenceGroup: PreferenceGroup,
     successCallback?: () => void,
+    undoCallback?: () => void,
   ) => void;
   onXstateSettingsChange: (
     key: string,
@@ -172,6 +173,7 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
         undoAction: ActionOrThunkAction,
         preferenceGroup: PreferenceGroup,
         successCallback?: () => void,
+        undoCallback?: () => void,
       ) => {
         if (isLoggedIn()) {
           // 1. dispatch the action first
@@ -198,6 +200,9 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
                     primary: true,
                     onClick: () => {
                       dispatch(undoAction);
+                      if (undoCallback) {
+                        undoCallback();
+                      }
                     },
                   },
                   {

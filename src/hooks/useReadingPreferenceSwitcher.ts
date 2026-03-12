@@ -3,25 +3,23 @@ import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
+import { getUpdatedQueryParams, SwitcherContext } from './useReadingPreferenceSwitcher.utils';
+
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import { markUserSwitchedReadingMode, resetUserSwitchFlag } from '@/hooks/readingModeSwitchTracker';
+import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import {
   selectReadingPreferences,
   setReadingPreference,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
-import { normalizeQueryParam } from '@/utils/url';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
+import QueryParam from 'types/QueryParam';
 import { ReadingPreference } from 'types/QuranReader';
 
-// Threshold in pixels to consider the user "at the top" of the page
-const SCROLL_TOP_THRESHOLD = 100;
-
-export enum SwitcherContext {
-  SurahHeader = 'surah_header',
-  ContextMenu = 'context_menu',
-  MobileTabs = 'mobile_tabs',
-}
+export { SwitcherContext } from './useReadingPreferenceSwitcher.utils';
 
 interface UseReadingPreferenceSwitcherOptions {
   context: SwitcherContext;
@@ -52,8 +50,15 @@ const useReadingPreferenceSwitcher = ({
   context,
 }: UseReadingPreferenceSwitcherOptions): UseReadingPreferenceSwitcherResult => {
   const router = useRouter();
-  const { readingPreference } = useSelector(selectReadingPreferences);
+  const { readingPreference: reduxReadingPreference } = useSelector(selectReadingPreferences);
+  const {
+    value: resolvedReadingPreference,
+  }: {
+    value: ReadingPreference;
+    isQueryParamDifferent: boolean;
+  } = useGetQueryParamOrReduxValue(QueryParam.READING_MODE);
   const lastReadVerseKeyState = useSelector(selectLastReadVerseKey);
+  const selectedTranslations = useSelector(selectSelectedTranslations);
 
   const {
     actions: { onSettingsChange },
@@ -65,60 +70,74 @@ const useReadingPreferenceSwitcher = ({
     ? getVerseNumberFromKey(lastReadVerseKey).toString()
     : undefined;
 
-  const switchReadingPreference = useCallback(
-    // eslint-disable-next-line react-func/max-lines-per-function
+  const getNextReaderQueryParams = useCallback(
     (newPreference: ReadingPreference) => {
-      if (newPreference === readingPreference) return;
-
-      // Prepare URL params
-      const newQueryParams = { ...router.query };
-
-      // Check if user is at the top of the page
-      const isAtTop = typeof window !== 'undefined' && window.scrollY <= SCROLL_TOP_THRESHOLD;
-
-      if (context === SwitcherContext.SurahHeader || isAtTop) {
-        // User is at the top of the page, so remove startingVerse to prevent scrolling
-        delete newQueryParams.startingVerse;
-      } else {
-        const chapterId = normalizeQueryParam(router.query.chapterId);
-        const isChapterScopedRoute = !!chapterId && !String(chapterId).includes(':'); // Treat chapter ids/slugs as chapter-scoped and only exclude verse-key/range route params that contain ":".
-
-        // For ContextMenu and MobileTabs when not at top, set startingVerse to ensure
-        // the virtualized scroll hooks navigate to the correct verse/page.
-        // Default to verse 1/1:1 if no verse has been tracked yet.
-        newQueryParams.startingVerse = isChapterScopedRoute
-          ? lastReadVerse || '1'
-          : lastReadVerseKey || '1:1';
-      }
-
-      const newUrlObject = {
-        pathname: router.pathname,
-        query: newQueryParams,
-      };
-
-      const updateReduxState = () => {
-        onSettingsChange(
-          'readingPreference',
-          newPreference,
-          setReadingPreference(newPreference),
-          setReadingPreference(readingPreference),
-          PreferenceGroup.READING,
-        );
-      };
-
-      // Update URL with shallow routing (no page reload), then update Redux state.
-      // The useScrollToVirtualizedVerse hooks in ReadingView/TranslationView
-      // will handle scrolling to the correct position based on startingVerse.
-      router
-        .replace(newUrlObject, null, { shallow: true, scroll: false })
-        .then(updateReduxState)
-        .catch(updateReduxState); // Still update Redux if router fails to keep UI in sync
+      return getUpdatedQueryParams({
+        newPreference,
+        query: router.query,
+        asPath: router.asPath,
+        context,
+        lastReadVerse,
+        lastReadVerseKey: lastReadVerseKey || undefined,
+        selectedTranslations,
+        scrollY: typeof window !== 'undefined' ? window.scrollY : undefined,
+      });
     },
-    [context, lastReadVerse, lastReadVerseKey, onSettingsChange, readingPreference, router],
+    [context, lastReadVerse, lastReadVerseKey, router.asPath, router.query, selectedTranslations],
+  );
+
+  const replaceReaderQuery = useCallback(
+    (query: typeof router.query) =>
+      router.replace(
+        {
+          pathname: router.pathname,
+          query,
+        },
+        null,
+        { shallow: true, scroll: false },
+      ),
+    [router],
+  );
+
+  const switchReadingPreference = useCallback(
+    (newPreference: ReadingPreference) => {
+      if (newPreference === resolvedReadingPreference) return;
+
+      const { previousQueryParams, newQueryParams } = getNextReaderQueryParams(newPreference);
+
+      // Mark that the user initiated this switch so the QueryParamMessage
+      // banner is suppressed while this mode switch is in-flight.
+      markUserSwitchedReadingMode(router.asPath);
+
+      const forwardNavigationPromise = replaceReaderQuery(newQueryParams);
+
+      onSettingsChange(
+        'readingPreference',
+        newPreference,
+        setReadingPreference(newPreference),
+        setReadingPreference(reduxReadingPreference),
+        PreferenceGroup.READING,
+        () => {
+          forwardNavigationPromise.finally(resetUserSwitchFlag);
+        },
+        () => {
+          markUserSwitchedReadingMode(router.asPath);
+          replaceReaderQuery(previousQueryParams).finally(resetUserSwitchFlag);
+        },
+      );
+    },
+    [
+      getNextReaderQueryParams,
+      onSettingsChange,
+      replaceReaderQuery,
+      reduxReadingPreference,
+      resolvedReadingPreference,
+      router.asPath,
+    ],
   );
 
   return {
-    readingPreference,
+    readingPreference: resolvedReadingPreference,
     switchReadingPreference,
     isLoading,
   };

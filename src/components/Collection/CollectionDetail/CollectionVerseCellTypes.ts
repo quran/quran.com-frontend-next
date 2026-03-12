@@ -5,7 +5,7 @@ type CollectionVerseCellProps = {
   collectionId: string;
   collectionName: string;
   isOwner: boolean;
-  onDelete?: (bookmarkId: string) => void;
+  onDelete?: (bookmarkId: string) => Promise<void>;
   onShare?: (verseKey: string) => void;
   createdAt?: string;
   isSelectMode?: boolean;

@@ -4,6 +4,7 @@
   "ask-question": "Ask a Question",
   "complete": "Complete",
   "completed-weeks": "{{completedWeeks}}/{{totalWeeks}} Weeks Completed",
+  "current": "Current",
   "divine-book-club": "The Divine Book Club",
   "divine-book-club-description": "This is a light group discussion which helps you follow the context of each week's reading.",
   "end-of-calendar": "End of Calendar",
@@ -17,6 +18,10 @@
     {
       "answer": "You are invited to make time each week to read just a few pages of the Quran in a language you understand. There are 46 readings in total, one for each week in the Islamic calendar from Shawwal to Sha'ban. This division of the Quran complements other divisions, such as the famous 30 parts which facilitate reading the Quran in one month.",
       "question": "How does the program work?"
+    },
+    {
+      "answer": "The weeks are grouped here into seven \"stations\", which many of the Companions would read over seven days.",
+      "question": "Why is Quran in a Year split into 7 sections?"
     },
     {
       "answer": "Not at all. The starting point in this program is to engage with the Quran's meanings through any language (translation) you are comfortable with. Quran.com offers translations in many languages to make this accessible for everyone. We aim to inspire participants to keep leveling up from year to year.",
@@ -93,6 +98,9 @@
   "quran-calendar-title": "Quran in a Year – A Simple Plan to Read & Understand the Entire Quran",
   "quran-reflect": "QuranReflect",
   "quran-reflect-description": "Engage with others regarding the Verses you have read this week.",
+  "quran-space-cta": "Create a Space",
+  "quran-space-description": "Create or join a live study circle with friends and family for Quran in a Year.",
+  "quran-space-title": "<quran>Quran</quran> Space",
   "quranic-calendar": "Quran in a Year",
   "ramadan": "Ramadan",
   "read-online": "Read Online",

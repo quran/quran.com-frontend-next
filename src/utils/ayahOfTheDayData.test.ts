@@ -9,16 +9,16 @@ type AyahEntry = {
 
 // Sample rows copied from the Google Sheet (Ayah of the Day) to validate JSON integrity.
 const SHEET_SAMPLES: AyahEntry[] = [
-  { date: '25/03/2025', verseKey: '39:53' },
-  { date: '28/03/2025', verseKey: '47:31' },
-  { date: '01/04/2025', verseKey: '57:16' },
-  { date: '05/04/2025', verseKey: '2:2' },
-  { date: '14/05/2025', verseKey: '3:185' },
-  { date: '23/07/2025', verseKey: '8:64' },
-  { date: '11/10/2025', verseKey: '22:24' },
-  { date: '28/11/2025', verseKey: '34:39' },
-  { date: '19/01/2026', verseKey: '57:21' },
-  { date: '19/02/2026', verseKey: '2:121' },
+  { date: '20/03/2026', verseKey: '1:2' },
+  { date: '25/03/2026', verseKey: '2:45' },
+  { date: '03/04/2026', verseKey: '2:163' },
+  { date: '14/05/2026', verseKey: '4:110' },
+  { date: '23/07/2026', verseKey: '9:128' },
+  { date: '11/10/2026', verseKey: '25:30' },
+  { date: '28/11/2026', verseKey: '39:2' },
+  { date: '19/01/2027', verseKey: '72:13' },
+  { date: '31/01/2027', verseKey: '89:23' },
+  { date: '04/02/2027', verseKey: '112:1' },
 ];
 
 const parseDateToTimestamp = (date: string): number => {

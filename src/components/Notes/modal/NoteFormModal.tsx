@@ -11,6 +11,7 @@ import type { OnSaveNote } from '@/components/Notes/modal/hooks/useNotesStates';
 import NotesOnVerseButton from '@/components/Notes/modal/NotesOnVerseButton';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
 import ReflectionIntro from '@/components/Notes/modal/ReflectionIntro';
+import PostReflectionIntro from '@/components/Notes/modal/ReflectionIntro/PostReflection';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
@@ -60,9 +61,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
     if (validateNoteInput()) setShowConfirmationModal(true);
   }, [validateNoteInput]);
 
-  const handleConfirmationBack = useCallback(() => {
-    setShowConfirmationModal(false);
-  }, []);
+  const handleConfirmationBack = useCallback(() => setShowConfirmationModal(false), []);
 
   const handleConfirmationConfirm = useCallback(async () => {
     await onPublicSaveRequest();
@@ -118,6 +117,8 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
             </div>
           )}
         </div>
+
+        <PostReflectionIntro />
 
         {showNotesOnVerseButton && notesCount > 0 && (
           <NotesOnVerseButton

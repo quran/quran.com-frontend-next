@@ -7,15 +7,14 @@ import styles from '../NotesAndReflectionsTab.module.scss';
 
 import Error from '@/components/Error';
 import CardsSkeleton from '@/components/MyQuran/Skeleton';
+import DeleteNoteModal from '@/components/Notes/modal/DeleteNoteModal';
 import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
 import useDeleteNote from '@/components/Notes/modal/hooks/useDeleteNote';
 import usePostNoteToQR from '@/components/Notes/modal/hooks/usePostNoteToQr';
 import NoteCard from '@/components/Notes/modal/MyNotes/Card/NoteCard';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
 import { NoteWithRecentReflection } from '@/components/Notes/modal/type';
-import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { Note } from '@/types/auth/Note';
-import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { logButtonClick } from '@/utils/eventLogger';
 
 // It will be used to calculate approximate min height to prevent block size jumping during virtuoso initial calculations
@@ -56,7 +55,14 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
     handleNotePostToQR,
   } = usePostNoteToQR({ onSuccess: mutateCache });
 
-  const { noteToDelete, isDeletingNote, handleDeleteNoteClick } = useDeleteNote({
+  const {
+    showDeleteConfirmation,
+    noteToDelete,
+    isDeletingNote,
+    handleDeleteNoteClick,
+    handleDeleteNoteConfirm,
+    handleDeleteNoteCancel,
+  } = useDeleteNote({
     onSuccess: mutateCache,
   });
 
@@ -142,7 +148,12 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
         onConfirm={handleNotePostToQR}
       />
 
-      <ConfirmationModal zIndexVariant={ZIndexVariant.ULTRA} />
+      <DeleteNoteModal
+        isOpen={showDeleteConfirmation}
+        isLoading={isDeletingNote}
+        onConfirm={handleDeleteNoteConfirm}
+        onCancel={handleDeleteNoteCancel}
+      />
     </>
   );
 };

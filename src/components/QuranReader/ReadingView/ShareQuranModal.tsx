@@ -2,6 +2,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 // Import styles from the original component
@@ -10,8 +11,12 @@ import { ModalSize } from '@/dls/Modal/Content';
 import Modal from '@/dls/Modal/Modal';
 import ShareButtons from '@/dls/ShareButtons';
 import CloseIcon from '@/icons/close.svg';
-import { getFirstTimeReadingGuideNavigationUrl } from '@/utils/navigation';
-import { getBasePath } from '@/utils/url';
+import {
+  getCanonicalUrl,
+  getFirstTimeReadingGuideNavigationUrl,
+  getReaderShareQueryParamsFromAsPath,
+  getVerseShareNavigationUrl,
+} from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 interface Props {
@@ -23,13 +28,18 @@ interface Props {
 }
 
 const ShareQuranModal: React.FC<Props> = ({ isOpen, onClose, verse }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
+  const router = useRouter();
+  const readerShareQueryParams = getReaderShareQueryParamsFromAsPath(router.asPath, router.query);
   const shareURL = verse
     ? (() => {
         const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verse.verseKey);
-        return `${getBasePath()}/${chapterId}/${verseNumber}`;
+        return getCanonicalUrl(
+          lang,
+          getVerseShareNavigationUrl(chapterId, verseNumber, readerShareQueryParams),
+        );
       })()
-    : `${getBasePath()}${getFirstTimeReadingGuideNavigationUrl()}`;
+    : getCanonicalUrl(lang, getFirstTimeReadingGuideNavigationUrl());
 
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose} size={ModalSize.MEDIUM}>

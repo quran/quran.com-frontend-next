@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
+/* eslint-disable react-func/max-lines-per-function */
 
 /**
  * Syncs Ayah of the Day and Quranic Calendar from CSV to JSON files.
@@ -12,10 +13,13 @@
 const fs = require('fs');
 const path = require('path');
 
+const umalquraPkg = require('@umalqura/core');
+
 // Path to the CSV file exported from Google Sheets
-const CSV_PATH = path.join(process.cwd(), 'data', 'Ayah of the day - Table - Sheet.csv');
+const DEFAULT_CSV_PATH = path.join(process.cwd(), 'data', 'Ayah of the day - Table - Sheet.csv');
 const AYAH_JSON_PATH = path.join(process.cwd(), 'data', 'ayah_of_the_day.json');
 const CALENDAR_JSON_PATH = path.join(process.cwd(), 'data', 'quranic-calendar.json');
+const umalqura = umalquraPkg.default || umalquraPkg;
 
 class UserError extends Error {
   constructor(message) {
@@ -176,6 +180,16 @@ const toDateParts = (timestamp) => {
   };
 };
 
+const toHijriDateParts = (timestamp) => {
+  const d = new Date(timestamp);
+  const utcDate = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  const hijriDate = umalqura(utcDate);
+  return {
+    hijriYear: String(hijriDate.hy),
+    hijriMonth: String(hijriDate.hm),
+  };
+};
+
 const isHeaderRow = (row) => {
   const date = String(row?.[2] || '').trim();
   const week = String(row?.[3] || '').trim();
@@ -224,8 +238,8 @@ const computeWeekEarliestDates = (rows) => {
   return weekEarliestTimestamp;
 };
 
-const parseCsv = () => {
-  const raw = readFileUtf8OrThrow(CSV_PATH, 'CSV file');
+const parseCsv = (csvPath) => {
+  const raw = readFileUtf8OrThrow(csvPath, 'CSV file');
   const rows = parseCsvText(raw);
 
   // If the first row is a header, keep it; our helpers skip it anyway.
@@ -253,31 +267,53 @@ const updateAyahJson = (entries) => {
 
 const updateCalendarJson = (weekEarliestTimestamp) => {
   const calendar = readJsonOrThrow(CALENDAR_JSON_PATH, 'quranic-calendar.json');
+  const weeks = Object.values(calendar)
+    .flat()
+    .sort((a, b) => Number(a.weekNumber) - Number(b.weekNumber));
 
-  Object.values(calendar).forEach((weeksArray) => {
-    weeksArray.forEach((week) => {
-      const ts = weekEarliestTimestamp.get(Number(week.weekNumber));
-      if (ts !== undefined) {
-        const parts = toDateParts(ts);
-        week.year = parts.year;
-        week.month = parts.month;
-        week.day = parts.day;
-      }
-    });
+  const updatedWeeks = weeks.map((week) => updateWeekDateParts(week, weekEarliestTimestamp));
+
+  const regroupedCalendar = {};
+  updatedWeeks.forEach((week) => {
+    const key = `${week.hijriYear}-${week.hijriMonth}`;
+    if (!regroupedCalendar[key]) {
+      regroupedCalendar[key] = [];
+    }
+    regroupedCalendar[key].push(week);
   });
 
   writeFileUtf8OrThrow(
     CALENDAR_JSON_PATH,
-    `${JSON.stringify(calendar, null, 2)}\n`,
+    `${JSON.stringify(regroupedCalendar, null, 2)}\n`,
     'quranic-calendar.json',
   );
 
   console.log(`Updated ${CALENDAR_JSON_PATH} week start dates from CSV (earliest date per week).`);
 };
 
+const updateWeekDateParts = (week, weekEarliestTimestamp) => {
+  const ts = weekEarliestTimestamp.get(Number(week.weekNumber));
+  if (ts === undefined) {
+    return week;
+  }
+
+  const gregorian = toDateParts(ts);
+  const hijri = toHijriDateParts(ts);
+
+  return {
+    ...week,
+    year: gregorian.year,
+    month: gregorian.month,
+    day: gregorian.day,
+    hijriYear: hijri.hijriYear,
+    hijriMonth: hijri.hijriMonth,
+  };
+};
+
 const main = () => {
   try {
-    const { ayahEntries, weekEarliestTimestamp } = parseCsv();
+    const csvPath = process.argv[2] ? path.resolve(process.argv[2]) : DEFAULT_CSV_PATH;
+    const { ayahEntries, weekEarliestTimestamp } = parseCsv(csvPath);
     updateAyahJson(ayahEntries);
     updateCalendarJson(weekEarliestTimestamp);
   } catch (e) {

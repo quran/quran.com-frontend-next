@@ -3,7 +3,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import Button from '@/dls/Button/Button';
+import Button, { ButtonSize } from '@/dls/Button/Button';
 import { Course } from '@/types/auth/Course';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLessonNavigationUrl } from '@/utils/navigation';
@@ -11,9 +11,10 @@ import { getLessonNavigationUrl } from '@/utils/navigation';
 type Props = {
   course: Course;
   isHeaderButton?: boolean;
+  size?: ButtonSize;
 };
 
-const StartOrContinueLearning: React.FC<Props> = ({ course, isHeaderButton = true }) => {
+const StartOrContinueLearning: React.FC<Props> = ({ course, isHeaderButton = true, size }) => {
   const { t } = useTranslation('learn');
   const { lessons, continueFromLesson, id, slug } = course;
   /**
@@ -32,7 +33,11 @@ const StartOrContinueLearning: React.FC<Props> = ({ course, isHeaderButton = tru
     router.push(getLessonNavigationUrl(slug, redirectToLessonSlug));
   };
 
-  return <Button onClick={onContinueLearningClicked}>{t('continue-learning')}</Button>;
+  return (
+    <Button size={size} onClick={onContinueLearningClicked}>
+      {t('continue-learning')}
+    </Button>
+  );
 };
 
 export default StartOrContinueLearning;

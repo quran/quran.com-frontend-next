@@ -161,6 +161,18 @@
   "donate_monthly": "Donasi setiap bulan",
   "donate_once": "Donasi satu kali",
   "done": "Selesai",
+  "ebook": {
+    "cta": {
+      "sign-up": "Daftar Sekarang",
+      "subscribe": "Berlangganan",
+      "subscribed": "Berlangganan"
+    },
+    "descriptions": {
+      "line1": "📖 Dapatkan eBook gratis tentang Renungan Surah Al-Mulk setelah Ramadan",
+      "line2": "✨ Tambahkan Refleksi Anda sebelum 19 Maret untuk kesempatan agar Refleksi Anda disertakan!"
+    },
+    "title": "Ebook Refleksi Gratis"
+  },
   "edit": "Sunting",
   "email-verification": {
     "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
@@ -493,6 +505,15 @@
     "sort": "Menyortir"
   },
   "stay-on-track": "🎯 Tetap di jalur yang benar!",
+  "study-mode-chapter-banner": {
+    "cta": "Tambahkan Refleksi Anda",
+    "descriptions": {
+      "line1": "✍️ Tuliskan renungan tentang satu atau beberapa ayat dari Surah Al-Mulk",
+      "line2": "✨ Tambahkan #AlMulkReflections ke postingan Anda"
+    },
+    "footer": "Refleksi terpilih akan disertakan dalam eBook. Tambahkan refleksi Anda paling lambat tanggal 19 Maret pukul 23:59 UTC.",
+    "title": "Buku Elektronik Renungan Surah Al-Mulk"
+  },
   "style": "Gaya",
   "submit": "Kirim",
   "subscribe": "Mendaftar",

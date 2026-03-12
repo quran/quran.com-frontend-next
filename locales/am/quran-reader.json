@@ -199,6 +199,16 @@
   "reciter-summary": "(በተፍሲር ማዕከል መልካም ፈቃድ)",
   "referencing": "ማጣቀሻ",
   "reflection-disclaimer": "ነጸብራቆች የግል አመለካከቶች ናቸው (ለጥራት የተገመገሙ) እና እንደ ትክክለኛ ሚዛን ሊወሰዱ አይገባም።",
+  "reflection-feed": {
+    "engage": "በቁርዓን ነጸብራቅ ላይ ተሳተፍ",
+    "follow": "ተከተል",
+    "load-more": "ተጨማሪ ጫን",
+    "sort": {
+      "label": "ነጸብራቆችን ደርድር በ",
+      "latest": "የቅርብ ጊዜ",
+      "popular": "ተወዳጅ"
+    }
+  },
   "reflection-languages": "የነጸብራቅ ቋንቋዎች",
   "reflection-not-available": "ለዚህ አያህ የተገመገሙ አስተያየቶች የሉም",
   "reflections": "ነጸብራቆች",

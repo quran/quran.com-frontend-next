@@ -161,6 +161,18 @@
   "donate_monthly": "Dona mensilmente",
   "donate_once": "Dona una volta",
   "done": "Fatto",
+  "ebook": {
+    "cta": {
+      "sign-up": "Iscriviti ora",
+      "subscribe": "Iscriviti",
+      "subscribed": "Iscritto"
+    },
+    "descriptions": {
+      "line1": "📖 Ricevi un eBook gratuito sulle riflessioni della Sura Al-Mulk dopo il Ramadan",
+      "line2": "✨ Aggiungi le tue riflessioni entro il 19 marzo per avere la possibilità di vederle incluse!"
+    },
+    "title": "eBook gratuito Riflessioni"
+  },
   "edit": "Modificare",
   "email-verification": {
     "check-spam": "Non hai ricevuto l'email di verifica? Controlla la tua casella di posta indesiderata",
@@ -493,6 +505,15 @@
     "sort": "Ordinare"
   },
   "stay-on-track": "🎯 Rimani sulla buona strada!",
+  "study-mode-chapter-banner": {
+    "cta": "Aggiungi la tua riflessione",
+    "descriptions": {
+      "line1": "✍️ Scrivi una riflessione su uno o più versetti della Sura Al-Mulk",
+      "line2": "✨ Aggiungi #AlMulkReflections al tuo post"
+    },
+    "footer": "Alcune riflessioni saranno incluse nell'e-book. Aggiungi la tua riflessione entro il 19 marzo alle 23:59 UTC.",
+    "title": "eBook Riflessioni sulla Sura Al-Mulk"
+  },
   "style": "Stile",
   "submit": "Invia",
   "subscribe": "sottoscrivi",

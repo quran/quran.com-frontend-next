@@ -1,16 +1,15 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
-
 import styles from './ReaderTopActions.module.scss';
 
 import TranslationSettingsButton from '@/components/chapters/ChapterHeader/components/TranslationSettingsButton';
 import ReadingModeActions from '@/components/chapters/ChapterHeader/ReadingModeActions';
 import useDirection from '@/hooks/useDirection';
-import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
-import { QuranReaderDataType } from '@/types/QuranReader';
+import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
+import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import isInReadingMode from '@/utils/readingPreference';
 import { VersesResponse } from 'types/ApiResponses';
+import QueryParam from 'types/QueryParam';
 
 interface ReaderTopActionsProps {
   initialData: VersesResponse;
@@ -32,7 +31,8 @@ const ReaderTopActions: React.FC<ReaderTopActionsProps> = ({
   quranReaderDataType,
 }) => {
   const direction = useDirection();
-  const readingPreference = useSelector(selectReadingPreference);
+  const { value: readingPreference }: { value: ReadingPreference; isQueryParamDifferent: boolean } =
+    useGetQueryParamOrReduxValue(QueryParam.READING_MODE);
 
   const isReadingMode = isInReadingMode(readingPreference);
 

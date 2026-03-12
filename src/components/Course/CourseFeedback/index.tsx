@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import CourseFeedbackModal from './CourseFeedbackModal';
 
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
+import useIsMobile from '@/hooks/useIsMobile';
 import { Course } from '@/types/auth/Course';
 import { getUserType, isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -26,6 +27,7 @@ const CourseFeedback: React.FC<Props> = ({ source, course, shouldOpenModal = fal
   const { t } = useTranslation('learn');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
+  const isMobile = useIsMobile();
   const userIsLoggedIn = isLoggedIn();
   const userType = getUserType(userIsLoggedIn);
 
@@ -55,7 +57,11 @@ const CourseFeedback: React.FC<Props> = ({ source, course, shouldOpenModal = fal
 
   return (
     <>
-      <Button size={ButtonSize.Small} type={ButtonType.Primary} onClick={onAddFeedbackClicked}>
+      <Button
+        size={isMobile ? ButtonSize.Small : ButtonSize.Medium}
+        type={ButtonType.Primary}
+        onClick={onAddFeedbackClicked}
+      >
         {t('feedback.add-feedback')}
       </Button>
       <CourseFeedbackModal

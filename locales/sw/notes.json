@@ -8,14 +8,11 @@
     },
     "post-button": "Nini kitatokea ninapochapisha?",
     "qr-intro": "QuranReflect, pamoja na Quran.com, ni mojawapo katika familia ya Quran.Foundation. Ni jukwaa la kijamii la kushiriki tafakari za kibinafsi juu ya Qur'ani, likiwahimiza watumiaji kutafakari ujumbe wa Qur'ani pamoja na kushiriki maarifa ambayo huchochea mabadiliko chanya. Tofauti na tafsir, ambayo ni tafsiri ya kielimu, tafakari ni mawazo ya kibinafsi na uzoefu unaohusiana na aya. Machapisho ya mtumiaji kwenye QuranReflect yanakaguliwa na kusimamiwa na timu iliyohitimu, ambayo inasaidia kuhakikisha ubora wa maudhui, adabu wakati wa kuingiliana na Qur'ani, na inawawezesha watumiaji kwa kushiriki maoni na kuangazia hotuba muhimu na hivyo kukuza jamii inayoinua kiroho, na inayozingatia Qur'ani. Pata maelezo zaidi: <link> Quranreflect.com/faq </link>",
-    "qr-title": "QuranReflect ni nini?",
-    "title": "QuranReflect ni nini na nini kitatokea nikichagua kisanduku hiki?"
+    "qr-title": "QuranReflect ni nini?"
   },
-  "click-to-see-more": "bonyeza kuona zaidi",
-  "delete-note": "Futa maelezo",
   "delete-note-modal": {
-    "subtitle": "Je, una uhakika unataka kufuta maelezo?",
-    "title": "Futa Maelezo"
+    "subtitle": "Una uhakika unataka kufuta dokezo hili?",
+    "title": "Futa Dokezo"
   },
   "delete-success": "Maelezo yamefutwa kwa mafanikio",
   "edit-note": "Hariri Dokezo",
@@ -44,17 +41,13 @@
     }
   },
   "note": "Maelezo",
-  "notes-and-reflcs": "Maelezo na Tafakari",
   "notes-on-this-verse": "Maelezo {{count}} kuhusu aya hii",
   "post-confirmation": {
     "question": "Una uhakika ungependa kuchapisha Tafakari hii kwa QuranReflect?"
   },
-  "post-on-qr": "Chapisha kwenye QuranReflect",
   "post-to": "Chapisha kwa",
   "posted-reflections": "Tafakari Zilizochapishwa",
   "private-notes": "Maelezo",
-  "qr-tooltip": "<span> <link> QuranReflect </link> ni jukwaa la kijamii la kushiriki tafakari kuhusu Qur'ani. wasiliana na Qur'ani, wasiliana na jambo la muhimu. </span>",
-  "reflection-update-success": "Tafakari imesasishwa kwa mafanikio",
   "reflections-intro": {
     "line-1": "Ili kutazama na kuwasiliana na mawazo ya jamii, jihusishe na jumuiya, unaweza pia kufanya mengi zaidi, tembelea <link> QuranReflect.com </link>.",
     "line-2": "Unaweza kuingia katika akaunti yako ya QuranReflect kwa kuingia au kujisajili kwa kutumia barua pepe ile ile ya Quran.com unayotumia wakati unapoingia.",
@@ -65,11 +58,8 @@
   "save-privately": "Hifadhi kisiri",
   "save-publish-failed": "Maelezo yamehifadhiwa kwa mafanikio lakini hayajachapishwa",
   "save-success": "Maelezo yamehifadhiwa",
-  "share-to-qr": "Shiriki kwenye QuranReflect.com",
-  "share-to-qr-desc": "Shiriki kama <b> {{name}} </b>. Hadhira ni <b> watumiaji wa QuranReflect </b>",
   "take-a-note-or-reflection": "Andika Dokezo au Tafakari",
   "update-publish-failed": "Maelezo yamesasishwa kwa mafanikio lakini hayajachapishwa",
-  "update-reflection": "Sasisha Tafakari",
   "update-success": "Maelezo yamesasishwa",
   "view-on-qr": "Tazama kwenye QuranReflect"
 }

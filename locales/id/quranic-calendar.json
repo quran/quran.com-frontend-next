@@ -4,6 +4,7 @@
   "ask-question": "Ajukan Pertanyaan",
   "complete": "Lengkap",
   "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} Minggu Selesai",
+  "current": "Saat ini",
   "divine-book-club": "The Divine Book Club",
   "divine-book-club-description": "Ini adalah suatu diskusi ringan yang membantu Anda mengikuti konteks bacaan setiap minggu.",
   "end-of-calendar": "Akhir Kalender",
@@ -53,6 +54,10 @@
     {
       "answer": "Ya. \"Quran dalam Setahun\" sepenuhnya gratis, dan kami mendorong Anda untuk membagikannya dengan orang lain. Undang teman, mulai klub buku, dan bantu lebih banyak orang menyelesaikan bacaan Quran mereka untuk pertama kali.",
       "question": "Apakah ini gratis? Bolehkah saya membagikannya?"
+    },
+    {
+      "answer": "Ya. \"Quran dalam Setahun\" sepenuhnya gratis, dan kami mendorong Anda untuk membagikannya kepada orang lain. Ajak teman, mulai klub buku, dan bantu lebih banyak orang menyelesaikan pembacaan Al-Quran lengkap pertama mereka.",
+      "question": "Apakah ini gratis? Bolehkah saya membagikannya?"
     }
   ],
   "hero": {
@@ -93,6 +98,9 @@
   "quran-calendar-title": "Quran dalam Setahun – Cara Mudah untuk Membaca & Memahami Seluruh Quran",
   "quran-reflect": "QuranReflect",
   "quran-reflect-description": "Berinteraksi dengan orang lain mengenai Ayat-ayat yang telah Anda baca minggu ini.",
+  "quran-space-cta": "Ciptakan Ruang",
+  "quran-space-description": "Buat atau bergabunglah dengan kelompok belajar langsung bersama teman dan keluarga untuk mempelajari Al-Quran selama Setahun.",
+  "quran-space-title": "<quran>Quran</quran> Ruang Angkasa",
   "quranic-calendar": "Kalender Qur'an Setahun",
   "ramadan": "Ramadan",
   "read-online": "Baca secara Online",

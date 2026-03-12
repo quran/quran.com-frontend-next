@@ -19,55 +19,54 @@
 }
 
 .subtitle {
-  font-size: var(--font-size-normal-px);
-  color: var(--color-text-faded-new);
-  margin-block-end: var(--spacing-large-px);
-  @include breakpoints.smallerThanTablet {
-    margin-block-end: var(--spacing-medium2-px);
+  font-size: var(--font-size-xsmall-px);
+  color: var(--color-text-default-new);
+  margin-block-end: var(--spacing-medium2-px);
+
+  @include breakpoints.tablet {
+    margin-block-end: var(--spacing-large-px);
+    font-size: var(--font-size-normal-px);
   }
 }
 
 .resourcesGrid {
-  display: flex;
-  align-items: stretch;
-  gap: var(--spacing-small-px);
-  @include breakpoints.smallerThanTablet {
-    flex-direction: column;
-    gap: var(--spacing-medium2-px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-medium2-px);
+
+  @include breakpoints.desktop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-small-px);
   }
 }
 
 .resourceCard {
-  border: 1px solid var(--color-borders-hairline);
-  border-radius: var(--border-radius-default);
+  position: relative;
+  border-radius: var(--border-radius-rounded);
   padding: var(--spacing-medium2-px);
   background-color: var(--color-background-elevated-new);
   display: flex;
-  gap: var(--spacing-medium2-px);
-  inline-size: 50%;
+  flex-direction: column;
+  inline-size: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  gap: var(--spacing-small-px);
+
+  @include breakpoints.tablet {
+    gap: var(--spacing-medium2-px);
+  }
+
   @include theme.light {
     box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
   }
+
   @include theme.dark {
     box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
   }
+
   @include theme.sepia {
     box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
   }
-  position: relative;
-  cursor: pointer;
-  @include breakpoints.smallerThanTablet {
-    inline-size: 88%;
-  }
-}
-
-.cardLink {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  inline-size: 100%;
-  block-size: 100%;
-  z-index: 1;
 }
 
 .resourceIcon {
@@ -75,39 +74,61 @@
   align-items: center;
   justify-content: flex-start;
   gap: var(--spacing-small-px);
-  padding-block-end: var(--spacing-medium-px);
-}
 
-.resourceContent {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  block-size: 100%;
+  svg {
+    block-size: var(--spacing-medium2-px);
+    inline-size: auto;
+  }
 }
 
 .resourceTitle {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
-  margin-block-end: var(--spacing-xsmall);
   color: var(--color-text-default-new);
 }
 
+.quranSpaceTitle {
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-light);
+  line-height: 1;
+  font-size: var(--spacing-medium2-px);
+
+  @include breakpoints.tablet {
+    font-size: var(--spacing-medium3-px);
+  }
+}
+
+.quranSpaceTitleAccent {
+  line-height: 1;
+  font-weight: var(--font-weight-bold);
+}
+
 .resourceDescription {
-  font-size: var(--font-size-normal-px);
+  font-size: var(--font-size-xsmall-px);
   color: var(--color-text-faded-new);
-  margin-block-end: var(--spacing-small);
+  font-weight: var(--font-weight-medium);
   flex-grow: 1;
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+  }
 }
 
 .resourceButton {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
   gap: var(--spacing-xsmall-px);
   margin-block-start: auto;
-  font-size: var(--font-size-medium-px);
+  font-size: var(--font-size-xxsmall-px);
   color: var(--color-text-faded-new);
+  font-weight: var(--font-weight-semibold);
   position: relative;
   z-index: 2;
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-medium-px);
+  }
 }

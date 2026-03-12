@@ -28,7 +28,7 @@ import {
   estimateReadingTimeOfInitialVisiblePortion,
 } from '@/utils/quranReflect/views';
 import { makeVerseKey } from '@/utils/verse';
-import AyahReflection from 'types/QuranReflect/AyahReflection';
+import AyahFeedItem from 'types/QuranReflect/AyahFeedItem';
 import ContentType from 'types/QuranReflect/ContentType';
 
 // Font size class map for reflection font scaling
@@ -46,10 +46,14 @@ const FONT_SIZE_CLASS_MAP: Record<number, string> = {
 };
 
 type Props = {
-  reflection: AyahReflection;
+  reflection: AyahFeedItem;
   selectedChapterId: string;
   selectedVerseNumber: string;
   contentType?: ContentType;
+  onLikeToggle: (post: AyahFeedItem) => Promise<void>;
+  onFollow: (post: AyahFeedItem) => Promise<void>;
+  isLikeLoading: boolean;
+  isFollowLoading: boolean;
 };
 
 const ReflectionItem: React.FC<Props> = ({
@@ -57,6 +61,10 @@ const ReflectionItem: React.FC<Props> = ({
   selectedChapterId,
   selectedVerseNumber,
   contentType = ContentType.REFLECTIONS,
+  onLikeToggle,
+  onFollow,
+  isLikeLoading,
+  isFollowLoading,
 }) => {
   const { id, createdAt, author, estimatedReadingTime } = reflection;
   const reflectionText = reflection?.body;
@@ -92,7 +100,7 @@ const ReflectionItem: React.FC<Props> = ({
   // some reference, are referencing to the entire chapter (doesn't have from/to properties)
   // we only want to show the data for references that have from/to properties
   const nonChapterVerseReferences = useMemo(
-    () => reflection.references.filter((verse) => !!verse.from && !!verse.to),
+    () => (reflection.references ?? []).filter((verse) => !!verse.from && !!verse.to),
     [reflection.references],
   );
 
@@ -132,10 +140,13 @@ const ReflectionItem: React.FC<Props> = ({
           isAuthorVerified={reflection?.author?.verified}
           reflectionGroup={reflection?.room?.name}
           reflectionGroupLink={getReflectionGroupLink(reflection?.room)}
-          verseReferences={reflection.references}
+          verseReferences={reflection.references ?? []}
           nonChapterVerseReferences={nonChapterVerseReferences}
           onReferredVersesHeaderClicked={onReferredVersesHeaderClicked}
           shouldShowReferredVerses={shouldShowReferredVerses}
+          shouldShowFollowButton={reflection.canShowFollowButton}
+          onFollow={() => onFollow(reflection)}
+          isFollowLoading={isFollowLoading}
         />
         <HeaderMenu
           postId={id}
@@ -150,7 +161,7 @@ const ReflectionItem: React.FC<Props> = ({
               className={styles.verseAndTranslationContainer}
               key={makeVerseKey(chapter, from, to)}
             >
-              {reflection.references.length > 1 && (
+              {(reflection.references ?? []).length > 1 && (
                 <span className={styles.surahName}>{getSurahName(chapter)}</span>
               )}
               <VerseAndTranslation chapter={chapter} from={from} to={to} />
@@ -186,11 +197,14 @@ const ReflectionItem: React.FC<Props> = ({
         )}
       </div>
       <SocialInteraction
-        references={reflection.references}
+        references={reflection.references ?? []}
         reflectionText={reflectionText}
         likesCount={reflection?.likesCount}
         commentsCount={reflection?.commentsCount}
         postId={id}
+        isLiked={reflection.isLiked}
+        onLikeToggle={() => onLikeToggle(reflection)}
+        isLikeLoading={isLikeLoading}
       />
     </div>
   );

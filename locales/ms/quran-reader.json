@@ -199,6 +199,16 @@
   "reciter-summary": "(Dengan izin Pusat Tafsir)",
   "referencing": "Rujukan",
   "reflection-disclaimer": "Refleksi adalah perspektif peribadi (disemak untuk kualiti) dan tidak harus diambil sebagai kata putus atau dalil ",
+  "reflection-feed": {
+    "engage": "Terlibat dalam Al-QuranRenungkan",
+    "follow": "Ikuti",
+    "load-more": "Muatkan Lagi",
+    "sort": {
+      "label": "Isih pantulan mengikut",
+      "latest": "Terkini",
+      "popular": "Popular"
+    }
+  },
   "reflection-languages": "Bahasa Refleksi",
   "reflection-not-available": "Tiada refleksi yang disemak untuk ayat ini",
   "reflections": "Refleksi",

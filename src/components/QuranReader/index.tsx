@@ -13,16 +13,17 @@ import ReaderTopActions from './ReaderTopActions';
 
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import useGetMushaf from '@/hooks/useGetMushaf';
+import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useIsMobile from '@/hooks/useIsMobile';
 import { selectIsExpanded } from '@/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
 import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
-import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles, selectShowTajweedRules } from '@/redux/slices/QuranReader/styles';
 import { Mushaf, QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import isInReadingMode from '@/utils/readingPreference';
 import { VersesResponse } from 'types/ApiResponses';
+import QueryParam from 'types/QueryParam';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -39,7 +40,8 @@ const QuranReader = ({
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
+  const { value: readingPreference }: { value: ReadingPreference; isQueryParamDifferent: boolean } =
+    useGetQueryParamOrReduxValue(QueryParam.READING_MODE);
   const isReadingPreference = isInReadingMode(readingPreference);
   const isMobile = useIsMobile();
   const isExpanded = useSelector(selectIsExpanded);

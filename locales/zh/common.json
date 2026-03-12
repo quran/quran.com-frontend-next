@@ -161,6 +161,18 @@
   "donate_monthly": "每月捐款",
   "donate_once": "捐赠一次",
   "done": "完毕",
+  "ebook": {
+    "cta": {
+      "sign-up": "立即注册",
+      "subscribe": "订阅",
+      "subscribed": "已订阅"
+    },
+    "descriptions": {
+      "line1": "📖 斋月后可免费获得《古兰经》第17章“主权章”反思电子书",
+      "line2": "✨ 请在3月19日前提交您的感想，就有机会让您的感想被收录！"
+    },
+    "title": "免费反思电子书"
+  },
   "edit": "编辑",
   "email-verification": {
     "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
@@ -493,6 +505,15 @@
     "sort": "种类"
   },
   "stay-on-track": "🎯 保持专注！",
+  "study-mode-chapter-banner": {
+    "cta": "添加你的反思",
+    "descriptions": {
+      "line1": "✍️ 请就《古兰经》第17章“主权章”（Al-Mulk）中的一节或几节经文撰写一篇反思文章。",
+      "line2": "✨ 在你的帖子中添加 #AlMulkReflections 标签"
+    },
+    "footer": "部分读者的感想将被收录到电子书中。请于3月19日晚上11:59（UTC）前提交您的感想。",
+    "title": "《古兰经》至尊章反思电子书"
+  },
   "style": "风格",
   "submit": "提交",
   "subscribe": "订阅",

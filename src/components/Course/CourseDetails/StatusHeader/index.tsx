@@ -5,8 +5,9 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
-import Button from '@/dls/Button/Button';
+import Button, { ButtonSize } from '@/dls/Button/Button';
 import { useToast, ToastStatus } from '@/dls/Toast/Toast';
+import useIsMobile from '@/hooks/useIsMobile';
 import { Course } from '@/types/auth/Course';
 import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { getUserType, isLoggedIn } from '@/utils/auth/login';
@@ -25,6 +26,8 @@ type Props = {
 
 const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const { id, isUserEnrolled, slug, lessons, allowGuestAccess } = course;
+  const isMobile = useIsMobile();
+  const buttonSize = isMobile ? ButtonSize.Small : ButtonSize.Medium;
   const router = useRouter();
   const { t } = useTranslation('learn');
   const toast = useToast();
@@ -73,12 +76,13 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const renderStartHereButton = () => {
     return (
       <Button
+        size={buttonSize}
         isDisabled={isEnrolling}
         isLoading={isEnrolling}
         onClick={onStartHereClicked}
         data-testid="learning-plan-enroll-button"
       >
-        {t('start-here')}
+        {t('start-learning')}
       </Button>
     );
   };
@@ -90,7 +94,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   }
 
   if (isUserEnrolled) {
-    return <StartOrContinueLearning course={course} />;
+    return <StartOrContinueLearning course={course} size={buttonSize} />;
   }
 
   return renderStartHereButton();

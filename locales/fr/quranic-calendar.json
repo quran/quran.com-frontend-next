@@ -4,6 +4,7 @@
   "ask-question": "Poser une question",
   "complete": "Terminé",
   "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} Semaines terminées",
+  "current": "Actuel",
   "divine-book-club": "Le Divine Book Club",
   "divine-book-club-description": "Il s’agit d’une discussion de groupe accessible qui vous aide à suivre le contexte de chaque lecture hebdomadaire.",
   "end-of-calendar": "Fin du calendrier",
@@ -53,6 +54,10 @@
     {
       "answer": "Oui. « Le Coran en un An » est entièrement gratuit et nous vous encourageons à le partager. Invitez un ami, créez un club de lecture et aidez davantage de personnes à lire le Coran pour la première fois.",
       "question": "Est-ce gratuit ? Puis-je le partager ?"
+    },
+    {
+      "answer": "Oui. « Le Coran en un an » est entièrement gratuit, et nous vous encourageons à le partager. Invitez un ami, créez un club de lecture et aidez davantage de personnes à lire le Coran en entier pour la première fois.",
+      "question": "Est-ce gratuit ? Puis-je le partager ?"
     }
   ],
   "hero": {
@@ -93,6 +98,9 @@
   "quran-calendar-title": "Le Coran en un an – Un plan simple pour lire et comprendre l'intégralité du Coran",
   "quran-reflect": "QuranReflect",
   "quran-reflect-description": "Interagissez avec les autres au sujet des Ayahs que vous avez lues cette semaine.",
+  "quran-space-cta": "Créer un espace",
+  "quran-space-description": "Créez ou rejoignez un groupe d'étude en direct avec vos amis et votre famille pour apprendre le Coran en un an.",
+  "quran-space-title": "<quran>Coran</quran> Espace",
   "quranic-calendar": "Le Coran en un An",
   "ramadan": "Ramadan",
   "read-online": "Lire en ligne",

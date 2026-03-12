@@ -199,6 +199,16 @@
   "reciter-summary": "(Dengan izin dari Tafsir Center)",
   "referencing": "Referensi",
   "reflection-disclaimer": "Refleksi merupakan perspektif personal (sudah ditinjau demi kualitas) dan bukan merupakan rujukan",
+  "reflection-feed": {
+    "engage": "Berinteraksi di QuranReflect",
+    "follow": "Mengikuti",
+    "load-more": "Muat Lebih Banyak",
+    "sort": {
+      "label": "Urutkan refleksi berdasarkan",
+      "latest": "Terbaru",
+      "popular": "Populer"
+    }
+  },
   "reflection-languages": "Bahasa Refleksi",
   "reflection-not-available": "Tidak ada refleksi yang ditinjau untuk ayat ini",
   "reflections": "Refleksi",

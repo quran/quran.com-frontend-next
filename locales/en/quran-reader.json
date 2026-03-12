@@ -199,6 +199,16 @@
   "reciter-summary": "Recitation source: With kind permission of Tafsir Center",
   "referencing": "Referencing",
   "reflection-disclaimer": "Reflections are personal perspectives (reviewed for quality) and should not be taken as authoritative.",
+  "reflection-feed": {
+    "engage": "Engage on QuranReflect",
+    "follow": "Follow",
+    "load-more": "Load More",
+    "sort": {
+      "label": "Sort reflections by",
+      "latest": "Latest",
+      "popular": "Popular"
+    }
+  },
   "reflection-languages": "Reflection Languages",
   "reflection-not-available": "There are no reviewed reflections for this ayah",
   "reflections": "Reflections",

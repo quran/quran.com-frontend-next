@@ -63,9 +63,13 @@
   "reflection-description-1": "Mengklik \"Tambah Refleksi\" akan membawa anda ke QuranReflect, platform untuk berkongsi refleksi peribadi tentang Al-Quran. Berbeza dengan Tafsir (tafsiran ulama), renungan adalah pandangan dan pengalaman peribadi yang berkaitan dengan ayat-ayat tersebut.",
   "reflection-description-2": "Jika anda menyiarkan secara terbuka, renungan anda akan disemak oleh pasukan penyederhana dan dapat dilihat oleh komuniti QuranReflect.",
   "repeat-learning-plan": "Rancangan Pembelajaran Ulangan",
+  "share": "Kongsi",
+  "share-title": "Kongsi:",
   "start-here": "Mula Di Sini",
+  "start-learning": "Mula Belajar",
   "tabs": {
     "main": "Butiran Utama",
+    "outline": "Garis Besar",
     "syllabus": "Silibus"
   },
   "what-happens-when-you-click-add-reflection": "Apakah yang berlaku apabila anda mengklik \"Tambah Refleksi\"?"

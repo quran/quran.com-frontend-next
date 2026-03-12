@@ -254,7 +254,7 @@ const useCollectionDetailViewController = ({
 
   const onItemDeleted = useCallback(
     (bookmarkId: string) => {
-      deleteCollectionBookmarkById(numericCollectionId, bookmarkId)
+      return deleteCollectionBookmarkById(numericCollectionId, bookmarkId)
         .then(() => {
           onUpdated();
           toast(

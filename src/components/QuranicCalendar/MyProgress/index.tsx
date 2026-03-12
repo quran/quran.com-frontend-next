@@ -1,51 +1,81 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import classNames from 'classnames';
+import umalqura from '@umalqura/core';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import CarouselView from './CarouselView';
-import MonthCard from './MonthCard';
 import styles from './MyProgress.module.scss';
-import { ProcessedWeek } from './types';
-import useMonthsData from './useMonthsData';
+import ProgressHeader from './ProgressHeader';
+import useGroupedWeeks from './useGroupedWeeks';
+import { WEEK_GROUPS } from './weekProgressConstants';
+import WeekProgressGroup from './WeekProgressGroup';
 
-import Button, { ButtonVariant } from '@/dls/Button/Button';
 import useGetUserQuranProgramEnrollment from '@/hooks/auth/useGetUserQuranProgramEnrollment';
 import { QURANIC_CALENDAR_PROGRAM_ID } from '@/utils/auth/constants';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getCurrentQuranicCalendarWeek } from '@/utils/hijri-date';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getLoginNavigationUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
-import { isMobile } from '@/utils/responsive';
+import DataContext from 'src/contexts/DataContext';
 
 interface MyProgressProps {
+  selectedWeek: number;
   onWeekSelect: (weekNumber: number) => void;
 }
 
-const MyProgress: React.FC<MyProgressProps> = ({ onWeekSelect }) => {
+const getInitialOpenGroups = (selectedWeek: number): Record<string, boolean> => {
+  const initialOpenGroups: Record<string, boolean> = {};
+  WEEK_GROUPS.forEach((group) => {
+    initialOpenGroups[group.key] = selectedWeek >= group.startWeek && selectedWeek <= group.endWeek;
+  });
+  return initialOpenGroups;
+};
+
+const MyProgress: React.FC<MyProgressProps> = ({ selectedWeek, onWeekSelect }) => {
   const { t, lang } = useTranslation('quranic-calendar');
   const router = useRouter();
+  const chaptersData = useContext(DataContext);
+  const currentWeek = getCurrentQuranicCalendarWeek(umalqura());
 
-  // Get month data for the carousel
-  const { monthRows, monthSlides } = useMonthsData();
-
-  // Get user enrollment data to check completed weeks
-  const { subscriptionData, isLoading: isSubscriptionLoading } = useGetUserQuranProgramEnrollment({
+  const { subscriptionData, isLoading } = useGetUserQuranProgramEnrollment({
     programId: QURANIC_CALENDAR_PROGRAM_ID,
   });
 
-  // Function to determine the CSS class for a week
-  const getWeekClass = useCallback(
-    (week: ProcessedWeek) => {
-      const isLoggedInAndSubscribed = isLoggedIn() && !isSubscriptionLoading;
-      return classNames(styles.weekItem, {
-        [styles.weekItemPassed]: isLoggedInAndSubscribed && week.hasPassed && !week.isCompleted,
-        [styles.weekItemActive]: isLoggedInAndSubscribed && week.isActive,
-        [styles.weekItemCompleted]: isLoggedInAndSubscribed && week.isCompleted,
-      });
+  const groupedWeeks = useGroupedWeeks({
+    chaptersData,
+    getIslamicMonthName: (month) => t(`islamic-months.${month}`),
+  });
+
+  const completedWeeksSet = useMemo(
+    () => new Set(subscriptionData?.completedWeeks || []),
+    [subscriptionData?.completedWeeks],
+  );
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>(() =>
+    getInitialOpenGroups(selectedWeek),
+  );
+
+  useEffect(() => {
+    const selectedGroup = WEEK_GROUPS.find(
+      (group) => selectedWeek >= group.startWeek && selectedWeek <= group.endWeek,
+    );
+    if (!selectedGroup) return;
+
+    setOpenGroups((prev) =>
+      prev[selectedGroup.key] ? prev : { ...prev, [selectedGroup.key]: true },
+    );
+  }, [selectedWeek]);
+
+  const isLoggedInAndReady = isLoggedIn() && !isLoading;
+
+  const onWeekClick = useCallback(
+    (weekNumber: number) => {
+      logButtonClick('quran_calendar_week_selected', { weekNumber });
+      onWeekSelect(weekNumber);
+      const weeklyVerse = document.getElementById('weekly-verses-section');
+      if (weeklyVerse) weeklyVerse.scrollIntoView({ behavior: 'smooth', block: 'center' });
     },
-    [isSubscriptionLoading],
+    [onWeekSelect],
   );
 
   const onTrackingButtonClick = useCallback(() => {
@@ -53,59 +83,37 @@ const MyProgress: React.FC<MyProgressProps> = ({ onWeekSelect }) => {
     router.replace(getLoginNavigationUrl(getQuranicCalendarNavigationUrl()));
   }, [router]);
 
+  const completedWeeksText = t('completed-weeks', {
+    completedWeeks: toLocalizedNumber(subscriptionData?.completedWeeks?.length || 0, lang),
+    totalWeeks: toLocalizedNumber(subscriptionData?.totalWeeks || 46, lang),
+  });
+
   return (
     <div className={styles.container}>
-      <div className={styles.headerRow}>
-        <h2 className={styles.title}>{t('my-progress')}</h2>
-
-        {isLoggedIn() ? (
-          <p className={styles.completedWeeks}>
-            {t('completed-weeks', {
-              completedWeeks: toLocalizedNumber(
-                subscriptionData?.completedWeeks?.length || 0,
-                lang,
-              ),
-              totalWeeks: toLocalizedNumber(subscriptionData?.totalWeeks || 46, lang),
-            })}
-          </p>
-        ) : (
-          <Button
-            onClick={onTrackingButtonClick}
-            variant={ButtonVariant.Compact}
-            className={styles.trackingButton}
-          >
-            {t('start-tracking')}
-          </Button>
-        )}
-      </div>
+      <ProgressHeader
+        title={t('my-progress')}
+        isLoggedIn={isLoggedIn()}
+        completedWeeksText={completedWeeksText}
+        startTrackingLabel={t('start-tracking')}
+        onStartTrackingClick={onTrackingButtonClick}
+      />
 
       <p className={styles.subtitle}>{t('progress-subtitle')}</p>
 
       <div className={styles.progressCard}>
-        {isMobile() ? (
-          <CarouselView
-            monthSlides={monthSlides}
-            getWeekClass={getWeekClass}
-            isProgramCompleted={subscriptionData?.isCompleted}
-            onWeekSelect={onWeekSelect}
+        {groupedWeeks.map((group) => (
+          <WeekProgressGroup
+            key={group.key}
+            group={group}
+            isOpen={openGroups[group.key]}
+            currentWeek={currentWeek}
+            activeWeek={selectedWeek}
+            completedWeeksSet={completedWeeksSet}
+            isLoggedInAndReady={isLoggedInAndReady}
+            setOpenGroups={setOpenGroups}
+            onWeekClick={onWeekClick}
           />
-        ) : (
-          <>
-            {monthRows.map((row, rowIndex) => (
-              <div key={`row-${rowIndex + 1}`} className={styles.monthsRow}>
-                {row.map((month) => (
-                  <MonthCard
-                    key={`month-${month.id}`}
-                    month={month}
-                    getWeekClass={getWeekClass}
-                    isProgramCompleted={subscriptionData?.isCompleted}
-                    onWeekSelect={onWeekSelect}
-                  />
-                ))}
-              </div>
-            ))}
-          </>
-        )}
+        ))}
       </div>
     </div>
   );

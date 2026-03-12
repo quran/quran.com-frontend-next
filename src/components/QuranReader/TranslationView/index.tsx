@@ -19,6 +19,7 @@ import Spinner from '@/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
+import useReadingModeBannerVisibility from '@/hooks/useReadingModeBannerVisibility';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
@@ -48,6 +49,7 @@ const TranslationView = ({
   const [apiPageToVersesMap, setApiPageToVersesMap] = useState<Record<number, Verse[]>>({
     1: initialData.verses,
   });
+  const isReadingModeQueryParamDifferent = useReadingModeBannerVisibility();
   const {
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
@@ -133,7 +135,8 @@ const TranslationView = ({
   const shouldShowQueryParamMessage =
     translationsQueryParamDifferent ||
     reciterQueryParamDifferent ||
-    wordByWordLocaleQueryParamDifferent;
+    wordByWordLocaleQueryParamDifferent ||
+    isReadingModeQueryParamDifferent;
 
   const isSingleVerse = quranReaderDataType === QuranReaderDataType.Verse;
 
@@ -144,6 +147,7 @@ const TranslationView = ({
           translationsQueryParamDifferent={translationsQueryParamDifferent}
           reciterQueryParamDifferent={reciterQueryParamDifferent}
           wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+          isReadingModeQueryParamDifferent={isReadingModeQueryParamDifferent}
         />
       )}
 

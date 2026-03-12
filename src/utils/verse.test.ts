@@ -3,7 +3,12 @@
 import { it, expect, describe } from 'vitest';
 
 import { getAllChaptersData } from './chapter';
-import { generateChapterVersesKeys, getDistanceBetweenVerses, sortWordLocation } from './verse';
+import {
+  doesVerseStartOnPage,
+  generateChapterVersesKeys,
+  getDistanceBetweenVerses,
+  sortWordLocation,
+} from './verse';
 
 describe('sort verse word position', () => {
   it('should sort based on chapter', async () => {
@@ -163,6 +168,47 @@ describe('get the distance between 2 verses', () => {
     const result = getDistanceBetweenVerses(chaptersData, firstVerseKey, secondVerseKey);
 
     expect(result).toEqual(expected);
+  });
+});
+
+describe('doesVerseStartOnPage', () => {
+  it('returns true when verse starts on the current page', () => {
+    const verse = {
+      words: [
+        { position: 1, pageNumber: 69 },
+        { position: 2, pageNumber: 69 },
+      ],
+    } as any;
+
+    expect(doesVerseStartOnPage(verse, 69)).toBe(true);
+  });
+
+  it('returns false for verse fragments that continue from a previous page', () => {
+    const verse = {
+      words: [
+        { position: 9, pageNumber: 70 },
+        { position: 10, pageNumber: 70 },
+      ],
+    } as any;
+
+    expect(doesVerseStartOnPage(verse, 70)).toBe(false);
+  });
+
+  it('returns false when verse starts on another page', () => {
+    const verse = {
+      words: [
+        { position: 1, pageNumber: 69 },
+        { position: 2, pageNumber: 70 },
+      ],
+    } as any;
+
+    expect(doesVerseStartOnPage(verse, 70)).toBe(false);
+  });
+
+  it('returns true when words are unavailable (fallback)', () => {
+    const verse = { words: [] } as any;
+
+    expect(doesVerseStartOnPage(verse, 70)).toBe(true);
   });
 });
 

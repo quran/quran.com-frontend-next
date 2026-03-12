@@ -62,10 +62,10 @@ const useLanguageChange = (): UseLanguageChangeReturn => {
     try {
       const loggedIn = isLoggedIn();
 
-      // Guest-only: keep locale-dependent content tabs (tafsir, lessons, reflections, etc.)
-      // following defaults unless the user has customized those preferences.
+      // Guest-only: keep default translations and tafsirs aligned with locale changes
+      // unless the user has customized those specific preferences.
       if (!loggedIn && !isUsingDefaultSettings) {
-        dispatch(syncLocaleDependentSettings({ prevLocale: lang, nextLocale: newLocale }));
+        dispatch(syncLocaleDependentSettings({ nextLocale: newLocale }));
       }
 
       // Apply default settings of the new locale if user hasn't customized settings

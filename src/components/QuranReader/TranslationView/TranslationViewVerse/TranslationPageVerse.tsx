@@ -6,6 +6,7 @@ import TranslationViewCell from '../TranslationViewCell';
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import Verse from '@/types/Verse';
+import { doesVerseStartOnPage } from '@/utils/verse';
 
 interface TranslationPageVerse {
   verse: Verse;
@@ -48,7 +49,8 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   }, [isLastVerseInView, verse, verseKeysQueue]);
 
   // Only show chapter header for verse 1 of a chapter (for multi-chapter pages like page 604)
-  const shouldShowChapterHeader = verse.verseNumber === 1;
+  const shouldShowChapterHeader =
+    verse.verseNumber === 1 && doesVerseStartOnPage(verse, verse.pageNumber);
 
   // First cell has header above it when:
   // 1. ChapterHeader shows above this verse, OR

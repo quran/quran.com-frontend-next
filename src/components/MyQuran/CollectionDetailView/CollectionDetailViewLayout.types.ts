@@ -19,7 +19,7 @@ export interface CollectionDetailViewLayoutProps {
   isOwner: boolean;
   emptyMessage: string;
   filteredBookmarks: Bookmark[];
-  onItemDeleted: (bookmarkId: string) => void;
+  onItemDeleted: (bookmarkId: string) => Promise<void>;
   onShareVerse: (verseKey: string) => void;
   isSelectMode: boolean;
   isAllExpanded: boolean;

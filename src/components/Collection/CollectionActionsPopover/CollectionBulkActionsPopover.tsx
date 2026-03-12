@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CollectionActionsPopover.module.scss';
 
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu, { PopoverMenuAlign } from '@/dls/PopoverMenu/PopoverMenu';
 import CopyIcon from '@/icons/copy.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
@@ -33,64 +33,72 @@ const CollectionBulkActionsPopover: React.FC<CollectionBulkActionsPopoverProps> 
   const { t } = useTranslation();
 
   return (
-    <PopoverMenu align={align} trigger={children}>
+    <PopoverMenu align={align} trigger={children} contentClassName={styles.popoverContainer}>
       <PopoverMenu.Item
         onClick={onCopyClick}
         shouldCloseMenuAfterClick
         dataTestId={`${dataTestPrefix}-copy`}
-        className={styles.menuItem}
+        icon={
+          <IconContainer
+            size={IconSize.Xsmall}
+            icon={<CopyIcon />}
+            color={IconColor.tertiary}
+            shouldForceSetColors
+            className={styles.icon}
+          />
+        }
       >
-        <IconContainer
-          className={styles.iconWrapper}
-          size={IconSize.Custom}
-          shouldForceSetColors={false}
-          icon={<CopyIcon />}
-        />
-        <span className={styles.menuItemText}>{t('common:copy')}</span>
+        {t('common:copy')}
       </PopoverMenu.Item>
       {!!onDeleteClick && (
         <PopoverMenu.Item
           onClick={onDeleteClick}
           shouldCloseMenuAfterClick
           dataTestId={`${dataTestPrefix}-delete`}
-          className={styles.menuItem}
+          icon={
+            <IconContainer
+              size={IconSize.Xsmall}
+              icon={<TrashIcon />}
+              color={IconColor.tertiary}
+              shouldForceSetColors
+              className={styles.icon}
+            />
+          }
         >
-          <IconContainer
-            className={styles.iconWrapper}
-            size={IconSize.Custom}
-            shouldForceSetColors={false}
-            icon={<TrashIcon />}
-          />
-          <span className={styles.menuItemText}>{t('common:delete')}</span>
+          {t('common:delete')}
         </PopoverMenu.Item>
       )}
       <PopoverMenu.Item
         onClick={onPinVersesClick}
         shouldCloseMenuAfterClick
         dataTestId={`${dataTestPrefix}-pin`}
-        className={styles.menuItem}
+        icon={
+          <IconContainer
+            size={IconSize.Xsmall}
+            icon={<PinIcon />}
+            color={IconColor.tertiary}
+            shouldForceSetColors
+            className={styles.icon}
+          />
+        }
       >
-        <IconContainer
-          className={styles.iconWrapper}
-          size={IconSize.Custom}
-          shouldForceSetColors={false}
-          icon={<PinIcon />}
-        />
-        <span className={styles.menuItemText}>{t('my-quran:bulk-actions.pin-verses')}</span>
+        {t('my-quran:bulk-actions.pin-verses')}
       </PopoverMenu.Item>
       <PopoverMenu.Item
         onClick={onNoteClick}
         shouldCloseMenuAfterClick
         dataTestId={`${dataTestPrefix}-note`}
-        className={styles.menuItem}
+        icon={
+          <IconContainer
+            size={IconSize.Xsmall}
+            icon={<NotesWithPencilIcon />}
+            color={IconColor.tertiary}
+            shouldForceSetColors
+            className={styles.icon}
+          />
+        }
       >
-        <IconContainer
-          className={styles.iconWrapper}
-          size={IconSize.Custom}
-          shouldForceSetColors={false}
-          icon={<NotesWithPencilIcon />}
-        />
-        <span className={styles.menuItemText}>{t('quran-reader:take-a-note')}</span>
+        {t('quran-reader:take-a-note')}
       </PopoverMenu.Item>
     </PopoverMenu>
   );

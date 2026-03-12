@@ -1,0 +1,149 @@
+@use 'src/styles/breakpoints';
+
+$close-icon-h: var(--spacing-medium3-px);
+$close-icon-w: var(--spacing-medium2-px);
+$modal-padding: var(--spacing-xlarge-px);
+$border-width-default: var(--spacing-hairline-px);
+
+.modal {
+  background-color: var(--color-background-elevated-new);
+
+  > div {
+    padding: $modal-padding !important;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    > div {
+      padding: var(--spacing-medium-px) !important;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  flex-direction: column;
+  gap: var(--spacing-medium2-px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+
+.title {
+  font-size: var(--font-size-normal-px);
+  font-style: normal;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-size-normal-px);
+  display: flex;
+  align-items: center;
+  color: var(--color-text-faded-new);
+}
+
+.backButton {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall-px);
+  cursor: pointer;
+
+  &:focus-visible {
+    border-radius: var(--border-radius-default);
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
+  }
+}
+
+.arrowIcon {
+  transform: rotate(180deg);
+
+  svg {
+    block-size: var(--spacing-small);
+    inline-size: var(--spacing-small);
+    color: var(--color-text-faded-new);
+  }
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: var(--border-radius-rounded);
+  color: var(--color-text-default);
+
+  svg {
+    block-size: $close-icon-h;
+    inline-size: $close-icon-w;
+  }
+}
+
+.divider {
+  inline-size: 100%;
+  border: none;
+  border-block-start: $border-width-default solid var(--color-separators-ayah-level);
+  margin: auto;
+}
+
+.content {
+  margin-block-start: var(--spacing-medium2-px);
+  margin-block-end: var(--spacing-medium2-px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-normal-px);
+}
+
+.subtitle {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-default);
+  text-align: center;
+  margin: 0;
+}
+
+.description {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-default);
+  text-align: center;
+  margin: 0;
+}
+
+.footer {
+  display: flex;
+  gap: var(--spacing-medium2-px);
+}
+
+.cancelButton,
+.deleteButton {
+  flex: 1;
+  font-size: var(--font-size-xsmall-px);
+  border-radius: var(--border-radius-medium-px);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+  }
+}
+
+.cancelButton {
+  border-width: $border-width-default;
+  border-color: var(--color-separators-ayah-level);
+  color: var(--color-text-faded-new);
+}
+
+.deleteButton {
+  color: var(--color-text-white);
+  background-color: var(--color-error-deep);
+  border-width: $border-width-default;
+  border-color: var(--color-error-deep);
+}

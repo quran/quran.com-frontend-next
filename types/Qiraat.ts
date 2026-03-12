@@ -123,16 +123,3 @@ export interface QiraatApiResponse {
   junctures: QiraatJuncture[];
   meta: QiraatMeta;
 }
-
-/**
- * Qiraat Card color palette
- * Colors are stored in the database per reading
- */
-export const QIRAAT_CARD_COLORS = {
-  white: '#FFFFFF',
-  green: '#B7D7A8',
-  pink: '#EA9999',
-  blue: '#A4C2F4',
-} as const;
-
-export type QiraatCardColor = keyof typeof QIRAAT_CARD_COLORS;

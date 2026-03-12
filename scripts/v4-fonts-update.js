@@ -6,29 +6,48 @@ const path = require('path');
 /**
  * V4 Fonts Update Script
  *
- * Copies all V4 font files from source directory to the project.
- * Removes old files first, then copies new ones.
+ * Copies V4 font files from a source directory into the project and only
+ * replaces the files present in that source package.
  *
  * Usage: node scripts/v4-fonts-update.js <source-directory>
  *
- * Source directory should contain (with files already renamed to pXXX.ext format):
- *   - COLRv1/{TTF,WOFF,WOFF2}/
- *   - OT-SVG DARK/{TTF,WOFF,WOFF2}/
- *   - OT-SVG LIGHT/{TTF,WOFF,WOFF2}/
- *   - OT-SVG SEPIA/{TTF,WOFF,WOFF2}/
+ * Source directory can be either:
+ *   - Flat per theme:
+ *     - COLRv1/
+ *     - OT-SVG DARK/
+ *     - OT-SVG LIGHT/
+ *     - OT-SVG SEPIA/
+ *   - Or grouped by format within each theme:
+ *     - COLRv1/{TTF,WOFF,WOFF2}/
+ *     - OT-SVG DARK/{TTF,WOFF,WOFF2}/
+ *     - OT-SVG LIGHT/{TTF,WOFF,WOFF2}/
+ *     - OT-SVG SEPIA/{TTF,WOFF,WOFF2}/
  *
- * Files will be placed in:
- *   - public/fonts/quran/hafs/v4/colrv1/{ttf,woff,woff2}/
- *   - public/fonts/quran/hafs/v4/ot-svg/dark/{ttf,woff,woff2}/
- *   - public/fonts/quran/hafs/v4/ot-svg/light/{ttf,woff,woff2}/
- *   - public/fonts/quran/hafs/v4/ot-svg/sepia/{ttf,woff,woff2}/
+ * Source files must already be renamed to pXXX.ext format before running
+ * this script.
  */
 
 const DIRECTORY_MAPPINGS = [
-  { source: 'COLRv1', destination: 'public/fonts/quran/hafs/v4/colrv1' },
-  { source: 'OT-SVG DARK', destination: 'public/fonts/quran/hafs/v4/ot-svg/dark' },
-  { source: 'OT-SVG LIGHT', destination: 'public/fonts/quran/hafs/v4/ot-svg/light' },
-  { source: 'OT-SVG SEPIA', destination: 'public/fonts/quran/hafs/v4/ot-svg/sepia' },
+  {
+    label: 'COLRv1',
+    sourceAliases: ['COLRv1'],
+    destination: 'public/fonts/quran/hafs/v4/colrv1',
+  },
+  {
+    label: 'OT-SVG DARK',
+    sourceAliases: ['OT-SVG DARK', 'OT-SVG- DARK'],
+    destination: 'public/fonts/quran/hafs/v4/ot-svg/dark',
+  },
+  {
+    label: 'OT-SVG LIGHT',
+    sourceAliases: ['OT-SVG LIGHT', 'OT-SVG- LIGHT'],
+    destination: 'public/fonts/quran/hafs/v4/ot-svg/light',
+  },
+  {
+    label: 'OT-SVG SEPIA',
+    sourceAliases: ['OT-SVG SEPIA', 'OT-SVG- SEPIA'],
+    destination: 'public/fonts/quran/hafs/v4/ot-svg/sepia',
+  },
 ];
 
 const FORMAT_MAPPINGS = [
@@ -39,64 +58,60 @@ const FORMAT_MAPPINGS = [
 
 const PROJECT_ROOT = path.join(__dirname, '..');
 
+function resolveSourceDirPath(sourceBaseDir, aliases) {
+  return aliases
+    .map((dirName) => path.join(sourceBaseDir, dirName))
+    .find((fullPath) => fs.existsSync(fullPath));
+}
+
 /**
- * Remove all font files from a directory (keeps the directory)
- * @param {string} dirPath - The directory path to clear
- * @returns {number} The number of files removed
+ * Collect all source font files for a single format, supporting either a flat
+ * theme directory or TTF/WOFF/WOFF2 subdirectories.
+ * @param {string} sourceDirPath - The theme source directory path
+ * @param {string} sourceFormatDir - The format subdirectory name
+ * @param {string} extension - The expected file extension
+ * @returns {string[]} The source files to copy
  */
-function clearDirectory(dirPath) {
-  if (!fs.existsSync(dirPath)) {
-    return 0;
-  }
+function collectSourceFiles(sourceDirPath, sourceFormatDir, extension) {
+  const nestedDirPath = path.join(sourceDirPath, sourceFormatDir);
+  const directoriesToRead = fs.existsSync(nestedDirPath) ? [nestedDirPath] : [sourceDirPath];
 
-  const files = fs.readdirSync(dirPath).filter((f) => !f.startsWith('.'));
-  files.forEach((file) => {
-    const filePath = path.join(dirPath, file);
-    if (fs.statSync(filePath).isFile()) {
-      fs.unlinkSync(filePath);
-    }
-  });
-
-  return files.length;
+  return directoriesToRead.flatMap((dirPath) =>
+    fs
+      .readdirSync(dirPath)
+      .filter((f) => !f.startsWith('.') && new RegExp(`^p\\d+\\.${extension}$`).test(f))
+      .map((file) => path.join(dirPath, file)),
+  );
 }
 
 /**
  * Copy all font files from source to destination
- * @param {string} sourcePath - The source directory path
+ * @param {string[]} sourceFiles - The source font files
  * @param {string} destPath - The destination directory path
- * @returns {{copied: number, skipped: number, notFound: boolean}} The copy results
+ * @returns {{copied: number, overwritten: number}} The copy results
  */
-function copyFontFiles(sourcePath, destPath) {
-  if (!fs.existsSync(sourcePath)) {
-    return { copied: 0, skipped: 0, notFound: true };
-  }
-
-  // Ensure destination directory exists
+function copyFontFiles(sourceFiles, destPath) {
   if (!fs.existsSync(destPath)) {
     fs.mkdirSync(destPath, { recursive: true });
   }
 
-  const files = fs.readdirSync(sourcePath).filter((f) => {
-    // Only copy font files (p*.ext format), skip any other files
-    return !f.startsWith('.') && /^p\d+\.\w+$/.test(f);
-  });
-
   let copied = 0;
-  let skipped = 0;
+  let overwritten = 0;
 
-  files.forEach((file) => {
-    const sourceFile = path.join(sourcePath, file);
+  sourceFiles.forEach((sourceFile) => {
+    const file = path.basename(sourceFile);
     const destFile = path.join(destPath, file);
 
-    if (fs.statSync(sourceFile).isFile()) {
-      fs.copyFileSync(sourceFile, destFile);
-      copied += 1;
+    if (fs.existsSync(destFile)) {
+      overwritten += 1;
     } else {
-      skipped += 1;
+      copied += 1;
     }
+
+    fs.copyFileSync(sourceFile, destFile);
   });
 
-  return { copied, skipped, notFound: false };
+  return { copied, overwritten };
 }
 
 function main() {
@@ -123,39 +138,37 @@ function main() {
   console.log(`Destination: ${PROJECT_ROOT}/public/fonts/quran/hafs/v4/`);
   console.log('');
 
-  let totalRemoved = 0;
   let totalCopied = 0;
+  let totalOverwritten = 0;
 
   DIRECTORY_MAPPINGS.forEach((mapping) => {
-    const sourceDirPath = path.join(sourceBaseDir, mapping.source);
+    const sourceDirPath = resolveSourceDirPath(sourceBaseDir, mapping.sourceAliases);
 
-    if (!fs.existsSync(sourceDirPath)) {
-      console.log(`\n${mapping.source}: NOT FOUND - skipping`);
+    if (!sourceDirPath) {
+      console.log(`\n${mapping.label}: NOT FOUND - skipping`);
       return;
     }
 
-    console.log(`\n${mapping.source} → ${mapping.destination}`);
+    console.log(`\n${mapping.label} → ${mapping.destination}`);
+    console.log(`  source: ${path.basename(sourceDirPath)}`);
     console.log('-'.repeat(50));
 
     FORMAT_MAPPINGS.forEach((format) => {
-      const sourcePath = path.join(sourceDirPath, format.sourceDir);
       const destPath = path.join(PROJECT_ROOT, mapping.destination, format.destDir);
+      const sourceFiles = collectSourceFiles(sourceDirPath, format.sourceDir, format.destDir);
 
-      // Check if source exists before clearing destination
-      if (!fs.existsSync(sourcePath)) {
-        console.log(`  ${format.destDir}: source not found - skipping (existing files preserved)`);
+      if (!sourceFiles.length) {
+        console.log(`  ${format.destDir}: no source files found - skipping`);
         return;
       }
 
-      // Clear existing files only after confirming source exists
-      const removed = clearDirectory(destPath);
-      totalRemoved += removed;
-
-      // Copy new files
-      const result = copyFontFiles(sourcePath, destPath);
+      const result = copyFontFiles(sourceFiles, destPath);
       totalCopied += result.copied;
+      totalOverwritten += result.overwritten;
 
-      console.log(`  ${format.destDir}: removed ${removed}, copied ${result.copied}`);
+      console.log(
+        `  ${format.destDir}: copied ${result.copied}, overwritten ${result.overwritten}`,
+      );
     });
   });
 
@@ -163,8 +176,8 @@ function main() {
   console.log('='.repeat(60));
   console.log('Summary');
   console.log('='.repeat(60));
-  console.log(`Total files removed: ${totalRemoved}`);
   console.log(`Total files copied: ${totalCopied}`);
+  console.log(`Total files overwritten: ${totalOverwritten}`);
   console.log('');
   console.log('Done!');
 }

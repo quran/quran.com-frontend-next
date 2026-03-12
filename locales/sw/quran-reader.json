@@ -199,6 +199,16 @@
   "reciter-summary": "Chanzo Cha Usomaji: Kwa idhini njema ya Kituo cha Tafsir",
   "referencing": "Kurejelea",
   "reflection-disclaimer": "Tafakari ni mitazamo ya kibinafsi (iliyokaguliwa kwa minajli ya ubora) na haipaswi kuchukuliwa kama yenye mamlaka.",
+  "reflection-feed": {
+    "engage": "Shiriki kwenye QuranReflect",
+    "follow": "Fuata",
+    "load-more": "Pakia Zaidi",
+    "sort": {
+      "label": "Panga tafakari kulingana na",
+      "latest": "Hivi karibuni",
+      "popular": "Maarufu"
+    }
+  },
   "reflection-languages": "Lugha za Tafakari",
   "reflection-not-available": "Hakuna tafakari zilizokaguliwa kwa aya hii",
   "reflections": "Tafakari",

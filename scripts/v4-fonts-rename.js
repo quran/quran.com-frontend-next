@@ -20,11 +20,14 @@ const path = require('path');
  */
 
 const FONT_DIRECTORIES = [
-  'COLRv1',
-  'COLRv1-Dark Mode Firefox',
-  'OT-SVG DARK',
-  'OT-SVG LIGHT',
-  'OT-SVG SEPIA',
+  { label: 'COLRv1', aliases: ['COLRv1'] },
+  {
+    label: 'COLRv1-Dark Mode Firefox',
+    aliases: ['COLRv1-Dark Mode Firefox', 'COLRv1 - Dark FF', 'COLRv1- DARK'],
+  },
+  { label: 'OT-SVG DARK', aliases: ['OT-SVG DARK', 'OT-SVG- DARK'] },
+  { label: 'OT-SVG LIGHT', aliases: ['OT-SVG LIGHT', 'OT-SVG- LIGHT'] },
+  { label: 'OT-SVG SEPIA', aliases: ['OT-SVG SEPIA', 'OT-SVG- SEPIA'] },
 ];
 
 const FORMAT_SUBDIRS = ['TTF', 'WOFF', 'WOFF2'];
@@ -90,6 +93,28 @@ function renameFilesInDirectory(dirPath) {
   return { renamed, skipped, notFound: false };
 }
 
+function renameFilesInThemeDirectory(themeDirPath) {
+  const total = { renamed: 0, skipped: 0, foundAtLeastOneDirectory: false };
+
+  const directoriesToProcess = [
+    themeDirPath,
+    ...FORMAT_SUBDIRS.map((dir) => path.join(themeDirPath, dir)),
+  ];
+
+  directoriesToProcess.forEach((dirPath) => {
+    const result = renameFilesInDirectory(dirPath);
+    if (result.notFound) {
+      return;
+    }
+
+    total.foundAtLeastOneDirectory = true;
+    total.renamed += result.renamed;
+    total.skipped += result.skipped;
+  });
+
+  return total;
+}
+
 function main() {
   const sourceBaseDir = process.argv[2];
 
@@ -116,28 +141,28 @@ function main() {
   let totalRenamed = 0;
   let totalSkipped = 0;
 
-  FONT_DIRECTORIES.forEach((fontDir) => {
-    const fontDirPath = path.join(sourceBaseDir, fontDir);
+  FONT_DIRECTORIES.forEach(({ label, aliases }) => {
+    const fontDirPath = aliases
+      .map((fontDir) => path.join(sourceBaseDir, fontDir))
+      .find((fullPath) => fs.existsSync(fullPath));
 
-    if (!fs.existsSync(fontDirPath)) {
-      console.log(`\n${fontDir}: not found, skipping`);
+    if (!fontDirPath) {
+      console.log(`\n${label}: not found, skipping`);
       return;
     }
 
-    console.log(`\n${fontDir}:`);
+    console.log(`\n${label}:`);
+    console.log(`  source: ${path.basename(fontDirPath)}`);
 
-    FORMAT_SUBDIRS.forEach((formatDir) => {
-      const fullPath = path.join(fontDirPath, formatDir);
-      const result = renameFilesInDirectory(fullPath);
+    const result = renameFilesInThemeDirectory(fontDirPath);
+    if (!result.foundAtLeastOneDirectory) {
+      console.log('  no files found');
+      return;
+    }
 
-      if (result.notFound) {
-        console.log(`  ${formatDir}: not found`);
-      } else {
-        console.log(`  ${formatDir}: renamed ${result.renamed}, skipped ${result.skipped}`);
-        totalRenamed += result.renamed;
-        totalSkipped += result.skipped;
-      }
-    });
+    console.log(`  renamed ${result.renamed}, skipped ${result.skipped}`);
+    totalRenamed += result.renamed;
+    totalSkipped += result.skipped;
   });
 
   console.log('');

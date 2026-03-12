@@ -1,42 +1,27 @@
 /* eslint-disable max-lines */
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, useDispatch } from 'react-redux';
 
 import { getReflectionTabs, handleReflectionViewed } from './helpers';
 import styles from './ReflectionBodyContainer.module.scss';
+import useQuranReflectFeed from './useQuranReflectFeed';
 
-import DataFetcher from '@/components/DataFetcher';
+import EbookBanner, { EbookBannerContext } from '@/components/Ebook/EbookBanner';
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
-import CompactSelector from '@/dls/CompactSelector';
+import StudyModeChapterBanner from '@/components/StudyMode/StudyModeChapterBanner';
+import Button, { ButtonShape, ButtonSize } from '@/dls/Button/Button';
 import Tabs from '@/dls/Tabs/Tabs';
-import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
-import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
-import {
-  selectReflectionLanguages,
-  setReflectionLanguages,
-  selectLessonLanguages,
-  setLessonLanguages,
-} from '@/redux/slices/QuranReader/readingPreferences';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import {
   fakeNavigate,
   getVerseLessonNavigationUrl,
   getVerseReflectionNavigationUrl,
 } from '@/utils/navigation';
-import {
-  LESSON_POST_TYPE_ID,
-  REFLECTION_POST_TYPE_ID,
-  makeAyahReflectionsUrl,
-} from '@/utils/quranReflect/apiPaths';
-import { getReflectionLanguageItems } from '@/utils/quranReflect/locale';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
-import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 import ContentType from 'types/QuranReflect/ContentType';
 
 const ReflectionSurahAndAyahSelection = dynamic(() => import('./ReflectionSurahAndAyahSelection'));
@@ -85,65 +70,26 @@ const ReflectionBodyContainer = ({
   }, [initialContentType]);
 
   const { lang, t } = useTranslation();
-  const dispatch = useDispatch();
-  const storedReflectionLanguages = useSelector(selectReflectionLanguages);
-  const storedLessonLanguages = useSelector(selectLessonLanguages);
-  const prevLangRef = useRef(lang);
-
-  // Get the appropriate languages based on content type
-  const selectedLanguages =
-    selectedContentType === ContentType.REFLECTIONS
-      ? storedReflectionLanguages
-      : storedLessonLanguages;
-
-  // Guest-only: keep reflection/lesson content languages aligned with the site locale
-  // unless the user customized those selections.
-  useEffect(() => {
-    const prevLang = prevLangRef.current;
-    if (prevLang === lang) return;
-    prevLangRef.current = lang;
-
-    // Logged-in users have persisted preferences; don't mutate them implicitly on locale change.
-    if (isLoggedIn()) return;
-
-    // Single source of truth for "follow locale unless customized" semantics.
-    dispatch(syncLocaleDependentSettings({ prevLocale: prevLang, nextLocale: lang }));
-  }, [lang, dispatch]);
-
   const {
-    actions: { onSettingsChange },
-  } = usePersistPreferenceGroup();
-
-  const handleLanguageChange = useCallback(
-    (newLanguages: string[]) => {
-      if (selectedContentType === ContentType.REFLECTIONS) {
-        onSettingsChange(
-          'selectedReflectionLanguages',
-          newLanguages,
-          setReflectionLanguages(newLanguages),
-          setReflectionLanguages(storedReflectionLanguages),
-          PreferenceGroup.READING,
-        );
-        dispatch(setReflectionLanguages(newLanguages));
-      } else {
-        onSettingsChange(
-          'selectedLessonLanguages',
-          newLanguages,
-          setLessonLanguages(newLanguages),
-          setLessonLanguages(storedLessonLanguages),
-          PreferenceGroup.READING,
-        );
-        dispatch(setLessonLanguages(newLanguages));
-      }
-    },
-    [
-      dispatch,
-      onSettingsChange,
-      selectedContentType,
-      storedReflectionLanguages,
-      storedLessonLanguages,
-    ],
-  );
+    items,
+    sortBy,
+    onSortChange,
+    sortOptions,
+    hasMore,
+    isLoading,
+    isLoadingMore,
+    error,
+    loadMore,
+    onLikeToggle,
+    onFollow,
+    retry,
+    isLikeLoading,
+    isFollowLoading,
+  } = useQuranReflectFeed({
+    chapterId: selectedChapterId,
+    verseNumber: selectedVerseNumber,
+    contentType: selectedContentType,
+  });
 
   const handleTabChange = (value: ContentType) => {
     logEvent('reflection_view_tab_change', { tab: value });
@@ -164,48 +110,50 @@ const ReflectionBodyContainer = ({
     'countAsViewedAfter',
   );
 
-  const renderBody = useCallback(
-    (data: AyahReflectionsResponse) => (
-      <ReflectionBody
-        data={data}
-        selectedChapterId={selectedChapterId}
-        selectedVerseNumber={selectedVerseNumber}
-        setSelectedVerseNumber={setSelectedVerseNumber}
-        scrollToTop={scrollToTop}
-        selectedContentType={selectedContentType}
-        isModal={isModal}
-        hideEndActions={!showEndActions}
-      />
-    ),
-    [
-      scrollToTop,
-      selectedChapterId,
-      selectedVerseNumber,
-      selectedContentType,
-      isModal,
-      showEndActions,
-    ],
-  );
-
-  const dataFetcher = (
-    <DataFetcher
-      loading={TafsirSkeleton}
-      queryKey={makeAyahReflectionsUrl({
-        surahId: selectedChapterId,
-        ayahNumber: selectedVerseNumber,
-        locales: selectedLanguages,
-        postTypeIds: [
-          selectedContentType === ContentType.REFLECTIONS
-            ? REFLECTION_POST_TYPE_ID
-            : LESSON_POST_TYPE_ID,
-        ],
-      })}
-      render={renderBody}
+  const bodyContent = (
+    <ReflectionBody
+      items={items}
+      selectedChapterId={selectedChapterId}
+      selectedVerseNumber={selectedVerseNumber}
+      setSelectedVerseNumber={setSelectedVerseNumber}
+      scrollToTop={scrollToTop}
+      selectedContentType={selectedContentType}
+      isModal={isModal}
+      hideEndActions={!showEndActions}
+      hasMore={hasMore}
+      isLoading={isLoading}
+      isLoadingMore={isLoadingMore}
+      error={error}
+      onLoadMore={loadMore}
+      onRetry={retry}
+      onLikeToggle={onLikeToggle}
+      onFollow={onFollow}
+      isLikeLoading={isLikeLoading}
+      isFollowLoading={isFollowLoading}
     />
   );
 
   const body = (
     <div className={styles.tabsContainerWrapper}>
+      <EbookBanner
+        disableDesktop
+        context={
+          initialContentType === ContentType.LESSONS
+            ? EbookBannerContext.LESSONS
+            : EbookBannerContext.REFLECTIONS
+        }
+        containerClassName={styles.bannerContainer}
+      />
+      <StudyModeChapterBanner
+        disableDesktop
+        chapterId={selectedChapterId}
+        containerClassName={styles.bannerContainer}
+        context={
+          initialContentType === ContentType.LESSONS
+            ? EbookBannerContext.LESSONS
+            : EbookBannerContext.REFLECTIONS
+        }
+      />
       {showTabs && (
         <Tabs
           tabs={getReflectionTabs(t, isModal)}
@@ -217,22 +165,38 @@ const ReflectionBodyContainer = ({
         />
       )}
       {isModal && showTabs ? (
-        <div className={styles.reflectionDataContainer}>{dataFetcher}</div>
+        <div className={styles.reflectionDataContainer}>{bodyContent}</div>
       ) : (
-        dataFetcher
+        bodyContent
       )}
     </div>
   );
 
   const languageSelection = (
-    <CompactSelector
-      id={`${selectedContentType}-languages`}
-      items={getReflectionLanguageItems()}
-      selectedValues={selectedLanguages}
-      onChange={handleLanguageChange}
-      isMultiSelect
-      minimumRequired={1}
-    />
+    <div
+      className={styles.sortChips}
+      role="group"
+      aria-label={t('quran-reader:reflection-feed.sort.label')}
+    >
+      {sortOptions.map((option) => (
+        <Button
+          key={option.id}
+          size={ButtonSize.XSmall}
+          shape={ButtonShape.Pill}
+          hasSidePadding={false}
+          className={classNames(styles.sortChip, {
+            [styles.sortChipSelected]: sortBy === option.id,
+            [styles.sortChipDefault]: sortBy !== option.id,
+          })}
+          contentClassName={styles.sortChipContent}
+          isSelected={sortBy === option.id}
+          aria-pressed={sortBy === option.id}
+          onClick={() => onSortChange(option.id)}
+        >
+          {option.label}
+        </Button>
+      ))}
+    </div>
   );
 
   return render({

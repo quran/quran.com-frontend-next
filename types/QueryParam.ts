@@ -5,6 +5,7 @@ enum QueryParam {
   WBW_LOCALE = 'wbw_locale',
   HIDE_ARABIC = 'hideArabic',
   FLOW = 'flow',
+  READING_MODE = 'readingMode',
   STARTING_VERSE = 'startingVerse',
   QUERY = 'query',
   QUERY_OLD = 'q',

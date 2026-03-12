@@ -199,6 +199,16 @@
   "reciter-summary": "(Con autorización del Centro Tafsir)",
   "referencing": "Referencias",
   "reflection-disclaimer": "Las reflexiones son perspectivas personales (revisadas por su calidad) y no deben tomarse como autorizadas.",
+  "reflection-feed": {
+    "engage": "Participa en QuranReflect",
+    "follow": "Seguir",
+    "load-more": "Cargar más",
+    "sort": {
+      "label": "Ordenar reflexiones por",
+      "latest": "El último",
+      "popular": "Popular"
+    }
+  },
   "reflection-languages": "Lenguajes de reflexión",
   "reflection-not-available": "No hay reflexiones revisadas para esta aleya",
   "reflections": "Reflexiones",

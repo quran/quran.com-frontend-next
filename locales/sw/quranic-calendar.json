@@ -4,6 +4,7 @@
   "ask-question": "Uliza Swali",
   "complete": "Imekamilika",
   "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} Wiki Zimekamilika",
+  "current": "Mkondo wa sasa",
   "divine-book-club": "The Divine Book Club",
   "divine-book-club-description": "Haya ni majadiliano mepesi ya kikundi ambayo hukusaidia kufuata muktadha wa usomaji wa kila wiki.",
   "end-of-calendar": "Mwisho wa Kalenda",
@@ -53,6 +54,10 @@
     {
       "answer": "Ndiyo. \"Qur'ani kwa Mwaka\" haina malipo yoyote, na tunakuhimiza kuishiriki na wengine. Alika marafiki, anzisha klabu ya kusoma, na uwasaidie watu wengine kukamilisha usomaji wao wa kwanza wa Qur'ani kikamilifu.",
       "question": "Je, hii ni bure? na ninaweza kuishiriki?"
+    },
+    {
+      "answer": "Ndiyo. \"Quran katika Mwaka\" ni bure kabisa, na tunakuhimiza uishiriki na wengine. Mwalike rafiki, anza klabu ya vitabu, na uwasaidie watu wengi zaidi kukamilisha usomaji wao kamili wa kwanza wa Quran.",
+      "question": "Je, hii ni bure? Je, ninaweza kuishiriki?"
     }
   ],
   "hero": {
@@ -93,6 +98,9 @@
   "quran-calendar-title": "Qur'ani kwa Mwaka—Mpango Rahisi wa Kusoma na Kuelewa Qur'ani Nzima",
   "quran-reflect": "Quranreflect",
   "quran-reflect-description": "Shirikiana na wengine kuhusiana na Aya ulizosoma wiki hii.",
+  "quran-space-cta": "Unda Nafasi",
+  "quran-space-description": "Unda au jiunge na kikundi cha kujifunza cha moja kwa moja na marafiki na familia kwa ajili ya Quran ndani ya Mwaka.",
+  "quran-space-title": "<quran>Quran</quran> Nafasi",
   "quranic-calendar": "Qur'ani kwa Mwaka",
   "ramadan": "Ramadhani",
   "read-online": "Soma Mtandaoni",

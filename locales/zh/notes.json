@@ -8,14 +8,11 @@
     },
     "post-button": "我发帖后会发生什么？",
     "qr-intro": "QuranReflect 和 Quran.com 都是 Quran.Foundation 家族的一部分。它是一个社交平台，用于分享个人对《古兰经》的看法，鼓励用户内化其信息并分享激发积极变革的见解。与学术解释不同，反思是与诗句相关的个人想法和经历。 QuranReflect 上的用户帖子由合格的团队进行审核和审核，他们将帮助确保内容质量和与《古兰经》互动时的礼仪，他们将通过分享反馈和突出有价值的话语来增强用户的能力，从而培育一个精神振奋、以《古兰经》为中心的社区。了解更多： <link> Quranreflect.com/faq </link>",
-    "qr-title": "QuranReflect是什么？",
-    "title": "QuranReflect是什么？如果我勾选这个复选框会发生什么？"
+    "qr-title": "QuranReflect是什么？"
   },
-  "click-to-see-more": "点击查看更多",
-  "delete-note": "删除注释",
   "delete-note-modal": {
-    "subtitle": "您确定要删除该注释吗？",
-    "title": "删除注释"
+    "subtitle": "您确定要删除此笔记吗？",
+    "title": "删除笔记"
   },
   "delete-success": "注释已成功删除",
   "edit-note": "编辑说明",
@@ -44,17 +41,13 @@
     }
   },
   "note": "笔记",
-  "notes-and-reflcs": "笔记与思考",
   "notes-on-this-verse": "{{count}} 关于这节诗的注释",
   "post-confirmation": {
     "question": "您确定要将这篇反思文章发布到 QuranReflect 吗？"
   },
-  "post-on-qr": "发表在《古兰经反思》上",
   "post-to": "发布到",
   "posted-reflections": "发表感言",
   "private-notes": "笔记",
-  "qr-tooltip": "<span> <link> QuranReflect </link>是一个分享对《古兰经》反思的社交平台。围绕《古兰经》进行联系，与重要的事情联系起来。 </span>",
-  "reflection-update-success": "反射已成功更新",
   "reflections-intro": {
     "line-1": "要查看评论并与之互动、与社区互动以及执行更多操作，请访问<link> QuranReflect.com </link> 。",
     "line-2": "您可以通过登录或注册时使用的同一 Quran.com 电子邮件地址来登录链接的 QuranReflect 帐户。",
@@ -65,11 +58,8 @@
   "save-privately": "私下保存",
   "save-publish-failed": "备注已保存成功但发布失败",
   "save-success": "注释已成功保存",
-  "share-to-qr": "分享到 QuranReflect.com",
-  "share-to-qr-desc": "分享为<b> {{name}} </b> 。受众是<b> QuranReflect 用户</b>",
   "take-a-note-or-reflection": "记笔记或反思",
   "update-publish-failed": "备注已更新成功但发布失败",
-  "update-reflection": "更新反射",
   "update-success": "备注已更新成功",
   "view-on-qr": "查看《古兰经反思》"
 }

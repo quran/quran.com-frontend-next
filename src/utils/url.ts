@@ -34,6 +34,17 @@ export type QueryParamValue = string | string[] | undefined;
 export const normalizeQueryParam = (param: QueryParamValue): string | undefined =>
   Array.isArray(param) ? param[0] : param;
 
+export const getQueryParamValueFromAsPath = (
+  asPath: string | undefined,
+  queryParam: string,
+): string | undefined => {
+  const queryString = asPath?.split('?')[1]?.split('#')[0];
+  if (!queryString) return undefined;
+
+  const value = new URLSearchParams(queryString).get(queryParam);
+  return value ?? undefined;
+};
+
 /**
  * Navigate programmatically to an external url. we will try to open
  * the url in a new tab and if it doesn't work due to pop-ups being blocked,

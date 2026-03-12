@@ -4,6 +4,7 @@
   "ask-question": "Đặt câu hỏi",
   "complete": "Hoàn thành",
   "completed-weeks": "{{completedWeeks}}/{{totalWeeks}} Số tuần đã hoàn thành",
+  "current": "Hiện hành",
   "divine-book-club": "The Divine Book Club",
   "divine-book-club-description": "Đây là buổi thảo luận nhóm nhẹ nhàng giúp bạn theo kịp bối cảnh bài đọc hàng tuần.",
   "end-of-calendar": "Hết lịch",
@@ -53,6 +54,10 @@
     {
       "answer": "Vâng. \"Đọc Kinh Qur'an trong một năm\" hoàn toàn miễn phí, hãy thoải mái chia sẻ với mọi người và rủ bạn bè cùng đọc.",
       "question": "Miễn phí à? Tôi được chia sẻ chứ?"
+    },
+    {
+      "answer": "Vâng. \"Đọc Kinh Qur'an trong một năm\" hoàn toàn miễn phí, và chúng tôi khuyến khích bạn chia sẻ nó với người khác. Mời bạn bè, thành lập câu lạc bộ đọc sách và giúp nhiều người hơn hoàn thành lần đọc Kinh Qur'an đầu tiên của họ.",
+      "question": "Cái này miễn phí à? Tôi có thể chia sẻ không?"
     }
   ],
   "hero": {
@@ -93,6 +98,9 @@
   "quran-calendar-title": "Đọc Kinh Qur'an trong một năm – Kế hoạch đơn giản để đọc và hiểu trọn bộ Kinh Qur'an",
   "quran-reflect": "QuranReflect",
   "quran-reflect-description": "Trao đổi với người khác về các câu kinh bạn đã đọc tuần này.",
+  "quran-space-cta": "Tạo một không gian",
+  "quran-space-description": "Hãy tạo hoặc tham gia nhóm học trực tuyến cùng bạn bè và gia đình để cùng nhau học Kinh Qur'an trong một năm.",
+  "quran-space-title": "<quran>Kinh Qur'an</quran> Không gian",
   "quranic-calendar": "Đọc Kinh Qur'an trong một năm",
   "ramadan": "Ramadan",
   "read-online": "Đọc trực tuyến",

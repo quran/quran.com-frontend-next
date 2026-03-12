@@ -4,6 +4,7 @@
   "ask-question": "Bëj një pyetje",
   "complete": "E plotësuar",
   "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} Javë të përfunduara",
+  "current": "Aktual",
   "divine-book-club": "Klubi i Librit Hyjnor",
   "divine-book-club-description": "Ky është një diskutim i lehtë në grup i cili ju ndihmon të ndiqni kontekstin e leximit të çdo jave.",
   "end-of-calendar": "Fundi i kalendarit",
@@ -53,6 +54,10 @@
     {
       "answer": "po. \"Kurani në një vit\" është plotësisht falas dhe ju inkurajojmë ta ndani atë me të tjerët. Fto një mik, hap një klub librash dhe ndihmo më shumë njerëz të përfundojnë leximin e parë të plotë të Kuranit.",
       "question": "A është kjo falas? A mund ta ndaj?"
+    },
+    {
+      "answer": "Po. \"Kurani në një vit\" është plotësisht falas dhe ju inkurajojmë ta ndani atë me të tjerët. Ftoni një mik, filloni një klub libri dhe ndihmoni më shumë njerëz të përfundojnë leximin e tyre të parë të plotë të Kuranit.",
+      "question": "A është falas? A mund ta ndaj me të tjerët?"
     }
   ],
   "hero": {
@@ -93,6 +98,9 @@
   "quran-calendar-title": "Kurani në një vit – Një plan i thjeshtë për të lexuar dhe kuptuar të gjithë Kuranin",
   "quran-reflect": "Kurani Reflekto",
   "quran-reflect-description": "Angazhohuni me të tjerët në lidhje me vargjet që keni lexuar këtë javë.",
+  "quran-space-cta": "Krijo një hapësirë",
+  "quran-space-description": "Krijo ose bashkohu me një rreth studimi të drejtpërdrejtë me miqtë dhe familjen për Kuranin brenda një viti.",
+  "quran-space-title": "<quran>Kurani</quran> Hapësirë",
   "quranic-calendar": "Kalendari Global Kur'anor",
   "ramadan": "Ramazani",
   "read-online": "Lexoni në internet",

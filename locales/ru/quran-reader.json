@@ -199,6 +199,16 @@
   "reciter-summary": "(С любезного разрешения Центра Тафсир)",
   "referencing": "Ссылка",
   "reflection-disclaimer": "Размышления не отражают мнение Quran.com и не должны быть вырваны из контекста.",
+  "reflection-feed": {
+    "engage": "Примите участие в обсуждениях на QuranReflect",
+    "follow": "Следовать",
+    "load-more": "Загрузить ещё",
+    "sort": {
+      "label": "Сортировать отражения по",
+      "latest": "Последний",
+      "popular": "Популярный"
+    }
+  },
   "reflection-languages": "Языки рефлексии",
   "reflection-not-available": "Для этого аята нет проверенных размышлений",
   "reflections": "Размышления",

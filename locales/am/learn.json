@@ -63,9 +63,13 @@
   "reflection-description-1": "\"እይታዎን ያክሉ\" ን ጠቅ ማድረግ ስለ ቁርኣን ሃሳብዎን መስጫ ወደሆነው QuranReflect ይወስደዎታል። ሃሳቦች(አስተያየቶች) ከተፍሲር (የሊቃውንት ትርጓሜ) በተቃራኒ ከጥቅሶቹ ጋር የተያያዙ ግላዊ ግንዛቤዎች እና ልምዶች ናቸው።",
   "reflection-description-2": "በይፋ ከለጠፉ፣ የእርስዎ አስተያየት በአወያይ ቡድን ይገመገማል እና QuranReflect ማህበረሰብ ይታያል።",
   "repeat-learning-plan": "የተደጋጋሚ የመማሪያ እቅድ",
+  "share": "አጋራ",
+  "share-title": "አጋራ፡",
   "start-here": "እዚህ ጀምር",
+  "start-learning": "መማር ጀምር",
   "tabs": {
     "main": "ዋና ዝርዝሮች",
+    "outline": "ዝርዝር",
     "syllabus": "የትምህርት መርሃ ግብር"
   },
   "what-happens-when-you-click-add-reflection": "\"እይታዎን ያክሉ\" የሚለውን ጠቅ ሲያደርጉ ምን ይከሰታል?"

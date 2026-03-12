@@ -6,6 +6,7 @@ import styles from './FAQ.module.scss';
 
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import QuestionIcon from '@/icons/question.svg';
+import { logButtonClick } from '@/utils/eventLogger';
 
 const FAQ: React.FC = () => {
   const { t } = useTranslation('quranic-calendar');
@@ -20,6 +21,7 @@ const FAQ: React.FC = () => {
     : []; // Fallback to empty array if not an array
 
   const toggleItem = (id: number) => {
+    logButtonClick('quranic_calendar_faq_item');
     setOpenItemId(openItemId === id ? null : id);
   };
 

@@ -8,14 +8,11 @@
     },
     "post-button": "Paylaşım yaptığımda ne oluyor?",
     "qr-intro": "QuranReflect, Quran.com ile birlikte Quran.Foundation ailesinin bir parçasıdır. Kuran hakkındaki kişisel düşüncelerin paylaşıldığı, kullanıcıların Kur'an'ın mesajlarını içselleştirmesine ve olumlu değişime ilham veren içgörüleri paylaşmaya teşvik ettiği sosyal bir platformdur. İlmî bir yorum olan tefsirden farklı olarak yansımalar, ayetlerle ilgili kişisel düşünce ve tecrübelerdir. QuranReflect'teki kullanıcı gönderileri, içeriğin kalitesinin ve Kuran'la etkileşimde görgü kurallarının sağlanmasına yardımcı olacak nitelikli bir ekip tarafından incelenir ve denetlenir ve geri bildirimleri paylaşarak ve değerli söylemi vurgulayarak kullanıcıları güçlendirerek manevi açıdan canlandırıcı, Kuran odaklı bir topluluğa teşvik eder. Daha fazla bilgi edinin: <link> Quranreflect.com/faq </link>",
-    "qr-title": "QuranReflect nedir?",
-    "title": "QuranReflect nedir ve bu kutuyu işaretlersem ne olur?"
+    "qr-title": "QuranReflect nedir?"
   },
-  "click-to-see-more": "Daha fazlasını görmek için tıklayın",
-  "delete-note": "Notu sil",
   "delete-note-modal": {
-    "subtitle": "Notu silmek istediğinizden emin misiniz?",
-    "title": "Notu sil"
+    "subtitle": "Bu notu silmek istediğinizden emin misiniz?",
+    "title": "Notu Sil"
   },
   "delete-success": "Not başarıyla silindi",
   "edit-note": "Düzenleme Notu",
@@ -44,17 +41,13 @@
     }
   },
   "note": "Not",
-  "notes-and-reflcs": "Notlar ve Düşünceler",
   "notes-on-this-verse": "{{count}} bu ayetle ilgili notlar",
   "post-confirmation": {
     "question": "Bu düşünceyi QuranReflect'te yayınlamak istediğinizden emin misiniz?"
   },
-  "post-on-qr": "KuranReflect'te yayınlayın",
   "post-to": "Gönder",
   "posted-reflections": "Yayınlanan Düşünceler",
   "private-notes": "Notlar",
-  "qr-tooltip": "<span> <link> QuranReflect </link> Kuran hakkındaki düşüncelerin paylaşıldığı sosyal bir platformdur. Kuran cercevesinde bağlantı kurun, önemli olanla bağlantı kurun. </span>",
-  "reflection-update-success": "tefekkur yansımasi başarıyla güncellendi",
   "reflections-intro": {
     "line-1": "Yorumları görüntülemek ve onlarla etkileşimde bulunmak, toplulukla etkileşimde bulunmak ve daha fazlasını yapmak için <link> QuranReflect.com </link> adresini ziyaret edin.",
     "line-2": "Oturum açarken kullandığınız Quran.com e-posta adresiyle oturum açarak veya kaydolarak bağlantılı KuranReflect hesabınızda oturum açabilirsiniz.",
@@ -65,11 +58,8 @@
   "save-privately": "Özel Olarak Kaydet",
   "save-publish-failed": "Not başarıyla kaydedildi ancak yayınlanamadı",
   "save-success": "Not başarıyla kaydedildi",
-  "share-to-qr": "KuranReflect.com'da paylaşın",
-  "share-to-qr-desc": "<b> {{name}} </b> olarak paylaşın. Hedef kitle: <b> QuranReflect kullanıcıları </b>",
   "take-a-note-or-reflection": "Not Alın veya Düşünün",
   "update-publish-failed": "Not başarıyla güncellendi ancak yayınlanamadı",
-  "update-reflection": "Güncelleme Yansıması",
   "update-success": "Not başarıyla güncellendi",
   "view-on-qr": "KuranReflect'te görüntüle"
 }

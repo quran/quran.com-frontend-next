@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
@@ -18,6 +19,8 @@ export type StudyModeState = {
   highlightedWordLocation: string | null;
   previousState: PreviousStudyModeState | null;
   showPinnedSection: boolean;
+  isLessonsChapterBannerVisible: boolean;
+  isReflectionsChapterBannerVisible: boolean;
 };
 
 export const initialState: StudyModeState = {
@@ -28,6 +31,8 @@ export const initialState: StudyModeState = {
   highlightedWordLocation: null,
   previousState: null,
   showPinnedSection: false,
+  isLessonsChapterBannerVisible: true,
+  isReflectionsChapterBannerVisible: true,
 };
 
 export type OpenStudyModePayload = {
@@ -56,6 +61,8 @@ const studyMode = createSlice({
         highlightedWordLocation: payload.highlightedWordLocation ?? null,
         previousState: state.previousState,
         showPinnedSection: payload.showPinnedSection ?? false,
+        isLessonsChapterBannerVisible: state.isLessonsChapterBannerVisible,
+        isReflectionsChapterBannerVisible: state.isReflectionsChapterBannerVisible,
       };
     },
     openStudyModeSsr: (state, { payload }: PayloadAction<OpenStudyModePayload>) => {
@@ -67,13 +74,23 @@ const studyMode = createSlice({
         highlightedWordLocation: payload.highlightedWordLocation ?? null,
         previousState: state.previousState,
         showPinnedSection: payload.showPinnedSection ?? false,
+        isLessonsChapterBannerVisible: state.isLessonsChapterBannerVisible,
+        isReflectionsChapterBannerVisible: state.isReflectionsChapterBannerVisible,
       };
     },
-    closeStudyMode: () => {
-      return initialState;
+    closeStudyMode: (state) => {
+      return {
+        ...initialState,
+        isLessonsChapterBannerVisible: state.isLessonsChapterBannerVisible,
+        isReflectionsChapterBannerVisible: state.isReflectionsChapterBannerVisible,
+      };
     },
-    resetStudyModeState: () => {
-      return initialState;
+    resetStudyModeState: (state) => {
+      return {
+        ...initialState,
+        isLessonsChapterBannerVisible: state.isLessonsChapterBannerVisible,
+        isReflectionsChapterBannerVisible: state.isReflectionsChapterBannerVisible,
+      };
     },
     setActiveTab: (state, { payload }: PayloadAction<StudyModeTabId | null>) => {
       return { ...state, activeTab: payload };
@@ -86,7 +103,11 @@ const studyMode = createSlice({
     },
     saveAndCloseStudyMode: (state) => {
       if (!state.verseKey) {
-        return initialState;
+        return {
+          ...initialState,
+          isLessonsChapterBannerVisible: state.isLessonsChapterBannerVisible,
+          isReflectionsChapterBannerVisible: state.isReflectionsChapterBannerVisible,
+        };
       }
       return {
         ...initialState,
@@ -95,6 +116,8 @@ const studyMode = createSlice({
           activeTab: state.activeTab,
           highlightedWordLocation: state.highlightedWordLocation,
         },
+        isLessonsChapterBannerVisible: state.isLessonsChapterBannerVisible,
+        isReflectionsChapterBannerVisible: state.isReflectionsChapterBannerVisible,
       };
     },
     restoreStudyMode: (state) => {
@@ -109,6 +132,8 @@ const studyMode = createSlice({
         highlightedWordLocation: state.previousState.highlightedWordLocation,
         previousState: null,
         showPinnedSection: state.showPinnedSection,
+        isLessonsChapterBannerVisible: state.isLessonsChapterBannerVisible,
+        isReflectionsChapterBannerVisible: state.isReflectionsChapterBannerVisible,
       };
     },
     clearPreviousState: (state) => {
@@ -116,6 +141,12 @@ const studyMode = createSlice({
         ...state,
         previousState: null,
       };
+    },
+    setIsLessonsChapterBannerVisible: (state, { payload }: PayloadAction<boolean>) => {
+      return { ...state, isLessonsChapterBannerVisible: payload };
+    },
+    setIsReflectionsChapterBannerVisible: (state, { payload }: PayloadAction<boolean>) => {
+      return { ...state, isReflectionsChapterBannerVisible: payload };
     },
   },
 });
@@ -130,6 +161,10 @@ export const selectStudyModeHighlightedWordLocation = (state: RootState) =>
 export const selectStudyModePreviousState = (state: RootState) => state.studyMode.previousState;
 export const selectStudyModeShowPinnedSection = (state: RootState) =>
   state.studyMode.showPinnedSection;
+export const selectIsLessonsChapterBannerVisible = (state: RootState) =>
+  state.studyMode.isLessonsChapterBannerVisible ?? true;
+export const selectIsReflectionsChapterBannerVisible = (state: RootState) =>
+  state.studyMode.isReflectionsChapterBannerVisible ?? true;
 
 export const {
   openStudyMode,
@@ -142,5 +177,7 @@ export const {
   saveAndCloseStudyMode,
   restoreStudyMode,
   clearPreviousState,
+  setIsLessonsChapterBannerVisible,
+  setIsReflectionsChapterBannerVisible,
 } = studyMode.actions;
 export default studyMode.reducer;

@@ -6,10 +6,10 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import useDebounceNavbarVisibility from '@/hooks/useDebounceNavbarVisibility';
 import useGetMushaf from '@/hooks/useGetMushaf';
+import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
-import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import {
   selectIsSidebarNavigationVisible,
@@ -23,6 +23,7 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { isMobile } from '@/utils/responsive';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
+import QueryParam from 'types/QueryParam';
 /**
  * Custom hook to manage all state logic for the ContextMenu component
  * @returns {object} An object containing state, data, translations, and event handlers for the ContextMenu
@@ -39,7 +40,8 @@ const useContextMenuState = () => {
 
   const { isActive } = useOnboarding();
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
-  const readingPreference = useSelector(selectReadingPreference);
+  const { value: readingPreference }: { value: ReadingPreference; isQueryParamDifferent: boolean } =
+    useGetQueryParamOrReduxValue(QueryParam.READING_MODE);
   const isTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;
 
   // Use the shared hook to debounce navbar visibility changes

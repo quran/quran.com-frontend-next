@@ -71,6 +71,7 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
 
   const {
     isDeleteModalOpen,
+    isDeleting,
     handleCopy,
     handleShare,
     handleDelete,
@@ -156,6 +157,7 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
         collectionName={collectionName}
         onCancel={handleDeleteCancel}
         onConfirm={handleDeleteConfirm}
+        isLoading={isDeleting}
       />
     </>
   );

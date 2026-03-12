@@ -8,14 +8,11 @@
     },
     "post-button": "Apa yang terjadi ketika saya memposting?",
     "qr-intro": "QuranReflect, bersama dengan Quran.com, adalah bagian dari keluarga Quran.Foundation. Ini adalah platform sosial untuk berbagi refleksi pribadi tentang Al-Qur'an, mendorong pengguna untuk menginternalisasi pesan-pesannya dan berbagi wawasan  dan pemahaman yang menginspirasi perubahan positif. Berbeda dengan tafsir yang merupakan tafsir ilmiah, renungan merupakan pemikiran dan pengalaman pribadi yang berkaitan dengan ayat tersebut. Postingan pengguna ke QuranReflect ditinjau dan dimoderatori oleh tim yang berkualifikasi, yang akan membantu memastikan kualitas konten, etika ketika berinteraksi dengan Al-Qur'an, dan mereka akan memberdayakan pengguna dengan berbagi umpan balik dan menyoroti wacana yang bernilai sehingga menumbuhkan komunitas yang memiliki semangat spiritual yang berfokus pada Al-Qur'an . Pelajari lebih lanjut: <link> Quranreflect.com/faq </link>",
-    "qr-title": "Apa itu QuranReflect?",
-    "title": "Apa itu QuranReflect dan apa yang terjadi jika saya mencentang kotak ini?"
+    "qr-title": "Apa itu QuranReflect?"
   },
-  "click-to-see-more": "klik untuk melihat lebih lanjut",
-  "delete-note": "Hapus catatan",
   "delete-note-modal": {
-    "subtitle": "Anda yakin ingin menghapus catatan tersebut?",
-    "title": "Hapus catatan"
+    "subtitle": "Apakah Anda yakin ingin menghapus catatan ini?",
+    "title": "Hapus Catatan"
   },
   "delete-success": "Catatan berhasil dihapus",
   "edit-note": "Catatan Pengeditan",
@@ -44,17 +41,13 @@
     }
   },
   "note": "Catatan",
-  "notes-and-reflcs": "Catatan & Refleksi",
   "notes-on-this-verse": "{{count}} catatan tentang ayat ini",
   "post-confirmation": {
     "question": "Apakah Anda yakin ingin memposting Renungan ini ke QuranReflect?"
   },
-  "post-on-qr": "Posting di QuranReflect",
   "post-to": "Kirim ke",
   "posted-reflections": "Refleksi yang Diposting",
   "private-notes": "Catatan",
-  "qr-tooltip": "<span> <link> QuranReflect </link> adalah platform sosial untuk berbagi refleksi tentang Al-Qur'an. Terhubung dengan Al-Qur'an, terhubung dengan hal-hal yang penting. </span>",
-  "reflection-update-success": "Refleksi telah berhasil diperbarui",
   "reflections-intro": {
     "line-1": "Untuk melihat dan berinteraksi dengan komentar, terlibat dengan komunitas, dan melakukan lebih banyak hal, kunjungi <link> QuranReflect.com </link> .",
     "line-2": "Anda dapat masuk ke akun QuranReflect Anda yang tertaut dengan melakukan login atau mendaftar menggunakan email Quran.com yang sama dengan yang digunakan saat masuk.",
@@ -65,11 +58,8 @@
   "save-privately": "Simpan Secara Pribadi",
   "save-publish-failed": "Catatan berhasil disimpan tetapi gagal dipublikasikan",
   "save-success": "Catatan berhasil disimpan",
-  "share-to-qr": "Bagikan ke QuranReflect.com",
-  "share-to-qr-desc": "Bagikan sebagai <b> {{name}} </b> . Pembacanya adalah <b> pengguna QuranReflect </b>",
   "take-a-note-or-reflection": "Buat Catatan atau Refleksi",
   "update-publish-failed": "Catatan berhasil diperbarui tetapi gagal dipublikasikan",
-  "update-reflection": "Perbarui Refleksi",
   "update-success": "Catatan berhasil diperbarui",
   "view-on-qr": "Lihat di QuranReflect"
 }

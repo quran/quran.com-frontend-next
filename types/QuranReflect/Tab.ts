@@ -4,6 +4,7 @@ enum Tab {
   Newest = 'newest',
   Feed = 'feed',
   Public = 'public',
+  QDC = 'qdc',
 }
 
 export default Tab;

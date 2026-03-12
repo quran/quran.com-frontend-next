@@ -29,7 +29,7 @@ type CollectionDetailProps = {
   bookmarks: Bookmark[];
   emptyMessage?: string;
 
-  onItemDeleted?: (bookmarkId: string) => void;
+  onItemDeleted?: (bookmarkId: string) => Promise<void>;
   onShareVerse?: (verseKey: string) => void;
   onBack?: () => void;
 

@@ -4,6 +4,7 @@ export const COLOR_MAP = {
   transparent: ['#ffffff', 'transparent'],
   blue: ['#a4c2f4', 'blue'],
   orange: ['#f5e2cd', 'orange'],
+  lavender: ['#cdcff5', 'lavender'],
 };
 
 export function getColorClass(id: string) {

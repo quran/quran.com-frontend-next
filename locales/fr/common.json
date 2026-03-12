@@ -161,6 +161,18 @@
   "donate_monthly": "Faire un don mensuel",
   "donate_once": "Faire un don",
   "done": "Fait",
+  "ebook": {
+    "cta": {
+      "sign-up": "Inscrivez-vous maintenant",
+      "subscribe": "S'abonner",
+      "subscribed": "Abonné"
+    },
+    "descriptions": {
+      "line1": "📖 Recevez gratuitement un e-book sur les réflexions concernant la sourate Al-Mulk après le Ramadan",
+      "line2": "✨ Ajoutez vos réflexions avant le 19 mars pour avoir une chance de voir votre réflexion incluse !"
+    },
+    "title": "Livre électronique gratuit de réflexions"
+  },
   "edit": "Modifier",
   "email-verification": {
     "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez vos spams",
@@ -493,6 +505,15 @@
     "sort": "Trier"
   },
   "stay-on-track": "🎯 Restez sur la bonne voie !",
+  "study-mode-chapter-banner": {
+    "cta": "Ajoutez votre réflexion",
+    "descriptions": {
+      "line1": "✍️ Rédigez une réflexion sur un ou plusieurs versets de la sourate Al-Mulk",
+      "line2": "✨ Ajoutez #AlMulkReflections à votre publication"
+    },
+    "footer": "Une sélection de réflexions sera incluse dans l'eBook. Veuillez soumettre votre réflexion avant le 19 mars à 23h59 UTC.",
+    "title": "Réflexions sur la sourate Al-Mulk (livre numérique)"
+  },
   "style": "Style",
   "submit": "Soumettre",
   "subscribe": "S'abonner",

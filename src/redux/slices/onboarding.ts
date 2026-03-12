@@ -25,6 +25,7 @@ export type OnboardingState = {
       }
     >
   >;
+  afterOnboardingRedirect: string | null;
 };
 
 const initialState: OnboardingState = {
@@ -36,6 +37,7 @@ const initialState: OnboardingState = {
     index: 0,
   },
   completedGroups: {},
+  afterOnboardingRedirect: null,
 };
 
 export const onboardingSlice = createSlice({
@@ -85,13 +87,23 @@ export const onboardingSlice = createSlice({
         },
       };
     },
+    setAfterOnboardingRedirect: (state: OnboardingState, action: PayloadAction<string | null>) => ({
+      ...state,
+      afterOnboardingRedirect: action.payload,
+    }),
   },
 });
 
-export const { dismissChecklist, setIsChecklistVisible, setActiveStepIndex } =
-  onboardingSlice.actions;
+export const {
+  dismissChecklist,
+  setIsChecklistVisible,
+  setActiveStepIndex,
+  setAfterOnboardingRedirect,
+} = onboardingSlice.actions;
 
 export const selectOnboarding = (state: RootState) => state.onboarding;
 export const selectOnboardingActiveStep = (state: RootState) => state.onboarding.activeStep;
+export const selectAfterOnboardingRedirect = (state: RootState) =>
+  state.onboarding.afterOnboardingRedirect ?? null;
 
 export default onboardingSlice.reducer;

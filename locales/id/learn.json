@@ -63,9 +63,13 @@
   "reflection-description-1": "Dengan mengklik \"Tambahkan Refleksi\", Anda akan diarahkan ke QuranReflect, sebuah platform untuk berbagi refleksi pribadi tentang Al-Quran. Tidak seperti Tafsir (interpretasi ilmiah), refleksi adalah pemahaman dan pengalaman pribadi yang terkait dengan ayat-ayat tersebut.",
   "reflection-description-2": "Jika Anda memposting secara publik, refleksi Anda akan dinilai oleh tim moderator dan dapat dilihat oleh komunitas QuranReflect.",
   "repeat-learning-plan": "Rencana Pembelajaran Berulang",
+  "share": "Membagikan",
+  "share-title": "Membagikan:",
   "start-here": "Mulai di sini",
+  "start-learning": "Mulai Belajar",
   "tabs": {
     "main": "Detail Utama",
+    "outline": "Garis besar",
     "syllabus": "Silabus"
   },
   "what-happens-when-you-click-add-reflection": "Apa yang terjadi ketika Anda mengeklik \"Tambahkan Refleksi\"?"

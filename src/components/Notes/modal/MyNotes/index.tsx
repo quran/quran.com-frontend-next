@@ -3,17 +3,16 @@ import useTranslation from 'next-translate/useTranslation';
 
 import modalStyles from '../Modal.module.scss';
 
+import DeleteNoteModal from '@/components/Notes/modal/DeleteNoteModal';
 import useDeleteNote from '@/components/Notes/modal/hooks/useDeleteNote';
 import usePostNoteToQR from '@/components/Notes/modal/hooks/usePostNoteToQr';
 import MyNotes from '@/components/Notes/modal/MyNotes/MyNotes';
 import myNotesStyles from '@/components/Notes/modal/MyNotes/MyNotes.module.scss';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
-import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import ArrowIcon from '@/icons/arrow.svg';
 import { Note } from '@/types/auth/Note';
-import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { toLocalizedNumber } from '@/utils/locale';
 
 interface MyNotesModalProps {
@@ -45,8 +44,14 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
     handleNotePostToQR,
   } = usePostNoteToQR({ flushNotesList: true });
 
-  const { showDeleteConfirmation, noteToDelete, isDeletingNote, handleDeleteNoteClick } =
-    useDeleteNote({ flushNotesList: true });
+  const {
+    showDeleteConfirmation,
+    noteToDelete,
+    isDeletingNote,
+    handleDeleteNoteClick,
+    handleDeleteNoteConfirm,
+    handleDeleteNoteCancel,
+  } = useDeleteNote({ flushNotesList: true });
 
   return (
     <>
@@ -99,7 +104,13 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
         onConfirm={handleNotePostToQR}
       />
 
-      {isOpen && <ConfirmationModal zIndexVariant={ZIndexVariant.ULTRA} />}
+      <DeleteNoteModal
+        isOpen={isOpen && showDeleteConfirmation}
+        isLoading={isDeletingNote}
+        onConfirm={handleDeleteNoteConfirm}
+        onCancel={handleDeleteNoteCancel}
+        onBack={handleDeleteNoteCancel}
+      />
     </>
   );
 };

@@ -199,6 +199,16 @@
   "reciter-summary": "(Avec l'aimable autorisation du Centre Tafsir)",
   "referencing": "Référencement",
   "reflection-disclaimer": "Les réflexions sont des points de vue personnels (révisées dans un souci de qualité), et ne doivent pas être prises comme des vérités absolues.",
+  "reflection-feed": {
+    "engage": "Participez à QuranReflect",
+    "follow": "Suivre",
+    "load-more": "Charger plus",
+    "sort": {
+      "label": "Trier les réflexions par",
+      "latest": "Dernier",
+      "popular": "Populaire"
+    }
+  },
   "reflection-languages": "Langages de Réflexion",
   "reflection-not-available": "Il n'y a pas de réflexions révisées pour cette Ayah",
   "reflections": "Réflexions",

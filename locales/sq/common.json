@@ -161,6 +161,18 @@
   "donate_monthly": "Dhuroni çdo muaj",
   "donate_once": "Dhuroni një herë",
   "done": "U krye",
+  "ebook": {
+    "cta": {
+      "sign-up": "Regjistrohu Tani",
+      "subscribe": "Abonohu",
+      "subscribed": "I abonuar"
+    },
+    "descriptions": {
+      "line1": "📖 Merrni një libër elektronik falas mbi Suren El-Mulk Reflektime pas Ramazanit",
+      "line2": "✨ Shtoni Reflektimet tuaja deri më 19 Mars për një shans që Reflektimi juaj të përfshihet!"
+    },
+    "title": "Libër elektronik falas \"Reflektime\""
+  },
   "edit": "Redakto",
   "email-verification": {
     "check-spam": "Nuk e morët emailin e verifikimit? Kontrolloni kutinë tuaj të postës së padëshiruar",
@@ -493,6 +505,15 @@
     "sort": "Rendit"
   },
   "stay-on-track": "🎯 Qëndroni në rrugën e duhur!",
+  "study-mode-chapter-banner": {
+    "cta": "Shtoni reflektimin tuaj",
+    "descriptions": {
+      "line1": "✍️ Shkruani një reflektim mbi një ajet/ajete të Sures El-Mulk",
+      "line2": "✨ Shto #AlMulkReflections në postimin tënd"
+    },
+    "footer": "Disa Reflektime të zgjedhura do të përfshihen në librin elektronik. Shtoni reflektimin tuaj deri më 19 mars, ora 23:59 UTC.",
+    "title": "Libri elektronik Reflektime të Surahut Al-Mulk"
+  },
   "style": "Stili",
   "submit": "Paraqisni",
   "subscribe": "Abonohu",

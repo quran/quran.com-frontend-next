@@ -5,7 +5,6 @@ import { useSWRConfig } from 'swr';
 
 import { CacheAction, invalidateCache } from '@/components/Notes/modal/utility/cache';
 import DataContext from '@/contexts/DataContext';
-import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
@@ -19,6 +18,8 @@ interface UseDeleteNoteReturn {
   noteToDelete: Note | null;
   isDeletingNote: boolean;
   handleDeleteNoteClick: (note: Note) => Promise<void>;
+  handleDeleteNoteConfirm: () => Promise<void>;
+  handleDeleteNoteCancel: () => void;
 }
 
 interface UseDeleteNoteProps {
@@ -34,7 +35,6 @@ const useDeleteNote = ({
   const toast = useToast();
   const chaptersData = useContext(DataContext);
   const { mutate, cache } = useSWRConfig();
-  const confirm = useConfirm();
   const safeTimeout = useSafeTimeout();
 
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -43,6 +43,11 @@ const useDeleteNote = ({
   const clearDeleteNote = useCallback(() => {
     safeTimeout(() => setNoteToDelete(null), 10);
   }, [safeTimeout]);
+
+  const handleDeleteNoteCancel = useCallback(() => {
+    setShowDeleteConfirmation(false);
+    clearDeleteNote();
+  }, [clearDeleteNote]);
 
   const { mutate: deleteNoteMutation, isMutating: isDeletingNote } = useMutation<unknown, Note>(
     async (note) => deleteNote(note.id),
@@ -82,34 +87,23 @@ const useDeleteNote = ({
     },
   );
 
-  const handleDeleteNoteClick = useCallback(
-    async (note: Note) => {
-      setNoteToDelete(note);
-      setShowDeleteConfirmation(true);
+  const handleDeleteNoteClick = useCallback(async (note: Note) => {
+    setNoteToDelete(note);
+    setShowDeleteConfirmation(true);
+  }, []);
 
-      const isConfirmed = await confirm({
-        confirmText: t('common:delete'),
-        cancelText: t('common:cancel'),
-        title: t('delete-note-modal.title'),
-        subtitle: t('delete-note-modal.subtitle'),
-      });
-
-      setShowDeleteConfirmation(false);
-
-      if (isConfirmed) {
-        await deleteNoteMutation(note);
-      } else {
-        clearDeleteNote();
-      }
-    },
-    [confirm, deleteNoteMutation, clearDeleteNote, t],
-  );
+  const handleDeleteNoteConfirm = useCallback(async () => {
+    if (!noteToDelete) return;
+    await deleteNoteMutation(noteToDelete);
+  }, [deleteNoteMutation, noteToDelete]);
 
   return {
     showDeleteConfirmation,
     noteToDelete,
     isDeletingNote,
     handleDeleteNoteClick,
+    handleDeleteNoteConfirm,
+    handleDeleteNoteCancel,
   };
 };
 
