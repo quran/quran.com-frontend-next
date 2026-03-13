@@ -18,9 +18,10 @@ type ErrorProps = {
   hasFullWidth?: boolean;
 };
 
-const Error = ({ hasFullWidth = true }: ErrorProps) => {
+const Error = ({ statusCode, hasFullWidth = true }: ErrorProps) => {
   const { t } = useTranslation('error');
   const router = useRouter();
+  const isNotFound = statusCode === 404;
 
   // If a previous page exists, go back; otherwise, go to home.
   const onBackButtonClicked = () => {
@@ -37,7 +38,7 @@ const Error = ({ hasFullWidth = true }: ErrorProps) => {
         [styles.withFullWidth]: hasFullWidth,
       })}
     >
-      <h1 className={styles.title}>{t('title')}</h1>
+      <h1 className={styles.title}>{isNotFound ? t('not-found-title') : t('title')}</h1>
       <div className={styles.goBack}>
         <Button onClick={onBackButtonClicked}>{t('go-back')}</Button>
       </div>
