@@ -46,12 +46,22 @@ We trust that you will not copy this idea/project, this is at the end for the sa
 
 ### Running the App Locally
 
-- Ensure you have the latest `nodejs` and `npm` installed. Prefer 10+
-- Ensure you have `yarn` installed. Simply `npm i -g yarn`
-- Clone this repo
-- Run `yarn` on the repo to install `node_modules`
-- Run `yarn dev` to start the app. If you wish to run on a different port, run `yarn dev -p 8000`
-- Open `localhost:3000` in your browser
+```bash
+# Ensure you have node.js and npm installed (Prefer 18.17.0+)
+node -v  
+npm -v  
+# Install yarn globally if not installed
+npm i -g yarn
+# Clone the repository
+git clone https://github.com/quran/quran.com-frontend-next
+cd quran.com-frontend-next
+# Install dependencies
+yarn
+# Start the application
+yarn dev
+# To run on a different port, use:
+yarn dev -p 8000
+```
 
 The app runs on Next.js and will automatically hot reload when you make changes.
 
