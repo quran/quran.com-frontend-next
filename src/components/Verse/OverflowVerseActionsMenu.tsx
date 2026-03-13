@@ -93,7 +93,10 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
         <OverflowVerseActionsMenuBody
           verse={verse}
           isTranslationView={isTranslationView}
-          onActionTriggered={onActionTriggered}
+          onActionTriggered={() => {
+            setIsMenuOpen(false);
+            onActionTriggered?.();
+          }}
           isInsideStudyMode={isInsideStudyMode}
         />
       </PopoverMenu>
