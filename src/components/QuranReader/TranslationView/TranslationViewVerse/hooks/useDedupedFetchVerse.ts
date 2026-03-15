@@ -111,7 +111,6 @@ const useDedupedFetchVerse = ({
 
   // Only use initial data if it has actual verses (not empty array)
   const hasInitialVerses = initialData?.verses && initialData.verses.length > 0;
-  const firstPageInitialVerses = pageNumber === 1 && hasInitialVerses ? initialData.verses : null;
   const shouldUseInitialData = pageNumber === 1 && isUsingDefaultSettings && hasInitialVerses;
 
   /**
@@ -140,14 +139,13 @@ const useDedupedFetchVerse = ({
   const { data: verses } = useSWRImmutable(requestKey, verseFetcher, {
     // CRITICAL: Always provide fallbackData for SSR compatibility
     // This ensures verses render immediately server-side and during hydration
-    fallbackData: firstPageInitialVerses || undefined,
-    // Keep first-page content visible while still fetching fresh data for non-default
-    // persisted/query-driven settings to avoid skeleton flicker on mode/param switches.
+    // Only reuse SSR verses when they already match the active reader settings.
+    // Otherwise we want the per-verse skeleton while the correct payload is loading.
+    fallbackData: shouldUseInitialData ? initialData.verses : undefined,
     revalidateOnMount: !shouldUseInitialData,
   });
 
-  // Keep first-page initial verses visible while hydration/request keys settle.
-  const effectiveVerses = verses || firstPageInitialVerses;
+  const effectiveVerses = verses || (shouldUseInitialData ? initialData.verses : null);
 
   useEffect(() => {
     if (effectiveVerses) {
