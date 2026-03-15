@@ -69,11 +69,13 @@
     --donation-popup-text: #ffffff;
     --donation-popup-link: #2ca4ab;
     --donation-popup-muted: #c3e6e9;
-    --donation-popup-progress-track: rgba(44, 54, 72, 0.43);
+    --donation-popup-progress-track: #2c3648;
     --donation-popup-progress-fill: #bb8b10;
+    --donation-popup-progress-milestone-remaining: #38794b;
     --donation-popup-button-bg: #43a4ad;
     --donation-popup-button-fg: #ffffff;
     --donation-popup-skeleton: rgba(195, 230, 233, 0.18);
+    --donation-popup-goal-marker: #d9d9d9;
   }
 
   @include theme.dark {
@@ -83,11 +85,13 @@
     --donation-popup-text: #ffffff;
     --donation-popup-link: #2ca4ab;
     --donation-popup-muted: #c3e6e9;
-    --donation-popup-progress-track: rgba(44, 54, 72, 0.43);
+    --donation-popup-progress-track: #2c3648;
     --donation-popup-progress-fill: #bb8b10;
+    --donation-popup-progress-milestone-remaining: #38794b;
     --donation-popup-button-bg: #43a4ad;
     --donation-popup-button-fg: #ffffff;
     --donation-popup-skeleton: rgba(195, 230, 233, 0.18);
+    --donation-popup-goal-marker: #d9d9d9;
   }
 
   @include theme.sepia {
@@ -97,10 +101,12 @@
     --donation-popup-text: #ffffff;
     --donation-popup-link: #2ca4ab;
     --donation-popup-muted: #c3e6e9;
-    --donation-popup-progress-track: rgba(44, 54, 72, 0.43);
+    --donation-popup-progress-track: #2c3648;
     --donation-popup-progress-fill: #bb8b10;
+    --donation-popup-progress-milestone-remaining: #38794b;
     --donation-popup-button-bg: #43a4ad;
     --donation-popup-button-fg: #ffffff;
     --donation-popup-skeleton: rgba(195, 230, 233, 0.18);
+    --donation-popup-goal-marker: #d9d9d9;
   }
 }

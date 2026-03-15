@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "Doneer nu",
     "dont-show-again": "Niet meer laten zien",
-    "goal-label": "Ramadan-inzamelingsdoel",
+    "extended-goal-label": "Jaarlijks doel",
+    "goal-label": "Alhumdulillah, Ramadandoel bereikt!",
     "learn-more": "Leer meer",
     "month-goal": "/maanddoel",
     "month-raised": "/maand verhoogd",

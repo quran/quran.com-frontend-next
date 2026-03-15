@@ -30,9 +30,10 @@ import { QuranFont } from '@/types/QuranReader';
 import { makeDonatePageUrl, makeDonateUrl } from '@/utils/apiPaths';
 import {
   getDonationOverview,
-  getDonationProgressPercentage,
   RAMADAN_2026_DONATION_CAMPAIGN,
+  RAMADAN_2026_EXTENDED_GOAL,
   RAMADAN_2026_MONTHLY_GOAL,
+  getDonationProgressState,
 } from '@/utils/donation/api';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -113,9 +114,23 @@ const DonatePopup = () => {
   const isOverviewLoading = donationOverview === undefined && !donationOverviewError;
   const shouldShowProgress = !!donationOverview && !donationOverviewError;
   const totalAmount = donationOverview?.totalAmount ?? 0;
+  const donationProgress = getDonationProgressState(
+    totalAmount,
+    RAMADAN_2026_MONTHLY_GOAL,
+    RAMADAN_2026_EXTENDED_GOAL,
+  );
+  const hasExtendedProgress =
+    donationProgress.isExtended && donationProgress.milestonePercentage !== null;
+  const hasOverflowProgress =
+    hasExtendedProgress && donationProgress.overflowProgressPercentage > 0;
+  const progressOverflowFillWidth = hasOverflowProgress
+    ? `${donationProgress.overflowProgressPercentage}%`
+    : undefined;
+  const progressOverflowGridTemplate = hasExtendedProgress
+    ? `${donationProgress.milestonePercentage}% 1fr`
+    : undefined;
   const formattedTotalAmount = toLocalizedNumber(Math.round(totalAmount), locale);
-  const formattedGoalAmount = toLocalizedNumber(RAMADAN_2026_MONTHLY_GOAL, locale);
-  const progressPercentage = getDonationProgressPercentage(totalAmount, RAMADAN_2026_MONTHLY_GOAL);
+  const formattedGoalAmount = toLocalizedNumber(donationProgress.displayGoalAmount, locale);
 
   return (
     <Modal
@@ -222,14 +237,53 @@ const DonatePopup = () => {
                     <span>{t('ramadan-donation-popup.month-goal')}</span>
                   </p>
                 </div>
-                <div className={styles.progressTrack} aria-hidden="true">
-                  <div
-                    className={styles.progressFill}
-                    style={{ width: `${progressPercentage}%` }}
-                    data-testid="ramadan-donation-popup-progress-fill"
-                  />
+                <div className={styles.progressTrackWrapper} aria-hidden="true">
+                  <div className={styles.progressTrack}>
+                    <div
+                      className={classNames(styles.progressFill, {
+                        [styles.progressFillFlatEnd]: hasOverflowProgress,
+                      })}
+                      style={{ width: `${donationProgress.filledToMilestonePercentage}%` }}
+                      data-testid="ramadan-donation-popup-progress-fill"
+                    />
+                    {hasOverflowProgress && (
+                      <div
+                        className={styles.progressOverflowFill}
+                        style={{
+                          insetInlineStart: `${donationProgress.milestonePercentage}%`,
+                          width: progressOverflowFillWidth,
+                        }}
+                        data-testid="ramadan-donation-popup-progress-overflow-fill"
+                      />
+                    )}
+                  </div>
+                  {hasExtendedProgress && (
+                    <div
+                      className={styles.progressGoalMarker}
+                      style={{
+                        insetInlineStart: `${donationProgress.milestonePercentage}%`,
+                      }}
+                      data-testid="ramadan-donation-popup-progress-goal-marker"
+                    />
+                  )}
                 </div>
-                <p className={styles.progressLabel}>{t('ramadan-donation-popup.goal-label')}</p>
+                {hasExtendedProgress ? (
+                  <div
+                    className={styles.progressOverflowLabels}
+                    style={{
+                      gridTemplateColumns: progressOverflowGridTemplate,
+                    }}
+                  >
+                    <p className={styles.progressReachedLabel}>
+                      {t('ramadan-donation-popup.goal-label')}
+                    </p>
+                    <p className={styles.progressExtendedGoalLabel}>
+                      {t('ramadan-donation-popup.extended-goal-label')}
+                    </p>
+                  </div>
+                ) : (
+                  <p className={styles.progressLabel}>{t('ramadan-donation-popup.goal-label')}</p>
+                )}
               </div>
             )}
 

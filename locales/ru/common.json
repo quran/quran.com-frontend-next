@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "Пожертвовать сейчас",
     "dont-show-again": "Больше не показывайте это",
-    "goal-label": "Цель сбора средств на Рамадан",
+    "extended-goal-label": "Годовая цель",
+    "goal-label": "Альхамдулиллах, цель Рамадана достигнута!",
     "learn-more": "Узнать больше",
     "month-goal": "цель в месяц",
     "month-raised": "/месяц собрано",

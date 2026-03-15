@@ -376,6 +376,7 @@
 }
 
 .progressTrack {
+  position: relative;
   inline-size: 100%;
   block-size: var(--spacing-xsmall-px);
   overflow: hidden;
@@ -387,10 +388,46 @@
   }
 }
 
+.progressTrackWrapper {
+  position: relative;
+  inline-size: 100%;
+}
+
 .progressFill {
+  position: relative;
+  z-index: 1;
   block-size: 100%;
   border-radius: inherit;
   background: var(--donation-popup-progress-fill);
+}
+
+.progressFillFlatEnd {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.progressOverflowFill {
+  position: absolute;
+  inset-block: 0;
+  z-index: 2;
+  border-radius: 0;
+  background: var(--donation-popup-progress-milestone-remaining);
+}
+
+.progressGoalMarker {
+  position: absolute;
+  inset-block-start: 50%;
+  z-index: 3;
+  inline-size: 3px;
+  block-size: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: var(--border-radius-small-px);
+  background: var(--donation-popup-goal-marker);
+
+  @include breakpoints.tablet {
+    inline-size: 4px;
+    block-size: 23px;
+  }
 }
 
 .progressLabel {
@@ -403,6 +440,33 @@
   @include breakpoints.tablet {
     font-size: var(--font-size-small-px);
   }
+}
+
+.progressOverflowLabels {
+  display: grid;
+  align-items: start;
+  inline-size: 100%;
+  color: var(--donation-popup-text);
+}
+
+.progressReachedLabel,
+.progressExtendedGoalLabel {
+  margin: 0;
+  font-size: var(--font-size-xxsmall-px);
+  line-height: normal;
+  text-align: center;
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xsmall-px);
+  }
+}
+
+.progressReachedLabel {
+  font-weight: var(--font-weight-light);
+}
+
+.progressExtendedGoalLabel {
+  font-weight: var(--font-weight-semibold);
 }
 
 .amountSkeleton {

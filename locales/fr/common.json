@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "Faites un don maintenant",
     "dont-show-again": "Ne plus afficher ceci",
-    "goal-label": "Objectif de collecte de fonds pour le Ramadan",
+    "extended-goal-label": "Objectif annuel",
+    "goal-label": "Alhumdulillah, objectif du Ramadan atteint !",
     "learn-more": "Apprendre encore plus",
     "month-goal": "objectif mensuel",
     "month-raised": "/mois augmenté",

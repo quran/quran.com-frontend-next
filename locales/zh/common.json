@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "立即捐款",
     "dont-show-again": "不要再次显示此内容",
-    "goal-label": "斋月筹款目标",
+    "extended-goal-label": "年度目标",
+    "goal-label": "Alhumdulillah，斋月目标达成！",
     "learn-more": "了解更多",
     "month-goal": "月度目标",
     "month-raised": "每月筹集",

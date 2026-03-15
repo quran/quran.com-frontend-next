@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "አሁኑኑ ይለግሱ",
     "dont-show-again": "ይህንን ዳግመኛ አታሳይ",
-    "goal-label": "የረመዳን የገንዘብ ማሰባሰቢያ ግብ",
+    "extended-goal-label": "ዓመታዊ ግብ",
+    "goal-label": "አልሀምዱሊላህ የረመዳን ግብ ደረሰ!",
     "learn-more": "ተጨማሪ ይወቁ",
     "month-goal": "/የወር ግብ",
     "month-raised": "/ወር ተጨምሯል",

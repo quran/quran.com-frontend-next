@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "Dhuro tani",
     "dont-show-again": "Mos e shfaq më këtë",
-    "goal-label": "Qëllimi i Mbledhjes së Fondeve për Ramazanin",
+    "extended-goal-label": "Objektivi Vjetor",
+    "goal-label": "Alhumdulilah, qëllimi i Ramazanit u arrit!",
     "learn-more": "Mëso më shumë",
     "month-goal": "objektivi /mujor",
     "month-raised": "/muaj i mbledhur",

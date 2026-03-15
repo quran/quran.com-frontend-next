@@ -26,7 +26,8 @@ const translations = new Map<string, string>([
   ['ramadan-donation-popup.next-ayah', 'Check back tomorrow for the next ayah'],
   ['ramadan-donation-popup.month-raised', '/month raised'],
   ['ramadan-donation-popup.month-goal', '/month goal'],
-  ['ramadan-donation-popup.goal-label', 'Ramadan Fundraising Goal'],
+  ['ramadan-donation-popup.goal-label', 'Alhumdulillah, Ramadan Goal Reached!'],
+  ['ramadan-donation-popup.extended-goal-label', 'Annual Goal'],
   ['ramadan-donation-popup.donate-now', 'Donate Now'],
   ['ramadan-donation-popup.dont-show-again', 'Don’t show this again'],
 ]);
@@ -257,7 +258,7 @@ describe('DonatePopup', () => {
     expect(mockVerseAndTranslationProps?.shouldShowReference).toBe(false);
   });
 
-  it('renders live progress when the donation overview succeeds', () => {
+  it('renders the annual track and Ramadan milestone before the milestone is reached', () => {
     (globalThis as any).mockDonationOverviewResult = {
       data: {
         totalAmount: 12_500,
@@ -268,8 +269,35 @@ describe('DonatePopup', () => {
 
     render(<DonatePopup />);
 
-    expect(screen.getByTestId('ramadan-donation-popup-progress-fill').style.width).toBe('62.5%');
-    expect(screen.queryByText('Ramadan Fundraising Goal')).not.toBeNull();
+    expect(
+      Number.parseFloat(screen.getByTestId('ramadan-donation-popup-progress-fill').style.width),
+    ).toBeCloseTo(41.666666666666664);
+    expect(screen.queryByText('Alhumdulillah, Ramadan Goal Reached!')).not.toBeNull();
+    expect(screen.queryByText('Annual Goal')).not.toBeNull();
+    expect(screen.queryByText('$30,000')).not.toBeNull();
+    expect(screen.queryByTestId('ramadan-donation-popup-progress-goal-marker')).not.toBeNull();
+    expect(screen.queryByTestId('ramadan-donation-popup-progress-overflow-fill')).toBeNull();
+  });
+
+  it('renders the extended goal state once donations pass the Ramadan goal', () => {
+    (globalThis as any).mockDonationOverviewResult = {
+      data: {
+        totalAmount: 20_252,
+        numberOfRecurringPlans: 42,
+      },
+      error: undefined,
+    };
+
+    render(<DonatePopup />);
+
+    expect(
+      Number.parseFloat(screen.getByTestId('ramadan-donation-popup-progress-fill').style.width),
+    ).toBeCloseTo(66.66666666666666);
+    expect(screen.queryByTestId('ramadan-donation-popup-progress-overflow-fill')).not.toBeNull();
+    expect(screen.queryByTestId('ramadan-donation-popup-progress-goal-marker')).not.toBeNull();
+    expect(screen.queryByText('Alhumdulillah, Ramadan Goal Reached!')).not.toBeNull();
+    expect(screen.queryByText('Annual Goal')).not.toBeNull();
+    expect(screen.queryByText('$30,000')).not.toBeNull();
   });
 
   it('keeps the popup visible and hides the progress row when the donation overview fails', () => {

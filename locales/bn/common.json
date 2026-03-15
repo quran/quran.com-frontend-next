@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "এখুনি দান করুন",
     "dont-show-again": "এটি আর দেখাবেন না",
-    "goal-label": "রমজানে তহবিল সংগ্রহের লক্ষ্য",
+    "extended-goal-label": "বার্ষিক লক্ষ্য",
+    "goal-label": "আলহামদুলিল্লাহ, রমজানের লক্ষ্যে পৌঁছেছি!",
     "learn-more": "আরও জানুন",
     "month-goal": "/মাসের লক্ষ্য",
     "month-raised": "/মাস বৃদ্ধি",

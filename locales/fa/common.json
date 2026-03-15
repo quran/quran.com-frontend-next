@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "همین حالا اهدا کنید",
     "dont-show-again": "اینو دیگه نشون نده",
-    "goal-label": "هدف جمع آوری کمک های مالی ماه رمضان",
+    "extended-goal-label": "هدف سالانه",
+    "goal-label": "الحمدلله به هدف رمضان رسید!",
     "learn-more": "بیشتر بدانید",
     "month-goal": "/هدف ماهانه",
     "month-raised": "/ماه افزایش سرمایه",

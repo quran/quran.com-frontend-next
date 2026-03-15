@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "Faça sua doação agora",
     "dont-show-again": "Não mostrar isso novamente",
-    "goal-label": "Meta de arrecadação de fundos para o Ramadã",
+    "extended-goal-label": "Meta anual",
+    "goal-label": "Alhumdulillah, meta do Ramadã alcançada!",
     "learn-more": "Saber mais",
     "month-goal": "meta mensal",
     "month-raised": "/mês arrecadado",

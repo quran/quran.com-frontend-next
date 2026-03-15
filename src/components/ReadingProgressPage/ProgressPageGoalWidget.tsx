@@ -51,6 +51,10 @@ const ProgressPageGoalWidget = ({ goal, isLoading, currentActivityDay }: Props) 
     setModalVisible((prev) => ({ ...prev, delete: visible }));
   };
 
+  const onDeleteModalBack = () => {
+    setModalVisible((prev) => ({ ...prev, update: true, delete: false }));
+  };
+
   const onShowDeleteModal = () => {
     logButtonClick('reading_goal_delete');
     setModalVisible((prev) => ({ ...prev, update: false, delete: true }));
@@ -142,7 +146,11 @@ const ProgressPageGoalWidget = ({ goal, isLoading, currentActivityDay }: Props) 
           onModalChange={onUpdateModalChange}
           onShowDeleteModal={onShowDeleteModal}
         />
-        <DeleteReadingGoalModal isOpen={modalVisible.delete} onModalChange={onDeleteModalChange} />
+        <DeleteReadingGoalModal
+          isOpen={modalVisible.delete}
+          onModalChange={onDeleteModalChange}
+          onBack={onDeleteModalBack}
+        />
       </div>
     </div>
   );

@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "Şimdi Bağış Yapın",
     "dont-show-again": "Bunu bir daha gösterme",
-    "goal-label": "Ramazan Bağış Toplama Hedefi",
+    "extended-goal-label": "Yıllık Hedef",
+    "goal-label": "Elhamdülillah Ramazan hedefine ulaşıldı!",
     "learn-more": "Daha fazla bilgi edin",
     "month-goal": "/aylık hedef",
     "month-raised": "/aylık olarak toplanan",

@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "تبرع الآن",
     "dont-show-again": "لا تعرض هذا مرة أخرى",
-    "goal-label": "هدف جمع التبرعات في رمضان",
+    "extended-goal-label": "الهدف السنوي",
+    "goal-label": "الحمد لله، تم تحقيق الهدف الرمضاني!",
     "learn-more": "أقرأ المزيد",
     "month-goal": "الهدف الشهري",
     "month-raised": "تم جمعه شهريًا",

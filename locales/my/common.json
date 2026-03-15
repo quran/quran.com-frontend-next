@@ -397,7 +397,8 @@
   "ramadan-donation-popup": {
     "donate-now": "ယခုလှူဒါန်းပါ",
     "dont-show-again": "ဒါကို ထပ်မပြပါနဲ့",
-    "goal-label": "ရမ်ဇာန် ရန်ပုံငွေရှာဖွေရေး ရည်မှန်းချက်",
+    "extended-goal-label": "နှစ်စဉ်ရည်မှန်းချက်",
+    "goal-label": "Alhumdulillah၊ ရမ်ဇာန်ပန်းတိုင်ရောက်ပါပြီ။",
     "learn-more": "ပိုမိုသိရှိရန်",
     "month-goal": "/လစဉ် ရည်မှန်းချက်",
     "month-raised": "/လ ကောက်ခံရရှိသော",
