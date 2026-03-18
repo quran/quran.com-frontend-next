@@ -10,12 +10,12 @@ import ArrowIcon from '@/public/icons/arrow.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 
 const TOPICS = [
-  {
-    slug: 'what-is-ramadan',
-    logKey: 'what-is-ramadan',
-    key: 'what-is-ramadan',
-    isHighlighted: true,
-  },
+  // {
+  //   slug: 'what-is-ramadan',
+  //   logKey: 'what-is-ramadan',
+  //   key: 'what-is-ramadan',
+  //   isHighlighted: true,
+  // },
   {
     slug: 'about-the-quran',
     logKey: 'about-quran',
@@ -50,7 +50,7 @@ const ExploreTopicsSection = () => {
               }}
               isNewTab
               className={classNames(styles.topic, {
-                [styles.highlighted]: topic.isHighlighted,
+                // [styles.highlighted]: topic.isHighlighted,
               })}
             >
               <div>

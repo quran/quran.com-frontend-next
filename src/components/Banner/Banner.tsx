@@ -27,6 +27,7 @@ interface BannerProps {
   variant?: BannerVariant;
   copy?: BannerCopy;
   underlinedSegmentHref?: string;
+  href?: string;
 }
 
 const Banner = ({
@@ -34,6 +35,7 @@ const Banner = ({
   ctaButtonText,
   variant = BannerVariant.InlineChip,
   copy,
+  href,
   underlinedSegmentHref,
 }: BannerProps) => {
   const mobileLineOne = copy?.mobileLineOne || '';
@@ -90,12 +92,12 @@ const Banner = ({
       </div>
       {ctaButtonText && (
         <Link
-          href={makeDonatePageUrl(false, true)}
+          href={href || makeDonatePageUrl(false, true)}
           variant={LinkVariant.Blend}
           className={classNames(styles.cta, styles[`${variant}Cta`])}
           ariaLabel={ctaButtonText}
           onClick={handleButtonClick}
-          isNewTab
+          isNewTab={!href}
         >
           <IconContainer
             icon={<DiamondIcon aria-hidden="true" />}

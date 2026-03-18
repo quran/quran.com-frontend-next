@@ -30,7 +30,6 @@ import {
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { TestId } from '@/tests/test-ids';
-import { makeDonateUrl } from '@/utils/apiPaths';
 import { getSidebarTransitionDurationFromCss } from '@/utils/css';
 import { isQuranReaderRoutePathname } from '@/utils/routes';
 
@@ -121,22 +120,32 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
 
   const { openSearchDrawer, openNavigationDrawer, openLanguageDrawer } = useNavbarDrawerActions();
 
-  const bannerCopy = {
-    mobileLineOne: t('fundraising-sticky-banner-v2.mobile-line-one'),
-    mobileLineTwo: t('fundraising-sticky-banner-v2.mobile-line-two'),
-  };
+  // const bannerCopy = {
+  //   mobileLineOne: t('fundraising-sticky-banner-v2.mobile-line-one'),
+  //   mobileLineTwo: t('fundraising-sticky-banner-v2.mobile-line-two'),
+  // };
 
-  const standaloneDesktopText = `${bannerCopy.mobileLineOne} ${bannerCopy.mobileLineTwo}`;
+  // const standaloneDesktopText = `${bannerCopy.mobileLineOne} ${bannerCopy.mobileLineTwo}`;
+
+  // const standaloneBannerProps = {
+  //   copy: {
+  //     desktop: standaloneDesktopText,
+  //     mobileLineOne: bannerCopy.mobileLineOne,
+  //     mobileLineTwo: bannerCopy.mobileLineTwo,
+  //   },
+  //   text: standaloneDesktopText,
+  //   ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
+  //   underlinedSegmentHref: makeDonateUrl(),
+  // }
+
+  const bannerText = t('beyond-ramadan');
+  const bannerCta = t('learn-more');
+  const bannerHref = '/beyond-ramadan';
 
   const standaloneBannerProps = {
-    copy: {
-      desktop: standaloneDesktopText,
-      mobileLineOne: bannerCopy.mobileLineOne,
-      mobileLineTwo: bannerCopy.mobileLineTwo,
-    },
-    text: standaloneDesktopText,
-    ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
-    underlinedSegmentHref: makeDonateUrl(),
+    text: bannerText,
+    ctaButtonText: bannerCta,
+    href: bannerHref,
   };
 
   return (

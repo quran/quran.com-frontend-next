@@ -1,34 +1,50 @@
+/* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 
 import styles from './NewCard.module.scss';
 
 import Card from '@/components/HomePage/Card';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { ROUTES } from '@/utils/navigation';
+import { getBeyondRamadanNavigationUrl } from '@/utils/navigation';
 
 const NewCard: React.FC = () => {
-  const { t } = useTranslation('home');
-
-  const onRamadanChallengeClicked = () => {
-    logButtonClick('homepage_ramadan_challenge_link');
+  const onGrowBeyondRamadanClicked = () => {
+    logButtonClick('homepage_grow_beyond_ramadan');
   };
 
   return (
     <Card
-      onClick={onRamadanChallengeClicked}
+      onClick={onGrowBeyondRamadanClicked}
       className={styles.firstTimeReadingCard}
-      link={ROUTES.RAMADAN_CHALLENGE}
+      link={getBeyondRamadanNavigationUrl()}
+      isNewTab
     >
       <div className={styles.cardOuterContainer}>
         <div className={styles.cardWithIcon}>
           <div className={styles.iconContainer}>
-            <span aria-hidden="true">✨</span>
+            <span aria-hidden="true">🚀</span>
           </div>
-          <div className={styles.link}>{t('ramadan-challenge')}</div>
+          <div className={styles.link}>
+            <Trans
+              i18nKey="home:grow-beyond-ramadan"
+              components={{
+                modalLink: (
+                  <Link
+                    variant={LinkVariant.Blend}
+                    href={getBeyondRamadanNavigationUrl()}
+                    className={styles.linkHref}
+                    onClick={onGrowBeyondRamadanClicked}
+                    isNewTab
+                  />
+                ),
+              }}
+            />
+          </div>
         </div>
         <IconContainer
           className={styles.arrowIcon}

@@ -55,7 +55,7 @@
   }
 }
 
-.ramadanDescription {
+.eventDescription {
   @include theme.light {
     color: var(--color-text-default-new);
   }
@@ -74,7 +74,7 @@
   align-items: center;
 }
 
-.ramadanTitle {
+.eventTitle {
   font-weight: var(--font-weight-semibold);
   color: var(--color-warning-deep);
   font-size: var(--font-size-small-px);
@@ -83,7 +83,7 @@
   }
 }
 
-.ramadanIcon {
+.eventIcon {
   path {
     fill: var(--color-warning-deep);
   }
@@ -120,7 +120,7 @@
   block-size: 100%;
 }
 
-.ramadanCard {
+.eventCard {
   @include theme.light {
     background-color: var(--color-topics-gold);
   }
@@ -159,7 +159,7 @@
   }
 }
 
-.ramadanArrowIcon {
+.eventArrowIcon {
   svg {
     path {
       @include theme.light {

@@ -21,11 +21,11 @@ import { logButtonClick } from '@/utils/eventLogger';
 import {
   APPS_URL,
   DEVELOPERS_URL,
+  getBeyondRamadanNavigationUrl,
   getMyQuranNavigationUrl,
   LEARNING_PLANS_URL,
   RADIO_URL,
   RECITERS_URL,
-  ROUTES,
 } from '@/utils/navigation';
 
 interface NavigationDrawerListProps {
@@ -49,10 +49,10 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
 
   const ITEMS = [
     {
-      title: 'Ramadan 2026',
+      title: 'Beyond Ramadan',
       icon: <DiamondIcon />,
-      href: ROUTES.RAMADAN_2026,
-      eventName: 'navigation_drawer_ramadan2026',
+      href: getBeyondRamadanNavigationUrl(),
+      eventName: 'navigation_drawer_beyond_ramadan',
       isEvent: true,
       locale: Language.EN,
     },

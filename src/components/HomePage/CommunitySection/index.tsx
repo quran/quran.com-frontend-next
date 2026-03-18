@@ -14,12 +14,12 @@ import ArrowIcon from '@/public/icons/arrow.svg';
 import { TestId } from '@/tests/test-ids';
 import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
-import { ROUTES } from '@/utils/navigation';
+import { getBeyondRamadanNavigationUrl } from '@/utils/navigation';
 import { getQRNavigationUrl } from '@/utils/quranReflect/navigation';
 
-const RAMADAN_EVENT = {
-  title: 'Discover Ramadan Activities!',
-  description: 'Tools & content to stay engaged all month',
+const EVENT = {
+  title: 'Continue Your Quran Journey',
+  description: 'Reading plans, reflections, and tools to stay connected all year.',
 };
 
 const CommunitySection = () => {
@@ -29,8 +29,8 @@ const CommunitySection = () => {
     logButtonClick('homepage_community_qr_card');
   };
 
-  const onRamadanCardClicked = () => {
-    logButtonClick('homepage_community_ramadan_card');
+  const onEventCardClicked = () => {
+    logButtonClick('homepage_community_continue_quran_journey_card');
   };
 
   return (
@@ -41,29 +41,29 @@ const CommunitySection = () => {
       <div className={styles.cardsContainer} data-testid={TestId.COMMUNITY_SECTION}>
         {lang === Language.EN && (
           <Card
-            className={classNames(styles.card, styles.ramadanCard)}
-            link={ROUTES.RAMADAN_2026}
+            className={classNames(styles.card, styles.eventCard)}
+            link={getBeyondRamadanNavigationUrl()}
             isNewTab
             linkClassName={styles.link}
-            onClick={onRamadanCardClicked}
+            onClick={onEventCardClicked}
           >
             <div className={styles.cardContent}>
               <div className={styles.cardTitle}>
                 <div className={styles.cardHeader}>
-                  <DiamondIcon className={styles.ramadanIcon} />
-                  <p className={classNames(styles.cardDescription, styles.ramadanTitle)}>
-                    {RAMADAN_EVENT.title}
+                  <DiamondIcon className={styles.eventIcon} />
+                  <p className={classNames(styles.cardDescription, styles.eventTitle)}>
+                    {EVENT.title}
                   </p>
                 </div>
                 <IconContainer
                   size={IconSize.Xsmall}
                   icon={<ArrowIcon />}
                   shouldForceSetColors={false}
-                  className={classNames(styles.arrowIcon, styles.ramadanArrowIcon)}
+                  className={classNames(styles.arrowIcon, styles.eventArrowIcon)}
                 />
               </div>
-              <p className={classNames(styles.cardDescription, styles.ramadanDescription)}>
-                {RAMADAN_EVENT.description}
+              <p className={classNames(styles.cardDescription, styles.eventDescription)}>
+                {EVENT.description}
               </p>
             </div>
           </Card>

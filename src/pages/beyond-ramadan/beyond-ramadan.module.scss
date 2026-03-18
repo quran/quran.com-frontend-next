@@ -1,0 +1,66 @@
+@use 'src/styles/breakpoints';
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.subtext {
+  font-size: var(--font-size-small);
+}
+
+.container {
+  text-align: start !important;
+}
+
+.list li::marker {
+  content: '✔️ ';
+}
+
+.list2 li::marker {
+  content: '-  ';
+}
+
+.learningPlansImage {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 16/15;
+  margin-block-end: var(--spacing-medium-px);
+}
+
+.enrollmentContainer {
+  text-align: center;
+  font-size: var(--font-size-medium-px);
+  font-weight: var(--font-weight-bold);
+  span {
+    color: var(--color-text-link-new);
+  }
+}
+
+.iconContainer {
+  margin-inline-end: var(--spacing-small-px);
+}
+
+.storeButtons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium-px);
+  .storeButton {
+    block-size: calc(2 * var(--spacing-large-px));
+    inline-size: auto;
+
+    @include breakpoints.smallerThanTablet {
+      block-size: var(--spacing-large-px);
+    }
+  }
+}
+.verse {
+  max-inline-size: 80%;
+  margin-inline: auto;
+  p {
+    margin: 0;
+  }
+}
