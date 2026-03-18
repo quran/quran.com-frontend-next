@@ -8,6 +8,7 @@ import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import DiamondIcon from '@/icons/diamond.svg';
 import { makeDonatePageUrl } from '@/utils/apiPaths';
+import EventName from '@/utils/event-names';
 import { logButtonClick } from '@/utils/eventLogger';
 
 export enum BannerVariant {
@@ -48,7 +49,7 @@ const Banner = ({
     shouldRenderTwoLineMobileCopy && desktopText.trim() === combinedMobileText;
 
   const handleButtonClick = useCallback(() => {
-    logButtonClick('donate_button_banner');
+    logButtonClick(EventName.TOP_BANNER_BEYOND_RAMADAN);
   }, []);
 
   const renderUnderlinedSegment = (className?: string) => {
