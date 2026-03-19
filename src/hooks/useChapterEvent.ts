@@ -17,6 +17,7 @@ interface ChapterEvent {
 }
 
 const CHAPTER_ID_TO_SHOW = '67';
+const MAX_DATE = new Date('2026-03-20');
 
 /**
  * A hook that returns the chapter event data if the current chapter has an event.
@@ -28,6 +29,7 @@ const useChapterEvent = (chapterId: string): ChapterEvent => {
   const { lang } = useTranslation('quran-reader');
   const { isEnrolled, isLoading } = useRamadanChallengeStatus();
   const hasMounted = useHasMounted();
+  const beyondMaxDate = useMemo(() => new Date() > MAX_DATE, []);
 
   const eventData = useMemo(() => {
     if (
@@ -35,7 +37,8 @@ const useChapterEvent = (chapterId: string): ChapterEvent => {
       !isLoading &&
       chapterId === CHAPTER_ID_TO_SHOW &&
       !isEnrolled &&
-      lang === Language.EN
+      lang === Language.EN &&
+      !beyondMaxDate
     ) {
       return {
         showEvent: true,
@@ -53,7 +56,7 @@ const useChapterEvent = (chapterId: string): ChapterEvent => {
       ctaText: '',
       ctaLink: '',
     };
-  }, [chapterId, isEnrolled, isLoading, hasMounted, lang]);
+  }, [chapterId, isEnrolled, isLoading, hasMounted, lang, beyondMaxDate]);
 
   return eventData;
 };
