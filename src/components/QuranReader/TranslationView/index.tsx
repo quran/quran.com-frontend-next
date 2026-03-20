@@ -96,7 +96,6 @@ const TranslationView = ({
         return (
           <EndOfScrollingControls
             quranReaderDataType={quranReaderDataType}
-            resourceId={resourceId}
             lastVerse={verses[verses.length - 1]}
             initialData={initialData}
           />

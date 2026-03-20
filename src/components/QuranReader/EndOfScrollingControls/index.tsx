@@ -2,11 +2,6 @@ import React from 'react';
 
 import { useSelector } from 'react-redux';
 
-import {
-  getReaderBannerAnalyticsParams,
-  getReaderBannerAnalyticsSource,
-  ReaderFundraisingBannerPlacement,
-} from '../fundraisingAnalytics';
 import RevelationOrderNavigationNotice, {
   RevelationOrderNavigationNoticeView,
 } from '../RevelationOrderNavigationNotice';
@@ -19,9 +14,6 @@ import PageControls from './PageControls';
 import RubControls from './RubControls';
 import VerseControls from './VerseControls';
 
-import HomepageFundraisingBanner, {
-  FundraisingBannerContext,
-} from '@/components/Fundraising/HomepageFundraisingBanner';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
@@ -29,14 +21,12 @@ import Verse from 'types/Verse';
 
 interface Props {
   quranReaderDataType: QuranReaderDataType;
-  resourceId: number | string;
   lastVerse: Verse;
   initialData: VersesResponse;
 }
 
 const EndOfScrollingControls: React.FC<Props> = ({
   quranReaderDataType,
-  resourceId,
   lastVerse,
   initialData,
 }) => {
@@ -67,21 +57,6 @@ const EndOfScrollingControls: React.FC<Props> = ({
           {quranReaderDataType === QuranReaderDataType.Hizb && (
             <HizbControls lastVerse={lastVerse} />
           )}
-        </div>
-        <div className={styles.fundraisingBannerWrapper}>
-          <HomepageFundraisingBanner
-            context={FundraisingBannerContext.QuranReader}
-            isDismissible={false}
-            analyticsSource={getReaderBannerAnalyticsSource(
-              quranReaderDataType,
-              ReaderFundraisingBannerPlacement.EndOfScrolling,
-            )}
-            analyticsParams={getReaderBannerAnalyticsParams(
-              quranReaderDataType,
-              resourceId,
-              initialData?.verses?.[0],
-            )}
-          />
         </div>
       </div>
     </>

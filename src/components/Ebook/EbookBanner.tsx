@@ -112,7 +112,7 @@ const CONTEXT_CONFIG = {
   },
 };
 
-const HIDE_DATE = new Date('2026-03-20');
+export const EBOOK_BANNER_HIDE_DATE = new Date('2026-03-20');
 
 /* eslint-disable max-lines */
 const EbookBanner = ({
@@ -224,7 +224,7 @@ const EbookBanner = ({
     return null;
   }
 
-  const isPastHideDate = Date.now() >= HIDE_DATE.getTime();
+  const isPastHideDate = Date.now() >= EBOOK_BANNER_HIDE_DATE.getTime();
 
   if (isPastHideDate || (isDismissible && isDismissed)) {
     return null;

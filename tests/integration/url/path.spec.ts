@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -15,6 +16,22 @@ test('Page /S should load Surah S', { tag: ['@url', '@smoke'] }, async ({ page }
   await expect(page.getByText('Al-Qiyamah').first()).toBeVisible();
   expect(await page.title()).toContain('Al-Qiyamah');
 });
+
+test(
+  'Page /78 should show correct chapter label and header metadata',
+  { tag: ['@url', '@reader', '@header'] },
+  async ({ page, isMobile }) => {
+    test.skip(isMobile);
+
+    await homePage.goTo('/78');
+    await expect(page.getByTestId(TestId.CHAPTER_NAVIGATION)).toContainText('78. An-Naba');
+
+    const pageInfo = page.getByTestId(TestId.PAGE_INFO);
+    await expect(pageInfo).toContainText('Page 582');
+    await expect(pageInfo).toContainText('Juz 30');
+    await expect(pageInfo).toContainText('Hizb 59');
+  },
+);
 
 test(
   'Page /S/V should load Ayah V of Surah S',

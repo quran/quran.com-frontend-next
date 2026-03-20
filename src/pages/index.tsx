@@ -11,8 +11,10 @@ import { useSelector } from 'react-redux';
 import styles from './index.module.scss';
 
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
-import EbookBanner, { EbookBannerContext } from '@/components/Ebook/EbookBanner';
-import HomepageFundraisingBanner from '@/components/Fundraising/HomepageFundraisingBanner';
+import EbookBanner, {
+  EbookBannerContext,
+  EBOOK_BANNER_HIDE_DATE,
+} from '@/components/Ebook/EbookBanner';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
 import HomePageApps from '@/components/HomePage/HomePageApps';
@@ -23,7 +25,6 @@ import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { selectIsHomepageEbookBannerVisible } from '@/redux/slices/ebookBanner';
-import { selectIsHomepageBannerVisible } from '@/redux/slices/fundraisingBanner';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -45,7 +46,6 @@ const Index: NextPage<IndexProps> = ({
   const { t, lang } = useTranslation('home');
   const isUserLoggedIn = isLoggedIn();
   const todayAyah = useMemo(() => getCurrentDayAyah(), []);
-  const isBannerVisible = useSelector(selectIsHomepageBannerVisible);
   const isEbookBannerVisible = useSelector(selectIsHomepageEbookBannerVisible);
 
   return (
@@ -65,7 +65,7 @@ const Index: NextPage<IndexProps> = ({
             <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
               <ReadingSection />
             </div>
-            {(isBannerVisible || isEbookBannerVisible) && (
+            {isEbookBannerVisible && Date.now() < EBOOK_BANNER_HIDE_DATE.getTime() && (
               <div
                 className={classNames(
                   styles.flowItem,
@@ -74,16 +74,12 @@ const Index: NextPage<IndexProps> = ({
                   styles.homepageFundraisingCard,
                 )}
               >
-                {isBannerVisible ? (
-                  <HomepageFundraisingBanner />
-                ) : (
-                  <EbookBanner
-                    context={EbookBannerContext.HOMEPAGE}
-                    titleClassName={styles.ebookBannerTitle}
-                    descriptionClassName={styles.ebookBannerDescription}
-                    ctaClassName={styles.ebookBannerCta}
-                  />
-                )}
+                <EbookBanner
+                  context={EbookBannerContext.HOMEPAGE}
+                  titleClassName={styles.ebookBannerTitle}
+                  descriptionClassName={styles.ebookBannerDescription}
+                  ctaClassName={styles.ebookBannerCta}
+                />
               </div>
             )}
             {isMobile() ? (

@@ -6,6 +6,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import EndOfScrollingControls from '.';
 
 import { QuranReaderDataType } from '@/types/QuranReader';
+import { VersesResponse } from 'types/ApiResponses';
+import Verse from 'types/Verse';
 
 vi.mock('react-redux', () => ({
   useSelector: (selector: (state: any) => any) => selector((globalThis as any).mockReduxState),
@@ -42,26 +44,6 @@ vi.mock('./HizbControls', () => ({
   default: () => <div data-testid="hizb-controls" />,
 }));
 
-vi.mock('@/components/Fundraising/HomepageFundraisingBanner', () => ({
-  __esModule: true,
-  default: ({
-    analyticsSource,
-    analyticsParams,
-  }: {
-    analyticsSource: string;
-    analyticsParams: Record<string, unknown>;
-  }) => (
-    <div
-      data-testid="fundraising-banner"
-      data-analytics-source={analyticsSource}
-      data-analytics-params={JSON.stringify(analyticsParams)}
-    />
-  ),
-  FundraisingBannerContext: {
-    QuranReader: 'quranReader',
-  },
-}));
-
 describe('EndOfScrollingControls', () => {
   const initialData = {
     verses: [{ verseKey: '2:255' }],
@@ -70,7 +52,9 @@ describe('EndOfScrollingControls', () => {
         to: '2:286',
       },
     },
-  } as any;
+  } as unknown as VersesResponse;
+
+  const lastVerse = { verseKey: '2:286' } as unknown as Verse;
 
   beforeEach(() => {
     cleanup();
@@ -81,44 +65,45 @@ describe('EndOfScrollingControls', () => {
     };
   });
 
-  it.each([
-    [
-      QuranReaderDataType.Chapter,
-      '2',
-      'quran_reader_chapter_end_of_scroll_banner',
-      { chapterId: 2 },
-    ],
-    [
-      QuranReaderDataType.Verse,
-      '2:255',
-      'quran_reader_range_end_of_scroll_banner',
-      { verseKey: '2:255' },
-    ],
-    [QuranReaderDataType.Page, '9', 'quran_reader_page_end_of_scroll_banner', { pageNumber: 9 }],
-    [QuranReaderDataType.Juz, '30', 'quran_reader_juz_end_of_scroll_banner', { juzNumber: 30 }],
-    [QuranReaderDataType.Hizb, '4', 'quran_reader_hizb_end_of_scroll_banner', { hizbNumber: 4 }],
-    [QuranReaderDataType.Rub, '7', 'quran_reader_rub_end_of_scroll_banner', { rubNumber: 7 }],
-    [
-      QuranReaderDataType.ChapterVerseRanges,
-      '2:255-2:257',
-      'quran_reader_range_end_of_scroll_banner',
-      { verseKey: '2:255' },
-    ],
-  ])(
-    'renders the fundraising banner for %s routes with the right analytics props',
-    (quranReaderDataType, resourceId, analyticsSource, analyticsParams) => {
-      render(
-        <EndOfScrollingControls
-          quranReaderDataType={quranReaderDataType as QuranReaderDataType}
-          resourceId={resourceId}
-          lastVerse={{ verseKey: '2:286' } as any}
-          initialData={initialData}
-        />,
-      );
+  it('renders chapter controls for Chapter data type', () => {
+    render(
+      <EndOfScrollingControls
+        quranReaderDataType={QuranReaderDataType.Chapter}
+        lastVerse={lastVerse}
+        initialData={initialData}
+      />,
+    );
 
-      const banner = screen.getByTestId('fundraising-banner');
-      expect(banner.getAttribute('data-analytics-source')).toBe(analyticsSource);
-      expect(JSON.parse(banner.getAttribute('data-analytics-params')!)).toEqual(analyticsParams);
-    },
-  );
+    expect(screen.getByTestId('chapter-controls')).toBeTruthy();
+  });
+
+  it('renders verse controls for Verse data type', () => {
+    render(
+      <EndOfScrollingControls
+        quranReaderDataType={QuranReaderDataType.Verse}
+        lastVerse={lastVerse}
+        initialData={initialData}
+      />,
+    );
+
+    expect(screen.getByTestId('verse-controls')).toBeTruthy();
+  });
+
+  it('renders revelation order notice when reading by revelation order', () => {
+    (globalThis as any).mockReduxState = {
+      revelationOrder: {
+        isReadingByRevelationOrder: true,
+      },
+    };
+
+    render(
+      <EndOfScrollingControls
+        quranReaderDataType={QuranReaderDataType.Chapter}
+        lastVerse={lastVerse}
+        initialData={initialData}
+      />,
+    );
+
+    expect(screen.getByTestId('revelation-order-notice')).toBeTruthy();
+  });
 });
