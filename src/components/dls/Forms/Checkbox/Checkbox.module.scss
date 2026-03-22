@@ -49,6 +49,9 @@
 }
 
 .indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--color-primary-medium);
   border-radius: var(--border-radius-default);
   inline-size: 100%;
