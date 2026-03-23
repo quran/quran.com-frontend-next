@@ -25,7 +25,8 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
         languageAlternates={getLanguageAlternates(PATH)}
       />
       <PageContainer>
-        <div className={styles.contentPage}>
+        <div className={styles.contentPage} dir="ltr">
+          <p className={styles.notice}>{t('terms-only-english')}</p>
           <h2>END USER SOFTWARE LICENSE AND TERMS OF SERVICE AGREEMENT</h2>
           <p>
             THIS TERMS OF SERVICE AGREEMENT IS A LEGAL AND BINDING AGREEMENT BETWEEN YOU
