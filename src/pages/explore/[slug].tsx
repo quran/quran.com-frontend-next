@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-
 import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { useRouter } from 'next/router';
+import Script from 'next/script';
 import useTranslation from 'next-translate/useTranslation';
 
 import contentPageStyles from '../contentPage.module.scss';
@@ -33,45 +31,24 @@ interface Props {
 const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
   const { lang } = useTranslation('articles');
   const { t: tCommon } = useTranslation('common');
-  const { query } = useRouter();
-  const [currentArticle, setCurrentArticle] = useState(contentArticle);
-  const slugParam = Array.isArray(query.slug) ? query.slug[0] : query.slug;
-  const slug = typeof slugParam === 'string' ? slugParam : '';
-
-  useEffect(() => {
-    setCurrentArticle(contentArticle);
-  }, [contentArticle]);
-
-  useEffect(() => {
-    if (!slug) return;
-    fetchContentArticle(slug, lang)
-      .then((response) => {
-        if (response) {
-          setCurrentArticle(response);
-        }
-      })
-      .catch((error) => {
-        logErrorToSentry(error, {
-          transactionName: 'ExplorePageSlug-useEffect',
-          metadata: { language: lang, slug },
-        });
-      });
-  }, [lang, slug]);
-
-  const title = currentArticle?.title || '';
-  const pageSlug = currentArticle?.slug || slug;
-  const heroImage = getPageImage(currentArticle?.image || currentArticle?.thumbnail);
+  const title = contentArticle?.title || '';
+  const pageSlug = contentArticle?.slug || '';
+  const heroImage = getPageImage(contentArticle?.image || contentArticle?.thumbnail);
   const imageAlt = title || pageSlug;
-  const shouldRenderTitle = Boolean(title && !currentArticle?.text?.includes('<h1'));
-  const canonicalPath = `${explorePath}/${pageSlug}`;
+  const shouldRenderTitle = Boolean(title && !contentArticle?.text?.includes('<h1'));
+  const canonicalPath = pageSlug ? `${explorePath}/${pageSlug}` : explorePath;
+  const hasQuranEmbed =
+    contentArticle?.text?.includes('data-quran-embed="true"') ||
+    contentArticle?.text?.includes('/embed/v1');
 
   return (
     <>
+      {hasQuranEmbed ? <Script src="/widget/embed-widget.js" strategy="afterInteractive" /> : null}
       <NextSeoWrapper
         title={title}
         url={getCanonicalUrl(lang, canonicalPath)}
         languageAlternates={getLanguageAlternates(canonicalPath)}
-        description={currentArticle?.description}
+        description={contentArticle?.description}
         image={heroImage}
       />
       <PageContainer>
@@ -89,11 +66,11 @@ const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
               <img className={styles.heroImage} src={heroImage} alt={imageAlt} />
             </div>
           ) : null}
-          {currentArticle?.text ? (
+          {contentArticle?.text ? (
             <div
               className={styles.pageBody}
               // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{ __html: currentArticle.text }}
+              dangerouslySetInnerHTML={{ __html: contentArticle.text }}
             />
           ) : null}
         </div>
