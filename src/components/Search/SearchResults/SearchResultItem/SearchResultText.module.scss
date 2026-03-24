@@ -1,5 +1,7 @@
+@use 'src/styles/utility';
+
 .arabic {
-  font-family: UthmanicHafs;
+  @include utility.kitabFontLang;
   direction: rtl;
   inline-size: 100%;
   display: block;

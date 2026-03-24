@@ -1,4 +1,7 @@
+@use 'src/styles/utility';
+
 .arabicContainer {
+  @include utility.kitabFontHtmlLang;
   text-align: start;
 
   ol {
