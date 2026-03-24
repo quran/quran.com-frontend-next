@@ -44,6 +44,10 @@
   gap: var(--spacing-medium);
 }
 
+h1.verseTextContainer {
+  font-weight: var(--font-weight-normal);
+}
+
 .chapterHeaderContainer {
   margin-inline-start: var(--spacing-medium);
   margin-inline-end: var(--spacing-medium);
