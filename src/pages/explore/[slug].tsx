@@ -7,8 +7,10 @@ import contentPageStyles from '../contentPage.module.scss';
 
 import styles from './explore-page.module.scss';
 
+import VerseChunkWidget from '@/components/Course/LessonHtmlContent/VerseChunkWidget';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import HtmlContent from '@/components/RichText/HtmlContent';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import ArrowLeft from '@/icons/west.svg';
 import { logErrorToSentry } from '@/lib/sentry';
@@ -20,6 +22,7 @@ import {
   getPageImage,
   normalizeExploreSlug,
 } from '@/utils/explore/content-api';
+import { parseContentChunks } from '@/utils/lessonContentParser';
 import { getDir, getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
@@ -27,6 +30,19 @@ import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGenerati
 interface Props {
   contentArticle?: ContentArticle | null;
 }
+
+const renderArticleContent = (html: string) =>
+  parseContentChunks(html).map((chunk) =>
+    chunk.type === 'html' ? (
+      <HtmlContent key={chunk.key} html={chunk.content} />
+    ) : (
+      <VerseChunkWidget
+        key={chunk.key}
+        reference={chunk.reference}
+        fallbackHtml={chunk.originalHtml}
+      />
+    ),
+  );
 
 const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
   const { lang } = useTranslation('articles');
@@ -67,11 +83,7 @@ const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
             </div>
           ) : null}
           {contentArticle?.text ? (
-            <div
-              className={styles.pageBody}
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{ __html: contentArticle.text }}
-            />
+            <div className={styles.pageBody}>{renderArticleContent(contentArticle.text)}</div>
           ) : null}
         </div>
       </PageContainer>
