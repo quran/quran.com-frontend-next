@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Script from 'next/script';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -18,14 +18,11 @@ import {
   ContentArticle,
   explorePath,
   fetchContentArticle,
-  fetchContentArticles,
   getPageImage,
-  normalizeExploreSlug,
 } from '@/utils/explore/content-api';
 import { parseContentChunks } from '@/utils/lessonContentParser';
 import { getDir, getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 
 interface Props {
   contentArticle?: ContentArticle | null;
@@ -91,30 +88,7 @@ const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  try {
-    const articles = await fetchContentArticles('en');
-    const paths = articles
-      .map((article) => normalizeExploreSlug(article.slug))
-      .filter((articleSlug): articleSlug is string => Boolean(articleSlug))
-      .map((articleSlug) => ({ params: { slug: articleSlug } }));
-
-    return {
-      paths,
-      fallback: 'blocking',
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticPaths-ExplorePageSlug',
-    });
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
-  }
-};
-
-export const getStaticProps: GetStaticProps<Props> = async ({ params, locale }) => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({ params, locale }) => {
   const slug = String(params?.slug || '');
   if (!slug) {
     return { notFound: true };
@@ -122,22 +96,20 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params, locale }) 
   try {
     const contentArticle = await fetchContentArticle(slug, locale || 'en');
     if (!contentArticle) {
-      return { notFound: true, revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS };
+      return { notFound: true };
     }
     return {
       props: {
         contentArticle,
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   } catch (error) {
     logErrorToSentry(error, {
-      transactionName: 'getStaticProps-ExplorePageSlug',
+      transactionName: 'getServerSideProps-ExplorePageSlug',
       metadata: { slug },
     });
     return {
       notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

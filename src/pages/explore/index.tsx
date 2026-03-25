@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
-
 import classNames from 'classnames';
-import { GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './explore.module.scss';
@@ -23,7 +21,6 @@ import {
 } from '@/utils/explore/content-api';
 import { getDir, getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 
 interface Props {
   articles?: ContentArticle[];
@@ -31,22 +28,8 @@ interface Props {
 
 const ExplorePage: NextPage<Props> = ({ articles }) => {
   const { t, lang } = useTranslation('articles');
-  const [contentArticles, setContentArticles] = useState(articles || []);
 
-  useEffect(() => {
-    fetchContentArticles(lang)
-      .then((response) => {
-        setContentArticles(response);
-      })
-      .catch((error) => {
-        logErrorToSentry(error, {
-          transactionName: 'ExplorePage-useEffect',
-          metadata: { language: lang },
-        });
-      });
-  }, [lang]);
-
-  const entries = contentArticles
+  const entries = (articles || [])
     .filter((article) => article.slug)
     .map((article) => ({
       href: getExploreHref(article.slug),
@@ -101,7 +84,7 @@ const ExplorePage: NextPage<Props> = ({ articles }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({ locale }) => {
   const language = locale || 'en';
   try {
     const articles = await fetchContentArticles(language);
@@ -109,18 +92,16 @@ export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
       props: {
         articles,
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   } catch (error) {
     logErrorToSentry(error, {
-      transactionName: 'getStaticProps-ExplorePage',
+      transactionName: 'getServerSideProps-ExplorePage',
       metadata: { language },
     });
     return {
       props: {
         articles: [],
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };
