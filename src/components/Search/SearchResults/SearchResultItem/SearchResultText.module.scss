@@ -1,7 +1,5 @@
-@use 'src/styles/utility';
-
 .arabic {
-  @include utility.kitabFontLang;
+  font-family: UthmanicHafs !important;
   direction: rtl;
   inline-size: 100%;
   display: block;
@@ -12,6 +10,7 @@
   line-height: 150%;
   flex-grow: 1;
   em {
+    font-family: inherit !important;
     font-weight: var(--font-weight-bold);
     color: var(--color-highlight-dark);
   }
