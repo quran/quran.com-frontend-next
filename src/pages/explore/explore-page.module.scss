@@ -30,10 +30,15 @@
 }
 
 .heroImage {
-  width: 100%;
-  height: auto;
+  inline-size: 100%;
+  block-size: auto;
   object-fit: contain;
   display: block;
+}
+
+.actionsRow {
+  display: flex;
+  margin-block-end: var(--spacing-medium);
 }
 
 .pageBody {

@@ -86,7 +86,7 @@
     "/about-the-quran": ["about-quran"],
     "/notes-and-reflections": ["notes"],
     "/explore": ["articles"],
-    "/explore/[slug]": ["articles"],
+    "/explore/[slug]": ["articles", "learn"],
     "/ramadan": ["ramadan-activities"],
     "/ramadanchallenge": ["ramadan-activities"],
     "/beyond-ramadan": ["ramadan-activities"],

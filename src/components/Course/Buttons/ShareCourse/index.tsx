@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -16,24 +16,38 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { getCourseNavigationUrl } from '@/utils/navigation';
 import { getBasePath } from '@/utils/url';
 
-type Props = { course: Course };
+type Props = {
+  course: Pick<Course, 'id' | 'title' | 'slug'>;
+  shareUrl?: string;
+  analyticsContext?: string;
+  buttonAnalyticsName?: string;
+  buttonAnalyticsData?: Record<string, string | number>;
+  buttonSize?: ButtonSize;
+};
 
-const ShareCourse: React.FC<Props> = ({ course }) => {
+const ShareCourse: React.FC<Props> = ({
+  course,
+  shareUrl: shareUrlProp,
+  analyticsContext = 'share_course',
+  buttonAnalyticsName = 'share_course_clicked',
+  buttonAnalyticsData,
+  buttonSize,
+}) => {
   const { t } = useTranslation('learn');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   const isMobile = useIsMobile();
 
-  const shareUrl = `${getBasePath()}${getCourseNavigationUrl(course.slug)}`;
+  const shareUrl = shareUrlProp || `${getBasePath()}${getCourseNavigationUrl(course.slug)}`;
 
   const onShareClicked = () => {
-    logButtonClick('share_course_clicked', { courseId: course.id });
+    logButtonClick(buttonAnalyticsName, buttonAnalyticsData || { courseId: course.id });
     setIsOpen(true);
   };
 
   return (
     <>
       <Button
-        size={isMobile ? ButtonSize.Small : ButtonSize.Medium}
+        size={buttonSize || (isMobile ? ButtonSize.Small : ButtonSize.Medium)}
         className={styles.shareButton}
         prefix={
           <span className={styles.shareIcon}>
@@ -59,7 +73,7 @@ const ShareCourse: React.FC<Props> = ({ course }) => {
             <ShareButtons
               url={shareUrl}
               title={course.title}
-              analyticsContext="share_course"
+              analyticsContext={analyticsContext}
               hideVideoGeneration
             />
           </div>

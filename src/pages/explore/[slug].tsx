@@ -7,11 +7,12 @@ import contentPageStyles from '../contentPage.module.scss';
 
 import styles from './explore-page.module.scss';
 
+import ShareCourse from '@/components/Course/Buttons/ShareCourse';
 import VerseChunkWidget from '@/components/Course/LessonHtmlContent/VerseChunkWidget';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import HtmlContent from '@/components/RichText/HtmlContent';
-import Button, { ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ArrowLeft from '@/icons/west.svg';
 import { logErrorToSentry } from '@/lib/sentry';
 import {
@@ -50,6 +51,7 @@ const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
   const imageAlt = title || pageSlug;
   const shouldRenderTitle = Boolean(title && !contentArticle?.text?.includes('<h1'));
   const canonicalPath = pageSlug ? `${explorePath}/${pageSlug}` : explorePath;
+  const shareUrl = getCanonicalUrl(lang, canonicalPath);
   const hasQuranEmbed =
     contentArticle?.text?.includes('data-quran-embed="true"') ||
     contentArticle?.text?.includes('/embed/v1');
@@ -59,7 +61,7 @@ const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
       {hasQuranEmbed ? <Script src="/widget/embed-widget.js" strategy="afterInteractive" /> : null}
       <NextSeoWrapper
         title={title}
-        url={getCanonicalUrl(lang, canonicalPath)}
+        url={shareUrl}
         languageAlternates={getLanguageAlternates(canonicalPath)}
         description={contentArticle?.description}
         image={heroImage}
@@ -73,6 +75,16 @@ const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
         </div>
         <div className={classNames(contentPageStyles.contentPage, styles.page)} dir={getDir(lang)}>
           {shouldRenderTitle ? <h1>{title}</h1> : null}
+          <div className={styles.actionsRow}>
+            <ShareCourse
+              course={{ id: pageSlug, title, slug: pageSlug }}
+              shareUrl={shareUrl}
+              analyticsContext="share_explore_article"
+              buttonAnalyticsName="explore_article_share_button"
+              buttonAnalyticsData={{ slug: pageSlug }}
+              buttonSize={ButtonSize.Small}
+            />
+          </div>
           {heroImage ? (
             <div className={styles.hero}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
