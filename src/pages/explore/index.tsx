@@ -26,17 +26,67 @@ interface Props {
   articles?: ContentArticle[];
 }
 
+const normalize_whitespace = (value: string) => value.replace(/\s+/g, ' ').trim();
+
+const strip_html = (value: string) => normalize_whitespace(value.replace(/<[^>]+>/g, ' '));
+
+const strip_markdown = (value: string) =>
+  normalize_whitespace(
+    value
+      .replace(/!\[[^\]]*]\([^)]+\)/g, ' ')
+      .replace(/\[([^\]]+)]\([^)]+\)/g, '$1')
+      .replace(/`{1,3}[^`]*`{1,3}/g, ' ')
+      .replace(/[*_~]/g, ' ')
+      .replace(/^#{1,6}\s+/gm, '')
+      .replace(/\s*[-+]\s+/g, ' ')
+      .replace(/\s{2,}/g, ' '),
+  );
+
+const to_plain_text = (value: string) => strip_markdown(strip_html(value));
+
+const slug_to_title = (slug?: string) => {
+  if (!slug) return '';
+
+  return slug
+    .replace(/[-_]+/g, ' ')
+    .split(' ')
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
+const truncate_text = (value: string, max_length: number) =>
+  value.length > max_length ? `${value.slice(0, max_length).trimEnd()}...` : value;
+
+const resolve_card_title = (article: ContentArticle) => {
+  const title = normalize_whitespace(article.title || '');
+  if (title) return title;
+  return slug_to_title(article.slug);
+};
+
+const resolve_card_description = (article: ContentArticle) => {
+  const description = to_plain_text(article.description || '');
+  if (description) return description;
+  return null;
+};
+
 const ExplorePage: NextPage<Props> = ({ articles }) => {
   const { t, lang } = useTranslation('articles');
 
   const entries = (articles || [])
     .filter((article) => article.slug)
-    .map((article) => ({
-      href: getExploreHref(article.slug),
-      title: article.title,
-      description: article.description,
-      image: getPageImage(article.thumbnail || article.image),
-    }));
+    .map((article) => {
+      const title = resolve_card_title(article);
+      const raw_description = resolve_card_description(article);
+      const description = raw_description ? truncate_text(raw_description, 140) : undefined;
+
+      return {
+        href: getExploreHref(article.slug),
+        title,
+        description,
+        image: getPageImage(article.thumbnail || article.image),
+      };
+    });
 
   return (
     <>

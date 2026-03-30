@@ -79,6 +79,10 @@
     margin: 0;
     display: inline;
   }
+
+  &:not(:empty) {
+    margin-block-start: var(--spacing-xxsmall);
+  }
 }
 
 .readMore {

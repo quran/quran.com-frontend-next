@@ -29,6 +29,8 @@ interface Props {
   contentArticle?: ContentArticle | null;
 }
 
+const strip_first_h1 = (html: string) => html.replace(/<h1[^>]*>[\s\S]*?<\/h1>/i, '');
+
 const renderArticleContent = (html: string) =>
   parseContentChunks(html).map((chunk) =>
     chunk.type === 'html' ? (
@@ -44,17 +46,15 @@ const renderArticleContent = (html: string) =>
 
 const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
   const { lang } = useTranslation('articles');
-  const { t: tCommon } = useTranslation('common');
   const title = contentArticle?.title || '';
   const pageSlug = contentArticle?.slug || '';
   const heroImage = getPageImage(contentArticle?.image || contentArticle?.thumbnail);
   const imageAlt = title || pageSlug;
-  const shouldRenderTitle = Boolean(title && !contentArticle?.text?.includes('<h1'));
+  const content_text = contentArticle?.text ? strip_first_h1(contentArticle.text) : '';
   const canonicalPath = pageSlug ? `${explorePath}/${pageSlug}` : explorePath;
   const shareUrl = getCanonicalUrl(lang, canonicalPath);
   const hasQuranEmbed =
-    contentArticle?.text?.includes('data-quran-embed="true"') ||
-    contentArticle?.text?.includes('/embed/v1');
+    content_text.includes('data-quran-embed="true"') || content_text.includes('/embed/v1');
 
   return (
     <>
@@ -68,13 +68,12 @@ const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
       />
       <PageContainer>
         <div className={styles.backButtonWrapper} dir={getDir(lang)}>
-          <Button href={explorePath} variant={ButtonVariant.Ghost} ariaLabel={tCommon('back')}>
+          <Button href={explorePath} variant={ButtonVariant.Ghost} ariaLabel="Back to Explore">
             <ArrowLeft />
-            <p className={styles.backText}>{tCommon('back')}</p>
+            <p className={styles.backText}>Back to Explore</p>
           </Button>
         </div>
         <div className={classNames(contentPageStyles.contentPage, styles.page)} dir={getDir(lang)}>
-          {shouldRenderTitle ? <h1>{title}</h1> : null}
           <div className={styles.actionsRow}>
             <ShareCourse
               course={{ id: pageSlug, title, slug: pageSlug }}
@@ -85,15 +84,14 @@ const ExploreContentPage: NextPage<Props> = ({ contentArticle }) => {
               buttonSize={ButtonSize.Small}
             />
           </div>
+          {title ? <h1>{title}</h1> : null}
           {heroImage ? (
             <div className={styles.hero}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className={styles.heroImage} src={heroImage} alt={imageAlt} />
             </div>
           ) : null}
-          {contentArticle?.text ? (
-            <div className={styles.pageBody}>{renderArticleContent(contentArticle.text)}</div>
-          ) : null}
+          {content_text ? <div className={styles.pageBody}>{renderArticleContent(content_text)}</div> : null}
         </div>
       </PageContainer>
     </>
