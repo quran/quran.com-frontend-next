@@ -1,0 +1,75 @@
+{
+  "add-another-note": "Weitere Notiz hinzufügen",
+  "body-placeholder": "Nutzen Sie diesen Bereich, um allgemeine Notizen zu speichern oder eine Reflexion zu schreiben.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li>Wenn Sie posten, wird Ihre Reflexion unter Ihrem Namen auf QuranReflect geteilt, wo sie vom Moderationsteam überprüft und für die QuranReflect-Community sichtbar wird.</li><li>Sobald Ihr Beitrag von unserem Moderationsteam überprüft und genehmigt oder hervorgehoben wurde, können Sie Likes, Kommentare und Benachrichtigungen über Follower erhalten. Nach der Anmeldung bei QuranReflect können Sie Ihre Benachrichtigungseinstellungen nach Ihren Wünschen anpassen.</li><li>Sie können Ihre Notizen und geposteten Reflexionen unter Ihrem Quran.com-Anmeldeprofil im Bereich \"Meine Notizen und Reflexionen\" einsehen oder sich mit Ihrer Quran.com-Anmelde-E-Mail bei <link>QuranReflect</link> einloggen.</li>",
+      "title": "Was passiert, wenn ich auf \"Speichern und auf QuranReflect posten\" klicke?"
+    },
+    "post-button": "Was passiert, wenn ich poste?",
+    "qr-intro": "QuranReflect ist zusammen mit Quran.com Teil der Quran.Foundation-Familie. Es ist eine soziale Plattform zum Teilen persönlicher Reflexionen über den Quran, die Benutzer ermutigt, seine Botschaften zu verinnerlichen und Einsichten zu teilen, die positive Veränderungen inspirieren. Im Gegensatz zu Tafsir, der eine wissenschaftliche Auslegung des Quran ist, sind Reflexionen persönliche Gedanken und Erfahrungen im Zusammenhang mit den Versen. Beiträge der Benutzer auf QuranReflect werden von einem qualifizierten Team überprüft und moderiert, das die Qualität der Inhalte sicherstellt, den respektvollen Umgang mit dem Quran wahrt und Benutzer durch Feedback und die Hervorhebung wertvoller Diskurse stärkt, um so eine spirituell aufbauende, Quran-fokussierte Community zu fördern. Mehr erfahren: <link>Quranreflect.com/faq</link>",
+    "qr-title": "Was ist QuranReflect?",
+    "title": "Was ist QuranReflect und was passiert, wenn ich dieses Kästchen ankreuze?"
+  },
+  "click-to-see-more": "Klicken, um mehr zu sehen",
+  "delete-note": "Notiz löschen",
+  "delete-note-modal": {
+    "subtitle": "Sind Sie sicher, dass Sie die Notiz löschen möchten?",
+    "title": "Notiz löschen"
+  },
+  "delete-success": "Notiz wurde erfolgreich gelöscht",
+  "edit-note": "Notiz bearbeiten",
+  "empty-notes": "Keine Notizen gefunden",
+  "empty-reflections": "Keine Reflexionen gefunden",
+  "export-success": "Die Notiz wurde erfolgreich auf Ihrem QuranReflect-Konto veröffentlicht",
+  "my-notes": "Meine Notizen ({{count}})",
+  "new-note-reflc-intro": {
+    "learn-more": "Mehr erfahren",
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li>Werden Namen Allahs erwähnt, und wie stehen sie im Zusammenhang mit dem Vers?</li><li>Welche Wörter oder sprachlichen Aspekte haben Ihre Aufmerksamkeit erregt?</li><li>Können Sie Verbindungen zum Kontext des Verses, zu anderen Quran-Versen, Hadithen oder Ereignissen herstellen?</li>",
+        "title": "Tiefere Einsichten:"
+      },
+      "personal": {
+        "desc": "<li>Auf welche Weise hat dieser Vers Sie bewegt oder inspiriert?</li><li>Gibt es Eigenschaften oder Handlungen, die erwähnt werden und die Sie verbessern können?</li><li>Gibt es ein Versprechen oder eine Warnung/ein Verbot, das Sie auf Ihr Leben anwenden können?</li><li>Haben Sie eine persönliche Geschichte, die mit diesem Vers zusammenhängt?</li><li>Welche Veränderungen möchten Sie auf der Grundlage dieses Verses vornehmen, und wie können Sie oder jemand anderes diese praktisch umsetzen?</li>",
+        "title": "Persönliche Reflexionsfragen:"
+      },
+      "title": "Reflexionsimpulse"
+    },
+    "see-less": "Weniger anzeigen",
+    "title": "Brauchen Sie Hilfe beim Reflektieren über den Quran?",
+    "what-is-reflc": {
+      "desc": "Über den Quran zu reflektieren oder nachzudenken bedeutet, die Worte Allahs aufmerksam zu lesen oder zu hören, sich mit ihren Bedeutungen auseinanderzusetzen und sich von ihnen zum Besseren verändern zu lassen. Dies wird als \"Tadabbur\" bezeichnet. Tafsir hingegen ist eine wissenschaftliche Auslegung des Quran, die detaillierte Erklärungen seiner Verse auf der Grundlage klassischer Quellen und wissenschaftlicher Analyse bietet. Während Tafsir den Gelehrten vorbehalten ist, fordert Allah \uFDDF jeden auf, sich im Tadabbur zu üben (Quran <link1>38:29</link1>, <link2>47:24</link2>, <link3>4:82</link3> und viele mehr).<br></br><br></br>Benutzer können ihre Notizen und persönlichen Reflexionen privat speichern. Oft können unsere Reflexionen bei anderen tiefen Anklang finden und ihre Verbindung zum Quran und ihre Beziehung zu Allah \uFDDF stärken. Deshalb haben Benutzer die Möglichkeit, ihre Reflexion auf QuranReflect zu teilen, als Teil unserer Bemühungen, Menschen auf ihrer gemeinsamen Reise wachsen zu lassen. Mehr erfahren unter: <link4>QuranReflect.com/faq</link4> und <link5>Fünf Perspektiven zur Reflexion über den Quran</link5>",
+      "title": "Was ist eine Reflexion?"
+    }
+  },
+  "note": "Notiz",
+  "notes-and-reflcs": "Notizen & Reflexionen",
+  "notes-on-this-verse": "{{count}} Notizen zu diesem Vers",
+  "post-confirmation": {
+    "question": "Sind Sie sicher, dass Sie diese Reflexion auf QuranReflect posten möchten?"
+  },
+  "post-on-qr": "Auf QuranReflect posten",
+  "post-to": "Posten auf",
+  "posted-reflections": "Gepostete Reflexionen",
+  "private-notes": "Notizen",
+  "qr-tooltip": "<span><link>QuranReflect</link> ist eine soziale Plattform zum Teilen von Reflexionen über den Quran. Verbinden Sie sich rund um den Quran, verbinden Sie sich mit dem, was zählt.</span>",
+  "reflection-update-success": "Reflexion wurde erfolgreich aktualisiert",
+  "reflections-intro": {
+    "line-1": "Um Kommentare anzusehen und zu interagieren, sich mit der Community zu engagieren und mehr zu tun, besuchen Sie <link>QuranReflect.com</link>.",
+    "line-2": "Sie können sich bei Ihrem verknüpften QuranReflect-Konto anmelden, indem Sie sich mit derselben Quran.com-E-Mail-Adresse anmelden oder registrieren.",
+    "line-3": "Inhalte, die nicht für die öffentliche Ansicht geeignet sind, werden ausgeblendet oder gelöscht. Benutzer, die unangemessene Inhalte posten, werden gesperrt.",
+    "title": "Mehr über gepostete Reflexionen erfahren"
+  },
+  "save-post-to-qr": "Speichern & auf QuranReflect posten",
+  "save-privately": "Privat speichern",
+  "save-publish-failed": "Die Notiz wurde erfolgreich gespeichert, konnte aber nicht veröffentlicht werden",
+  "save-success": "Notiz wurde erfolgreich gespeichert",
+  "share-to-qr": "Auf QuranReflect.com teilen",
+  "share-to-qr-desc": "Teilen als <b>{{name}}</b>. Publikum ist <b>QuranReflect-Benutzer</b>",
+  "take-a-note-or-reflection": "Notiz oder Reflexion hinzufügen",
+  "update-publish-failed": "Die Notiz wurde erfolgreich aktualisiert, konnte aber nicht veröffentlicht werden",
+  "update-reflection": "Reflexion aktualisieren",
+  "update-success": "Notiz wurde erfolgreich aktualisiert",
+  "view-on-qr": "Auf QuranReflect ansehen"
+}

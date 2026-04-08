@@ -1,0 +1,74 @@
+{
+  "api-docs": {
+    "cta": "API-Dokumentation ansehen",
+    "header": "API-Dokumentation",
+    "sub-header": "Integrieren Sie Quran.com-Daten mit unserer umfassenden API in Ihre Anwendungen",
+    "title": "API-Dokumentation"
+  },
+  "app-portal": {
+    "cta-explore": "Apps entdecken",
+    "cta-oauth": "OAuth2-Anleitung ansehen",
+    "description": "Entdecken Sie innovative Apps, die einzigartige Bedürfnisse und verschiedene Gesellschaftsgruppen ansprechen.",
+    "heading": "Verbundene Quran-Apps",
+    "oauth-pitch": "Nutzen Sie OAuth2.0 der Quran.Foundation, damit Benutzer ihre Daten finden und dort weitermachen können, wo sie auf Quran.com und integrierten Apps aufgehört haben.",
+    "tagline": "Präsentieren Sie Ihre Quran-Apps"
+  },
+  "careers": {
+    "career": "Karrieremöglichkeiten",
+    "cta": "Stellenangebote ansehen",
+    "header": "Entdecken Sie unsere aktuellen Stellenangebote"
+  },
+  "footer": "- Quran.com-Team",
+  "header": "Entwicklerhilfe",
+  "hero": {
+    "subtitle": "Ressourcen, Werkzeuge und Anleitungen für Entwickler, die Quran-Erlebnisse gestalten.",
+    "title": "Entwickeln mit Quran.com"
+  },
+  "issues-cta": "Sollten Sie Fragen haben oder die Betreuer kontaktieren wollen, erstellen Sie einfach ein Issue. Wir melden uns so schnell wie möglich bei Ihnen, insha'Allah.",
+  "issues-guide": "Normalerweise verwenden wir <0>Github-Projekte</0> als Quelle dafür, woran als Nächstes gearbeitet wird, was ansteht und welche Fehler behoben werden müssen. Zum Beispiel enthält <1>diese URL</1> eine Liste von Fehlern, Aufgaben, bei denen wir Hilfe benötigen, und kommende Funktionen.",
+  "labs": "Quran Labs",
+  "labs-cta": "Labs entdecken",
+  "labs-description": "Entdecken Sie von der Community entwickelte experimentelle Funktionen und kommende Innovationen.",
+  "labs-pitch": "Teilen Sie Ihre Ideen und beteiligen Sie sich an der Zukunft des Quran-Engagements und der Quran-Erfahrungen.",
+  "main-desc": "Entdecken Sie die Programme, Werkzeuge und Dokumentation, die Ihnen helfen, das Quran.com-Ökosystem zu erweitern.",
+  "projects": {
+    "all": "Wir haben eine Reihe von Projekten, die alle auf Github gehostet werden. Sie finden sie alle <0>hier</0>. Hier eine Übersicht:",
+    "items": {
+      "q-android": {
+        "description": "Native Android-Mushaf- und Audio-Player-Erfahrung für Smartphones und Tablets.",
+        "name": "Quran Android",
+        "stack": "Kotlin und Java"
+      },
+      "q-api": {
+        "description": "Ruby on Rails-Backend, das Quran-Daten, Suche und Übersetzungen bereitstellt.",
+        "name": "Quran.com API",
+        "stack": "Rails, PostgreSQL"
+      },
+      "q-audio": {
+        "description": "Audio-Streaming-Plattform und begleitende mobile Apps für Rezitationen.",
+        "name": "Quranic Audio",
+        "stack": "Web- und mobile Apps"
+      },
+      "q-ios": {
+        "description": "Swift-basierter Quran-Reader mit Lesezeichen, Rezitationen und Offline-Unterstützung.",
+        "name": "Quran iOS",
+        "stack": "Swift"
+      },
+      "q-next": {
+        "description": "Next.js-Weberfahrung zum Lesen, Suchen und Anhören des Quran.",
+        "name": "Quran.com Frontend",
+        "stack": "Entwickelt mit TypeScript und Next.js"
+      }
+    },
+    "lead": "Open-Source-Projekte, die vom Quran.com-Team und der Community gepflegt werden.",
+    "q-android": "<0>Quran Android</0> – geschrieben in Kotlin und Java.",
+    "q-api": "<0>Quran.com API</0> – geschrieben in Ruby on Rails.",
+    "q-api-docs": "<0>Quran.com API-Dokumentation</0> – Unser API-Dokumentationsportal.",
+    "q-audio": "<0>Quranic Audio</0> und <1>Quranic Audio mobile Apps</1>",
+    "q-audio-segments": "<0>Quran Audio Segments</0>",
+    "q-ios": "<0>Quran iOS</0> – geschrieben in Swift.",
+    "q-next": "<0>Quran.com Frontend</0> – geschrieben in Next.js.",
+    "q-v2": "<0>Quran.com</0> – geschrieben in Ruby on Rails."
+  },
+  "thanks": "Wir freuen uns auf Ihren Beitrag!"
+}

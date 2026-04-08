@@ -1,0 +1,24 @@
+{
+  "all-notifications": "Alle Benachrichtigungen",
+  "channels-notifications": "Kanal-Benachrichtigungen",
+  "channels": {
+    "chat": "Chat",
+    "email": "E-Mail",
+    "in_app": "In-App",
+    "push": "Push",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Benachrichtigungseinstellungen sind nicht aktiviert",
+  "notif-update-success": "Ihre Benachrichtigungseinstellungen wurden erfolgreich aktualisiert!",
+  "tabs": {
+    "categories-settings": "Kategorieeinstellungen",
+    "global-settings": "Globale Einstellungen"
+  },
+  "tags": {
+    "calendar": "Quran in einem Jahr",
+    "goal-reminder": "Zielerinnerung",
+    "learning-plans": "Lernpläne",
+    "qgj": "Quran-Wachstumsreise",
+    "streaks": "Serien"
+  }
+}

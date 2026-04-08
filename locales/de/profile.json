@@ -1,0 +1,59 @@
+{
+  "allowed-formats": "Nur {{formats}}",
+  "change-password": "Passwort ändern",
+  "delete-account": "Konto löschen",
+  "delete-account-warning-title": "Warnung",
+  "delete-confirmation": {
+    "action-text": "Ich verstehe die Konsequenzen, mein Konto löschen",
+    "confirmation-text": "mein Konto löschen",
+    "instruction-text": "Bitte geben Sie <strong>{{text}}</strong> zur Bestätigung ein",
+    "subtitle": "Das Löschen Ihres Quran.com-Kontos ist dauerhaft und kann nicht rückgängig gemacht werden. Ihre Kontodaten, Einstellungen und der Verlauf werden dauerhaft aus Ihrem Profil entfernt und sind nicht mehr verfügbar. Wenn Sie dieselben Anmeldedaten für QuranReflect verwenden, wird dieses Konto ebenfalls gelöscht. [Bitte beachten Sie: Dies betrifft nicht Ihr Spenderkonto und ist nicht mit Ihren Spenden verknüpft. Spenden müssen direkt über die Spendenplattform verwaltet werden.]",
+    "title": "Sind Sie absolut sicher?"
+  },
+  "delete-profile-picture": {
+    "action-text": "Ja",
+    "cancel-text": "Nein",
+    "subtitle": "Sie werden das Profilbild löschen und auf das Standardbild zurücksetzen. Sind Sie sicher?",
+    "title": "Profilbild löschen"
+  },
+  "edit-details": "Details bearbeiten",
+  "email-notification-settings": "E-Mail-Benachrichtigungseinstellungen",
+  "errors": {
+    "remove-failed": "Profilbild konnte nicht entfernt werden. Bitte versuchen Sie es erneut.",
+    "upload-failed": "Profilbild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut."
+  },
+  "max-file-size": "Maximal {{size}}",
+  "my-profile": "Mein Profil",
+  "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Sie erhalten eine E-Mail-Erinnerung an Ihr Quran-Ziel, wenn Sie eine Weile keinen Fortschritt gemacht haben.",
+      "title": "Zielerinnerung"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Surah Al-Mulk: Sinnvolle Auswendiglern-Challenge",
+      "title": "Tägliche Ramadan-Challenge"
+    },
+    "quran-reading-program": {
+      "description": "Sie erhalten eine E-Mail mit Links zur wöchentlichen Leseaufgabe, Reflexionsimpulsen und weiteren Ressourcen, um Sie auf Kurs zu halten.",
+      "title": "Quran in einem Jahr"
+    },
+    "streaks-that-will-break": {
+      "description": "Sie erhalten eine E-Mail, wenn eine Serie kurz davor ist, unterbrochen zu werden.",
+      "title": "Serien"
+    }
+  },
+  "personalization": "Personalisierung",
+  "profile-picture": "Profilbild",
+  "remove-picture": "Bild entfernen",
+  "remove-success": "Profilbild erfolgreich entfernt",
+  "save-changes": "Änderungen speichern",
+  "save-picture": "Bild speichern",
+  "success": {
+    "details": "Ihr Profil wurde erfolgreich aktualisiert",
+    "notifications": "Ihre Benachrichtigungseinstellungen wurden erfolgreich aktualisiert",
+    "password": "Ihr Passwort wurde erfolgreich aktualisiert"
+  },
+  "update-password": "Passwort aktualisieren",
+  "upload-picture": "Bild hochladen",
+  "upload-success": "Profilbild erfolgreich hochgeladen"
+}

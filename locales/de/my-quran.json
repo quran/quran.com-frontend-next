@@ -1,0 +1,63 @@
+{
+  "bulk-actions": {
+    "actions": "Aktionen",
+    "actions-count": "Aktionen ({{count}})",
+    "cancel": "Abbrechen",
+    "collapse-all": "Alle einklappen",
+    "expand-all": "Alle ausklappen",
+    "pin": "Anheften",
+    "pin-verses": "Verse anheften",
+    "select": "Auswählen"
+  },
+  "collections": {
+    "detail-empty": "Beginnen Sie mit dem Lesen und fügen Sie Verse zu Ihrer Sammlung hinzu!",
+    "favorites": "Favoriten",
+    "filters": {
+      "chapters": "Kapitel",
+      "clear-all": "Alle löschen",
+      "juz": "Juz",
+      "no-matches": "Keine gespeicherten Verse entsprechen Ihren Filtern.",
+      "no-results": "Keine Ergebnisse",
+      "title": "Filter"
+    },
+    "guest-promo": {
+      "sign-in": "Anmelden",
+      "subtitle": "Verse vergleichen und gegenüberstellen",
+      "title": "Eigene Sammlungen erstellen"
+    },
+    "items": "{{count}} Element",
+    "items_plural": "{{count}} Elemente",
+    "load-more": "Mehr laden",
+    "new-collection": "Neue Sammlung",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Kürzlich aktualisiert",
+      "z-a": "Z - A"
+    },
+    "title": "Sammlungen"
+  },
+  "notes-and-reflections": "Notizen & Reflexionen",
+  "page": "Seite",
+  "reading-bookmark": {
+    "empty": "Beginnen Sie mit dem Lesen und speichern Sie ein Lesezeichen!",
+    "title": "Mein Lesezeichen"
+  },
+  "recent": "Zuletzt",
+  "recent-empty": "Beginnen Sie mit dem Lesen, um Ihre zuletzt gelesenen Inhalte zu sehen",
+  "recently-saved": {
+    "title": "Kürzlich gespeichert"
+  },
+  "saved": "Gespeichert",
+  "search": {
+    "filter": "Filter",
+    "placeholder": "Gespeichertes durchsuchen...",
+    "sort": "Sortieren"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Notizen an Verse anhängen",
+      "custom-collections": "Eigene Sammlungen erstellen"
+    },
+    "title": "Melden Sie sich an oder registrieren Sie sich kostenlos, um Zugang zu weiteren Funktionen zu erhalten!"
+  }
+}

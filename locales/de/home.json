@@ -1,0 +1,103 @@
+{
+  "achieve-quran-goals": "Erreiche deine Quran-Ziele",
+  "apps": {
+    "description": "Vernetzte Apps, um dein Wachstum mit dem Quran zu fordern.",
+    "featured-apps": "Empfohlene Apps",
+    "qariah": {
+      "description": "Quran-Rezitatorinnen",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com fur Android",
+      "name": "Quran Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com fur iPhone",
+      "name": "Quran iOS"
+    },
+    "quran-space": {
+      "description": "Live-Studienkreis",
+      "name": "Quran Space"
+    },
+    "quranreflect": {
+      "description": "Reflexionen lesen und teilen",
+      "name": "QuranReflect"
+    },
+    "see-more": "Mehr anzeigen",
+    "title": "Quran-Apps"
+  },
+  "begin": "Beginnen",
+  "calendar-cta": "Kalender",
+  "chapters-and-verses": "Kapitel und Verse",
+  "continue-learning-plan": "Weiterlernen",
+  "continue-read": "Weiterlesen",
+  "explore-topics": "Themen entdecken",
+  "first-time-reading": "Neu beim Quran? <link>Hier starten</link>",
+  "grow-beyond-ramadan": "Wachse mit uns <modalLink>uber den Ramadan hinaus</modalLink>",
+  "know-someone": "Wachse mit uns diesen <modalLink>Ramadan</modalLink>",
+  "learning-plan": "Lernplane",
+  "listen-to-radio": "Quran Radio horen",
+  "my-quran": "Mein Quran",
+  "navigate-quran": "Quran durchsuchen",
+  "no-bookmarks": "Du hast noch keine Lesezeichen",
+  "no-page-bookmarks": "Du hast noch keine Seiten-Lesezeichen",
+  "no-recently-read": "Du hast noch keine Lesesitzungen",
+  "noble-quran": "Der edle Quran",
+  "popular": "Beliebt",
+  "qgj": {
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Alle Plane anzeigen",
+        "my-plans": "Meine Plane"
+      },
+      "desc": {
+        "logged-in": "Hast du schon einmal ein Lernprogramm begonnen und bist auf halbem Weg abgekommen? Lernplane sind in uberschaubare Abschnitte unterteilt und wir verfolgen deinen Fortschritt, bis du das Ziel erreichst. Entdecke unser aktuelles Kursangebot noch heute",
+        "logged-in-no-plans": "Hast du schon einmal ein Lernprogramm begonnen und bist auf halbem Weg abgekommen? Lernplane sind in uberschaubare Abschnitte unterteilt und wir verfolgen deinen Fortschritt, bis du das Ziel erreichst. Entdecke unser aktuelles Kursangebot noch heute",
+        "logged-out": "Hast du schon einmal ein Lernprogramm begonnen und bist auf halbem Weg abgekommen? Lernplane sind in uberschaubare Abschnitte unterteilt und wir verfolgen deinen Fortschritt, bis du das Ziel erreichst. Entdecke unser aktuelles Kursangebot noch heute"
+      },
+      "title": "Lernplane"
+    },
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Mochtest du 10 Minuten am Tag lesen, einen Juz im Monat abschliessen oder den gesamten Quran in einem Jahr beenden? Es ist einfach, ein individuelles Ziel zu erstellen und deinen Fortschritt zu verfolgen"
+      },
+      "title": "Individuelle Quran-Leseziele"
+    },
+    "title": "Quran-Wachstumsreise"
+  },
+  "qr-community": "Lies die heutigen ausgewahlten Verse und Reflexionen",
+  "quran-in-year": "Quran in einem Jahr",
+  "quran-in-year-cta": "Lesung dieser Woche",
+  "quran-in-year-verse-title": "Ein Vers aus der Lesung dieser Woche",
+  "ramadan-activities-cta": "<link>Folge dem <b>Globalen Quran-Kalender</b> fur wochentliche Lesungen, inspirierende Podcasts und einen Aufruf zum Nachdenken!</link>",
+  "ramadan-challenge": "Nimm an der Ramadan-Herausforderung teil",
+  "ramadan": {
+    "header": "Werkzeuge, um deine Verbindung zum Quran zu vertiefen",
+    "title": "Bereit fur den Ramadan?"
+  },
+  "read-juz": "Juz lesen",
+  "recently-read": "Zuletzt gelesen",
+  "revelation-order-disclaimer": "Diese Ansicht zeigt die chronologische Reihenfolge der Suren im Quran, basierend darauf, wann sie dem Propheten Muhammad <hover>ﷺ</hover> offenbart wurden. Die Chronologie ist Gegenstand gelehrter Meinungen und einige Suren wurden in Teilen zu verschiedenen Zeiten offenbart. Die Reihenfolge hier basiert auf der Arbeit von <link>Tanzil.net</link>. [Hinweis: Die kompilierte Mushaf-Reihenfolge von al-Fatiha bis an-Nas ist eine Frage des Konsenses.]",
+  "see-more-learning-plans": "Mehr anzeigen",
+  "set-custom-goal": "Ziel setzen",
+  "share-quran": {
+    "description": "Hilf dabei, den Quran an neue Lernende weiterzugeben",
+    "title": "Teile den Quran!"
+  },
+  "start-learning-plan": "Lernen starten",
+  "start-read": "Mit dem Lesen beginnen",
+  "stay-consistent": "Verfolge Serien, erstelle individuelle Ziele, bleibe konsequent",
+  "tab": {
+    "bookmarks": "Lesezeichen",
+    "page-bookmarks": "Seiten",
+    "popular": "Beliebt"
+  },
+  "take-notes": "Hast du <modalLink>Notizen</modalLink> verpasst?",
+  "view-all-bookmarks": "Alle Lesezeichen anzeigen",
+  "voice": {
+    "trigger": "Schnellzugriff auf alles"
+  },
+  "welcome": {
+    "title": "Es ist der Monat des Quran! Hilf Millionen von Nutzern, Zugang zur Rechtleitung des Quran zu erhalten."
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "default-translations": "Zadani prijevodi",
+  "filter": "filter",
+  "language-filter-label": "Pretrazite sve prijevode na jednom jeziku",
+  "language-select": "Odaberite jezik",
+  "reset": "resetuj",
+  "search": "Pretraga",
+  "search-desc": "Pretrazite korpus casnog Kur'ana i njegove prijevode koristeci mocan i izuzetno precizan visejezicni pretrazivac.",
+  "search-title": "Pretraga za '{{searchQuery}}'",
+  "searching-translations": "Pretrazivanje prijevoda",
+  "translation-select": "Odaberite prijevod"
+}

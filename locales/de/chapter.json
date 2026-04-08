@@ -1,0 +1,4 @@
+{
+  "meta-description": "Lesen und hören Sie Surah {{transliteratedName}}. Die Surah wurde in {{revelationPlace}} offenbart und steht an {{chapterOrder}}. Stelle im Quran. Der Surah-Titel bedeutet \"{{translatedName}}\" auf {{localeName}} und besteht aus {{versesCount}} Versen.",
+  "ranges-meta-desc": "Lesen und hören Sie von Ayah {{rangeFrom}} bis Ayah {{rangeTo}}."
+}

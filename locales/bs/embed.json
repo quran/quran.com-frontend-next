@@ -1,0 +1,85 @@
+{
+  "actions": {
+    "copied": "Kopirano!",
+    "copy": "Kopiraj",
+    "copyEmbedSnippet": "Kopiraj kod za ugradnju"
+  },
+  "checkboxes": {
+    "answers": "Pokazi dugme za odgovore (ako je dostupno)",
+    "audio": "Omoguci reprodukciju audia",
+    "customSize": "Koristi prilagodenu sirinu/visinu",
+    "lessons": "Pokazi dugme za lekcije",
+    "mergeVerses": "Spoji ajete (prikaz u liniji)",
+    "reflections": "Pokazi dugme za razmisljanja",
+    "showArabic": "Pokazi arapski tekst ajeta",
+    "tafsirs": "Pokazi dugme za tefsire",
+    "translator": "Pokazi ime prevodioca",
+    "verseRange": "Omoguci raspon ajeta",
+    "wordByWord": "Omoguci prijevod rijec-po-rijec",
+    "wordByWordTransliteration": "Omoguci transliteraciju rijec-po-rijec"
+  },
+  "errors": {
+    "clipboardFallback": "Pisanje u meduspremnik neuspjesno, koristim alternativu",
+    "clipboardUnavailable": "API meduspremnika nije dostupan",
+    "loadChapters": "Nemoguce ucitati sure",
+    "loadReciters": "Nemoguce ucitati ucace",
+    "loadTranslations": "Nemoguce ucitati prijevode"
+  },
+  "fields": {
+    "ayah": "Ajet",
+    "clientId": "ID klijenta",
+    "height": "Visina",
+    "language": "Jezik",
+    "mushaf": "Mushaf",
+    "reciter": "Ucac",
+    "surah": "Sura",
+    "theme": "Tema",
+    "translations": "Prijevodi",
+    "width": "Sirina"
+  },
+  "header": {
+    "subtitle": "<bold>Kvalitetniji, prilagodljiv nacin za ukljucivanje kur'anskih ajeta u vas sadrzaj.</bold><br />Kreirajte ugradeni element koji mozete jednostavno prilagoditi, s <bold>preciznim prikazom arapskog teksta, ugradjenim ucenjem</bold> i jos mnogo toga, tako da citaoci mogu slusati dok se angazuju s ajetom.",
+    "title": "Graditelj za ugradnju ajeta"
+  },
+  "meta": {
+    "description": "Konfigurisite i pregledajte widgete za ugradnju za dijeljenje Kur'ana, zatim kopirajte gotov kod.",
+    "title": "Graditelj za ugradnju ajeta | Quran.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "King Fahad Complex v1",
+    "kfgqpc_v2": "King Fahad Complex v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tedzvid"
+  },
+  "placeholders": {
+    "searchTranslations": "Pretrazite prijevode..."
+  },
+  "reciters": {
+    "select": "Odaberite ucaca"
+  },
+  "sections": {
+    "configuration": "Konfiguracija",
+    "preview": "Pregled uzivo",
+    "snippet": "Kod za ugradnju"
+  },
+  "states": {
+    "loadingChapters": "Ucitavanje sura...",
+    "loadingPreview": "Ucitavanje pregleda...",
+    "loadingReciters": "Ucitavanje ucaca...",
+    "loadingVerses": "Ucitavanje ajeta...",
+    "noTranslations": "Prijevodi nisu pronadjeni"
+  },
+  "theme": {
+    "dark": "Tamna",
+    "light": "Svijetla",
+    "sepia": "Sepija"
+  },
+  "translations": {
+    "chipRemoveLabel": "Ukloni prijevod",
+    "otherLanguage": "Ostalo"
+  },
+  "widget": {
+    "readOnQuran": "Citajte na Quran.com"
+  }
+}

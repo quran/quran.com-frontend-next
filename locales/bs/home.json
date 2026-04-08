@@ -1,0 +1,103 @@
+{
+  "achieve-quran-goals": "Ostvarite svoje ciljeve s Kur'anom",
+  "apps": {
+    "description": "Povezane aplikacije za dalji rast s Kur'anom.",
+    "featured-apps": "Istaknute aplikacije",
+    "qariah": {
+      "description": "Ucacice Kur'ana",
+      "name": "Qariah"
+    },
+    "quran-android": {
+      "description": "Quran.com za Android",
+      "name": "Quran Android"
+    },
+    "quran-ios": {
+      "description": "Quran.com za iPhone",
+      "name": "Quran iOS"
+    },
+    "quran-space": {
+      "description": "Halkaz uzivo",
+      "name": "Quran Space"
+    },
+    "quranreflect": {
+      "description": "Citajte i dijelite razmisljanja",
+      "name": "QuranReflect"
+    },
+    "see-more": "Pogledajte vise",
+    "title": "Kur'anske aplikacije"
+  },
+  "begin": "Pocnite",
+  "calendar-cta": "Kalendar",
+  "chapters-and-verses": "Sure i ajeti",
+  "continue-learning-plan": "Nastavite uciti",
+  "continue-read": "Nastavite citati",
+  "explore-topics": "Istrazite teme",
+  "first-time-reading": "Novi ste s Kur'anom? <link>Pocnite ovdje</link>",
+  "grow-beyond-ramadan": "Rastite s nama <modalLink>nakon Ramazana</modalLink>",
+  "know-someone": "Rastite s nama ovaj <modalLink>Ramazan</modalLink>",
+  "learning-plan": "Planovi ucenja",
+  "listen-to-radio": "Slusajte Kur'an Radio",
+  "my-quran": "Moj Kur'an",
+  "navigate-quran": "Navigirajte Kur'an",
+  "no-bookmarks": "Nemate jos nijednu oznaku",
+  "no-page-bookmarks": "Nemate jos nijednu oznaku stranice",
+  "no-recently-read": "Nemate jos nijednu sesiju citanja",
+  "noble-quran": "Casni Kur'an",
+  "popular": "Popularno",
+  "qgj": {
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Pogledajte sve planove",
+        "my-plans": "Moji planovi"
+      },
+      "desc": {
+        "logged-in": "Da li ste ikada zapoceli program ucenja i skrenuli s puta na pola? Planovi ucenja su podijeljeni na savladive dijelove i pratimo vas napredak dok ne dostignete cilj. Istrazite nasu trenutnu ponudu kurseva danas",
+        "logged-in-no-plans": "Da li ste ikada zapoceli program ucenja i skrenuli s puta na pola? Planovi ucenja su podijeljeni na savladive dijelove i pratimo vas napredak dok ne dostignete cilj. Istrazite nasu trenutnu ponudu kurseva danas",
+        "logged-out": "Da li ste ikada zapoceli program ucenja i skrenuli s puta na pola? Planovi ucenja su podijeljeni na savladive dijelove i pratimo vas napredak dok ne dostignete cilj. Istrazite nasu trenutnu ponudu kurseva danas"
+      },
+      "title": "Planovi ucenja"
+    },
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Zelite li citati 10 minuta dnevno, zavrsiti dzuz za mjesec ili procitati cijeli Kur'an za godinu dana? Jednostavno je kreirati prilagodeni cilj i pratiti napredak"
+      },
+      "title": "Prilagodeni ciljevi citanja Kur'ana"
+    },
+    "title": "Putovanje rasta s Kur'anom"
+  },
+  "qr-community": "Procitajte danasnje istaknute ajete i razmisljanja",
+  "quran-in-year": "Kur'an za godinu dana",
+  "quran-in-year-cta": "Citanje ove sedmice",
+  "quran-in-year-verse-title": "Ajet iz citanja ove sedmice",
+  "ramadan-activities-cta": "<link>Pratite <b>Globalni kur'anski kalendar</b> za sedmicna citanja, inspirativne podcaste i poziv na razmisljanje!</link>",
+  "ramadan-challenge": "Pridruzite se Ramazanskom izazovu",
+  "ramadan": {
+    "header": "Alati za produbljivanje vase veze s Kur'anom",
+    "title": "Spremni za Ramazan?"
+  },
+  "read-juz": "Citaj dzuz",
+  "recently-read": "Nedavno procitano",
+  "revelation-order-disclaimer": "Ovaj prikaz pokazuje hronoloski redoslijed sura u Kur'anu prema vremenu kada su objavljene Vjerovjesniku Muhammedu <hover>ﷺ</hover>. Hronologija je predmet ucenjackog misljenja i neke sure su objavljene u dijelovima u razlicitim periodima. Redoslijed ovdje je zasnovan na radu <link>Tanzil.net</link>. [Napomena: ustaljeni redoslijed mushafa od El-Fatihe do En-Nasa je stvar konsenzusa.]",
+  "see-more-learning-plans": "Pogledajte vise",
+  "set-custom-goal": "Postavite cilj",
+  "share-quran": {
+    "description": "Pomozite u sirenju Kur'ana novim ucenicima",
+    "title": "Podijelite Kur'an!"
+  },
+  "start-learning-plan": "Pocnite uciti",
+  "start-read": "Pocnite citati",
+  "stay-consistent": "Pratite nizove, kreirajte prilagodene ciljeve, ostanite dosljedni",
+  "tab": {
+    "bookmarks": "Oznake",
+    "page-bookmarks": "Stranice",
+    "popular": "Popularno"
+  },
+  "take-notes": "Da li propustate <modalLink>Biljeske?</modalLink>",
+  "view-all-bookmarks": "Pogledajte sve oznake",
+  "voice": {
+    "trigger": "Brzi pristup svemu"
+  },
+  "welcome": {
+    "title": "Mjesec je Kur'ana! Pomozite milionima korisnika da dobiju pristup uputi Kur'ana."
+  }
+}

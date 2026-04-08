@@ -1,0 +1,41 @@
+{
+  "credits": {
+    "desc": "Izrazavamo zahvalnost svima koji su podrzali i doprinijeli ovom projektu, pomazuci da Kur'an bude dostupan milionima sirom svijeta.",
+    "lokalize": "<0>Lokalize</0>: Sistem za kompjuterski potpomognuto prevodenje koji se fokusira na produktivnost i osiguranje kvaliteta te pruza besprijekoran radni tok lokalizacije.",
+    "quran-align": "<0>Collin Fair</0>: Alat za proizvodnju precizne segmentacije snimljenog ucenja Kur'ana na nivou rijeci.",
+    "quran-complex": "<0>QuranComplex</0>: Kompleks kralja Fahda za stampanje casnog Kur'ana je lider u sluzenju casnom Kur'anu i njegovim naukama, prevodjenju njegovih znacenja i zastiti Kur'anskog teksta od iskrivljavanja, putem optimalne upotrebe naprednih tehnologija u oblasti stampanja, audio snimaka, elektronskog izdavastva i digitalnih aplikacija.",
+    "quran-enc": "<0>QuranEnc</0>: Portal koji nudi besplatne i pouzdane prijevode znacenja i tefsire plemenitog Kur'ana na mnogim svjetskim jezicima.",
+    "tanzil": "<0>Tanzil</0>: Medunarodni Kur'anski projekat ciji je cilj pruzanje visoko verificiranog i preciznog Kur'anskog teksta.",
+    "tarteel": "<0>Tarteel</0>: Aplikacija za hifz Kur'ana pokretana vjestackom inteligencijom. Dizajnirana je da vam pomogne pamtiti pametnije, bilo da trazite ajet, pratite svoj napredak ili pratite svoje ucenje.",
+    "title": "Zasluge",
+    "zekr": "<0>Zekr</0>: Kur'anski alat otvorene platforme za pregledavanje i istrazivanje Kur'ana"
+  },
+  "global-effort": {
+    "desc": "Milioni ljudi sirom svijeta oslanjaju se na Quran.com kao svoj primarni digitalni Kur'anski resurs. Bilo da dolaze uciti, razmisljati, pamtiti ili izucavati, dijele zajednicku svrhu: iskrenu zelju da se povezu s rijecima Allaha. Kako nastavljamo rasti, ostajemo posveceni osiguravanju da Quran.com ostane pouzdano, pristupacno i lijepo dizajnirano mjesto za svakoga ko zeli da se poveze sa Kur'anom.",
+    "title": "Globalni napor"
+  },
+  "key-features": {
+    "desc": "Quran.com je dizajniran da podrzi svaku fazu angazmana sa Kur'anom - od citanja i hifza do izucavanja i razmisljanja. Nase funkcionalnosti ukljucuju:",
+    "features": [
+      "Korisnicko sucelje za Kur'an - Cisto i intuitivno iskustvo citanja na bilo kojem uredaju.",
+      "Visestruki prijevodi i tefsir - Pristup prijevodima na vise jezika, zajedno sa tefsirom.",
+      "Audio ucenja - Slusajte visokokvalitetna ucenja od svjetski poznatih karija, s mogucnoscu pracenja rijec po rijec.",
+      "Napredna pretraga i navigacija - Pronadjite ajete trenutno po temi ili kljucnim rijecima u cijelom Kur'anu.",
+      "Oznacavanje ajeta i biljeske - Sacuvajte ajete i zapisite licna razmisljanja za kasniju referencu.",
+      "QuranReflect integracija - Angazirajte se sa globalnom zajednicom putem razmisljanja i uvida koje dijele ucenjaci i pojedinci.",
+      "Pracenje napretka citanja i ciljevi - Pratite svoje dnevne ciljeve i historiju citanja",
+      "API za programere - Besplatan pristup sadrzaju i funkcionalnostima za pokretanje islamskih aplikacija i istrazivanja.",
+      "I mnogo vise, Elhamdulillah."
+    ],
+    "title": "Kljucne funkcionalnosti i ponuda"
+  },
+  "main-description": "Od svog osnivanja 1995. godine, Quran.com je posvecen tome da Kur'an bude dostupan svima na nacin koji je jasan, autentican i lak za koristenje. Svakodnevno se milioni ljudi sirom svijeta okrecu Quran.com-u da citaju, slusaju, izucavaju i razmisljaju o Kur'anu - bili oni dozivotni studenti, ucenjaci ili tek na pocetku svog putovanja.",
+  "our-mission": {
+    "desc": "Kur'an je namijenjen da se cita, razumije i o njemu razmislja. Nasa misija je ukloniti prepreke pristupu i osnaziti pojedince i zajednice pruzajuci pouzdano, dobro dizajnirano i duboko obogacujuce Kur'ansko iskustvo. Cilj nam je sluziti kao pouzdan izvor za svakoga ko zeli da se poveze sa Kur'anom, vodeni principima tacnosti, jasnoce i iskrenosti.",
+    "title": "Nasa misija"
+  },
+  "who-we-are": {
+    "desc": "Quran.com je vakuf, osnovan kao javno dobro kako bi se osiguralo da Kur'an ostane dostupan svima, besplatno i bez komercijalnih interesa. Njime upravlja <link>Quran.Foundation</link>, neprofitna organizacija 501(c)(3), koja odrzava i razvija Quran.com kao dio svoje misije da pruzi visokokvalitetne, autenticne Kur'anske resurse svijetu. Nasa posvecnost je sluziti Kur'anu i njegovim citaocima s izvrsnoscu, iskrenoscui odgovornoscu.",
+    "title": "Ko smo mi"
+  }
+}

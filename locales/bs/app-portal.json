@@ -1,0 +1,104 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Efikasno memorisite i ponavljajte Kur'an",
+        "description": "Aplikacija za Kur'an osmisljena da vam pomogne da memorisite i ponavljate Kur'an na inovativan nacin.",
+        "tagline": "Inovativan pratilac za hifz i ponavljanje Kur'ana",
+        "title": "Muhaffidh"
+      },
+      "quran_android": {
+        "caption": "Citajte, oznacavajte i slusajte Kur'an na Android uredajima",
+        "description": "Funkcije ukljucuju stranice u medinskom stilu, neprekidni audio, oznacavanje/tagovanje/dijeljenje, pretragu, nocni mod, ponavljanje audia i prijevode/tefsire na mnogim jezicima.",
+        "tagline": "Besplatna Kur'an aplikacija otvorenog koda za Android",
+        "title": "Kur'an za Android"
+      },
+      "quran_ios": {
+        "caption": "Lijepa aplikacija za citanje i slusanje Kur'ana bez reklama za iPhone i iPad",
+        "description": "Od kreatora Quran.com: citajte Kur'an u pokretu, memorisite i slusajte omiljene ucace u cistom iskustvu bez reklama.",
+        "tagline": "Lijepa aplikacija za mushaf bez reklama",
+        "title": "Kur'an za iOS (od quran.com)"
+      },
+      "quranmeet": {
+        "caption": "Uzivo sesije ucenja Kur'ana",
+        "description": "Platforma koja povezuje ucenike s uciteljima i grupama za ucenje u individualnim i malim grupnim sesijama ucenja Kur'ana.",
+        "tagline": "Individualne i male grupne sesije Kur'ana",
+        "title": "QuranMeet"
+      },
+      "quranreflect": {
+        "caption": "Podijelite razmisljanja",
+        "description": "Drustvena platforma za njegovanje kulture razmisljanja o Casnom Kur'anu",
+        "tagline": "Citajte i dijelite razmisljanja",
+        "title": "QuranReflect"
+      },
+      "readtafsir": {
+        "caption": "Pretrazujte i uporedujte klasicne tefsire",
+        "description": "Citajte i slusajte vise klasicnih izvora tefsira na jednom mjestu, sto olaksava pregledanje, pretragu i poredenje tumacenja.",
+        "tagline": "Interaktivno citanje i slusanje tefsira",
+        "title": "ReadTafsir"
+      },
+      "sunnah": {
+        "caption": "Zbirka hadisa",
+        "description": "Biblioteka hadisa s glavnim zbirkama dostupnim online, ukljucujuci prijevode na vise jezika i alate za pretragu.",
+        "tagline": "Hadis na dohvat ruke",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Interaktivni tefsir s vise izvora",
+        "description": "Portal za istrazivanje Kur'ana koji objedinjuje tefsir, kiraete, mushafe, i'rab, kur'anske nauke, esbabun-nuzul, propise i rjecnike.",
+        "tagline": "Centar za istrazivanje Kur'ana",
+        "title": "Tafsir App"
+      }
+    },
+    "filters": {
+      "all": "Sve aplikacije",
+      "community": "Zajednica",
+      "hadith-sunnah": "Hadis i sunnet",
+      "popular": "Popularne",
+      "quran-reader": "Citac Kur'ana",
+      "reflections": "Razmisljanja",
+      "study-tools": "Alati za ucenje"
+    },
+    "title": "Pretrazite sve aplikacije"
+  },
+  "cta": {
+    "app-store": "Preuzmite na App Storeu",
+    "google-play": "Nabavite na Google Playu",
+    "visit": "Posjetite"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Slusajte vise od 60 zena iz cijelog svijeta kako uce Kur'an u razlicitim kiraetima!",
+        "name": "Qariah",
+        "tagline": "Aplikacija s ucacicama Kur'ana"
+      },
+      "quran-kareem": {
+        "headline": "Vas novi put za povezivanje s Knjigom Allahovom",
+        "name": "Quran Kareem",
+        "tagline": "Citajte, slusajte i razmisljajte"
+      },
+      "quran-link": {
+        "headline": "Istrazite vise od 25 tefsira i 100 prijevoda na jednom mjestu",
+        "name": "Quran Link",
+        "tagline": "Tefsir i pratilac za ucenje"
+      },
+      "quran-space": {
+        "headline": "Povežite se s uciteljima, ucenicima ili kolegama u realnom vremenu putem audia i videa za zajednicko citanje, razmisljanje i ucenje Kur'ana.",
+        "name": "Quran Space",
+        "tagline": "Prostor za uzivo susrete s Kur'anom"
+      }
+    },
+    "learn-more": "Saznajte vise",
+    "title": "Istaknute aplikacije",
+    "view-all": "Pogledajte sve"
+  },
+  "footer": {
+    "disclaimer": "Svaka aplikacija je u nezavisnom vlasnistvu i odrzava je njen developer. Za podrsku, prijavu gresaka ili zahtjeve za nove funkcije, molimo kontaktirajte direktno autora aplikacije."
+  },
+  "hero": {
+    "description": "Istrazite jedinstvene aplikacije pokretane verificiranim sadrzajem i korisnickim funkcijama Quran Foundationa, dok vas racun, napredak i putovanje ostaju povezani.",
+    "title": "Povezane kur'anske aplikacije"
+  },
+  "quran-apps-portal": "Povezane kur'anske aplikacije"
+}

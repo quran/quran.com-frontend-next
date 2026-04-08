@@ -1,0 +1,4 @@
+{
+  "meta-description": "Citajte i slusajte Suru {{transliteratedName}}. Sura je objavljena u {{revelationPlace}}, {{chapterOrder}}. po redu u Kur'anu. Naziv sure znaci \"{{translatedName}}\" na {{localeName}} i sastoji se od {{versesCount}} ajeta.",
+  "ranges-meta-desc": "Citajte i slusajte od ajeta {{rangeFrom}} do ajeta {{rangeTo}}."
+}

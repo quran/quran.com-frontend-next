@@ -1,0 +1,104 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Quran effizient auswendig lernen und wiederholen",
+        "description": "Eine Quran-App, die dir hilft, den Quran auf innovative Weise auswendig zu lernen und zu wiederholen.",
+        "tagline": "Ein innovativer Begleiter zum Auswendiglernen und Wiederholen des Quran",
+        "title": "Muhaffidh"
+      },
+      "quran_android": {
+        "caption": "Lies, setze Lesezeichen und hore den Quran auf Android-Geraten",
+        "description": "Funktionen umfassen Madani-Seitenformat, luckenlose Audiowiedergabe, Lesezeichen/Tags/Teilen, Suche, Nachtmodus, Audio-Wiederholung und Ubersetzungen/Tafsir in vielen Sprachen.",
+        "tagline": "Kostenlose Open-Source Quran-App fur Android",
+        "title": "Quran fur Android"
+      },
+      "quran_ios": {
+        "caption": "Schone, werbefreie Quran-App zum Lesen und Zuhoren fur iPhone & iPad",
+        "description": "Von den Machern von Quran.com: Lies den Quran unterwegs, lerne auswendig und hore deinen Lieblingsrezitatoren zu - in einem sauberen, werbefreien Erlebnis.",
+        "tagline": "Eine schone, werbefreie Mushaf-App",
+        "title": "Quran fur iOS (von quran.com)"
+      },
+      "quranmeet": {
+        "caption": "Live Quran-Lernsitzungen",
+        "description": "Eine Plattform, die Schuler mit Lehrern und Lerngruppen fur Einzel- und Kleingruppen-Quran-Lernsitzungen verbindet.",
+        "tagline": "Einzel- und Kleingruppen-Quran-Sitzungen",
+        "title": "QuranMeet"
+      },
+      "quranreflect": {
+        "caption": "Reflexionen teilen",
+        "description": "Eine soziale Plattform zur Forderung einer Kultur der Reflexion uber den Heiligen Quran",
+        "tagline": "Reflexionen lesen und teilen",
+        "title": "QuranReflect"
+      },
+      "readtafsir": {
+        "caption": "Klassische Tafsire suchen und vergleichen",
+        "description": "Lies und hore mehrere klassische Tafsir-Quellen an einem Ort, mit einfacher Moglichkeit zum Durchsuchen, Suchen und Vergleichen von Interpretationen.",
+        "tagline": "Interaktives Tafsir-Lesen und -Horen",
+        "title": "ReadTafsir"
+      },
+      "sunnah": {
+        "caption": "Hadith-Sammlung",
+        "description": "Eine Hadith-Bibliothek mit grossen Sammlungen online, einschliesslich Ubersetzungen in mehreren Sprachen und Suchwerkzeugen.",
+        "tagline": "Hadith auf Knopfdruck",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Interaktiver Tafsir mit mehreren Quellen",
+        "description": "Ein Quran-Forschungsportal, das Tafsir, Qira'at, Mushafs, I'rab, Quran-Wissenschaften, Asbab al-Nuzul, Rechtsurteile und Worterbücher zusammenfuhrt.",
+        "tagline": "Ein Quran-Forschungszentrum",
+        "title": "Tafsir App"
+      }
+    },
+    "filters": {
+      "all": "Alle Apps",
+      "community": "Community",
+      "hadith-sunnah": "Hadith und Sunnah",
+      "popular": "Beliebt",
+      "quran-reader": "Quran-Leser",
+      "reflections": "Reflexionen",
+      "study-tools": "Lernwerkzeuge"
+    },
+    "title": "Alle Apps durchsuchen"
+  },
+  "cta": {
+    "app-store": "Im App Store herunterladen",
+    "google-play": "Bei Google Play herunterladen",
+    "visit": "Besuchen"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Hore uber 60 Frauen aus der ganzen Welt, die den Quran in verschiedenen Rezitationsarten vortragen!",
+        "name": "Qariah",
+        "tagline": "Die App fur Quran-Rezitatorinnen"
+      },
+      "quran-kareem": {
+        "headline": "Dein neues Tor zur Verbindung mit dem Buch Allahs",
+        "name": "Quran Kareem",
+        "tagline": "Lesen, zuhoren und reflektieren"
+      },
+      "quran-link": {
+        "headline": "Entdecke uber 25 Tafsire und uber 100 Ubersetzungen an einem Ort",
+        "name": "Quran Link",
+        "tagline": "Tafsir- und Studienbegleiter"
+      },
+      "quran-space": {
+        "headline": "Verbinde dich mit Lehrern, Schulern oder Gleichgesinnten in Echtzeit per Audio und Video, um gemeinsam den Quran zu lesen, zu reflektieren und zu studieren.",
+        "name": "Quran Space",
+        "tagline": "Live Quran-Treffpunkt"
+      }
+    },
+    "learn-more": "Mehr erfahren",
+    "title": "Empfohlene Apps",
+    "view-all": "Alle anzeigen"
+  },
+  "footer": {
+    "disclaimer": "Jede Anwendung wird unabhangig von ihrem Entwickler betrieben und gepflegt. Fur Support, Fehlerberichte oder Funktionswunsche wende dich bitte direkt an den App-Ersteller."
+  },
+  "hero": {
+    "description": "Entdecke einzigartige Apps, die auf den verifizierten Inhalten und Benutzerfunktionen der Quran Foundation basieren, wahrend dein Konto, Fortschritt und deine Reise verbunden bleiben.",
+    "title": "Vernetzte Quran-Apps"
+  },
+  "quran-apps-portal": "Vernetzte Quran-Apps"
+}

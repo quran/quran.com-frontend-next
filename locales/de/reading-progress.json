@@ -1,0 +1,32 @@
+{
+  "add": "Hinzufügen",
+  "add-data-success": "Ihre Lesedaten wurden erfolgreich hinzugefügt.",
+  "back-to-reading-goal": "Zurück zum Leseziel",
+  "delete-goal": {
+    "action": "Ziel löschen",
+    "confirmation": {
+      "action-text": "Ich verstehe die Konsequenzen, mein Ziel löschen",
+      "confirmation-text": "mein Ziel löschen",
+      "instruction-text": "Bitte geben Sie <strong>{{text}}</strong> zur Bestätigung ein",
+      "subtitle": "Diese Aktion kann nicht rückgängig gemacht werden. Ihr Ziel wird dauerhaft gelöscht und wir werden Ihren Fortschritt nicht mehr verfolgen.",
+      "title": "Sind Sie sicher?"
+    },
+    "success": "Ihr Leseziel wurde erfolgreich gelöscht."
+  },
+  "edit-goal": {
+    "action": "Ziel bearbeiten",
+    "subtitle": "Wir berechnen Ihren Fortschritt basierend auf dem neuen Ziel neu.",
+    "success": "Ihr Leseziel wurde erfolgreich aktualisiert.",
+    "title": "Ihr Leseziel bearbeiten"
+  },
+  "history": "Lesehistorie",
+  "history-for": "Lesehistorie für {{date}}",
+  "manage-goal": "Ihr Leseziel verwalten",
+  "manually-add": "Lesungen manuell hinzufügen",
+  "no-reading-history-for": "Keine Lesehistorie für {{date}}",
+  "reading-progress-header": "Ihr Fortschritt",
+  "reading-progress-streak": "Serie",
+  "reading-time": "Lesezeit",
+  "seconds-read-tooltip": "Dies ist die Zeit, die Sie mit dem Lesen der eingegebenen Ayahs verbracht haben. Wir füllen sie automatisch mit der durchschnittlichen Lesegeschwindigkeit auf Quran.com aus, aber Sie können sie mit Ihrer tatsächlichen Lesezeit überschreiben.",
+  "you-read": "Sie haben gelesen:"
+}

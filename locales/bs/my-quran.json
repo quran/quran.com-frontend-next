@@ -1,0 +1,63 @@
+{
+  "bulk-actions": {
+    "actions": "Akcije",
+    "actions-count": "Akcije ({{count}})",
+    "cancel": "Otkazi",
+    "collapse-all": "Skupi sve",
+    "expand-all": "Prosiri sve",
+    "pin": "Zakaci",
+    "pin-verses": "Zakaci ajete",
+    "select": "Odaberi"
+  },
+  "collections": {
+    "detail-empty": "Pocnite citati i dodajte u svoju kolekciju!",
+    "favorites": "Favoriti",
+    "filters": {
+      "chapters": "Sura",
+      "clear-all": "Obrisi sve",
+      "juz": "Dzuz",
+      "no-matches": "Nijedan sacuvani ajet ne odgovara vasim filterima.",
+      "no-results": "Nema rezultata",
+      "title": "Filter"
+    },
+    "guest-promo": {
+      "sign-in": "Prijavite se",
+      "subtitle": "Uporedite i kontrastirajte ajete",
+      "title": "Kreirajte prilagodene kolekcije"
+    },
+    "items": "{{count}} stavka",
+    "items_plural": "{{count}} stavki",
+    "load-more": "Ucitaj vise",
+    "new-collection": "Nova kolekcija",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Nedavno azurirano",
+      "z-a": "Z - A"
+    },
+    "title": "Kolekcije"
+  },
+  "notes-and-reflections": "Biljske i razmisljanja",
+  "page": "Stranica",
+  "reading-bookmark": {
+    "empty": "Pocnite citati i sacuvajte oznaku za citanje!",
+    "title": "Moja oznaka za citanje"
+  },
+  "recent": "Nedavno",
+  "recent-empty": "Pocnite citati da vidite nedavno procitano",
+  "recently-saved": {
+    "title": "Nedavno sacuvano"
+  },
+  "saved": "Sacuvano",
+  "search": {
+    "filter": "Filter",
+    "placeholder": "Pretrazi sacuvano...",
+    "sort": "Sortiraj"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Prilosite biljeske uz ajete",
+      "custom-collections": "Kreirajte prilagodene kolekcije"
+    },
+    "title": "Prijavite se ili registrujte besplatno za pristup dodatnim funkcionalnostima!"
+  }
+}
