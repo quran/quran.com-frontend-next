@@ -1,0 +1,75 @@
+{
+  "add-another-note": "Dodaj još jednu bilješku",
+  "body-placeholder": "Koristite ovaj prostor za čuvanje općih bilješki ili za pisanje razmišljanja.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li>Objavljivanje znači da će vaše razmišljanje biti podijeljeno na QuranReflect pod vašim imenom gdje će ga pregledati moderacijski tim i biti vidljivo QuranReflect zajednici.</li><li>Kada vaš post bude pregledan i odobren ili istaknut od strane našeg moderacijskog tima, možete dobiti lajkove, komentare i obavijesti o praćenju. Prijavom na QuranReflect možete ažurirati svoje postavke obavijesti prema vašim preferencijama.</li><li>Možete pregledati svoje bilješke i objavljena razmišljanja u vašem Quran.com profilu u sekciji \"Moje bilješke i razmišljanja\", ili se prijaviti na <link>QuranReflect</link> koristeći vaš Quran.com e-mail za prijavu.</li>",
+      "title": "Šta se desi ako kliknem \"Sačuvaj i objavi na QuranReflect\"?"
+    },
+    "post-button": "Šta se desi kada objavim?",
+    "qr-intro": "QuranReflect, zajedno sa Quran.com, dio je Quran.Foundation porodice. To je društvena platforma za dijeljenje ličnih razmišljanja o Kur'anu, koja podstiče korisnike da internalizuju njegove poruke i dijele uvide koji inspirišu pozitivne promjene. Za razliku od tefsira, koji je naučno tumačenje, razmišljanja su lične misli i iskustva vezana za ajete. Korisničke objave na QuranReflect pregledava i moderira kvalificiran tim koji će pomoći osigurati kvalitet sadržaja, bonton pri interakciji s Kur'anom, te će osnažiti korisnike dijeljenjem povratnih informacija i isticanjem vrijednog diskursa, tako njegujući duhovno uzdižuću zajednicu fokusiranu na Kur'an. Saznajte više: <link>Quranreflect.com/faq</link>",
+    "qr-title": "Šta je QuranReflect?",
+    "title": "Šta je QuranReflect i šta se desi ako označim ovu opciju?"
+  },
+  "click-to-see-more": "kliknite za više",
+  "delete-note": "Obriši bilješku",
+  "delete-note-modal": {
+    "subtitle": "Jeste li sigurni da želite obrisati bilješku?",
+    "title": "Obriši bilješku"
+  },
+  "delete-success": "Bilješka je uspješno obrisana",
+  "edit-note": "Uredi bilješku",
+  "empty-notes": "Nema pronađenih bilješki",
+  "empty-reflections": "Nema pronađenih razmišljanja",
+  "export-success": "Bilješka je uspješno objavljena na vaš račun na QuranReflect",
+  "my-notes": "Moje bilješke ({{count}})",
+  "new-note-reflc-intro": {
+    "learn-more": "Saznajte više",
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li>Da li su spomenuta neka Allahova imena i kako se odnose na ajet?</li><li>Koje riječi ili jezički aspekti su vam privukli pažnju?</li><li>Možete li povući veze s kontekstom ajeta, drugim Kur'anskim ajetima, hadisima ili događajima?</li>",
+        "title": "Dublji uvidi:"
+      },
+      "personal": {
+        "desc": "<li>Na koje načine vas je ovaj ajet pokrenuo ili inspirisao?</li><li>Postoje li osobine ili djela spomenuta u kojima se možete poboljšati?</li><li>Postoji li obećanje ili upozorenje/zabrana koju možete primijeniti u svom životu?</li><li>Imate li ličnu priču vezanu za ovaj ajet?</li><li>Koje promjene želite napraviti na osnovu ovog ajeta i kako ih vi ili neko drugi praktično može implementirati?</li>",
+        "title": "Pitanja za lično razmišljanje:"
+      },
+      "title": "Podsticaji za razmišljanje"
+    },
+    "see-less": "Pogledaj manje",
+    "title": "Trebate pomoć pri razmišljanju o Kur'anu?",
+    "what-is-reflc": {
+      "desc": "Razmišljanje ili razmatranje Kur'ana podrazumijeva pažljivo čitanje ili slušanje Allahovih riječi, angažovanje sa njihovim značenjima i dopuštanje da nas utiče i mijenja na bolje. Ovo se naziva \"Tedebbur\". Tefsir, nasuprot tome, je naučno tumačenje Kur'ana, koje pruža detaljne objašnjenja ajeta na osnovu klasičnih izvora i naučne analize. Dok je tefsir rezervisan za učenjake, Allah dželle še'nuhu traži od svih da se angažuju u teddebburu (Kur'an <link1>38:29</link1>, <link2>47:24</link2>, <link3>4:82</link3>, i mnogi drugi).<br></br><br></br>Korisnici mogu sačuvati svoje bilješke i lična razmišljanja privatno. Često naša razmišljanja mogu duboko odjeknuti kod drugih, pomažući njihovu povezanost s Kur'anom i njihov odnos s Allahom dželle še'nuhu. Zato korisnici imaju opciju da podijele svoje razmišljanje na QuranReflect kao dio naših napora da pomognemo ljudima da zajedno rastu na svom putovanju. Da saznate više, posjetite: <link4>QuranReflect.com/faq</link4> i <link5>Pet perspektiva za razmišljanje o Kur'anu</link5>",
+      "title": "Šta je razmišljanje?"
+    }
+  },
+  "note": "Bilješka",
+  "notes-and-reflcs": "Bilješke i razmišljanja",
+  "notes-on-this-verse": "{{count}} bilješki na ovom ajetu",
+  "post-confirmation": {
+    "question": "Jeste li sigurni da želite objaviti ovo razmišljanje na QuranReflect?"
+  },
+  "post-on-qr": "Objavi na QuranReflect",
+  "post-to": "Objavi na",
+  "posted-reflections": "Objavljena razmišljanja",
+  "private-notes": "Bilješke",
+  "qr-tooltip": "<span><link>QuranReflect</link> je društvena platforma za dijeljenje razmišljanja o Kur'anu. Povežite se oko Kur'ana, povežite se s onim što je važno.</span>",
+  "reflection-update-success": "Razmišljanje je uspješno ažurirano",
+  "reflections-intro": {
+    "line-1": "Za pregled i interakciju s komentarima, angažovanje sa zajednicom i još toga, posjetite <link>QuranReflect.com</link>.",
+    "line-2": "Možete se prijaviti na svoj povezani QuranReflect račun prijavom ili registracijom s istim Quran.com e-mailom korištenim za prijavu.",
+    "line-3": "Sadržaj koji nije prikladan za javno prikazivanje bit će sakriven ili obrisan. Korisnici koji objavljuju neprikladan sadržaj bit će blokirani.",
+    "title": "Saznajte više o objavljenim razmišljanjima"
+  },
+  "save-post-to-qr": "Sačuvaj i objavi na QuranReflect",
+  "save-privately": "Sačuvaj privatno",
+  "save-publish-failed": "Bilješka je uspješno sačuvana ali objavljivanje nije uspjelo",
+  "save-success": "Bilješka je uspješno sačuvana",
+  "share-to-qr": "Podijeli na QuranReflect.com",
+  "share-to-qr-desc": "Podijeli kao <b>{{name}}</b>. Publika su <b>QuranReflect korisnici</b>",
+  "take-a-note-or-reflection": "Dodaj bilješku ili razmišljanje",
+  "update-publish-failed": "Bilješka je uspješno ažurirana ali objavljivanje nije uspjelo",
+  "update-reflection": "Ažuriraj razmišljanje",
+  "update-success": "Bilješka je uspješno ažurirana",
+  "view-on-qr": "Pogledaj na QuranReflect"
+}

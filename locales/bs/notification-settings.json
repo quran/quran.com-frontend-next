@@ -1,0 +1,24 @@
+{
+  "all-notifications": "Sve obavijesti",
+  "channels-notifications": "Obavijesti po kanalima",
+  "channels": {
+    "chat": "Chat",
+    "email": "E-mail",
+    "in_app": "U aplikaciji",
+    "push": "Push",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Postavke obavijesti nisu omogućene",
+  "notif-update-success": "Vaše postavke obavijesti su uspješno ažurirane!",
+  "tabs": {
+    "categories-settings": "Postavke kategorija",
+    "global-settings": "Globalne postavke"
+  },
+  "tags": {
+    "calendar": "Kur'an u godinu dana",
+    "goal-reminder": "Podsjetnik na cilj",
+    "learning-plans": "Planovi učenja",
+    "qgj": "Putovanje rasta s Kur'anom",
+    "streaks": "Nizovi"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "additional-resources": "Dodatni resursi",
+  "additional-resources-subtitle": "Ovi dodatni resursi će vam pomoći da ostvarite dublju vezu s ajetima koje ste pročitali.",
+  "ask-question": "Postavite pitanje",
+  "complete": "Završeno",
+  "completed-weeks": "{{completedWeeks}}/{{totalWeeks}} sedmica završeno",
+  "divine-book-club": "Božanski klub knjige",
+  "divine-book-club-description": "Ovo je lagana grupna diskusija koja vam pomaže da pratite kontekst sedmičnog čitanja.",
+  "end-of-calendar": "Kraj kalendara",
+  "english-pdf": "PDF na engleskom",
+  "faq": "Često postavljana pitanja",
+  "faq-items": [
+    {
+      "answer": "Kur'an za godinu dana je jednostavan, strukturiran plan čitanja koji vam pomaže da završite cijeli Kur'an za jednu godinu - od kraja jednog Ramazana do početka sljedećeg. Cilj je steći osnovno razumijevanje Kur'ana od početka do kraja bez pritiska ili opterećenja.",
+      "question": "Šta je \"Kur'an za godinu dana\"?"
+    },
+    {
+      "answer": "Pozivamo vas da svake sedmice odvojite vrijeme za čitanje samo nekoliko stranica Kur'ana na jeziku koji razumijete. Ukupno ima 46 čitanja, po jedno za svaku sedmicu islamskog kalendara od Ševvala do Ša'bana. Ova podjela Kur'ana dopunjuje druge podjele, poput poznatih 30 džuzova koji olakšavaju čitanje Kur'ana za jedan mjesec.",
+      "question": "Kako program funkcioniše?"
+    },
+    {
+      "answer": "Uopće ne. Polazna tačka u ovom programu je da se angažirate s značenjima Kur'ana na bilo kojem jeziku (prijevodu) koji vam odgovara. Quran.com nudi prijevode na mnogim jezicima kako bi ovo bilo pristupačno svima. Cilj nam je inspirisati učesnike da svake godine napreduju na viši nivo.",
+      "question": "Da li moram znati čitati arapski da bih učestvovao/la?"
+    },
+    {
+      "answer": "Svake sedmice, ažurirani zadatak čitanja bit će dostupan na Quran.com/calendar. Možete čitati direktno na Quran.com, gdje će vas poseban link odvesti direktno na primarno čitanje za tu sedmicu.\\n\\nTakođer možete otvoriti PDF na engleskom i štampati ga kod kuće. On sadrži tekući prijevod uglavnom adaptiran iz rada M.A.S. Abdel Haleema. Dokument za svaku sedmicu je podijeljen na sedam dijelova, što olakšava raspodjelu čitanja tokom sedmice ako to preferirate. Postoje kratki uvodi u sure, naslovi i bilješke koje pojašnjavaju neke bitne tačke, a svaki dnevni dio ima pitanje za razmišljanje i preporučenu akciju.",
+      "question": "Gdje mogu pronaći sedmične zadatke čitanja?"
+    },
+    {
+      "answer": "Imate više opcija za pravilno praćenje. Toplo preporučujemo da se pretplatite za primanje emailova sa sedmičnim zadacima čitanja u prilogu. Također smo kreirali kanale zajednice na Telegramu i WhatsAppu koji će sadržavati podsjetnike i ohrabrenja. Jednostavno kliknite na dugmad po vašem izboru na Quran.com/calendar za pretplatu. Možete odabrati sve tri opcije ako želite.",
+      "question": "Kako mogu primati sedmične podsjetnike za čitanje?"
+    },
+    {
+      "answer": "Na Quran.com, idite u meni postavki da:\\n• Prilagodite veličine i stilove fontova\\n• Prebacujte se između svijetlog, tamnog i sepija moda\\n• Birajte između više dostupnih prijevoda\\n\\nOvo olakšava svakome da učestvuje na jeziku koji najbolje razumije, sa prijevodom koji je jasan i informativan.",
+      "question": "Kako mogu personalizirati svoje iskustvo čitanja?"
+    },
+    {
+      "answer": "Ohrabrujemo vas da pretražite QuranReflect.com za razmišljanja drugih ljudi o odlomcima koji se čitaju svake sedmice, i čim se osjetite spremnim, podijelite i vlastite misli!\\n\\nTakođer obavezno pogledajte podcast Božanski klub knjige: poučna diskusija predvođena učenjacima koja prati ovaj raspored. Traje samo sat sedmično i pruža veoma koristan kontekst.",
+      "question": "Koje dodatne resurse pružate?"
+    },
+    {
+      "answer": "Nema problema. Jednostavno nastavite s čitanjem za tekuću sedmicu - nema potrebe da nadomjestite propuštene sedmice. Budite dosljedni i fokusirajte se na napredovanje. Uvijek postoji sljedeća godina da nadoknadite ono što ste propustili.",
+      "question": "Šta ako zaostanete ili se pridružim kasno?"
+    },
+    {
+      "answer": "Najbolji način da ostanete dosljedni je čitanje s drugima. Ohrabrujemo vas da pokrenete lični klub knjige - sa porodicom, prijateljima ili čak online. Sastajte se sedmično, diskutujte o pročitanom i podržavajte jedni druge na ovom putovanju.",
+      "question": "Kako mogu najbolje iskoristiti ovo putovanje?"
+    },
+    {
+      "answer": "Planiramo promovirati sljedeće korake i više nivoe. U tekućoj godini pozivamo što više ljudi da počnu tako što ćemo stvari pojednostaviti: pročitajte cijeli Kur'an s osnovnim razumijevanjem. Kada ovo završite, osjećat ćete se spremnim da ponovo čitate i idete dublje!",
+      "question": "Da li će biti opcija za dublje učenje kasnije?"
+    },
+    {
+      "answer": "Da. \"Kur'an za godinu dana\" je potpuno besplatan i ohrabrujemo vas da ga podijelite s drugima. Pozovite prijatelja, pokrenite klub knjige i pomozite većem broju ljudi da završi svoje prvo kompletno čitanje Kur'ana.",
+      "question": "Da li je ovo besplatno? Mogu li ga dijeliti?"
+    }
+  ],
+  "hero": {
+    "description": "Pažljivo osmišljen raspored koji vam olakšava čitanje i razumijevanje cijelog Kur'ana od jednog Ramazana do sljedećeg, u ujednačenom i savladivom tempu.",
+    "line-1": "Globalni kur'anski kalendar je raspored čitanja osmišljen da potakne razmišljanje pri čitanju cijelog Kur'ana od kraja jednog Ramazana do početka sljedećeg. Ohrabrujemo vas da odvojite vrijeme za razumijevanje i razmišljanje o ajetima kako biste ostvarili dublju, iskrenu vezu sa Kur'anom."
+  },
+  "interact-with-post": "Interagirajte s ovom objavom na QuranReflectu",
+  "islamic-months": {
+    "1": "Muharrem",
+    "2": "Safer",
+    "3": "Rebi'ul-evvel",
+    "4": "Rebi'ul-ahir",
+    "5": "Džumade'l-ula",
+    "6": "Džumade'l-ahira",
+    "7": "Redžeb",
+    "8": "Ša'ban",
+    "9": "Ramazan",
+    "10": "Ševval",
+    "11": "Zu'l-ka'de",
+    "12": "Zu'l-hidždže"
+  },
+  "join-qc": {
+    "line-1": "Trenutno smo u <highlight>{{weekNumber}}. sedmici</highlight> Kur'anskog kalendara.",
+    "line-2": "<normal>Pridružite nam se u sedmičnom čitanju, čak i ako vam je prvi put!</normal>"
+  },
+  "join-quranic-calendar": "Pretplatite se za primanje obavijesti i resursa putem QuranReflecta",
+  "join-quranic-calendar-success": "Uspješno ste se pridružili programu Kur'an za godinu dana!",
+  "join-telegram": "Pridružite se našem Telegramu",
+  "join-telegram-mobile": "Telegram",
+  "join-whatsapp": "Pridružite se našem WhatsAppu",
+  "join-whatsapp-mobile": "Whatsapp",
+  "mark-as-completed": "Označi kao završeno",
+  "marked-as-completed": "Ova sedmica je uspješno označena kao završena!",
+  "month": "Mjesec",
+  "my-progress": "Moj napredak",
+  "progress-subtitle": "Slobodno se vratite i završite sedmice koje ste propustili!",
+  "quran-calendar-description": "Strukturiran plan čitanja za završavanje Kur'ana za godinu dana. Izgradite dosljednost, produbite razumijevanje i ostanite na pravom putu - bez opterećenja.",
+  "quran-calendar-title": "Kur'an za godinu dana - Jednostavan plan za čitanje i razumijevanje cijelog Kur'ana",
+  "quran-reflect": "QuranReflect",
+  "quran-reflect-description": "Razgovarajte s drugima o ajetima koje ste pročitali ove sedmice.",
+  "quranic-calendar": "Kur'an za godinu dana",
+  "ramadan": "Ramazan",
+  "read-online": "Čitaj online",
+  "read-this-weeks-verses": "Pročitajte ajete ove sedmice",
+  "reading-options": {
+    "default-settings": "Čitaj s mojim standardnim postavkama",
+    "en-and-ar": "Čitaj na engleskom i arapskom",
+    "en-only": "Čitaj samo na engleskom"
+  },
+  "reflection-prompts": "💭 Pitanja za RAZMIŠLJANJE iz čitanja ove sedmice <span>(Preuzmite PDF za više)</span>:",
+  "share-reflections": "Podijelite svoja razmišljanja",
+  "start-tracking": "Počnite pratiti",
+  "supplemental-resources": "Pomoćni resursi",
+  "today": "Današnji datum je: <highlight>{{month}} {{day}} {{year}}, {{gregorianDate}}</highlight>",
+  "verse": "Ajet",
+  "verses-subtitle": "Ohrabrujemo vas da se fokusirate na razumijevanje osnovnih značenja, pa odaberite jezik koji vam odgovara.",
+  "watch-episode": "Pogledajte epizodu {{weekNumber}}",
+  "week": "Sedmica",
+  "week-completed": "Završeno",
+  "week-title": "Sedmica {{weekNumber}} ({{month}}) - ajeti od {{rangeStart}} do {{rangeEnd}}",
+  "weekly-verses-help-description-1": "Ovaj PDF sadrži tekući prijevod uglavnom adaptiran iz rada M.A.S. Abdel Haleema. Dokument za svaku sedmicu je podijeljen na sedam dijelova, što olakšava raspodjelu čitanja tokom sedmice ako to preferirate. Postoje kratki uvodi u sure, naslovi i bilješke koje pojašnjavaju neke bitne tačke, a svaki dnevni dio ima pitanje za razmišljanje i preporučenu akciju"
+}

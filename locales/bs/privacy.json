@@ -1,0 +1,48 @@
+{
+  "communication": {
+    "desc": "Možemo koristiti vašu e-mail adresu za slanje važnih ažuriranja, biltena ili obavijesti vezanih za naše usluge, sadržaj itd. Imat ćete mogućnost da se odjavite od ovih komunikacija u bilo kojem trenutku.",
+    "title": "Komunikacija"
+  },
+  "contact-us": {
+    "desc": "Ako imate bilo kakvih pitanja, nedoumica ili zahtjeva u vezi s ovom Politikom privatnosti ili rukovanjem vašim ličnim podacima, molimo kontaktirajte nas <0>ovdje</0>. Korištenjem naše web stranice potvrđujete da ste pročitali i razumjeli ovu Politiku privatnosti i da pristajete na prikupljanje, korištenje i otkrivanje vaših ličnih podataka kako je opisano.",
+    "title": "Kontaktirajte nas"
+  },
+  "cookies": {
+    "desc": "Quran.com koristi kolačiće za poboljšanje vašeg iskustva pregledavanja, pružanje personaliziranog sadržaja i analizu prometa na web stranici. Pristupanjem i korištenjem naše web stranice pristajete na korištenje kolačića u skladu s ovom Politikom privatnosti.<br/><br/><li>Vrste kolačića koje koristimo:</li><subLi>Neophodni kolačići: Ovi kolačići su neophodni za pravilno funkcioniranje naše web stranice i omogućavaju osnovne funkcije, kao što su navigacija po stranici i pristup sigurnim područjima. Ne prikupljaju nikakve lično prepoznatljive informacije. Bez ovih kolačića neki dijelovi web stranice možda neće ispravno funkcionirati.</subLi><subLi>Analitički kolačići i kolačići performansi: Koristimo ove kolačiće za prikupljanje informacija o tome kako posjetioci koriste našu web stranicu, uključujući broj posjetilaca, stranice koje posjećuju i vrijeme provedeno na svakoj stranici. Ovi podaci nam pomažu da analiziramo i poboljšamo performanse i funkcionalnost naše web stranice. Ovi kolačići vas ne identificiraju lično; svi podaci su agregirani i anonimni.</subLi>",
+    "title": "Korištenje kolačića"
+  },
+  "data-analysis": {
+    "desc": "Koristimo Google Analytics kako bismo osigurali da stranica nastavi raditi kako se očekuje i kako bismo znali kojim funkcionalnostima dati prioritet itd. Ove informacije su anonimne i ne povezujemo ih s bilo kojim pojedincem.",
+    "title": "Analiza podataka"
+  },
+  "data-deletion": {
+    "desc": "Kako bismo osigurali vašu privatnost i kontrolu nad vašim ličnim podacima, pružamo jednostavan proces brisanja računa. Kada odlučite obrisati svoj račun, svi povezani lični podaci će biti automatski i trajno uklonjeni iz naših sistema. Možete pokrenuti brisanje računa pristupanjem svojoj stranici profila. Nakon pokretanja brisanja, vaši lični podaci će biti sigurno obrisani s naših servera u razumnom roku.",
+    "title": "Brisanje podataka"
+  },
+  "data-protection": {
+    "desc": "<boldSpan>Pravo na pristup:</boldSpan> Imate pravo zatražiti od Quran Foundationa kopije vaših ličnih podataka. Možemo vam naplatiti malu naknadu za ovu uslugu. <br/><br/><boldSpan>Pravo na ispravku</boldSpan>: Imate pravo zatražiti da Quran Foundation ispravi sve informacije za koje smatrate da su netačne. Također imate pravo zatražiti da Quran Foundation dopuni informacije za koje smatrate da su nepotpune. <br/><br/><boldSpan>Pravo na brisanje:</boldSpan> Imate pravo zatražiti da Quran Foundation obriše vaše lične podatke, pod određenim uslovima. <br/><br/><boldSpan>Pravo na ograničenje obrade:</boldSpan> Imate pravo zatražiti da Quran Foundation ograniči obradu vaših ličnih podataka, pod određenim uslovima.<br/><br/><boldSpan>Pravo na prigovor na obradu</boldSpan>: Imate pravo prigovoriti obradi vaših ličnih podataka od strane Quran Foundationa, pod određenim uslovima. <br/><br/><boldSpan>Pravo na prenosivost podataka</boldSpan>: Imate pravo zatražiti da Quran Foundation prenese podatke koje smo prikupili drugoj organizaciji ili direktno vama, pod određenim uslovima.",
+    "title": "Prava zaštite podataka"
+  },
+  "data-security": {
+    "desc": "Preduzimamo odgovarajuće mjere za zaštitu vaših ličnih podataka od neovlašćenog pristupa, izmjene, otkrivanja ili uništenja. Koristimo sigurnosne protokole po industrijskim standardima i primjenjujemo fizičke, elektronske i upravljačke mjere zaštite kako bismo osigurali povjerljivost i integritet vaših podataka.",
+    "title": "Sigurnost podataka"
+  },
+  "data-sharing": {
+    "desc": "Ne prodajemo, ne trgujemo niti iznajmljujemo vaše lične podatke trećim stranama.",
+    "title": "Dijeljenje podataka"
+  },
+  "info-collection": {
+    "desc": "Prikupljamo određene lične podatke od korisnika koji odluče kreirati račun na Quran.com. Ove informacije mogu uključivati:<br/><br/><underline>E-mail adresu</underline>: Prikupljamo vašu e-mail adresu kako bismo olakšali proces kreiranja računa i u komunikacijske svrhe vezane za vaš račun, uključujući oporavak računa i sigurnosne obavijesti.",
+    "title": "Prikupljanje informacija"
+  },
+  "log-data": {
+    "desc": "Prikupljamo informacije koje vaš pregledač šalje svaki put kada posjetite našu uslugu (\"Podaci dnevnika\"). Ovi podaci dnevnika mogu uključivati informacije kao što su IP adresa vašeg računara, tip pregledača, verzija pregledača, stranice naše usluge koje posjećujete, vrijeme i datum vaše posjete, vrijeme provedeno na tim stranicama i druge statistike.",
+    "title": "Podaci dnevnika"
+  },
+  "main-privacy-desc": "Quran Foundation, Inc. (koja uključuje Quran.com) je neprofitna organizacija 501(c)(3) koja nastoji osnažiti svakog čovjeka da ima korist od Kur'ana. Quran Foundation, Inc. cijeni i poštuje privatnost svih naših korisnika.",
+  "personal-info-use": {
+    "desc": "Koristimo lične podatke koje prikupljamo u sljedeće svrhe:<br/> <li><underline>Kreiranje i upravljanje računom</underline>: Vaša e-mail adresa se koristi za kreiranje i upravljanje vašim računom na našoj web stranici. Omogućava vam prijavu, pristup vašim postavkama i pohranjivanje vaših oznaka i historije čitanja.</li><li><underline>Personalizacija</underline>: Možemo koristiti vašu historiju čitanja za pružanje personaliziranih preporuka i prijedloga na osnovu vaših preferencija i interesovanja.</li>",
+    "title": "Korištenje ličnih podataka"
+  },
+  "privacy-header": "Politika privatnosti"
+}

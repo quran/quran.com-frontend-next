@@ -1,0 +1,114 @@
+{
+  "benefits": {
+    "access-anywhere": {
+      "bullet-points": [
+        "Deine Notizen werden sicher in deinem Quran.com-Konto gespeichert.",
+        "Synchronisierung uber alle Gerate - setze dein Studium auf Handy, Tablet oder Desktop fort."
+      ],
+      "description": "Deine Notizen werden uber alle Gerate synchronisiert, wenn du angemeldet bist, sodass du auf deine Reflexionen zugreifen kannst, egal ob du am Handy, Tablet oder Computer bist.",
+      "login-prompt": "Erstelle einfach ein kostenloses Konto, um loszulegen.",
+      "title": "Jederzeit und uberall zuganglich"
+    },
+    "enhanced-memorization": {
+      "bullet-points": [
+        "Schreibe Erklarungen oder Erinnerungen neben Verse, um das Auswendiglernen zu unterstutzen.",
+        "Notiere schwierige Worter oder Konzepte fur spatere Wiederholung.",
+        "Verwende Notizen, um den Fortschritt bei Memorierungsplanen zu markieren."
+      ],
+      "description": "Notizen uber Verse, die du auswendig lernst, konnen die Merkfahigkeit erheblich verbessern. Erstelle Eselsbrucken, notiere Muster oder schreibe personliche Verknupfungen, die dir helfen, die Verse im Gedachtnis zu behalten.",
+      "image": {
+        "alt": "Notizen zum Auswendiglernen und Wiederholen"
+      },
+      "paragraph": "Ob du aktiv auswendig lernst oder Gelerntes wiederholst - Notizen konnen eine wirkungsvolle Hilfe beim Memorieren sein.",
+      "title": "Verbessertes Auswendiglernen und Wiederholen"
+    },
+    "organize-preserve": {
+      "description": "Halte deine Erkenntnisse nach Versen geordnet, sodass du im Laufe der Zeit einen personlichen Tafsir (Kommentar) aufbauen kannst. Deine Notizen werden in deinem Konto gespeichert, sodass du nie einen Moment der Inspiration oder des Verstandnisses verlierst.",
+      "images": {
+        "organized": "Organisierte Notizen auf Versebene",
+        "preserved": "Aufbewahrte Studiennotizen"
+      },
+      "paragraph": "Hast du jemals einen Kurs oder einen Vortrag verlassen und alles uber die Notizen vergessen, die du irgendwo in ein Notizbuch, eine Notiz-App oder ein Dokument gekritzelt hast? Stell dir vor, du hattest jederzeit Zugriff auf jede Notiz, die du zu einem Vers gemacht hast - direkt auf Ayah-Ebene, wenn du diesen Vers erneut liest.",
+      "title": "Organisiere und bewahre dein Studium"
+    },
+    "personal-reflection": {
+      "bullet-points": [
+        "Halte deine Gedanken, Reflexionen und Erkenntnisse beim Lesen des Quran fest - so einfach oder tiefgrundig sie auch sein mogen.",
+        "Starke deine Beziehung zum Quran, indem du dich aktiv mit seinen Versen beschaftigst, anstatt schnell und ohne Pause zu lesen."
+      ],
+      "description": "Notizen ermoglichen es dir, deine personliche Reise mit dem Quran zu dokumentieren. Halte deine Gedanken, Fragen und Momente der Klarheit beim Studium fest. Im Laufe der Zeit werden diese Notizen zu einem wertvollen Zeugnis deines spirituellen Wachstums und deines vertieften Verstandnisses.",
+      "examples-heading": "Beispiele fur Notizen:",
+      "images": {
+        "growth": "Beispiel fur Notizen zum spirituellen Wachstum",
+        "reflection": "Beispiel fur personliche Reflexionsnotizen"
+      },
+      "title": "Personliche Reflexion und spirituelles Wachstum"
+    },
+    "share-reflections": {
+      "community-paragraph": "Wenn du sie teilst, konnen deine Reflexionen bei anderen tiefen Anklang finden und eine Gemeinschaft des Quran-zentrierten Wachstums fordern. Erfahre mehr auf <0>QuranReflect.com/faq</0> und entdecke die <1>Funf Perspektiven</1>, um deine Reflexionen zu bereichern.",
+      "conclusion": {
+        "dua": "Moge Allah den Quran zum Licht deiner Brust machen, zum Fruhling deines Herzens, zum Entferner deiner Sorgen und zum Erleichterer deiner Not. Amin.",
+        "paragraph1": "Der Quran ist ein lebenslanger Begleiter, und die Nutzung der Notizfunktion kann dir helfen, eine bedeutungsvolle, interaktive Beziehung zu ihm aufzubauen. Nutze sie, um Reflexionen festzuhalten, Herausforderungen zu markieren, Erkenntnisse zu bewahren und mehr. Im Laufe der Zeit wird sie zu einem personlichen Zeugnis deiner Muhe, Aufrichtigkeit und deines Wachstums mit dem Buch Allahs, insha'Allah.",
+        "paragraph2": "Wir laden dich ein, dich herauszufordern, dich taglich mit dem Quran zu verbinden - auch wenn es nur ein Vers ist - und dir einen Moment zu nehmen, um nachzudenken und eine Notiz zu schreiben. <0>Lass diese kleine, konsequente Handlung zu einem Mittel werden, deine Beziehung zum Buch Allahs zu vertiefen, eine Ayah nach der anderen.</0>",
+        "title": "Beginne deine Reise heute"
+      },
+      "deeper-insights-title": "Tiefere Einblicke:",
+      "deeper-insights": [
+        "Werden Namen Allahs erwahnt, und wie stehen sie im Zusammenhang mit dem Vers?",
+        "Welche Worter oder sprachlichen Aspekte haben deine Aufmerksamkeit erregt?",
+        "Kannst du Verbindungen zum Kontext des Verses, zu anderen Quran-Versen, Hadith oder Ereignissen herstellen?"
+      ],
+      "description": "Bald verfugbar: die Moglichkeit, ausgewahlte Notizen mit Freunden, Familie oder Lerngruppen zu teilen. Arbeite gemeinsam am Verstandnis und verbreite nutzliches Wissen.",
+      "paragraph1": "Wahrend Notizen auf Quran.com privat gespeichert werden, hast du auch die Moglichkeit, ausgewahlte Reflexionen offentlich auf <0>QuranReflect.com</0> zu teilen. Dies ist eine gemeinnutzige Community-Plattform, die zu einer durchdachten Beschaftigung mit dem Quran ermutigt - nicht durch wissenschaftlichen Tafsir (der qualifizierten Gelehrten vorbehalten ist), sondern durch aufrichtige, personliche Reflexionen, die von einem qualifizierten Moderationsteam uberpruft und angeleitet werden.",
+      "paragraph2": "Allah ladt alle Glaubigen, nicht nur Gelehrte, zum Tadabbur ein:",
+      "quote": "Dies ist ein gesegnetes Buch, das Wir dir, o Prophet, offenbart haben, damit sie uber seine Verse nachdenken und damit die Verstandigen sich besinnen. (Surah Sad 38:29)",
+      "reflection-prompt": "Beispiele fur personliche Reflexionsfragen, die du zum Nachdenken verwenden kannst:",
+      "reflection-questions": [
+        "Auf welche Weise hat dich dieser Vers beruhrt oder inspiriert?",
+        "Gibt es Eigenschaften oder Handlungen, die erwahnt werden und die du verbessern kannst?",
+        "Gibt es ein Versprechen oder eine Warnung/ein Verbot, das du in deinem Leben anwenden kannst?",
+        "Hast du eine personliche Geschichte, die mit diesem Vers zusammenhangt?",
+        "Welche Veranderungen mochtest du aufgrund dieses Verses vornehmen, und wie kannst du oder jemand anderes sie praktisch umsetzen?"
+      ],
+      "title": "Teile deine Reflexionen, damit andere davon profitieren"
+    },
+    "title": "Vorteile der Notizfunktion"
+  },
+  "description": "Entdecke 5 uberzeugende Grunde, Notizen auf Quran.com zu machen, und wie Notizen eine wichtige Rolle auf deiner Reise mit dem Quran spielen konnen.",
+  "heading": "5 uberzeugende Grunde, Notizen zu machen - und wie sie deine Reise mit dem Quran verandern konnen",
+  "how-to-use": {
+    "saved-note-explanation": "Sobald du eine Notiz fur einen Vers gespeichert hast, wird das Notizsymbol blau, sodass du bei zukunftigen Lesungen leicht erkennen kannst, welche Verse du zuvor kommentiert hast.",
+    "step1": "<0>Wahle einen Vers:</0> Klicke auf einen beliebigen Vers und wahle die Option Notizen.",
+    "step2": "<0>Fuege deine Gedanken hinzu:</0> Gib deine Reflexionen, Erinnerungen oder Fragen ein.",
+    "step3": "<0>Speichern:</0> Deine Notizen werden in deinem Konto gespeichert.",
+    "step4": "<0>Jederzeit abrufen:</0> Kehre zu deinen Notizen uber dein Profil oder direkt am Vers zuruck.",
+    "title": "So verwendest du die Notizfunktion"
+  },
+  "images": {
+    "adding-notes": {
+      "alt": "Notizen zu einem Vers hinzufugen"
+    },
+    "blue-icon": {
+      "alt": "Blaues Notizsymbol fur gespeicherte Notizen"
+    },
+    "feature-available": {
+      "alt": "Die Notizfunktion ist neben jeder Ayah verfugbar",
+      "caption": "Die Notizfunktion ist neben jeder Ayah verfugbar"
+    }
+  },
+  "introduction": "Die Notizfunktion auf Quran.com ist eine bedeutungsvolle Moglichkeit, deine Beschaftigung mit dem Quran zu vertiefen. Ob du studierst, reflektierst oder einfach die Botschaft besser verstehen mochtest - Notizen konnen dir helfen, eine tiefere Verbindung zu den Versen aufzubauen und Erkenntnisse festzuhalten, die sonst vergessen werden konnten.",
+  "meta": {
+    "description": "Erfahre, wie du die Notizfunktion auf Quran.com nutzen kannst, um dein Quran-Studium zu verbessern.",
+    "title": "Notizen machen - Quran.com"
+  },
+  "table-of-contents": {
+    "items": [
+      "Personliche Reflexion und spirituelles Wachstum",
+      "Organisiere und bewahre dein Studium",
+      "Jederzeit und uberall zuganglich",
+      "Verbessertes Auswendiglernen und Wiederholen",
+      "Teile deine Reflexionen, damit andere davon profitieren"
+    ],
+    "title": "Vorteile der Notizfunktion"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "add": "Dodaj",
+  "add-data-success": "Vaši podaci o čitanju su uspješno dodani.",
+  "back-to-reading-goal": "Nazad na cilj čitanja",
+  "delete-goal": {
+    "action": "Obriši cilj",
+    "confirmation": {
+      "action-text": "Razumijem posljedice, obriši moj cilj",
+      "confirmation-text": "obriši moj cilj",
+      "instruction-text": "Molimo upišite <strong>{{text}}</strong> za potvrdu",
+      "subtitle": "Ova radnja se ne može poništiti. Ovo će trajno obrisati vaš cilj i prestat ćemo pratiti vaš napredak.",
+      "title": "Jeste li sigurni?"
+    },
+    "success": "Vaš cilj čitanja je uspješno obrisan."
+  },
+  "edit-goal": {
+    "action": "Uredi cilj",
+    "subtitle": "Ponovo ćemo izračunati vaš napredak na osnovu novog cilja.",
+    "success": "Vaš cilj čitanja je uspješno ažuriran.",
+    "title": "Uredite svoj cilj čitanja"
+  },
+  "history": "Historija čitanja",
+  "history-for": "Historija čitanja za {{date}}",
+  "manage-goal": "Upravljajte svojim ciljem čitanja",
+  "manually-add": "Ručno dodaj čitanja",
+  "no-reading-history-for": "Nema historije čitanja za {{date}}",
+  "reading-progress-header": "Vaš napredak",
+  "reading-progress-streak": "Niz",
+  "reading-time": "Vrijeme čitanja",
+  "seconds-read-tooltip": "Ovo je vrijeme koje ste proveli čitajući ajete koje ste unijeli. Automatski ga popunjavamo prosječnom brzinom čitanja na Quran.com, ali možete ga zamijeniti vašim stvarnim vremenom čitanja.",
+  "you-read": "Pročitali ste:"
+}

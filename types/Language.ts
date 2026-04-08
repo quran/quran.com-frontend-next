@@ -24,6 +24,7 @@ enum Language {
   TA = 'ta',
   HI = 'hi',
   UZ = 'uz',
+  BS = 'bs',
   DE = 'de',
   ES = 'es',
   SW = 'sw',

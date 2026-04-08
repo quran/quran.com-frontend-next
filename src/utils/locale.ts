@@ -27,6 +27,7 @@ const LOCALE_NAME = {
   [Language.UR]: 'اردو',
   [Language.ZH]: '简体中文',
   [Language.MS]: 'Melayu',
+  [Language.BS]: 'Bosanski',
   [Language.DE]: 'Deutsch',
   [Language.INH]: 'ʁəlʁɑj mot',
   [Language.TA]: 'தமிழ்', // tamil
@@ -72,6 +73,8 @@ export const LANG_LOCALE_MAP = {
   [Language.ES]: 'es-ES',
   [Language.SW]: 'sw-TZ',
   [Language.VI]: 'vi-VN',
+  [Language.BS]: 'bs-BA',
+  [Language.DE]: 'de-DE',
 };
 
 export enum Direction {

@@ -1,0 +1,38 @@
+{
+  "all-saved-verses": "Alle gespeicherten Verse",
+  "alphabetical": "A-Z",
+  "back-to-collection-list": "Zurück zur Sammlungsliste",
+  "collapse-all": "Alle Verse einklappen",
+  "collection-list-empty": "Die Sammlungsliste ist leer. Sie haben noch keine Sammlung erstellt",
+  "collection-name": "Sammlungsname",
+  "collections": "Sammlungen",
+  "date-asc": "Datum (Älteste)",
+  "date-desc": "Datum (Neueste)",
+  "delete-bookmark": {
+    "confirmation-subtitle": "Sie werden {{count}} Element(e) aus {{collectionName}} löschen. Sind Sie sicher?",
+    "subtitle": "Sind Sie sicher, dass Sie {{bookmarkName}} aus der Sammlung {{collectionName}} löschen möchten?",
+    "success": "{{count}} Element(e) gelöscht.",
+    "title": "Lesezeichen löschen"
+  },
+  "delete-collection-action": "Sammlung löschen",
+  "delete-collection-success": "Sammlung erfolgreich gelöscht",
+  "delete-collection": {
+    "description": "Sie verlieren alle in dieser Sammlung gespeicherten Verse.",
+    "subtitle": "Sind Sie sicher, dass Sie die Sammlung {{collectionName}} löschen möchten?",
+    "subtitle-tagged": "Sind Sie sicher, dass Sie die Sammlung <collectionName>{{collectionName}}</collectionName> löschen möchten?",
+    "title": "Sammlung löschen"
+  },
+  "edit-collection": "Sammlung bearbeiten",
+  "edit-collection-name-required": "Geben Sie einen Sammlungsnamen zum Speichern ein.",
+  "edit-collection-success": "Sammlung erfolgreich aktualisiert",
+  "empty": "Die Sammlung ist leer",
+  "expand-all": "Alle Verse ausklappen",
+  "go-to-ayah": "Zur Ayah gehen",
+  "load-more": "Mehr laden",
+  "no-collections": "Sie haben noch keine Sammlungen",
+  "quranic-asc": "Quranische Reihenfolge (Aufsteigend)",
+  "quranic-desc": "Quranische Reihenfolge (Absteigend)",
+  "recently-added": "Kürzlich hinzugefügt",
+  "recently-updated": "Kürzlich aktualisiert",
+  "verse-key": "Kapitel- und Versnummer"
+}

@@ -1,0 +1,59 @@
+{
+  "allowed-formats": "Samo {{formats}}",
+  "change-password": "Promijeni lozinku",
+  "delete-account": "Obriši račun",
+  "delete-account-warning-title": "Upozorenje",
+  "delete-confirmation": {
+    "action-text": "Razumijem posljedice, obriši moj račun",
+    "confirmation-text": "obriši moj račun",
+    "instruction-text": "Molimo upišite <strong>{{text}}</strong> za potvrdu",
+    "subtitle": "Brisanje vašeg Quran.com računa je trajno i ne može se poništiti. Podaci vašeg računa, postavke i historija će biti trajno uklonjeni iz vašeg profila i više neće biti dostupni. Ako koristite istu prijavu za QuranReflect, taj račun će također biti obrisan. [Napomena: Ovo ne utiče na vaš donatorski račun i nije vezano za vaše donacije. Donacijama se mora upravljati direktno putem donatorske platforme.]",
+    "title": "Jeste li potpuno sigurni?"
+  },
+  "delete-profile-picture": {
+    "action-text": "Da",
+    "cancel-text": "Ne",
+    "subtitle": "Obrisat ćete profilnu sliku i vratiti je na zadanu, jeste li sigurni?",
+    "title": "Obriši profilnu sliku"
+  },
+  "edit-details": "Uredi detalje",
+  "email-notification-settings": "Postavke obavijesti putem e-maila",
+  "errors": {
+    "remove-failed": "Uklanjanje profilne slike nije uspjelo. Molimo pokušajte ponovo.",
+    "upload-failed": "Učitavanje profilne slike nije uspjelo. Molimo pokušajte ponovo."
+  },
+  "max-file-size": "Maks. {{size}}",
+  "my-profile": "Moj profil",
+  "notifications": {
+    "abandoned-quran-goal": {
+      "description": "E-mail će vam biti poslan kao podsjetnik na vaš Kur'anski cilj ako niste napredovali neko vrijeme.",
+      "title": "Podsjetnik na cilj"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Sura El-Mulk: Izazov smislenog hifza",
+      "title": "Dnevni ramazanski izazov"
+    },
+    "quran-reading-program": {
+      "description": "E-mail će vam biti poslan sa linkovima na sedmični zadatak za čitanje, podsticaje za razmišljanje i dodatne resurse kako biste ostali na pravom putu.",
+      "title": "Kur'an u godinu dana"
+    },
+    "streaks-that-will-break": {
+      "description": "E-mail će vam biti poslan da vas obavijesti o nizu koji će uskoro biti prekinut.",
+      "title": "Nizovi"
+    }
+  },
+  "personalization": "Personalizacija",
+  "profile-picture": "Profilna slika",
+  "remove-picture": "Ukloni sliku",
+  "remove-success": "Profilna slika uspješno uklonjena",
+  "save-changes": "Sačuvaj promjene",
+  "save-picture": "Sačuvaj sliku",
+  "success": {
+    "details": "Vaš profil je uspješno ažuriran",
+    "notifications": "Vaše postavke obavijesti su uspješno ažurirane",
+    "password": "Vaša lozinka je uspješno ažurirana"
+  },
+  "update-password": "Ažuriraj lozinku",
+  "upload-picture": "Učitaj sliku",
+  "upload-success": "Profilna slika uspješno učitana"
+}

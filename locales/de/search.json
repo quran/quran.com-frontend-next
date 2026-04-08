@@ -1,0 +1,12 @@
+{
+  "default-translations": "Standardübersetzungen",
+  "filter": "Filtern",
+  "language-filter-label": "Alle Übersetzungen einer Sprache durchsuchen",
+  "language-select": "Sprache auswählen",
+  "reset": "Zurücksetzen",
+  "search": "Suchen",
+  "search-desc": "Durchsuchen Sie den Korpus des Heiligen Quran und seiner Übersetzungen mit einer leistungsstarken und hochgenauen mehrsprachigen Suchmaschine.",
+  "search-title": "Suche nach '{{searchQuery}}'",
+  "searching-translations": "Übersetzungen werden durchsucht",
+  "translation-select": "Übersetzung auswählen"
+}

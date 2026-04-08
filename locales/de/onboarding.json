@@ -1,0 +1,103 @@
+{
+  "checklist": {
+    "1": "Startseiten-Funktionen",
+    "2": "Passe deine Einstellungen an",
+    "3": "Bereichere dein Ayah-Leseerlebnis",
+    "4": "Personalisierte Funktionen"
+  },
+  "finish": "Fertig",
+  "onboarding-checklist": "Einfuhrungscheckliste",
+  "onboarding-title": "Hole das Beste aus Quran.com heraus! <br></br> Starte jetzt deine Tour:",
+  "previous": "Zuruck",
+  "skip": "Uberspringen",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Klicke auf das 3-Punkte-Menu, um Optionen zum Kopieren, Lesezeichen setzen und Wiederholen von Versen zu entdecken. Entdecke verschiedene Moglichkeiten zur Verswiederholung",
+      "title": "3-Punkte-Menu"
+    },
+    "ayah-reflection": {
+      "description": "Lies Reflexionen (Tadabbur) von Gelehrten, Wissensschulern und gewohnlichen Menschen, um eine personlichere Verbindung zum Quran aufzubauen",
+      "title": "Lies Reflexionen auf Ayah-Ebene"
+    },
+    "ayah-tafsir": {
+      "description": "Entdecke den Tafsir auf Ayah-Ebene mit detaillierten Einblicken, die dein Verstandnis beim Lesen verbessern. (Tafsir kann bei Bedarf fur mehrere Verse zusammengefasst sein)",
+      "title": "Lies Tafsir auf Ayah-Ebene"
+    },
+    "font-size": {
+      "description": "Passe deine Quran-Lekture mit einfach einstellbaren Schriftgrossen fur ein angenehmes Leseerlebnis an",
+      "title": "Schriftgrosse"
+    },
+    "font-style": {
+      "description": "Optionen umfassen Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 Zeilen, Indopak 16 Zeilen",
+      "title": "Wahle deine bevorzugte Schriftart"
+    },
+    "inline-wbw": {
+      "description": "Zeige die Ubersetzung jedes Wortes inline (unter dem Wort) oder als Tooltip uber dem Wort an, wahrend du dem Quran zuhorst",
+      "title": "Wort-fur-Wort-Ubersetzung inline (unter dem Wort) oder als Tooltip anzeigen"
+    },
+    "juz": {
+      "description": "Quran nach Juz anzeigen",
+      "title": "Quran nach Juz anzeigen"
+    },
+    "listen": {
+      "description": "Starte den Audioplayer, um der Rezitation zuzuhoren",
+      "title": "Hore die Surah oder Ayah"
+    },
+    "login": {
+      "description": "Melde dich an, speichere Einstellungen gerateübergreifend und erhalte Zugang zu zusatzlichen Funktionen.",
+      "title": "Anmelden"
+    },
+    "quran-radio": {
+      "description": "Hore QuranRadio - Quran-Streaming ohne Werbung",
+      "title": "Quran Radio"
+    },
+    "reading-sessions": {
+      "description": "Uberblicke deine Quran-Reise mit einem Blick auf deinen personalisierten Leseverlauf und behalte den Uberblick uber die Verse, die du auf Quran.com gelesen hast.",
+      "title": "Leseverlauf anzeigen"
+    },
+    "reading-view": {
+      "description": "Quran im Mushaf-Lesemodus anzeigen",
+      "title": "Lesemodus"
+    },
+    "search-bar": {
+      "description": "Finde die Verse, Suren, Stichworter, Juz und Themen, die du suchst, mithilfe unserer Suchleiste",
+      "title": "Suchleiste"
+    },
+    "select-reciter": {
+      "description": "Personalisiere dein Horerlebnis, indem du einen Rezitator auswahlst, dem du am liebsten zuhorst!",
+      "title": "Wahle aus einer Vielzahl von Rezitatoren"
+    },
+    "settings": {
+      "description": "Verwalte deine Einstellungen",
+      "title": "Einstellungen"
+    },
+    "streak": {
+      "description": "Setze personalisierte Leseziele, verfolge deinen Fortschritt und baue eine konsequente Quran-Lesegewohnheit mit unserer Funktion fur Leseserien und Leseplane auf.",
+      "title": "Verfolge Leseserien und Leseplane"
+    },
+    "surah-info": {
+      "description": "Erhalte Informationen uber jede Surah - bequem am Anfang jeder Surah platziert",
+      "title": "Uber die Surah lesen"
+    },
+    "theme": {
+      "description": "Wahle dein bevorzugtes Erscheinungsbild - Hell, Sepia oder Dunkel - fur ein angenehmes und personalisiertes Quran-Leseerlebnis.",
+      "title": "Quran im Hellen, Sepia- oder Dunkelmodus lesen"
+    },
+    "translations": {
+      "description": "Wahle aus einer Vielzahl von Ubersetzungen in mehreren Sprachen. Tipp: Vergleiche Ubersetzungen, indem du mehrere Optionen auswahlst",
+      "title": "Ubersetzungen"
+    },
+    "wbw-audio": {
+      "description": "Wahle diese Option, um jedes Wort einzeln anzuhoren, indem du einfach auf das Wort klickst!",
+      "title": "Hore die Wort-fur-Wort-Transliteration, indem du auf das Wort klickst"
+    },
+    "wbw-translation": {
+      "description": "Sieh die Bedeutung einzelner Worter, wahrend du den Quran liest oder horst, um dein Quran-Vokabular zu erweitern",
+      "title": "Wort-fur-Wort-Ubersetzung lesen"
+    },
+    "wbw-transliteration": {
+      "description": "Sieh die Transliteration jedes Wortes, um dich auf deiner Quran-Lesereise zu unterstutzen",
+      "title": "Wort-fur-Wort-Transliteration lesen"
+    }
+  }
+}

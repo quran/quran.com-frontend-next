@@ -1,0 +1,141 @@
+{
+  "achieve-quran-goals": "Erreiche deine Quran-Ziele",
+  "continue-reading": "Weiterlesen",
+  "continuous": {
+    "description": "Dein Ziel berechnet deinen Fortschritt uber einen bestimmten Zeitraum",
+    "title": "Uber einen Zeitraum"
+  },
+  "create-plan": "Plan erstellen",
+  "create-reading-goal": "Ziel erstellen",
+  "daily-progress": "Tagesfortschritt",
+  "daily-progress-completed": "Geschafft! 🎉",
+  "daily": {
+    "description": "Dein Ziel wird jeden Tag zuruckgesetzt",
+    "title": "Tagliches Ziel"
+  },
+  "day-streak": "Tage in Folge",
+  "day-x": "Tag {{day}}",
+  "days": "Tage",
+  "days-remaining": "Tage verbleibend",
+  "duration": "Dauer (Tage)",
+  "ending-chapter": "End-Surah",
+  "ending-verse": "End-Ayah",
+  "examples-subtitle": "Hier ist eine Liste haufiger Ziele. Du kannst auch ein eigenes Ziel erstellen.",
+  "examples-title": "Wahle ein vordefiniertes Ziel oder erstelle dein eigenes",
+  "examples": {
+    "custom": {
+      "description": "Lege ein individuelles Ziel fest, das zu dir passt",
+      "title": "Individuell"
+    },
+    "khatm": {
+      "description": "Ein klassisches Khatm-Ziel. Lies 1 Juz pro Tag",
+      "title": "Lies den Quran in 30 Tagen"
+    },
+    "time": {
+      "description": "Ein einfaches, anfangerfreundliches Ziel",
+      "title": "Lies 10 Minuten pro Tag"
+    },
+    "year": {
+      "description": "Lies den Quran in deinem eigenen Tempo uber das nachste Jahr",
+      "title": "Lies den Quran in einem Jahr"
+    }
+  },
+  "frequency-tab": {
+    "description": "Soll dein Ziel jeden Tag oder alle paar Tage zuruckgesetzt werden? Keine Sorge, wir verfolgen deinen Fortschritt unabhangig von der gewahlten Haufigkeit.",
+    "title": "Wahle eine Haufigkeit fur dein Ziel"
+  },
+  "goal-completed": "Ziel erreicht! 🎉 ",
+  "goal-done": {
+    "description": "Weiteres Lesen wird trotzdem aufgezeichnet",
+    "title": "Du hast das heutige Ziel erreicht"
+  },
+  "goal-target": {
+    "description": "Wie viel Zeit, Seiten oder Verse sollst du lesen, um dein Ziel zu erreichen?",
+    "title": "Lege ein Ziel fest"
+  },
+  "goal-type": {
+    "description": "Soll dein Ziel auf Zeit, Seiten oder einem individuellen Bereich basieren (z. B. 3 Juz des Quran)?",
+    "title": "Wahle ein Kriterium fur dein Ziel"
+  },
+  "goal-types": {
+    "pages": {
+      "description": "Dein Ziel basiert auf Seiten",
+      "title": "Seiten"
+    },
+    "range": {
+      "description": "Dein Ziel basiert auf einem individuellen Versbereich (das kann eine Surah, ein Juz oder sogar der gesamte Quran sein)",
+      "title": "Individueller Bereich"
+    },
+    "time": {
+      "description": "Dein Ziel basiert auf Zeit",
+      "title": "Zeit"
+    }
+  },
+  "plus-x-more-days": {
+    "one": "+{{days}} weiterer Tag",
+    "other": "+{{days}} weitere Tage"
+  },
+  "preview-schedule": {
+    "description": "So wird dein Ziel aussehen. Du kannst es jederzeit andern.",
+    "title": "Hier ist eine Vorschau deines Plans"
+  },
+  "progress": {
+    "complete": "Das heutige Ziel ist erreicht 🎉",
+    "goal-complete": "Dein gesamtes Ziel ist erreicht 🎉",
+    "pages-goal": "lies {{pages}} Seiten des Quran",
+    "range-goal": "lies {{from}} bis {{to}}",
+    "time-goal": "lies {{time}} im Quran"
+  },
+  "reading-goal": "Leseziel",
+  "reading-goal-description": "Fallt es dir schwer, beim Quran-Lesen konsequent zu bleiben?<br/><br/>Die Quran-Wachstumsreise ist eine dynamische Funktion, die dir hilft, auf deinem Weg mit dem Quran konsequent zu bleiben. Ob du 10 Minuten am Tag lesen, einen Juz im Monat abschliessen oder den gesamten Quran in einem Jahr beenden mochtest - Quran.com kann dir jetzt helfen, ein individuelles Ziel zu setzen und deine taglichen Leseserien zu verfolgen, wahrend du Fortschritte machst. Die Nutzung ist vollig kostenlos und wir hoffen, dass es dir hilft, motiviert zu bleiben, dein Ziel zu erreichen!",
+  "reading-goal-label": "Du bist auf einer",
+  "reading-goal-title": "Die Quran-Wachstumsreise",
+  "recommended": "Empfohlen",
+  "remaining": "Verbleibend fur heute",
+  "remaining-base": "Verbleibend",
+  "remaining-days": {
+    "one": "{{days}} Tag verbleibend",
+    "other": "{{days}} Tage verbleibend"
+  },
+  "set-a-new-goal": "Neues Ziel setzen",
+  "set-custom-goal": "Individuelles Ziel setzen",
+  "set-reading-goal-success": "Dein Leseziel wurde erfolgreich festgelegt.",
+  "start-journey": "Starte deine Reise!",
+  "start-reading": "Mit dem Lesen beginnen",
+  "starting-chapter": "Start-Surah",
+  "starting-verse": "Start-Ayah",
+  "streak": "Serie",
+  "streak-definition": "Eine Serie ist die Anzahl aufeinanderfolgender Tage, an denen du den Quran gelesen hast.",
+  "timeline-meaning": "Was bedeutet deine Zeitleiste?",
+  "timeline-states": {
+    "checked": "Du hast dein Ziel erreicht",
+    "filled": "Du hast etwas gelesen, aber nicht genug, um dein Ziel zu erreichen",
+    "none": "Du hast an diesem Tag noch nichts gelesen",
+    "stroked": "Du hast heute noch nichts gelesen"
+  },
+  "todays-goal": "Heutiges Ziel",
+  "track-your-streak": "Verfolge Serien, erstelle individuelle Ziele, bleibe konsequent",
+  "view-progress": "Fortschritt anzeigen",
+  "week-progress": "Fortschritt dieser Woche",
+  "x-days": {
+    "one": "{{days}} Tag",
+    "other": "{{days}} Tage"
+  },
+  "x-days-streak": "<p>{{days}}</p> <span>Tage in Folge</span>",
+  "x-hours": {
+    "one": "{{hours}} Stunde",
+    "other": "{{hours}} Stunden"
+  },
+  "x-minutes": {
+    "one": "{{minutes}} Minute",
+    "other": "{{minutes}} Minuten"
+  },
+  "x-pages": {
+    "one": "{{pages}} Seite",
+    "other": "{{pages}} Seiten"
+  },
+  "x-seconds": {
+    "one": "{{seconds}} Sekunde",
+    "other": "{{seconds}} Sekunden"
+  }
+}

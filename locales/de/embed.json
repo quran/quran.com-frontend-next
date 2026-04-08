@@ -1,0 +1,85 @@
+{
+  "actions": {
+    "copied": "Kopiert!",
+    "copy": "Kopieren",
+    "copyEmbedSnippet": "Einbettungscode kopieren"
+  },
+  "checkboxes": {
+    "answers": "Antworten-Button anzeigen (falls verfugbar)",
+    "audio": "Audiowiedergabe aktivieren",
+    "customSize": "Benutzerdefinierte Breite/Hohe verwenden",
+    "lessons": "Lektionen-Button anzeigen",
+    "mergeVerses": "Verse zusammenfuhren (Inline-Anzeige)",
+    "reflections": "Reflexionen-Button anzeigen",
+    "showArabic": "Arabischen Vers anzeigen",
+    "tafsirs": "Tafsir-Button anzeigen",
+    "translator": "Ubersetzer-Name anzeigen",
+    "verseRange": "Versbereich aktivieren",
+    "wordByWord": "Wort-fur-Wort-Ubersetzung aktivieren",
+    "wordByWordTransliteration": "Wort-fur-Wort-Transliteration aktivieren"
+  },
+  "errors": {
+    "clipboardFallback": "Schreiben in die Zwischenablage fehlgeschlagen, verwende Fallback",
+    "clipboardUnavailable": "Zwischenablage-API nicht verfugbar",
+    "loadChapters": "Kapitel konnten nicht geladen werden",
+    "loadReciters": "Rezitatoren konnten nicht geladen werden",
+    "loadTranslations": "Ubersetzungen konnten nicht geladen werden"
+  },
+  "fields": {
+    "ayah": "Ayah",
+    "clientId": "Client-ID",
+    "height": "Hohe",
+    "language": "Sprache",
+    "mushaf": "Mushaf",
+    "reciter": "Rezitator",
+    "surah": "Surah",
+    "theme": "Design",
+    "translations": "Ubersetzungen",
+    "width": "Breite"
+  },
+  "header": {
+    "subtitle": "<bold>Eine hochwertigere, anpassbare Moglichkeit, Quran-Verse in deine Inhalte einzubinden.</bold><br />Erstelle eine Einbettung, die du einfach anpassen kannst, mit <bold>praziser arabischer Darstellung, integrierter Rezitation</bold> und mehr, damit Leser zuhoren konnen, wahrend sie sich mit dem Vers beschaftigen.",
+    "title": "Ayah-Einbettungs-Builder"
+  },
+  "meta": {
+    "description": "Konfiguriere und sieh dir eine Vorschau von Einbettungs-Widgets zum Teilen des Quran an und kopiere den fertigen Code-Schnipsel.",
+    "title": "Ayah-Einbettungs-Builder | Quran.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "King Fahad Complex v1",
+    "kfgqpc_v2": "King Fahad Complex v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tadschid"
+  },
+  "placeholders": {
+    "searchTranslations": "Ubersetzungen suchen..."
+  },
+  "reciters": {
+    "select": "Rezitator auswahlen"
+  },
+  "sections": {
+    "configuration": "Konfiguration",
+    "preview": "Live-Vorschau",
+    "snippet": "Einbettungscode"
+  },
+  "states": {
+    "loadingChapters": "Kapitel werden geladen...",
+    "loadingPreview": "Vorschau wird geladen...",
+    "loadingReciters": "Rezitatoren werden geladen...",
+    "loadingVerses": "Verse werden geladen...",
+    "noTranslations": "Keine Ubersetzungen gefunden"
+  },
+  "theme": {
+    "dark": "Dunkel",
+    "light": "Hell",
+    "sepia": "Sepia"
+  },
+  "translations": {
+    "chipRemoveLabel": "Ubersetzung entfernen",
+    "otherLanguage": "Andere"
+  },
+  "widget": {
+    "readOnQuran": "Auf Quran.com lesen"
+  }
+}

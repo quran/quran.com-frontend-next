@@ -1,0 +1,141 @@
+{
+  "achieve-quran-goals": "Ostvarite svoje ciljeve s Kur'anom",
+  "continue-reading": "Nastavi sa čitanjem",
+  "continuous": {
+    "description": "Vaš cilj će pratiti napredak tokom određenog broja dana",
+    "title": "Tokom određenog perioda"
+  },
+  "create-plan": "Kreiraj plan",
+  "create-reading-goal": "Kreiraj cilj",
+  "daily-progress": "Dnevni napredak",
+  "daily-progress-completed": "Završeno! 🎉",
+  "daily": {
+    "description": "Vaš cilj će se resetirati svaki dan",
+    "title": "Dnevni cilj"
+  },
+  "day-streak": "Dani u nizu",
+  "day-x": "Dan {{day}}",
+  "days": "Dani",
+  "days-remaining": "preostalih dana",
+  "duration": "Trajanje (dani)",
+  "ending-chapter": "Završna sura",
+  "ending-verse": "Završni ajet",
+  "examples-subtitle": "Ovo je lista uobičajenih ciljeva. Možete kreirati i vlastiti cilj.",
+  "examples-title": "Odaberite gotov cilj ili kreirajte vlastiti",
+  "examples": {
+    "custom": {
+      "description": "Postavite prilagođeni cilj koji vam odgovara",
+      "title": "Prilagođeno"
+    },
+    "khatm": {
+      "description": "Klasičan hatma cilj. Čitajte 1 džuz dnevno",
+      "title": "Pročitajte Kur'an za 30 dana"
+    },
+    "time": {
+      "description": "Jednostavan cilj za početnike",
+      "title": "Čitajte 10 minuta dnevno"
+    },
+    "year": {
+      "description": "Čitajte Kur'an svojim tempom tokom naredne godine",
+      "title": "Pročitajte Kur'an za godinu dana"
+    }
+  },
+  "frequency-tab": {
+    "description": "Da li želite da se vaš cilj resetira svaki dan ili svakih određeni broj dana? Ne brinite, pratit ćemo vaš napredak bez obzira na odabranu učestalost.",
+    "title": "Odaberite učestalost za vaš cilj"
+  },
+  "goal-completed": "Cilj ostvaren! 🎉 ",
+  "goal-done": {
+    "description": "Svako dodatno čitanje će i dalje biti zabilježeno",
+    "title": "Završili ste današnji cilj"
+  },
+  "goal-target": {
+    "description": "Koliko vremena, stranica ili ajeta trebate pročitati da biste ostvarili cilj?",
+    "title": "Postavite cilj koji želite dostići"
+  },
+  "goal-type": {
+    "description": "Da li želite da vaš cilj bude baziran na vremenu, stranicama ili prilagođenom rasponu (npr. 3 džuza Kur'ana)?",
+    "title": "Odaberite kriterij za vaš cilj"
+  },
+  "goal-types": {
+    "pages": {
+      "description": "Vaš cilj će biti baziran na stranicama",
+      "title": "Stranice"
+    },
+    "range": {
+      "description": "Vaš cilj će biti baziran na prilagođenom rasponu ajeta (to može biti sura, džuz ili čak cijeli Kur'an)",
+      "title": "Prilagođeni raspon"
+    },
+    "time": {
+      "description": "Vaš cilj će biti baziran na vremenu",
+      "title": "Vrijeme"
+    }
+  },
+  "plus-x-more-days": {
+    "one": "+{{days}} dan više",
+    "other": "+{{days}} dana više"
+  },
+  "preview-schedule": {
+    "description": "Ovako će izgledati vaš cilj. Uvijek ga možete promijeniti kasnije.",
+    "title": "Ovo je pregled vašeg rasporeda"
+  },
+  "progress": {
+    "complete": "Današnji cilj je završen 🎉",
+    "goal-complete": "Cijeli cilj je završen 🎉",
+    "pages-goal": "pročitajte {{pages}} stranica Kur'ana",
+    "range-goal": "pročitajte od {{from}} do {{to}}",
+    "time-goal": "pročitajte {{time}} Kur'ana"
+  },
+  "reading-goal": "Cilj čitanja",
+  "reading-goal-description": "Da li vam je teško održati dosljednost u čitanju Kur'ana?<br/><br/>Putovanje rasta s Kur'anom je dinamična funkcija razvijena da vam pomogne da ostanete dosljedni na svom putu s Kur'anom. Bilo da želite čitati 10 minuta dnevno, završiti džuz za mjesec ili pročitati cijeli Kur'an za godinu, itd., Quran.com vam sada može pomoći da postavite prilagođeni cilj i pratite vaše dnevne nizove čitanja, uz prilagođavanje kako napredujete. Potpuno je besplatno za korištenje i nadamo se da će vam pomoći da ostanete motivirani na putu do svog cilja!",
+  "reading-goal-label": "Vi imate",
+  "reading-goal-title": "Predstavljamo Putovanje rasta s Kur'anom",
+  "recommended": "Preporučeno",
+  "remaining": "Preostalo za danas",
+  "remaining-base": "Preostalo",
+  "remaining-days": {
+    "one": "{{days}} dan preostao",
+    "other": "{{days}} dana preostalo"
+  },
+  "set-a-new-goal": "Postavite novi cilj",
+  "set-custom-goal": "Postavite prilagođeni cilj",
+  "set-reading-goal-success": "Vaš cilj čitanja je uspješno postavljen.",
+  "start-journey": "Započnite svoje putovanje!",
+  "start-reading": "Počnite čitati",
+  "starting-chapter": "Početna sura",
+  "starting-verse": "Početni ajet",
+  "streak": "Niz",
+  "streak-definition": "Niz je broj uzastopnih dana u kojima ste čitali Kur'an.",
+  "timeline-meaning": "Šta znači vaša vremenska linija?",
+  "timeline-states": {
+    "checked": "Završili ste svoj cilj",
+    "filled": "Čitali ste nešto, ali nedovoljno da završite cilj",
+    "none": "Niste ništa pročitali tog dana",
+    "stroked": "Danas niste ništa pročitali"
+  },
+  "todays-goal": "Današnji cilj",
+  "track-your-streak": "Pratite nizove, kreirajte prilagođene ciljeve, ostanite dosljedni",
+  "view-progress": "Pogledajte napredak",
+  "week-progress": "Napredak ove sedmice",
+  "x-days": {
+    "one": "{{days}} dan",
+    "other": "{{days}} dana"
+  },
+  "x-days-streak": "<p>{{days}}</p> <span>dana u nizu</span>",
+  "x-hours": {
+    "one": "{{hours}} sat",
+    "other": "{{hours}} sati"
+  },
+  "x-minutes": {
+    "one": "{{minutes}} minuta",
+    "other": "{{minutes}} minuta"
+  },
+  "x-pages": {
+    "one": "{{pages}} stranica",
+    "other": "{{pages}} stranica"
+  },
+  "x-seconds": {
+    "one": "{{seconds}} sekunda",
+    "other": "{{seconds}} sekundi"
+  }
+}
