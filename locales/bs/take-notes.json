@@ -2,113 +2,113 @@
   "benefits": {
     "access-anywhere": {
       "bullet-points": [
-        "Vase biljeske su sigurno pohranjene na vasem Quran.com racunu.",
-        "Sinhronizujte na svim uredajima - nastavite ucenje na mobitelu, tabletu ili racunaru."
+        "Vaše bilješke su sigurno pohranjene na vašem Quran.com računu.",
+        "Sinhronizujte na svim uređajima - nastavite učenje na mobitelu, tabletu ili računaru."
       ],
-      "description": "Vase biljeske se sinhronizuju na svim uredajima kada ste prijavljeni, omogucavajuci vam pristup vasim razmisljanjima bilo da ste na telefonu, tabletu ili racunaru.",
-      "login-prompt": "Jednostavno kreirajte besplatan nalog da pocnete.",
+      "description": "Vaše bilješke se sinhronizuju na svim uređajima kada ste prijavljeni, omogućavajući vam pristup vašim razmišljanjima bilo da ste na telefonu, tabletu ili računaru.",
+      "login-prompt": "Jednostavno kreirajte besplatan nalog da počnete.",
       "title": "Pristupite bilo gdje, bilo kada"
     },
     "enhanced-memorization": {
       "bullet-points": [
-        "Zapisite objasnjenja ili podsjetnike pored ajeta kako biste olaksali memorisanje.",
-        "Zabilježite teske rijeci ili koncepte za kasniji pregled.",
-        "Koristite biljeske za pracenje napretka u rasporedu memorisanja."
+        "Zapišite objašnjenja ili podsjetnike pored ajeta kako biste olakšali memorisanje.",
+        "Zabilježite teške riječi ili koncepte za kasniji pregled.",
+        "Koristite bilješke za praćenje napretka u rasporedu memorisanja."
       ],
-      "description": "Zapisivanje bilježki o ajetima koje memorirate moze znacajno poboljsati pamcenje. Kreirajte mnemotehnicka pomagala, zabilježite obrasce ili zapisite licne asocijacije koje vam pomazu da ajeti ostanu u memoriji.",
+      "description": "Zapisivanje bilježki o ajetima koje memorirate može značajno poboljšati pamćenje. Kreirajte mnemotehnička pomagala, zabilježite obrasce ili zapišite lične asocijacije koje vam pomažu da ajeti ostanu u memoriji.",
       "image": {
-        "alt": "Biljeske za memorisanje i ponavljanje"
+        "alt": "Bilješke za memorisanje i ponavljanje"
       },
-      "paragraph": "Bilo da aktivno memorirate ili ponavljate nauceno, biljeske mogu biti mocno pomagalo u hifzu.",
-      "title": "Poboljsano memorisanje i ponavljanje"
+      "paragraph": "Bilo da aktivno memorirate ili ponavljate naučeno, bilješke mogu biti moćno pomagalo u hifzu.",
+      "title": "Poboljšano memorisanje i ponavljanje"
     },
     "organize-preserve": {
-      "description": "Organizirajte svoje uvide po ajetima, sto olaksava izgradnju licnog tefsira (komentara) tokom vremena. Vase biljeske su sacuvane na vasem racunu, tako da nikada necete izgubiti taj trenutak inspiracije ili razumijevanja.",
+      "description": "Organizirajte svoje uvide po ajetima, što olakšava izgradnju ličnog tefsira (komentara) tokom vremena. Vaše bilješke su sačuvane na vašem računu, tako da nikada nećete izgubiti taj trenutak inspiracije ili razumijevanja.",
       "images": {
-        "organized": "Organizirane biljeske na nivou ajeta",
-        "preserved": "Sacuvane biljeske iz ucenja"
+        "organized": "Organizirane bilješke na nivou ajeta",
+        "preserved": "Sačuvane bilješke iz učenja"
       },
-      "paragraph": "Da li vam se ikada desilo da napustite predavanje i potpuno zaboravite na biljeske koje ste negdje nabrzinu zapisali u biljeznici, aplikaciji ili dokumentu? Zamislite da imate pristup svakoj biljesci koju ste zapisali uz ajet, lako dostupnoj na nivou ajeta svaki put kada ponovo citate taj ajet.",
-      "title": "Organizirajte i sacuvajte svoje ucenje"
+      "paragraph": "Da li vam se ikada desilo da napustite predavanje i potpuno zaboravite na bilješke koje ste negdje nabrzinu zapisali u bilježnici, aplikaciji ili dokumentu? Zamislite da imate pristup svakoj bilješci koju ste zapisali uz ajet, lako dostupnoj na nivou ajeta svaki put kada ponovo čitate taj ajet.",
+      "title": "Organizirajte i sačuvajte svoje učenje"
     },
     "personal-reflection": {
       "bullet-points": [
-        "Zapisujte svoje misli, razmisljanja i spoznaje dok citate Kur'an - bilo da su jednostavne ili duboke.",
-        "Ojacajte svoju vezu s Kur'anom aktivnim angazmanom s njegovim ajetima umjesto brzog citanja bez zaustavljanja."
+        "Zapisujte svoje misli, razmišljanja i spoznaje dok čitate Kur'an - bilo da su jednostavne ili duboke.",
+        "Ojačajte svoju vezu s Kur'anom aktivnim angažmanom s njegovim ajetima umjesto brzog čitanja bez zaustavljanja."
       ],
-      "description": "Pravljenje bilježki vam omogucava da dokumentirate svoje licno putovanje s Kur'anom. Zabilježite svoje misli, pitanja i trenutke jasnoce dok ucite. S vremenom, ove biljeske postaju vrijedan zapis vaseg duhovnog rasta i produbljivanja razumijevanja.",
+      "description": "Pravljenje bilježki vam omogućava da dokumentirate svoje lično putovanje s Kur'anom. Zabilježite svoje misli, pitanja i trenutke jasnoće dok učite. S vremenom, ove bilješke postaju vrijedan zapis vašeg duhovnog rasta i produbljivanja razumijevanja.",
       "examples-heading": "Primjeri bilježki:",
       "images": {
         "growth": "Primjer bilježki o duhovnom rastu",
-        "reflection": "Primjer bilježki licnog razmisljanja"
+        "reflection": "Primjer bilježki ličnog razmišljanja"
       },
-      "title": "Licno razmisljanje i duhovni rast"
+      "title": "Lično razmišljanje i duhovni rast"
     },
     "share-reflections": {
-      "community-paragraph": "Kada se podijele, vasa razmisljanja mogu duboko odjeknuti kod drugih i njegovati zajednicu rasta utemeljenu na Kur'anu. Saznajte vise na <0>QuranReflect.com/faq</0> i istrazite <1>Pet perspektiva</1> za obogacivanje vasih razmisljanja.",
+      "community-paragraph": "Kada se podijele, vaša razmišljanja mogu duboko odjeknuti kod drugih i njegovati zajednicu rasta utemeljenu na Kur'anu. Saznajte više na <0>QuranReflect.com/faq</0> i istražite <1>Pet perspektiva</1> za obogaćivanje vaših razmišljanja.",
       "conclusion": {
-        "dua": "Neka Allah ucini Kur'an svjetlom vasih grudi, proljecem vaseg srca, odstranjivanjem vasih tuga i olaksanjem vasih briga. Amin.",
-        "paragraph1": "Kur'an je dozivotni pratilac, a koristenje funkcije Biljeske vam moze pomoci da izgradite smislen, interaktivan odnos s njim. Koristite je za biljezenje razmisljanja, oznacavanje izazova, cuvanje uvida i jos mnogo toga. S vremenom ce postati licni zapis vaseg truda, iskrenosti i rasta s Knjigom Allahovom, insha'Allah.",
-        "paragraph2": "Pozivamo vas da se izazovete da se svakodnevno povežete s Kur'anom - makar samo s jednim ajetom - i odvojite trenutak za razmisljanje i zapisivanje biljeske. <0>Neka ova mala, dosljedna praksa postane sredstvo za produbljivanje vaseg odnosa s Knjigom Allahovom, ajet po ajet.</0>",
-        "title": "Zapocnite svoje putovanje danas"
+        "dua": "Neka Allah učini Kur'an svjetlom vaših grudi, proljećem vašeg srca, odstranjivanjem vaših tuga i olakšanjem vaših briga. Amin.",
+        "paragraph1": "Kur'an je doživotni pratilac, a korištenje funkcije Bilješke vam može pomoći da izgradite smislen, interaktivan odnos s njim. Koristite je za bilježenje razmišljanja, označavanje izazova, čuvanje uvida i još mnogo toga. S vremenom će postati lični zapis vašeg truda, iskrenosti i rasta s Knjigom Allahovom, insha'Allah.",
+        "paragraph2": "Pozivamo vas da se izazovete da se svakodnevno povežete s Kur'anom - makar samo s jednim ajetom - i odvojite trenutak za razmišljanje i zapisivanje bilješke. <0>Neka ova mala, dosljedna praksa postane sredstvo za produbljivanje vašeg odnosa s Knjigom Allahovom, ajet po ajet.</0>",
+        "title": "Započnite svoje putovanje danas"
       },
       "deeper-insights-title": "Dublji uvidi:",
       "deeper-insights": [
         "Da li su spomenuta neka Allahova imena i kako se odnose na ajet?",
-        "Koje rijeci ili jezicki aspekti su privukli vasu paznju?",
-        "Mozete li povuci veze s kontekstom ajeta, drugim kur'anskim ajetima, hadisima ili dogadajima?"
+        "Koje riječi ili jezički aspekti su privukli vašu pažnju?",
+        "Možete li povući veze s kontekstom ajeta, drugim kur'anskim ajetima, hadisima ili događajima?"
       ],
-      "description": "Uskoro: mogucnost dijeljenja odabranih bilježki s prijateljima, porodicom ili grupama za ucenje. Saradujte u razumijevanju i sirite korisno znanje.",
-      "paragraph1": "Dok su biljeske na Quran.com sacuvane privatno, imate i mogucnost da podijelite odabrana razmisljanja javno na <0>QuranReflect.com</0>. Ovo je neprofitna platforma zajednice osmisljena da potakne promisljeno angazovanje s Kur'anom - ne kroz ucenjacki tefsir (koji je rezervisan za kvalificirane ucenjake), vec kroz iskrena, licna razmisljanja koja pregledava i usmjerava kvalificiran moderatorski tim.",
-      "paragraph2": "Allah poziva sve vjernike, ne samo ucenjake, na tedebur:",
-      "quote": "Ovo je blagoslovljena Knjiga koju smo ti objavili, o Vjerovjesnice, da bi razmisljali o ajetima njezinim i da bi pouku primili oni koji su razumom obdareni. (Sura Sad 38:29)",
-      "reflection-prompt": "Primjeri pitanja za licno razmisljanje koje mozete koristiti:",
+      "description": "Uskoro: mogućnost dijeljenja odabranih bilježki s prijateljima, porodicom ili grupama za učenje. Sarađujte u razumijevanju i širite korisno znanje.",
+      "paragraph1": "Dok su bilješke na Quran.com sačuvane privatno, imate i mogućnost da podijelite odabrana razmišljanja javno na <0>QuranReflect.com</0>. Ovo je neprofitna platforma zajednice osmišljena da potakne promišljeno angažovanje s Kur'anom - ne kroz učenjački tefsir (koji je rezervisan za kvalificirane učenjake), već kroz iskrena, lična razmišljanja koja pregledava i usmjerava kvalificiran moderatorski tim.",
+      "paragraph2": "Allah poziva sve vjernike, ne samo učenjake, na tedebur:",
+      "quote": "Ovo je blagoslovljena Knjiga koju smo ti objavili, o Vjerovjesniče, da bi razmišljali o ajetima njezinim i da bi pouku primili oni koji su razumom obdareni. (Sura Sad 38:29)",
+      "reflection-prompt": "Primjeri pitanja za lično razmišljanje koje možete koristiti:",
       "reflection-questions": [
-        "Na koji nacin vas je ovaj ajet pokrenuo ili inspirirao?",
-        "Da li postoje osobine ili postupci spomenuti koje mozete poboljsati?",
-        "Da li postoji obecanje ili upozorenje/zabrana koje mozete primijeniti u svom zivotu?",
-        "Da li imate licnu pricu povezanu s ovim ajetom?",
-        "Koje promjene zelite napraviti na osnovu ovog ajeta i kako ih vi ili neko drugi moze prakticno primijeniti?"
+        "Na koji način vas je ovaj ajet pokrenuo ili inspirirao?",
+        "Da li postoje osobine ili postupci spomenuti koje možete poboljšati?",
+        "Da li postoji obećanje ili upozorenje/zabrana koje možete primijeniti u svom životu?",
+        "Da li imate ličnu priču povezanu s ovim ajetom?",
+        "Koje promjene želite napraviti na osnovu ovog ajeta i kako ih vi ili neko drugi može praktično primijeniti?"
       ],
-      "title": "Podijelite svoja razmisljanja da i drugi imaju koristi"
+      "title": "Podijelite svoja razmišljanja da i drugi imaju koristi"
     },
-    "title": "Prednosti koristenja funkcije Biljeske"
+    "title": "Prednosti korištenja funkcije Bilješke"
   },
-  "description": "Otkrijte 5 mocnih razloga za pravljenje bilježki na Quran.com i kako biljeske mogu igrati kljucnu ulogu na vasem putovanju s Kur'anom.",
-  "heading": "5 mocnih razloga za pravljenje bilježki - i kako mogu transformirati vase putovanje s Kur'anom",
+  "description": "Otkrijte 5 moćnih razloga za pravljenje bilježki na Quran.com i kako bilješke mogu igrati ključnu ulogu na vašem putovanju s Kur'anom.",
+  "heading": "5 moćnih razloga za pravljenje bilježki - i kako mogu transformirati vaše putovanje s Kur'anom",
   "how-to-use": {
-    "saved-note-explanation": "Kada sacuvate biljesku za ajet, ikona biljeske ce postati plava, sto olaksava prepoznavanje ajeta koje ste prethodno komentarisali tokom buducih citanja.",
-    "step1": "<0>Odaberite ajet:</0> Kliknite na bilo koji ajet i odaberite opciju Biljeske.",
-    "step2": "<0>Dodajte svoje misli:</0> Upisite svoja razmisljanja, podsjetnike ili pitanja.",
-    "step3": "<0>Sacuvajte:</0> Vase biljeske ce biti sacuvane pod vasim racunom.",
-    "step4": "<0>Pristupite bilo kada:</0> Vratite se na svoje biljeske putem profila ili direktno na ajetu.",
-    "title": "Kako koristiti funkciju Biljeske"
+    "saved-note-explanation": "Kada sačuvate bilješku za ajet, ikona bilješke će postati plava, što olakšava prepoznavanje ajeta koje ste prethodno komentarisali tokom budućih čitanja.",
+    "step1": "<0>Odaberite ajet:</0> Kliknite na bilo koji ajet i odaberite opciju Bilješke.",
+    "step2": "<0>Dodajte svoje misli:</0> Upišite svoja razmišljanja, podsjetnike ili pitanja.",
+    "step3": "<0>Sačuvajte:</0> Vaše bilješke će biti sačuvane pod vašim računom.",
+    "step4": "<0>Pristupite bilo kada:</0> Vratite se na svoje bilješke putem profila ili direktno na ajetu.",
+    "title": "Kako koristiti funkciju Bilješke"
   },
   "images": {
     "adding-notes": {
       "alt": "Dodavanje bilježki na ajet"
     },
     "blue-icon": {
-      "alt": "Plava ikona biljeske koja oznacava sacuvane biljeske"
+      "alt": "Plava ikona bilješke koja označava sačuvane bilješke"
     },
     "feature-available": {
       "alt": "Funkcija bilježki dostupna pored svakog ajeta",
       "caption": "Funkcija bilježki je dostupna pored svakog ajeta"
     }
   },
-  "introduction": "Funkcija Biljeske na Quran.com je smislen nacin da produbite svoj angazman s Kur'anom. Bilo da ucite, razmisljate ili jednostavno pokusavate bolje razumjeti poruku, pravljenje bilježki vam moze pomoci da se dublje povežete s ajetima i zadržite uvide koji bi inace mogli biti zaboravljeni.",
+  "introduction": "Funkcija Bilješke na Quran.com je smislen način da produbite svoj angažman s Kur'anom. Bilo da učite, razmišljate ili jednostavno pokušavate bolje razumjeti poruku, pravljenje bilježki vam može pomoći da se dublje povežete s ajetima i zadržite uvide koji bi inače mogli biti zaboravljeni.",
   "meta": {
-    "description": "Saznajte kako koristiti funkciju bilježki na Quran.com za unaprjedenje vaseg iskustva ucenja Kur'ana.",
-    "title": "Pravite biljeske - Quran.com"
+    "description": "Saznajte kako koristiti funkciju bilježki na Quran.com za unapređenje vašeg iskustva učenja Kur'ana.",
+    "title": "Pravite bilješke - Quran.com"
   },
   "table-of-contents": {
     "items": [
-      "Licno razmisljanje i duhovni rast",
-      "Organizirajte i sacuvajte svoje ucenje",
+      "Lično razmišljanje i duhovni rast",
+      "Organizirajte i sačuvajte svoje učenje",
       "Pristupite bilo gdje, bilo kada",
-      "Poboljsano memorisanje i ponavljanje",
-      "Podijelite svoja razmisljanja da i drugi imaju koristi"
+      "Poboljšano memorisanje i ponavljanje",
+      "Podijelite svoja razmišljanja da i drugi imaju koristi"
     ],
-    "title": "Prednosti koristenja funkcije Biljeske"
+    "title": "Prednosti korištenja funkcije Bilješke"
   }
 }

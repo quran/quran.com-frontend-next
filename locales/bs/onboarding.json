@@ -1,103 +1,103 @@
 {
   "checklist": {
-    "1": "Funkcije pocetne stranice",
+    "1": "Funkcije početne stranice",
     "2": "Prilagodite svoje postavke",
-    "3": "Obogatite svoje iskustvo citanja ajeta",
+    "3": "Obogatite svoje iskustvo čitanja ajeta",
     "4": "Personalizirane funkcije"
   },
-  "finish": "Zavrsi",
+  "finish": "Završi",
   "onboarding-checklist": "Lista za upoznavanje",
-  "onboarding-title": "Maksimizirajte svoje iskustvo na Quran.com! <br></br> Zapocnite svoju turu sada:",
+  "onboarding-title": "Maksimizirajte svoje iskustvo na Quran.com! <br></br> Započnite svoju turu sada:",
   "previous": "Prethodno",
-  "skip": "Preskoci",
+  "skip": "Preskoči",
   "steps": {
     "3-dot-menu": {
-      "description": "Kliknite na meni s 3 tacke da otkrijete opcije za kopiranje, oznacavanje i ponavljanje ajeta. Otkrijte razne opcije za ponavljanje ajeta",
-      "title": "Meni s 3 tacke"
+      "description": "Kliknite na meni s 3 tačke da otkrijete opcije za kopiranje, označavanje i ponavljanje ajeta. Otkrijte razne opcije za ponavljanje ajeta",
+      "title": "Meni s 3 tačke"
     },
     "ayah-reflection": {
-      "description": "Citajte razmisljanja (tedebur) ucenjaka, studenata znanja i obicnih ljudi koji vam pomazu da razvijete licniju vezu s Kur'anom",
-      "title": "Citajte razmisljanja na nivou ajeta"
+      "description": "Čitajte razmišljanja (tedebur) učenjaka, studenata znanja i običnih ljudi koji vam pomažu da razvijete ličniju vezu s Kur'anom",
+      "title": "Čitajte razmišljanja na nivou ajeta"
     },
     "ayah-tafsir": {
-      "description": "Istrazite tefsir na nivou ajeta, koji pruza detaljne uvide za unaprjedenje vaseg razumijevanja dok citate. (Tefsir moze biti grupisan za vise ajeta kada je to primjereno)",
-      "title": "Citajte tefsir na nivou ajeta"
+      "description": "Istražite tefsir na nivou ajeta, koji pruža detaljne uvide za unapređenje vašeg razumijevanja dok čitate. (Tefsir može biti grupisan za više ajeta kada je to primjereno)",
+      "title": "Čitajte tefsir na nivou ajeta"
     },
     "font-size": {
-      "description": "Prilagodite citanje Kur'ana s jednostavnim podesavanjem velicine fonta za ugodno iskustvo citanja",
-      "title": "Velicina fonta"
+      "description": "Prilagodite čitanje Kur'ana s jednostavnim podešavanjem veličine fonta za ugodno iskustvo čitanja",
+      "title": "Veličina fonta"
     },
     "font-style": {
-      "description": "Opcije ukljucuju Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 linija, Indopak 16 linija",
-      "title": "Odaberite preferirano pismo za citanje"
+      "description": "Opcije uključuju Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 linija, Indopak 16 linija",
+      "title": "Odaberite preferirano pismo za čitanje"
     },
     "inline-wbw": {
-      "description": "Pogledajte prijevod svake rijeci u liniji (ispod rijeci) ili u oblacicu iznad rijeci dok slusate Kur'an",
-      "title": "Prikazite prijevod rijec-po-rijec u liniji (ispod rijeci) ili prikazite oblacic"
+      "description": "Pogledajte prijevod svake riječi u liniji (ispod riječi) ili u oblačiću iznad riječi dok slušate Kur'an",
+      "title": "Prikažite prijevod riječ-po-riječ u liniji (ispod riječi) ili prikažite oblačić"
     },
     "juz": {
-      "description": "Pregledajte Kur'an po dzuzovima",
-      "title": "Pregledajte Kur'an po dzuzovima"
+      "description": "Pregledajte Kur'an po džuzovima",
+      "title": "Pregledajte Kur'an po džuzovima"
     },
     "listen": {
-      "description": "Pokrenite audio player da slusate ucenje",
-      "title": "Slusajte suru ili ajet"
+      "description": "Pokrenite audio player da slušate učenje",
+      "title": "Slušajte suru ili ajet"
     },
     "login": {
-      "description": "Prijavite se i sacuvajte postavke na svim uredajima te dobijte pristup dodatnim funkcijama.",
+      "description": "Prijavite se i sačuvajte postavke na svim uređajima te dobijte pristup dodatnim funkcijama.",
       "title": "Prijava"
     },
     "quran-radio": {
-      "description": "Slusajte Kur'an Radio - strimujte Kur'an bez reklama",
+      "description": "Slušajte Kur'an Radio - strimujte Kur'an bez reklama",
       "title": "Kur'an Radio"
     },
     "reading-sessions": {
-      "description": "Lako pregledajte svoje kur'ansko putovanje s pogledom na vasu personaliziranu historiju citanja, prateci ajete koje ste istraživali na Quran.com.",
-      "title": "Pogledajte historiju citanja"
+      "description": "Lako pregledajte svoje kur'ansko putovanje s pogledom na vašu personaliziranu historiju čitanja, prateći ajete koje ste istraživali na Quran.com.",
+      "title": "Pogledajte historiju čitanja"
     },
     "reading-view": {
-      "description": "Pregledajte Kur'an u modusu mushafa za citanje",
-      "title": "Modus citanja"
+      "description": "Pregledajte Kur'an u modusu mushafa za čitanje",
+      "title": "Modus čitanja"
     },
     "search-bar": {
-      "description": "Pronadite ajete, sure, kljucne rijeci, dzuzove i teme koje trazite koristeci nasu traku za pretragu",
+      "description": "Pronađite ajete, sure, ključne riječi, džuzove i teme koje tražite koristeći našu traku za pretragu",
       "title": "Traka za pretragu"
     },
     "select-reciter": {
-      "description": "Personalizirajte svoje iskustvo slusanja odabirom ucaca kojeg najradije slusate!",
-      "title": "Odaberite izmedju razlicitih ucaca"
+      "description": "Personalizirajte svoje iskustvo slušanja odabirom učača kojeg najradije slušate!",
+      "title": "Odaberite između različitih učača"
     },
     "settings": {
       "description": "Upravljajte svojim preferencama",
       "title": "Postavke"
     },
     "streak": {
-      "description": "Postavite personalizirane ciljeve citanja, pratite napredak i izgradite dosljednu naviku citanja Kur'ana s nasom funkcijom za nizove citanja i planove.",
-      "title": "Pratite nizove citanja i planove citanja"
+      "description": "Postavite personalizirane ciljeve čitanja, pratite napredak i izgradite dosljednu naviku čitanja Kur'ana s našom funkcijom za nizove čitanja i planove.",
+      "title": "Pratite nizove čitanja i planove čitanja"
     },
     "surah-info": {
-      "description": "Saznajte vise o svakoj suri - pogodno smjesteno na pocetku svake sure",
-      "title": "Procitajte o suri"
+      "description": "Saznajte više o svakoj suri - pogodno smješteno na početku svake sure",
+      "title": "Pročitajte o suri"
     },
     "theme": {
-      "description": "Odaberite omiljeni izgled - svijetli, sepija ili tamni mod - za ugodno i personalizirano iskustvo citanja Kur'ana.",
-      "title": "Citajte Kur'an u svijetlom, sepija ili tamnom modu"
+      "description": "Odaberite omiljeni izgled - svijetli, sepija ili tamni mod - za ugodno i personalizirano iskustvo čitanja Kur'ana.",
+      "title": "Čitajte Kur'an u svijetlom, sepija ili tamnom modu"
     },
     "translations": {
-      "description": "Birajte izmedju razlicitih prijevoda na vise jezika. Savjet: Uporedite prijevode odabirom vise opcija",
+      "description": "Birajte između različitih prijevoda na više jezika. Savjet: Uporedite prijevode odabirom više opcija",
       "title": "Prijevodi"
     },
     "wbw-audio": {
-      "description": "Odaberite ovu opciju da slusate svaku rijec pojedinacno jednostavnim klikom na rijec!",
-      "title": "Slusajte transliteraciju rijec-po-rijec klikom na rijec"
+      "description": "Odaberite ovu opciju da slušate svaku riječ pojedinačno jednostavnim klikom na riječ!",
+      "title": "Slušajte transliteraciju riječ-po-riječ klikom na riječ"
     },
     "wbw-translation": {
-      "description": "Pogledajte znacenje pojedinih rijeci dok citate ili slusate Kur'an kako biste unaprijedili svoj kur'anski vokabular",
-      "title": "Citajte prijevod rijec-po-rijec"
+      "description": "Pogledajte značenje pojedinih riječi dok čitate ili slušate Kur'an kako biste unaprijedili svoj kur'anski vokabular",
+      "title": "Čitajte prijevod riječ-po-riječ"
     },
     "wbw-transliteration": {
-      "description": "Pogledajte transliteraciju svake rijeci koja ce vam pomoci na vasem putu citanja Kur'ana",
-      "title": "Citajte transliteraciju rijec-po-rijec"
+      "description": "Pogledajte transliteraciju svake riječi koja će vam pomoći na vašem putu čitanja Kur'ana",
+      "title": "Čitajte transliteraciju riječ-po-riječ"
     }
   }
 }

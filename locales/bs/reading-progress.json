@@ -1,32 +1,32 @@
 {
   "add": "Dodaj",
-  "add-data-success": "Vasi podaci o citanju su uspjesno dodani.",
-  "back-to-reading-goal": "Nazad na cilj citanja",
+  "add-data-success": "Vaši podaci o čitanju su uspješno dodani.",
+  "back-to-reading-goal": "Nazad na cilj čitanja",
   "delete-goal": {
-    "action": "Obrisi cilj",
+    "action": "Obriši cilj",
     "confirmation": {
-      "action-text": "Razumijem posljedice, obrisi moj cilj",
-      "confirmation-text": "obrisi moj cilj",
-      "instruction-text": "Molimo upisite <strong>{{text}}</strong> za potvrdu",
-      "subtitle": "Ova radnja se ne moze ponistiti. Ovo ce trajno obrisati vas cilj i prestat cemo pratiti vas napredak.",
+      "action-text": "Razumijem posljedice, obriši moj cilj",
+      "confirmation-text": "obriši moj cilj",
+      "instruction-text": "Molimo upišite <strong>{{text}}</strong> za potvrdu",
+      "subtitle": "Ova radnja se ne može poništiti. Ovo će trajno obrisati vaš cilj i prestat ćemo pratiti vaš napredak.",
       "title": "Jeste li sigurni?"
     },
-    "success": "Vas cilj citanja je uspjesno obrisan."
+    "success": "Vaš cilj čitanja je uspješno obrisan."
   },
   "edit-goal": {
     "action": "Uredi cilj",
-    "subtitle": "Ponovo cemo izracunati vas napredak na osnovu novog cilja.",
-    "success": "Vas cilj citanja je uspjesno azuriran.",
-    "title": "Uredite svoj cilj citanja"
+    "subtitle": "Ponovo ćemo izračunati vaš napredak na osnovu novog cilja.",
+    "success": "Vaš cilj čitanja je uspješno ažuriran.",
+    "title": "Uredite svoj cilj čitanja"
   },
-  "history": "Historija citanja",
-  "history-for": "Historija citanja za {{date}}",
-  "manage-goal": "Upravljajte svojim ciljem citanja",
-  "manually-add": "Rucno dodaj citanja",
-  "no-reading-history-for": "Nema historije citanja za {{date}}",
-  "reading-progress-header": "Vas napredak",
+  "history": "Historija čitanja",
+  "history-for": "Historija čitanja za {{date}}",
+  "manage-goal": "Upravljajte svojim ciljem čitanja",
+  "manually-add": "Ručno dodaj čitanja",
+  "no-reading-history-for": "Nema historije čitanja za {{date}}",
+  "reading-progress-header": "Vaš napredak",
   "reading-progress-streak": "Niz",
-  "reading-time": "Vrijeme citanja",
-  "seconds-read-tooltip": "Ovo je vrijeme koje ste proveli citajuci ajete koje ste unijeli. Automatski ga popunjavamo prosjecnom brzinom citanja na Quran.com, ali mozete ga zamijeniti vasim stvarnim vremenom citanja.",
-  "you-read": "Procitali ste:"
+  "reading-time": "Vrijeme čitanja",
+  "seconds-read-tooltip": "Ovo je vrijeme koje ste proveli čitajući ajete koje ste unijeli. Automatski ga popunjavamo prosječnom brzinom čitanja na Quran.com, ali možete ga zamijeniti vašim stvarnim vremenom čitanja.",
+  "you-read": "Pročitali ste:"
 }

@@ -5,25 +5,25 @@
     "copyEmbedSnippet": "Kopiraj kod za ugradnju"
   },
   "checkboxes": {
-    "answers": "Pokazi dugme za odgovore (ako je dostupno)",
-    "audio": "Omoguci reprodukciju audia",
-    "customSize": "Koristi prilagodenu sirinu/visinu",
-    "lessons": "Pokazi dugme za lekcije",
+    "answers": "Pokaži dugme za odgovore (ako je dostupno)",
+    "audio": "Omogući reprodukciju audia",
+    "customSize": "Koristi prilagođenu širinu/visinu",
+    "lessons": "Pokaži dugme za lekcije",
     "mergeVerses": "Spoji ajete (prikaz u liniji)",
-    "reflections": "Pokazi dugme za razmisljanja",
-    "showArabic": "Pokazi arapski tekst ajeta",
-    "tafsirs": "Pokazi dugme za tefsire",
-    "translator": "Pokazi ime prevodioca",
-    "verseRange": "Omoguci raspon ajeta",
-    "wordByWord": "Omoguci prijevod rijec-po-rijec",
-    "wordByWordTransliteration": "Omoguci transliteraciju rijec-po-rijec"
+    "reflections": "Pokaži dugme za razmišljanja",
+    "showArabic": "Pokaži arapski tekst ajeta",
+    "tafsirs": "Pokaži dugme za tefsire",
+    "translator": "Pokaži ime prevodioca",
+    "verseRange": "Omogući raspon ajeta",
+    "wordByWord": "Omogući prijevod riječ-po-riječ",
+    "wordByWordTransliteration": "Omogući transliteraciju riječ-po-riječ"
   },
   "errors": {
-    "clipboardFallback": "Pisanje u meduspremnik neuspjesno, koristim alternativu",
-    "clipboardUnavailable": "API meduspremnika nije dostupan",
-    "loadChapters": "Nemoguce ucitati sure",
-    "loadReciters": "Nemoguce ucitati ucace",
-    "loadTranslations": "Nemoguce ucitati prijevode"
+    "clipboardFallback": "Pisanje u međuspremnik neuspješno, koristim alternativu",
+    "clipboardUnavailable": "API međuspremnika nije dostupan",
+    "loadChapters": "Nemoguće učitati sure",
+    "loadReciters": "Nemoguće učitati učače",
+    "loadTranslations": "Nemoguće učitati prijevode"
   },
   "fields": {
     "ayah": "Ajet",
@@ -31,18 +31,18 @@
     "height": "Visina",
     "language": "Jezik",
     "mushaf": "Mushaf",
-    "reciter": "Ucac",
+    "reciter": "Učač",
     "surah": "Sura",
     "theme": "Tema",
     "translations": "Prijevodi",
-    "width": "Sirina"
+    "width": "Širina"
   },
   "header": {
-    "subtitle": "<bold>Kvalitetniji, prilagodljiv nacin za ukljucivanje kur'anskih ajeta u vas sadrzaj.</bold><br />Kreirajte ugradeni element koji mozete jednostavno prilagoditi, s <bold>preciznim prikazom arapskog teksta, ugradjenim ucenjem</bold> i jos mnogo toga, tako da citaoci mogu slusati dok se angazuju s ajetom.",
+    "subtitle": "<bold>Kvalitetniji, prilagodljiv način za uključivanje kur'anskih ajeta u vaš sadržaj.</bold><br />Kreirajte ugrađeni element koji možete jednostavno prilagoditi, s <bold>preciznim prikazom arapskog teksta, ugrađenim učenjem</bold> i još mnogo toga, tako da čitaoci mogu slušati dok se angažuju s ajetom.",
     "title": "Graditelj za ugradnju ajeta"
   },
   "meta": {
-    "description": "Konfigurisite i pregledajte widgete za ugradnju za dijeljenje Kur'ana, zatim kopirajte gotov kod.",
+    "description": "Konfigurišite i pregledajte widgete za ugradnju za dijeljenje Kur'ana, zatim kopirajte gotov kod.",
     "title": "Graditelj za ugradnju ajeta | Quran.com"
   },
   "mushaf": {
@@ -50,25 +50,25 @@
     "kfgqpc_v1": "King Fahad Complex v1",
     "kfgqpc_v2": "King Fahad Complex v2",
     "qpc": "QPC Uthmani Hafs",
-    "tajweed": "Tedzvid"
+    "tajweed": "Tedžvid"
   },
   "placeholders": {
-    "searchTranslations": "Pretrazite prijevode..."
+    "searchTranslations": "Pretražite prijevode..."
   },
   "reciters": {
-    "select": "Odaberite ucaca"
+    "select": "Odaberite učača"
   },
   "sections": {
     "configuration": "Konfiguracija",
-    "preview": "Pregled uzivo",
+    "preview": "Pregled uživo",
     "snippet": "Kod za ugradnju"
   },
   "states": {
-    "loadingChapters": "Ucitavanje sura...",
-    "loadingPreview": "Ucitavanje pregleda...",
-    "loadingReciters": "Ucitavanje ucaca...",
-    "loadingVerses": "Ucitavanje ajeta...",
-    "noTranslations": "Prijevodi nisu pronadjeni"
+    "loadingChapters": "Učitavanje sura...",
+    "loadingPreview": "Učitavanje pregleda...",
+    "loadingReciters": "Učitavanje učača...",
+    "loadingVerses": "Učitavanje ajeta...",
+    "noTranslations": "Prijevodi nisu pronađeni"
   },
   "theme": {
     "dark": "Tamna",
@@ -80,6 +80,6 @@
     "otherLanguage": "Ostalo"
   },
   "widget": {
-    "readOnQuran": "Citajte na Quran.com"
+    "readOnQuran": "Čitajte na Quran.com"
   }
 }

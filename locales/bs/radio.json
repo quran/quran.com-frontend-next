@@ -2,26 +2,26 @@
   "change": "Promijeni",
   "curated-station": {
     "juz-amma": {
-      "description": "Slusajte posljednji dzuz Kur'ana",
-      "title": "Dzuz Amma"
+      "description": "Slušajte posljednji džuz Kur'ana",
+      "title": "Džuz Amma"
     },
     "popular-recitations": {
-      "description": "Dnevno odabrana kolekcija ucenja",
-      "title": "Popularna ucenja"
+      "description": "Dnevno odabrana kolekcija učenja",
+      "title": "Popularna učenja"
     },
     "surah-al-kahf": {
-      "description": "Slusajte Suru El-Kehf u ponavljanju",
+      "description": "Slušajte Suru El-Kehf u ponavljanju",
       "title": "Sura El-Kehf"
     },
     "yaseen-alwaqiah-al-mulk": {
-      "description": "Sure od odabranih ucaca",
+      "description": "Sure od odabranih učača",
       "title": "Jasin, El-Vakia, El-Mulk"
     }
   },
   "curated-stations": "Odabrane stanice",
   "pause-radio": "Pauziraj radio",
   "play-radio": "Pusti radio",
-  "radio-desc": "Slusajte neprekidno lijepo ucenje casnog Kur'ana od razlicitih ucaca.",
-  "reciter-stations": "Stanice ucaca",
+  "radio-desc": "Slušajte neprekidno lijepo učenje časnog Kur'ana od različitih učača.",
+  "reciter-stations": "Stanice učača",
   "station": "Stanica"
 }

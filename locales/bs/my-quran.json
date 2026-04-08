@@ -2,61 +2,61 @@
   "bulk-actions": {
     "actions": "Akcije",
     "actions-count": "Akcije ({{count}})",
-    "cancel": "Otkazi",
+    "cancel": "Otkaži",
     "collapse-all": "Skupi sve",
-    "expand-all": "Prosiri sve",
-    "pin": "Zakaci",
-    "pin-verses": "Zakaci ajete",
+    "expand-all": "Proširi sve",
+    "pin": "Zakači",
+    "pin-verses": "Zakači ajete",
     "select": "Odaberi"
   },
   "collections": {
-    "detail-empty": "Pocnite citati i dodajte u svoju kolekciju!",
+    "detail-empty": "Počnite čitati i dodajte u svoju kolekciju!",
     "favorites": "Favoriti",
     "filters": {
       "chapters": "Sura",
-      "clear-all": "Obrisi sve",
-      "juz": "Dzuz",
-      "no-matches": "Nijedan sacuvani ajet ne odgovara vasim filterima.",
+      "clear-all": "Obriši sve",
+      "juz": "Džuz",
+      "no-matches": "Nijedan sačuvani ajet ne odgovara vašim filterima.",
       "no-results": "Nema rezultata",
       "title": "Filter"
     },
     "guest-promo": {
       "sign-in": "Prijavite se",
       "subtitle": "Uporedite i kontrastirajte ajete",
-      "title": "Kreirajte prilagodene kolekcije"
+      "title": "Kreirajte prilagođene kolekcije"
     },
     "items": "{{count}} stavka",
     "items_plural": "{{count}} stavki",
-    "load-more": "Ucitaj vise",
+    "load-more": "Učitaj više",
     "new-collection": "Nova kolekcija",
     "sort": {
       "a-z": "A - Z",
-      "recently-updated": "Nedavno azurirano",
+      "recently-updated": "Nedavno ažurirano",
       "z-a": "Z - A"
     },
     "title": "Kolekcije"
   },
-  "notes-and-reflections": "Biljske i razmisljanja",
+  "notes-and-reflections": "Bilješke i razmišljanja",
   "page": "Stranica",
   "reading-bookmark": {
-    "empty": "Pocnite citati i sacuvajte oznaku za citanje!",
-    "title": "Moja oznaka za citanje"
+    "empty": "Počnite čitati i sačuvajte oznaku za čitanje!",
+    "title": "Moja oznaka za čitanje"
   },
   "recent": "Nedavno",
-  "recent-empty": "Pocnite citati da vidite nedavno procitano",
+  "recent-empty": "Počnite čitati da vidite nedavno pročitano",
   "recently-saved": {
-    "title": "Nedavno sacuvano"
+    "title": "Nedavno sačuvano"
   },
-  "saved": "Sacuvano",
+  "saved": "Sačuvano",
   "search": {
     "filter": "Filter",
-    "placeholder": "Pretrazi sacuvano...",
+    "placeholder": "Pretraži sačuvano...",
     "sort": "Sortiraj"
   },
   "sign-in-prompt": {
     "features": {
-      "attach-notes": "Prilosite biljeske uz ajete",
-      "custom-collections": "Kreirajte prilagodene kolekcije"
+      "attach-notes": "Priložite bilješke uz ajete",
+      "custom-collections": "Kreirajte prilagođene kolekcije"
     },
     "title": "Prijavite se ili registrujte besplatno za pristup dodatnim funkcionalnostima!"
   }

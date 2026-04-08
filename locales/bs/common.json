@@ -6,33 +6,33 @@
     "auth-onboarding": {
       "data-sync": {
         "action": "Dalje",
-        "description": "Bilo da koristite Quran.com na telefonu ili laptopu, vaši zabilježeni ajeti, posljednje pročitani ajeti i vaše postavke bit ce dostupni",
-        "title": "Vaši podaci ce biti sinhronizovani <br></br> na svim uredajima"
+        "description": "Bilo da koristite Quran.com na telefonu ili laptopu, vaši zabilježeni ajeti, posljednje pročitani ajeti i vaše postavke bit će dostupni",
+        "title": "Vaši podaci će biti sinhronizovani <br></br> na svim uređajima"
       },
       "feedback": {
         "action": "U redu, razumijem",
-        "description": "Hvala vam sto koristite Quran.com i bilo bi nam drago cuti vase povratne informacije na <link>feedback.quran.com</link>",
-        "title": "Zelimo cuti vase misljenje"
+        "description": "Hvala vam što koristite Quran.com i bilo bi nam drago čuti vaše povratne informacije na <link>feedback.quran.com</link>",
+        "title": "Želimo čuti vaše mišljenje"
       },
       "quran-foundation-link": {
         "action": "Dalje",
-        "description": "Koristite vasu Quran.com prijavu za pristup QuranReflect.com -- aktivnoj globalnoj zajednici koja se bavi razmisljanjem o Kur'anu.",
-        "title": "Koristite svoj racun na svim Quran.Foundation aplikacijama!"
+        "description": "Koristite vašu Quran.com prijavu za pristup QuranReflect.com -- aktivnoj globalnoj zajednici koja se bavi razmišljanjem o Kur'anu.",
+        "title": "Koristite svoj račun na svim Quran.Foundation aplikacijama!"
       },
       "quran-growth-journey": {
         "action": "Dalje",
-        "description": "Odrzavajte svoj niz ucenja Kur'ana i napredujte ka svojim ciljevima dok gradite nove navike",
-        "title": "Zapocnite svoje putovanje ucenja Kur'ana!"
+        "description": "Održavajte svoj niz učenja Kur'ana i napredujte ka svojim ciljevima dok gradite nove navike",
+        "title": "Započnite svoje putovanje učenja Kur'ana!"
       },
       "welcome": {
-        "action": "Pogledajte sta je novo",
-        "title": "Dobrodosli na Quran.com <br></br> Korisnicki racun"
+        "action": "Pogledajte šta je novo",
+        "title": "Dobrodošli na Quran.com <br></br> Korisnički račun"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "S velikim zadovoljstvom najavljujemo da sada mozete grupisati zabiljeske u \"kolekcije\"! <br/><br/> <li>Dodajte koliko god zelite kolekcija</li><li>Dodajte zabiljesku u jednu ili vise kolekcija</li><li>I jos mnogo toga!</li>",
-        "title": "Kolekcije zabiljesaka su stigle!"
+        "description": "S velikim zadovoljstvom najavljujemo da sada možete grupisati zabilješke u \"kolekcije\"! <br/><br/> <li>Dodajte koliko god želite kolekcija</li><li>Dodajte zabilješku u jednu ili više kolekcija</li><li>I još mnogo toga!</li>",
+        "title": "Kolekcije zabilješki su stigle!"
       }
     }
   },
@@ -44,8 +44,8 @@
     "nav-drawer-open": "Otvori navigacionu ladicu",
     "play-surah": "Pustite suru {{surahName}}",
     "select-lng": "Odaberite jezik",
-    "sidebar-nav-close": "Zatvori bocnu navigaciju",
-    "tooltip-action": "Akcija objasnjenja",
+    "sidebar-nav-close": "Zatvori bočnu navigaciju",
+    "tooltip-action": "Akcija objašnjenja",
     "translation-info": "Pogledajte informacije o prijevodu"
   },
   "audio": {

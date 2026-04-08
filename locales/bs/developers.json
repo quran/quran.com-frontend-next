@@ -2,37 +2,37 @@
   "api-docs": {
     "cta": "Pogledaj API dokumentaciju",
     "header": "API dokumentacija",
-    "sub-header": "Integrirajte podatke sa Quran.com u svoje aplikacije pomocu naseg sveobuhvatnog API-ja",
+    "sub-header": "Integrirajte podatke sa Quran.com u svoje aplikacije pomoću našeg sveobuhvatnog API-ja",
     "title": "API dokumentacija"
   },
   "app-portal": {
-    "cta-explore": "Istrazite aplikacije",
-    "cta-oauth": "Pogledajte OAuth2 vodic",
-    "description": "Istrazite transformativne aplikacije koje odgovaraju na jedinstvene potrebe razlicitih segmenata drustva.",
+    "cta-explore": "Istražite aplikacije",
+    "cta-oauth": "Pogledajte OAuth2 vodič",
+    "description": "Istražite transformativne aplikacije koje odgovaraju na jedinstvene potrebe različitih segmenata društva.",
     "heading": "Povezane Kur'anske aplikacije",
-    "oauth-pitch": "Koristite Quran.Foundation OAuth2.0 kako biste korisnicima omogucili da pronadju svoje podatke i nastave tamo gdje su stali na Quran.com i povezanim aplikacijama.",
+    "oauth-pitch": "Koristite Quran.Foundation OAuth2.0 kako biste korisnicima omogućili da pronađu svoje podatke i nastave tamo gdje su stali na Quran.com i povezanim aplikacijama.",
     "tagline": "Predstavite svoje Kur'anske aplikacije"
   },
   "careers": {
     "career": "Prilike za karijeru",
     "cta": "Pogledaj pozicije",
-    "header": "Istrazite nase trenutne oglase za posao"
+    "header": "Istražite naše trenutne oglase za posao"
   },
   "footer": "- Quran.com tim",
-  "header": "Pomoc za razvoj",
+  "header": "Pomoć za razvoj",
   "hero": {
     "subtitle": "Resursi, alati i smjernice za programere koji grade Kur'anska iskustva.",
     "title": "Gradite sa Quran.com"
   },
-  "issues-cta": "Ukoliko imate bilo kakvih pitanja ili zelite kontaktirati odrzavatelje, samo napisite issue. Javit cemo vam se sto prije, insha'Allah.",
-  "issues-guide": "Obicno koristimo <0>Github projekte</0> kao izvor za ono na cemu radimo, sta dolazi i koji bugovi postoje koje treba rijesiti. Na primjer, <1>ovaj URL</1> ima listu bugova, stvari za koje nam treba pomoc i nadolazecih funkcionalnosti.",
+  "issues-cta": "Ukoliko imate bilo kakvih pitanja ili želite kontaktirati održavatelje, samo napišite issue. Javit ćemo vam se što prije, insha'Allah.",
+  "issues-guide": "Obično koristimo <0>Github projekte</0> kao izvor za ono na čemu radimo, šta dolazi i koji bugovi postoje koje treba riješiti. Na primjer, <1>ovaj URL</1> ima listu bugova, stvari za koje nam treba pomoć i nadolazećih funkcionalnosti.",
   "labs": "Quran Labs",
-  "labs-cta": "Istrazite Labs",
-  "labs-description": "Otkrijte eksperimentalne funkcionalnosti koje pokrece zajednica i nadolazece inovacije.",
-  "labs-pitch": "Podijelite svoje ideje i ucestvujte u buducnosti Kur'anskog angazmana i iskustava.",
-  "main-desc": "Istrazite programe, alate i dokumentaciju dizajniranu da vam pomognu prosiriti Quran.com ekosistem.",
+  "labs-cta": "Istražite Labs",
+  "labs-description": "Otkrijte eksperimentalne funkcionalnosti koje pokreće zajednica i nadolazeće inovacije.",
+  "labs-pitch": "Podijelite svoje ideje i učestvujte u budućnosti Kur'anskog angažmana i iskustava.",
+  "main-desc": "Istražite programe, alate i dokumentaciju dizajniranu da vam pomognu proširiti Quran.com ekosistem.",
   "projects": {
-    "all": "Imamo niz projekata koji su svi hostovani na Githubu. Mozete ih sve pronaci <0>ovdje</0>. Ali da ih navedemo:",
+    "all": "Imamo niz projekata koji su svi hostovani na Githubu. Možete ih sve pronaći <0>ovdje</0>. Ali da ih navedemo:",
     "items": {
       "q-android": {
         "description": "Nativno Android mushaf i audio player iskustvo za telefone i tablete.",
@@ -40,35 +40,35 @@
         "stack": "Kotlin i Java"
       },
       "q-api": {
-        "description": "Ruby on Rails backend koji pokrece Kur'anske podatke, pretragu i prijevode.",
+        "description": "Ruby on Rails backend koji pokreće Kur'anske podatke, pretragu i prijevode.",
         "name": "Quran.com API",
         "stack": "Rails, PostgreSQL"
       },
       "q-audio": {
-        "description": "Audio streaming platforma i mobilne aplikacije za ucenje Kur'ana.",
+        "description": "Audio streaming platforma i mobilne aplikacije za učenje Kur'ana.",
         "name": "Quranic Audio",
         "stack": "Web i mobilne aplikacije"
       },
       "q-ios": {
-        "description": "Swift-baziran Kur'anski citac sa oznakama, ucenjima i offline podrskom.",
+        "description": "Swift-baziran Kur'anski čitač sa oznakama, učenjima i offline podrškom.",
         "name": "Quran iOS",
         "stack": "Swift"
       },
       "q-next": {
-        "description": "Next.js web iskustvo za citanje, pretrazivanje i slusanje Kur'ana.",
+        "description": "Next.js web iskustvo za čitanje, pretraživanje i slušanje Kur'ana.",
         "name": "Quran.com Frontend",
-        "stack": "Izgraden sa TypeScript i Next.js"
+        "stack": "Izgrađen sa TypeScript i Next.js"
       }
     },
-    "lead": "Open-source projekti koje odrzava Quran.com tim i zajednica.",
+    "lead": "Open-source projekti koje održava Quran.com tim i zajednica.",
     "q-android": "<0>Quran Android</0> - napisan u Kotlinu i Javi.",
     "q-api": "<0>Quran.com API</0> - napisan u Ruby on Rails.",
-    "q-api-docs": "<0>Quran.com API Docs</0> - Nas API docs portal.",
+    "q-api-docs": "<0>Quran.com API Docs</0> - Naš API docs portal.",
     "q-audio": "<0>Quranic Audio</0> i <1>Quranic Audio mobilne aplikacije</1>",
     "q-audio-segments": "<0>Quran Audio Segments</0>",
     "q-ios": "<0>Quran iOS</0> - napisan u Swiftu.",
     "q-next": "<0>Quran.com Frontend</0> - napisan u Next.js.",
     "q-v2": "<0>Quran.com</0> - napisan u Ruby on Rails."
   },
-  "thanks": "Radujemo se vasem doprinosu!"
+  "thanks": "Radujemo se vašem doprinosu!"
 }
