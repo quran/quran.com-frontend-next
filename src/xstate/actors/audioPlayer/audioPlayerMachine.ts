@@ -110,24 +110,24 @@ export const audioPlayerMachine =
                 actions: ['setSurahAndAyahNumbers', 'exitRadio'],
                 description: 'User opens the audio player to play an Ayah',
                 cond: 'isUsingCustomReciterId',
-                target: 'VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                target: 'VISIBLE.PLAYING_INTRO_AYAH_CUSTOM',
               },
               {
                 actions: ['setSurahAndAyahNumbers', 'exitRadio'],
                 description: 'User opens the audio player to play an Ayah',
-                target: 'VISIBLE',
+                target: 'VISIBLE.PLAYING_INTRO_AYAH',
               },
             ],
             PLAY_SURAH: [
               {
                 actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
                 cond: 'isUsingCustomReciterId',
-                target: 'VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                target: 'VISIBLE.PLAYING_INTRO_CUSTOM',
               },
               {
                 actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
                 description: 'User opens the audio player to play a Surah',
-                target: 'VISIBLE',
+                target: 'VISIBLE.PLAYING_INTRO',
               },
             ],
             SET_PLAYBACK_SPEED: {
@@ -297,13 +297,13 @@ export const audioPlayerMachine =
                         actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
                         description: 'When the user chooses to play an Ayah of another Surah',
                         cond: 'isDifferentSurahAndReciter',
-                        target: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                        target: '#audioPlayer.VISIBLE.PLAYING_INTRO_AYAH_CUSTOM',
                       },
                       {
                         actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
                         description: 'When the user chooses to play an Ayah of another Surah',
                         cond: 'isDifferentSurah',
-                        target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                        target: '#audioPlayer.VISIBLE.PLAYING_INTRO_AYAH',
                       },
                       {
                         actions: ['setSurahAndAyahNumbers', 'setAudioPlayerCurrentTime'],
@@ -430,13 +430,13 @@ export const audioPlayerMachine =
                         actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
                         description: 'When the user chooses to play an Ayah of another Surah',
                         cond: 'isDifferentSurahAndReciter',
-                        target: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                        target: '#audioPlayer.VISIBLE.PLAYING_INTRO_AYAH_CUSTOM',
                       },
                       {
                         actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
                         description: 'When the user chooses to play an Ayah of another Surah',
                         cond: 'isDifferentSurah',
-                        target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                        target: '#audioPlayer.VISIBLE.PLAYING_INTRO_AYAH',
                       },
                       {
                         actions: [
@@ -455,13 +455,13 @@ export const audioPlayerMachine =
                       {
                         actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                         cond: 'isUsingCustomReciterId',
-                        target: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                        target: '#audioPlayer.VISIBLE.PLAYING_INTRO_CUSTOM',
                       },
                       {
                         actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                         description: 'When the user chooses to play another Surah',
                         cond: 'isDifferentSurah',
-                        target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                        target: '#audioPlayer.VISIBLE.PLAYING_INTRO',
                       },
                       {
                         actions: ['exitRadio'],
@@ -535,6 +535,100 @@ export const audioPlayerMachine =
               after: {
                 500: {
                   target: '#audioPlayer.HIDDEN',
+                },
+              },
+            },
+            PLAYING_INTRO: {
+              initial: 'LOADING',
+              states: {
+                LOADING: {
+                  entry: 'setIntroAudioSource',
+                  on: {
+                    CAN_PLAY: 'ACTIVE',
+                    FAIL: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                  },
+                },
+                ACTIVE: {
+                  invoke: {
+                    id: 'playIntroAudio',
+                    src: 'playIntroAudio',
+                    onError: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                  },
+                  on: {
+                    END: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                    PAUSE: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                  },
+                },
+              },
+            },
+            PLAYING_INTRO_CUSTOM: {
+              initial: 'LOADING',
+              states: {
+                LOADING: {
+                  entry: 'setIntroAudioSource',
+                  on: {
+                    CAN_PLAY: 'ACTIVE',
+                    FAIL: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                  },
+                },
+                ACTIVE: {
+                  invoke: {
+                    id: 'playIntroAudioCustom',
+                    src: 'playIntroAudio',
+                    onError: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                  },
+                  on: {
+                    END: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                    PAUSE: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                  },
+                },
+              },
+            },
+            PLAYING_INTRO_AYAH: {
+              initial: 'LOADING',
+              states: {
+                LOADING: {
+                  // Wait for the browser to buffer the audio to CAN_PLAY to prevent play() promise rejections
+                  entry: 'setIntroAudioSourceAyah',
+                  on: {
+                    CAN_PLAY: 'ACTIVE',
+                    FAIL: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                  },
+                },
+                ACTIVE: {
+                  // Stream the Ta'awwudh before fetching the main Surah audio bundle
+                  invoke: {
+                    id: 'playIntroAudioAyah',
+                    src: 'playIntroAudio',
+                    onError: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                  },
+                  on: {
+                    END: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                    PAUSE: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                  },
+                },
+              },
+            },
+            PLAYING_INTRO_AYAH_CUSTOM: {
+              initial: 'LOADING',
+              states: {
+                LOADING: {
+                  entry: 'setIntroAudioSourceAyah',
+                  on: {
+                    CAN_PLAY: 'ACTIVE',
+                    FAIL: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                  },
+                },
+                ACTIVE: {
+                  invoke: {
+                    id: 'playIntroAudioAyahCustom',
+                    src: 'playIntroAudio',
+                    onError: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                  },
+                  on: {
+                    END: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                    PAUSE: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                  },
                 },
               },
             },
@@ -696,7 +790,7 @@ export const audioPlayerMachine =
                 actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
                 description: 'When the user chooses to play an Ayah of another Surah',
                 cond: 'isDifferentSurah',
-                target: 'VISIBLE.LOADING_RECITER_DATA',
+                target: 'VISIBLE.PLAYING_INTRO_AYAH',
               },
               {
                 actions: [
@@ -720,13 +814,13 @@ export const audioPlayerMachine =
               {
                 actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                 cond: 'isUsingCustomReciterId',
-                target: 'VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                target: 'VISIBLE.PLAYING_INTRO_CUSTOM',
               },
               {
                 actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                 description: 'When the user chooses to play another Surah',
                 cond: 'isDifferentSurah',
-                target: 'VISIBLE.LOADING_RECITER_DATA',
+                target: 'VISIBLE.PLAYING_INTRO',
               },
             ],
             PLAY_RADIO: {
@@ -785,6 +879,12 @@ export const audioPlayerMachine =
           }
           return [];
         }),
+        setIntroAudioSource: (context) => {
+          context.audioPlayer.src = '/intros/taawwudh_basmala.webm';
+        },
+        setIntroAudioSourceAyah: (context) => {
+          context.audioPlayer.src = '/intros/taawwudh.webm';
+        },
         exitRadio: pure((context) => {
           const { radioActor } = context;
           let actions = [];
@@ -1085,6 +1185,10 @@ export const audioPlayerMachine =
         },
       },
       services: {
+        playIntroAudio: (context) => {
+          context.audioPlayer.playbackRate = 1;
+          return context.audioPlayer.play();
+        },
         playAudio: (context) => {
           context.audioPlayer.playbackRate = context.playbackRate;
           context.audioPlayer.volume = context.volume;
