@@ -23,6 +23,39 @@ export interface Typegen0 {
       data: unknown;
       __tip: 'See the XState TS docs to learn how to strongly type this.';
     };
+    'done.invoke.playIntroAudio': {
+      type: 'done.invoke.playIntroAudio';
+      data: unknown;
+      __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
+    'done.invoke.playIntroAudioCustom': {
+      type: 'done.invoke.playIntroAudioCustom';
+      data: unknown;
+      __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
+    'done.invoke.playIntroAudioAyah': {
+      type: 'done.invoke.playIntroAudioAyah';
+      data: unknown;
+      __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
+    'done.invoke.playIntroAudioAyahCustom': {
+      type: 'done.invoke.playIntroAudioAyahCustom';
+      data: unknown;
+      __tip: 'See the XState TS docs to learn how to strongly type this.';
+    };
+    'error.platform.playIntroAudio': { type: 'error.platform.playIntroAudio'; data: unknown };
+    'error.platform.playIntroAudioCustom': {
+      type: 'error.platform.playIntroAudioCustom';
+      data: unknown;
+    };
+    'error.platform.playIntroAudioAyah': {
+      type: 'error.platform.playIntroAudioAyah';
+      data: unknown;
+    };
+    'error.platform.playIntroAudioAyahCustom': {
+      type: 'error.platform.playIntroAudioAyahCustom';
+      data: unknown;
+    };
     'error.platform.fetchCustomReciter': {
       type: 'error.platform.fetchCustomReciter';
       data: unknown;
@@ -44,6 +77,11 @@ export interface Typegen0 {
     fetchRepeatData: 'done.invoke.fetchRepeatData';
     initMediaSession: 'done.invoke.audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED:invocation[0]';
     playAudio: 'done.invoke.playAudio';
+    playIntroAudio:
+      | 'done.invoke.playIntroAudio'
+      | 'done.invoke.playIntroAudioCustom'
+      | 'done.invoke.playIntroAudioAyah'
+      | 'done.invoke.playIntroAudioAyahCustom';
   };
   missingImplementations: {
     actions: never;
@@ -55,6 +93,8 @@ export interface Typegen0 {
     continueFromLastTimestamp: 'END';
     decrementAyah: 'PREV_AYAH';
     exitRadio: 'CLOSE_RADIO' | 'PLAY_AYAH' | 'PLAY_SURAH' | 'SET_REPEAT_SETTING';
+    setIntroAudioSource: 'PLAY_SURAH';
+    setIntroAudioSourceAyah: 'PLAY_AYAH';
     forwardChangeReciterToRadioMachine: 'CHANGE_RECITER';
     forwardEndedToRadioMachine: 'END';
     forwardPlayToRadioMachine: 'PLAY_RADIO';
@@ -151,6 +191,7 @@ export interface Typegen0 {
       | 'done.invoke.fetchReciter'
       | 'done.invoke.fetchRepeatData'
       | 'xstate.after(VERSE_DELAY)#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING';
+    playIntroAudio: 'CAN_PLAY' | 'PLAY_SURAH' | 'PLAY_AYAH';
   };
   matchesStates:
     | 'HIDDEN'
@@ -169,6 +210,18 @@ export interface Typegen0 {
     | 'VISIBLE.LOADING_RECITER_DATA'
     | 'VISIBLE.LOADING_RECITER_DATA_AND_PAUSE'
     | 'VISIBLE.LOADING_REPEAT_DATA'
+    | 'VISIBLE.PLAYING_INTRO'
+    | 'VISIBLE.PLAYING_INTRO.LOADING'
+    | 'VISIBLE.PLAYING_INTRO.ACTIVE'
+    | 'VISIBLE.PLAYING_INTRO_CUSTOM'
+    | 'VISIBLE.PLAYING_INTRO_CUSTOM.LOADING'
+    | 'VISIBLE.PLAYING_INTRO_CUSTOM.ACTIVE'
+    | 'VISIBLE.PLAYING_INTRO_AYAH'
+    | 'VISIBLE.PLAYING_INTRO_AYAH.LOADING'
+    | 'VISIBLE.PLAYING_INTRO_AYAH.ACTIVE'
+    | 'VISIBLE.PLAYING_INTRO_AYAH_CUSTOM'
+    | 'VISIBLE.PLAYING_INTRO_AYAH_CUSTOM.LOADING'
+    | 'VISIBLE.PLAYING_INTRO_AYAH_CUSTOM.ACTIVE'
     | {
         VISIBLE?:
           | 'AUDIO_PLAYER_INITIATED'
@@ -177,6 +230,10 @@ export interface Typegen0 {
           | 'LOADING_RECITER_DATA'
           | 'LOADING_RECITER_DATA_AND_PAUSE'
           | 'LOADING_REPEAT_DATA'
+          | 'PLAYING_INTRO'
+          | 'PLAYING_INTRO_CUSTOM'
+          | 'PLAYING_INTRO_AYAH'
+          | 'PLAYING_INTRO_AYAH_CUSTOM'
           | {
               AUDIO_PLAYER_INITIATED?:
                 | 'DELAYING'
@@ -184,6 +241,10 @@ export interface Typegen0 {
                 | 'PAUSED'
                 | 'PLAYING'
                 | { PAUSED?: 'ACTIVE' | 'LOADING'; PLAYING?: 'ACTIVE' | 'LOADING' };
+              PLAYING_INTRO?: 'LOADING' | 'ACTIVE';
+              PLAYING_INTRO_CUSTOM?: 'LOADING' | 'ACTIVE';
+              PLAYING_INTRO_AYAH?: 'LOADING' | 'ACTIVE';
+              PLAYING_INTRO_AYAH_CUSTOM?: 'LOADING' | 'ACTIVE';
             };
       };
   tags: 'loading';

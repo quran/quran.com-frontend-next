@@ -123,19 +123,33 @@ const AudioPlayer = () => {
   };
 
   const onPlay = (e) => {
-    const isAudioPlaying = audioService
-      .getSnapshot()
-      .matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
-    if (!isAudioPlaying) {
+    const snapshot = audioService.getSnapshot();
+    const isAudioPlaying = snapshot.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
+    const isPlayingIntro =
+      snapshot.matches('VISIBLE.PLAYING_INTRO') ||
+      snapshot.matches('VISIBLE.PLAYING_INTRO_CUSTOM') ||
+      snapshot.matches('VISIBLE.PLAYING_INTRO_AYAH') ||
+      snapshot.matches('VISIBLE.PLAYING_INTRO_AYAH_CUSTOM');
+    if (!isAudioPlaying && !isPlayingIntro) {
       e.target.pause();
       return;
     }
 
-    audioService.send({ type: 'PLAY' });
+    if (!isPlayingIntro) {
+      audioService.send({ type: 'PLAY' });
+    }
   };
 
   const onPause = () => {
-    audioService.send({ type: 'PAUSE' });
+    const snapshot = audioService.getSnapshot();
+    const isPlayingIntro =
+      snapshot.matches('VISIBLE.PLAYING_INTRO') ||
+      snapshot.matches('VISIBLE.PLAYING_INTRO_CUSTOM') ||
+      snapshot.matches('VISIBLE.PLAYING_INTRO_AYAH') ||
+      snapshot.matches('VISIBLE.PLAYING_INTRO_AYAH_CUSTOM');
+    if (!isPlayingIntro) {
+      audioService.send({ type: 'PAUSE' });
+    }
   };
 
   const onProgress = (e) => {
