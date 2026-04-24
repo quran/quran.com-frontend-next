@@ -92,7 +92,7 @@ select option {
   }
 }
 
-.desktopStandaloneBannerActive {
+.desktopHomepageStandaloneBannerActive {
   @include breakpoints.tablet {
     --navbar-container-height: calc(var(--navbar-height) + var(--banner-height));
   }

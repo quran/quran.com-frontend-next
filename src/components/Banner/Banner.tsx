@@ -29,14 +29,9 @@ interface BannerProps {
 }
 
 const Banner = ({ text, ctaButtonText, variant = BannerVariant.InlineChip, copy }: BannerProps) => {
-  const mobileLineOne = copy?.mobileLineOne || '';
-  const mobileLineTwo = copy?.mobileLineTwo || '';
-  const combinedMobileText = `${mobileLineOne} ${mobileLineTwo}`.trim();
   const desktopText = copy?.desktop || text || copy?.mobileLineOne || '';
   const shouldRenderTwoLineMobileCopy =
-    variant === BannerVariant.Standalone && Boolean(mobileLineOne && mobileLineTwo);
-  const shouldRenderDesktopUnderlinedSecondSegment =
-    shouldRenderTwoLineMobileCopy && desktopText.trim() === combinedMobileText;
+    variant === BannerVariant.Standalone && Boolean(copy?.mobileLineOne && copy?.mobileLineTwo);
 
   const handleButtonClick = useCallback(() => {
     logButtonClick('donate_button_banner');
@@ -47,18 +42,11 @@ const Banner = ({ text, ctaButtonText, variant = BannerVariant.InlineChip, copy 
       <div className={styles.text}>
         {shouldRenderTwoLineMobileCopy ? (
           <>
-            <span className={styles.mobileLine}>{mobileLineOne}</span>
+            <span className={styles.mobileLine}>{copy.mobileLineOne}</span>
             <span className={classNames(styles.mobileLine, styles.mobileLineUnderlined)}>
-              {mobileLineTwo}
+              {copy.mobileLineTwo}
             </span>
-            {shouldRenderDesktopUnderlinedSecondSegment ? (
-              <span className={styles.desktopLine}>
-                <span>{mobileLineOne}&nbsp;</span>
-                <span className={styles.mobileLineUnderlined}>{mobileLineTwo}</span>
-              </span>
-            ) : (
-              <span className={styles.desktopLine}>{desktopText}</span>
-            )}
+            <span className={styles.desktopLine}>{desktopText}</span>
           </>
         ) : (
           <span>{desktopText}</span>

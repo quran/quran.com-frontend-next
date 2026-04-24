@@ -1,6 +1,5 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/utility';
-@use 'src/styles/theme';
 
 .container {
   display: flex;
@@ -9,13 +8,6 @@
   background: var(--color-background-elevated);
   border: var(--spacing-micro-px) solid var(--color-separators-new);
   transition: margin-inline-start var(--transition-regular), inline-size var(--transition-regular);
-
-  @include breakpoints.smallerThanTablet {
-    @include theme.light {
-      background: var(--color-background-alternative-faded);
-      border-color: var(--color-separators-ayah-level);
-    }
-  }
 }
 
 .withSidebarNavigation {

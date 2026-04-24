@@ -3,7 +3,6 @@
 $translation-content-max-width: 600px;
 
 .container {
-  --chapter-header-breakout: calc(2 * var(--spacing-medium2-px));
   @include utility.edgeHorizontalPadding;
   display: flex;
   flex-direction: column;

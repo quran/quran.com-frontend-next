@@ -54,6 +54,9 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
   const isQuranReaderRoute = isQuranReaderRoutePathname(router.pathname);
+  const isHomepageRoute = router.pathname === '/';
+  const shouldRenderStandaloneDesktopBanner = isHomepageRoute;
+  const shouldRenderInlineDesktopBanner = !isHomepageRoute;
   const normalizedPathname = router.asPath.split(/[?#]/)[0];
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const isPersistHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
@@ -121,19 +124,28 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { openSearchDrawer, openNavigationDrawer, openLanguageDrawer } = useNavbarDrawerActions();
 
   const bannerCopy = {
+    desktop: t('fundraising-sticky-banner-v2.desktop-text'),
     mobileLineOne: t('fundraising-sticky-banner-v2.mobile-line-one'),
     mobileLineTwo: t('fundraising-sticky-banner-v2.mobile-line-two'),
   };
 
-  const standaloneDesktopText = `${bannerCopy.mobileLineOne} ${bannerCopy.mobileLineTwo}`;
+  const homepageStandaloneDesktopText = `${bannerCopy.mobileLineOne} ${bannerCopy.mobileLineTwo}`;
 
   const standaloneBannerProps = {
     copy: {
-      desktop: standaloneDesktopText,
+      desktop: isHomepageRoute ? homepageStandaloneDesktopText : bannerCopy.desktop,
       mobileLineOne: bannerCopy.mobileLineOne,
       mobileLineTwo: bannerCopy.mobileLineTwo,
     },
-    text: standaloneDesktopText,
+    text: isHomepageRoute ? homepageStandaloneDesktopText : bannerCopy.desktop,
+    ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
+  };
+
+  const inlineBannerProps = {
+    copy: {
+      desktop: bannerCopy.desktop,
+    },
+    text: t('fundraising-sticky-banner-v2.desktop-text'),
     ctaButtonText: t('fundraising-sticky-banner-v2.cta'),
   };
 
@@ -142,6 +154,8 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
       {isBannerVisible && (
         <div
           className={classNames(styles.bannerContainerTop, {
+            [styles.mobileOnly]: !shouldRenderStandaloneDesktopBanner,
+            [styles.desktopAndMobile]: shouldRenderStandaloneDesktopBanner,
             [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen || isLanguageDrawerOpen,
           })}
         >
@@ -159,6 +173,11 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             <NavbarLogoWrapper />
           </div>
         </div>
+        {isBannerVisible && shouldRenderInlineDesktopBanner && (
+          <div className={styles.bannerContainerCenter}>
+            <Banner {...inlineBannerProps} variant={BannerVariant.InlineChip} />
+          </div>
+        )}
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>
             {!isLoggedIn && <ProfileAvatarButton />}

@@ -52,20 +52,17 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
 
   return (
     <div className={styles.containerWrapper}>
-      <div dir={direction} className={styles.topControls}>
-        <div className={styles.leftControls}>
-          <PlayChapterAudioButton chapterId={Number(chapterId)} />
-        </div>
-        <div className={styles.rightControls}>
-          {isReadingMode ? <ReadingModeActions /> : <TranslationSettingsButton />}
-        </div>
-      </div>
-
-      {showEvent && (
-        <ChapterEvent title={title} description={description} ctaText={ctaText} ctaLink={ctaLink} />
-      )}
-
       <div className={classNames(styles.container, className)}>
+        {/* Top controls section */}
+        <div dir={direction} className={styles.topControls}>
+          <div className={styles.leftControls}>
+            <PlayChapterAudioButton chapterId={Number(chapterId)} />
+          </div>
+          <div className={styles.rightControls}>
+            {isReadingMode ? <ReadingModeActions /> : <TranslationSettingsButton />}
+          </div>
+        </div>
+
         {/* Chapter title section */}
         <ChapterTitle
           chapterId={chapterId}
@@ -81,6 +78,10 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
           isTranslationView={isTranslationView}
         />
       </div>
+
+      {showEvent && (
+        <ChapterEvent title={title} description={description} ctaText={ctaText} ctaLink={ctaLink} />
+      )}
     </div>
   );
 };
