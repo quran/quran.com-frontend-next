@@ -48,6 +48,8 @@ build/
 storybook-static/
 
 package-lock.json
+yarn.lock
+pnpm-lock.yaml
 coverage
 .jest-test-results.json
 
