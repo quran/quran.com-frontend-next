@@ -13,6 +13,7 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 
 export enum StudyModeTabId {
   TAFSIR = 'tafsir',
+  SYNTAX = 'syntax',
   LAYERS = 'layers',
   LESSONS = 'lessons',
   REFLECTIONS = 'reflections',

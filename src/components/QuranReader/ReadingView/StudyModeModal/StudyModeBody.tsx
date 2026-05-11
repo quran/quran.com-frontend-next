@@ -113,6 +113,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
               <TabComponent
                 chapterId={selectedChapterId}
                 verseNumber={selectedVerseNumber}
+                selectedWord={selectedWord}
                 switchTab={onTabChange}
                 questionId={questionId}
                 questionsInitialData={questionsInitialData}
