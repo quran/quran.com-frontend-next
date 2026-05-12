@@ -385,11 +385,14 @@ describe('Test formatVerseReferencesToLinks', () => {
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
-  // Additional test cases that match current behavior
-  it('should convert partial verse references', () => {
+  it('should not convert partial or hyphen-only references', () => {
     const input = 'See 1: and :1 and 1-1';
-    const expected = 'See 1: and :1 and <a href="/1-1" target="_blank">1-1</a>';
-    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+    expect(formatVerseReferencesToLinks(input)).toEqual(input);
+  });
+
+  it('should not convert a hyphen-only numeric range inside parentheses', () => {
+    const input = 'See Surah As-Saffat, verses (7-10) for context';
+    expect(formatVerseReferencesToLinks(input)).toEqual(input);
   });
 
   it('should convert dates that look like verse references', () => {
