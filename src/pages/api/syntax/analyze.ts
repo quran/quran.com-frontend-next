@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { fetchSyntaxAnalysisViaQuranMcp } from '@/lib/syntaxAnalysisQuranMcp';
 import type {
   SyntaxAnalysisIsmChart,
   SyntaxAnalysisResult,
@@ -288,6 +289,21 @@ export default async function handler(
   const model =
     process.env.SYNTAX_ANALYSIS_MODEL || process.env.OPENAI_SYNTAX_MODEL || 'gpt-4o-mini';
 
+  const envProvider = process.env.SYNTAX_ANALYSIS_PROVIDER?.trim().toLowerCase();
+  /**
+   * `quran_mcp` — [Quran MCP](https://mcp.quran.ai/documentation) Streamable HTTP (no OpenAI key).
+   * `openai` — LLM JSON (requires OPENAI_API_KEY).
+   * Default: OpenAI when a key is set, otherwise Quran MCP.
+   */
+  let syntaxProvider: 'openai' | 'quran_mcp';
+  if (envProvider === 'quran_mcp' || envProvider === 'openai') {
+    syntaxProvider = envProvider;
+  } else if (apiKey) {
+    syntaxProvider = 'openai';
+  } else {
+    syntaxProvider = 'quran_mcp';
+  }
+
   const { textUthmani, verseKey } = req.body as {
     textUthmani?: string;
     verseKey?: string;
@@ -301,10 +317,24 @@ export default async function handler(
     return res.status(400).json({ error: 'textUthmani too long' });
   }
 
-  if (!apiKey) {
+  if (syntaxProvider === 'openai' && !apiKey) {
     return res.status(503).json({
-      error: 'Syntax analysis is not configured. Set OPENAI_API_KEY on the server.',
+      error:
+        'Syntax analysis (OpenAI) is not configured. Set OPENAI_API_KEY, or set SYNTAX_ANALYSIS_PROVIDER=quran_mcp to use https://mcp.quran.ai/',
     });
+  }
+
+  if (syntaxProvider === 'quran_mcp') {
+    try {
+      const fromMcp = await fetchSyntaxAnalysisViaQuranMcp({
+        textUthmani: text,
+        verseKey: typeof verseKey === 'string' ? verseKey : undefined,
+      });
+      return res.status(200).json(fromMcp);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : 'Quran MCP syntax analysis failed';
+      return res.status(502).json({ error: message });
+    }
   }
 
   const systemPrompt = `You are an expert in Quranic Arabic morphology, صرف (Sarf), and نحو.
