@@ -186,6 +186,8 @@ export const cleanTranscript = (text: string): string => {
 /**
  * Converts verse references in text to clickable links.
  * Example: "1:1" or "1:1-2" or "1:1-2:3" will be converted to HTML anchor tags.
+ * The chapter:verse separator must be ":"; a bare hyphen-only range like
+ * "7-10" is ambiguous and is left as plain text.
  *
  * @param {string} text - The text containing verse references
  * @returns {string} The text with verse references converted to links
@@ -193,7 +195,7 @@ export const cleanTranscript = (text: string): string => {
 export const formatVerseReferencesToLinks = (text: string): string => {
   if (!text) return '';
   return text.replace(
-    /(\d{1,3}[:-]\d{1,3}(?:-\d{1,3}(?::\d{1,3})?)?)(?![^<]*<\/a>)/g,
+    /(\d{1,3}:\d{1,3}(?:-\d{1,3}(?::\d{1,3})?)?)(?![^<]*<\/a>)/g,
     (match) => `<a href="${`/${match}`}" target="_blank">${match}</a>`,
   );
 };
