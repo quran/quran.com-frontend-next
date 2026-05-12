@@ -147,15 +147,46 @@ export function parseToolJsonPayload(result: unknown): unknown {
   return JSON.parse(textBlock.text) as unknown;
 }
 
+export async function runFetchWordParadigmOnClient(
+  client: Client,
+  pickedWord: MorphologyWord,
+  textUthmani: string,
+  verseKey?: string,
+): Promise<unknown | null> {
+  try {
+    const args: Record<string, string> = {};
+    if (isValidAyahKey(verseKey)) {
+      args.ayah_key = verseKey.trim();
+      args.word_text = textUthmani;
+    } else {
+      const lemma = str(pickedWord, 'lemma');
+      if (!lemma) return null;
+      args.lemma = lemma;
+    }
+    const res = await client.callTool({ name: 'fetch_word_paradigm', arguments: args });
+    return parseToolJsonPayload(res);
+  } catch {
+    return null;
+  }
+}
+
+export type McpSyntaxStudyBundle = {
+  base: SyntaxAnalysisResult;
+  /** Resolved morphology row for `textUthmani` (used to build optional charts from MCP). */
+  pickedWord: MorphologyWord;
+  morphologyResponse: unknown;
+  paradigm: unknown | null;
+};
+
 /**
- * Calls `fetch_grounding_rules` then `fetch_word_morphology` on an initialized MCP client.
- * @returns {Promise<SyntaxAnalysisResult>} Normalized result for the resolved word (no optional charts).
+ * Morphology + optional paradigm from Quran MCP (grounding + tools).
+ * @returns {Promise<McpSyntaxStudyBundle>} Base UI result, resolved word row, and raw MCP payloads for chart building.
  */
-export async function runFetchWordMorphologyOnClient(
+export async function runMcpSyntaxStudyOnClient(
   client: Client,
   textUthmani: string,
   verseKey?: string,
-): Promise<SyntaxAnalysisResult> {
+): Promise<McpSyntaxStudyBundle> {
   await client.callTool({ name: 'fetch_grounding_rules', arguments: {} });
 
   const morphArgs: Record<string, string> = {};
@@ -175,5 +206,26 @@ export async function runFetchWordMorphologyOnClient(
   const words = Array.isArray(payload.words) ? payload.words : [];
   const picked = pickMorphologyWord(words, textUthmani);
   if (!picked) throw new Error('Quran MCP returned no morphology for this word');
-  return morphologyWordToSyntaxResult(picked);
+
+  const paradigm = await runFetchWordParadigmOnClient(client, picked, textUthmani, verseKey);
+
+  return {
+    base: morphologyWordToSyntaxResult(picked),
+    pickedWord: picked,
+    morphologyResponse: payload,
+    paradigm,
+  };
+}
+
+/**
+ * Calls `fetch_grounding_rules` then `fetch_word_morphology` on an initialized MCP client.
+ * @returns {Promise<SyntaxAnalysisResult>} Normalized result for the resolved word (no optional charts).
+ */
+export async function runFetchWordMorphologyOnClient(
+  client: Client,
+  textUthmani: string,
+  verseKey?: string,
+): Promise<SyntaxAnalysisResult> {
+  const { base } = await runMcpSyntaxStudyOnClient(client, textUthmani, verseKey);
+  return base;
 }

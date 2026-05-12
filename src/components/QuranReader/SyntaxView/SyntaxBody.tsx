@@ -165,24 +165,19 @@ const SyntaxBody: React.FC<SyntaxBodyProps> = (props) => {
                       ))}
                     </ul>
                   </div>
-                  <SyntaxAnalysisCharts
+                  {/* <SyntaxAnalysisCharts
                     verbChart={analysis.verbChart}
                     verbPresentTenseChart={analysis.verbPresentTenseChart}
                     verbPastTenseChart={analysis.verbPastTenseChart}
                     ismChart={analysis.ismChart}
                     sarfChart={analysis.sarfChart}
-                  />
-                  <pre className={styles.syntaxWordJson}>{JSON.stringify(analysis, null, 2)}</pre>
+                  /> */}
+                 
                 </>
               )}
             </div>
 
-            {selectedWord && (
-              <details className={styles.syntaxRawDetails}>
-                <summary>Raw word payload</summary>
-                <pre className={styles.syntaxWordJson}>{JSON.stringify(selectedWord, null, 2)}</pre>
-              </details>
-            )}
+            
           </div>
         </div>
       }

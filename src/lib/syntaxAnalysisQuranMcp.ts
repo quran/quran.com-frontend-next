@@ -1,7 +1,9 @@
 import { Client } from '@modelcontextprotocol/sdk/client';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp';
 
-import { runFetchWordMorphologyOnClient } from '@/lib/syntaxAnalysisQuranMcpMorphology';
+import { applyOptionalChartsToResult } from '@/lib/syntaxAnalysisCharts';
+import { buildOptionalChartsFromMcp } from '@/lib/syntaxChartsFromMcp';
+import { runMcpSyntaxStudyOnClient } from '@/lib/syntaxAnalysisQuranMcpMorphology';
 import type { SyntaxAnalysisResult } from 'types/SyntaxAnalysis';
 
 const DEFAULT_QURAN_MCP_URL = 'https://mcp.quran.ai/';
@@ -14,8 +16,9 @@ export type QuranMcpSyntaxOptions = {
 };
 
 /**
- * Grounded word morphology from [Quran MCP](https://mcp.quran.ai/) via Streamable HTTP.
- * @returns {@link SyntaxAnalysisResult} derived from `fetch_word_morphology` (charts omitted).
+ * Grounded word study from [Quran MCP](https://mcp.quran.ai/) (`fetch_word_morphology` + `fetch_word_paradigm`).
+ * Sarf and verb charts are derived from MCP paradigm stems (same JSON shapes as the legacy analyzer).
+ * @returns {@link SyntaxAnalysisResult} with optional charts when paradigm data is available.
  */
 export async function fetchSyntaxAnalysisViaQuranMcp(
   options: QuranMcpSyntaxOptions,
@@ -29,7 +32,10 @@ export async function fetchSyntaxAnalysisViaQuranMcp(
 
   try {
     await client.connect(transport);
-    return await runFetchWordMorphologyOnClient(client, options.textUthmani, options.verseKey);
+    const bundle = await runMcpSyntaxStudyOnClient(client, options.textUthmani, options.verseKey);
+    return bundle.base;
+    //const rawCharts = buildOptionalChartsFromMcp(bundle.pickedWord, bundle.paradigm);
+    //return applyOptionalChartsToResult(bundle.base, rawCharts);
   } finally {
     await client.close().catch(() => undefined);
   }

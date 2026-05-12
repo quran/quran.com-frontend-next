@@ -4,7 +4,7 @@ import type { SyntaxAnalysisResult } from 'types/SyntaxAnalysis';
 
 /**
  * Paste a full `SyntaxAnalysisResult` JSON object here while
- * `NEXT_PUBLIC_SYNTAX_ANALYSIS_MOCK=true` is set. No OpenAI/API call is made.
+ * `NEXT_PUBLIC_SYNTAX_ANALYSIS_MOCK=true` is set. No MCP/API call is made.
  *
  * Tip: paste from an API/tools response, keeping valid TypeScript/JSON shapes.
  */
