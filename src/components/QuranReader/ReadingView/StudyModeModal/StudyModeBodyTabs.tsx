@@ -21,12 +21,12 @@ import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVerseIcon from '@/icons/related-verses.svg';
+import SearchIcon from '@/icons/search.svg';
 import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Word from '@/types/Word';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { toLocalizedNumber } from '@/utils/locale';
-import { LineIcon } from 'react-share';
 
 const Loading = () => (
   <div className={answerStyle.edgeToEdge}>
@@ -167,7 +167,7 @@ export const useStudyModeTabs = ({
     {
       id: StudyModeTabId.SYNTAX,
       label: 'Syntax',
-      icon: <LineIcon color="var(--color-blue-buttons-and-icons)" />,
+      icon: <SearchIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: () => handleTabClick(StudyModeTabId.SYNTAX),
       condition: true,
     },

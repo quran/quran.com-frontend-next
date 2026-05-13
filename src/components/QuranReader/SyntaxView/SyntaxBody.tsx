@@ -28,7 +28,7 @@ interface SyntaxBodyProps {
 
 /**
  * Syntax tab body — layout and font scaling match TafsirBody (tafsirFontScale + generate-font-scales).
- * Morphology JSON comes from `/api/syntax/analyze` (OpenAI when configured).
+ * Morphology JSON comes from `/api/syntax/analyze` (Quran MCP).
  */
 const SyntaxBody: React.FC<SyntaxBodyProps> = (props) => {
   const { selectedWord, scrollToTop, chapterId, verseNumber } = props;
@@ -130,22 +130,18 @@ const SyntaxBody: React.FC<SyntaxBodyProps> = (props) => {
                   </div>
                   <div className={styles.syntaxAnalysisBlock}>
                     <strong>Pattern</strong>
-                    
-                    <p lang="ar">
-                    <p className={styles.syntaxPatternWordPattern} dir="auto">
+                    <p
+                      className={styles.syntaxPatternWordPattern}
+                      lang="ar"
+                      dir="auto"
+                    >
                       {analysis.pattern.wordPattern}
                       {' '}
-                      —  
+                      —
                       <span style={arabicTypographyStyle} className={verbTypographyClassName}>
                         {analysis.pattern.patternType}
                       </span>
                     </p>
-                    
-                    </p>
-                    
-
-                    
-                   
                   </div>
                   <div className={styles.syntaxAnalysisBlock}>
                     <strong>Word breakdown</strong>
@@ -165,19 +161,16 @@ const SyntaxBody: React.FC<SyntaxBodyProps> = (props) => {
                       ))}
                     </ul>
                   </div>
-                  {/* <SyntaxAnalysisCharts
+                  <SyntaxAnalysisCharts
                     verbChart={analysis.verbChart}
                     verbPresentTenseChart={analysis.verbPresentTenseChart}
                     verbPastTenseChart={analysis.verbPastTenseChart}
                     ismChart={analysis.ismChart}
                     sarfChart={analysis.sarfChart}
-                  /> */}
-                 
+                  />
                 </>
               )}
             </div>
-
-            
           </div>
         </div>
       }
