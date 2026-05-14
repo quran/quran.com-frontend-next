@@ -33,7 +33,7 @@ module.exports = {
     ];
 
     // @/ root alias doesn't work in storybook, so we have to write the aliases manually
-    const otherAliases = ["components", "utils", "redux", "hooks", "contexts"];
+    const otherAliases = ["components", "utils", "redux", "hooks", "contexts", "styles"];
 
     // Add support for module aliases (same aliases in tsconfig.json)
     config.resolve.alias = {
