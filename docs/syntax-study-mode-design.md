@@ -16,7 +16,7 @@ This document describes the feature work on the **current branch** compared to *
 | **API** | `POST /api/syntax/analyze` — validates input, calls server-side Quran MCP client, returns `SyntaxAnalysisResult`. |
 | **Data** | Morphology from MCP mapped to `rootLetter`, `pattern`, `wordBreakDown`; paradigm stems optionally merged into charts via `syntaxChartsFromMcp` + `syntaxAnalysisCharts`. |
 | **Mock** | `NEXT_PUBLIC_SYNTAX_ANALYSIS_MOCK=true` skips MCP and returns `syntaxAnalysis.mock.ts`. |
-| **Infra / other** | `@modelcontextprotocol/sdk` dependency; TS path alias for MCP ESM; content proxy URL behavior; middleware `_next/data` handling scoped to production; Verse font tweak in tafsir/translation mode. |
+| **Infra / other** | `@modelcontextprotocol/sdk` dependency; TS path alias for MCP ESM; Verse font tweak in tafsir/translation mode. `middleware.ts` and `url.ts` match **`origin/production`** (no Syntax-specific edits). |
 
 ---
 
@@ -106,10 +106,33 @@ Documented in `.env.example` (syntax / MCP section).
 
 ---
 
-## 7. Supporting / unrelated branch diffs (still listed)
+## 7. Middleware & URL utilities (current behavior, same as production)
 
-- **`middleware.ts`** — `_next/data` 404 behavior only in **production** (avoids dev disruption).
-- **`src/utils/url.ts`** — `getProxiedServiceUrl` for `CONTENT` service uses staging vs production CDN hosts.
+These files are **not** part of the Syntax feature contract. They are documented here because an earlier branch revision briefly changed them; the **current** sources match **`origin/production`**.
+
+### 7.1 `src/middleware.ts`
+
+| Behavior | Detail |
+|----------|--------|
+| **`_next/data` requests** | If `req.url` includes `_next/data`, respond with **`404`** and an empty body. Intended to force a **full page reload** after a new deployment instead of serving stale client-side navigation payloads. Applies in **all** environments (including local `yarn dev`), not gated on `NODE_ENV`. |
+| **Ramadan routes** | Paths containing `/ramadan2026` or `/ramadanchallenge` (case-insensitive) redirect to the **lowercase** pathname when the URL is not already lowercase. |
+| **Everything else** | `NextResponse.next()`. |
+
+**Implication for local dev:** Client transitions that rely on `_next/data` JSON may get `404` from middleware; a hard refresh or full navigation is expected after deploys. This is unrelated to `/api/syntax/analyze`.
+
+### 7.2 `src/utils/url.ts`
+
+`getProxiedServiceUrl(service, path)` builds backend URLs for Quran Foundation services. There is **no** special branch for `QuranFoundationService.CONTENT` that bypasses the app proxy.
+
+| Condition | Base URL |
+|-----------|----------|
+| **Static build** (`isStaticBuild`) | `${API_GATEWAY_URL}/${service}${path}` |
+| **Otherwise** | `${getBasePath()}/api/proxy/${service}${path}` where `getBasePath()` is `http://` or `https://` + `NEXT_PUBLIC_VERCEL_URL` depending on `NEXT_PUBLIC_VERCEL_ENV === 'development'`. |
+
+All services in `QuranFoundationService` (`search`, `auth`, `content`, `quran-reflect`) use the same proxy pattern. Syntax analysis does **not** call this helper; it uses **`POST /api/syntax/analyze`** → Quran MCP on the server.
+
+### 7.3 Other branch diffs (Syntax-related infra)
+
 - **`tsconfig.json`** — path alias `@modelcontextprotocol/sdk/*` → ESM dist (bundler resolution).
 - **`package.json` / `yarn.lock`** — adds `@modelcontextprotocol/sdk`.
 - **`VerseText.module.scss`** — mobile `tafsirOrTranslationMode` font scale factor adjusted (`1.2` → `0.75` of `--font-size`).
@@ -124,8 +147,6 @@ Documented in `.env.example` (syntax / MCP section).
 | M | `package.json` | Add `@modelcontextprotocol/sdk`. |
 | M | `yarn.lock` | Lockfile for new dependency. |
 | M | `tsconfig.json` | MCP SDK path alias. |
-| M | `src/middleware.ts` | Gate `_next/data` 404 on `NODE_ENV === 'production'`. |
-| M | `src/utils/url.ts` | Direct CDN URLs for content service proxy branch. |
 | M | `src/components/Verse/VerseText.module.scss` | Tafsir/translation mode font sizing tweak. |
 | M | `src/components/QuranReader/ReadingView/StudyModeModal/StudyModeBody.tsx` | Wire Syntax tab panel / props (e.g. `selectedWord`). |
 | M | `src/components/QuranReader/ReadingView/StudyModeModal/StudyModeBodyTabs.tsx` | Register `StudyModeSyntaxTab`, tab config, **Search** icon for Syntax. |

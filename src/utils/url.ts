@@ -9,9 +9,6 @@ export enum QuranFoundationService {
   QURAN_REFLECT = 'quran-reflect',
 }
 
-const STAGING_CONTENT_HOST = 'https://staging.quran.com';
-const PRODUCTION_CONTENT_HOST = 'https://api.qurancdn.com';
-
 export const getCurrentPath = () => {
   if (typeof window !== 'undefined') {
     return window.location.href;
@@ -71,14 +68,6 @@ export const getBasePath = (): string =>
   }`;
 
 export const getProxiedServiceUrl = (service: QuranFoundationService, path: string): string => {
-  if (service === QuranFoundationService.CONTENT) {
-    const contentHost =
-      process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-        ? PRODUCTION_CONTENT_HOST
-        : STAGING_CONTENT_HOST;
-    return `${contentHost}${path}`;
-  }
-
   const PROXY_PATH = `/api/proxy/${service}`;
   const BASE_PATH = isStaticBuild
     ? `${process.env.API_GATEWAY_URL}/${service}`
