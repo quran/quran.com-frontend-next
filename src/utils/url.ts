@@ -10,7 +10,7 @@ export enum QuranFoundationService {
 }
 
 const STAGING_CONTENT_HOST = 'https://staging.quran.com';
-const PRODUCTION_CONTENT_HOST = 'https://api.qurancdn.com';
+// const PRODUCTION_CONTENT_HOST = 'https://api.qurancdn.com';
 
 export const getCurrentPath = () => {
   if (typeof window !== 'undefined') {
