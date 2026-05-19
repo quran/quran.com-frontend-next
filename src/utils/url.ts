@@ -55,6 +55,22 @@ export const navigateToExternalUrl = (url: string) => {
   }
 };
 
+function resolveDeployHost(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_VERCEL_URL?.trim();
+  if (fromEnv) {
+    return fromEnv.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  }
+  const netlifyUrl = process.env.URL || process.env.DEPLOY_PRIME_URL;
+  if (netlifyUrl) {
+    try {
+      return new URL(netlifyUrl).host;
+    } catch {
+      // fall through
+    }
+  }
+  return process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'localhost:3000' : 'quran.com';
+}
+
 /**
  * Get the base path of the current deployment on Vercel/local machine
  * e.g. http://localhost
@@ -62,13 +78,15 @@ export const navigateToExternalUrl = (url: string) => {
  * if we want to construct a full path e.g. when we add alternate languages
  * meta tags.
  *
+ * On Netlify, falls back to `URL` / `DEPLOY_PRIME_URL` when `NEXT_PUBLIC_VERCEL_URL` is unset.
+ *
  * @see https://vercel.com/docs/concepts/projects/environment-variables
  * @returns {string}
  */
-export const getBasePath = (): string =>
-  `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'}://${
-    process.env.NEXT_PUBLIC_VERCEL_URL
-  }`;
+export const getBasePath = (): string => {
+  const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
+  return `${isDev ? 'http' : 'https'}://${resolveDeployHost()}`;
+};
 
 export const getProxiedServiceUrl = (service: QuranFoundationService, path: string): string => {
   if (service === QuranFoundationService.CONTENT) {
