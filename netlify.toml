@@ -9,8 +9,8 @@
   NODE_VERSION = "18"
   NEXT_PUBLIC_VERCEL_ENV = "production"
   # Required in Netlify UI (Site settings → Environment variables):
-  NEXT_PUBLIC_VERCEL_URL = chimerical-cajeta-2e6cb3.netlify.app
-  ALLOWED_ORIGINS = quran.com,test.quran.com,chimerical-cajeta-2e6cb3.netlify.app/
+  NEXT_PUBLIC_VERCEL_URL ="chimerical-cajeta-2e6cb3.netlify.app"
+  ALLOWED_ORIGINS = quran.com,test.quran.com,chimerical-cajeta-2e6cb3.netlify.app
   # Copy other vars from .env.example / .env.local as needed (API_GATEWAY_URL, tokens, etc.)
   NEXT_PUBLIC_SERVER_SENTRY_ENABLED=false
   NEXT_PUBLIC_CLIENT_SENTRY_ENABLED=true
