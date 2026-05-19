@@ -1,11 +1,12 @@
 import range from 'lodash/range';
 
-import Skeleton from '@/dls/Skeleton/Skeleton';
-
 import styles from './SyntaxSkeleton.module.scss';
+
+import Skeleton from '@/dls/Skeleton/Skeleton';
 
 /**
  * Loading placeholder for Syntax view content (Study Mode dynamic import).
+ * @returns {React.ReactElement} Skeleton lines for Syntax tab loading state.
  */
 const SyntaxSkeleton = () => {
   return (

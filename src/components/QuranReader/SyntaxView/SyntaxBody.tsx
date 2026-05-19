@@ -130,14 +130,8 @@ const SyntaxBody: React.FC<SyntaxBodyProps> = (props) => {
                   </div>
                   <div className={styles.syntaxAnalysisBlock}>
                     <strong>Pattern</strong>
-                    <p
-                      className={styles.syntaxPatternWordPattern}
-                      lang="ar"
-                      dir="auto"
-                    >
-                      {analysis.pattern.wordPattern}
-                      {' '}
-                      —
+                    <p className={styles.syntaxPatternWordPattern} lang="ar" dir="auto">
+                      {analysis.pattern.wordPattern} —
                       <span style={arabicTypographyStyle} className={verbTypographyClassName}>
                         {analysis.pattern.patternType}
                       </span>

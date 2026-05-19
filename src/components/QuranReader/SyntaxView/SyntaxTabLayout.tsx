@@ -1,9 +1,9 @@
 import React, { useRef, useCallback, ReactNode } from 'react';
 
+import styles from './SyntaxTabLayout.module.scss';
+
 import { FontSizeType } from '@/components/QuranReader/ReadingView/StudyModeModal/FontSizeControl';
 import StudyModeControlsHeader from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeControlsHeader';
-
-import styles from './SyntaxTabLayout.module.scss';
 
 interface SyntaxTabLayoutProps {
   selectionControl: ReactNode;
@@ -13,6 +13,7 @@ interface SyntaxTabLayoutProps {
 
 /**
  * Layout for Syntax (grammar analytics) content in Study Mode — mirrors StudyModeTabLayout pattern.
+ * @returns {React.ReactElement} Syntax tab chrome with font controls and body slot.
  */
 const SyntaxTabLayout: React.FC<SyntaxTabLayoutProps> = ({
   selectionControl,
@@ -29,6 +30,10 @@ const SyntaxTabLayout: React.FC<SyntaxTabLayoutProps> = ({
 
 export default SyntaxTabLayout;
 
+/**
+ * Scroll container ref + scroll-to-top for Syntax tab content.
+ * @returns {{ containerRef: React.RefObject<HTMLDivElement>, scrollToTop: () => void }}
+ */
 export const useSyntaxTabScroll = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 

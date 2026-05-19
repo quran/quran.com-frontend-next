@@ -2,8 +2,8 @@ import { Client } from '@modelcontextprotocol/sdk/client';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp';
 
 import { applyOptionalChartsToResult } from '@/lib/syntaxAnalysisCharts';
-import { buildOptionalChartsFromMcp } from '@/lib/syntaxChartsFromMcp';
 import { runMcpSyntaxStudyOnClient } from '@/lib/syntaxAnalysisQuranMcpMorphology';
+import { buildOptionalChartsFromMcp } from '@/lib/syntaxChartsFromMcp';
 import type { SyntaxAnalysisResult } from 'types/SyntaxAnalysis';
 
 const DEFAULT_QURAN_MCP_URL = 'https://mcp.quran.ai/';
@@ -33,9 +33,8 @@ export async function fetchSyntaxAnalysisViaQuranMcp(
   try {
     await client.connect(transport);
     const bundle = await runMcpSyntaxStudyOnClient(client, options.textUthmani, options.verseKey);
-    return bundle.base;
-    //const rawCharts = buildOptionalChartsFromMcp(bundle.pickedWord, bundle.paradigm);
-    //return applyOptionalChartsToResult(bundle.base, rawCharts);
+    const rawCharts = buildOptionalChartsFromMcp(bundle.pickedWord, bundle.paradigm);
+    return applyOptionalChartsToResult(bundle.base, rawCharts);
   } finally {
     await client.close().catch(() => undefined);
   }

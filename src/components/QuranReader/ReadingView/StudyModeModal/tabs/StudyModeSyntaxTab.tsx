@@ -3,7 +3,10 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 import SyntaxSkeleton from '@/components/QuranReader/SyntaxView/SyntaxSkeleton';
-import { useSyntaxTabScroll, syntaxTabStyles as styles } from '@/components/QuranReader/SyntaxView/SyntaxTabLayout';
+import {
+  useSyntaxTabScroll,
+  syntaxTabStyles as styles,
+} from '@/components/QuranReader/SyntaxView/SyntaxTabLayout';
 import Word from '@/types/Word';
 
 const SyntaxBody = dynamic(() => import('@/components/QuranReader/SyntaxView/SyntaxBody'), {

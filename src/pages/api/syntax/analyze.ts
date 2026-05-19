@@ -10,6 +10,7 @@ const MAX_WORD_LENGTH = 200;
 /**
  * POST `/api/syntax/analyze` — morphology + optional sarf/verb charts via
  * [Quran MCP](https://mcp.quran.ai/documentation) (Streamable HTTP).
+ * @returns {Promise<void>} JSON body: `SyntaxAnalysisResult` or `{ error }`.
  */
 export default async function handler(
   req: NextApiRequest,

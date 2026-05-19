@@ -24,8 +24,8 @@ import RelatedVerseIcon from '@/icons/related-verses.svg';
 import SearchIcon from '@/icons/search.svg';
 import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
-import Word from '@/types/Word';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
+import Word from '@/types/Word';
 import { toLocalizedNumber } from '@/utils/locale';
 
 const Loading = () => (

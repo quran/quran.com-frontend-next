@@ -1,8 +1,8 @@
+/* eslint-disable max-lines -- paradigm stem mapping is linear but verbose */
+/* eslint-disable max-lines-per-function, react-func/max-lines-per-function */
+/* eslint-disable no-restricted-syntax, no-continue, import/prefer-default-export */
 import type { MorphologyWord } from '@/lib/syntaxAnalysisQuranMcpMorphology';
-import type {
-  SyntaxAnalysisVerbChart,
-  SyntaxAnalysisVerbSlot,
-} from 'types/SyntaxAnalysis';
+import type { SyntaxAnalysisVerbChart, SyntaxAnalysisVerbSlot } from 'types/SyntaxAnalysis';
 
 type ParadigmStem = { stem: string; description: string };
 
@@ -124,7 +124,10 @@ function buildVerbChartFromStems(stems: ParadigmStem[]): SyntaxAnalysisVerbChart
     return next;
   };
 
-  const pick = (chartKey: keyof SyntaxAnalysisVerbChart, number: 'singular' | 'dual' | 'plural') => {
+  const pick = (
+    chartKey: keyof SyntaxAnalysisVerbChart,
+    number: 'singular' | 'dual' | 'plural',
+  ) => {
     const mapKey = `${chartKey}:${number}`;
     const hit = byCoord.get(mapKey);
     if (hit) {
@@ -167,6 +170,7 @@ function buildVerbChartFromStems(stems: ParadigmStem[]): SyntaxAnalysisVerbChart
 /**
  * Builds optional chart payloads (same JSON keys as the former OpenAI chart pass)
  * from Quran MCP morphology + `fetch_word_paradigm` stems.
+ * @returns {Record<string, unknown>} Partial chart fields for `applyOptionalChartsToResult`.
  */
 export function buildOptionalChartsFromMcp(
   pickedWord: MorphologyWord,
@@ -177,7 +181,10 @@ export function buildOptionalChartsFromMcp(
   const surface = str(pickedWord, 'text_uthmani')?.trim() || '';
   const translation = str(pickedWord, 'translation')?.trim() || '';
 
-  if (payload && (payload.perfect.length || payload.imperfect.length || payload.imperative.length)) {
+  if (
+    payload &&
+    (payload.perfect.length || payload.imperfect.length || payload.imperative.length)
+  ) {
     const lemmaOrRoot = payload.lemma || payload.root || surface || '—';
     const glossBit = payload.gloss ? ` (${payload.gloss})` : '';
     const ideaCell = payload.lemma ? `${payload.lemma}${glossBit}` : lemmaOrRoot;

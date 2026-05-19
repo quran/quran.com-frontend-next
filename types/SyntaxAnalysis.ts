@@ -67,11 +67,7 @@ export type SyntaxAnalysisVerbChart = {
 };
 
 /** Four Sarf columns — DOM order with `dir="rtl"` on the table is Past → Present → Idea → Doer (reading RTL). */
-export type SyntaxAnalysisSarfColumnKey =
-  | 'pastTense'
-  | 'presentTense'
-  | 'idea'
-  | 'doer';
+export type SyntaxAnalysisSarfColumnKey = 'pastTense' | 'presentTense' | 'idea' | 'doer';
 
 /**
  * Verb-derived morphology chart (مصدر، اسم فاعل، صيغ أمر/نهي، مجهول، ظرف، إلخ).
