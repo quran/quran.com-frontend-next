@@ -1,9 +1,9 @@
+# Next.js on Netlify — https://docs.netlify.com/integrations/frameworks/next-js/
 [build]
-  command = "npm run build"
-  publish = "/build"
-  base = "/"
+  command = "yarn build"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[build.environment]
+  NODE_VERSION = "18"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
