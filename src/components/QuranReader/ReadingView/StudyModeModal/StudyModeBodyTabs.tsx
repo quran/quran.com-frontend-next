@@ -21,9 +21,11 @@ import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVerseIcon from '@/icons/related-verses.svg';
+import SearchIcon from '@/icons/search.svg';
 import { AyahHadithsResponse } from '@/types/Hadith';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
+import Word from '@/types/Word';
 import { toLocalizedNumber } from '@/utils/locale';
 
 const Loading = () => (
@@ -33,6 +35,10 @@ const Loading = () => (
 );
 
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
+  loading: Loading,
+});
+
+export const StudyModeSyntaxTab = dynamic(() => import('./tabs/StudyModeSyntaxTab'), {
   loading: Loading,
 });
 
@@ -68,6 +74,7 @@ export const StudyModeRelatedVersesTab = dynamic(
 interface TabProps {
   chapterId: string;
   verseNumber: string;
+  selectedWord?: Word;
   switchTab?: (tabId: StudyModeTabId | null) => void;
   questionId?: string;
   questionsInitialData?: AyahQuestionsResponse;
@@ -79,6 +86,7 @@ interface TabProps {
 
 export const TAB_COMPONENTS: Partial<Record<StudyModeTabId, React.ComponentType<TabProps>>> = {
   [StudyModeTabId.TAFSIR]: StudyModeTafsirTab,
+  [StudyModeTabId.SYNTAX]: StudyModeSyntaxTab,
   [StudyModeTabId.LAYERS]: StudyModeLayersTab,
   [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
   [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
@@ -154,6 +162,13 @@ export const useStudyModeTabs = ({
       label: t('quran-reader:tafsirs'),
       icon: <BookIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: () => handleTabClick(StudyModeTabId.TAFSIR),
+      condition: true,
+    },
+    {
+      id: StudyModeTabId.SYNTAX,
+      label: 'Syntax',
+      icon: <SearchIcon color="var(--color-blue-buttons-and-icons)" />,
+      onClick: () => handleTabClick(StudyModeTabId.SYNTAX),
       condition: true,
     },
     {

@@ -21,6 +21,9 @@
     "target": "es5",
     "incremental": true,
     "paths": {
+      "@modelcontextprotocol/sdk/*": [
+        "./node_modules/@modelcontextprotocol/sdk/dist/esm/*"
+      ],
       "@/icons/*": ["./public/icons/*"],
       "@/public/*": ["./public/*"],
       "@/dls/*": ["./src/components/dls/*"],

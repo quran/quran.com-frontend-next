@@ -412,6 +412,7 @@ const StudyModeModal: React.FC<Props> = ({
     activeContentTab &&
     [
       StudyModeTabId.TAFSIR,
+      StudyModeTabId.SYNTAX,
       StudyModeTabId.LAYERS,
       StudyModeTabId.REFLECTIONS,
       StudyModeTabId.LESSONS,
