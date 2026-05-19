@@ -10,21 +10,21 @@
   NEXT_PUBLIC_VERCEL_ENV = "production"
   # Required in Netlify UI (Site settings → Environment variables):
   NEXT_PUBLIC_VERCEL_URL ="chimerical-cajeta-2e6cb3.netlify.app"
-  ALLOWED_ORIGINS = quran.com,test.quran.com,chimerical-cajeta-2e6cb3.netlify.app
+  ALLOWED_ORIGINS ="quran.com,test.quran.com,chimerical-cajeta-2e6cb3.netlify.app"
   # Copy other vars from .env.example / .env.local as needed (API_GATEWAY_URL, tokens, etc.)
   NEXT_PUBLIC_SERVER_SENTRY_ENABLED=false
   NEXT_PUBLIC_CLIENT_SENTRY_ENABLED=true
   NODE_TLS_REJECT_UNAUTHORIZED=0 #set this only when SSL is self signed
   SIGNATURE_TOKEN=1234
-  INTERNAL_CLIENT_ID=QDC_WEB
+  INTERNAL_CLIENT_ID="QDC_WEB"
   PROXY_SIGNATURE_TOKEN=123456
   NEXT_PUBLIC_AUTH_PROFILE_TIMEOUT_MS=4000 # timeout (ms) before forcing incomplete profile redirect
-  NEXT_PUBLIC_QURAN_REFLECT_URL=https://quranreflect.com
+  NEXT_PUBLIC_QURAN_REFLECT_URL="https://quranreflect.com"
   NEXT_PUBLIC_SSO_ENABLED=false
-  NEXT_PUBLIC_EMBED_URL=https://quran.com/embed/v1 # Embed Ayah
-  API_GATEWAY_URL=https://api.quran.com
-  SYNTAX_ANALYSIS_PROVIDER=quran_mcp
-  QURAN_SYNTAX_MCP_URL=https://mcp.quran.ai/
+  NEXT_PUBLIC_EMBED_URL="https://quran.com/embed/v1" # Embed Ayah
+  API_GATEWAY_URL="https://api.quran.com"
+  SYNTAX_ANALYSIS_PROVIDER="quran_mcp"
+  QURAN_SYNTAX_MCP_URL="https://mcp.quran.ai/"
   NEXT_PUBLIC_SYNTAX_ANALYSIS_MOCK=false
 
 [[plugins]]
