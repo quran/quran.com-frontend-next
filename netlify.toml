@@ -1,6 +1,10 @@
 # Next.js on Netlify — https://docs.netlify.com/integrations/frameworks/next-js/
+#
+# Publish must NOT match the site base directory (Netlify rejects publish === base).
+# Clear "Publish directory" in the Netlify UI if it is set to "." or the repo root.
 [build]
   command = "yarn build"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "18"
