@@ -90,10 +90,7 @@ export const getBasePath = (): string => {
 
 export const getProxiedServiceUrl = (service: QuranFoundationService, path: string): string => {
   if (service === QuranFoundationService.CONTENT) {
-    const contentHost =
-      process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-        ? PRODUCTION_CONTENT_HOST
-        : STAGING_CONTENT_HOST;
+    const contentHost = STAGING_CONTENT_HOST;
     return `${contentHost}${path}`;
   }
 
