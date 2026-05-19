@@ -1,15 +1,19 @@
 # Next.js on Netlify — https://docs.netlify.com/integrations/frameworks/next-js/
 #
-# Do NOT set "Publish directory" in the Netlify UI (.next, public, dist, build).
-# @netlify/plugin-nextjs sets the deploy output automatically.
+# Publish MUST differ from site base (Netlify rejects publish === base).
+# @netlify/plugin-nextjs may adjust the publish path during build; `.next` satisfies validation.
 #
-# All [build.environment] values MUST be quoted strings (Netlify rejects bare true/false/numbers).
-# Prefer Site settings → Environment variables for secrets instead of committing them here.
+# Netlify UI (Build & deploy → Build settings):
+#   Base directory: leave empty if this repo root IS the app (not a monorepo subfolder).
+#   Publish directory: leave EMPTY so this file wins — do not set "." or "/" in the UI.
+#
+# All [build.environment] values MUST be quoted strings.
 [build]
   command = "yarn build"
+  publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "24"
   NEXT_PUBLIC_VERCEL_ENV = "production"
   NEXT_PUBLIC_VERCEL_URL = "chimerical-cajeta-2e6cb3.netlify.app"
   ALLOWED_ORIGINS = "quran.com,test.quran.com,chimerical-cajeta-2e6cb3.netlify.app"
