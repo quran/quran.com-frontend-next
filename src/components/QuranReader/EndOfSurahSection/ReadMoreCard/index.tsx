@@ -118,6 +118,7 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
               surahName: nextChapter!.transliteratedName,
               surahNumber: nextDisplayNumber,
             })}
+            onScrollToTop={onScrollToTop}
           />
         )}
 
@@ -134,6 +135,7 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
               surahName: prevChapter!.transliteratedName,
               surahNumber: prevDisplayNumber,
             })}
+            onScrollToTop={onScrollToTop}
           />
         )}
       </div>
