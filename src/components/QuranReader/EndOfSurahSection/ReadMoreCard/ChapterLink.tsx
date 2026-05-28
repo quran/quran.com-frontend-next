@@ -22,6 +22,7 @@ interface ChapterLinkProps {
   shouldShowArabicName: boolean;
   badgeLabel: string;
   ariaLabel: string;
+  onScrollToTop: () => void;
 }
 
 const ChapterLink: React.FC<ChapterLinkProps> = ({
@@ -33,6 +34,7 @@ const ChapterLink: React.FC<ChapterLinkProps> = ({
   shouldShowArabicName,
   badgeLabel,
   ariaLabel,
+  onScrollToTop,
 }) => {
   const badgeStyle = isNext ? styles.nextBadge : styles.prevBadge;
   const chapterTitle = `${chapterNumber}. ${chapter.transliteratedName}`;
@@ -46,6 +48,9 @@ const ChapterLink: React.FC<ChapterLinkProps> = ({
   const handleClick = () => {
     const eventName = isNext ? 'end_of_surah_next_chapter' : 'end_of_surah_previous_chapter';
     logButtonClick(eventName, { chapterNumber });
+    // Reset scroll so the newly opened surah starts from the top instead of
+    // staying at the bottom where the end-of-surah card was clicked.
+    onScrollToTop();
   };
 
   return (
