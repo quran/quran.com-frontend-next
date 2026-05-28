@@ -39,11 +39,6 @@
         "name": "Quran Android",
         "stack": "Kotlin and Java"
       },
-      "q-api": {
-        "description": "Ruby on Rails backend that powers Quran data, search, and translations.",
-        "name": "Quran.com API",
-        "stack": "Rails, PostgreSQL"
-      },
       "q-audio": {
         "description": "Audio streaming platform and companion mobile apps for recitations.",
         "name": "Quranic Audio",

@@ -23,7 +23,6 @@ const DevelopersPage: NextPage = () => {
   const { t, lang } = useTranslation('developers');
   const projects = [
     { key: 'q-next', href: 'https://github.com/quran/quran.com-frontend-next' },
-    { key: 'q-api', href: 'https://github.com/quran/quran.com-api' },
     { key: 'q-android', href: 'https://github.com/quran/quran_android' },
     { key: 'q-ios', href: 'https://github.com/quran/quran-ios' },
     { key: 'q-audio', href: 'https://github.com/quran/audio.quran.com' },
