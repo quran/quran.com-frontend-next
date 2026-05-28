@@ -45,9 +45,17 @@ const ChapterLink: React.FC<ChapterLinkProps> = ({
   const hasSummary = wordCount > MIN_SUMMARY_WORDS;
   const isLongSummary = hasSummary && wordCount > LONG_SUMMARY_THRESHOLD;
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent) => {
     const eventName = isNext ? 'end_of_surah_next_chapter' : 'end_of_surah_previous_chapter';
     logButtonClick(eventName, { chapterNumber });
+    // Skip the scroll reset for modified/non-primary clicks (e.g. Cmd/Ctrl/Shift-click
+    // to open in a new tab), since the current tab isn't navigating away and should
+    // keep its reading position.
+    const isModifiedClick =
+      event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
+    if (isModifiedClick) {
+      return;
+    }
     // Reset scroll so the newly opened surah starts from the top instead of
     // staying at the bottom where the end-of-surah card was clicked.
     onScrollToTop();
