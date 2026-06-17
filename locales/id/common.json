@@ -1,6 +1,6 @@
 {
   "about": "Tentang Kami",
-  "allow": "Ijinkan",
+  "allow": "Izinkan",
   "and": "dan",
   "announcements": {
     "auth-onboarding": {
@@ -11,12 +11,12 @@
       },
       "feedback": {
         "action": "OK saya mengerti",
-        "description": "Terima kasih telah menggunakan Quran.com dan silakan beri tanggapan Anda di <link> feedback.quran.com </link>",
+        "description": "Terima kasih telah menggunakan Quran.com. Kami senang mendengar masukan Anda di <link>feedback.quran.com</link>",
         "title": "Kami ingin tahu pendapat Anda"
       },
       "quran-foundation-link": {
         "action": "Berikutnya",
-        "description": "Gunakan login Quran.com Anda untuk akses ke QuranReflect.com — sebuah komunitas refleksi Al-Qur'an global yang bertumbuh pesat.",
+        "description": "Gunakan akun Quran.com Anda untuk mengakses QuranReflect.com, komunitas global yang aktif dalam refleksi Al-Qur'an.",
         "title": "Gunakan akun Anda di seluruh aplikasi Quran.Foundation!"
       },
       "quran-growth-journey": {
@@ -39,10 +39,10 @@
   "answers": "Jawaban",
   "aria": {
     "change-settings": "Ubah pengaturan",
-    "drawer-close": "Tutup Laci",
+    "drawer-close": "Tutup Panel",
     "msg-close": "Tutup Pesan",
-    "nav-drawer-open": "Buka Laci Navigasi",
-    "play-surah": "Putar Surah {{SurahName}}",
+    "nav-drawer-open": "Buka Panel Navigasi",
+    "play-surah": "Putar Surah {{surahName}}",
     "select-lng": "Pilih Bahasa",
     "sidebar-nav-close": "Tutup Sidebar Navigasi",
     "tooltip-action": "Aksi tooltip",
@@ -64,17 +64,17 @@
     "playback-speed-unit": "x",
     "player": {
       "close-audio-player": "Tutup Pemutar Audio",
-      "currently-playing": "Anda saat ini sedang memainkan",
+      "currently-playing": "Sedang diputar",
       "delay-verse": "Keterlambatan antar ayat",
       "download": "Unduh",
       "full-surah": "Surah Lengkap",
       "manage-repeat-settings": "Kelola pengaturan pengulangan",
-      "mismatch": "Klik \"Mulai Dari Awal\" jika Anda ingin memainkan {{currentReadingChapter}} sebagai gantinya",
-      "pause": "Berhenti sebentar",
+      "mismatch": "Klik \"Mulai dari Awal\" jika Anda ingin memutar {{currentReadingChapter}} sebagai gantinya",
+      "pause": "Jeda",
       "pause-audio": "Jeda Audio",
       "play": "Mainkan",
       "play-audio": "Putar Audio",
-      "play-range": "Jankau memainkan",
+      "play-range": "Putar rentang",
       "previous-ayah": "Ayat sebelumnya",
       "repeat-1-verse": "Ulangi Ayat",
       "repeat-settings": "Ulangi Pengaturan",
@@ -101,7 +101,7 @@
   "bookmark": "Penanda",
   "bookmarked": "Ditandai",
   "bookmarks-migration": {
-    "body-1": "Bookmark Anda sekarang akan menjadi <strong>Ayat-ayat Tersimpan</strong> di dalam <strong>Koleksi</strong>Untuk menyimpan bookmark Anda saat ini, silakan masuk atau buat akun.",
+    "body-1": "Bookmark Anda sekarang akan menjadi <strong>Ayat Tersimpan</strong> di dalam <strong>Koleksi</strong>. Untuk menyimpan bookmark Anda saat ini, masuk atau buat akun.",
     "body-2": "Kami juga menambahkan Bookmark Bacaan baru untuk membantu Anda melanjutkan tepat di tempat Anda berhenti.",
     "checkbox": "Jangan tampilkan pesan ini lagi (Peringatan: Anda akan kehilangan semua bookmark Anda saat ini)",
     "sign-in": "Masuk / Daftar",
@@ -110,7 +110,7 @@
   "both": "Keduanya",
   "cancel": "Batal",
   "change-theme": "Ubah Tema",
-  "click-here": "Klik disini",
+  "click-here": "Klik di sini",
   "close": "Tutup",
   "command-bar": {
     "navigations": "Navigasi",
@@ -135,7 +135,7 @@
   },
   "consents": {
     "communication": {
-      "body": "🚀 Tingkatkan kemajuan Anda dengan menerima notifikasi <boldSpan>personal</boldSpan> tentang kemajuan pencapaian tujuan Anda, memertahankan pencapaian, dan meningkatkan penggunaan fitur kami saat ini. <br></br> <br></br> Bisakah kami terus mengabari Anda melalui email dan saluran lainnya? Kendali di tangan Anda – silakan sesuaikan preferensi ini kapan saja di pengaturan akun Anda. <br></br> <br></br> Cukup pilih 'Ijinkan' untuk <boldSpan>pengingat yang menginspirasi</boldSpan> atau 'Jangan Sekarang' untuk menolaknya.",
+      "body": "🚀 Tingkatkan kemajuan Anda dengan menerima notifikasi <boldSpan>personal</boldSpan> tentang kemajuan pencapaian tujuan Anda, memertahankan pencapaian, dan meningkatkan penggunaan fitur kami saat ini. <br></br> <br></br> Bisakah kami terus mengabari Anda melalui email dan saluran lainnya? Kendali di tangan Anda – silakan sesuaikan preferensi ini kapan saja di pengaturan akun Anda. <br></br> <br></br> Cukup pilih 'Izinkan' untuk <boldSpan>pengingat yang menginspirasi</boldSpan> atau 'Jangan Sekarang' untuk menolaknya.",
       "header": "Kami ingin membantu Anda tetap <boldSpan>berkomitmen dan konsisten</boldSpan> dalam Perjalanan Kemajuan berQur'an Anda! 📖🌟"
     }
   },
@@ -143,20 +143,20 @@
   "contribute-to-our-mission": "Berkontribusi pada misi kami",
   "copied": "disalin",
   "copied-to-clipboard": "Disalin ke papan klip",
-  "copy": "Salinan",
+  "copy": "Salin",
   "copy-embed": "Salin Sematkan",
   "copylink": "Salin tautan",
   "counter": {
-    "decrease": "Mengurangi",
-    "increase": "Meningkatkan"
+    "decrease": "Kurangi",
+    "increase": "Tambah"
   },
-  "create": "Membuat",
+  "create": "Buat",
   "create-my-goal": "Buat Tujuan Saya",
   "default-description": "Al-Qur'an diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
   "delete": "Hapus",
   "developers": "Pengembang",
   "display": "Tampilan",
-  "donate": "Menyumbang",
+  "donate": "Donasi",
   "donate-now": "Donasi sekarang",
   "donate_monthly": "Donasi setiap bulan",
   "donate_once": "Donasi satu kali",
@@ -164,7 +164,7 @@
   "edit": "Sunting",
   "email-verification": {
     "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
-    "email-sent": "Kami baru saja mengirim email ke <strong> {{email}} </strong>",
+    "email-sent": "Kami baru saja mengirim email ke <strong>{{email}}</strong>",
     "email-verification": "Verifikasi email",
     "resend-email": "Kirim ulang email",
     "resend-email-in": "Kirim ulang email verifikasi dalam {{remainingTime}} detik...",
@@ -226,7 +226,7 @@
     "verification-resend-failed": "Gagal mengirim ulang kode verifikasi",
     "verse-metadata-failed": "Gagal memuat metadata ayat."
   },
-  "exciting-updates": "Pengkinian menarik",
+  "exciting-updates": "Pembaruan Menarik",
   "favorites": "Favorit",
   "feedback": "Beri Masukan",
   "fonts": {
@@ -240,7 +240,7 @@
     "qcf-v4-desc": "Jenis huruf Tajwid dibuat menggunakan jenis huruf Easy Quran - Dar Al Marifa Tajweed Mushaf dan King Fahad Glorious Quran Printing Complex (KFGQPC) Uthmanic Hafs V4 - setelah mendapat izin dari keduanya.",
     "qpc_uthmani_hafs": "QPC Utsmani Hafs",
     "quran-font": "Huruf Qur'an",
-    "quran-font-size": "Ukuran huruf Al Quran",
+    "quran-font-size": "Ukuran huruf Al-Qur'an",
     "tajweed": "Tajwid",
     "tajweed-desc": "Font tulisan Tajwid menunjukkan Mushaf berwarna Tajwid. Anda dapat membaca lebih lanjut tentang aturan warna Tajwid <0> sini </0>",
     "tajweed_v4": "Kompleks Raja Fahad V4",
@@ -250,10 +250,10 @@
   },
   "footer": {
     "apps-disclaimer": "Setiap aplikasi dimiliki dan dikelola secara independen oleh pengembangnya. Untuk dukungan, laporan bug, atau permintaan fitur, silakan hubungi pembuat aplikasi secara langsung.",
-    "description": "Quran.com adalah platform tepercaya yang digunakan jutaan orang di seluruh dunia untuk membaca, mencari, mendengarkan, dan merefleksikan Al-Qur'an dalam berbagai bahasa. Platform ini menyediakan terjemahan, tafsir, tilawah, terjemahan kata demi kata, dan berbagai alat untuk pembelajaran yang lebih mendalam, sehingga Al-Qur'an dapat diakses oleh semua orang. <br/> <br/> Sebagai sebuah Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang-orang terhubung secara mendalam dengan Al-Qur'an. Didukung oleh <link> Quran.Foundation </link>, sebuah organisasi nirlaba 501(c)(3), Quran.com terus berkembang sebagai referensi yang sangat bernilai dan gratis untuk semua orang, Alhamdulillah.",
+    "description": "Quran.com adalah platform tepercaya yang digunakan jutaan orang di seluruh dunia untuk membaca, mencari, mendengarkan, dan merefleksikan Al-Qur'an dalam berbagai bahasa. Platform ini menyediakan terjemahan, tafsir, tilawah, terjemahan kata demi kata, dan berbagai alat untuk pembelajaran yang lebih mendalam, sehingga Al-Qur'an dapat diakses oleh semua orang. <br/> <br/> Sebagai sebuah Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang-orang terhubung secara mendalam dengan Al-Qur'an. Didukung oleh <link>Quran.Foundation</link>, sebuah organisasi nirlaba 501(c)(3), Quran.com terus berkembang sebagai referensi yang sangat bernilai dan gratis untuk semua orang, Alhamdulillah.",
     "hiring": "Kami sedang merekrut! Bergabunglah dengan tim QuranFoundation dan berkontribusi pada misi kami. <link> Daftar sekarang! </link>",
     "rights": "Hak Cipta Terlindungi",
-    "title": "Baca, Dengarkan, Cari, dan Renungkan Al Quran"
+    "title": "Baca, Dengarkan, Cari, dan Renungkan Al-Qur'an"
   },
   "form": {
     "body": "Tubuh",
@@ -278,13 +278,13 @@
   },
   "fundraising-share-title": "Sebarkan Penggalangan Dana Quran.com",
   "fundraising-sticky-banner-v2": {
-    "cta": "Menyumbangkan",
+    "cta": "Donasi",
     "desktop-text": "Berkontribusilah pada misi kami",
     "mobile-line-one": "Ini adalah bulan Al-Quran.",
     "mobile-line-two": "Bantu kami menyebarkan cahayanya."
   },
   "fundraising-sticky-banner": {
-    "cta": "Menyumbang",
+    "cta": "Donasi",
     "title": "Menyumbang di hari-hari terbaik!"
   },
   "fundraising": {
@@ -297,7 +297,7 @@
   },
   "get-started": "Memulai",
   "go-to-verse": "Buka Ayat",
-  "hear-it-pronounced": "Klik kata-kata Qurani, dengarkan pengucapannya",
+  "hear-it-pronounced": "Klik kata-kata Qur'ani untuk mendengar pengucapannya",
   "help": "Bantuan",
   "hide-arabic": "Sembunyikan Bahasa Arab",
   "hizb": "Hizb",
@@ -311,12 +311,12 @@
   "juz": "Juz",
   "language": "Bahasa",
   "languages": "Bahasa",
-  "learn": "Mempelajari",
+  "learn": "Pelajari",
   "learn-more": "Pelajari lebih lanjut",
   "learning-plans": "Rencana Pembelajaran",
-  "less": "Tampilkan Lebih Sedikit",
+  "less": "Lebih sedikit",
   "lessons": "Pelajaran",
-  "listen": "Mendengarkan",
+  "listen": "Dengarkan",
   "loading": "Memuat",
   "login": "Login",
   "logout": "Logout",
@@ -360,7 +360,7 @@
   "pbuh": "Berkah Allah atasnya",
   "popular-links": "Link populer",
   "popup": {
-    "companion-title": "Sahabat Al Quran tercinta,",
+    "companion-title": "Sahabat Al-Qur'an tercinta,",
     "footnote": "Donasi bulanan memungkinkan kami untuk tidak terlalu fokus pada penggalangan dana",
     "subtitle": "“Tidak ada hari yang di dalamnya amal saleh lebih diridhai Allah daripada hari-hari ini.” [Al-Bukhari 969]",
     "text-1": "Kami berkomitmen untuk melayani dunia pengetahuan dan teknologi Qur'ani, selalu gratis.",
@@ -374,8 +374,8 @@
   },
   "prev": "Sebelumnya",
   "previous-ayah": "Ayat sebelumnya",
-  "privacy": "Kerahasiaan",
-  "product-updates": "Pengkinian Produk",
+  "privacy": "Privasi",
+  "product-updates": "Pembaruan Produk",
   "profile": "Profil",
   "projects-desc": "Proyek nirlaba yang dimiliki, dikelola, atau disponsori oleh <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
@@ -437,7 +437,7 @@
     "no-tafsir-selected": "Tidak ada tafsir yang dipilih",
     "no-translation-selected": "Tidak ada terjemahan yang dipilih",
     "reading-experience": "Pengalaman Membaca",
-    "reset": "Mengatur ulang",
+    "reset": "Atur ulang",
     "reset-cta": "Atur Semula Pengaturan",
     "reset-notif": "Pengaturan Anda kembali ke pengaturan bawaan",
     "search-reciter": "Cari Qari",
@@ -452,9 +452,9 @@
     "value-and-other": "{{value}} , dan {{othersCount}} lainnya",
     "value-and-others": "{{value}} , dan {{othersCount}} lainnya",
     "wbw-helper": "Tampilkan terjemahan atau transliterasi langsung di bawah kata",
-    "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan kursor atau mengklik perkataan"
+    "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan kursor atau mengeklik kata"
   },
-  "share": "Membagikan",
+  "share": "Bagikan",
   "share-quran-description-line-1": "Nabi ﷺ bersabda:",
   "share-quran-description-line-2": "'Sampaikanlah dariku, meskipun hanya satu ayat.'",
   "share-quran-description-line-3": "(HR. Al-Bukhari 3461)",
@@ -471,12 +471,12 @@
     "try-navigating-with": "Tips: coba navigasi dengan"
   },
   "sign-in": "Masuk",
-  "sitemap": "Peta situs",
+  "sitemap": "Peta Situs",
   "sort": {
     "ascending": "menaik",
     "by": "Sortir dengan",
     "descending": "Menurun",
-    "sort": "Menyortir"
+      "sort": "Urutkan"
   },
   "stay-on-track": "🎯 Tetap di jalur yang benar!",
   "style": "Gaya",
@@ -491,8 +491,8 @@
     "group-message": "Anda sedang membaca tafsir untuk kelompok ayat dari {{from}} hingga {{to}}",
     "no-text": "{{tafsirName}} tidak tersedia untuk ayat saat ini.",
     "surah": "Surah Tafsir",
-    "tafsir-desc": "Baca {{tafsirName}} untuk Ayat {{verseNumber}} Surah {{SurahName}}",
-    "tafsirs-desc": "Baca berbagai Tafsir Ayat {{ayahNumber}} Surah {{SurahName}} oleh ulama Tafsir terpercaya",
+    "tafsir-desc": "Baca {{tafsirName}} untuk Ayat {{verseNumber}} dari Surah {{surahName}}",
+    "tafsirs-desc": "Baca berbagai tafsir Ayat {{ayahNumber}} dari Surah {{surahName}} oleh ulama tafsir tepercaya",
     "title": "tafsir"
   },
   "terms-and-conditions": "Syarat dan Ketentuan",
@@ -506,7 +506,7 @@
     "system-desc": "Tema sistem secara otomatis mengadopsi pengaturan mode terang/gelap Anda"
   },
   "to": "Ke",
-  "tooltip": "Dalam gelembung tooltip",
+  "tooltip": "Dalam tooltip",
   "tooltip-trans-lang": "Bahasa Tooltip",
   "trans-lang": "Bahasa Terjemahan",
   "translation": "Terjemahan",
@@ -527,7 +527,7 @@
   "verse-bookmarked": "Ayat telah ditandai",
   "verse-copied": "Ayat telah disalin ke clipboard!",
   "verses": "Ayat",
-  "view": "Melihat",
+  "view": "Lihat",
   "voice": {
     "ask-permission": "Mohon izin mikrofon untuk mulai menggunakan Pencarian Suara",
     "error": "Terjadi kesalahan, coba lagi nanti ({{errorCode}}).",

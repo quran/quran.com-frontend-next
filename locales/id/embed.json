@@ -1,54 +1,54 @@
 {
   "actions": {
     "copied": "Disalin!",
-    "copy": "Menyalin",
-    "copyEmbedSnippet": "Salin Cuplikan Sematkan"
+    "copy": "Salin",
+    "copyEmbedSnippet": "Salin Cuplikan Sematan"
   },
   "checkboxes": {
-    "answers": "Tombol Tampilkan Jawaban (jika tersedia)",
+    "answers": "Tampilkan tombol Jawaban (jika tersedia)",
     "audio": "Aktifkan pemutaran audio",
     "customSize": "Gunakan lebar/tinggi khusus",
-    "lessons": "Tombol Tampilkan Pelajaran",
+    "lessons": "Tampilkan tombol Pelajaran",
     "mergeVerses": "Gabungkan ayat (tampilan sebaris)",
-    "reflections": "Tombol Tampilkan Refleksi",
+    "reflections": "Tampilkan tombol Refleksi",
     "showArabic": "Tampilkan ayat Arab",
-    "tafsirs": "Tombol Tampilkan Tafsir",
+    "tafsirs": "Tampilkan tombol Tafsir",
     "translator": "Tampilkan nama penerjemah",
     "verseRange": "Aktifkan rentang ayat",
     "wordByWord": "Aktifkan terjemahan kata demi kata",
     "wordByWordTransliteration": "Aktifkan transliterasi kata demi kata"
   },
   "errors": {
-    "clipboardFallback": "Penulisan ke clipboard gagal, menggunakan metode cadangan.",
+    "clipboardFallback": "Gagal menulis ke clipboard, menggunakan metode cadangan",
     "clipboardUnavailable": "API clipboard tidak tersedia",
-    "loadChapters": "Bab tidak dapat dimuat",
-    "loadReciters": "Tidak dapat memuat pembaca puisi",
-    "loadTranslations": "Terjemahan tidak dapat dimuat."
+    "loadChapters": "Tidak dapat memuat surah",
+    "loadReciters": "Tidak dapat memuat qari",
+    "loadTranslations": "Tidak dapat memuat terjemahan"
   },
   "fields": {
-    "ayah": "Ayah",
+    "ayah": "Ayat",
     "clientId": "ID Klien",
     "height": "Tinggi",
     "language": "Bahasa",
     "mushaf": "Mushaf",
-    "reciter": "Tukang deklamasi",
+    "reciter": "Qari",
     "surah": "Surah",
     "theme": "Tema",
     "translations": "Terjemahan",
     "width": "Lebar"
   },
   "header": {
-    "subtitle": "<bold>Cara yang lebih berkualitas dan dapat disesuaikan untuk menyertakan ayat-ayat Al-Quran dalam konten Anda.</bold><br />Buat konten tersemat yang dapat Anda sesuaikan dengan mudah, dengan <bold>Terjemahan bahasa Arab yang akurat, dengan sistem pembacaan terintegrasi.</bold> dan banyak lagi, sehingga pembaca dapat mendengarkan sambil berinteraksi dengan ayat tersebut.",
-    "title": "Ayah Embed Builder"
+    "subtitle": "<bold>Cara berkualitas tinggi dan dapat disesuaikan untuk menyertakan ayat Al-Quran dalam konten Anda.</bold><br />Buat sematan yang dapat disesuaikan dengan mudah, dilengkapi <bold>tampilan Arab yang akurat dan lantunan bawaan</bold>, sehingga pembaca dapat mendengarkan sambil menyimak ayat.",
+    "title": "Pembuat Sematan Ayat"
   },
   "meta": {
-    "description": "Konfigurasikan dan pratinjau widget sematan untuk berbagi Al-Quran, lalu salin cuplikan skrip yang siap digunakan.",
-    "title": "Pembuat Sisipan Ayat | Quran.com"
+    "description": "Atur dan pratinjau widget sematan untuk berbagi Al-Quran, lalu salin cuplikan kode yang siap digunakan.",
+    "title": "Pembuat Sematan Ayat | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
-    "kfgqpc_v1": "Kompleks Raja Fahad v1",
-    "kfgqpc_v2": "Kompleks Raja Fahad v2",
+    "kfgqpc_v1": "Mushaf King Fahad v1",
+    "kfgqpc_v2": "Mushaf King Fahad v2",
     "qpc": "QPC Uthmani Hafs",
     "tajweed": "Tajwid"
   },
@@ -56,24 +56,24 @@
     "searchTranslations": "Cari terjemahan..."
   },
   "reciters": {
-    "select": "Pilih pembaca"
+    "select": "Pilih qari"
   },
   "sections": {
-    "configuration": "Konfigurasi",
+    "configuration": "Pengaturan",
     "preview": "Pratinjau langsung",
-    "snippet": "Sematkan cuplikan"
+    "snippet": "Kode sematan"
   },
   "states": {
-    "loadingChapters": "Memuat bab...",
+    "loadingChapters": "Memuat surah...",
     "loadingPreview": "Memuat pratinjau...",
-    "loadingReciters": "Sedang memuat para pembaca puisi...",
-    "loadingVerses": "Memuat ayat-ayat...",
-    "noTranslations": "Tidak ada terjemahan yang ditemukan."
+    "loadingReciters": "Memuat qari...",
+    "loadingVerses": "Memuat ayat...",
+    "noTranslations": "Tidak ada terjemahan yang ditemukan"
   },
   "theme": {
     "dark": "Gelap",
-    "light": "Lampu",
-    "sepia": "Warna coklat tua"
+    "light": "Terang",
+    "sepia": "Sepia"
   },
   "translations": {
     "chipRemoveLabel": "Hapus terjemahan",
