@@ -878,7 +878,7 @@ export const audioPlayerMachine =
         setAudioPlayerCurrentTime: (context) => {
           const {
             ayahNumber,
-            audioData: { verseTimings, basmalaAudioUrl },
+            audioData: { verseTimings, basmalaAudioUrl, basmalaTiming },
             duration,
             shouldPlayFromRandomTimeStamp,
           } = context;
@@ -888,9 +888,10 @@ export const audioPlayerMachine =
           } else if (
             basmalaAudioUrl &&
             ayahNumber === 1 &&
-            context.audioPlayer.src === basmalaAudioUrl
+            context.audioPlayer.src === basmalaAudioUrl &&
+            basmalaTiming
           ) {
-            context.audioPlayer.currentTime = 0;
+            context.audioPlayer.currentTime = milliSecondsToSeconds(basmalaTiming.timestampFrom);
           } else {
             const ayahTimestamps = verseTimings[ayahNumber - 1];
             const { timestampFrom } = ayahTimestamps;
@@ -946,6 +947,23 @@ export const audioPlayerMachine =
         updateTiming: pure((context) => {
           const actions = [];
           actions.push('setElapsedTime');
+
+          // Check if basmala has finished playing
+          const { audioData, ayahNumber, audioPlayer } = context;
+          if (
+            audioData.basmalaAudioUrl &&
+            audioData.basmalaTiming &&
+            ayahNumber === 1 &&
+            audioPlayer.src === audioData.basmalaAudioUrl
+          ) {
+            const currentTimeMs = audioPlayer.currentTime * 1000;
+            if (currentTimeMs >= audioData.basmalaTiming.timestampTo) {
+              // Basmala finished, trigger transition to chapter audio
+              actions.push(send({ type: 'END' }));
+              return actions;
+            }
+          }
+
           if (context.repeatActor) {
             actions.push(
               send(

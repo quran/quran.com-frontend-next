@@ -143,6 +143,10 @@ const prependBasmalaTiming = (
     duration: chapterAudioData.duration + basmalaDuration,
     verseTimings: [basmalaTimingForChapter, ...offsetVerseTimings],
     basmalaAudioUrl: basmalaAudioData.audioUrl,
+    basmalaTiming: {
+      timestampFrom: basmalaTiming.timestampFrom,
+      timestampTo: basmalaTiming.timestampTo,
+    },
   };
 };
 
