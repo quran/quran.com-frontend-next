@@ -768,6 +768,7 @@ export const audioPlayerMachine =
       },
     },
     {
+      // @ts-expect-error - XState types don't include custom actions
       actions: {
         continueFromLastTimestamp: (context) => {
           /**
@@ -932,6 +933,7 @@ export const audioPlayerMachine =
           const { audioData } = context;
           context.audioPlayer.src = audioData.audioUrl;
           context.audioPlayer.currentTime = 0;
+          context.audioPlayer.play();
         },
         setPlaybackRate: pure((context: AudioPlayerContext, event) => {
           const { playbackRate } = event;
