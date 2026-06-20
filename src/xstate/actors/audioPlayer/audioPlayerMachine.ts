@@ -348,11 +348,19 @@ export const audioPlayerMachine =
                           description: 'Waiting for the buffer to be filled',
                           target: 'LOADING',
                         },
-                        END: {
-                          actions: 'forwardEndedToRadioMachine',
-                          description: 'The audio finished played',
-                          target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.ENDED',
-                        },
+                        END: [
+                          {
+                            actions: 'switchToChapterAudio',
+                            cond: 'isPlayingBasmala',
+                            description: 'Basmala finished, switch to chapter audio',
+                            target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
+                          },
+                          {
+                            actions: 'forwardEndedToRadioMachine',
+                            description: 'The audio finished played',
+                            target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.ENDED',
+                          },
+                        ],
 
                         UPDATE_TIMING: {
                           actions: 'updateTiming',
@@ -858,20 +866,31 @@ export const audioPlayerMachine =
         }),
         setAudioPlayerSource: (context) => {
           const {
-            audioData: { audioUrl },
+            audioData: { audioUrl, basmalaAudioUrl },
+            ayahNumber,
           } = context;
-          context.audioPlayer.src = audioUrl;
+          if (basmalaAudioUrl && ayahNumber === 1) {
+            context.audioPlayer.src = basmalaAudioUrl;
+          } else {
+            context.audioPlayer.src = audioUrl;
+          }
         },
         setAudioPlayerCurrentTime: (context) => {
           const {
             ayahNumber,
-            audioData: { verseTimings },
+            audioData: { verseTimings, basmalaAudioUrl },
             duration,
             shouldPlayFromRandomTimeStamp,
           } = context;
           if (shouldPlayFromRandomTimeStamp) {
             const randomTimestamp = random(0, duration);
             context.audioPlayer.currentTime = randomTimestamp;
+          } else if (
+            basmalaAudioUrl &&
+            ayahNumber === 1 &&
+            context.audioPlayer.src === basmalaAudioUrl
+          ) {
+            context.audioPlayer.currentTime = 0;
           } else {
             const ayahTimestamps = verseTimings[ayahNumber - 1];
             const { timestampFrom } = ayahTimestamps;
@@ -908,6 +927,11 @@ export const audioPlayerMachine =
         }),
         pauseAudio: (context) => {
           context.audioPlayer.pause();
+        },
+        switchToChapterAudio: (context) => {
+          const { audioData } = context;
+          context.audioPlayer.src = audioData.audioUrl;
+          context.audioPlayer.currentTime = 0;
         },
         setPlaybackRate: pure((context: AudioPlayerContext, event) => {
           const { playbackRate } = event;
@@ -1082,6 +1106,14 @@ export const audioPlayerMachine =
           const durationWithTolerancePeriod = duration - 3;
 
           return currentTime > durationWithTolerancePeriod;
+        },
+        isPlayingBasmala: (context) => {
+          const { audioData, ayahNumber } = context;
+          return (
+            !!audioData.basmalaAudioUrl &&
+            ayahNumber === 1 &&
+            context.audioPlayer.src === audioData.basmalaAudioUrl
+          );
         },
       },
       services: {

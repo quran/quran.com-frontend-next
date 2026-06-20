@@ -216,6 +216,17 @@ export const getChapterAudioData = async (
 };
 
 /**
+ * Get basmala audio data for a specific reciter.
+ * The basmala is verse 1:1 and needs to be prepended to chapters with bismillahPre: true.
+ *
+ * @param {number} reciterId
+ * @returns {Promise<AudioData>}
+ */
+export const getBasmalaAudioData = async (reciterId: number): Promise<AudioData> => {
+  return getChapterAudioData(reciterId, 1, true);
+};
+
+/**
  * Get the timestamps for a specific verseKey.
  * We need this to select to move the cursor in the audio player when we click "play" in a specific verse.
  *
