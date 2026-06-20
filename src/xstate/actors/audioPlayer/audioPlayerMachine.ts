@@ -862,7 +862,12 @@ export const audioPlayerMachine =
             return milliSecondsToSeconds(event.data.duration);
           },
           audioData: (context, event: any) => event.data,
-          surahVersesCount: (context, event: any) => event.data.verseTimings.length,
+          surahVersesCount: (context, event: any) => {
+            // If basmala is prepended (verse 0), exclude it from count
+            const hasBasmala =
+              event.data.basmalaAudioUrl && event.data.verseTimings[0]?.verseKey.endsWith(':0');
+            return hasBasmala ? event.data.verseTimings.length - 1 : event.data.verseTimings.length;
+          },
         }),
         setAudioPlayerSource: (context) => {
           const {
@@ -893,7 +898,11 @@ export const audioPlayerMachine =
           ) {
             context.audioPlayer.currentTime = milliSecondsToSeconds(basmalaTiming.timestampFrom);
           } else {
-            const ayahTimestamps = verseTimings[ayahNumber - 1];
+            // If basmala is prepended, verseTimings[0] is the basmala (verse 0)
+            // So actual verses are at index ayahNumber (not ayahNumber - 1)
+            const hasBasmala = basmalaAudioUrl && verseTimings[0]?.verseKey.endsWith(':0');
+            const index = hasBasmala ? ayahNumber : ayahNumber - 1;
+            const ayahTimestamps = verseTimings[index];
             const { timestampFrom } = ayahTimestamps;
             context.audioPlayer.currentTime = milliSecondsToSeconds(timestampFrom);
           }

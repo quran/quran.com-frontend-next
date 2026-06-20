@@ -99,11 +99,25 @@ export const getActiveAyahNumber = (activeVerseTiming?: VerseTiming) => {
 };
 
 /**
+ * Offset verse timing by duration.
+ *
+ * @param {VerseTiming} timing - The verse timing to offset
+ * @param {number} offset - Duration in milliseconds to offset by
+ * @returns {VerseTiming} Offset verse timing
+ */
+const offsetVerseTiming = (timing: VerseTiming, offset: number): VerseTiming => ({
+  ...timing,
+  timestampFrom: timing.timestampFrom + offset,
+  timestampTo: timing.timestampTo + offset,
+  segments: timing.segments.map(([location, from, to]): [number, number, number] => [
+    location,
+    from + offset,
+    to + offset,
+  ]),
+});
+
+/**
  * Prepends basmala timing to chapter audio data for chapters that require it.
- * Chapters 1 and 9 don't need basmala prepended (bismillahPre: false).
- * For other chapters, we fetch verse 1:1 timing and include it at the start with timestamp 0.
- * The actual chapter audio starts after the basmala, so we don't need to offset timestamps -
- * the basmala audio will be prepended to the audio file URL via playlist/queue.
  *
  * @param {AudioData} chapterAudioData - The audio data for the chapter
  * @param {AudioData} basmalaAudioData - The audio data containing basmala (verse 1:1)
@@ -115,9 +129,7 @@ const prependBasmalaTiming = (
   basmalaAudioData: AudioData,
   chapterId: number,
 ): AudioData => {
-  if (!basmalaAudioData.verseTimings || basmalaAudioData.verseTimings.length === 0) {
-    return chapterAudioData;
-  }
+  if (!basmalaAudioData.verseTimings?.length) return chapterAudioData;
 
   const basmalaTiming = basmalaAudioData.verseTimings[0];
   const basmalaDuration = basmalaTiming.timestampTo - basmalaTiming.timestampFrom;
@@ -129,14 +141,9 @@ const prependBasmalaTiming = (
     timestampTo: basmalaDuration,
   };
 
-  const offsetVerseTimings = (chapterAudioData.verseTimings || []).map((timing) => ({
-    ...timing,
-    timestampFrom: timing.timestampFrom + basmalaDuration,
-    timestampTo: timing.timestampTo + basmalaDuration,
-    segments: timing.segments.map(
-      ([location, from, to]) => [location, from + basmalaDuration, to + basmalaDuration] as const,
-    ),
-  }));
+  const offsetVerseTimings = (chapterAudioData.verseTimings || []).map((timing) =>
+    offsetVerseTiming(timing, basmalaDuration),
+  );
 
   return {
     ...chapterAudioData,
