@@ -9,6 +9,8 @@ interface AudioData {
   duration: number;
   verseTimings?: VerseTiming[];
   reciterId: number;
+  basmalaAudioUrl?: string;
+  basmalaTiming?: { timestampFrom: number; timestampTo: number };
 }
 
 export default AudioData;

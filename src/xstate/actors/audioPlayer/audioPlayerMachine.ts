@@ -348,11 +348,19 @@ export const audioPlayerMachine =
                           description: 'Waiting for the buffer to be filled',
                           target: 'LOADING',
                         },
-                        END: {
-                          actions: 'forwardEndedToRadioMachine',
-                          description: 'The audio finished played',
-                          target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.ENDED',
-                        },
+                        END: [
+                          {
+                            actions: 'switchToChapterAudio',
+                            cond: 'isPlayingBasmala',
+                            description: 'Basmala finished, switch to chapter audio',
+                            target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
+                          },
+                          {
+                            actions: 'forwardEndedToRadioMachine',
+                            description: 'The audio finished played',
+                            target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.ENDED',
+                          },
+                        ],
 
                         UPDATE_TIMING: {
                           actions: 'updateTiming',
@@ -854,26 +862,47 @@ export const audioPlayerMachine =
             return milliSecondsToSeconds(event.data.duration);
           },
           audioData: (context, event: any) => event.data,
-          surahVersesCount: (context, event: any) => event.data.verseTimings.length,
+          surahVersesCount: (context, event: any) => {
+            // If basmala is prepended (verse 0), exclude it from count
+            const hasBasmala =
+              event.data.basmalaAudioUrl && event.data.verseTimings[0]?.verseKey.endsWith(':0');
+            return hasBasmala ? event.data.verseTimings.length - 1 : event.data.verseTimings.length;
+          },
         }),
         setAudioPlayerSource: (context) => {
           const {
-            audioData: { audioUrl },
+            audioData: { audioUrl, basmalaAudioUrl },
+            ayahNumber,
           } = context;
-          context.audioPlayer.src = audioUrl;
+          if (basmalaAudioUrl && ayahNumber === 1) {
+            context.audioPlayer.src = basmalaAudioUrl;
+          } else {
+            context.audioPlayer.src = audioUrl;
+          }
         },
         setAudioPlayerCurrentTime: (context) => {
           const {
             ayahNumber,
-            audioData: { verseTimings },
+            audioData: { verseTimings, basmalaAudioUrl, basmalaTiming },
             duration,
             shouldPlayFromRandomTimeStamp,
           } = context;
           if (shouldPlayFromRandomTimeStamp) {
             const randomTimestamp = random(0, duration);
             context.audioPlayer.currentTime = randomTimestamp;
+          } else if (
+            basmalaAudioUrl &&
+            ayahNumber === 1 &&
+            context.audioPlayer.src === basmalaAudioUrl &&
+            basmalaTiming
+          ) {
+            context.audioPlayer.currentTime = milliSecondsToSeconds(basmalaTiming.timestampFrom);
           } else {
-            const ayahTimestamps = verseTimings[ayahNumber - 1];
+            // If basmala is prepended, verseTimings[0] is the basmala (verse 0)
+            // So actual verses are at index ayahNumber (not ayahNumber - 1)
+            const hasBasmala = basmalaAudioUrl && verseTimings[0]?.verseKey.endsWith(':0');
+            const index = hasBasmala ? ayahNumber : ayahNumber - 1;
+            const ayahTimestamps = verseTimings[index];
             const { timestampFrom } = ayahTimestamps;
             context.audioPlayer.currentTime = milliSecondsToSeconds(timestampFrom);
           }
@@ -909,6 +938,13 @@ export const audioPlayerMachine =
         pauseAudio: (context) => {
           context.audioPlayer.pause();
         },
+        // @ts-expect-error - Custom action for basmala transition
+        switchToChapterAudio: (context) => {
+          const { audioData } = context;
+          context.audioPlayer.src = audioData.audioUrl;
+          context.audioPlayer.currentTime = 0;
+          context.audioPlayer.play();
+        },
         setPlaybackRate: pure((context: AudioPlayerContext, event) => {
           const { playbackRate } = event;
           // eslint-disable-next-line no-param-reassign
@@ -920,6 +956,23 @@ export const audioPlayerMachine =
         updateTiming: pure((context) => {
           const actions = [];
           actions.push('setElapsedTime');
+
+          // Check if basmala has finished playing
+          const { audioData, ayahNumber, audioPlayer } = context;
+          if (
+            audioData.basmalaAudioUrl &&
+            audioData.basmalaTiming &&
+            ayahNumber === 1 &&
+            audioPlayer.src === audioData.basmalaAudioUrl
+          ) {
+            const currentTimeMs = audioPlayer.currentTime * 1000;
+            if (currentTimeMs >= audioData.basmalaTiming.timestampTo) {
+              // Basmala finished, trigger transition to chapter audio
+              actions.push(send({ type: 'END' }));
+              return actions;
+            }
+          }
+
           if (context.repeatActor) {
             actions.push(
               send(
@@ -1082,6 +1135,15 @@ export const audioPlayerMachine =
           const durationWithTolerancePeriod = duration - 3;
 
           return currentTime > durationWithTolerancePeriod;
+        },
+        // @ts-expect-error - Custom guard for basmala detection
+        isPlayingBasmala: (context) => {
+          const { audioData, ayahNumber } = context;
+          return (
+            !!audioData.basmalaAudioUrl &&
+            ayahNumber === 1 &&
+            context.audioPlayer.src === audioData.basmalaAudioUrl
+          );
         },
       },
       services: {

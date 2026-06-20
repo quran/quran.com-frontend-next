@@ -1,8 +1,14 @@
+/* eslint-disable max-lines */
 import AudioPlayerContext from './types/AudioPlayerContext';
 
 import isCurrentTimeInRange from '@/components/AudioPlayer/hooks/isCurrentTimeInRange';
 import { getVerseNumberFromKey } from '@/utils/verse';
-import { getAvailableReciters, getChapterAudioData } from 'src/api';
+import {
+  getAvailableReciters,
+  getBasmalaAudioData,
+  getChapter,
+  getChapterAudioData,
+} from 'src/api';
 import AudioData from 'types/AudioData';
 import Reciter from 'types/Reciter';
 import VerseTiming from 'types/VerseTiming';
@@ -92,9 +98,78 @@ export const getActiveAyahNumber = (activeVerseTiming?: VerseTiming) => {
   return Number(verseNumber);
 };
 
+/**
+ * Offset verse timing by duration.
+ *
+ * @param {VerseTiming} timing - The verse timing to offset
+ * @param {number} offset - Duration in milliseconds to offset by
+ * @returns {VerseTiming} Offset verse timing
+ */
+const offsetVerseTiming = (timing: VerseTiming, offset: number): VerseTiming => ({
+  ...timing,
+  timestampFrom: timing.timestampFrom + offset,
+  timestampTo: timing.timestampTo + offset,
+  segments: timing.segments.map(([location, from, to]): [number, number, number] => [
+    location,
+    from + offset,
+    to + offset,
+  ]),
+});
+
+/**
+ * Prepends basmala timing to chapter audio data for chapters that require it.
+ *
+ * @param {AudioData} chapterAudioData - The audio data for the chapter
+ * @param {AudioData} basmalaAudioData - The audio data containing basmala (verse 1:1)
+ * @param {number} chapterId - The chapter ID for proper verse key
+ * @returns {AudioData} AudioData with basmala timing prepended
+ */
+const prependBasmalaTiming = (
+  chapterAudioData: AudioData,
+  basmalaAudioData: AudioData,
+  chapterId: number,
+): AudioData => {
+  if (!basmalaAudioData.verseTimings?.length) return chapterAudioData;
+
+  const basmalaTiming = basmalaAudioData.verseTimings[0];
+  const basmalaDuration = basmalaTiming.timestampTo - basmalaTiming.timestampFrom;
+
+  const basmalaTimingForChapter: VerseTiming = {
+    ...basmalaTiming,
+    verseKey: `${chapterId}:0`,
+    timestampFrom: 0,
+    timestampTo: basmalaDuration,
+  };
+
+  const offsetVerseTimings = (chapterAudioData.verseTimings || []).map((timing) =>
+    offsetVerseTiming(timing, basmalaDuration),
+  );
+
+  return {
+    ...chapterAudioData,
+    duration: chapterAudioData.duration + basmalaDuration,
+    verseTimings: [basmalaTimingForChapter, ...offsetVerseTimings],
+    basmalaAudioUrl: basmalaAudioData.audioUrl,
+    basmalaTiming: {
+      timestampFrom: basmalaTiming.timestampFrom,
+      timestampTo: basmalaTiming.timestampTo,
+    },
+  };
+};
+
 export const executeFetchReciter = async (context: AudioPlayerContext): Promise<AudioData> => {
   const { reciterId, surah } = context;
-  return getChapterAudioData(reciterId, surah, true);
+  const chapterAudioData = await getChapterAudioData(reciterId, surah, true);
+
+  const chapterResponse = await getChapter(surah.toString(), 'en');
+  const { chapter } = chapterResponse;
+
+  if (chapter?.bismillahPre) {
+    const basmalaAudioData = await getBasmalaAudioData(reciterId);
+    return prependBasmalaTiming(chapterAudioData, basmalaAudioData, surah);
+  }
+
+  return chapterAudioData;
 };
 
 export const executeFetchReciterFromEvent = async (
