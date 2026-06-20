@@ -768,7 +768,6 @@ export const audioPlayerMachine =
       },
     },
     {
-      // @ts-expect-error - XState types don't include custom actions
       actions: {
         continueFromLastTimestamp: (context) => {
           /**
@@ -929,6 +928,7 @@ export const audioPlayerMachine =
         pauseAudio: (context) => {
           context.audioPlayer.pause();
         },
+        // @ts-expect-error - Custom action for basmala transition
         switchToChapterAudio: (context) => {
           const { audioData } = context;
           context.audioPlayer.src = audioData.audioUrl;
@@ -1109,6 +1109,7 @@ export const audioPlayerMachine =
 
           return currentTime > durationWithTolerancePeriod;
         },
+        // @ts-expect-error - Custom guard for basmala detection
         isPlayingBasmala: (context) => {
           const { audioData, ayahNumber } = context;
           return (

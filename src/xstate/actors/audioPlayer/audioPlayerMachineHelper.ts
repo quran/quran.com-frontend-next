@@ -133,11 +133,9 @@ const prependBasmalaTiming = (
     ...timing,
     timestampFrom: timing.timestampFrom + basmalaDuration,
     timestampTo: timing.timestampTo + basmalaDuration,
-    segments: timing.segments.map(([location, from, to]) => [
-      location,
-      from + basmalaDuration,
-      to + basmalaDuration,
-    ]),
+    segments: timing.segments.map(
+      ([location, from, to]) => [location, from + basmalaDuration, to + basmalaDuration] as const,
+    ),
   }));
 
   return {
