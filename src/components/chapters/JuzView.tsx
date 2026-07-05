@@ -62,7 +62,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
                     <SurahPreviewRow
                       chapterId={Number(chapterId)}
                       description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
-                        'common:ayahs',
+                        'common:ayahs', { count: chapter.versesCount }
                       )}`}
                       surahName={chapter.transliteratedName}
                       surahNumber={Number(chapterId)}

@@ -51,7 +51,7 @@ const ReadingStats: React.FC<ReadingStatsProps> = ({ activityDay }) => {
         </p>
         <p>
           <BookIcon />
-          {`${localizedVerses} ${t('common:ayahs').toLocaleLowerCase(lang)}`}
+          {`${localizedVerses} ${t('common:ayahs', {count: verses}).toLocaleLowerCase(lang)}`}
         </p>
         <p>
           <ClockIcon />
