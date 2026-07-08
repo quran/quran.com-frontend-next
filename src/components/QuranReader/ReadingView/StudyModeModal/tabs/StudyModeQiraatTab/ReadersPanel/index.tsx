@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import colorStyles from '../color.module.scss';
 import { getColorClass } from '../utils/color';
+import { TransmitterReadingAssignment } from '../utils/transmitterReadingAssignments';
 
 import ReaderItem from './ReaderItem';
 import styles from './ReadersPanel.module.scss';
@@ -16,6 +17,7 @@ interface ReadersPanelProps {
   readers: QiraatReader[];
   transmitters: QiraatTransmitter[];
   readings: QiraatReading[];
+  transmitterAssignments: Map<number, TransmitterReadingAssignment>;
   isExpanded: boolean;
   onToggleExpand: () => void;
   onTransmitterClick?: (transmitterId: number) => void;
@@ -32,6 +34,7 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
   readers,
   transmitters,
   readings,
+  transmitterAssignments,
   isExpanded,
   onToggleExpand,
   onTransmitterClick,
@@ -100,7 +103,7 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
             key={reader.id}
             reader={reader}
             transmitters={transmitters}
-            readings={readings}
+            transmitterAssignments={transmitterAssignments}
             onInfoClick={() => onReaderInfoClick?.(reader.id)}
             onTransmitterClick={onTransmitterClick}
             isClickable={!!onTransmitterClick}
