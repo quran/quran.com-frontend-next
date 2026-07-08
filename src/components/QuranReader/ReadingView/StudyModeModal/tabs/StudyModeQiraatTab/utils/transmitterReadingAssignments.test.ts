@@ -107,6 +107,44 @@ describe('buildTransmitterReadingAssignments', () => {
     expect(assignments.get(21)).toEqual({ readingId: 102, color: BLUE });
   });
 
+  it('distributes ambiguous tags so multiple otherwise-hidden colors are all shown', () => {
+    // white has an unambiguous representative; green and pink are each reachable ONLY
+    // through the two ambiguous readers 2 and 3. Both colors must appear in the panel
+    // (a single-pass "prefer first unrepresented" would assign both tags green).
+    const readers = [makeReader(1, 1), makeReader(2, 2), makeReader(3, 3)];
+    const transmitters = [makeTransmitter(11, 1), makeTransmitter(21, 2), makeTransmitter(31, 3)];
+    const readings = [
+      makeReading(100, WHITE, [1, 2, 3]),
+      makeReading(101, GREEN, [2, 3]),
+      makeReading(102, PINK, [2, 3]),
+    ];
+
+    const assignments = buildTransmitterReadingAssignments(readers, transmitters, readings);
+
+    const shownColors = new Set([21, 31].map((id) => assignments.get(id)?.color));
+    expect(shownColors).toEqual(new Set([GREEN, PINK]));
+  });
+
+  it('keeps sibling ambiguous tags on the same color when only one color is missing', () => {
+    // white has an unambiguous representative; pink is the only missing color and is
+    // reachable by three ambiguous readers — all three should map to pink (2:245 shape,
+    // not split across white/pink).
+    const readers = [makeReader(1, 1), makeReader(2, 2), makeReader(3, 3), makeReader(4, 4)];
+    const transmitters = [
+      makeTransmitter(11, 1),
+      makeTransmitter(21, 2),
+      makeTransmitter(31, 3),
+      makeTransmitter(41, 4),
+    ];
+    const readings = [makeReading(100, WHITE, [1, 2, 3, 4]), makeReading(101, PINK, [2, 3, 4])];
+
+    const assignments = buildTransmitterReadingAssignments(readers, transmitters, readings);
+
+    expect(assignments.get(21)).toEqual({ readingId: 101, color: PINK });
+    expect(assignments.get(31)).toEqual({ readingId: 101, color: PINK });
+    expect(assignments.get(41)).toEqual({ readingId: 101, color: PINK });
+  });
+
   it('falls back to first-match order when every candidate color is already represented', () => {
     const readers = [makeReader(1, 1), makeReader(2, 2), makeReader(3, 3)];
     const transmitters = [makeTransmitter(11, 1), makeTransmitter(21, 2), makeTransmitter(31, 3)];
