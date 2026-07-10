@@ -207,6 +207,9 @@ export const formatVerseReferencesToLinks = (text: string, chapterContext?: stri
       if (colonIndex !== -1) {
         const chapter = match.slice(0, colonIndex);
         const verses = match.slice(colonIndex + 1);
+        if (verses.includes(':')) {
+          return match;
+        }
         return `<a href="/${chapter}/${verses}" target="_blank">${match}</a>`;
       }
       if (chapterContext) {
@@ -251,6 +254,10 @@ export const findChapterContext = (
 
     if (chapter.transliteratedName) {
       names.add(chapter.transliteratedName);
+    }
+
+    if (chapter.slug) {
+      names.add(chapter.slug);
     }
 
     for (const name of names) {
