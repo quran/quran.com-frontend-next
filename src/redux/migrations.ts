@@ -121,7 +121,7 @@ export default {
   18: (state) => ({
     ...state,
     audioPlayerState: {
-      ...state.readingPreferences,
+      ...state.audioPlayerState,
       showTooltipWhenPlayingAudio: false,
     },
   }),
@@ -385,6 +385,17 @@ export default {
       // One-time reset after reader donation visibility refactor to recover stale hidden states.
       isQuranReaderBannerVisible: true,
       isQuranReaderFloatingBannerVisible: true,
+    },
+  }),
+  // Reset audioPlayerState to only known AudioState keys, clearing any
+  // readingPreferences keys spilled by the copy-paste bug in migration 18.
+  49: (state) => ({
+    ...state,
+    audioPlayerState: {
+      enableAutoScrolling: state.audioPlayerState?.enableAutoScrolling ?? true,
+      isDownloadingAudio: state.audioPlayerState?.isDownloadingAudio ?? false,
+      showTooltipWhenPlayingAudio: state.audioPlayerState?.showTooltipWhenPlayingAudio ?? false,
+      repeatSettings: state.audioPlayerState?.repeatSettings,
     },
   }),
 };
