@@ -106,16 +106,16 @@ const ReadingSection: React.FC<Props> = () => {
   const effectiveSurahNumber =
     effectiveAyahVerseKey?.surahNumber ??
     firstVerseOfStoredPage?.surahNumber ??
-    recentlyReadVerseKeys?.[0]?.surah ??
     lastReadVerse?.chapterId ??
+    recentlyReadVerseKeys?.[0]?.surah ??
     1;
   const effectiveVerseNumber =
     effectiveAyahVerseKey?.verseNumber ??
     firstVerseOfStoredPage?.verseNumber ??
-    recentlyReadVerseKeys?.[0]?.ayah ??
     (lastReadVerse?.verseKey
       ? getVerseAndChapterNumbersFromKey(lastReadVerse.verseKey)[1]
-      : undefined);
+      : undefined) ??
+    recentlyReadVerseKeys?.[0]?.ayah;
 
   // Resolve page number for current mushaf (use effectivePageNumber from hook)
   const resolvedPageNumber = isPageBookmark ? effectivePageNumber ?? undefined : undefined;
@@ -127,7 +127,8 @@ const ReadingSection: React.FC<Props> = () => {
   // Determine if user has reading sessions
   const hasReadingBookmark = !!effectiveBookmark;
   const hasRecentlyReadVerses = recentlyReadVerseKeys && recentlyReadVerseKeys.length > 0;
-  const hasReadingSessions = hasReadingBookmark || hasRecentlyReadVerses;
+  const hasLocalLastReadVerse = !!lastReadVerse?.chapterId;
+  const hasReadingSessions = hasReadingBookmark || hasRecentlyReadVerses || hasLocalLastReadVerse;
 
   const isGuestWithReadingSessions = isGuest && hasReadingSessions;
   const isUserWithReadingSessions = !isGuest && hasReadingSessions;
