@@ -21,6 +21,7 @@ import useMappedBookmark from '@/hooks/useMappedBookmark';
 import BookmarkRemoveIcon from '@/icons/bookmark_remove.svg';
 import { selectGuestReadingBookmark } from '@/redux/slices/guestBookmark';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { selectUserState } from '@/redux/slices/session';
 import BookmarkType from '@/types/BookmarkType';
 import { getMushafId } from '@/utils/api';
@@ -28,7 +29,7 @@ import { GuestReadingBookmark } from '@/utils/bookmark';
 import { logButtonClick } from '@/utils/eventLogger';
 import { MY_QURAN_URL } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
-import { getPageFirstVerseKey } from '@/utils/verse';
+import { getPageFirstVerseKey, getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 interface Props {}
 
@@ -37,6 +38,7 @@ const ReadingSection: React.FC<Props> = () => {
   const { isFirstTimeGuest, isGuest } = useSelector(selectUserState);
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
+  const lastReadVerse = useSelector(selectLastReadVerseKey);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
 
   // Use global reading bookmark hook (singleton pattern)
@@ -104,11 +106,15 @@ const ReadingSection: React.FC<Props> = () => {
   const effectiveSurahNumber =
     effectiveAyahVerseKey?.surahNumber ??
     firstVerseOfStoredPage?.surahNumber ??
+    lastReadVerse?.chapterId ??
     recentlyReadVerseKeys?.[0]?.surah ??
     1;
   const effectiveVerseNumber =
     effectiveAyahVerseKey?.verseNumber ??
     firstVerseOfStoredPage?.verseNumber ??
+    (lastReadVerse?.verseKey
+      ? getVerseAndChapterNumbersFromKey(lastReadVerse.verseKey)[1]
+      : undefined) ??
     recentlyReadVerseKeys?.[0]?.ayah;
 
   // Resolve page number for current mushaf (use effectivePageNumber from hook)
@@ -121,7 +127,8 @@ const ReadingSection: React.FC<Props> = () => {
   // Determine if user has reading sessions
   const hasReadingBookmark = !!effectiveBookmark;
   const hasRecentlyReadVerses = recentlyReadVerseKeys && recentlyReadVerseKeys.length > 0;
-  const hasReadingSessions = hasReadingBookmark || hasRecentlyReadVerses;
+  const hasLocalLastReadVerse = !!lastReadVerse?.chapterId;
+  const hasReadingSessions = hasReadingBookmark || hasRecentlyReadVerses || hasLocalLastReadVerse;
 
   const isGuestWithReadingSessions = isGuest && hasReadingSessions;
   const isUserWithReadingSessions = !isGuest && hasReadingSessions;
