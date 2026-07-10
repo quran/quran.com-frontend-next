@@ -121,7 +121,7 @@ export default {
   18: (state) => ({
     ...state,
     audioPlayerState: {
-      ...state.readingPreferences,
+      ...state.audioPlayerState,
       showTooltipWhenPlayingAudio: false,
     },
   }),
