@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 
-import React, { MouseEvent, useMemo } from 'react';
+import React, { MouseEvent, useContext, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -13,7 +13,8 @@ import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
 import Language from '@/types/Language';
 import { getLanguageDataById, findLanguageIdByLocale, toLocalizedNumber } from '@/utils/locale';
-import { formatVerseReferencesToLinks, isNumericString } from '@/utils/string';
+import { findChapterContext, formatVerseReferencesToLinks, isNumericString } from '@/utils/string';
+import DataContext from '@/contexts/DataContext';
 import Footnote from 'types/Footnote';
 
 interface FootnoteTextProps {
@@ -31,6 +32,7 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   onTextClicked,
   isLoading,
 }) => {
+  const chaptersData = useContext(DataContext);
   const { t, lang } = useTranslation('quran-reader');
 
   // App locale language data (for container/header direction)
@@ -54,8 +56,9 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
 
   const updatedText = useMemo(() => {
     if (!footnote?.text) return '';
-    return formatVerseReferencesToLinks(footnote.text);
-  }, [footnote?.text]);
+    const chapterContext = findChapterContext(footnote.text, chaptersData);
+    return formatVerseReferencesToLinks(footnote.text, chapterContext);
+  }, [footnote?.text, chaptersData]);
 
   return (
     <div
