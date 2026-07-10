@@ -1,3 +1,5 @@
+import type Chapter from '@/types/Chapter';
+
 /**
  * Shorten a text by setting the maximum number of characters
  * by the value of the parameter and adding "..." at the end.
@@ -187,15 +189,89 @@ export const cleanTranscript = (text: string): string => {
  * Converts verse references in text to clickable links.
  * Example: "1:1" or "1:1-2" or "1:1-2:3" will be converted to HTML anchor tags.
  *
+ * When a reference includes a chapter number (e.g. "37:7-10"), the URL
+ * uses the format /chapter/verses (e.g. "/37/7-10").
+ * Bare verse ranges without a chapter prefix (e.g. "7-10") are not linked
+ * because the chapter cannot be determined without context.
+ *
  * @param {string} text - The text containing verse references
+ * @param {string} [chapterContext] - Optional chapter ID to use for bare verse ranges
  * @returns {string} The text with verse references converted to links
  */
-export const formatVerseReferencesToLinks = (text: string): string => {
+export const formatVerseReferencesToLinks = (text: string, chapterContext?: string): string => {
   if (!text) return '';
   return text.replace(
     /(\d{1,3}[:-]\d{1,3}(?:-\d{1,3}(?::\d{1,3})?)?)(?![^<]*<\/a>)/g,
-    (match) => `<a href="${`/${match}`}" target="_blank">${match}</a>`,
+    (match) => {
+      const colonIndex = match.indexOf(':');
+      if (colonIndex !== -1) {
+        const chapter = match.slice(0, colonIndex);
+        const verses = match.slice(colonIndex + 1);
+        return `<a href="/${chapter}/${verses}" target="_blank">${match}</a>`;
+      }
+      if (chapterContext) {
+        return `<a href="/${chapterContext}/${match}" target="_blank">${match}</a>`;
+      }
+      return match;
+    },
   );
+};
+
+/**
+ * Scans footnote text for a mention of a Surah name and returns
+ * the corresponding chapter ID. This allows bare verse ranges
+ * (e.g. "7-10") to be linked with the correct chapter prefix
+ * when the Surah is named earlier in the text.
+ *
+ * Uses transliterated names and slugs from chapter data. Works best
+ * when the Surah name appears in Latin script.
+ *
+ * @param {string} text - The footnote text to scan
+ * @param {Record<string, Chapter>} chaptersData - Chapter data keyed by ID
+ * @returns {string | null} The detected chapter ID, or null if no match
+ */
+export const findChapterContext = (
+  text: string,
+  chaptersData: Record<string, Chapter>,
+): string | null => {
+  if (!text || !chaptersData) return null;
+
+  const textLower = text.toLowerCase();
+  let lastMatch: string | null = null;
+  let lastIndex = -1;
+
+  for (const [chapterId, chapter] of Object.entries(chaptersData)) {
+    const names = new Set<string>();
+
+    if (typeof chapter.defaultSlug === 'string') {
+      names.add(chapter.defaultSlug);
+    } else if (chapter.defaultSlug?.slug) {
+      names.add(chapter.defaultSlug.slug);
+    }
+
+    if (chapter.transliteratedName) {
+      names.add(chapter.transliteratedName);
+    }
+
+    for (const name of names) {
+      const withoutAl = name.replace(/^al[- ]/i, '');
+      if (withoutAl !== name) {
+        names.add(withoutAl);
+      }
+    }
+
+    for (const name of names) {
+      if (!name) continue;
+      const nameLower = name.toLowerCase();
+      const index = textLower.indexOf(nameLower);
+      if (index !== -1 && index > lastIndex) {
+        lastMatch = chapterId;
+        lastIndex = index;
+      }
+    }
+  }
+
+  return lastMatch;
 };
 
 /**
