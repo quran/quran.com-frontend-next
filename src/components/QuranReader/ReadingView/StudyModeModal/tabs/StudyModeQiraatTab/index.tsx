@@ -20,6 +20,8 @@ import {
 } from '@/redux/slices/QuranReader/studyMode';
 import { openReaderBioModal } from '@/redux/slices/QuranReader/verseActionModal';
 
+const DEFAULT_COLOR = '#FFFFFF';
+
 interface StudyModeQiraatTabProps {
   chapterId: string;
   verseNumber: string;
@@ -70,6 +72,52 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
     if (!data?.junctures || !selectedJunctureId) return null;
     return data.junctures.find((juncture) => juncture.id === selectedJunctureId) ?? null;
   }, [data?.junctures, selectedJunctureId]);
+
+  // Compute reader-to-color and reader-to-reading maps for disambiguation.
+  // When a reader appears in multiple readings, we assign the reader to the
+  // first candidate reading whose color hasn't been used by another reader.
+  // This ensures each reading gets a unique color in the Readers panel.
+  const { readerColorMap, readerReadingMap } = useMemo(() => {
+    const colorMap = new Map<number, string>();
+    const readingMap = new Map<number, number>();
+    const usedColors = new Set<string>();
+
+    const readingsList = selectedJuncture?.readings ?? [];
+
+    const readerCandidates = (data?.readers ?? []).map((reader) => ({
+      reader,
+      candidates: readingsList.filter(
+        ({ matrix }) => matrix?.readers?.includes(reader.id),
+      ),
+    }));
+
+    // First pass: assign unambiguous readers (single candidate)
+    for (const { reader, candidates } of readerCandidates) {
+      if (candidates.length === 1) {
+        const color = candidates[0].color || DEFAULT_COLOR;
+        colorMap.set(reader.id, color);
+        readingMap.set(reader.id, candidates[0].id);
+        usedColors.add(color);
+      }
+    }
+
+    // Second pass: for ambiguous readers, prefer a candidate color not yet used
+    for (const { reader, candidates } of readerCandidates) {
+      if (candidates.length <= 1) continue;
+
+      const unusedCandidate = candidates.find(
+        ({ color }) => color && !usedColors.has(color),
+      );
+
+      const chosen = unusedCandidate || candidates[0];
+      const color = chosen.color || DEFAULT_COLOR;
+      colorMap.set(reader.id, color);
+      readingMap.set(reader.id, chosen.id);
+      usedColors.add(color);
+    }
+
+    return { readerColorMap: colorMap, readerReadingMap: readingMap };
+  }, [data?.readers, selectedJuncture?.readings]);
 
   // Handlers
   const handleJunctureSelect = useCallback((junctureId: number) => {
@@ -140,15 +188,15 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
       const transmitter = data?.transmitters?.find((tr) => tr.id === transmitterId);
       if (!transmitter) return undefined;
 
-      // 3. Find and scroll to a reading where that reader appears in the matrix
-      const readerReading = selectedJuncture.readings.find((reading) =>
-        reading.matrix?.readers?.includes(transmitter.readerId),
-      );
-
-      if (readerReading) scrollToReading(readerReading.id);
+      // 3. Use the same disambiguation result as the color assignment, so the
+      //    scroll target matches the reader's color in the Readers panel.
+      const readingId = readerReadingMap.get(transmitter.readerId);
+      if (readingId) {
+        scrollToReading(readingId);
+      }
       return undefined;
     },
-    [selectedJuncture?.readings, data?.transmitters],
+    [selectedJuncture?.readings, data?.transmitters, readerReadingMap],
   );
 
   if (isLoading) {
@@ -187,6 +235,7 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
             readers={data.readers}
             transmitters={data.transmitters}
             readings={selectedJuncture?.readings || []}
+            readerColorMap={readerColorMap}
             isExpanded={isReadersPanelExpanded}
             onToggleExpand={handleToggleReadersPanel}
             onTransmitterClick={handleTransmitterClick}
