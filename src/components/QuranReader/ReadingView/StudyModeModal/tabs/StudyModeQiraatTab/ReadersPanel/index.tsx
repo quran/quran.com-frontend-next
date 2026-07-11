@@ -16,13 +16,12 @@ interface ReadersPanelProps {
   readers: QiraatReader[];
   transmitters: QiraatTransmitter[];
   readings: QiraatReading[];
+  readerColorMap: Map<number, string>;
   isExpanded: boolean;
   onToggleExpand: () => void;
   onTransmitterClick?: (transmitterId: number) => void;
   onReaderInfoClick?: (readerId: number) => void;
 }
-
-const DEFAULT_COLOR = '#FFFFFF';
 
 /**
  * Responsive panel displaying all canonical readers with their transmitters.
@@ -34,6 +33,7 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
   readers,
   transmitters,
   readings,
+  readerColorMap,
   isExpanded,
   onToggleExpand,
   onTransmitterClick,
@@ -60,47 +60,6 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
         )),
     [readings],
   );
-
-  const readerColorMap = useMemo(() => {
-    const map = new Map<number, string>();
-    const usedColors = new Set<string>();
-
-    const readerCandidates = readers.map((reader) => ({
-      reader,
-      candidates: readings.filter(
-        ({ matrix }) => matrix?.readers?.includes(reader.id),
-      ),
-    }));
-
-    // First pass: assign unambiguous readers (single candidate)
-    for (const { reader, candidates } of readerCandidates) {
-      if (candidates.length === 1) {
-        const color = candidates[0].color || DEFAULT_COLOR;
-        map.set(reader.id, color);
-        usedColors.add(color);
-      }
-    }
-
-    // Second pass: for ambiguous readers, prefer a candidate color not yet used
-    for (const { reader, candidates } of readerCandidates) {
-      if (candidates.length <= 1) continue;
-
-      const unusedCandidate = candidates.find(
-        ({ color }) => color && !usedColors.has(color),
-      );
-
-      if (unusedCandidate) {
-        const color = unusedCandidate.color || DEFAULT_COLOR;
-        map.set(reader.id, color);
-        usedColors.add(color);
-      } else {
-        const color = candidates[0].color || DEFAULT_COLOR;
-        map.set(reader.id, color);
-      }
-    }
-
-    return map;
-  }, [readers, readings]);
 
   return (
     <div className={classNames(styles.panel, { [styles.expanded]: isExpanded })}>
