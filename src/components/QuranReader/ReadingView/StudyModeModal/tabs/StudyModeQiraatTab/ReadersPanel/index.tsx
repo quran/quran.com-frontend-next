@@ -16,6 +16,7 @@ interface ReadersPanelProps {
   readers: QiraatReader[];
   transmitters: QiraatTransmitter[];
   readings: QiraatReading[];
+  readerColorMap: Map<number, string>;
   isExpanded: boolean;
   onToggleExpand: () => void;
   onTransmitterClick?: (transmitterId: number) => void;
@@ -32,6 +33,7 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
   readers,
   transmitters,
   readings,
+  readerColorMap,
   isExpanded,
   onToggleExpand,
   onTransmitterClick,
@@ -101,6 +103,7 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
             reader={reader}
             transmitters={transmitters}
             readings={readings}
+            readerColor={readerColorMap.get(reader.id)}
             onInfoClick={() => onReaderInfoClick?.(reader.id)}
             onTransmitterClick={onTransmitterClick}
             isClickable={!!onTransmitterClick}
