@@ -10,6 +10,7 @@ interface ReaderItemProps {
   reader: QiraatReader;
   transmitters: QiraatTransmitter[];
   readings: QiraatReading[];
+  readerColor?: string;
   onInfoClick?: () => void;
   onTransmitterClick?: (transmitterId: number) => void;
   isClickable?: boolean;
@@ -26,6 +27,7 @@ const ReaderItem: React.FC<ReaderItemProps> = ({
   reader,
   transmitters,
   readings,
+  readerColor,
   onInfoClick,
   onTransmitterClick,
   isClickable = false,
@@ -57,12 +59,14 @@ const ReaderItem: React.FC<ReaderItemProps> = ({
 
     if (transmitterReading) return transmitterReading.color || DEFAULT_COLOR;
 
-    // 2. If not found directly, the transmitter inherits color from its parent reader
-    // Find a reading where this reader appears in the matrix
+    // 2. If the parent component has pre-computed a color for this reader, use it
+    if (readerColor) return readerColor;
+
+    // 3. If not found directly, the transmitter inherits color from its parent reader
     const readerReading = readings.find(({ matrix }) => matrix?.readers?.includes(reader.id));
     if (readerReading) return readerReading.color || DEFAULT_COLOR;
 
-    // 3. Default fallback - no association found
+    // 4. Default fallback - no association found
     return DEFAULT_COLOR;
   };
 
