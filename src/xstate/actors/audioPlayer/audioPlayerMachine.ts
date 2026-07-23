@@ -327,18 +327,33 @@ export const audioPlayerMachine =
                             'User either clicks on the pause button or presses the space key',
                           target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PAUSED.ACTIVE',
                         },
-                        REPEAT_AYAH: {
-                          actions: [
-                            assign({
-                              ayahNumber: (context, event: any) => event.ayahNumber,
-                              verseDelay: (context, event: any) => event.verseDelay,
-                            }),
-                            'pauseAudio',
-                            'setAudioPlayerCurrentTime',
-                          ],
-                          description: 'Repeat the current ayah',
-                          target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING',
-                        },
+                        REPEAT_AYAH: [
+                          {
+                            actions: [
+                              assign({
+                                ayahNumber: (context, event: any) => event.ayahNumber,
+                                verseDelay: (context, event: any) => event.verseDelay,
+                              }),
+                              'pauseAudio',
+                              'setAudioPlayerCurrentTime',
+                            ],
+                            cond: 'hasVerseDelay',
+                            description:
+                              'Repeat the current ayah with a configurable delay between verses',
+                            target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING',
+                          },
+                          {
+                            actions: [
+                              assign({
+                                ayahNumber: (context, event: any) => event.ayahNumber,
+                              }),
+                              'setAudioPlayerCurrentTime',
+                            ],
+                            description:
+                              'Repeat the current ayah seamlessly without pausing the audio',
+                            target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
+                          },
+                        ],
                         SEEKING: {
                           description:
                             'When the mouse or keyboard keys are clicked to jump forward/backward 5 or 10 seconds or when the user wants to navigate to a specific time.',
@@ -1075,6 +1090,9 @@ export const audioPlayerMachine =
           return context.surah === event.surah && reciterId === context.audioData?.reciterId;
         },
         isRepeatActive: (context) => !!context.repeatActor,
+        hasVerseDelay: (context, event: any) => {
+          return event.verseDelay > 0;
+        },
         isUsingCustomReciterId: (context, event) => !!event.reciterId,
         isAudioAlmostEnded: (context) => {
           const { currentTime } = context.audioPlayer;
