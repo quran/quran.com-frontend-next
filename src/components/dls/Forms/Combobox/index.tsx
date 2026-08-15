@@ -231,7 +231,20 @@ const Combobox: React.FC<Props> = ({
   );
 
   const onSelectorClicked = () => {
-    setIsOpened((prevIsOpened) => !prevIsOpened);
+    setIsOpened((prevIsOpened) => {
+      const willOpen = !prevIsOpened;
+      // Opening the combobox previously left `inputValue` seeded with the current
+      // selection's label (from `initialInputValue`). Since the item list is
+      // filtered by a substring match against `inputValue`, this hid every item
+      // whose label didn't contain that stale value (e.g. selecting "36:1" then
+      // reopening only showed "36:1", "36:10"-"36:19"). Clear it on open so every
+      // item is visible until the user actually types to filter.
+      // See https://github.com/quran/quran.com-frontend-next/issues/2088
+      if (willOpen && !isMultiSelect) {
+        setInputValue('');
+      }
+      return willOpen;
+    });
     // we need to focus on the input field whenever the user clicks anywhere inside the component.
     if (isMultiSelect) {
       focusInput();

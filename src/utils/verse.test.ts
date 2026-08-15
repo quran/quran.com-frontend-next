@@ -198,4 +198,16 @@ describe('generateChapterVersesKeys', () => {
     const result = generateChapterVersesKeys(chaptersData, chapterId, false);
     expect(result).toEqual(expectedKeys);
   });
+
+  // Coverage for a long surah: the existing tests above only exercised
+  // chapters 1, 112, and the not-found case, none of which have more than 19
+  // verses, so a hypothetical 19-item cap would not have been caught here.
+  it('should generate keys for every verse of a surah with more than 19 verses', async () => {
+    const chapterId = '2'; // Al-Baqarah has 286 verses
+    const chaptersData = await getAllChaptersData();
+    const result = generateChapterVersesKeys(chaptersData, chapterId, false);
+    const expectedKeys = Array.from({ length: 286 }, (unused, index) => `2:${index + 1}`);
+
+    expect(result).toEqual(expectedKeys);
+  });
 });
