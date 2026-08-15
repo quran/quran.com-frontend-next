@@ -198,4 +198,19 @@ describe('generateChapterVersesKeys', () => {
     const result = generateChapterVersesKeys(chaptersData, chapterId, false);
     expect(result).toEqual(expectedKeys);
   });
+
+  // Regression test for https://github.com/quran/quran.com-frontend-next/issues/2088
+  // The repeat-settings "to ayah" dropdown must include every ayah in the surah,
+  // not just the first 19, for surahs that have more than 19 verses.
+  it('should generate keys for every verse of a surah with more than 19 verses', async () => {
+    const chapterId = '2'; // Al-Baqarah has 286 verses
+    const chaptersData = await getAllChaptersData();
+    const result = generateChapterVersesKeys(chaptersData, chapterId, false);
+
+    expect(result).toHaveLength(286);
+    expect(result[0]).toEqual('2:1');
+    expect(result[18]).toEqual('2:19');
+    expect(result[19]).toEqual('2:20');
+    expect(result[result.length - 1]).toEqual('2:286');
+  });
 });
