@@ -3,7 +3,9 @@
 @use 'src/styles/constants';
 
 .footer {
-  background-color: var(--color-background-elevated-new);
+  // matches page background instead of "elevated" surface; in Sepia those
+  // differ and caused a visible seam at the footer's top border (#2336)
+  background-color: var(--color-background-default);
 }
 
 .flowItem {
