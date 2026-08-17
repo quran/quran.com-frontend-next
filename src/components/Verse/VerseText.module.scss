@@ -82,6 +82,12 @@
 @include utility.generate-font-scales('fallback_qpc_uthmani_hafs');
 @include utility.generate-font-scales('tajweed');
 
+// Compensate the line-height for the 1.2x font-size bump applied to
+// `.tafsirOrTranslationMode` (see below), so IndoPak text doesn't overlap
+// between lines in Translation/Tafsir mode. See quran/quran.com-frontend-next#1925.
+@include utility.generate-translation-mode-line-height-fix('text_indopak_15_lines');
+@include utility.generate-translation-mode-line-height-fix('text_indopak_16_lines');
+
 .highlighted {
   background-color: var(--color-background-alternative-faded);
 }

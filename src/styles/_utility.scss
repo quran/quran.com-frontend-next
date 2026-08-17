@@ -834,6 +834,26 @@ $line-width-map: (
   }
 }
 
+// `.tafsirOrTranslationMode` (see VerseText.module.scss) bumps --font-size by
+// 1.2x on tablet+ for translation/tafsir views, but --line-height keeps the
+// value tuned for the un-scaled font-size. IndoPak's diacritics are tall
+// enough that this mismatch makes them overlap the line below it, so scale
+// --line-height by the same 1.2x for IndoPak specifically when combined with
+// `.tafsirOrTranslationMode`.
+@mixin generate-translation-mode-line-height-fix($name) {
+  $tablet-line-height-scales: get-scales($name, 'tablet', $line-heights-map);
+
+  @for $i from 1 through constants.$maximum-font-step {
+    @if map.has-key($tablet-line-height-scales, $i) {
+      .tafsirOrTranslationMode.#{$name}-font-size-#{$i} {
+        @include breakpoints.tablet {
+          --line-height: calc(1.2 * #{map.get($tablet-line-height-scales, $i)});
+        }
+      }
+    }
+  }
+}
+
 // Sets a max-width based on the device width. Inspired by the bootstrap container (https://getbootstrap.com/docs/5.0/layout/containers/).
 $large-device-width-ratio: 95%;
 $quran-max-container-width: 112rem;
