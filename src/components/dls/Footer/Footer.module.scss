@@ -6,6 +6,14 @@
   // matches page background instead of "elevated" surface; in Sepia those
   // differ and caused a visible seam at the footer's top border (#2336)
   background-color: var(--color-background-default);
+
+  // Quran reader routes (chapter/juz/page/verse) render on the elevated
+  // surface (see QuranReader.module.scss's .container), not the default one.
+  // Without this override, the default-background footer above would itself
+  // create a new Sepia seam against that elevated surface (#3326).
+  &.elevatedBackground {
+    background-color: var(--color-background-elevated-new);
+  }
 }
 
 .flowItem {
