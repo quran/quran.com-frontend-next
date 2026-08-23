@@ -36,9 +36,29 @@ const ThemeProvider = ({ children }) => {
 
   useLayoutEffect(() => {
     if (typeof window === 'undefined') {
-      return;
+      return undefined;
     }
-    setThemeColorMetaTag(THEME_COLORS[themeVariant]);
+    const color = THEME_COLORS[themeVariant];
+    setThemeColorMetaTag(color);
+
+    // Guard against later head reconciliations (e.g. `DefaultSeo` re-rendering with its
+    // static placeholder color on unrelated navigation/state changes) reverting the tag.
+    // This effect only reruns on `themeVariant` change, so without this observer the
+    // meta tag would stay wrong until the next theme switch.
+    const observer = new MutationObserver(() => {
+      const tag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+      if (tag && tag.getAttribute('content') !== color) {
+        tag.setAttribute('content', color);
+      }
+    });
+    observer.observe(document.head, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['content'],
+    });
+
+    return () => observer.disconnect();
   }, [themeVariant]);
 
   return <div>{children}</div>;

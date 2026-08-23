@@ -99,4 +99,50 @@ describe('ThemeProvider', () => {
     expect(document.head.querySelectorAll('meta[name="theme-color"]')).toHaveLength(1);
     expect(getThemeColorMetaTag()?.getAttribute('content')).toBe('#1f2125');
   });
+
+  it('restores the theme color after a later SEO rerender reverts the meta tag', async () => {
+    vi.mocked(useSelector).mockReturnValue({ type: ThemeType.Dark });
+    vi.mocked(useThemeDetector).mockReturnValue({
+      isDarkTheme: true,
+      settingsTheme: { type: ThemeType.Dark },
+      themeVariant: ThemeType.Dark,
+    });
+
+    render(<ThemeProvider>{null}</ThemeProvider>);
+
+    expect(getThemeColorMetaTag()?.getAttribute('content')).toBe('#1f2125');
+
+    // Simulate `DefaultSeo`/next-seo's head reconciliation stomping the tag back to its
+    // static placeholder on an unrelated rerender (e.g. AppContent selector change).
+    getThemeColorMetaTag()?.setAttribute('content', '#fff');
+
+    await vi.waitFor(() => {
+      expect(getThemeColorMetaTag()?.getAttribute('content')).toBe('#1f2125');
+    });
+  });
+
+  it('restores the theme color after the SEO tag is replaced with a new element', async () => {
+    vi.mocked(useSelector).mockReturnValue({ type: ThemeType.Sepia });
+    vi.mocked(useThemeDetector).mockReturnValue({
+      isDarkTheme: false,
+      settingsTheme: { type: ThemeType.Sepia },
+      themeVariant: ThemeType.Sepia,
+    });
+
+    render(<ThemeProvider>{null}</ThemeProvider>);
+
+    expect(getThemeColorMetaTag()?.getAttribute('content')).toBe('#f8ebd5');
+
+    // Simulate Next's head diffing removing the old tag and inserting a fresh one from
+    // the static SEO config (a childList mutation rather than an attribute mutation).
+    getThemeColorMetaTag()?.remove();
+    const replacementTag = document.createElement('meta');
+    replacementTag.name = 'theme-color';
+    replacementTag.content = '#fff';
+    document.head.appendChild(replacementTag);
+
+    await vi.waitFor(() => {
+      expect(getThemeColorMetaTag()?.getAttribute('content')).toBe('#f8ebd5');
+    });
+  });
 });
