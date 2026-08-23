@@ -1,800 +1,800 @@
 {
-    "1": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Fatihah",
-        "versesCount": 7,
-        "translatedName": "الفاتحة",
-        "slug": "al-fatihah"
-    },
-    "2": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Baqarah",
-        "versesCount": 286,
-        "translatedName": "البقرة",
-        "slug": "al-baqarah"
-    },
-    "3": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Ali 'Imran",
-        "versesCount": 200,
-        "translatedName": "آل عمران",
-        "slug": "ali-imran"
-    },
-    "4": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "An-Nisa",
-        "versesCount": 176,
-        "translatedName": "النساء",
-        "slug": "an-nisa"
-    },
-    "5": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Ma'idah",
-        "versesCount": 120,
-        "translatedName": "المائدة",
-        "slug": "al-maidah"
-    },
-    "6": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-An'am",
-        "versesCount": 165,
-        "translatedName": "الأنعام",
-        "slug": "al-anam"
-    },
-    "7": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-A'raf",
-        "versesCount": 206,
-        "translatedName": "الأعراف",
-        "slug": "al-araf"
-    },
-    "8": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Anfal",
-        "versesCount": 75,
-        "translatedName": "الأنفال",
-        "slug": "al-anfal"
-    },
-    "9": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "At-Tawbah",
-        "versesCount": 129,
-        "translatedName": "التوبة",
-        "slug": "at-tawbah"
-    },
-    "10": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Yunus",
-        "versesCount": 109,
-        "translatedName": "يونس",
-        "slug": "yunus"
-    },
-    "11": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Hud",
-        "versesCount": 123,
-        "translatedName": "هود",
-        "slug": "hud"
-    },
-    "12": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Yusuf",
-        "versesCount": 111,
-        "translatedName": "يوسف",
-        "slug": "yusuf"
-    },
-    "13": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Ar-Ra'd",
-        "versesCount": 43,
-        "translatedName": "الرعد",
-        "slug": "ar-rad"
-    },
-    "14": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Ibrahim",
-        "versesCount": 52,
-        "translatedName": "ابراهيم",
-        "slug": "ibrahim"
-    },
-    "15": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Hijr",
-        "versesCount": 99,
-        "translatedName": "الحجر",
-        "slug": "al-hijr"
-    },
-    "16": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "An-Nahl",
-        "versesCount": 128,
-        "translatedName": "النحل",
-        "slug": "an-nahl"
-    },
-    "17": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Isra",
-        "versesCount": 111,
-        "translatedName": "الإسراء",
-        "slug": "al-isra"
-    },
-    "18": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Kahf",
-        "versesCount": 110,
-        "translatedName": "الكهف",
-        "slug": "al-kahf"
-    },
-    "19": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Maryam",
-        "versesCount": 98,
-        "translatedName": "مريم",
-        "slug": "maryam"
-    },
-    "20": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Taha",
-        "versesCount": 135,
-        "translatedName": "طه",
-        "slug": "taha"
-    },
-    "21": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Anbya",
-        "versesCount": 112,
-        "translatedName": "الأنبياء",
-        "slug": "al-anbya"
-    },
-    "22": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Hajj",
-        "versesCount": 78,
-        "translatedName": "الحج",
-        "slug": "al-hajj"
-    },
-    "23": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Mu'minun",
-        "versesCount": 118,
-        "translatedName": "المؤمنون",
-        "slug": "al-muminun"
-    },
-    "24": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "An-Nur",
-        "versesCount": 64,
-        "translatedName": "النور",
-        "slug": "an-nur"
-    },
-    "25": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Furqan",
-        "versesCount": 77,
-        "translatedName": "الفرقان",
-        "slug": "al-furqan"
-    },
-    "26": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Ash-Shu'ara",
-        "versesCount": 227,
-        "translatedName": "الشعراء",
-        "slug": "ash-shuara"
-    },
-    "27": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "An-Naml",
-        "versesCount": 93,
-        "translatedName": "النمل",
-        "slug": "an-naml"
-    },
-    "28": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Qasas",
-        "versesCount": 88,
-        "translatedName": "القصص",
-        "slug": "al-qasas"
-    },
-    "29": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-'Ankabut",
-        "versesCount": 69,
-        "translatedName": "العنكبوت",
-        "slug": "al-ankabut"
-    },
-    "30": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Ar-Rum",
-        "versesCount": 60,
-        "translatedName": "الروم",
-        "slug": "ar-rum"
-    },
-    "31": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Luqman",
-        "versesCount": 34,
-        "translatedName": "لقمان",
-        "slug": "luqman"
-    },
-    "32": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "As-Sajdah",
-        "versesCount": 30,
-        "translatedName": "السجدة",
-        "slug": "as-sajdah"
-    },
-    "33": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Ahzab",
-        "versesCount": 73,
-        "translatedName": "الأحزاب",
-        "slug": "al-ahzab"
-    },
-    "34": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Saba",
-        "versesCount": 54,
-        "translatedName": "سبإ",
-        "slug": "saba"
-    },
-    "35": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Fatir",
-        "versesCount": 45,
-        "translatedName": "فاطر",
-        "slug": "fatir"
-    },
-    "36": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Ya-Sin",
-        "versesCount": 83,
-        "translatedName": "يس",
-        "slug": "ya-sin"
-    },
-    "37": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "As-Saffat",
-        "versesCount": 182,
-        "translatedName": "الصافات",
-        "slug": "as-saffat"
-    },
-    "38": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Sad",
-        "versesCount": 88,
-        "translatedName": "ص",
-        "slug": "sad"
-    },
-    "39": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Az-Zumar",
-        "versesCount": 75,
-        "translatedName": "الزمر",
-        "slug": "az-zumar"
-    },
-    "40": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Ghafir",
-        "versesCount": 85,
-        "translatedName": "غافر",
-        "slug": "ghafir"
-    },
-    "41": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Fussilat",
-        "versesCount": 54,
-        "translatedName": "فصلت",
-        "slug": "fussilat"
-    },
-    "42": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Ash-Shuraa",
-        "versesCount": 53,
-        "translatedName": "الشورى",
-        "slug": "ash-shuraa"
-    },
-    "43": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Az-Zukhruf",
-        "versesCount": 89,
-        "translatedName": "الزخرف",
-        "slug": "az-zukhruf"
-    },
-    "44": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Ad-Dukhan",
-        "versesCount": 59,
-        "translatedName": "الدخان",
-        "slug": "ad-dukhan"
-    },
-    "45": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Jathiyah",
-        "versesCount": 37,
-        "translatedName": "الجاثية",
-        "slug": "al-jathiyah"
-    },
-    "46": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Ahqaf",
-        "versesCount": 35,
-        "translatedName": "الأحقاف",
-        "slug": "al-ahqaf"
-    },
-    "47": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Muhammad",
-        "versesCount": 38,
-        "translatedName": "محمد",
-        "slug": "muhammad"
-    },
-    "48": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Fath",
-        "versesCount": 29,
-        "translatedName": "الفتح",
-        "slug": "al-fath"
-    },
-    "49": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Hujurat",
-        "versesCount": 18,
-        "translatedName": "الحجرات",
-        "slug": "al-hujurat"
-    },
-    "50": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Qaf",
-        "versesCount": 45,
-        "translatedName": "ق",
-        "slug": "qaf"
-    },
-    "51": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Adh-Dhariyat",
-        "versesCount": 60,
-        "translatedName": "الذاريات",
-        "slug": "adh-dhariyat"
-    },
-    "52": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "At-Tur",
-        "versesCount": 49,
-        "translatedName": "الطور",
-        "slug": "at-tur"
-    },
-    "53": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "An-Najm",
-        "versesCount": 62,
-        "translatedName": "النجم",
-        "slug": "an-najm"
-    },
-    "54": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Qamar",
-        "versesCount": 55,
-        "translatedName": "القمر",
-        "slug": "al-qamar"
-    },
-    "55": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Ar-Rahman",
-        "versesCount": 78,
-        "translatedName": "الرحمن",
-        "slug": "ar-rahman"
-    },
-    "56": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Waqi'ah",
-        "versesCount": 96,
-        "translatedName": "الواقعة",
-        "slug": "al-waqiah"
-    },
-    "57": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Hadid",
-        "versesCount": 29,
-        "translatedName": "الحديد",
-        "slug": "al-hadid"
-    },
-    "58": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Mujadila",
-        "versesCount": 22,
-        "translatedName": "المجادلة",
-        "slug": "al-mujadila"
-    },
-    "59": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Hashr",
-        "versesCount": 24,
-        "translatedName": "الحشر",
-        "slug": "al-hashr"
-    },
-    "60": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Mumtahanah",
-        "versesCount": 13,
-        "translatedName": "الممتحنة",
-        "slug": "al-mumtahanah"
-    },
-    "61": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "As-Saf",
-        "versesCount": 14,
-        "translatedName": "الصف",
-        "slug": "as-saf"
-    },
-    "62": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Jumu'ah",
-        "versesCount": 11,
-        "translatedName": "الجمعة",
-        "slug": "al-jumuah"
-    },
-    "63": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Munafiqun",
-        "versesCount": 11,
-        "translatedName": "المنافقون",
-        "slug": "al-munafiqun"
-    },
-    "64": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "At-Taghabun",
-        "versesCount": 18,
-        "translatedName": "التغابن",
-        "slug": "at-taghabun"
-    },
-    "65": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "At-Talaq",
-        "versesCount": 12,
-        "translatedName": "الطلاق",
-        "slug": "at-talaq"
-    },
-    "66": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "At-Tahrim",
-        "versesCount": 12,
-        "translatedName": "التحريم",
-        "slug": "at-tahrim"
-    },
-    "67": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Mulk",
-        "versesCount": 30,
-        "translatedName": "الملك",
-        "slug": "al-mulk"
-    },
-    "68": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Qalam",
-        "versesCount": 52,
-        "translatedName": "القلم",
-        "slug": "al-qalam"
-    },
-    "69": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Haqqah",
-        "versesCount": 52,
-        "translatedName": "الحاقة",
-        "slug": "al-haqqah"
-    },
-    "70": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Ma'arij",
-        "versesCount": 44,
-        "translatedName": "المعارج",
-        "slug": "al-maarij"
-    },
-    "71": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Nuh",
-        "versesCount": 28,
-        "translatedName": "نوح",
-        "slug": "nuh"
-    },
-    "72": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Jinn",
-        "versesCount": 28,
-        "translatedName": "الجن",
-        "slug": "al-jinn"
-    },
-    "73": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Muzzammil",
-        "versesCount": 20,
-        "translatedName": "المزمل",
-        "slug": "al-muzzammil"
-    },
-    "74": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Muddaththir",
-        "versesCount": 56,
-        "translatedName": "المدثر",
-        "slug": "al-muddaththir"
-    },
-    "75": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Qiyamah",
-        "versesCount": 40,
-        "translatedName": "القيامة",
-        "slug": "al-qiyamah"
-    },
-    "76": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Insan",
-        "versesCount": 31,
-        "translatedName": "الانسان",
-        "slug": "al-insan"
-    },
-    "77": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Mursalat",
-        "versesCount": 50,
-        "translatedName": "المرسلات",
-        "slug": "al-mursalat"
-    },
-    "78": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "An-Naba",
-        "versesCount": 40,
-        "translatedName": "النبإ",
-        "slug": "an-naba"
-    },
-    "79": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "An-Nazi'at",
-        "versesCount": 46,
-        "translatedName": "النازعات",
-        "slug": "an-naziat"
-    },
-    "80": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "'Abasa",
-        "versesCount": 42,
-        "translatedName": "عبس",
-        "slug": "abasa"
-    },
-    "81": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "At-Takwir",
-        "versesCount": 29,
-        "translatedName": "التكوير",
-        "slug": "at-takwir"
-    },
-    "82": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Infitar",
-        "versesCount": 19,
-        "translatedName": "الإنفطار",
-        "slug": "al-infitar"
-    },
-    "83": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Mutaffifin",
-        "versesCount": 36,
-        "translatedName": "المطففين",
-        "slug": "al-mutaffifin"
-    },
-    "84": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Inshiqaq",
-        "versesCount": 25,
-        "translatedName": "الإنشقاق",
-        "slug": "al-inshiqaq"
-    },
-    "85": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Buruj",
-        "versesCount": 22,
-        "translatedName": "البروج",
-        "slug": "al-buruj"
-    },
-    "86": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "At-Tariq",
-        "versesCount": 17,
-        "translatedName": "الطارق",
-        "slug": "at-tariq"
-    },
-    "87": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-A'la",
-        "versesCount": 19,
-        "translatedName": "الأعلى",
-        "slug": "al-ala"
-    },
-    "88": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Ghashiyah",
-        "versesCount": 26,
-        "translatedName": "الغاشية",
-        "slug": "al-ghashiyah"
-    },
-    "89": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Fajr",
-        "versesCount": 30,
-        "translatedName": "الفجر",
-        "slug": "al-fajr"
-    },
-    "90": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Balad",
-        "versesCount": 20,
-        "translatedName": "البلد",
-        "slug": "al-balad"
-    },
-    "91": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Ash-Shams",
-        "versesCount": 15,
-        "translatedName": "الشمس",
-        "slug": "ash-shams"
-    },
-    "92": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Layl",
-        "versesCount": 21,
-        "translatedName": "الليل",
-        "slug": "al-layl"
-    },
-    "93": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Ad-Duhaa",
-        "versesCount": 11,
-        "translatedName": "الضحى",
-        "slug": "ad-duhaa"
-    },
-    "94": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Ash-Sharh",
-        "versesCount": 8,
-        "translatedName": "الشرح",
-        "slug": "ash-sharh"
-    },
-    "95": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "At-Tin",
-        "versesCount": 8,
-        "translatedName": "التين",
-        "slug": "at-tin"
-    },
-    "96": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-'Alaq",
-        "versesCount": 19,
-        "translatedName": "العلق",
-        "slug": "al-alaq"
-    },
-    "97": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Qadr",
-        "versesCount": 5,
-        "translatedName": "القدر",
-        "slug": "al-qadr"
-    },
-    "98": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Al-Bayyinah",
-        "versesCount": 8,
-        "translatedName": "البينة",
-        "slug": "al-bayyinah"
-    },
-    "99": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "Az-Zalzalah",
-        "versesCount": 8,
-        "translatedName": "الزلزلة",
-        "slug": "az-zalzalah"
-    },
-    "100": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-'Adiyat",
-        "versesCount": 11,
-        "translatedName": "العاديات",
-        "slug": "al-adiyat"
-    },
-    "101": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Qari'ah",
-        "versesCount": 11,
-        "translatedName": "القارعة",
-        "slug": "al-qariah"
-    },
-    "102": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "At-Takathur",
-        "versesCount": 8,
-        "translatedName": "التكاثر",
-        "slug": "at-takathur"
-    },
-    "103": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-'Asr",
-        "versesCount": 3,
-        "translatedName": "العصر",
-        "slug": "al-asr"
-    },
-    "104": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Humazah",
-        "versesCount": 9,
-        "translatedName": "الهمزة",
-        "slug": "al-humazah"
-    },
-    "105": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Fil",
-        "versesCount": 5,
-        "translatedName": "الفيل",
-        "slug": "al-fil"
-    },
-    "106": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Quraysh",
-        "versesCount": 4,
-        "translatedName": "قريش",
-        "slug": "quraysh"
-    },
-    "107": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Ma'un",
-        "versesCount": 7,
-        "translatedName": "الماعون",
-        "slug": "al-maun"
-    },
-    "108": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Kawthar",
-        "versesCount": 3,
-        "translatedName": "الكوثر",
-        "slug": "al-kawthar"
-    },
-    "109": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Kafirun",
-        "versesCount": 6,
-        "translatedName": "الكافرون",
-        "slug": "al-kafirun"
-    },
-    "110": {
-        "revelationPlace": "madinah",
-        "transliteratedName": "An-Nasr",
-        "versesCount": 3,
-        "translatedName": "النصر",
-        "slug": "an-nasr"
-    },
-    "111": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Masad",
-        "versesCount": 5,
-        "translatedName": "المسد",
-        "slug": "al-masad"
-    },
-    "112": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Ikhlas",
-        "versesCount": 4,
-        "translatedName": "الإخلاص",
-        "slug": "al-ikhlas"
-    },
-    "113": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "Al-Falaq",
-        "versesCount": 5,
-        "translatedName": "الفلق",
-        "slug": "al-falaq"
-    },
-    "114": {
-        "revelationPlace": "makkah",
-        "transliteratedName": "An-Nas",
-        "versesCount": 6,
-        "translatedName": "الناس",
-        "slug": "an-nas"
-    }
+  "1": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Fatiha",
+    "versesCount": 7,
+    "translatedName": "Hapja",
+    "slug": "al-fatihah"
+  },
+  "2": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Bekare",
+    "versesCount": 286,
+    "translatedName": "Lopa",
+    "slug": "al-baqarah"
+  },
+  "3": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "Ali Imran",
+    "versesCount": 200,
+    "translatedName": "Familja e Imranit",
+    "slug": "ali-imran"
+  },
+  "4": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "En-Nisa",
+    "versesCount": 176,
+    "translatedName": "Gratë",
+    "slug": "an-nisa"
+  },
+  "5": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Maide",
+    "versesCount": 120,
+    "translatedName": "Tryeza e Shtruar",
+    "slug": "al-maidah"
+  },
+  "6": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Enam",
+    "versesCount": 165,
+    "translatedName": "Bagëtia",
+    "slug": "al-anam"
+  },
+  "7": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Araf",
+    "versesCount": 206,
+    "translatedName": "Lartësitë",
+    "slug": "al-araf"
+  },
+  "8": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Enfal",
+    "versesCount": 75,
+    "translatedName": "Plaçka e Luftës",
+    "slug": "al-anfal"
+  },
+  "9": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "Et-Teube",
+    "versesCount": 129,
+    "translatedName": "Pendimi",
+    "slug": "at-tawbah"
+  },
+  "10": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Junus",
+    "versesCount": 109,
+    "translatedName": "Junusi",
+    "slug": "yunus"
+  },
+  "11": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Hud",
+    "versesCount": 123,
+    "translatedName": "Hudi",
+    "slug": "hud"
+  },
+  "12": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Jusuf",
+    "versesCount": 111,
+    "translatedName": "Jusufi",
+    "slug": "yusuf"
+  },
+  "13": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "Er-Rad",
+    "versesCount": 43,
+    "translatedName": "Bubullima",
+    "slug": "ar-rad"
+  },
+  "14": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Ibrahim",
+    "versesCount": 52,
+    "translatedName": "Ibrahimi",
+    "slug": "ibrahim"
+  },
+  "15": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Hixhr",
+    "versesCount": 99,
+    "translatedName": "Shkëmbi",
+    "slug": "al-hijr"
+  },
+  "16": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "En-Nahl",
+    "versesCount": 128,
+    "translatedName": "Bleta",
+    "slug": "an-nahl"
+  },
+  "17": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Isra",
+    "versesCount": 111,
+    "translatedName": "Udhëtimi i Natës",
+    "slug": "al-isra"
+  },
+  "18": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Kehf",
+    "versesCount": 110,
+    "translatedName": "Shpella",
+    "slug": "al-kahf"
+  },
+  "19": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Merjem",
+    "versesCount": 98,
+    "translatedName": "Merjemja",
+    "slug": "maryam"
+  },
+  "20": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Ta-Ha",
+    "versesCount": 135,
+    "translatedName": "Ta-Ha",
+    "slug": "taha"
+  },
+  "21": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Enbija",
+    "versesCount": 112,
+    "translatedName": "Profetët",
+    "slug": "al-anbya"
+  },
+  "22": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Haxh",
+    "versesCount": 78,
+    "translatedName": "Haxhi",
+    "slug": "al-hajj"
+  },
+  "23": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Muminun",
+    "versesCount": 118,
+    "translatedName": "Besimtarët",
+    "slug": "al-muminun"
+  },
+  "24": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "En-Nur",
+    "versesCount": 64,
+    "translatedName": "Drita",
+    "slug": "an-nur"
+  },
+  "25": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Furkan",
+    "versesCount": 77,
+    "translatedName": "Dalluesi",
+    "slug": "al-furqan"
+  },
+  "26": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Esh-Shuara",
+    "versesCount": 227,
+    "translatedName": "Poetët",
+    "slug": "ash-shuara"
+  },
+  "27": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "En-Neml",
+    "versesCount": 93,
+    "translatedName": "Milingonat",
+    "slug": "an-naml"
+  },
+  "28": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Kasas",
+    "versesCount": 88,
+    "translatedName": "Tregimet",
+    "slug": "al-qasas"
+  },
+  "29": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Ankebut",
+    "versesCount": 69,
+    "translatedName": "Merimanga",
+    "slug": "al-ankabut"
+  },
+  "30": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Er-Rum",
+    "versesCount": 60,
+    "translatedName": "Romakët",
+    "slug": "ar-rum"
+  },
+  "31": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Lukman",
+    "versesCount": 34,
+    "translatedName": "Lukmani",
+    "slug": "luqman"
+  },
+  "32": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Es-Sexhde",
+    "versesCount": 30,
+    "translatedName": "Sexhdeja",
+    "slug": "as-sajdah"
+  },
+  "33": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Ahzab",
+    "versesCount": 73,
+    "translatedName": "Aleancat",
+    "slug": "al-ahzab"
+  },
+  "34": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Sebé",
+    "versesCount": 54,
+    "translatedName": "Sebeja",
+    "slug": "saba"
+  },
+  "35": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Fatir",
+    "versesCount": 45,
+    "translatedName": "Krijuesi",
+    "slug": "fatir"
+  },
+  "36": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Ja-Sin",
+    "versesCount": 83,
+    "translatedName": "Ja-Sin",
+    "slug": "ya-sin"
+  },
+  "37": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Es-Saffat",
+    "versesCount": 182,
+    "translatedName": "Radhët",
+    "slug": "as-saffat"
+  },
+  "38": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Sad",
+    "versesCount": 88,
+    "translatedName": "Sad",
+    "slug": "sad"
+  },
+  "39": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Ez-Zumer",
+    "versesCount": 75,
+    "translatedName": "Turmat",
+    "slug": "az-zumar"
+  },
+  "40": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Gafir",
+    "versesCount": 85,
+    "translatedName": "Falësi",
+    "slug": "ghafir"
+  },
+  "41": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Fusilet",
+    "versesCount": 54,
+    "translatedName": "Sqaruar Detajisht",
+    "slug": "fussilat"
+  },
+  "42": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Esh-Shura",
+    "versesCount": 53,
+    "translatedName": "Konsultimi",
+    "slug": "ash-shuraa"
+  },
+  "43": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Ez-Zuhruf",
+    "versesCount": 89,
+    "translatedName": "Stolitë e Arta",
+    "slug": "az-zukhruf"
+  },
+  "44": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Ed-Duhan",
+    "versesCount": 59,
+    "translatedName": "Tymin",
+    "slug": "ad-dukhan"
+  },
+  "45": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Xhathije",
+    "versesCount": 37,
+    "translatedName": "Të Ulurit në Gjunjë",
+    "slug": "al-jathiyah"
+  },
+  "46": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Ahkaf",
+    "versesCount": 35,
+    "translatedName": "Kodrat e Rërës",
+    "slug": "al-ahqaf"
+  },
+  "47": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "Muhamed",
+    "versesCount": 38,
+    "translatedName": "Muhammedi",
+    "slug": "muhammad"
+  },
+  "48": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Fet-h",
+    "versesCount": 29,
+    "translatedName": "Fitorja",
+    "slug": "al-fath"
+  },
+  "49": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Huxhurat",
+    "versesCount": 18,
+    "translatedName": "Dhoma",
+    "slug": "al-hujurat"
+  },
+  "50": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Kaf",
+    "versesCount": 45,
+    "translatedName": "Kaf",
+    "slug": "qaf"
+  },
+  "51": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Edh-Dharijat",
+    "versesCount": 60,
+    "translatedName": "Erat Shpërhapëse",
+    "slug": "adh-dhariyat"
+  },
+  "52": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Et-Tur",
+    "versesCount": 49,
+    "translatedName": "Mali",
+    "slug": "at-tur"
+  },
+  "53": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "En-Nexhm",
+    "versesCount": 62,
+    "translatedName": "Ylli",
+    "slug": "an-najm"
+  },
+  "54": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Kamer",
+    "versesCount": 55,
+    "translatedName": "Hëna",
+    "slug": "al-qamar"
+  },
+  "55": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "Er-Rahman",
+    "versesCount": 78,
+    "translatedName": "Mëshiruesi",
+    "slug": "ar-rahman"
+  },
+  "56": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Uakia",
+    "versesCount": 96,
+    "translatedName": "Ngjarja",
+    "slug": "al-waqiah"
+  },
+  "57": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Hadid",
+    "versesCount": 29,
+    "translatedName": "Hekuri",
+    "slug": "al-hadid"
+  },
+  "58": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Muxhadele",
+    "versesCount": 22,
+    "translatedName": "Gruaja e Debatuar",
+    "slug": "al-mujadila"
+  },
+  "59": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Hashr",
+    "versesCount": 24,
+    "translatedName": "Mërgimi",
+    "slug": "al-hashr"
+  },
+  "60": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Mumtehine",
+    "versesCount": 13,
+    "translatedName": "Gruaja e Sprovuar",
+    "slug": "al-mumtahanah"
+  },
+  "61": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "Es-Saff",
+    "versesCount": 14,
+    "translatedName": "Radhët",
+    "slug": "as-saf"
+  },
+  "62": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Xhuma",
+    "versesCount": 11,
+    "translatedName": "Xhumaja",
+    "slug": "al-jumuah"
+  },
+  "63": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Munafikun",
+    "versesCount": 11,
+    "translatedName": "Hipokritët",
+    "slug": "al-munafiqun"
+  },
+  "64": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "Et-Tegabun",
+    "versesCount": 18,
+    "translatedName": "Mashtrimi i Përbashkët",
+    "slug": "at-taghabun"
+  },
+  "65": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "Et-Talak",
+    "versesCount": 12,
+    "translatedName": "Divorci",
+    "slug": "at-talaq"
+  },
+  "66": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "Et-Tahrim",
+    "versesCount": 12,
+    "translatedName": "Ndalimi",
+    "slug": "at-tahrim"
+  },
+  "67": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Mulk",
+    "versesCount": 30,
+    "translatedName": "Sovraniteti",
+    "slug": "al-mulk"
+  },
+  "68": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Kalem",
+    "versesCount": 52,
+    "translatedName": "Stilografi",
+    "slug": "al-qalam"
+  },
+  "69": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Hakka",
+    "versesCount": 52,
+    "translatedName": "E Vërteta",
+    "slug": "al-haqqah"
+  },
+  "70": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Mearixh",
+    "versesCount": 44,
+    "translatedName": "Shkallët e Ngritjes",
+    "slug": "al-maarij"
+  },
+  "71": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Nuh",
+    "versesCount": 28,
+    "translatedName": "Nuhu",
+    "slug": "nuh"
+  },
+  "72": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Xhin",
+    "versesCount": 28,
+    "translatedName": "Xhindët",
+    "slug": "al-jinn"
+  },
+  "73": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Muzzemil",
+    "versesCount": 20,
+    "translatedName": "I Mbështjelluri",
+    "slug": "al-muzzammil"
+  },
+  "74": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Muddethir",
+    "versesCount": 56,
+    "translatedName": "I Mbuluari",
+    "slug": "al-muddaththir"
+  },
+  "75": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Kijame",
+    "versesCount": 40,
+    "translatedName": "Ringjallja",
+    "slug": "al-qiyamah"
+  },
+  "76": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Insan",
+    "versesCount": 31,
+    "translatedName": "Njeriu",
+    "slug": "al-insan"
+  },
+  "77": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Murselat",
+    "versesCount": 50,
+    "translatedName": "Të Dërguarit",
+    "slug": "al-mursalat"
+  },
+  "78": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "En-Nebe",
+    "versesCount": 40,
+    "translatedName": "Lajmërimi",
+    "slug": "an-naba"
+  },
+  "79": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "En-Naziat",
+    "versesCount": 46,
+    "translatedName": "Të Ngënët",
+    "slug": "an-naziat"
+  },
+  "80": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Abese",
+    "versesCount": 42,
+    "translatedName": "Ai u vrenjt",
+    "slug": "abasa"
+  },
+  "81": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Et-Tekvir",
+    "versesCount": 29,
+    "translatedName": "Përmbysja",
+    "slug": "at-takwir"
+  },
+  "82": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Infitar",
+    "versesCount": 19,
+    "translatedName": "Çarja",
+    "slug": "al-infitar"
+  },
+  "83": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Mutafifin",
+    "versesCount": 36,
+    "translatedName": "Mashtrimi",
+    "slug": "al-mutaffifin"
+  },
+  "84": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Inshikak",
+    "versesCount": 25,
+    "translatedName": "Çarja e Plotë",
+    "slug": "al-inshiqaq"
+  },
+  "85": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Buruxh",
+    "versesCount": 22,
+    "translatedName": "Yjet",
+    "slug": "al-buruj"
+  },
+  "86": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Et-Tarik",
+    "versesCount": 17,
+    "translatedName": "Ylli i Mëngjesit",
+    "slug": "at-tariq"
+  },
+  "87": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Ala",
+    "versesCount": 19,
+    "translatedName": "Më i Larti",
+    "slug": "al-ala"
+  },
+  "88": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Gashije",
+    "versesCount": 26,
+    "translatedName": "Ngjarja Mbuluese",
+    "slug": "al-ghashiyah"
+  },
+  "89": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Fexhr",
+    "versesCount": 30,
+    "translatedName": "Agimi",
+    "slug": "al-fajr"
+  },
+  "90": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Beled",
+    "versesCount": 20,
+    "translatedName": "Qyteti",
+    "slug": "al-balad"
+  },
+  "91": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Esh-Shems",
+    "versesCount": 15,
+    "translatedName": "Dielli",
+    "slug": "ash-shams"
+  },
+  "92": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Lejl",
+    "versesCount": 21,
+    "translatedName": "Nata",
+    "slug": "al-layl"
+  },
+  "93": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Edh-Duha",
+    "versesCount": 11,
+    "translatedName": "Mëngjesi",
+    "slug": "ad-duhaa"
+  },
+  "94": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Esh-Sharh",
+    "versesCount": 8,
+    "translatedName": "Shkarkimi",
+    "slug": "ash-sharh"
+  },
+  "95": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Et-Tin",
+    "versesCount": 8,
+    "translatedName": "Fiku",
+    "slug": "at-tin"
+  },
+  "96": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Alek",
+    "versesCount": 19,
+    "translatedName": "Ngjizja",
+    "slug": "al-alaq"
+  },
+  "97": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Kadr",
+    "versesCount": 5,
+    "translatedName": "Fuqia",
+    "slug": "al-qadr"
+  },
+  "98": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "El-Bejjine",
+    "versesCount": 8,
+    "translatedName": "Dëshmia e Qartë",
+    "slug": "al-bayyinah"
+  },
+  "99": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "Ez-Zelzele",
+    "versesCount": 8,
+    "translatedName": "Tërmeti",
+    "slug": "az-zalzalah"
+  },
+  "100": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Adijat",
+    "versesCount": 11,
+    "translatedName": "Kalorësit",
+    "slug": "al-adiyat"
+  },
+  "101": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Karia",
+    "versesCount": 11,
+    "translatedName": "Katastrofa",
+    "slug": "al-qariah"
+  },
+  "102": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Et-Tekathur",
+    "versesCount": 8,
+    "translatedName": "Rritja Materiale",
+    "slug": "at-takathur"
+  },
+  "103": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Asr",
+    "versesCount": 3,
+    "translatedName": "Koha që Kalon",
+    "slug": "al-asr"
+  },
+  "104": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Humeze",
+    "versesCount": 9,
+    "translatedName": "Përgojuesi",
+    "slug": "al-humazah"
+  },
+  "105": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Fil",
+    "versesCount": 5,
+    "translatedName": "Elefanti",
+    "slug": "al-fil"
+  },
+  "106": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Kurejsh",
+    "versesCount": 4,
+    "translatedName": "Kurejshet",
+    "slug": "quraysh"
+  },
+  "107": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Maun",
+    "versesCount": 7,
+    "translatedName": "Ndihmat e Vogla",
+    "slug": "al-maun"
+  },
+  "108": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Kevther",
+    "versesCount": 3,
+    "translatedName": "Shumëllojshmëria",
+    "slug": "al-kawthar"
+  },
+  "109": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Kafirun",
+    "versesCount": 6,
+    "translatedName": "Mosbesimtarët",
+    "slug": "al-kafirun"
+  },
+  "110": {
+    "revelationPlace": "madinah",
+    "transliteratedName": "En-Nasr",
+    "versesCount": 3,
+    "translatedName": "Ndihma Hyjnore",
+    "slug": "an-nasr"
+  },
+  "111": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Mesed",
+    "versesCount": 5,
+    "translatedName": "Litari i Palmës",
+    "slug": "al-masad"
+  },
+  "112": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Ihlas",
+    "versesCount": 4,
+    "translatedName": "Sinqeriteti",
+    "slug": "al-ikhlas"
+  },
+  "113": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "El-Felek",
+    "versesCount": 5,
+    "translatedName": "Agimi",
+    "slug": "al-falaq"
+  },
+  "114": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "En-Nas",
+    "versesCount": 6,
+    "translatedName": "Njerëzimi",
+    "slug": "an-nas"
+  }
 }
