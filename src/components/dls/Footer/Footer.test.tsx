@@ -58,4 +58,16 @@ describe('Footer', () => {
       expect(footer?.classList.contains(styles.elevatedBackground)).toBe(true);
     },
   );
+
+  it.each(['/collections/all', '/collections/[collectionId]'])(
+    'uses the elevated background on collection route %s to match CollectionDetailContainer surface (#3326)',
+    (pathname) => {
+      mockUseRouter.mockReturnValue({ pathname });
+
+      const { container } = render(<Footer />);
+      const footer = container.querySelector('footer');
+
+      expect(footer?.classList.contains(styles.elevatedBackground)).toBe(true);
+    },
+  );
 });
