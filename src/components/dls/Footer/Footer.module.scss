@@ -3,7 +3,10 @@
 @use 'src/styles/constants';
 
 .footer {
-  background-color: var(--color-background-elevated-new);
+  // Matches the page body background so no seam shows between content and
+  // footer. Identical to elevated-new in Light/Dark; in Sepia the tokens
+  // differ (#f8ebd5 vs #fff7ea) and elevated-new drew a visible line.
+  background-color: var(--color-background-default);
 }
 
 .flowItem {
