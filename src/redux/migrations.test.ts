@@ -140,6 +140,32 @@ describe('Redux migrations', () => {
     });
   });
 
+  it('migration 18: should set showTooltipWhenPlayingAudio and preserve audioPlayerState', () => {
+    const oldState = {
+      readingPreferences: {
+        wordByWordContentType: [WordByWordType.Translation],
+        readingPreference: 'reading',
+      },
+      audioPlayerState: {
+        isPlaying: true,
+        reciterId: 1,
+        enableAutoScrolling: false,
+      },
+    };
+
+    const migratedState = migrations[18](oldState);
+
+    // audioPlayerState should be spread from itself, not readingPreferences
+    expect(migratedState.audioPlayerState.isPlaying).toBe(true);
+    expect(migratedState.audioPlayerState.reciterId).toBe(1);
+    expect(migratedState.audioPlayerState.enableAutoScrolling).toBe(false);
+    expect(migratedState.audioPlayerState.showTooltipWhenPlayingAudio).toBe(false);
+
+    // readingPreferences should remain untouched
+    expect(migratedState.readingPreferences.wordByWordContentType).toEqual([WordByWordType.Translation]);
+    expect(migratedState.readingPreferences.readingPreference).toBe('reading');
+  });
+
   it('migration 42: should default showTajweedRules to true and preserve false', () => {
     const m1 = migrations[42]({ quranReaderStyles: { quranFont: 'v2' } });
     expect(m1.quranReaderStyles.showTajweedRules).toBe(true);
