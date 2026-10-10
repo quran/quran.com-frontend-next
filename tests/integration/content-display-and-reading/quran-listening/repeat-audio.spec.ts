@@ -21,6 +21,9 @@ test(
   async () => {
     const modal = await audioUtilities.openRepeatModal();
     await expect(modal).toBeVisible({ timeout: 5000 });
+    await expect(modal.getByText('Pause after each verse', { exact: true })).toBeVisible();
+    await expect(modal.getByText('× verse length', { exact: true })).toBeVisible();
+    await expect(modal.getByText('Set to 0 for no pause.', { exact: true })).toBeVisible();
   },
 );
 
