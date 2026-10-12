@@ -17,12 +17,12 @@
       "clear-all": "Tümünü temizle",
       "juz": "Cüz",
       "no-matches": "Kaydedilen ayetlerden hiçbiri filtrelerinizle eşleşmiyor.",
-      "no-results": "Sonuç bulunamadı.",
+      "no-results": "Sonuç bulunamadı",
       "title": "Filtrele"
     },
     "guest-promo": {
       "sign-in": "Giriş Yap",
-      "subtitle": "Ayetler arasındaki benzerlikleri ve farklılıkları karşılaştırın.",
+      "subtitle": "Ayetler arasındaki benzerlikleri ve farklılıkları karşılaştırın",
       "title": "Özel koleksiyonlar oluşturun"
     },
     "items": "{{count}} öğe",
@@ -43,7 +43,7 @@
     "title": "Okuma Yer İşaretim"
   },
   "recent": "Son Okunanlar",
-  "recent-empty": "Son okuduklarınızı görmek için okumaya başlayın.",
+  "recent-empty": "Son okuduklarınızı görmek için okumaya başlayın",
   "recently-saved": {
     "title": "Son Kaydedilenler"
   },
@@ -55,9 +55,9 @@
   },
   "sign-in-prompt": {
     "features": {
-      "attach-notes": "Ayetlere notlar ekleyin.",
+      "attach-notes": "Ayetlere notlar ekleyin",
       "custom-collections": "Özel koleksiyonlar oluşturun"
     },
-    "title": "Daha fazla özelliğe erişmek için giriş yapın veya ücretsiz kayıt olun!"
+    "title": "Daha fazla özelliğe erişmek için giriş yapın veya ücretsiz kaydolun!"
   }
 }

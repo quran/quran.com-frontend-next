@@ -15,7 +15,7 @@
     "title": "Yer işaretini sil"
   },
   "delete-collection-action": "Koleksiyonu Sil",
-  "delete-collection-success": "Koleksiyon başarıyla silindi.",
+  "delete-collection-success": "Koleksiyon başarıyla silindi",
   "delete-collection": {
     "description": "Bu koleksiyonda kayıtlı tüm ayetleri kaybedeceksiniz.",
     "subtitle": "{{collectionName}} koleksiyonunu silmek istediğinizden emin misiniz?",
@@ -24,12 +24,12 @@
   },
   "edit-collection": "Koleksiyonu Düzenle",
   "edit-collection-name-required": "Kaydedilecek koleksiyon için bir ad girin.",
-  "edit-collection-success": "Koleksiyon başarıyla güncellendi.",
+  "edit-collection-success": "Koleksiyon başarıyla güncellendi",
   "empty": "Koleksiyon boş",
   "expand-all": "Tüm ayetleri genişlet",
   "go-to-ayah": "Ayete git",
   "load-more": "Daha Fazla Yükle",
-  "no-collections": "Henüz hiçbir koleksiyonunuz yok.",
+  "no-collections": "Henüz hiçbir koleksiyonunuz yok",
   "quranic-asc": "Kur'an'daki sıralama (Artan)",
   "quranic-desc": "Kur'an'daki sıralama (Azalan)",
   "recently-added": "Son eklenenler",

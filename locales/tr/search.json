@@ -3,9 +3,9 @@
   "filter": "filtre",
   "language-filter-label": "Bir dilin tüm meallerinde arayın",
   "language-select": "Bir dil seçin",
-  "reset": "Sıfırla",
+  "reset": "sıfırla",
   "search": "Arama",
-  "search-desc": "Güçlü ve son derece doğru çok dilli bir arama motoru kullanarak Kur'an-ı Kerim külliyatını ve çevirilerini arayın.",
+  "search-desc": "Güçlü ve son derece doğru çok dilli bir arama motoru kullanarak Kur'an-ı Kerim külliyatını ve meallerini arayın.",
   "search-title": "'{{searchQuery}}' için arama sonuçları",
   "searching-translations": "Meallerde aranıyor",
   "translation-select": "Bir meal seçin"

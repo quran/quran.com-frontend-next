@@ -46,7 +46,7 @@
   },
   "goal-completed": "Hedef Tamamlandı! 🎉",
   "goal-done": {
-    "description": "Herhangi bir ek okuma yine de kaydedilecektir.",
+    "description": "Herhangi bir ek okuma yine de kaydedilecektir",
     "title": "Bugünün hedefini tamamladınız"
   },
   "goal-target": {
@@ -60,7 +60,7 @@
   "goal-types": {
     "pages": {
       "description": "Hedefiniz sayfalara dayalı olacak",
-      "title": "Sayfa"
+      "title": "Sayfalar"
     },
     "range": {
       "description": "Hedefiniz, belirlediğiniz bir ayet aralığına dayalı olacak (bu bir sure, bir cüz, hatta Kur'an'ın tamamı olabilir)",
@@ -114,7 +114,7 @@
     "stroked": "Bugün hiçbir şey okumadınız"
   },
   "todays-goal": "Bugünün Hedefi",
-  "track-your-streak": "Serileri Takip Edin, Özel Hedefler Oluşturun, İstikrarlı Kalın",
+  "track-your-streak": "Serilerinizi Takip Edin, Özel Hedefler Oluşturun, İstikrarlı Kalın",
   "view-progress": "İlerlemeyi Görüntüle",
   "week-progress": "Bu haftaki ilerleme",
   "x-days": {

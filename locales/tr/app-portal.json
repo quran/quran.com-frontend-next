@@ -11,13 +11,13 @@
         "caption": "Android cihazlarda Kur'an'ı okuyun, yer işareti ekleyin ve dinleyin",
         "description": "Özellikler arasında Medine Mushafı tarzı sayfalar, kesintisiz ses oynatma, yer işareti ekleme/etiketleme/paylaşma, arama, gece modu, ses tekrarı ve birçok dilde meal/tefsir yer alıyor.",
         "tagline": "Android için ücretsiz, açık kaynak Kur'an uygulaması",
-        "title": "Quran for Android"
+        "title": "Android için Kur'an"
       },
       "quran_ios": {
         "caption": "iPhone ve iPad için şık, reklamsız Kur'an okuma ve dinleme uygulaması",
         "description": "Quran.com'un geliştiricilerinden: Kur'an'ı her yerde okuyun, ezberleyin ve en sevdiğiniz kârileri sade, reklamsız bir deneyimle dinleyin.",
         "tagline": "Güzel, reklamsız bir Mushaf uygulaması",
-        "title": "Quran for iOS (by quran.com)"
+        "title": "iOS için Kur'an (Quran.com)"
       },
       "quranmeet": {
         "caption": "Canlı Kur'an öğrenimi oturumları",
@@ -89,7 +89,7 @@
         "tagline": "Canlı Kur'an Toplantı Alanı"
       }
     },
-    "learn-more": "Daha fazla bilgi edin",
+    "learn-more": "Daha fazla bilgi",
     "title": "Öne Çıkan Uygulamalar",
     "view-all": "Tümünü görüntüle"
   },

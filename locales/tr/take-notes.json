@@ -19,7 +19,7 @@
       "image": {
         "alt": "Ezber ve tekrar notları"
       },
-      "paragraph": "İster aktif olarak ezberliyor olun, ister öğrendiklerinizi tekrar edin, notlar ezberde güçlü bir yardımcı olabilir.",
+      "paragraph": "İster aktif olarak ezberliyor, ister öğrendiklerinizi tekrar ediyor olun, notlar ezberde güçlü bir yardımcı olabilir.",
       "title": "Gelişmiş Ezberleme ve Tekrar"
     },
     "organize-preserve": {
@@ -61,14 +61,14 @@
       "description": "Çok yakında: Seçtiğiniz notları arkadaşlarınızla, ailenizle veya çalışma gruplarınızla paylaşabileceksiniz. Anlayışınız üzerinde birlikte çalışın ve faydalı bilgiyi yayın.",
       "paragraph1": "Quran.com'daki notlarınız gizli olarak kaydedilir; bunun yanı sıra seçtiğiniz tefekkürleri <0>QuranReflect.com</0> üzerinde herkesle paylaşma seçeneğiniz de vardır. Bu, Kur'an ile bilinçli bir etkileşimi teşvik etmek için kurulmuş, kâr amacı gütmeyen bir topluluk platformudur. Bunu ilmî tefsir yoluyla değil (bu, ehil âlimlere mahsustur), ehil bir moderasyon ekibince incelenen ve yönlendirilen samimi, kişisel tefekkürler yoluyla yapar.",
       "paragraph2": "Allah, sadece âlimleri değil, bütün müminleri tedebbüre davet ediyor:",
-      "quote": "Bu bir mübarek kitaptır ki onu sana [ey Muhammed], insanlar âyetleri üzerinde iyice düşünsünler, akıl iz‘an sahipleri ondan dersler, öğütler alsınlar diye indirdik. (Sad Suresi, 38:29)",
+      "quote": "Bu bir mübarek kitaptır ki onu sana [ey Muhammed], insanlar âyetleri üzerinde iyice düşünsünler, akıl iz'an sahipleri ondan dersler, öğütler alsınlar diye indirdik. (Sad Suresi, 38:29)",
       "reflection-prompt": "Kendi tefekkürünüz için kullanabileceğiniz örnek sorular:",
       "reflection-questions": [
-        "Bu ayet sizi hangi açıdan etkiledi veya ilham verdi?",
-        "Geliştirebileceğiniz niteliklerden veya eylemlerden bahsediliyor mu?",
-        "Hayatınıza uygulayabileceğiniz bir vaat veya uyarı/yasak var mı?",
-        "Bu ayetle ilgili kişisel bir hikayeniz var mı?",
-        "Bu ayete dayanarak hangi değişiklikleri yapmak istiyorsunuz ve siz veya başkası bunları pratik olarak nasıl uygulayabilir?"
+        "Bu ayet sizi hangi açılardan etkiledi veya size ilham verdi?",
+        "Ayette geliştirebileceğiniz nitelikler veya davranışlar var mı?",
+        "Hayatınıza uygulayabileceğiniz bir vaat ya da uyarı/yasak var mı?",
+        "Bu ayetle ilgili kişisel bir hikâyeniz var mı?",
+        "Bu ayet doğrultusunda hangi değişiklikleri yapmak istiyorsunuz; siz veya bir başkası bunları pratikte nasıl uygulayabilir?"
       ],
       "title": "Tefekkürlerinizi paylaşın ki başkaları da faydalanabilsin"
     },
@@ -79,8 +79,8 @@
   "how-to-use": {
     "saved-note-explanation": "Bir ayete not eklediğinizde, not simgesi maviye dönüşür. Bu sayede sonraki okumalarınızda daha önce not yazdığınız ayetleri kolayca görebilirsiniz.",
     "step1": "<0>Bir Ayet Seçin:</0> Herhangi bir ayete tıklayın ve Notlar seçeneğini belirleyin.",
-    "step2": "<0>Düşüncelerinizi ekleyin:</0> Tefekkürlerinizi, hatırlatmalarınızı veya sorularınızı yazın.",
-    "step3": "<0>Kaydet:</0> Notlarınız hesabınıza kaydedilecektir.",
+    "step2": "<0>Düşüncelerinizi Ekleyin:</0> Tefekkürlerinizi, hatırlatmalarınızı veya sorularınızı yazın.",
+    "step3": "<0>Kaydedin:</0> Notlarınız hesabınıza kaydedilecektir.",
     "step4": "<0>Her An Erişim:</0> Notlarınıza ister profilinizden, ister doğrudan ayet üzerinden ulaşabilirsiniz.",
     "title": "Notlar Özelliği Nasıl Kullanılır?"
   },

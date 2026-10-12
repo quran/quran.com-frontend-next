@@ -11,7 +11,7 @@
     "qr-title": "QuranReflect nedir?",
     "title": "QuranReflect nedir ve bu kutuyu işaretlersem ne olur?"
   },
-  "click-to-see-more": "Daha fazlasını görmek için tıklayın",
+  "click-to-see-more": "daha fazlasını görmek için tıklayın",
   "delete-note": "Notu sil",
   "delete-note-modal": {
     "subtitle": "Notu silmek istediğinizden emin misiniz?",
@@ -24,7 +24,7 @@
   "export-success": "Not, QuranReflect hesabınızda başarıyla yayımlandı",
   "my-notes": "Notlarım ({{count}})",
   "new-note-reflc-intro": {
-    "learn-more": "Daha fazla bilgi edin",
+    "learn-more": "Daha fazla bilgi",
     "reflc-prompts": {
       "deeper": {
         "desc": "<li>Ayette Allah'ın isimlerinden herhangi biri geçiyor mu, geçiyorsa bunların ayetle ilişkisi nedir?</li><li>Hangi kelimeler veya dilsel özellikler dikkatinizi çekti?</li><li>Ayetin bağlamı, diğer Kur'an ayetleri, hadisler veya olaylarla bağlantı kurabilir misiniz?</li>",
@@ -34,12 +34,12 @@
         "desc": "<li>Bu ayet sizi hangi açılardan etkiledi veya size ilham verdi?</li><li>Ayette geliştirebileceğiniz nitelikler veya davranışlar var mı?</li><li>Hayatınıza uygulayabileceğiniz bir vaat ya da uyarı/yasak var mı?</li><li>Bu ayetle ilgili kişisel bir hikâyeniz var mı?</li><li>Bu ayet doğrultusunda hangi değişiklikleri yapmak istiyorsunuz; siz veya bir başkası bunları pratikte nasıl uygulayabilir?</li>",
         "title": "Kişisel Tefekkür Soruları:"
       },
-      "title": "Tefekkür İçin Sorular"
+      "title": "Tefekkür için Sorular"
     },
     "see-less": "Daha az göster",
     "title": "Kur'an üzerine tefekkür etmekte yardıma mı ihtiyacınız var?",
     "what-is-reflc": {
-      "desc": "Kur'an üzerinde tefekkür etmek ya da derinlemesine düşünmek; Allah'ın sözlerini dikkatle okumayı veya dinlemeyi, anlamları üzerinde durmayı ve onun bizi etkileyip daha iyiye doğru değiştirmesine izin vermeyi kapsar. Buna \"tedebbür\" denir. Tefsir ise Kur'an ayetlerini klasik kaynaklara ve ilmî tahlillere dayanarak ayrıntılı biçimde açıklayan ilmî bir yorumdur. Tefsir âlimlere mahsus iken Allah ﷻ herkesi tedebbüre davet eder (Kur'an <link1>38:29</link1>, <link2>47:24</link2>, <link3>4:82</link3> ve daha birçok ayet).<br></br><br></br>Kullanıcılar notlarını ve kişisel tefekkürlerini gizli olarak kaydedebilir. Çoğu zaman tefekkürlerimiz başkalarında derin bir yankı uyandırabilir; onların Kur'an'la bağını ve Allah ﷻ ile ilişkisini güçlendirebilir. Bu nedenle, insanların bu yolculukta birlikte gelişmesine yardımcı olma çabamızın bir parçası olarak kullanıcılar tefekkürlerini QuranReflect'te paylaşabilir. Daha fazla bilgi için: <link4>QuranReflect.com/faq</link4> ve <link5>Kur'an Üzerinde Tefekkür İçin Beş Mercek</link5>",
+      "desc": "Kur'an üzerinde tefekkür etmek ya da derinlemesine düşünmek; Allah'ın sözlerini dikkatle okumayı veya dinlemeyi, anlamları üzerinde durmayı ve onun bizi etkileyip daha iyiye doğru değiştirmesine izin vermeyi kapsar. Buna \"tedebbür\" denir. Tefsir ise Kur'an ayetlerini klasik kaynaklara ve ilmî tahlillere dayanarak ayrıntılı biçimde açıklayan ilmî bir yorumdur. Tefsir âlimlere mahsus iken Allah ﷻ herkesi tedebbüre davet eder (Kur'an <link1>38:29</link1>, <link2>47:24</link2>, <link3>4:82</link3> ve daha birçok ayet).<br></br><br></br>Kullanıcılar notlarını ve kişisel tefekkürlerini gizli olarak kaydedebilir. Çoğu zaman tefekkürlerimiz başkalarında derin bir yankı uyandırabilir; onların Kur'an'la bağını ve Allah ﷻ ile ilişkisini güçlendirebilir. Bu nedenle, insanların bu yolculukta birlikte gelişmesine yardımcı olma çabamızın bir parçası olarak kullanıcılar tefekkürlerini QuranReflect'te paylaşabilir. Daha fazla bilgi için: <link4>QuranReflect.com/faq</link4> ve <link5>Kur'an Üzerinde Tefekkür için Beş Mercek</link5>",
       "title": "Tefekkür Nedir?"
     }
   },
@@ -63,12 +63,12 @@
   },
   "save-post-to-qr": "Kaydet ve QuranReflect'e Gönder",
   "save-privately": "Özel Olarak Kaydet",
-  "save-publish-failed": "Not başarıyla kaydedildi ancak yayınlanamadı",
+  "save-publish-failed": "Not başarıyla kaydedildi ancak yayımlanamadı",
   "save-success": "Not başarıyla kaydedildi",
   "share-to-qr": "QuranReflect.com'da Paylaş",
   "share-to-qr-desc": "<b>{{name}}</b> olarak paylaşın. Hedef kitle: <b>QuranReflect kullanıcıları</b>",
   "take-a-note-or-reflection": "Not veya Tefekkür Ekle",
-  "update-publish-failed": "Not başarıyla güncellendi ancak yayınlanamadı",
+  "update-publish-failed": "Not başarıyla güncellendi ancak yayımlanamadı",
   "update-reflection": "Tefekkürü Güncelle",
   "update-success": "Not başarıyla güncellendi",
   "view-on-qr": "QuranReflect'te görüntüle"

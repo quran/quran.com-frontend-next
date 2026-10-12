@@ -20,7 +20,7 @@
       "title": "Ayet düzeyinde tefekkürleri okuyun"
     },
     "ayah-tafsir": {
-      "description": "Okurken anlayışınızı geliştirecek ayrıntılı bilgiler sunan Tefsir'i ayet düzeyinde keşfedin. (Tefsir, uygun görüldüğünde birden fazla ayete göre gruplandırılabilir)",
+      "description": "Okurken anlayışınızı geliştirecek ayrıntılı bilgiler sunan tefsiri ayet düzeyinde keşfedin. (Tefsir, uygun görüldüğünde birden fazla ayet için gruplandırılabilir)",
       "title": "Ayet düzeyinde tefsir okuyun"
     },
     "font-size": {
@@ -36,7 +36,7 @@
       "title": "Kelime kelime meali satır içinde (kelimenin altında) veya bilgi balonunda görüntüleyin"
     },
     "juz": {
-      "description": "Kur'an'ı cüzlere göre görüntüleyin",
+      "description": "Kur'an'ı Cüzlere Göre Görüntüleyin",
       "title": "Kur'an'ı Cüzlere Göre Görüntüleyin"
     },
     "listen": {
@@ -53,7 +53,7 @@
     },
     "reading-sessions": {
       "description": "Kişiselleştirilmiş okuma geçmişinize göz atarak Quran.com'da okuduğunuz ayetleri takip edin ve Kur'an yolculuğunuzu kolayca gözden geçirin.",
-      "title": "Okuma geçmişini görüntüle"
+      "title": "Okuma geçmişinizi görüntüleyin"
     },
     "reading-view": {
       "description": "Mushaf modunda Kur'an'ı görüntüleyin",
@@ -92,7 +92,7 @@
       "title": "Kelimeye tıklayarak kelime kelime okunuşu dinleyin"
     },
     "wbw-translation": {
-      "description": "Kur'an'ı okurken veya dinlerken tek tek kelimelerin anlamlarını görüntüleyerek Kur'an'la ilgili kelime dağarcığınızı geliştirmenize yardımcı olun",
+      "description": "Kur'an kelime dağarcığınızı geliştirmek için Kur'an'ı okurken veya dinlerken kelimelerin tek tek anlamlarını görüntüleyin",
       "title": "Kelime kelime meali okuyun"
     },
     "wbw-transliteration": {

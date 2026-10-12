@@ -56,8 +56,8 @@
     }
   ],
   "hero": {
-    "description": "Bir Ramazan’dan diğerine kadar tüm Kur’an’ı düzenli ve yönetilebilir bir hızda okuyup anlamanızı kolaylaştıran, özenle hazırlanmış bir program.",
-    "line-1": "Küresel Kur'an Takvimi, bir Ramazan ayının sonundan bir sonraki Ramazan ayının başına kadar Kur'an'ın tamamının derinlemesine okunmasını teşvik etmek için tasarlanmış bir okuma programıdır. Daha derin, daha samimi bir bağ kurabilmeniz için ayetleri anlamaya ve üzerinde düşünmeye zaman ayırmanızı öneririz."
+    "description": "Bir Ramazan'dan diğerine kadar tüm Kur'an'ı düzenli ve yönetilebilir bir hızda okuyup anlamanızı kolaylaştıran, özenle hazırlanmış bir program.",
+    "line-1": "Küresel Kur'an Takvimi, bir Ramazan ayının sonundan bir sonraki Ramazan ayının başına kadar Kur'an'ın tamamının tefekkür ederek okunmasını teşvik etmek için tasarlanmış bir okuma programıdır. Daha derin, daha samimi bir bağ kurabilmeniz için ayetleri anlamaya ve üzerinde düşünmeye zaman ayırmanızı öneririz."
   },
   "interact-with-post": "Bu gönderiyle QuranReflect'te etkileşime geçin",
   "islamic-months": {
@@ -113,5 +113,5 @@
   "week": "Hafta",
   "week-completed": "Tamamlandı",
   "week-title": "{{weekNumber}}. Hafta ({{month}}): {{rangeStart}} - {{rangeEnd}} arası ayetler",
-  "weekly-verses-help-description-1": "Bu PDF, büyük ölçüde M.A.S. Abdel Haleem’in çalışmalarından uyarlanmış akıcı bir meal içerir. Her haftalık doküman yedi bölüme ayrılmıştır; böylece okumayı haftaya yaymak isterseniz kolaylık sağlar. Surelerin kısa girişleri, başlıklar ve bazı önemli noktaları açıklayan notlar bulunur. Her günlük bölüm ayrıca bir tefekkür sorusu ve önerilen bir eylem içerir."
+  "weekly-verses-help-description-1": "Bu PDF, büyük ölçüde M.A.S. Abdel Haleem'in çalışmasından uyarlanmış akıcı bir meal içerir. Her haftanın belgesi yedi bölüme ayrılmıştır; böylece dilerseniz okumayı haftaya yayabilirsiniz. Surelere kısa girişler, bazı temel noktaları açıklayan başlıklar ve notlar yer alır; her günlük bölümde bir tefekkür sorusu ve önerilen bir uygulama bulunur"
 }

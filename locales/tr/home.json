@@ -23,7 +23,7 @@
       "description": "Tefekkürleri Okuyun ve Paylaşın",
       "name": "QuranReflect"
     },
-    "see-more": "Daha fazlasını gör",
+    "see-more": "Daha fazla göster",
     "title": "Kur'an Uygulamaları"
   },
   "begin": "Başla",
@@ -34,7 +34,7 @@
   "explore-topics": "Konuları Keşfet",
   "first-time-reading": "Kur'an'la yeni mi tanışıyorsunuz? <link>Buradan başlayın</link>",
   "grow-beyond-ramadan": "<modalLink>Ramazan'dan sonra da</modalLink> bizimle gelişin",
-  "know-someone": "Bu <modalLink>Ramazan</modalLink>'da bizimle gelişin",
+  "know-someone": "Bu <modalLink>Ramazan'da</modalLink> bizimle gelişin",
   "learning-plan": "Öğrenme Planları",
   "listen-to-radio": "Kur'an Radyosunu Dinleyin",
   "my-quran": "Kur'an'ım",
@@ -51,15 +51,15 @@
         "my-plans": "Planlarım"
       },
       "desc": {
-        "logged-in": "Hiç bir öğrenme programına başlayıp yarı yolda bıraktığınız oldu mu? Öğrenme planları kolay takip edilebilir bölümlere ayrılmıştır ve siz bitiş çizgisine ulaşana kadar ilerlemenizi takip ederiz. Mevcut kurslarımızı bugün keşfedin.",
-        "logged-in-no-plans": "Hiç bir öğrenme programına başlayıp yarı yolda bıraktığınız oldu mu? Öğrenme planları kolay takip edilebilir bölümlere ayrılmıştır ve siz bitiş çizgisine ulaşana kadar ilerlemenizi takip ederiz. Mevcut kurslarımızı bugün keşfedin.",
-        "logged-out": "Hiç bir öğrenme programına başlayıp yarı yolda bıraktığınız oldu mu? Öğrenme planları kolay takip edilebilir bölümlere ayrılmıştır ve siz bitiş çizgisine ulaşana kadar ilerlemenizi takip ederiz. Mevcut kurslarımızı bugün keşfedin."
+        "logged-in": "Hiç bir öğrenme programına başlayıp yarı yolda bıraktığınız oldu mu? Öğrenme planları kolay takip edilebilir bölümlere ayrılmıştır ve siz bitiş çizgisine ulaşana kadar ilerlemenizi takip ederiz. Mevcut kurslarımızı bugün keşfedin",
+        "logged-in-no-plans": "Hiç bir öğrenme programına başlayıp yarı yolda bıraktığınız oldu mu? Öğrenme planları kolay takip edilebilir bölümlere ayrılmıştır ve siz bitiş çizgisine ulaşana kadar ilerlemenizi takip ederiz. Mevcut kurslarımızı bugün keşfedin",
+        "logged-out": "Hiç bir öğrenme programına başlayıp yarı yolda bıraktığınız oldu mu? Öğrenme planları kolay takip edilebilir bölümlere ayrılmıştır ve siz bitiş çizgisine ulaşana kadar ilerlemenizi takip ederiz. Mevcut kurslarımızı bugün keşfedin"
       },
       "title": "Öğrenme Planları"
     },
     "quran-reading-goals": {
       "desc": {
-        "logged-out": "Günde 10 dakika okumak mı, bir ayda bir cüz tamamlamak mı, yoksa bir yılda Kur'an'ın tamamını bitirmek mi istiyorsunuz? Kişisel bir hedef oluşturmak ve ilerlemenizi takip etmek çok kolay."
+        "logged-out": "Günde 10 dakika okumak mı, bir ayda bir cüz tamamlamak mı, yoksa bir yılda Kur'an'ın tamamını bitirmek mi istiyorsunuz? Kişisel bir hedef oluşturmak ve ilerlemenizi takip etmek çok kolay"
       },
       "title": "Özel Kur'an Okuma Hedefleri"
     },
@@ -69,7 +69,7 @@
   "quran-in-year": "Bir Yılda Kur'an",
   "quran-in-year-cta": "Bu Haftanın Okuması",
   "quran-in-year-verse-title": "Bu haftanın okumasından bir ayet",
-  "ramadan-activities-cta": "<link>Haftalık okumalar, ilham veren podcast'ler ve tefekküre davet için <b>Küresel Kur'an Takvimi</b>'ni takip edin!</link>",
+  "ramadan-activities-cta": "<link>Haftalık okumalar, ilham veren podcast'ler ve tefekküre davet için <b>Küresel Kur'an Takvimi'ni</b> takip edin!</link>",
   "ramadan-challenge": "Ramazan Meydan Okumasına Katılın",
   "ramadan": {
     "header": "Kur'an ile Bağınızı Derinleştirecek Araçlar",
@@ -78,7 +78,7 @@
   "read-juz": "Cüz Oku",
   "recently-read": "Son Okunanlar",
   "revelation-order-disclaimer": "Bu görünüm, Kur'an'daki surelerin Hz. Muhammed'e <hover>ﷺ</hover> indiriliş zamanına göre kronolojik sırasını gösterir. Bu kronoloji âlimlerin görüşlerine dayanır ve bazı sureler farklı zamanlarda parça parça nazil olmuştur. Buradaki sıralama <link>Tanzil.net</link> çalışmasına dayanmaktadır. [Not: Fâtiha'dan Nâs'a kadar derlenmiş Mushaf sıralaması üzerinde icma vardır.]",
-  "see-more-learning-plans": "Daha Fazlasını Gör",
+  "see-more-learning-plans": "Daha Fazla Göster",
   "set-custom-goal": "Hedef Belirle",
   "share-quran": {
     "description": "Kur'an'ı yeni öğrenenlere ulaştırmaya yardımcı olun",

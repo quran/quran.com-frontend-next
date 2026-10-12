@@ -4,7 +4,7 @@
   "channels": {
     "chat": "Sohbet",
     "email": "E-posta",
-    "in_app": "Uygulama içi",
+    "in_app": "Uygulama İçi",
     "push": "Anlık bildirim",
     "sms": "SMS"
   },

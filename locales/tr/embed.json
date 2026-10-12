@@ -19,11 +19,11 @@
     "wordByWordTransliteration": "Kelime kelime okunuşu etkinleştir"
   },
   "errors": {
-    "clipboardFallback": "Panoya yazma işlemi başarısız oldu, yedek yöntem kullanılıyor.",
-    "clipboardUnavailable": "Pano API'si kullanılamıyor.",
-    "loadChapters": "Sureler yüklenemedi.",
-    "loadReciters": "Kâriler yüklenemedi.",
-    "loadTranslations": "Mealler yüklenemedi."
+    "clipboardFallback": "Panoya yazılamadı, yedek yöntem kullanılıyor",
+    "clipboardUnavailable": "Pano API'si kullanılamıyor",
+    "loadChapters": "Sureler yüklenemedi",
+    "loadReciters": "Kâriler yüklenemedi",
+    "loadTranslations": "Mealler yüklenemedi"
   },
   "fields": {
     "ayah": "Ayet",
@@ -68,7 +68,7 @@
     "loadingPreview": "Önizleme yükleniyor...",
     "loadingReciters": "Kâriler yükleniyor...",
     "loadingVerses": "Ayetler yükleniyor...",
-    "noTranslations": "Meal bulunamadı."
+    "noTranslations": "Meal bulunamadı"
   },
   "theme": {
     "dark": "Koyu",
