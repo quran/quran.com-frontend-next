@@ -1,4 +1,4 @@
 {
-  "description": "Ayetlerle ilgili otantik hadisleri ve rivayetleri keşfedin. {{ayahNumber}} Surenin {{surahName}}Bu Kur'an ayetiyle bağlantılı akademik geleneklere erişin.",
+  "description": "{{surahName}} Suresinin {{ayahNumber}}. ayetiyle ilgili sahih hadisleri ve rivayetleri keşfedin. Bu Kur'an ayetiyle bağlantılı ilmî kaynaklara ulaşın.",
   "title": "Hadisler {{surahName}} - {{ayahNumber}}"
 }

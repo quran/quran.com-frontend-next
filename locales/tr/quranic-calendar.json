@@ -1,57 +1,57 @@
 {
-  "additional-resources": "Ek kaynaklar",
+  "additional-resources": "Ek Kaynaklar",
   "additional-resources-subtitle": "Bu ek kaynaklar, okuduğunuz ayetlerle daha derin bir bağ kurmanıza yardımcı olacaktır.",
   "ask-question": "Soru Sor",
   "complete": "Tamamla",
-  "completed-weeks": "{{completedWeeks}} / {{totalWeeks}}Tamamlanan haftalar",
-  "divine-book-club": "İlahi okuma grubu",
-  "divine-book-club-description": "Bu, her haftanın okumasının bağlamını takip etmenize yardımcı olan hafif bir grup tartışmasıdır.",
+  "completed-weeks": "{{completedWeeks}}/{{totalWeeks}} Hafta Tamamlandı",
+  "divine-book-club": "The Divine Book Club",
+  "divine-book-club-description": "Bu, her haftaki okumanın bağlamını takip etmenize yardımcı olan sade bir grup sohbetidir.",
   "end-of-calendar": "Takvimin Sonu",
   "english-pdf": "İngilizce PDF",
   "faq": "Sıkça Sorulan Sorular",
   "faq-items": [
     {
-      "answer": "'Bir Yılda Kuran', Kuran'ın tamamını bir yıl içinde, bir Ramazan'ın sonundan bir sonrakinin başlangıcına kadar tamamlamanıza yardımcı olan basit ve düzenli bir okuma planıdır. Amaç, baskı veya bunalmış hissetmeden Kuran'ı baştan sona temel bir anlayışla okumaktır.",
-      "question": "Bir Yılda Kur’an’ nedir?"
+      "answer": "“Bir Yılda Kur'an”, Kur'an'ın tamamını bir yılda (bir Ramazan'ın sonundan bir sonraki Ramazan'ın başına kadar) okumanıza yardımcı olan basit ve düzenli bir okuma planıdır. Amaç, kendinizi baskı altında ya da bunalmış hissetmeden Kur'an'ı baştan sona temel düzeyde anlayarak okumaktır.",
+      "question": "“Bir Yılda Kur'an” nedir?"
     },
     {
-      "answer": "Sizleri, her hafta anladığınız bir dilde Kuran'dan sadece birkaç sayfa okumaya davet ediyoruz. Toplamda 46 okuma vardır; bunlar İslami takvimde Şevval'den Şaban'a kadar her hafta için birer tanedir. Kuran'ın bu bölümlemesi, Kuran'ı bir ayda okumayı kolaylaştıran ünlü 30 cüz gibi diğer bölümlemeleri tamamlar.",
-      "question": "Bu program nasıl uygulanıyor?"
+      "answer": "Sizi her hafta, anladığınız bir dilde Kur'an'dan yalnızca birkaç sayfa okumaya vakit ayırmaya davet ediyoruz. Toplam 46 okuma vardır; Hicri takvimde Şevval'den Şaban'a kadar her hafta için bir okuma. Kur'an'ın bu bölümlendirmesi, Kur'an'ı bir ayda okumayı kolaylaştıran meşhur 30 cüz gibi diğer bölümlendirmeleri tamamlar niteliktedir.",
+      "question": "Program nasıl işliyor?"
     },
     {
-      "answer": "Hiç de değil. Bu programdaki başlangıç noktası, Kur’an’ın anlamlarıyla, rahat olduğunuz herhangi bir dil (çeviri) aracılığıyla etkileşim kurmaktır. Quran.com, herkesin erişebilmesi için birçok dilde meal sunmaktadır. Amacımız, katılımcıları her yıl bir üst seviyeye çıkmaları için teşvik etmektir.",
+      "answer": "Hayır, gerekmez. Bu programın çıkış noktası, Kur'an'ın anlamlarıyla rahat ettiğiniz herhangi bir dilde (meal aracılığıyla) buluşmaktır. Quran.com, herkesin erişebilmesi için birçok dilde meal sunar. Amacımız, katılımcıları her yıl bir üst seviyeye çıkmaya teşvik etmektir.",
       "question": "Katılmak için Arapça okuyabilmem gerekir mi?"
     },
     {
-      "answer": "Her hafta, güncellenmiş okuma görevi Quran.com/calendar adresinde yayımlanacaktır. Doğrudan Quran.com'da okuyabilirsiniz; burada özel bir bağlantı sizi haftanın ana okumasına götürecektir.\\n\\nAyrıca, İngilizce PDF'yi açıp evde yazdırabilirsiniz. Bu, büyük ölçüde M.A.S. Abdel Haleem'in çalışmasından uyarlanmış akıcı bir çeviri içerir. Her haftanın belgesi, tercih ederseniz okumayı haftaya yaymayı kolaylaştırmak için yedi bölüme ayrılmıştır. Surelere kısa girişler, bazı önemli noktaları açıklayan başlıklar ve notlar bulunur ve her günlük bölüm bir tefekkür sorusu ve önerilen bir eylem içerir.",
-      "question": "Haftalık okuma görevlerini nerede bulabilirim?"
+      "answer": "Her hafta güncel okuma bölümü Quran.com/calendar adresinde yayımlanır. Doğrudan Quran.com üzerinden okuyabilirsiniz; burada özel bir bağlantı sizi doğrudan haftanın ana okumasına götürür.\\n\\nAyrıca İngilizce PDF'yi açıp evde yazdırabilirsiniz. PDF, büyük ölçüde M.A.S. Abdel Haleem'in çalışmasından uyarlanmış akıcı bir meal içerir. Her haftanın belgesi yedi bölüme ayrılmıştır; böylece dilerseniz okumayı haftaya yayabilirsiniz. Surelere kısa girişler, bazı temel noktaları açıklayan başlıklar ve notlar yer alır; her günlük bölümde bir tefekkür sorusu ve önerilen bir uygulama bulunur.",
+      "question": "Haftalık okuma bölümlerini nerede bulabilirim?"
     },
     {
-      "answer": "Takipte kalmak için birden fazla seçeneğiniz var. Haftalık okuma görevlerini içeren e-postaları almak üzere abone olmanızı özellikle tavsiye ederiz. Ayrıca hatırlatmalar ve teşviklerin yer aldığı Telegram ve WhatsApp topluluk kanalları da oluşturduk. Quran.com/calendar sayfasında dilediğiniz butona tıklayarak abone olabilirsiniz. İsterseniz üçüne birden katılabilirsiniz.",
+      "answer": "Takipte kalmanız için birden fazla seçenek var. Haftalık okuma bölümlerinin ekli olarak gönderildiği e-postalara abone olmanızı özellikle tavsiye ederiz. Ayrıca hatırlatmalar ve teşvik edici mesajlar paylaşılan Telegram ve WhatsApp topluluk kanalları da oluşturduk. Abone olmak için Quran.com/calendar sayfasında istediğiniz butonlara tıklamanız yeterli. Dilerseniz üçüne birden katılabilirsiniz.",
       "question": "Haftalık okuma hatırlatmalarını nasıl alabilirim?"
     },
     {
-      "answer": "Quran.com'da ayarlar menüsüne giderek şunları yapabilirsiniz: \\n • Yazı tipi boyutlarını ve stillerini ayarlayın \\n • Açık, koyu ve sepya modu arasında geçiş yapın \\n • Birden fazla mevcut çeviri arasından seçim yapın \\n \\n Bu, herkesin en iyi anladığı dilde ve net ve bilgilendirici bir çeviriyle katılımını kolaylaştırır.",
+      "answer": "Quran.com'da ayarlar menüsüne giderek:\\n• Yazı tipi boyutlarını ve stillerini ayarlayabilir\\n• Açık, koyu ve sepya mod arasında geçiş yapabilir\\n• Mevcut birçok meal arasından seçim yapabilirsiniz\\n\\nBöylece herkes en iyi anladığı dilde, açık ve bilgilendirici bir meal ile programa kolayca katılabilir.",
       "question": "Okuma deneyimimi nasıl kişiselleştirebilirim?"
     },
     {
-      "answer": "Sizi, her hafta okunan pasajlar hakkındaki diğer insanların tefekkürlerini incelemeniz için QuranReflect.com'a göz atmaya davet ediyoruz. Kendinizi hazır hissettiğinizde, kendi düşüncelerinizi paylaşmak için gönderi yapın!\\n\\nAyrıca, bu takvimi takip eden ve anlayışlı bir ilim adamı liderliğindeki bir tartışma olan The Divine Book Club podcast'ini de mutlaka inceleyin. Her hafta sadece bir saattir ve çok faydalı bir bağlam sunar.",
-      "question": "Hangi ek imkânları sağlıyorsunuz?"
+      "answer": "Her hafta okunan bölümler hakkında başkalarının tefekkürlerini okumak için QuranReflect.com'a göz atmanızı tavsiye ederiz; kendinizi hazır hissettiğinizde siz de kendi düşüncelerinizi paylaşın!\\n\\nAyrıca bu programı takip eden, bir âlimin yönettiği derinlikli bir sohbet olan The Divine Book Club podcast'ine de mutlaka göz atın. Haftada yalnızca bir saat süren bu sohbet, çok faydalı bir bağlam sunar.",
+      "question": "Hangi ek kaynakları sunuyorsunuz?"
     },
     {
-      "answer": "Hiç sorun değil. Sadece bulunduğunuz haftanın okumasına başlayın—kaçırdığınız haftaları telafi etmenize gerek yok. Tutarlı kalın ve ilerlemeye odaklanın. Kaçırdığınız her şeyi tamamlamak için her zaman gelecek yıl vardır.",
+      "answer": "Hiç sorun değil. Bulunduğunuz haftanın okumasından devam edin; kaçırdığınız haftaları telafi etmenize gerek yok. İstikrarlı olun ve ileriye odaklanın. Kaçırdıklarınızı tamamlamak için her zaman bir sonraki yıl var.",
       "question": "Geride kalırsam ya da geç katılırsam ne olur?"
     },
     {
-      "answer": "Tutarlı kalmanın en iyi yolu başkalarıyla birlikte okumaktır. Aileniz, arkadaşlarınız veya çevrimiçi olarak kişisel bir kitap grubu kurmanızı tavsiye ederiz. Haftalık buluşun, okuduklarınızı tartışın ve bu yolculukta birbirinize destek olun.",
+      "answer": "İstikrarı korumanın en iyi yolu başkalarıyla birlikte okumaktır. Ailenizle, arkadaşlarınızla, hatta çevrimiçi olarak kendi okuma grubunuzu kurmanızı tavsiye ederiz. Her hafta bir araya gelin, okuduklarınızı konuşun ve bu yolculukta birbirinize destek olun.",
       "question": "Bu yolculuğu en iyi şekilde nasıl değerlendirebilirim?"
     },
     {
-      "answer": "Bir sonraki adımları ve daha ileri seviyeleri teşvik etmeyi planlıyoruz. Bu yıl için amacımız, olabildiğince çok kişiyi davet ederek işi basit tutmak: temel bir anlayışla Kur’an’ı baştan sona okumak. Bunu yaptıktan sonra, tekrar okumaya ve daha derinlemesine inmeye hazır hissedeceksiniz!",
-      "question": "İleride daha derinlemesine çalışma seçenekleri olacak mı?"
+      "answer": "Sonraki adımları ve daha ileri seviyeleri de duyurmayı planlıyoruz. Bu yıl, olabildiğince çok kişiyi işi basit tutarak başlamaya davet ediyoruz: Kur'an'ı temel düzeyde anlayarak baştan sona okumak. Bunu tamamladığınızda, yeniden okumaya ve daha derine inmeye hazır hissedeceksiniz!",
+      "question": "İleride daha kapsamlı çalışma seçenekleri olacak mı?"
     },
     {
-      "answer": "Evet. \"Bir yılda Kur’an\" tamamen ücretsizdir ve onu başkalarıyla paylaşmanızı teşvik ediyoruz. Bir arkadaşınızı davet edin, bir okuma grubu başlatın ve daha fazla kişinin Kur’an'ı ilk defa baştan sona okumasına yardımcı olun.",
+      "answer": "Evet. “Bir Yılda Kur'an” tamamen ücretsizdir ve başkalarıyla paylaşmanızı teşvik ediyoruz. Bir arkadaşınızı davet edin, bir okuma grubu başlatın ve daha fazla kişinin Kur'an'ı ilk kez baştan sona okumasına yardımcı olun.",
       "question": "Bu ücretsiz mi? Paylaşabilir miyim?"
     }
   ],
@@ -59,14 +59,14 @@
     "description": "Bir Ramazan’dan diğerine kadar tüm Kur’an’ı düzenli ve yönetilebilir bir hızda okuyup anlamanızı kolaylaştıran, özenle hazırlanmış bir program.",
     "line-1": "Küresel Kur'an Takvimi, bir Ramazan ayının sonundan bir sonraki Ramazan ayının başına kadar Kur'an'ın tamamının derinlemesine okunmasını teşvik etmek için tasarlanmış bir okuma programıdır. Daha derin, daha samimi bir bağ kurabilmeniz için ayetleri anlamaya ve üzerinde düşünmeye zaman ayırmanızı öneririz."
   },
-  "interact-with-post": "Bu yazıyla KuranReflect'te etkileşim kurun",
+  "interact-with-post": "Bu gönderiyle QuranReflect'te etkileşime geçin",
   "islamic-months": {
     "1": "Muharrem",
-    "2": "Sefer",
-    "3": "Rabi'ul-Evvel",
-    "4": "Rabi' al-Thani",
-    "5": "Cemada el-Evvel",
-    "6": "Cemada el Sani",
+    "2": "Safer",
+    "3": "Rebiülevvel",
+    "4": "Rebiülahir",
+    "5": "Cemaziyelevvel",
+    "6": "Cemaziyelahir",
     "7": "Recep",
     "8": "Şaban",
     "9": "Ramazan",
@@ -75,43 +75,43 @@
     "12": "Zilhicce"
   },
   "join-qc": {
-    "line-1": "Islami Takviminin <highlight> {{weekNumber}} </highlight> Haftasındayız.",
-    "line-2": "<normal> İlk kez olsanız bile bu haftaki okumamız için bize katılın! </normal>"
+    "line-1": "Kur'an Takviminin <highlight>{{weekNumber}}. haftasındayız</highlight>.",
+    "line-2": "<normal>İlk kez katılıyor olsanız bile bu haftaki okumaya siz de katılın!</normal>"
   },
-  "join-quranic-calendar": "KuranReflect aracılığıyla güncellemeler ve kaynaklar almak için abone olun",
-  "join-quranic-calendar-success": "İlahi Kitap Kulübüne başarıyla katıldınız!",
-  "join-telegram": "Telegram grubumuza katılın",
+  "join-quranic-calendar": "QuranReflect üzerinden güncellemeler ve kaynaklar almak için abone olun",
+  "join-quranic-calendar-success": "“Bir Yılda Kur'an” programına başarıyla katıldınız!",
+  "join-telegram": "Telegram Kanalımıza Katılın",
   "join-telegram-mobile": "Telegram",
-  "join-whatsapp": "Whatsapp grubumuza katılın",
-  "join-whatsapp-mobile": "Whatsapp",
-  "mark-as-completed": "Tamamlandı olarak işaretle",
+  "join-whatsapp": "WhatsApp Kanalımıza Katılın",
+  "join-whatsapp-mobile": "WhatsApp",
+  "mark-as-completed": "Tamamlandı Olarak İşaretle",
   "marked-as-completed": "Bu hafta başarıyla tamamlandı olarak işaretlendi!",
   "month": "Ay",
-  "my-progress": "Gelişimlerim",
+  "my-progress": "İlerlemem",
   "progress-subtitle": "Geri dönüp kaçırdığınız haftaları tamamlamaktan çekinmeyin!",
-  "quran-calendar-description": "Kuran'ı bir yılda tamamlamak için düzenli bir okuma planı. Tutarlılık kazanın, anlayışınızı derinleştirin ve bunalmış hissetmeden programı takip edin.",
-  "quran-calendar-title": "Bir Yılda Kur’an – Kur’an’ı tamamen okumak ve anlamak için basit bir plan",
-  "quran-reflect": "Tefekkür-ü Kur’an",
+  "quran-calendar-description": "Kur'an'ı bir yılda tamamlamak için düzenli bir okuma planı. İstikrar kazanın, anlayışınızı derinleştirin ve kendinizi bunalmış hissetmeden programı takip edin.",
+  "quran-calendar-title": "Bir Yılda Kur'an – Kur'an'ı Baştan Sona Okumak ve Anlamak İçin Basit Bir Plan",
+  "quran-reflect": "QuranReflect",
   "quran-reflect-description": "Bu hafta okuduğunuz ayetlerle ilgili olarak başkalarıyla etkileşime geçin.",
-  "quranic-calendar": "Küresel Kuran Takvimi",
+  "quranic-calendar": "Bir Yılda Kur'an",
   "ramadan": "Ramazan",
-  "read-online": "Çevrimiçi oku",
+  "read-online": "Çevrimiçi Oku",
   "read-this-weeks-verses": "Bu Haftanın Ayetlerini Oku",
   "reading-options": {
     "default-settings": "Varsayılan ayarlarımla oku",
-    "en-and-ar": "İngilizce ve Arapça okuyun",
-    "en-only": "Yalnızca İngilizce okuyun"
+    "en-and-ar": "İngilizce ve Arapça oku",
+    "en-only": "Yalnızca İngilizce oku"
   },
-  "reflection-prompts": "💭Bu haftanın okumasından tefekkür soruları <span> (Daha fazlasını görmek için PDF'i indirin) </span> :",
-  "share-reflections": "Düşüncelerinizi paylaşın",
+  "reflection-prompts": "💭 Bu haftanın okumasından TEFEKKÜR soruları <span>(Daha fazlasını görmek için PDF'yi indirin)</span>:",
+  "share-reflections": "Tefekkürlerinizi Paylaşın",
   "start-tracking": "Takibi başlat",
   "supplemental-resources": "Destekleyici Kaynaklar",
-  "today": "Bugünün tarihi: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
+  "today": "Bugünün tarihi: <highlight>{{day}} {{month}} {{year}}, {{gregorianDate}}</highlight>",
   "verse": "Ayet",
   "verses-subtitle": "Temel anlamları anlamaya odaklanmanız önerilir, bu nedenle sizin için uygun olan dili seçin.",
-  "watch-episode": "{{weekNumber}} Bölümü izle",
+  "watch-episode": "{{weekNumber}}. Bölümü İzle",
   "week": "Hafta",
   "week-completed": "Tamamlandı",
-  "week-title": "Hafta {{weekNumber}} ( {{month}} ) {{rangeStart}} ile {{rangeEnd}} ayetleri kapsar",
+  "week-title": "{{weekNumber}}. Hafta ({{month}}): {{rangeStart}} - {{rangeEnd}} arası ayetler",
   "weekly-verses-help-description-1": "Bu PDF, büyük ölçüde M.A.S. Abdel Haleem’in çalışmalarından uyarlanmış akıcı bir meal içerir. Her haftalık doküman yedi bölüme ayrılmıştır; böylece okumayı haftaya yaymak isterseniz kolaylık sağlar. Surelerin kısa girişleri, başlıklar ve bazı önemli noktaları açıklayan notlar bulunur. Her günlük bölüm ayrıca bir tefekkür sorusu ve önerilen bir eylem içerir."
 }

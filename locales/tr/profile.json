@@ -1,18 +1,18 @@
 {
   "allowed-formats": "Sadece {{formats}}",
-  "change-password": "Şifre değiştir",
-  "delete-account": "Hesabı sil",
+  "change-password": "Şifreyi Değiştir",
+  "delete-account": "Hesabı Sil",
   "delete-account-warning-title": "Uyarı",
   "delete-confirmation": {
     "action-text": "Sonucu anlıyorum, hesabımı sil",
     "confirmation-text": "hesabımı sil",
-    "instruction-text": "Lütfen onaylamak için <strong> {{text}} </strong> yazın",
-    "subtitle": "Bu işlem geri alınamaz. Bu, hesabınızı, kayıtlı yer imlerinizi, okuma oturumlarınızı ve tüm verilerinizi kalıcı olarak siler.",
-    "title": "Kesinlikle emin misin?"
+    "instruction-text": "Onaylamak için lütfen <strong>{{text}}</strong> yazın",
+    "subtitle": "Quran.com hesabınızı silme işlemi kalıcıdır ve geri alınamaz. Hesap verileriniz, tercihleriniz ve geçmişiniz profilinizden kalıcı olarak kaldırılacak ve artık erişilemeyecektir. QuranReflect için de aynı giriş bilgilerini kullanıyorsanız o hesap da silinecektir. [Lütfen dikkat: Bu işlem bağışçı hesabınızı etkilemez ve bağışlarınızla bağlantılı değildir. Bağışlar doğrudan bağış platformu üzerinden yönetilmelidir.]",
+    "title": "Kesinlikle emin misiniz?"
   },
   "delete-profile-picture": {
     "action-text": "Evet",
-    "cancel-text": "HAYIR",
+    "cancel-text": "Hayır",
     "subtitle": "Profil resmini silip varsayılan haline sıfırlayacaksınız, emin misiniz?",
     "title": "Profil Resmini Sil"
   },
@@ -27,19 +27,19 @@
   "notifications": {
     "abandoned-quran-goal": {
       "description": "Eğer bir süredir Kur'an hedefinizde ilerleme kaydetmediyseniz, size hatırlatma amaçlı bir e-posta gönderilecektir.",
-      "title": "Hedef Hatırlatıcısı"
+      "title": "Hedef Hatırlatıcı"
     },
     "daily-ramadan-challenge": {
-      "description": "Mülk Suresi 2026 Ramazan Mücadelesi",
+      "description": "Mülk Suresi: Anlamını Kavrayarak Ezberleme Meydan Okuması",
       "title": "Günlük Ramazan Meydan Okuması"
     },
     "quran-reading-program": {
-      "description": "Haftalık okuma ödevi, düşünme soruları ve sizi doğru yolda tutacak daha birçok kaynağa ait bağlantıları içeren bir e-posta gönderilecektir.",
-      "title": "Bir Yılda Kur'an Okumak"
+      "description": "Haftalık okuma ödevinin bağlantılarını, tefekkür sorularını ve sizi hedefinizde tutacak diğer kaynakları içeren bir e-posta gönderilecektir.",
+      "title": "Bir Yılda Kur'an"
     },
     "streaks-that-will-break": {
-      "description": "Yaklaşan bir seri hakkında sizi bilgilendirmek için bir e-posta gönderilecektir.",
-      "title": "Çizgiler"
+      "description": "Bozulmak üzere olan bir seriniz olduğunda sizi bilgilendirmek için bir e-posta gönderilecektir.",
+      "title": "Seriler"
     }
   },
   "personalization": "Kişiselleştirme",
@@ -51,7 +51,7 @@
   "success": {
     "details": "Profiliniz başarıyla güncellendi.",
     "notifications": "Bildirim ayarlarınız başarıyla güncellendi.",
-    "password": "Parolanız başarıyla güncellendi."
+    "password": "Şifreniz başarıyla güncellendi."
   },
   "update-password": "Şifreyi Güncelle",
   "upload-picture": "Resim Yükle",

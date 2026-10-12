@@ -1,4 +1,4 @@
 {
-  "description": "Ayah için katmanlı çeviriyi keşfedin. {{ayahNumber}} Surenin {{surahName}} Genişletilebilir ve daraltılabilir anlamlarla.",
-  "title": "Çeviri Katmanları {{surahName}} - {{ayahNumber}}"
+  "description": "{{surahName}} Suresinin {{ayahNumber}}. ayetinin katmanlı mealini, genişletilebilir ve daraltılabilir anlamlarıyla keşfedin.",
+  "title": "Meal Katmanları {{surahName}} - {{ayahNumber}}"
 }

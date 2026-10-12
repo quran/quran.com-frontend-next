@@ -1,41 +1,41 @@
 {
   "credits": {
-    "desc": "Kuran-ı Kerim'in dünya çapında milyonlarca insana ulaşmasını sağlayan bu projeye destek veren ve katkıda bulunan herkese şükranlarımızı sunuyoruz.",
+    "desc": "Kur'an-ı Kerim'in dünya çapında milyonlarca insana ulaşmasını sağlayan bu projeye destek veren ve katkıda bulunan herkese şükranlarımızı sunuyoruz.",
     "lokalize": "<0>Lokalize</0>: Verimliliğe ve kalite güvencesine odaklanan ve sorunsuz bir yerelleştirme iş akışı sağlayan bilgisayar destekli bir çeviri sistemidir.",
-    "quran-align": "<0>Collin Fair</0>: Kaydedilmiş Kur'an-ı Kerim okumalarının kelime bazında kesin bölümlenmesini sağlayan bir araç.",
-    "quran-complex": "<0>QuranComplex</0>: Kral Fahd Muhteşem Kur'an Basım Kompleksi, baskı, ses kayıtları, elektronik yayıncılık ve dijital uygulamalar alanında ileri teknolojilerin en iyi şekilde kullanılması yoluyla, Muhteşem Kur'an ve Bilimlerine hizmet etmede, Meallerini tercüme etmede ve Kur'an Metnini tahriften korumada lider bir kuruluştur.",
-    "quran-enc": "<0>QuranEnc</0>: Kur'an-ı Kerim'in birçok dünya diline ait meâl ve tefsirlerinin ücretsiz ve güvenilir tercümelerini sunan bir portal.",
-    "tanzil": "<0>Tanzil</0>: Son derece doğrulanmış kesin bir Kur'an metni sağlamayı amaçlayan uluslararası bir Kur'an projesi.",
-    "tarteel": "<0>Tarteel</0>: Yapay zeka destekli bir Kur'an ezberleme uygulaması. İster bir ayet arayın, ister ilerlemenizi takip edin veya okumanızı takip edin, daha akıllıca ezberlemenize yardımcı olmak için tasarlanmıştır.",
-    "title": "Krediler",
-    "zekr": "<0>Zekr</0>: Kuran'ı incelemek ve araştırmak için açık platformlu bir Kuran çalışma aracı"
+    "quran-align": "<0>Collin Fair</0>: Kayıtlı Kur'an tilavetlerini kelime düzeyinde hassas biçimde bölümlere ayıran bir araç.",
+    "quran-complex": "<0>QuranComplex</0>: Kral Fehd Kur'an-ı Kerim Basım Kompleksi; baskı, ses kayıtları, elektronik yayıncılık ve dijital uygulamalar alanındaki ileri teknolojileri en verimli şekilde kullanarak Kur'an-ı Kerim'e ve Kur'an ilimlerine hizmet etme, meallerini hazırlama ve Kur'an metnini tahriften koruma konusunda öncü bir kuruluştur.",
+    "quran-enc": "<0>QuranEnc</0>: Kur'an-ı Kerim meallerini ve tefsir tercümelerini birçok dünya dilinde ücretsiz ve güvenilir şekilde sunan bir portal.",
+    "tanzil": "<0>Tanzil</0>: Titizlikle doğrulanmış, hatasız bir Kur'an metni sunmayı amaçlayan uluslararası bir Kur'an projesi.",
+    "tarteel": "<0>Tarteel</0>: Yapay zekâ destekli bir Kur'an ezberleme uygulaması. İster bir ayet arıyor, ister ilerlemenizi takip ediyor, ister tilavetinizi metin üzerinden izliyor olun; daha verimli ezberlemenize yardımcı olmak için tasarlandı.",
+    "title": "Emeği Geçenler",
+    "zekr": "<0>Zekr</0>: Kur'an'ı incelemek ve araştırmak için açık platformlu bir Kur'an çalışma aracı"
   },
   "global-effort": {
-    "desc": "Dünyanın dört bir yanından milyonlarca insan, birincil dijital Kuran kaynağı olarak Quran.com'a güveniyor. İster okumak, ister düşünmek, ister ezberlemek veya çalışmak için gelsinler, ortak bir amaçları var: Allah'ın sözleriyle bağlantı kurmak için samimi bir arzu. \\n Büyümeye devam ederken, Quran.com'un Kuran ile etkileşim kurmak isteyen herkes için güvenilir, erişilebilir ve güzel tasarlanmış bir alan olmaya devam etmesini sağlamaya kararlıyız.",
+    "desc": "Dünyanın dört bir yanından milyonlarca insan, Quran.com'u başlıca dijital Kur'an kaynağı olarak kullanıyor. İster okumak, ister tefekkür etmek, ezberlemek ya da incelemek için gelsinler, hepsinin ortak bir amacı var: Allah'ın kelâmıyla bağ kurmaya yönelik samimi bir istek. Büyümeye devam ederken Quran.com'un, Kur'an'la bağ kurmak isteyen herkes için güvenilir, erişilebilir ve özenle tasarlanmış bir alan olmaya devam etmesi için kararlılıkla çalışıyoruz.",
     "title": "Küresel Bir Çaba"
   },
   "key-features": {
     "desc": "Quran.com, Kur'an'la etkileşimin her aşamasını desteklemek için tasarlanmıştır: okuma ve ezberlemeden çalışma ve tefekküre kadar. Özelliklerimiz şunları içerir:",
     "features": [
-      "Kullanıcı Dostu Kur'an Arayüzü – Herhangi bir cihazda temiz ve sezgisel bir okuma deneyimi.",
-      "Çoklu Tercüme ve Tefsir – Tefsir ile birlikte birden fazla dilde tercümelere erişim.",
-      "Sesli Okumalar – Dünyaca ünlü Karilerin yüksek kaliteli okumalarını dinleyin ve kelime kelime takip edin.",
-      "Gelişmiş Arama ve Gezinme – Kuran'ın tamamında ayetleri anında konu veya anahtar kelimelere göre bulun.",
-      "Ayet İşaretleme ve Notlar – Ayetleri kaydedin ve daha sonra başvurmak üzere kişisel düşüncelerinizi yazın.",
-      "QuranReflect Entegrasyonu – Bilim insanları ve bireyler tarafından paylaşılan yansımalar ve içgörüler aracılığıyla küresel bir toplulukla etkileşim kurun.",
-      "Okuma İlerleme Takibi ve Hedefleri – Günlük hedeflerinizi ve okuma geçmişinizi takip edin",
-      "Geliştiriciler için API'ler – İslami uygulamaları ve Ar-Ge'yi güçlendirecek içerik ve özelliklere ücretsiz erişim.",
-      "Ve daha fazlası, Elhamdülillah."
+      "Kullanıcı Dostu Kur'an Arayüzü – Her cihazda sade ve sezgisel bir okuma deneyimi.",
+      "Çoklu Meal ve Tefsir – Birçok dilde meallere ve tefsirlere erişim.",
+      "Sesli Tilavetler – Dünyaca ünlü kârilerin yüksek kaliteli tilavetlerini dinleyin ve kelime kelime takip edin.",
+      "Gelişmiş Arama ve Gezinme – Kur'an'ın tamamında konuya veya anahtar kelimelere göre ayetleri anında bulun.",
+      "Ayet Yer İşaretleri ve Notlar – Ayetleri kaydedin, daha sonra başvurmak üzere kişisel tefekkürlerinizi yazın.",
+      "QuranReflect Entegrasyonu – Âlimlerin ve bireylerin paylaştığı tefekkür ve görüşlerle küresel bir toplulukla etkileşim kurun.",
+      "Okuma İlerlemesi Takibi ve Hedefler – Günlük hedeflerinizi ve okuma geçmişinizi takip edin.",
+      "Geliştiriciler için API'ler – İslami uygulamalara ve Ar-Ge çalışmalarına güç verecek içerik ve özelliklere ücretsiz erişim.",
+      "Ve daha fazlası, elhamdülillah."
     ],
-    "title": "Temel özellikler ve sunulan hizmetler"
+    "title": "Temel Özellikler ve Hizmetler"
   },
-  "main-description": "1995'teki kuruluşundan bu yana, Quran.com, Kuran'ı herkesin anlayabileceği, gerçek ve etkileşimi kolay bir şekilde erişilebilir kılmaya kendini adamıştır. Her gün, dünya çapında milyonlarca insan Kuran'ı okumak, dinlemek, incelemek ve üzerinde düşünmek için Quran.com'a yöneliyor; ister hayat boyu öğrenci, ister akademisyen olsunlar, ister yolculuklarına yeni başlamış olsunlar.",
+  "main-description": "Quran.com, 1995'teki kuruluşundan bu yana Kur'an'ı herkesin açık, sahih ve kolayca faydalanabileceği bir şekilde sunmaya kendini adamıştır. Her gün dünya genelinde milyonlarca insan; ister ömür boyu öğrenci, ister âlim olsun, ister yolculuğuna yeni başlamış olsun, Kur'an'ı okumak, dinlemek, incelemek ve üzerinde tefekkür etmek için Quran.com'a yöneliyor.",
   "our-mission": {
-    "desc": "Kuran'ın okunması, anlaşılması ve üzerinde düşünülmesi amaçlanmıştır. Misyonumuz, güvenilir, iyi tasarlanmış ve derinlemesine zenginleştirici bir Kuran deneyimi sunarak erişim engellerini kaldırmak ve bireyleri ve toplulukları güçlendirmektir. Doğruluk, açıklık ve samimiyet ilkeleriyle yönlendirilen Kuran ile etkileşim kurmak isteyen herkes için güvenilir bir kaynak olmayı hedefliyoruz.",
+    "desc": "Kur'an; okunmak, anlaşılmak ve üzerinde tefekkür edilmek içindir. Misyonumuz; güvenilir, özenle tasarlanmış ve derinden zenginleştirici bir Kur'an deneyimi sunarak erişimin önündeki engelleri kaldırmak, bireyleri ve toplulukları güçlendirmektir. Doğruluk, açıklık ve samimiyet ilkelerinin rehberliğinde, Kur'an'la bağ kurmak isteyen herkes için güvenilir bir kaynak olmayı hedefliyoruz.",
     "title": "Misyonumuz"
   },
   "who-we-are": {
-    "desc": "Quran.com, Kuran'ın herkese ücretsiz ve ticari çıkarlar olmadan erişilebilir olmasını sağlamak için kamusal bir güven olarak kurulan bir vakıftır. 501(c)(3) kar amacı gütmeyen bir kuruluş olan <link>Quran.Foundation</link> tarafından yönetilir ve Kuran.com'u, dünyaya yüksek kaliteli, gerçek Kuran kaynakları sağlama misyonunun bir parçası olarak sürdürür ve geliştirir. Taahhüdümüz, Kuran'a ve okuyucularına mükemmellik, samimiyet ve sorumlulukla hizmet etmektir.",
+    "desc": "Quran.com, Kur'an'ın ticari bir çıkar gözetmeksizin herkese ücretsiz olarak erişilebilir kalmasını sağlamak amacıyla kamu yararına kurulmuş bir vakıftır. 501(c)(3) statüsünde kâr amacı gütmeyen bir kuruluş olan <link>Quran.Foundation</link> tarafından yönetilir; kuruluş, dünyaya yüksek kaliteli ve sahih Kur'an kaynakları sunma misyonunun bir parçası olarak Quran.com'u sürdürür ve geliştirir. Kur'an'a ve okuyucularına mükemmellik, samimiyet ve sorumluluk bilinciyle hizmet etmeyi taahhüt ediyoruz.",
     "title": "Biz Kimiz"
   }
 }

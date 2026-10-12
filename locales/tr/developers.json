@@ -6,69 +6,69 @@
     "title": "API Belgeleri"
   },
   "app-portal": {
-    "cta-explore": "Uygulamaları Keşfedin",
-    "cta-oauth": "OAuth2 kılavuzuna bakın.",
-    "description": "Topluluk tarafından geliştirilen en yeni deneyimleri keşfedin ve platformumuzla nelerin mümkün olduğunu görün.",
+    "cta-explore": "Uygulamaları Keşfet",
+    "cta-oauth": "OAuth2 kılavuzunu gör",
+    "description": "Toplumun farklı kesimlerine ve kendine özgü ihtiyaçlarına yönelik dönüştürücü uygulamaları keşfedin.",
     "heading": "Bağlantılı Kur'an Uygulamaları",
-    "oauth-pitch": "Sorunsuz giriş için Kuran Vakfı OAuth2 ile uygulamanızı gönderin ve Kuran Uygulamaları Portalı'nda öne çıkarılması için başvurunuzu yapın.",
-    "tagline": "Kuran uygulamalarınızı sergileyin."
+    "oauth-pitch": "Kullanıcıların verilerine ulaşabilmesi ve Quran.com ile entegre uygulamalarda kaldıkları yerden devam edebilmesi için Quran.Foundation'ın OAuth2.0 altyapısını kullanın.",
+    "tagline": "Kur'an uygulamalarınızı sergileyin"
   },
   "careers": {
-    "career": "Kariyer fırsatları",
-    "cta": "Pozisyonları görüntüle",
+    "career": "Kariyer Fırsatları",
+    "cta": "Pozisyonları Görüntüle",
     "header": "Mevcut iş ilanlarımızı keşfedin"
   },
   "footer": "- Quran.com ekibi",
   "header": "Geliştirme Yardımı",
   "hero": {
-    "subtitle": "Kur'an deneyimleri geliştiren yazılımcılar için kaynaklar, araçlar ve kılavuzlar.",
-    "title": "Quran.com ile oluşturuldu"
+    "subtitle": "Kur'an deneyimleri geliştiren geliştiriciler için kaynaklar, araçlar ve rehberlik.",
+    "title": "Quran.com ile Geliştirin"
   },
-  "issues-cta": "Herhangi bir sorunuz varsa ve bizimle iletişime geçmek isterseniz, bize yazın! Mümkün olan en kısa sürede size geri döneceğiz, inşaAllah.",
-  "issues-guide": "Tipik olarak, daha sonra ne üzerinde çalışılacağı, ne olacağı ve çözülmesi gereken hangi hataların mevcut olduğu konusunda kaynak olarak <0>Github projelerini</0> Örneğin <1>bu url</1> hataların listesi, yardıma ihtiyacımız olan şeyler ve gelecek özellikler içeriyor.",
-  "labs": "Laboratuvarlar",
-  "labs-cta": "Laboratuvarları Keşfedin",
-  "labs-description": "Deneysel özellikleri ve gelecek yenilikleri keşfedin. Fikirlerinizi paylaşın.",
-  "labs-pitch": "Fikirlerinizi paylaşın ve Kur'an'la ilgili etkileşim ve deneyimlerin geleceğine katılın.",
-  "main-desc": "Esselamü aleyküm, Öncelikle Kuran.com'u ve projelerini geliştirmemize yardımcı olmak için gösterdiğiniz ilgi için çok teşekkür ederiz. Sizinle çalışmaktan heyecan duyuyoruz!",
+  "issues-cta": "Herhangi bir sorunuz varsa veya proje sorumlularıyla iletişime geçmek istiyorsanız bir issue açmanız yeterli. İnşallah en kısa sürede size dönüş yapacağız.",
+  "issues-guide": "Genellikle sırada ne üzerinde çalışılacağını, neyin yolda olduğunu ve hangi hataların çözülmesi gerektiğini belirlemek için <0>GitHub projelerini</0> kaynak olarak kullanırız. Örneğin <1>bu bağlantıda</1> hataların, yardıma ihtiyaç duyduğumuz konuların ve yakında gelecek özelliklerin listesi bulunuyor.",
+  "labs": "Quran Labs",
+  "labs-cta": "Laboratuvarları Keşfet",
+  "labs-description": "Topluluk odaklı deneysel özellikleri ve yakında gelecek yenilikleri keşfedin.",
+  "labs-pitch": "Fikirlerinizi paylaşın, Kur'an'la etkileşimin ve Kur'an deneyimlerinin geleceğine katkıda bulunun.",
+  "main-desc": "Quran.com ekosistemini genişletmenize yardımcı olmak için tasarlanmış programları, araçları ve belgeleri keşfedin.",
   "projects": {
-    "all": "Tamamı Github'da barındırılan bir dizi projemiz var. Hepsi <0>burada</0> . Özetlemek gerekirse:",
+    "all": "Tamamı GitHub'da barındırılan çok sayıda projemiz var. Hepsini <0>buradan</0> inceleyebilirsiniz. Kısaca özetlemek gerekirse:",
     "items": {
       "q-android": {
         "description": "Telefonlar ve tabletler için yerel Android mushaf ve ses oynatıcı deneyimi.",
-        "name": "Kuran Android",
+        "name": "Quran Android",
         "stack": "Kotlin ve Java"
       },
       "q-api": {
-        "description": "Kuran verilerini, aramayı ve çevirileri destekleyen Ruby on Rails tabanlı arka uç sistemi.",
+        "description": "Kur'an verilerine, aramaya ve meallere güç veren Ruby on Rails tabanlı arka uç.",
         "name": "Quran.com API",
         "stack": "Rails, PostgreSQL"
       },
       "q-audio": {
-        "description": "Okuma-yazma etkinlikleri için ses akışı platformu ve ona eşlik eden mobil uygulamalar.",
-        "name": "Kuran Sesi",
+        "description": "Tilavetler için ses akışı platformu ve ona eşlik eden mobil uygulamalar.",
+        "name": "Quranic Audio",
         "stack": "Web ve mobil uygulamalar"
       },
       "q-ios": {
-        "description": "Swift tabanlı, yer imleri, okuma kayıtları ve çevrimdışı desteği bulunan Kur'an okuyucu.",
-        "name": "Kuran iOS",
-        "stack": "Süratli"
+        "description": "Yer işaretleri, tilavetler ve çevrimdışı kullanım desteği sunan Swift tabanlı Kur'an okuyucu.",
+        "name": "Quran iOS",
+        "stack": "Swift"
       },
       "q-next": {
         "description": "Kur'an okuma, arama ve dinleme için Next.js tabanlı web deneyimi.",
         "name": "Quran.com Ön Yüzü",
-        "stack": "TypeScript ve Next.js ile geliştirilmiştir."
+        "stack": "TypeScript ve Next.js ile geliştirildi"
       }
     },
     "lead": "Quran.com ekibi ve topluluğu tarafından sürdürülen açık kaynaklı projeler.",
-    "q-android": "<0>Kuran Android</0>",
+    "q-android": "<0>Quran Android</0> - Kotlin ve Java ile yazılmıştır.",
     "q-api": "<0>Quran.com API'si</0> - Ruby on Rails ile yazılmıştır.",
-    "q-api-docs": "<0> Quran.com API Belgeleri </0> - API belgeleri portalımız.",
-    "q-audio": "<0>Kuran Sesleri</0> ve <1>Kuran Sesleri mobil uygulamaları</1>",
-    "q-audio-segments": "<0>Kuran Ses Bölümleri</0>",
-    "q-ios": "<0>Kuran iOS</0>",
-    "q-next": "<0>Quran.com Önyüzü</0> - Next.js ile yazılmıştır.",
+    "q-api-docs": "<0>Quran.com API Belgeleri</0> - API belgeleri portalımız.",
+    "q-audio": "<0>Quranic Audio</0> ve <1>Quranic Audio mobil uygulamaları</1>",
+    "q-audio-segments": "<0>Quran Audio Segments</0>",
+    "q-ios": "<0>Quran iOS</0> - Swift ile yazılmıştır.",
+    "q-next": "<0>Quran.com Ön Yüzü</0> - Next.js ile yazılmıştır.",
     "q-v2": "<0>Quran.com</0> - Ruby on Rails ile yazılmıştır."
   },
-  "thanks": "Okuduğunuz için teşekkürler! Bazı kodlar işlediğinizi görmek için sabırsızlanıyorum!"
+  "thanks": "Katkılarınızı sabırsızlıkla bekliyoruz!"
 }
