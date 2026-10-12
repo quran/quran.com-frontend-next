@@ -7,6 +7,7 @@ type RepeatSettingProps = {
   value: number;
   onChange: (value: number) => void;
   suffix: string;
+  description?: string;
   minValue?: number;
   maxValue?: number;
   format?: (val: number) => string;
@@ -22,12 +23,16 @@ const RepeatSetting = ({
   maxValue = Infinity,
   step = 1,
   suffix,
+  description,
   infinityThreshold,
   format = (val: number) => val.toString(),
 }: RepeatSettingProps) => {
   return (
     <div className={styles.inputContainer}>
-      <span className={styles.label}>{label}</span>{' '}
+      <span className={styles.label}>
+        <span>{label}</span>
+        {description && <span className={styles.description}>{description}</span>}
+      </span>{' '}
       <span className={styles.input}>
         <Counter
           onIncrement={
@@ -46,7 +51,7 @@ const RepeatSetting = ({
           }
           count={format(value)}
         />{' '}
-        {suffix}
+        <span className={styles.suffix}>{suffix}</span>
       </span>
     </div>
   );

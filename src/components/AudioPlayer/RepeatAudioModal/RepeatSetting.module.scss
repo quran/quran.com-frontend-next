@@ -12,14 +12,25 @@
 }
 
 .label {
+  display: flex;
+  flex-direction: column;
   font-weight: var(--font-weight-bold);
   @include breakpoints.tablet {
     min-inline-size: calc(8.5 * var(--spacing-large));
   }
 }
+.description {
+  color: var(--color-text-faded);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-normal);
+}
 .input {
   display: flex;
   align-items: center;
+}
+
+.suffix {
+  white-space: nowrap;
 }
 
 .switchContainer {

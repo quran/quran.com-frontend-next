@@ -308,7 +308,8 @@ const RepeatAudioModal = ({
             value={verseRepetition.delayMultiplier}
             minValue={0}
             onChange={onDelayMultiplierChange}
-            suffix={t('audio.player.times')}
+            suffix={t('audio.player.delay-verse-suffix')}
+            description={t('audio.player.delay-verse-description')}
             step={0.5}
           />
         </div>
