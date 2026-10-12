@@ -2,62 +2,62 @@
   "bulk-actions": {
     "actions": "Eylemler",
     "actions-count": "Eylemler ({{count}})",
-    "cancel": "İptal etmek",
+    "cancel": "İptal",
     "collapse-all": "Tümünü Daralt",
     "expand-all": "Tümünü Genişlet",
-    "pin": "Pin",
-    "pin-verses": "Pin ayetleri",
-    "select": "Seçme"
+    "pin": "Sabitle",
+    "pin-verses": "Ayetleri sabitle",
+    "select": "Seç"
   },
   "collections": {
     "detail-empty": "Okumaya başlayın ve koleksiyonunuza ekleyin!",
     "favorites": "Favoriler",
     "filters": {
-      "chapters": "Bölüm",
+      "chapters": "Sure",
       "clear-all": "Tümünü temizle",
-      "juz": "Juz",
+      "juz": "Cüz",
       "no-matches": "Kaydedilen ayetlerden hiçbiri filtrelerinizle eşleşmiyor.",
-      "no-results": "Sonuç bulunamadı.",
+      "no-results": "Sonuç bulunamadı",
       "title": "Filtrele"
     },
     "guest-promo": {
-      "sign-in": "Giriş yap",
-      "subtitle": "Ayetler arasındaki benzerlikleri ve farklılıkları karşılaştırın.",
+      "sign-in": "Giriş Yap",
+      "subtitle": "Ayetler arasındaki benzerlikleri ve farklılıkları karşılaştırın",
       "title": "Özel koleksiyonlar oluşturun"
     },
     "items": "{{count}} öğe",
-    "items_plural": "{{count}} öğeler",
+    "items_plural": "{{count}} öğe",
     "load-more": "Daha fazla yükle",
     "new-collection": "Yeni Koleksiyon",
     "sort": {
       "a-z": "A - Z",
-      "recently-updated": "Son güncellemeler",
+      "recently-updated": "Son güncellenenler",
       "z-a": "Z - A"
     },
     "title": "Koleksiyonlar"
   },
-  "notes-and-reflections": "Notlar ve Düşünceler",
+  "notes-and-reflections": "Notlar ve Tefekkürler",
   "page": "Sayfa",
   "reading-bookmark": {
     "empty": "Okumaya başlayın ve bir Okuma Yer İşareti kaydedin!",
-    "title": "Okuma Ayracım"
+    "title": "Okuma Yer İşaretim"
   },
-  "recent": "Son",
-  "recent-empty": "Son okuduklarınızı görmek için okumaya başlayın.",
+  "recent": "Son Okunanlar",
+  "recent-empty": "Son okuduklarınızı görmek için okumaya başlayın",
   "recently-saved": {
     "title": "Son Kaydedilenler"
   },
-  "saved": "Kaydedildi",
+  "saved": "Kaydedilenler",
   "search": {
     "filter": "Filtrele",
-    "placeholder": "Arama kaydedildi...",
-    "sort": "Düzenlemek"
+    "placeholder": "Kaydedilenlerde ara...",
+    "sort": "Sırala"
   },
   "sign-in-prompt": {
     "features": {
-      "attach-notes": "Ayetlere notlar ekleyin.",
+      "attach-notes": "Ayetlere notlar ekleyin",
       "custom-collections": "Özel koleksiyonlar oluşturun"
     },
-    "title": "Daha fazla özelliğe erişmek için giriş yapın veya ücretsiz kayıt olun!"
+    "title": "Daha fazla özelliğe erişmek için giriş yapın veya ücretsiz kaydolun!"
   }
 }

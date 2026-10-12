@@ -1,5 +1,5 @@
 {
-  "all-saved-verses": "Tüm kaydedilen ayetler",
+  "all-saved-verses": "Kaydedilen tüm ayetler",
   "alphabetical": "A'dan Z'ye",
   "back-to-collection-list": "Koleksiyon listesine geri dön",
   "collapse-all": "Tüm ayetleri daralt",
@@ -9,30 +9,30 @@
   "date-asc": "Tarih (En Eski)",
   "date-desc": "Tarih (En Yeni)",
   "delete-bookmark": {
-    "confirmation-subtitle": "Sileceksiniz {{count}} ürün(ler)den {{collectionName}}, Emin misin?",
-    "subtitle": "{{bookmarkName}} ' {{collectionName}} koleksiyonundan silmek istediğinizden emin misiniz?",
-    "success": "Silindi {{count}} öğeler).",
+    "confirmation-subtitle": "{{collectionName}} koleksiyonundan {{count}} öğe silinecek. Emin misiniz?",
+    "subtitle": "{{bookmarkName}} yer işaretini {{collectionName}} koleksiyonundan silmek istediğinizden emin misiniz?",
+    "success": "{{count}} öğe silindi.",
     "title": "Yer işaretini sil"
   },
   "delete-collection-action": "Koleksiyonu Sil",
-  "delete-collection-success": "Koleksiyon başarıyla silindi.",
+  "delete-collection-success": "Koleksiyon başarıyla silindi",
   "delete-collection": {
     "description": "Bu koleksiyonda kayıtlı tüm ayetleri kaybedeceksiniz.",
     "subtitle": "{{collectionName}} koleksiyonunu silmek istediğinizden emin misiniz?",
-    "subtitle-tagged": "Silmek istediğinizden emin misiniz? <collectionName>{{collectionName}}</collectionName> ?",
-    "title": "Koleksiyonu sil"
+    "subtitle-tagged": "<collectionName>{{collectionName}}</collectionName> koleksiyonunu silmek istediğinizden emin misiniz?",
+    "title": "Koleksiyonu Sil"
   },
   "edit-collection": "Koleksiyonu Düzenle",
   "edit-collection-name-required": "Kaydedilecek koleksiyon için bir ad girin.",
-  "edit-collection-success": "Koleksiyon başarıyla güncellendi.",
+  "edit-collection-success": "Koleksiyon başarıyla güncellendi",
   "empty": "Koleksiyon boş",
   "expand-all": "Tüm ayetleri genişlet",
   "go-to-ayah": "Ayete git",
-  "load-more": "Daha fazla yükle",
-  "no-collections": "Henüz hiçbir koleksiyonunuz yok.",
+  "load-more": "Daha Fazla Yükle",
+  "no-collections": "Henüz hiçbir koleksiyonunuz yok",
   "quranic-asc": "Kur'an'daki sıralama (Artan)",
   "quranic-desc": "Kur'an'daki sıralama (Azalan)",
-  "recently-added": "Son eklenen",
-  "recently-updated": "Son güncellenen",
+  "recently-added": "Son eklenenler",
+  "recently-updated": "Son güncellenenler",
   "verse-key": "Sure ve Ayet Numarası"
 }

@@ -2,58 +2,58 @@
   "checklist": {
     "1": "Ana sayfa özellikleri",
     "2": "Ayarlarınızı özelleştirin",
-    "3": "Ayah okuma deneyiminizi zenginleştirin",
+    "3": "Ayet okuma deneyiminizi zenginleştirin",
     "4": "Kişiselleştirilmiş özellikler"
   },
-  "finish": "Sona ermek",
-  "onboarding-checklist": "İlk Katılım Kontrol Listesi",
-  "onboarding-title": "Kuran.com deneyiminizi en üst düzeye çıkarın! <br></br> Turunuza şimdi başlayın:",
-  "previous": "Öncesi",
-  "skip": "Atlamak",
+  "finish": "Bitir",
+  "onboarding-checklist": "Başlangıç Kontrol Listesi",
+  "onboarding-title": "Quran.com deneyiminizden en iyi şekilde yararlanın! <br></br> Turunuza şimdi başlayın:",
+  "previous": "Önceki",
+  "skip": "Atla",
   "steps": {
     "3-dot-menu": {
-      "description": "Ayetleri kopyalama, yer imlerine ekleme ve tekrarlama seçeneklerini keşfetmek için 3 noktalı menüyü tıklayın. Ayetleri tekrarlamak için çeşitli seçenekleri keşfedin",
+      "description": "Ayetleri kopyalama, yer işaretlerine ekleme ve tekrarlama seçeneklerini görmek için 3 nokta menüsüne tıklayın. Ayetleri tekrarlamaya yönelik çeşitli seçenekleri keşfedin",
       "title": "3 nokta menüsü"
     },
     "ayah-reflection": {
-      "description": "Kur'an'la daha kişisel bir bağ geliştirmenize yardımcı olması için akademisyenlerin, ilim öğrencilerinin ve sıradan insanların düşüncelerini (tadabbur) okuyun",
-      "title": "Ayah seviyesindeki yansımaları okuyun"
+      "description": "Kur'an'la daha kişisel bir bağ kurmanıza yardımcı olması için âlimlerin, ilim talebelerinin ve sıradan insanların tefekkürlerini (tedebbür) okuyun",
+      "title": "Ayet düzeyinde tefekkürleri okuyun"
     },
     "ayah-tafsir": {
-      "description": "Okurken anlayışınızı geliştirecek ayrıntılı bilgiler sunan Tefsir'i ayet düzeyinde keşfedin. (Tefsir, uygun görüldüğünde birden fazla ayete göre gruplandırılabilir)",
-      "title": "Ayet seviyesinde Tefsir oku"
+      "description": "Okurken anlayışınızı geliştirecek ayrıntılı bilgiler sunan tefsiri ayet düzeyinde keşfedin. (Tefsir, uygun görüldüğünde birden fazla ayet için gruplandırılabilir)",
+      "title": "Ayet düzeyinde tefsir okuyun"
     },
     "font-size": {
-      "description": "Rahat bir okuma deneyimi için Kur'an okumanızı ayarlaması kolay yazı tipi boyutlarıyla özelleştirin",
+      "description": "Rahat bir okuma deneyimi için kolayca ayarlanabilen yazı boyutlarıyla Kur'an okumanızı kişiselleştirin",
       "title": "Yazı Boyutu"
     },
     "font-style": {
-      "description": "Seçenekler arasında Uthmani - Kral Fahad Kompleksi v1, Uthmani - Kral Fahad Kompleksi v2, Uthmani QPC Hafs, Indopak 15 hat, Indopak 16 hat bulunmaktadır.",
-      "title": "Tercih ettiğiniz okuma metnini seçin"
+      "description": "Seçenekler: Osmanî - Kral Fehd Kompleksi v1, Osmanî - Kral Fehd Kompleksi v2, Uthmani QPC Hafs, IndoPak 15 Satır, IndoPak 16 Satır",
+      "title": "Tercih ettiğiniz Mushaf yazı stilini seçin"
     },
     "inline-wbw": {
-      "description": "Kur'an'ı dinlerken her kelimenin çevirisini satırda (kelimenin altında) veya kelimenin üstünde bir baloncuk içinde görüntüleyin",
-      "title": "Kelime kelime çeviriyi satır içi olarak (kelimenin altında) görüntüleyin veya araç ipucunu görüntüleyin"
+      "description": "Kur'an'ı dinlerken her kelimenin mealini satır içinde (kelimenin altında) veya kelimenin üzerinde bir bilgi balonunda görüntüleyin",
+      "title": "Kelime kelime meali satır içinde (kelimenin altında) veya bilgi balonunda görüntüleyin"
     },
     "juz": {
-      "description": "Kuran'ı Cüz'den görüntüle",
-      "title": "Kuran'ı Cüz'den görüntüle"
+      "description": "Kur'an'ı Cüzlere Göre Görüntüleyin",
+      "title": "Kur'an'ı Cüzlere Göre Görüntüleyin"
     },
     "listen": {
-      "description": "Okunuşu dinlemek için ses oynatıcıyı başlatın",
-      "title": "Sureyi veya Ayah'ı dinleyin"
+      "description": "Tilaveti dinlemek için ses oynatıcıyı başlatın",
+      "title": "Sureyi veya Ayeti Dinleyin"
     },
     "login": {
-      "description": "Oturum açın, ayarları cihazlar arasında kaydedin ve ek özelliklere erişin.",
-      "title": "Giriş yapmak"
+      "description": "Giriş yapın; ayarlarınızı cihazlarınız arasında kaydedin ve ek özelliklere erişin.",
+      "title": "Giriş Yap"
     },
     "quran-radio": {
-      "description": "Kuran Radyosunu dinleyin - Kur'an'ı reklamsız yayınlayın",
-      "title": "Kuran Radyosu"
+      "description": "QuranRadio'yu dinleyin - Kur'an tilavetlerini reklamsız olarak canlı dinleyin",
+      "title": "Kur'an Radyosu"
     },
     "reading-sessions": {
-      "description": "Kuran.com'da keşfettiğiniz ayetleri takip ederek, kişiselleştirilmiş okuma geçmişinize bir bakış atarak Kuran yolculuğunuzu kolayca gözden geçirin.",
-      "title": "Okuma geçmişini görüntüle"
+      "description": "Kişiselleştirilmiş okuma geçmişinize göz atarak Quran.com'da okuduğunuz ayetleri takip edin ve Kur'an yolculuğunuzu kolayca gözden geçirin.",
+      "title": "Okuma geçmişinizi görüntüleyin"
     },
     "reading-view": {
       "description": "Mushaf modunda Kur'an'ı görüntüleyin",
@@ -61,43 +61,43 @@
     },
     "search-bar": {
       "description": "Arama çubuğumuzu kullanarak aradığınız ayet, sure, anahtar kelime, cüz ve konuları bulun",
-      "title": "Arama çubuğu"
+      "title": "Arama Çubuğu"
     },
     "select-reciter": {
-      "description": "Dinlemekten en çok keyif aldığınız okuyucuyu seçerek dinleme deneyiminizi kişiselleştirin!",
-      "title": "Dinlemek için çeşitli okuyucular arasından seçim yapın"
+      "description": "Dinlemekten en çok keyif aldığınız kâriyi seçerek dinleme deneyiminizi kişiselleştirin!",
+      "title": "Dinlemek için çeşitli kâriler arasından seçim yapın"
     },
     "settings": {
-      "description": "Tercihlerinizi kontrol edin",
+      "description": "Tercihlerinizi yönetin",
       "title": "Ayarlar"
     },
     "streak": {
-      "description": "Okuma Çizgileri ve Planları özelliğimizle kişiselleştirilmiş okuma hedefleri belirleyin, ilerlemenizi takip edin ve tutarlı bir Kuran okuma alışkanlığı oluşturun.",
+      "description": "Okuma Serileri ve Planlar özelliğimizle kişisel okuma hedefleri belirleyin, ilerlemenizi takip edin ve düzenli bir Kur'an okuma alışkanlığı edinin.",
       "title": "Okuma serilerini ve okuma planlarını takip edin"
     },
     "surah-info": {
-      "description": "Her Surenin başında uygun bir konumda bulunan her Sure hakkında bilgi edinin",
-      "title": "Suresi Hakkında Okuyun"
+      "description": "Her surenin başında kolayca ulaşabileceğiniz bilgilerle o sure hakkında fikir edinin",
+      "title": "Sure Hakkında Bilgi Edinin"
     },
     "theme": {
-      "description": "Rahat ve kişiselleştirilmiş bir Kuran okuma deneyimi için favori görünümünüzü (Açık, Sepya veya Karanlık mod) seçin.",
-      "title": "Kuran'ı Açık, Sepya veya Karanlık Modda Okuyun"
+      "description": "Rahat ve kişiselleştirilmiş bir Kur'an okuma deneyimi için en sevdiğiniz görünümü (Açık, Sepya veya Koyu mod) seçin.",
+      "title": "Kur'an'ı Açık, Sepya veya Koyu Modda Okuyun"
     },
     "translations": {
-      "description": "Birden çok dilde çeşitli çeviriler arasından seçim yapın. İpucu: Birden fazla seçenek belirleyerek çevirileri karşılaştırın",
-      "title": "Çeviriler"
+      "description": "Birçok dilde çeşitli mealler arasından seçim yapın. İpucu: Birden fazla seçenek belirleyerek mealleri karşılaştırın",
+      "title": "Mealler"
     },
     "wbw-audio": {
       "description": "Sadece kelimenin üzerine tıklayarak her kelimeyi ayrı ayrı dinlemek için bu seçeneği seçin!",
-      "title": "Kelimenin üzerine tıklayarak kelime kelime harf çevirisini dinleyin"
+      "title": "Kelimeye tıklayarak kelime kelime okunuşu dinleyin"
     },
     "wbw-translation": {
-      "description": "Kur'an'ı okurken veya dinlerken tek tek kelimelerin anlamlarını görüntüleyerek Kur'an'la ilgili kelime dağarcığınızı geliştirmenize yardımcı olun",
-      "title": "Kelime kelime çeviriyi okuyun"
+      "description": "Kur'an kelime dağarcığınızı geliştirmek için Kur'an'ı okurken veya dinlerken kelimelerin tek tek anlamlarını görüntüleyin",
+      "title": "Kelime kelime meali okuyun"
     },
     "wbw-transliteration": {
-      "description": "Kur'an okuma yolculuğunuzda size yardımcı olacak her kelimenin harf çevirisini görüntüleyin",
-      "title": "Kelime kelime harf çevirisini okuyun"
+      "description": "Kur'an okuma yolculuğunuzda size yardımcı olması için her kelimenin okunuşunu görüntüleyin",
+      "title": "Kelime kelime okunuşu takip edin"
     }
   }
 }

@@ -2,103 +2,103 @@
   "browse": {
     "apps": {
       "muhaffidh": {
-        "caption": "Kur'an'ı etkili bir şekilde ezberleyin ve tekrar edin.",
+        "caption": "Kur'an'ı etkili bir şekilde ezberleyin ve tekrar edin",
         "description": "Kur'an'ı ezberlemenize ve tekrar etmenize yenilikçi bir şekilde yardımcı olmak için tasarlanmış bir Kur'an uygulaması.",
-        "tagline": "Yenilikçi bir Kur'an ezberleme ve tekrar kılavuzu",
-        "title": "Muhaffid"
+        "tagline": "Yenilikçi bir Kur'an ezberleme ve tekrar yardımcısı",
+        "title": "Muhaffidh"
       },
       "quran_android": {
-        "caption": "Android cihazlarda Kur'an'ı okuyun, yer imlerine ekleyin ve dinleyin.",
-        "description": "Özellikler arasında Medeni tarzı sayfalar, kesintisiz ses kaydı, yer imi ekleme/etiketleme/paylaşma, arama, gece modu, ses tekrarı ve birçok dilde çeviri/tefsir yer almaktadır.",
-        "tagline": "Android için ücretsiz, açık kaynaklı Kuran uygulaması",
-        "title": "Android için Kuran"
+        "caption": "Android cihazlarda Kur'an'ı okuyun, yer işareti ekleyin ve dinleyin",
+        "description": "Özellikler arasında Medine Mushafı tarzı sayfalar, kesintisiz ses oynatma, yer işareti ekleme/etiketleme/paylaşma, arama, gece modu, ses tekrarı ve birçok dilde meal/tefsir yer alıyor.",
+        "tagline": "Android için ücretsiz, açık kaynak Kur'an uygulaması",
+        "title": "Android için Kur'an"
       },
       "quran_ios": {
-        "caption": "iPhone ve iPad için güzel, reklamsız Kur'an okuma ve dinleme uygulaması.",
-        "description": "Quran.com'un yapımcılarından: Temiz, reklamsız bir deneyimle Kur'an'ı hareket halindeyken okuyun, ezberleyin ve en sevdiğiniz kıraatçileri dinleyin.",
+        "caption": "iPhone ve iPad için şık, reklamsız Kur'an okuma ve dinleme uygulaması",
+        "description": "Quran.com'un geliştiricilerinden: Kur'an'ı her yerde okuyun, ezberleyin ve en sevdiğiniz kârileri sade, reklamsız bir deneyimle dinleyin.",
         "tagline": "Güzel, reklamsız bir Mushaf uygulaması",
-        "title": "iOS için Kuran (quran.com tarafından)"
+        "title": "iOS için Kur'an (Quran.com)"
       },
       "quranmeet": {
         "caption": "Canlı Kur'an öğrenimi oturumları",
         "description": "Öğrencileri öğretmenler ve çalışma gruplarıyla bir araya getirerek birebir ve küçük grup halinde Kur'an öğrenimi seansları sağlayan bir platform.",
         "tagline": "Birebir ve küçük grup Kur'an dersleri",
-        "title": "Kuran Buluşması"
+        "title": "QuranMeet"
       },
       "quranreflect": {
-        "caption": "Düşüncelerinizi paylaşın",
-        "description": "Kuran-ı Kerim üzerine tefekkür kültürünü geliştirmeyi amaçlayan bir sosyal platform.",
-        "tagline": "Düşünceleri Okuyun ve Paylaşın",
-        "title": "Kur'anDüşün"
+        "caption": "Tefekkürlerinizi paylaşın",
+        "description": "Kur'an-ı Kerim üzerine tefekkür kültürünü geliştirmeyi amaçlayan bir sosyal platform",
+        "tagline": "Tefekkürleri Okuyun ve Paylaşın",
+        "title": "QuranReflect"
       },
       "readtafsir": {
-        "caption": "Klasik tefsirleri araştırın ve karşılaştırın.",
+        "caption": "Klasik tefsirleri araştırın ve karşılaştırın",
         "description": "Birden fazla klasik tefsir kaynağını tek bir yerde okuyun ve dinleyin; bu sayede yorumları kolayca inceleyebilir, arayabilir ve karşılaştırabilirsiniz.",
         "tagline": "İnteraktif tefsir okuma ve dinleme",
         "title": "ReadTafsir"
       },
       "sunnah": {
         "caption": "Hadis derlemesi",
-        "description": "Çeşitli dillerde çeviriler ve arama araçları da dahil olmak üzere, başlıca koleksiyonlarının çevrimiçi olarak erişilebildiği bir hadis kütüphanesi.",
-        "tagline": "Hadisler parmaklarınızın ucunda.",
+        "description": "Başlıca hadis koleksiyonlarını çevrimiçi sunan; çeşitli dillerde çeviriler ve arama araçları içeren bir hadis kütüphanesi.",
+        "tagline": "Hadisler parmaklarınızın ucunda",
         "title": "Sunnah.com"
       },
       "tafsirapp": {
-        "caption": "Çoklu kaynaklarla etkileşimli tefsir",
+        "caption": "Birden fazla kaynakla etkileşimli tefsir",
         "description": "Tefsir, kıraat, mushaflar, i'rab, Kur'an ilimleri, esbab-ı nüzul, hükümler ve sözlükleri bir araya getiren bir Kur'an araştırma portalı.",
         "tagline": "Bir Kur'an araştırma merkezi",
-        "title": "Tefsir Uygulaması"
+        "title": "Tafsir App"
       }
     },
     "filters": {
       "all": "Tüm uygulamalar",
-      "community": "Toplum",
+      "community": "Topluluk",
       "hadith-sunnah": "Hadis ve Sünnet",
       "popular": "Popüler",
-      "quran-reader": "Kur'an Okuyucusu",
-      "reflections": "Yansımalar",
+      "quran-reader": "Kur'an Okuyucu",
+      "reflections": "Tefekkürler",
       "study-tools": "Çalışma araçları"
     },
     "title": "Tüm Uygulamalara Gözat"
   },
   "cta": {
-    "app-store": "App Store'dan indirin",
-    "google-play": "Google Play'den indirin.",
-    "visit": "Ziyaret etmek"
+    "app-store": "App Store'dan İndirin",
+    "google-play": "Google Play'den Alın",
+    "visit": "Ziyaret Et"
   },
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Dünyanın dört bir yanından 60'tan fazla kadının Kur'an'ı çeşitli okuyuşlarla seslendirmesini dinleyin!",
-        "name": "Kariah",
-        "tagline": "Kur'an okuyan kadınlar"
+        "headline": "Dünyanın dört bir yanından 60'tan fazla hanım kârinin farklı kıraatlerle Kur'an tilavetlerini dinleyin!",
+        "name": "Qariah",
+        "tagline": "Kadın Kur'an Kârileri Uygulaması"
       },
       "quran-kareem": {
-        "headline": "Allah'ın Kitabı ile bağlantı kurmanın yeni kapısı.",
-        "name": "Kuran-ı Kerim",
-        "tagline": "Okuyun, dinleyin ve düşünün."
+        "headline": "Allah'ın Kitabı ile bağ kurmanın yeni kapısı",
+        "name": "Quran Kareem",
+        "tagline": "Okuyun, dinleyin ve tefekkür edin"
       },
       "quran-link": {
-        "headline": "25'ten fazla tefsir ve 100'den fazla tercümeyi tek bir yerde keşfedin.",
-        "name": "Kuran Bağlantısı",
-        "tagline": "Tefsir ve çalışma arkadaşı"
+        "headline": "25'ten fazla tefsiri ve 100'den fazla meali tek bir yerde keşfedin",
+        "name": "Quran Link",
+        "tagline": "Tefsir ve çalışma yardımcısı"
       },
       "quran-space": {
         "headline": "Öğretmenler, öğrenciler veya akranlarınızla gerçek zamanlı sesli ve görüntülü bağlantı kurarak Kur'an'ı birlikte okuyun, üzerinde düşünün ve inceleyin.",
-        "name": "Kuran Mekânı",
+        "name": "Quran Space",
         "tagline": "Canlı Kur'an Toplantı Alanı"
       }
     },
-    "learn-more": "Daha fazla bilgi edin",
+    "learn-more": "Daha fazla bilgi",
     "title": "Öne Çıkan Uygulamalar",
     "view-all": "Tümünü görüntüle"
   },
   "footer": {
-    "disclaimer": "Her uygulama, geliştiricisi tarafından bağımsız olarak sahiplenilir ve bakımı yapılır. Destek, hata bildirimleri veya özellik istekleri için lütfen doğrudan uygulama geliştiricisiyle iletişime geçin."
+    "disclaimer": "Her uygulama, geliştiricisine aittir ve geliştiricisi tarafından bağımsız olarak sürdürülür. Destek, hata bildirimi veya özellik talepleri için lütfen doğrudan uygulama geliştiricisiyle iletişime geçin."
   },
   "hero": {
-    "description": "Hesabınız, ilerlemeniz ve yolculuğunuz bağlantıda kalırken, Kuran Vakfı'nın doğrulanmış içeriği ve kullanıcı özellikleriyle desteklenen benzersiz uygulamaları keşfedin.",
-    "title": "Uygulama Ekosistemimizi Keşfedin"
+    "description": "Hesabınız, ilerlemeniz ve yolculuğunuz birbirine bağlı kalırken Quran Foundation'ın doğrulanmış içeriği ve kullanıcı özellikleriyle güçlendirilen benzersiz uygulamaları keşfedin.",
+    "title": "Bağlantılı Kur'an Uygulamaları"
   },
   "quran-apps-portal": "Bağlantılı Kur'an Uygulamaları"
 }

@@ -1,6 +1,6 @@
 {
-  "go-back": "Geri dön",
+  "go-back": "Geri Dön",
   "if-persist": "Sorun devam ederse lütfen",
-  "report-cta": "Hata Bildir",
-  "title": "Üzgünüz, bir şeyler ters gitti!"
+  "report-cta": "bir hata bildirin",
+  "title": "Üzgünüz, bir hata oluştu"
 }

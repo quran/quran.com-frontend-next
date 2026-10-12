@@ -2,26 +2,26 @@
   "change": "Değiştir",
   "curated-station": {
     "juz-amma": {
-      "description": "Kuran'ın son Cüz'ünü dinleyin",
-      "title": "Amma cüzü"
+      "description": "Kur'an'ın son cüzünü dinleyin",
+      "title": "Amme Cüzü"
     },
     "popular-recitations": {
-      "description": "Günlük küratörlü okuma akışı",
-      "title": "Popüler Anlatımlar"
+      "description": "Özenle seçilmiş günlük tilavet akışı",
+      "title": "Popüler Tilavetler"
     },
     "surah-al-kahf": {
-      "description": "Kehf Suresini tekrarlı dinleyin",
+      "description": "Kehf Suresini tekrar tekrar dinleyin",
       "title": "Kehf Suresi"
     },
     "yaseen-alwaqiah-al-mulk": {
-      "description": "Hafızların küratörlüğünden sureler",
-      "title": "Yasin, Vakı'a, Mülk"
+      "description": "Seçkin kârilerin tilavetinden sureler",
+      "title": "Yasin, Vakıa, Mülk"
     }
   },
-  "curated-stations": "Veli İstasyonları",
+  "curated-stations": "Seçkin İstasyonlar",
   "pause-radio": "Radyoyu Duraklat",
-  "play-radio": "Radyo Çal",
-  "radio-desc": "Çeşitli okuyucular tarafından Kur'an-ı Kerim'in kesintisiz güzel okunuşunu dinleyin.",
-  "reciter-stations": "Okuyucu İstasyonları",
+  "play-radio": "Radyoyu Oynat",
+  "radio-desc": "Çeşitli kârilerin sesinden Kur'an-ı Kerim'in güzel tilavetini kesintisiz dinleyin.",
+  "reciter-stations": "Kâri İstasyonları",
   "station": "İstasyon"
 }

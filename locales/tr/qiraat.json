@@ -1,4 +1,4 @@
 {
-  "description": "Ayah'ın farklı Kıraat'larını (çeşitli okumaları) keşfedin {{ayahNumber}} Surenin {{surahName}}",
+  "description": "{{surahName}} Suresinin {{ayahNumber}}. ayetinin farklı kıraatlerini (okuyuş farklılıklarını) keşfedin",
   "title": "Kıraat {{surahName}} - {{ayahNumber}}"
 }
