@@ -25,7 +25,7 @@ describe('RepeatSetting', () => {
     );
 
     expect(screen.getByText(LABEL).textContent).toBe(LABEL);
-    expect(screen.getByText(SUFFIX).textContent).toContain(SUFFIX);
+    expect(screen.getByText(SUFFIX, { exact: true }).textContent).toBe(SUFFIX);
     expect(screen.getByText(DESCRIPTION).textContent).toBe(DESCRIPTION);
   });
 });

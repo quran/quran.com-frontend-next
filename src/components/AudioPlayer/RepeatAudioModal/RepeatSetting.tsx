@@ -51,7 +51,7 @@ const RepeatSetting = ({
           }
           count={format(value)}
         />{' '}
-        {suffix}
+        <span className={styles.suffix}>{suffix}</span>
       </span>
     </div>
   );

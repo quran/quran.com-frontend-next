@@ -29,6 +29,10 @@
   align-items: center;
 }
 
+.suffix {
+  white-space: nowrap;
+}
+
 .switchContainer {
   margin-block-end: var(--spacing-xsmall);
 }
