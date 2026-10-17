@@ -33,6 +33,7 @@ const initialState: QuranReaderStyles = {
   qnaFontScale: 3,
   hadithFontScale: 3,
   surahInfoFontScale: 3,
+  layersFontScale: 3,
   quranFont: QuranFont.MadaniV1,
   mushafLines: MushafLines.SixteenLines,
   isUsingDefaultFont: true,

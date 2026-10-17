@@ -27,7 +27,7 @@ describe('FlashCardList', () => {
       />,
     );
 
-    const cardButton = screen.getByRole('button', { name: /الْحَمْدُ/u });
+    const cardButton = screen.getByRole('button', { name: /الْحَمْدُ/ });
     expect(cardButton.getAttribute('aria-expanded')).toBe('false');
 
     fireEvent.click(cardButton);

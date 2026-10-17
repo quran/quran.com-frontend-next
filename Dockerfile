@@ -29,6 +29,9 @@ RUN yarn build
 # Create env.sh for runtime environment variables
 RUN cp .env env.sh && sed -i 's/^/export /g' env.sh
 
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
 EXPOSE 80
 
 CMD ["bash", "-c", ". /app/env.sh && exec pm2-runtime /app/server-http.js -i max --max-memory-restart 512M"]

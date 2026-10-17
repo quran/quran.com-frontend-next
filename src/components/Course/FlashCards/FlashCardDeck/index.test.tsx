@@ -32,7 +32,7 @@ describe('FlashCardDeck', () => {
       vi.advanceTimersByTime(SWIPE_ANIMATION_MS);
     });
 
-    expect(screen.getByText(/flashcards\.all-done|All done!/u)).toBeDefined();
+    expect(screen.getByText(/flashcards\.all-done|All done!/)).toBeDefined();
     expect(onComplete).toHaveBeenCalledWith({ known: [cards[0]], unknown: [] });
   });
 });

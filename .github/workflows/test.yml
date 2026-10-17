@@ -6,9 +6,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
       # Utilize a cache when installing deps for a potentially quicker build
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@60edb5c2436412f556447646399e9a2ab13197977a8154c68364e84a2530753
         with:
           node-version: 18
           cache: 'yarn'

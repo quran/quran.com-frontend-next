@@ -436,8 +436,6 @@ describe('prepareGenerateMediaFileRequestData', () => {
               [3, 1409, 2502],
               [4, 2502, 5840],
             ],
-            normalizedStart: 0,
-            normalizedEnd: 6090,
           },
           {
             verseKey: '1:2',
@@ -450,8 +448,6 @@ describe('prepareGenerateMediaFileRequestData', () => {
               [3, 7885, 8515],
               [4, 8515, 11550],
             ],
-            normalizedStart: 6090,
-            normalizedEnd: 11680,
           },
         ],
         reciterId: 7,
@@ -490,7 +486,7 @@ describe('prepareGenerateMediaFileRequestData', () => {
       previewMode: PreviewMode.DISABLED,
       type: MediaType.VIDEO,
       chaptersDataArabic: '',
-    } as GenerateMediaFileRequest;
+    } as unknown as GenerateMediaFileRequest;
 
     const result = prepareGenerateMediaFileRequestData(rawData);
 
@@ -811,8 +807,6 @@ describe('prepareGenerateMediaFileRequestData', () => {
               [3, 1409, 2502],
               [4, 2502, 5840],
             ],
-            normalizedStart: 0,
-            normalizedEnd: 6090,
           },
           {
             verseKey: '1:2',
@@ -825,8 +819,6 @@ describe('prepareGenerateMediaFileRequestData', () => {
               [3, 7885, 8515],
               [4, 8515, 11550],
             ],
-            normalizedStart: 6090,
-            normalizedEnd: 11680,
           },
         ],
         reciterId: 7,
@@ -865,7 +857,7 @@ describe('prepareGenerateMediaFileRequestData', () => {
       type: MediaType.IMAGE,
       chaptersDataArabic: '',
       previewMode: PreviewMode.DISABLED,
-    } as GenerateMediaFileRequest;
+    } as unknown as GenerateMediaFileRequest;
 
     const result = prepareGenerateMediaFileRequestData(rawData);
 

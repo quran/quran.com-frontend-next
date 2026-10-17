@@ -62,8 +62,7 @@ export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQur
     }
   }
 
-  // TODO: reset back again to 0. this is temporary fix
-  return weekEntries.length;
+  return 0;
 };
 
 // TODO: add unit tests

@@ -15,11 +15,11 @@ const getPausedLoadingState = () =>
     { VISIBLE: 'LOADING_RECITER_DATA_AND_PAUSE' },
     {
       ...audioPlayerMachine.initialState.context,
-      audioPlayer: getAudioPlayer(),
+      audioPlayer: getAudioPlayer() as unknown as HTMLAudioElement,
       surah: 1,
       ayahNumber: 1,
     },
-  );
+  ) as unknown as State<any, any, any, any, any>;
 
 const getFetchReciterDoneEvent = () => ({
   type: 'done.invoke.fetchReciter',
@@ -29,7 +29,7 @@ const getFetchReciterDoneEvent = () => ({
     verseTimings: [{ verseKey: '1:1', timestampFrom: 0, timestampTo: 5_000, segments: [] }],
     reciterId: 7,
   },
-});
+} as any);
 
 describe('audioPlayerMachine reset flows', () => {
   it('resolves paused reciter reload to PAUSED.ACTIVE and pauses audio', () => {

@@ -16,10 +16,10 @@ jobs:
     if: false # Temporarily disable this workflow
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@60edb5c2436412f556447646399e9a2ab13197977a8154c68364e84a2530753
         with:
           node-version: 18
           cache: 'yarn'
@@ -39,7 +39,7 @@ jobs:
           CI: true
 
       - name: Upload Playwright report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@0b7084591103e87095857ee7c2cf4550d5c78b36
         if: always()
         with:
           name: playwright-report
