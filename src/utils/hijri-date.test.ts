@@ -54,15 +54,13 @@ describe('getCurrentQuranicCalendarWeek', () => {
     it('should return 0 for dates before the calendar starts', () => {
       // umalqura(1446, 9, 30) -> 2025-03-29 (UTC), before April 1 anchor
       const hijriDate = umalqura(1446, 9, 30);
-      // TODO: reset it back to 0
-      expect(getCurrentQuranicCalendarWeek(hijriDate)).toEqual(46);
+      expect(getCurrentQuranicCalendarWeek(hijriDate)).toEqual(0);
     });
 
     it('should return 0 for dates after the calendar ends', () => {
       // umalqura(1447, 10, 1) -> 2026-03-19 (UTC), after calendar end
       const hijriDate = umalqura(1447, 10, 1);
-      // TODO: reset it back to 0
-      expect(getCurrentQuranicCalendarWeek(hijriDate)).toEqual(46);
+      expect(getCurrentQuranicCalendarWeek(hijriDate)).toEqual(0);
     });
 
     it('should handle week boundaries correctly', () => {
