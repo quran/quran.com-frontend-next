@@ -55,7 +55,7 @@ test(
 );
 
 test.beforeEach(async ({ page, context, isMobile }) => {
-  test(isMobile, 'Repeat audio tests does not need to run on mobile devices');
+  test.skip(isMobile, 'Repeat audio tests does not need to run on mobile devices');
 
   homePage = new Homepage(page, context);
   audioUtilities = new AudioUtilities(page);
