@@ -199,6 +199,34 @@ export const getPreviousChapterNumber = (
 };
 
 /**
+ * Get the first chapter number for the given reading order.
+ *
+ * @param {boolean} isReadingByRevelationOrder
+ * @returns {number}
+ */
+export const getFirstChapterNumber = (isReadingByRevelationOrder?: boolean): number =>
+  isReadingByRevelationOrder ? REVELATION_ORDER[0] : 1;
+
+/**
+ * Get the chapter that "Continue Reading" should open after the given chapter.
+ * After the last chapter it wraps around to the first one, so the reader can
+ * start reading the Quran again.
+ *
+ * @param {number} currentChapter
+ * @param {boolean} isReadingByRevelationOrder
+ * @returns {number | null}
+ */
+export const getContinueReadingChapterNumber = (
+  currentChapter: number,
+  isReadingByRevelationOrder?: boolean,
+): number | null => {
+  if (isLastSurah(currentChapter, isReadingByRevelationOrder)) {
+    return getFirstChapterNumber(isReadingByRevelationOrder);
+  }
+  return getNextChapterNumber(currentChapter, isReadingByRevelationOrder);
+};
+
+/**
  * Get how much percentage of the chapter has been read.
  *
  * @param {number} currentVerse
