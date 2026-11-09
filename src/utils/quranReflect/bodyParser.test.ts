@@ -152,4 +152,17 @@ describe('replaceUrlsWithLinks between existing anchors', () => {
       "<a href='https://a.com' target='_blank'>https://a.com</a> again: <a href='https://a.com' target='_blank'>https://a.com</a>",
     );
   });
+
+  it('treats end tags with other casing or spaces as closing the anchor', () => {
+    const spaced = parseReflectionBody("<a href='/local'>A</a > then https://b.com", '');
+    expect(spaced).toContain("<a href='https://b.com' target='_blank'>https://b.com</a>");
+
+    const upper = parseReflectionBody("<A HREF='/local'>A</A> then https://b.com", '');
+    expect(upper).toContain("<a href='https://b.com' target='_blank'>https://b.com</a>");
+  });
+
+  it('does not link a URL inside an uppercase anchor', () => {
+    const body = "<A HREF='https://a.com'>https://a.com</A>";
+    expect(parseReflectionBody(body, '')).toBe(body);
+  });
 });
