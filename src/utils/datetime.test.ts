@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect } from 'vitest';
 
 import { formatDateRelatively, getEarliestDate, getShortDayName } from './datetime';
 
@@ -29,6 +29,46 @@ it('format the date correctly', () => {
   expect(formatDateRelatively(inDays2, 'en', now)).toBe('in 2 days');
   expect(formatDateRelatively(weeksAgo2, 'en', now)).toBe('2 weeks ago');
   expect(formatDateRelatively(lastYear, 'en', now)).toBe('last year');
+});
+
+describe('formatDateRelatively across a DST change', () => {
+  const originalTz = process.env.TZ;
+
+  afterEach(() => {
+    // Assigning undefined would set TZ to the string "undefined", so delete it instead
+    if (originalTz === undefined) {
+      delete process.env.TZ;
+    } else {
+      process.env.TZ = originalTz;
+    }
+  });
+
+  it('returns whole days when the range includes the end of DST', () => {
+    process.env.TZ = 'America/New_York';
+    // DST ended on 2021-11-07, so the local midnights are 4 days + 1 hour apart
+    const now = new Date(2021, 10, 9, 12);
+    const date = new Date(2021, 10, 5, 12);
+
+    expect(formatDateRelatively(date, 'en', now)).toBe('4 days ago');
+  });
+
+  it('returns whole days when the range includes the start of DST', () => {
+    process.env.TZ = 'America/New_York';
+    // DST started on 2021-03-14, so the local midnights are 3 days - 1 hour apart
+    const now = new Date(2021, 2, 16, 12);
+    const date = new Date(2021, 2, 13, 12);
+
+    expect(formatDateRelatively(date, 'en', now)).toBe('3 days ago');
+  });
+
+  it('does not change the passed dates', () => {
+    const now = new Date('2021-12-02T23:22:00.000Z');
+    const date = new Date('2021-11-29T23:22:00.000Z');
+    formatDateRelatively(date, 'en', now);
+
+    expect(now.toISOString()).toBe('2021-12-02T23:22:00.000Z');
+    expect(date.toISOString()).toBe('2021-11-29T23:22:00.000Z');
+  });
 });
 
 describe('getShortDayName', () => {
