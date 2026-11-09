@@ -313,8 +313,8 @@ export const getLocaleNameByFullName = (fullName: string): string =>
  * @returns {string}
  */
 // Intl.NumberFormat is performance heavy so we are caching the formatter.
-const numberFormatters: Map<Intl.NumberFormatOptions | string, Intl.NumberFormat> = new Map();
-let currentLanguageLocale: string = null;
+// The cache key includes the locale so a formatter built for one locale is never reused for another.
+const numberFormatters: Map<string, Intl.NumberFormat> = new Map();
 
 export const toLocalizedNumber = (
   value: number,
@@ -322,19 +322,14 @@ export const toLocalizedNumber = (
   showLeadingZero = false,
   options: Intl.NumberFormatOptions = undefined,
 ) => {
-  // we do this because an empty object will result in a new formatter being created everytime since we don't have it's reference.
-  const formatterKey = options ?? 'DEFAULT_OPTIONS';
+  const formatterKey = `${locale}|${options ? JSON.stringify(options) : ''}`;
 
-  if (numberFormatters.has(formatterKey) && currentLanguageLocale === locale) {
-    return getFormattedNumber(numberFormatters.get(formatterKey), value, showLeadingZero);
+  let formatter = numberFormatters.get(formatterKey);
+  if (!formatter) {
+    formatter = new Intl.NumberFormat(LANG_LOCALE_MAP[locale], options);
+    numberFormatters.set(formatterKey, formatter);
   }
-
-  currentLanguageLocale = locale;
-  const fullLocale = LANG_LOCALE_MAP[locale];
-
-  const newNumberFormatter = new Intl.NumberFormat(fullLocale, options);
-  numberFormatters.set(formatterKey, newNumberFormatter);
-  return getFormattedNumber(newNumberFormatter, value, showLeadingZero);
+  return getFormattedNumber(formatter, value, showLeadingZero);
 };
 
 /**
