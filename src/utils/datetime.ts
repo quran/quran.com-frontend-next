@@ -165,9 +165,11 @@ export const formatDateRelatively = (
   // Formatter for "Today" and "Yesterday" etc
   const relative = new Intl.RelativeTimeFormat(fullLocale, { numeric: 'auto' });
 
-  const nowDate = now.setHours(0, 0, 0, 0);
-  const then = date.setHours(0, 0, 0, 0);
-  const days = (then - nowDate) / 86400000;
+  // Copy the dates so the caller's Date objects are not changed by setHours
+  const nowDate = new Date(now).setHours(0, 0, 0, 0);
+  const then = new Date(date).setHours(0, 0, 0, 0);
+  // Round because local midnights are 23h or 25h apart across a DST change
+  const days = Math.round((then - nowDate) / 86400000);
 
   if (days < -365) {
     const years = Math.round(days / 365);
