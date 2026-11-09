@@ -35,7 +35,12 @@ describe('formatDateRelatively across a DST change', () => {
   const originalTz = process.env.TZ;
 
   afterEach(() => {
-    process.env.TZ = originalTz;
+    // Assigning undefined would set TZ to the string "undefined", so delete it instead
+    if (originalTz === undefined) {
+      delete process.env.TZ;
+    } else {
+      process.env.TZ = originalTz;
+    }
   });
 
   it('returns whole days when the range includes the end of DST', () => {
