@@ -29,16 +29,15 @@ const tagToLink = (tag: string, hashtagStyle: string): string => {
  */
 const replaceUrlsWithLinks = (text: string): string => {
   const regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;#]*[-A-Z0-9+&@#/%=~_])/gi;
-  return text.replace(regex, (url) => {
-    // Check if URL is already linked
-    const surroundingLength = 100; // Number of characters around the URL to check for <a> tag
-    const index = text.indexOf(url);
+  return text.replace(regex, (url, ...args) => {
+    // `replace` passes the match offset right before the full string.
+    const offset = args[args.length - 2] as number;
+    const beforeText = text.slice(0, offset);
+    const lastAnchorOpen = beforeText.lastIndexOf('<a ');
+    const lastAnchorClose = beforeText.lastIndexOf('</a>');
 
-    const beforeText = text.slice(Math.max(0, index - surroundingLength), index);
-    const afterText = text.slice(index + url.length, index + url.length + surroundingLength);
-
-    if (beforeText.includes('<a href=') && afterText.includes('</a>')) {
-      // URL is already inside an anchor tag, return as is
+    // URL is inside an anchor tag (its href or its link text), return as is
+    if (lastAnchorOpen !== -1 && lastAnchorOpen > lastAnchorClose) {
       return url;
     }
 

@@ -136,3 +136,20 @@ describe('parseReflectionBody', () => {
     });
   });
 });
+
+describe('replaceUrlsWithLinks between existing anchors', () => {
+  it('links a plain URL that sits between two existing anchor tags', () => {
+    const body =
+      "<a href='https://a.com' target='_blank'>A</a> then https://b.com then <a href='https://c.com' target='_blank'>C</a>";
+    const result = parseReflectionBody(body, '');
+    expect(result).toContain("<a href='https://b.com' target='_blank'>https://b.com</a>");
+  });
+
+  it('links a plain URL even when the same URL is already linked earlier', () => {
+    const body = "<a href='https://a.com' target='_blank'>https://a.com</a> again: https://a.com";
+    const result = parseReflectionBody(body, '');
+    expect(result).toBe(
+      "<a href='https://a.com' target='_blank'>https://a.com</a> again: <a href='https://a.com' target='_blank'>https://a.com</a>",
+    );
+  });
+});
