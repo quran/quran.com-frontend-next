@@ -27,18 +27,26 @@ const tagToLink = (tag: string, hashtagStyle: string): string => {
  * @param {string} text - The input text containing URLs.
  * @returns {string} The text with URLs replaced by anchor tags.
  */
+// HTML tag names are case-insensitive and an end tag may have spaces before `>`
+const ANCHOR_OPEN_REGEX = /<a[\s>]/gi;
+const ANCHOR_CLOSE_REGEX = /<\/a\s*>/gi;
+
+const lastMatchIndex = (text: string, pattern: RegExp): number => {
+  const matches = Array.from(text.matchAll(pattern));
+  return matches.length ? matches[matches.length - 1].index : -1;
+};
+
 const replaceUrlsWithLinks = (text: string): string => {
   const regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;#]*[-A-Z0-9+&@#/%=~_])/gi;
-  return text.replace(regex, (url) => {
-    // Check if URL is already linked
-    const surroundingLength = 100; // Number of characters around the URL to check for <a> tag
-    const index = text.indexOf(url);
+  return text.replace(regex, (url, ...args) => {
+    // `replace` passes the match offset right before the full string.
+    const offset = args[args.length - 2] as number;
+    const beforeText = text.slice(0, offset);
+    const lastAnchorOpen = lastMatchIndex(beforeText, ANCHOR_OPEN_REGEX);
+    const lastAnchorClose = lastMatchIndex(beforeText, ANCHOR_CLOSE_REGEX);
 
-    const beforeText = text.slice(Math.max(0, index - surroundingLength), index);
-    const afterText = text.slice(index + url.length, index + url.length + surroundingLength);
-
-    if (beforeText.includes('<a href=') && afterText.includes('</a>')) {
-      // URL is already inside an anchor tag, return as is
+    // URL is inside an anchor tag (its href or its link text), return as is
+    if (lastAnchorOpen !== -1 && lastAnchorOpen > lastAnchorClose) {
       return url;
     }
 
