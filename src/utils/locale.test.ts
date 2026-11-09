@@ -100,3 +100,11 @@ it('toLocalizedVerseKeyAuto handles edge cases', () => {
   expect(toLocalizedVerseKeyAuto('2:286', 'en')).toBe('2:286'); // LTR
   expect(toLocalizedVerseKeyAuto('2:286', 'ur')).toBe('2:286'); // Urdu special case
 });
+
+it('toLocalizedNumber does not reuse a formatter cached for another locale', () => {
+  expect(toLocalizedNumber(5, 'ar')).toBe('٥');
+  // a call with custom options switches the cached locale to `en`...
+  expect(toLocalizedNumber(2025, 'en', false, { useGrouping: false })).toBe('2025');
+  // ...but the default formatter cached for `ar` must not be reused for `en`.
+  expect(toLocalizedNumber(5, 'en')).toBe('5');
+});
