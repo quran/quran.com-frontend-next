@@ -65,7 +65,7 @@
     "player": {
       "close-audio-player": "Close Audio Player",
       "currently-playing": "You are currently playing",
-      "delay-verse": "Delay between verse",
+      "delay-verse": "Pause after each verse",
       "download": "Download",
       "full-surah": "Full Surah",
       "manage-repeat-settings": "Manage repeat settings",
@@ -85,6 +85,7 @@
       "start-playing": "Start Playing",
       "stop-repeating": "Stop Repeating",
       "times": "times",
+      "verse-length": "× verse length",
       "verses-range": "Range of verses",
       "volume-control": "Volume control"
     },
