@@ -41,10 +41,12 @@ enum AudioPlayerOverflowMenu {
 
 interface OverflowAudioPlayActionsMenuBodyProps {
   isEmbedded?: boolean;
+  selectedVerseKey?: string;
 }
 
 const OverflowAudioPlayActionsMenuBody = ({
   isEmbedded,
+  selectedVerseKey,
 }: OverflowAudioPlayActionsMenuBodyProps) => {
   const [selectedMenu, setSelectedMenu] = useState<AudioPlayerOverflowMenu>(
     AudioPlayerOverflowMenu.Main,
@@ -83,9 +85,9 @@ const OverflowAudioPlayActionsMenuBody = ({
     () => ({
       [AudioPlayerOverflowMenu.Main]: [
         <DownloadAudioButton key={0} />,
+        <RepeatButton key={1} selectedVerseKey={isEmbedded ? selectedVerseKey : undefined} />,
         ...(!isEmbedded
           ? [
-              <RepeatButton key={1} />,
               <PopoverMenu.Divider key={2} />,
               <PopoverMenu.Item
                 key={3}
@@ -149,7 +151,7 @@ const OverflowAudioPlayActionsMenuBody = ({
         <AudioExperienceMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
       ),
     }),
-    [t, playbackRate, isEmbedded],
+    [t, playbackRate, isEmbedded, selectedVerseKey],
   );
 
   return <>{menus[selectedMenu]}</>;

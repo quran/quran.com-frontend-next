@@ -572,7 +572,7 @@ const StudyModeModal: React.FC<Props> = ({
       footer={
         isAudioVisible ? (
           <div className={styles.audioPlayerFooter}>
-            <AudioPlayerBody isEmbedded />
+            <AudioPlayerBody isEmbedded selectedVerseKey={verseKey} />
           </div>
         ) : undefined
       }

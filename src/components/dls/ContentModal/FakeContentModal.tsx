@@ -86,6 +86,9 @@ export const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => 
       const target = event.target as Node;
       if (event.button !== 0) return;
       if (contentRef.current?.contains(target)) return;
+      // React bubbles events from portals (e.g. a nested modal opened from inside this modal)
+      // through the component tree, so ignore pointer downs that did not happen on the overlay's DOM.
+      if (!event.currentTarget.contains(target)) return;
 
       // Check if click is on Radix UI portalled content (dropdown, popover, etc.)
       // These render outside modal DOM via Portal but should not trigger close

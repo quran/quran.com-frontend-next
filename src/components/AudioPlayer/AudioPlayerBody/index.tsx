@@ -15,9 +15,14 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 
 interface AudioPlayerBodyProps {
   isEmbedded?: boolean;
+  /**
+   * The verse the embedded player is shown for (e.g. the verse opened in Study Mode).
+   * Used to preselect it when opening the repeat settings.
+   */
+  selectedVerseKey?: string;
 }
 
-const AudioPlayerBody = ({ isEmbedded }: AudioPlayerBodyProps) => {
+const AudioPlayerBody = ({ isEmbedded, selectedVerseKey }: AudioPlayerBodyProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isRadioMode = useSelector(audioService, (state) => !!state.context.radioActor);
   const { isActive, activeStepGroup, activeStepIndex, nextStep } = useOnboarding();
@@ -49,7 +54,7 @@ const AudioPlayerBody = ({ isEmbedded }: AudioPlayerBodyProps) => {
       {isRadioMode ? (
         <RadioPlaybackControl radioActor={audioService.getSnapshot().context.radioActor} />
       ) : (
-        <PlaybackControls isEmbedded={isEmbedded} />
+        <PlaybackControls isEmbedded={isEmbedded} selectedVerseKey={selectedVerseKey} />
       )}
     </>
   );
