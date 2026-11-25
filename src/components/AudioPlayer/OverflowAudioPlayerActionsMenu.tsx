@@ -16,9 +16,13 @@ import { logEvent } from '@/utils/eventLogger';
 
 interface OverflowAudioPlayerActionsMenuProps {
   isEmbedded?: boolean;
+  selectedVerseKey?: string;
 }
 
-const OverflowAudioPlayerActionsMenu = ({ isEmbedded }: OverflowAudioPlayerActionsMenuProps) => {
+const OverflowAudioPlayerActionsMenu = ({
+  isEmbedded,
+  selectedVerseKey,
+}: OverflowAudioPlayerActionsMenuProps) => {
   const direction = useDirection();
   const { isActive, activeStepGroup, activeStepIndex, nextStep, prevStep } = useOnboarding();
   const [open, setOpen] = useState(false);
@@ -101,7 +105,10 @@ const OverflowAudioPlayerActionsMenu = ({ isEmbedded }: OverflowAudioPlayerActio
         shouldUseModalZIndex={isEmbedded}
         {...(isEmbedded && { expandDirection: PopoverMenuExpandDirection.TOP })}
       >
-        <OverflowAudioPlayActionsMenuBody isEmbedded={isEmbedded} />
+        <OverflowAudioPlayActionsMenuBody
+          isEmbedded={isEmbedded}
+          selectedVerseKey={selectedVerseKey}
+        />
       </PopoverMenu>
     </div>
   );

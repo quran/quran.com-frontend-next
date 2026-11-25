@@ -13,10 +13,19 @@ import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import RepeatIcon from '@/icons/repeat.svg';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getChapterNumberFromKey } from '@/utils/verse';
 import { selectIsLoading } from '@/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const RepeatAudioButton = () => {
+type RepeatAudioButtonProps = {
+  /**
+   * When set (e.g. the verse opened in Study Mode), the repeat modal opens for this verse
+   * instead of the whole surah that is currently playing.
+   */
+  selectedVerseKey?: string;
+};
+
+const RepeatAudioButton = ({ selectedVerseKey }: RepeatAudioButtonProps) => {
   const { t } = useTranslation('common');
   const audioService = useContext(AudioPlayerMachineContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,8 +73,13 @@ const RepeatAudioButton = () => {
       </PopoverMenu.Item>
       {!isLoading && (
         <RepeatAudioModal
-          defaultRepetitionMode={RepetitionMode.Range}
-          chapterId={currentSurah.toString()}
+          defaultRepetitionMode={selectedVerseKey ? RepetitionMode.Single : RepetitionMode.Range}
+          selectedVerseKey={selectedVerseKey}
+          chapterId={
+            selectedVerseKey
+              ? getChapterNumberFromKey(selectedVerseKey).toString()
+              : currentSurah.toString()
+          }
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />

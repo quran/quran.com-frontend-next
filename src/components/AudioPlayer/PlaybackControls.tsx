@@ -16,9 +16,10 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 
 interface PlaybackControlsProps {
   isEmbedded?: boolean;
+  selectedVerseKey?: string;
 }
 
-const PlaybackControls = ({ isEmbedded }: PlaybackControlsProps) => {
+const PlaybackControls = ({ isEmbedded, selectedVerseKey }: PlaybackControlsProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isLoading = useSelector(audioService, selectIsLoading);
   const { lang } = useTranslation('common');
@@ -27,7 +28,10 @@ const PlaybackControls = ({ isEmbedded }: PlaybackControlsProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.actionItem}>
-        <OverflowAudioPlayerActionsMenu isEmbedded={isEmbedded} />
+        <OverflowAudioPlayerActionsMenu
+          isEmbedded={isEmbedded}
+          selectedVerseKey={selectedVerseKey}
+        />
       </div>
       <div className={styles.actionItem}>
         <VolumeControl shouldUseModalZIndex={isEmbedded} />

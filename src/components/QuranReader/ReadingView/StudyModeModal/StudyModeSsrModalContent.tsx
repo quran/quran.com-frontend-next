@@ -132,7 +132,10 @@ const StudyModeSsrModalContent: React.FC<StudyModeSsrModalContentProps> = ({
         footer={
           isAudioVisible ? (
             <div className={styles.audioPlayerFooter}>
-              <AudioPlayerBody isEmbedded />
+              <AudioPlayerBody
+                isEmbedded
+                selectedVerseKey={`${selectedChapterId}:${selectedVerseNumber}`}
+              />
             </div>
           ) : undefined
         }
