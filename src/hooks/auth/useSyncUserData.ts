@@ -18,12 +18,13 @@ import {
 } from '@/redux/slices/QuranReader/readingTracker';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
-import { syncUserLocalData } from '@/utils/auth/api';
+import { privateFetcher, syncUserLocalData } from '@/utils/auth/api';
 import {
   BOOKMARK_CACHE_PATHS,
   makeReadingSessionsUrl,
   makeUserProfileUrl,
 } from '@/utils/auth/apiPaths';
+import { getLocalSessionsNewerThanServer } from '@/utils/auth/readingSessionsSync';
 import { getLastSyncAt, removeLastSyncAt, setLastSyncAt } from '@/utils/auth/userDataSync';
 import { GuestReadingBookmark } from '@/utils/bookmark';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
@@ -35,6 +36,7 @@ import SyncDataType, {
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';
 import { PinnedItemTargetType, SyncPinnedItemPayload } from 'types/PinnedItem';
+import ReadingSession from 'types/ReadingSession';
 
 const MAX_SYNC_ATTEMPTS = 3; // 1 initial + 2 retries
 const INITIAL_RETRY_DELAY_MS = 1000;
@@ -130,6 +132,21 @@ const buildSyncPayload = (
   };
 };
 
+/**
+ * Drop local reading sessions that are older than what the account already has, so a device
+ * with stale local data (e.g. a PWA) can't push an old place on top of a newer one.
+ *
+ * @param {RecentReadingSessions} sessions - Local reading sessions from Redux.
+ * @returns {Promise<RecentReadingSessions>} The local sessions that are safe to upload.
+ */
+const getReadingSessionsToSync = async (
+  sessions: RecentReadingSessions,
+): Promise<RecentReadingSessions> => {
+  if (!Object.keys(sessions).length) return sessions;
+  const serverSessions: ReadingSession[] = await privateFetcher(makeReadingSessionsUrl());
+  return getLocalSessionsNewerThanServer(sessions, serverSessions);
+};
+
 const isBookmarkCacheKey = (key: unknown): boolean =>
   typeof key === 'string' &&
   (Object.values(BOOKMARK_CACHE_PATHS).some((p) => key.includes(p)) ||
@@ -162,9 +179,10 @@ const useSyncUserData = () => {
     async (attempt = 0): Promise<void> => {
       const bookmarksCount =
         Object.keys(bookmarkedVerses).length + Object.keys(bookmarkedPages).length;
-      // prettier-ignore
-      const payload = buildSyncPayload(bookmarkedVerses, bookmarkedPages, recentReadingSessions, pinnedVersesRef.current, mushafId, guestReadingBookmarkRef.current);
       try {
+        const readingSessions = await getReadingSessionsToSync(recentReadingSessions);
+        // prettier-ignore
+        const payload = buildSyncPayload(bookmarkedVerses, bookmarkedPages, readingSessions, pinnedVersesRef.current, mushafId, guestReadingBookmarkRef.current);
         const { lastSyncAt } = await syncUserLocalData(payload);
         mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
         mutate(makeReadingSessionsUrl());
