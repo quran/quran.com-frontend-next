@@ -52,12 +52,15 @@ export const isValidTranslationsQueryParamValueWithExistingKey = (
 
 /**
  * Check whether the value of the query param is a valid
- * reciter Id.
+ * reciter Id. An id that is not in {@link reciters} is invalid, so the list
+ * has to be fetched before a param can be accepted; passing no list means no
+ * id can be matched and nothing is valid.
  *
  * @param {string} value
+ * @param {Reciter[]} reciters
  * @returns {boolean}
  */
-export const isValidReciterId = (value: string, reciters: Reciter[]): boolean => {
+export const isValidReciterId = (value: string, reciters?: Reciter[]): boolean => {
   const isValidReciter = reciters?.some((reciter) => reciter.id === Number(value));
   // if it's empty string, we shouldn't consider it as a valid reciter id
   if (!value) {

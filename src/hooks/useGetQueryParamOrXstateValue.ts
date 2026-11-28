@@ -3,14 +3,19 @@ import { useContext } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
+import useSWRImmutable from 'swr/immutable';
 
+import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
 import {
   equalityCheckerByType,
   getQueryParamValueByType,
   QueryParamValueType,
 } from '@/utils/query-params';
 import { isValidReciterId } from '@/utils/queryParamValidator';
+import { fetcher } from 'src/api';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import { RecitersResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 
 const QUERY_PARAMS_DATA = {
@@ -24,7 +29,7 @@ const QUERY_PARAMS_DATA = {
   {
     selector: (state) => any;
     valueType: QueryParamValueType;
-    validate: (val: any) => boolean;
+    validate: (val: any, extraData?: any) => boolean;
   }
 >;
 
@@ -40,6 +45,7 @@ const useGetQueryParamOrXstateValue = (
   queryParam: QueryParam,
 ): { value: any; isQueryParamDifferent: boolean } => {
   const { query, isReady } = useRouter();
+  const { lang } = useTranslation();
   const audioService = useContext(AudioPlayerMachineContext);
   const { selector } = QUERY_PARAMS_DATA[queryParam];
 
@@ -49,12 +55,22 @@ const useGetQueryParamOrXstateValue = (
     isQueryParamDifferent: false,
   };
 
+  // the reciter id is validated against the list of available reciters, so the
+  // list is needed before the param can be accepted. The key is null unless the
+  // param is actually in the url, which keeps the request off every other page,
+  // and it is the same key the reciter menu uses so both share one response.
+  const needsReciters = isReady && queryParam === QueryParam.RECITER && !!query[queryParam];
+  const { data: recitersData } = useSWRImmutable<RecitersResponse>(
+    needsReciters ? makeAvailableRecitersUrl(lang) : null,
+    () => fetcher(makeAvailableRecitersUrl(lang)),
+  );
+
   // if the param exists in the url
   if (isReady && query[queryParam]) {
     const { validate, valueType } = QUERY_PARAMS_DATA[queryParam];
 
     const paramStringValue = String(query[queryParam]);
-    const isValidValue = validate(paramStringValue);
+    const isValidValue = validate(paramStringValue, recitersData?.reciters);
     if (!isValidValue) {
       return { isQueryParamDifferent: false, value: selectedValue };
     }
